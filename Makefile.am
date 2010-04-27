@@ -1,3 +1,7 @@
-SUBDIRS = src
-EXTRA_DIST = HACKING
+SUBDIRS = src po
+
+EXTRA_DIST = \
+	HACKING
+	autogen.sh
+
 CLEANFILES = *~

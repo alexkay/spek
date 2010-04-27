@@ -11,8 +11,12 @@ libtool
 ltmain.sh
 Makefile
 Makefile.in
+Makefile.in.in
 missing
+mkinstalldirs
 omf.make
+po/POTFILES
+po/stamp-it
 src/*.o
 src/spek
 stamp-h1
