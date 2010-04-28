@@ -6,10 +6,8 @@ int main (string[] args) {
 	Intl.textdomain (Config.GETTEXT_PACKAGE);
 
 	Gtk.init (ref args);
-
-	var window = new Spek.Window ();
-	window.destroy.connect (Gtk.main_quit);
-
+	Gst.init (ref args);
+	new Spek.Window ();
 	Gtk.main ();
 	return 0;
 }

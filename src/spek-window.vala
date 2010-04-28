@@ -4,8 +4,9 @@ namespace Spek {
 	public class Window : Gtk.Window {
 
 		public Window () {
-			this.title = "Spek";
+			this.title = Config.PACKAGE_STRING;
 			this.set_default_size (300, 200);
+			this.destroy.connect (Gtk.main_quit);
 
 			var toolbar = new Toolbar ();
 			var open = new ToolButton.from_stock (STOCK_OPEN);
@@ -29,7 +30,6 @@ namespace Spek {
 			if (chooser.run () == ResponseType.ACCEPT) {
 				// TODO
 			}
-			chooser.destroy ();
 		}
 	}
 }
