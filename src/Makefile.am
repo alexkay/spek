@@ -1,7 +1,8 @@
 bin_PROGRAMS = spek
 
 spek_SOURCES = \
-	spek.vala
+	spek.vala \
+	spek-window.vala
 
 INCLUDES = \
 	-include config.h \
