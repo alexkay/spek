@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+_Name=Spek
+_GenericName=Spectrogram Viewer
+_Comment=Spectrogram viewer
+Exec=sampala
+Icon=sampala
+Terminal=false
+Categories=Audio
+StartupNotify=true

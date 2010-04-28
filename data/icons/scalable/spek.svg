@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="280"
+   height="280"
+   id="svg2">
+  <defs
+     id="defs4" />
+  <g
+     transform="translate(0,-772.36218)"
+     id="layer1">
+    <g
+       transform="matrix(1.0033597,0,0,0.95445541,-84.6288,726.1841)"
+       id="g5214">
+      <path
+         d="m 148,49.28125 c -11.99467,0 -21.71875,12.21817 -21.71875,27.28125 0,0.68473 0.023,1.359186 0.0625,2.03125 l -40.3125,230.28125 43.15625,0 4.0625,-23.21875 188.0625,0 40.25,-236.375 -212.15625,0 0,0.0625 C 148.9456,49.307097 148.46804,49.28125 148,49.28125 z"
+         id="rect3594"
+         style="fill:#f9e689;fill-opacity:1;stroke:#000000;stroke-width:1.02186584;stroke-opacity:1" />
+      <path
+         d="m 106.5625,286.59375 c -11.994674,0 -21.71875,12.21817 -21.71875,27.28125 0,15.06308 9.724076,27.25 21.71875,27.25 1.20071,0 2.38353,-0.10841 3.53125,-0.34375 l 0,0.4375 212.15625,0 -1.03125,-54.5625 -212.125,0 0,0.125 c -0.83135,-0.12133 -1.67398,-0.1875 -2.53125,-0.1875 z"
+         id="path3590"
+         style="fill:#c5c5c5;fill-opacity:1;stroke:#000000;stroke-width:1.02186584;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <rect
+         width="236.14818"
+         height="57.336876"
+         x="-2213.9961"
+         y="-2289.0808"
+         transform="matrix(-0.16720778,0.98592168,0.00326554,-0.99999467,0,0)"
+         id="rect3601"
+         style="fill:#dbdbdb;fill-opacity:1;stroke:#000000;stroke-width:2.52341509;stroke-opacity:1" />
+    </g>
+    <text
+       x="81.701401"
+       y="897.75659"
+       id="text3605"
+       xml:space="preserve"
+       style="font-size:48px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono Bold"><tspan
+         x="81.701401"
+         y="897.75659"
+         id="tspan3607">Vala</tspan></text>
+  </g>
+</svg>

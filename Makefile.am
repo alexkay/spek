@@ -1,7 +1,17 @@
-SUBDIRS = src po
+# Makefile.am
+
+SUBDIRS = \
+	data \
+	src \
+	vapi \
+	po
 
 EXTRA_DIST = \
-	HACKING
-	autogen.sh
+	intltool-extract.in \
+	intltool-merge.in \
+	intltool-update.in
 
-CLEANFILES = *~
+DISTCLEANFILES = \
+	intltool-extract \
+	intltool-merge \
+	intltool-update

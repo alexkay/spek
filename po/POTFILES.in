@@ -1,3 +1,3 @@
-# List of source files containing translatable strings.
-
-src/main.c
+[encoding: UTF-8]
+data/spek.desktop.in.in
+src/spek.vala

@@ -1,9 +1,18 @@
 bin_PROGRAMS = spek
 
 spek_SOURCES = \
-	main.c
+	spek.vala
 
-spek_CPPFLAGS = @GTK_CFLAGS@
-spek_LDADD = @GTK_LIBS@
+INCLUDES = \
+	-include config.h \
+	$(SPEK_CFLAGS) \
+	-DLOCALEDIR=\""$(localedir)"\" \
+	-DPKGDATADIR=\""$(pkgdatadir)"\" \
+	-DPKGLIBDIR=\""$(pkglibdir)"\"
 
-CLEANFILES = *~
+VALAFLAGS = \
+	--vapidir=$(srcdir)/../vapi --pkg config \
+	@SPEK_PACKAGES@
+
+spek_LDADD = \
+	$(SPEK_LIBS)

@@ -1,27 +1,49 @@
-AC_INIT(spek, 0.1)
-AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+# configure.ac
+
+AC_INIT([spek], [0.1])
+AC_CONFIG_SRCDIR([src/spek.vala])
+AC_CONFIG_HEADERS([config.h])
+
+AM_INIT_AUTOMAKE([no-dist-gzip dist-bzip2])
+
+# Enable silent rules is available
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+
 AM_MAINTAINER_MODE
 
 AC_PROG_CC
-AM_PROG_CC_C_O
+AC_PROG_CC_STDC
+AM_PROG_VALAC([0.7.0])
 AC_PROG_INSTALL
-AC_PROG_LIBTOOL
+AC_PROG_INTLTOOL([0.35])
 
-dnl ***************************************************************************
-dnl Internatinalization
-dnl ***************************************************************************
+pkg_modules="gtk+-2.0 >= 2.14.0"
+SPEK_PACKAGES="--pkg gtk+-2.0"
+PKG_CHECK_MODULES(SPEK, [$pkg_modules])
+AC_SUBST(SPEK_CFLAGS)
+AC_SUBST(SPEK_LIBS)
+AC_SUBST(SPEK_PACKAGES)
+
 GETTEXT_PACKAGE=spek
+AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["$GETTEXT_PACKAGE"], [Gettext Package])
 AC_SUBST(GETTEXT_PACKAGE)
-AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [GETTEXT package name])
 AM_GLIB_GNU_GETTEXT
-IT_PROG_INTLTOOL([0.35.0])
 
-AM_PATH_GTK_2_0([2.10.0],,AC_MSG_ERROR([Gtk+ 2.10.0 or higher required.]))
+AM_GLIB_GNU_GETTEXT
 
-AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
-        Makefile
-        src/Makefile
-        po/Makefile.in
+	Makefile
+	data/spek.desktop.in
+	data/Makefile
+	data/icons/Makefile
+	data/icons/16x16/Makefile
+	data/icons/22x22/Makefile
+	data/icons/24x24/Makefile
+	data/icons/32x32/Makefile
+	data/icons/48x48/Makefile
+	data/icons/scalable/Makefile
+	po/Makefile.in
+	src/Makefile
+	vapi/Makefile
 ])
 AC_OUTPUT
