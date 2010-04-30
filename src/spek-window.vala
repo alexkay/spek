@@ -1,3 +1,4 @@
+using Gst;
 using Gtk;
 
 namespace Spek {
@@ -28,8 +29,40 @@ namespace Spek {
 				STOCK_CANCEL, ResponseType.CANCEL,
 				STOCK_OPEN, ResponseType.ACCEPT, null);
 			if (chooser.run () == ResponseType.ACCEPT) {
-				// TODO
+				open (chooser.get_filename ());
 			}
+			chooser.destroy ();
+		}
+
+		private void open (string name) {
+			var pipeline = new Pipeline ("pipeline");
+			var filesrc = ElementFactory.make ("filesrc", "filesrc");
+			var decodebin = ElementFactory.make ("decodebin", "decodebin");
+			pipeline.add_many (filesrc, decodebin);
+			filesrc.link (decodebin);
+			filesrc.set ("location", name);
+
+			Signal.connect (decodebin, "new-decoded-pad", (GLib.Callback) on_new_decoded_pad, pipeline);
+			pipeline.set_state (State.PAUSED);
+			pipeline.get_state (null, null, -1);
+
+			unowned Iterator it = decodebin.iterate_src_pads ();
+			void *data;
+			while (it.next (out data) == IteratorResult.OK) {
+				var pad = (Pad) data;
+				var caps = pad.get_caps ();
+				var structure = caps.get_structure (0);
+				stdout.printf ("structure=%s\n", structure.to_string ());
+			}
+		}
+
+		private static void on_new_decoded_pad (
+			Element decodebin, Pad new_pad, bool last, Pipeline pipeline) {
+			var fakesink = ElementFactory.make ("fakesink", null);
+			pipeline.add (fakesink);
+			var sinkpad = fakesink.get_static_pad ("sink");
+			new_pad.link (sinkpad);
+			fakesink.set_state (State.PAUSED);
 		}
 	}
 }

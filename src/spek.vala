@@ -7,7 +7,8 @@ int main (string[] args) {
 
 	Gtk.init (ref args);
 	Gst.init (ref args);
-	new Spek.Window ();
+	var window = new Spek.Window ();
 	Gtk.main ();
+	window.destroy ();
 	return 0;
 }
