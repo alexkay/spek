@@ -36,15 +36,20 @@ namespace Spek {
 
 		private void open (string name) {
 			var pipeline = new Pipeline ("pipeline");
-			var filesrc = ElementFactory.make ("filesrc", "filesrc");
-			var decodebin = ElementFactory.make ("decodebin", "decodebin");
+			var filesrc = ElementFactory.make ("filesrc", null);
+			var decodebin = ElementFactory.make ("decodebin", null);
 			pipeline.add_many (filesrc, decodebin);
 			filesrc.link (decodebin);
 			filesrc.set ("location", name);
 
 			Signal.connect (decodebin, "new-decoded-pad", (GLib.Callback) on_new_decoded_pad, pipeline);
-			pipeline.set_state (State.PAUSED);
-			pipeline.get_state (null, null, -1);
+
+			pipeline.get_bus ().add_watch (on_watch);
+
+			if (StateChangeReturn.ASYNC == pipeline.set_state (State.PLAYING)) {
+				pipeline.get_state (null, null, -1);
+			}
+			Thread.usleep (1000000);
 
 			unowned Iterator it = decodebin.iterate_src_pads ();
 			void *data;
@@ -56,12 +61,41 @@ namespace Spek {
 			}
 		}
 
+		private static bool on_watch (Bus bus, Message message) {
+			var structure = message.get_structure ();
+			if (message.type == Gst.MessageType.ELEMENT &&
+				structure.get_name () == "spectrum") {
+				// TODO: binding must be fixed: `out endtime`
+				ClockTime endtime = 0;
+				void *p = &endtime;
+				structure.get_clock_time ("endtime", (ClockTime) p);
+				stdout.printf ("%d:", endtime / 1000000000);
+
+				var magnitudes = structure.get_value ("magnitude");
+				for (int i=0; i<10; i++) {
+					var mag = magnitudes.list_get_value (i);
+					stdout.printf (" %.2f", mag.get_float ());
+				}
+				stdout.printf ("\n");
+			}
+			return true;
+		}
+
 		private static void on_new_decoded_pad (
 			Element decodebin, Pad new_pad, bool last, Pipeline pipeline) {
+			var spectrum = ElementFactory.make ("spectrum", null);
+			pipeline.add (spectrum);
+			var sinkpad = spectrum.get_static_pad ("sink");
+			new_pad.link (sinkpad);
+			spectrum.set ("bands", 10);
+			spectrum.set ("interval", 1000000000); // 1 sec
+			spectrum.set ("message-magnitude", true);
+			spectrum.set ("post-messages", true);
+			spectrum.set_state (State.PAUSED);
+
 			var fakesink = ElementFactory.make ("fakesink", null);
 			pipeline.add (fakesink);
-			var sinkpad = fakesink.get_static_pad ("sink");
-			new_pad.link (sinkpad);
+			spectrum.link (fakesink);
 			fakesink.set_state (State.PAUSED);
 		}
 	}
