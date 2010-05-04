@@ -2,6 +2,7 @@ bin_PROGRAMS = spek
 
 spek_SOURCES = \
 	spek.vala \
+	spek-source.vala \
 	spek-window.vala
 
 INCLUDES = \
