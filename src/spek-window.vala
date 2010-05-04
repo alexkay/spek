@@ -30,7 +30,7 @@ namespace Spek {
 				STOCK_CANCEL, ResponseType.CANCEL,
 				STOCK_OPEN, ResponseType.ACCEPT, null);
 			if (chooser.run () == ResponseType.ACCEPT) {
-				source = new Source (chooser.get_filename ());
+				source = new Source (chooser.get_filename (), 10, 100);
 			}
 			chooser.destroy ();
 		}

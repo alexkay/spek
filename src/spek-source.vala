@@ -4,11 +4,16 @@ namespace Spek {
 	public class Source : GLib.Object {
 
 		public string file_name { get; construct; }
+		public int bands { get; construct; }
+		public int samples { get; construct; }
 
-		private Pipeline pipeline;
+		private Pipeline pipeline = null;
+		private Element spectrum = null;
+		private Pad pad = null;
+		private static int sample = 0;
 
-		public Source (string file_name) {
-			GLib.Object (file_name: file_name);
+		public Source (string file_name, int bands, int samples) {
+			GLib.Object (file_name: file_name, bands: bands, samples: samples);
 		}
 
 		~Source () {
@@ -16,6 +21,7 @@ namespace Spek {
 		}
 
 		construct {
+			// TODO: catch errors
 			pipeline = new Pipeline ("pipeline");
 			var filesrc = ElementFactory.make ("filesrc", null);
 			var decodebin = ElementFactory.make ("decodebin", null);
@@ -23,55 +29,56 @@ namespace Spek {
 			filesrc.link (decodebin);
 			filesrc.set ("location", file_name);
 
-			Signal.connect (decodebin, "new-decoded-pad", (GLib.Callback) on_new_decoded_pad, pipeline);
+			// decodebin's src pads are not constructed immediately.
+			// See gst-plugins-base/tree/gst/playback/test6.c
+			Signal.connect (
+				decodebin, "new-decoded-pad",
+				(GLib.Callback) on_new_decoded_pad, this);
 
 			pipeline.get_bus ().add_watch (on_bus_watch);
-
-			if (StateChangeReturn.ASYNC == pipeline.set_state (State.PLAYING)) {
+			if (pipeline.set_state (State.PAUSED) == StateChangeReturn.ASYNC) {
 				pipeline.get_state (null, null, -1);
 			}
 
-			/*
-			unowned Iterator it = decodebin.iterate_src_pads ();
-			void *data;
-			while (it.next (out data) == IteratorResult.OK) {
-				var pad = (Pad) data;
-				var caps = pad.get_caps ();
-				var structure = caps.get_structure (0);
-				stdout.printf ("structure=%s\n", structure.to_string ());
-			}
-			*/
+			// TODO: replace with Pad.query_duration when bgo#617260 is fixed
+			var query = new Query.duration (Format.TIME);
+			pad.query (query);
+			Format format;
+			int64 duration;
+			query.parse_duration (out format, out duration);
+			spectrum.set ("interval", duration / (samples + 1));
+
+			pipeline.set_state (State.PLAYING);
 		}
 
+		// TODO: get rid of the last parameter when bgo#615979 is fixed
 		private static void on_new_decoded_pad (
-			Element decodebin, Pad new_pad, bool last, Pipeline pipeline) {
-			var spectrum = ElementFactory.make ("spectrum", null);
-			pipeline.add (spectrum);
-			var sinkpad = spectrum.get_static_pad ("sink");
-			new_pad.link (sinkpad);
-			spectrum.set ("bands", 10);
-			spectrum.set ("interval", 1000000000); // 1 sec
-			spectrum.set ("threshold", -99);
-			spectrum.set ("message-magnitude", true);
-			spectrum.set ("post-messages", true);
-			spectrum.set_state (State.PAUSED);
+			Element decodebin, Pad new_pad, bool last, Source source) {
+			if (spectrum != null) {
+				// We want to construct the spectrum element only for the first decoded pad.
+				return;
+			}
+			source.spectrum = ElementFactory.make ("spectrum", null);
+			source.pipeline.add (source.spectrum);
+			var sinkpad = source.spectrum.get_static_pad ("sink");
+			source.pad = new_pad;
+			source.pad.link (sinkpad);
+			source.spectrum.set ("bands", source.bands);
+			//source.spectrum.set ("threshold", -99);
+			source.spectrum.set ("message-magnitude", true);
+			source.spectrum.set ("post-messages", true);
+			source.spectrum.set_state (State.PAUSED);
 
 			var fakesink = ElementFactory.make ("fakesink", null);
-			pipeline.add (fakesink);
-			spectrum.link (fakesink);
+			source.pipeline.add (fakesink);
+			source.spectrum.link (fakesink);
 			fakesink.set_state (State.PAUSED);
 		}
 
 		private static bool on_bus_watch (Bus bus, Message message) {
 			var structure = message.get_structure ();
-			if (message.type == MessageType.ELEMENT &&
-				structure.get_name () == "spectrum") {
-
-				ClockTime endtime = 0;
-				// TODO: binding must be fixed: `out endtime`
-				structure.get_clock_time ("endtime", (ClockTime) (void *) (&endtime));
-				stdout.printf ("%d:", endtime / 1000000000);
-
+			if (message.type == MessageType.ELEMENT && structure.get_name () == "spectrum") {
+				stdout.printf ("%d:", sample++);
 				var magnitudes = structure.get_value ("magnitude");
 				for (int i=0; i<10; i++) {
 					var mag = magnitudes.list_get_value (i);
