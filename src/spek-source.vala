@@ -6,14 +6,20 @@ namespace Spek {
 		public string file_name { get; construct; }
 		public int bands { get; construct; }
 		public int samples { get; construct; }
+		// TODO: file a bug, cannot s/set/construct/
+		public Callback callback {get; set; }
+
+		public delegate void Callback (int sample, float[] values);
 
 		private Pipeline pipeline = null;
 		private Element spectrum = null;
 		private Pad pad = null;
-		private static int sample = 0;
+		private int sample;
+		private float[] values;
 
-		public Source (string file_name, int bands, int samples) {
+		public Source (string file_name, int bands, int samples, Callback callback) {
 			GLib.Object (file_name: file_name, bands: bands, samples: samples);
+			this.callback = callback;
 		}
 
 		~Source () {
@@ -21,6 +27,9 @@ namespace Spek {
 		}
 
 		construct {
+			sample = 0;
+			values = new float[bands];
+
 			// TODO: catch errors
 			pipeline = new Pipeline ("pipeline");
 			var filesrc = ElementFactory.make ("filesrc", null);
@@ -75,16 +84,14 @@ namespace Spek {
 			fakesink.set_state (State.PAUSED);
 		}
 
-		private static bool on_bus_watch (Bus bus, Message message) {
+		private bool on_bus_watch (Bus bus, Message message) {
 			var structure = message.get_structure ();
 			if (message.type == MessageType.ELEMENT && structure.get_name () == "spectrum") {
-				stdout.printf ("%d:", sample++);
 				var magnitudes = structure.get_value ("magnitude");
-				for (int i=0; i<10; i++) {
-					var mag = magnitudes.list_get_value (i);
-					stdout.printf (" %.2f", mag.get_float ());
+				for (int i = 0; i < bands; i++) {
+					values[i] = magnitudes.list_get_value (i).get_float ();
 				}
-				stdout.printf ("\n");
+				callback (sample++, values);
 			}
 			return true;
 		}
