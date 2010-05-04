@@ -1,11 +1,21 @@
 using Gst;
 
 namespace Spek {
-	public class Source {
+	public class Source : GLib.Object {
+
+		public string file_name { get; construct; }
 
 		private Pipeline pipeline;
 
 		public Source (string file_name) {
+			GLib.Object (file_name: file_name);
+		}
+
+		~Source () {
+			pipeline.set_state (State.NULL);
+		}
+
+		construct {
 			pipeline = new Pipeline ("pipeline");
 			var filesrc = ElementFactory.make ("filesrc", null);
 			var decodebin = ElementFactory.make ("decodebin", null);
