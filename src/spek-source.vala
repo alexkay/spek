@@ -73,7 +73,7 @@ namespace Spek {
 			source.pad = new_pad;
 			source.pad.link (sinkpad);
 			source.spectrum.set ("bands", source.bands);
-			//source.spectrum.set ("threshold", -99);
+			source.spectrum.set ("threshold", -100);
 			source.spectrum.set ("message-magnitude", true);
 			source.spectrum.set ("post-messages", true);
 			source.spectrum.set_state (State.PAUSED);
