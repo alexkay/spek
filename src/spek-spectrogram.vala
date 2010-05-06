@@ -5,7 +5,7 @@ namespace Spek {
 	class Spectrogram : Gtk.Image {
 
 		private Source source;
-
+		private const int THRESHOLD = -92;
 		private struct Color { uchar r; uchar g; uchar b; }
 
 		public Spectrogram () {
@@ -14,7 +14,9 @@ namespace Spek {
 		public void show_file (string file_name) {
 			pixbuf = new Pixbuf (Colorspace.RGB, false, 8, allocation.width, allocation.height);
 			pixbuf.fill (0);
-			source = new Source (file_name, allocation.height, allocation.width, source_callback);
+			source = new Source (
+				file_name, allocation.height, allocation.width,
+				THRESHOLD, source_callback);
 		}
 
 		private void source_callback (int sample, float[] values) {
@@ -23,7 +25,8 @@ namespace Spek {
 			unowned uchar[] pixels = pixbuf.get_pixels ();
 			for (int y = 0; y < values.length; y++) {
 				var i = (values.length - y - 1) * rowstride + x * 3;
-				var level = float.min (1f, Math.log10f (101f + values[y]) / 2f);
+				var level = float.min (
+					1f, Math.log10f (1f - THRESHOLD + values[y]) / Math.log10f (-THRESHOLD));
 				var color = get_color (level);
 				if (sample < 20) {
 					// TODO: allocate additional space for this.
@@ -39,6 +42,7 @@ namespace Spek {
 		// Modified version of Dan Bruton's algorithm:
 		// http://www.physics.sfasu.edu/astro/color/spectra.html
 		private Color get_color (float level) {
+			level *= 0.6625f;
 			float r = 0.0f, g = 0.0f, b = 0.0f;
 			if (level >= 0f && level < 0.15f) {
 				r = (0.15f - level) / (0.15f + 0.075f);
@@ -60,22 +64,15 @@ namespace Spek {
 				r = 1.0f;
 				g = (0.6625f - level) / (0.6625f - 0.5f);
 				b = 0.0f;
-			} else if (level >= 0.6625 && level <= 1.0f) {
-				r = 1.0f;
-				g = 0.0f;
-				b = 0.0f;
 			}
 
 			// Intensity correction.
-			float cf = 0.0f;
+			float cf = 1.0f;
 			if (level >= 0 && level < 0.1f) {
-				cf = 0.3f + 0.7f * (level + 0.075f) / (0.1f + 0.075f);
-			} else if (level >= 0.1f && level <= 0.8f) {
-				cf = 1.0f;
-			} else if (level > 0.8f && level <= 1.0f) {
-				cf = 0.3f + 0.7f * (1.0f - level) / (1.0f - 0.8f);
+				cf = level / 0.1f;
 			}
 			cf *= 255f;
+
 			return { (uchar) (r * cf + 0.5f), (uchar) (g * cf + 0.5f), (uchar) (b * cf + 0.5f) };
 		}
 	}

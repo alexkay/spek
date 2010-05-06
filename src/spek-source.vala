@@ -6,6 +6,7 @@ namespace Spek {
 		public string file_name { get; construct; }
 		public int bands { get; construct; }
 		public int samples { get; construct; }
+		public int threshold { get; construct; }
 		// TODO: file a bug, cannot s/set/construct/
 		public Callback callback {get; set; }
 
@@ -17,8 +18,8 @@ namespace Spek {
 		private int sample;
 		private float[] values;
 
-		public Source (string file_name, int bands, int samples, Callback callback) {
-			GLib.Object (file_name: file_name, bands: bands, samples: samples);
+		public Source (string file_name, int bands, int samples, int threshold, Callback callback) {
+			GLib.Object (file_name: file_name, bands: bands, samples: samples, threshold: threshold);
 			this.callback = callback;
 		}
 
@@ -73,7 +74,7 @@ namespace Spek {
 			source.pad = new_pad;
 			source.pad.link (sinkpad);
 			source.spectrum.set ("bands", source.bands);
-			source.spectrum.set ("threshold", -100);
+			source.spectrum.set ("threshold", source.threshold);
 			source.spectrum.set ("message-magnitude", true);
 			source.spectrum.set ("post-messages", true);
 			source.spectrum.set_state (State.PAUSED);
