@@ -33,6 +33,18 @@ namespace Spek {
 			quit.clicked.connect (s => this.destroy());
 			toolbar.insert (quit, -1);
 
+			// This separator forces the rest of the items to the end of the toolbar.
+			var sep = new SeparatorToolItem ();
+			sep.set_expand (true);
+			sep.draw = false;
+			toolbar.insert (sep, -1);
+
+			var about = new ToolButton.from_stock (STOCK_ABOUT);
+			about.is_important = true;
+			about.add_accelerator ("clicked", group, keyval_from_name ("F1"), 0, AccelFlags.VISIBLE);
+			about.clicked.connect (on_about_clicked);
+			toolbar.insert (about, -1);
+
 			this.spectrogram = new Spectrogram ();
 
 			var vbox = new VBox (false, 0);
@@ -51,6 +63,29 @@ namespace Spek {
 				spectrogram.open (chooser.get_filename ());
 			}
 			chooser.destroy ();
+		}
+
+		private void on_about_clicked () {
+			string[] authors = {
+				"Alexander Kojevnikov <alexander@kojevnikov.com>"
+			};
+
+			show_about_dialog (
+				this,
+				"program-name", "Spek",
+				"version", Config.PACKAGE_VERSION,
+				"copyright", _("Copyright © 2010 Alexander Kojevnikov"),
+				"comments", _("Spek - Audio Spectrum Viewer"),
+				"authors", authors,
+				// TODO
+//				"documenters", documenters,
+//				"artists", artists,
+//				"website-label", _("Spek Website"),
+//				"website", "http://TODO",
+//				"license", "GPLv3+",
+				"wrap-license", true,
+				"logo-icon-name", "spek",
+				"translator-credits", _("translator-credits"));
 		}
 	}
 }
