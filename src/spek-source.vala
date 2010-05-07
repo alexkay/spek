@@ -25,6 +25,7 @@ namespace Spek {
 		}
 
 		public void stop () {
+			// Need to manually remove the bus watch, otherwise `this` is never unreferenced.
 			if (watch_id > 0) {
 				GLib.Source.remove (watch_id);
 				watch_id = 0;
@@ -33,13 +34,6 @@ namespace Spek {
 				pipeline.set_state (State.NULL);
 				pipeline = null;
 			}
-			spectrum = null;
-			pad = null;
-		}
-
-		~Source () {
-			stop ();
-			stdout.printf ("unref\n");
 		}
 
 		construct {

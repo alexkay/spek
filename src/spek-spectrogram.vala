@@ -24,7 +24,6 @@ namespace Spek {
 			this.image = new ImageSurface (Format.RGB24, allocation.width, allocation.height);
 			if (this.source != null) {
 				this.source.stop ();
-				this.source = null;
 			}
 			this.source = new Source (
 				file_name, allocation.height, allocation.width,
