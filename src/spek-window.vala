@@ -33,7 +33,7 @@ namespace Spek {
 				STOCK_CANCEL, ResponseType.CANCEL,
 				STOCK_OPEN, ResponseType.ACCEPT, null);
 			if (chooser.run () == ResponseType.ACCEPT) {
-				spectrogram.show_file (chooser.get_filename ());
+				spectrogram.open (chooser.get_filename ());
 			}
 			chooser.destroy ();
 		}

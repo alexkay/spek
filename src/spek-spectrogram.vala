@@ -1,47 +1,62 @@
+using Cairo;
 using Gdk;
 using Gtk;
 
 namespace Spek {
-	class Spectrogram : Gtk.Image {
+	class Spectrogram : DrawingArea {
 
 		private Source source;
 		private const int THRESHOLD = -92;
-		private struct Color { uchar r; uchar g; uchar b; }
+
+		private ImageSurface image;
 
 		public Spectrogram () {
+			show_all ();
 		}
 
-		public void show_file (string file_name) {
-			pixbuf = new Pixbuf (Colorspace.RGB, false, 8, allocation.width, allocation.height);
-			pixbuf.fill (0);
+		public void open (string file_name) {
+			image = new ImageSurface (Format.RGB24, allocation.width, allocation.height);
 			source = new Source (
 				file_name, allocation.height, allocation.width,
 				THRESHOLD, source_callback);
+			queue_draw ();
 		}
 
 		private void source_callback (int sample, float[] values) {
 			var x = sample;
-			var rowstride = pixbuf.rowstride;
-			unowned uchar[] pixels = pixbuf.get_pixels ();
+			var stride = image.get_stride ();
+			unowned uchar[] data = image.get_data ();
 			for (int y = 0; y < values.length; y++) {
-				var i = (values.length - y - 1) * rowstride + x * 3;
+				var i = (values.length - y - 1) * stride + x * 4;
 				var level = float.min (
 					1f, Math.log10f (1f - THRESHOLD + values[y]) / Math.log10f (-THRESHOLD));
-				var color = get_color (level);
+				uint32 color = get_color (level);
 				if (sample < 20) {
 					// TODO: allocate additional space for this.
 					color = get_color (((float) y) / values.length);
 				}
-				pixels[i] = color.r;
-				pixels[i + 1] = color.g;
-				pixels[i + 2] = color.b;
+				uint32 *p = &data[i];
+				*p = color;
 			}
-			queue_draw_area (allocation.x + sample, allocation.y, 1, allocation.height);
+			queue_draw_area (sample, 0, 1, allocation.height);
+		}
+
+		private override bool expose_event (EventExpose event) {
+			var cr = cairo_create (this.window);
+
+			if (image == null) {
+				cr.set_source_rgb (0, 0, 0);
+			} else {
+				cr.set_source_surface (image, 0, 0);
+			}
+			cr.rectangle (event.area.x, event.area.y, event.area.width, event.area.height);
+			cr.fill ();
+			return true;
 		}
 
 		// Modified version of Dan Bruton's algorithm:
 		// http://www.physics.sfasu.edu/astro/color/spectra.html
-		private Color get_color (float level) {
+		private uint32 get_color (float level) {
 			level *= 0.6625f;
 			float r = 0.0f, g = 0.0f, b = 0.0f;
 			if (level >= 0f && level < 0.15f) {
@@ -73,7 +88,11 @@ namespace Spek {
 			}
 			cf *= 255f;
 
-			return { (uchar) (r * cf + 0.5f), (uchar) (g * cf + 0.5f), (uchar) (b * cf + 0.5f) };
+			// Pack RGB values into Cairo-happy format.
+			uint32 rr = (uint32) (r * cf + 0.5f);
+			uint32 gg = (uint32) (g * cf + 0.5f);
+			uint32 bb = (uint32) (b * cf + 0.5f);
+			return (rr << 16) + (gg << 8) + bb;
 		}
 	}
 }
