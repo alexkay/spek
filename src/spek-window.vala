@@ -1,3 +1,4 @@
+using Gdk;
 using Gtk;
 
 namespace Spek {
@@ -7,18 +8,32 @@ namespace Spek {
 
 		public Window () {
 			this.title = Config.PACKAGE_STRING;
-			this.set_default_size (300, 200);
+			this.set_default_size (640, 480);
 			this.destroy.connect (Gtk.main_quit);
 
+			var group = new AccelGroup ();
+			this.add_accel_group (group);
+
 			var toolbar = new Toolbar ();
+			toolbar.set_style (ToolbarStyle.BOTH_HORIZ);
+
 			var open = new ToolButton.from_stock (STOCK_OPEN);
+			open.is_important = true;
+			open.add_accelerator (
+				"clicked", group, 'O', ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
 			open.clicked.connect (on_open_clicked);
 			toolbar.insert (open, -1);
+
+			toolbar.insert (new SeparatorToolItem (), -1);
+
 			var quit = new ToolButton.from_stock (STOCK_QUIT);
+			quit.is_important = true;
+			quit.add_accelerator (
+				"clicked", group, 'Q', ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
 			quit.clicked.connect (s => this.destroy());
 			toolbar.insert (quit, -1);
 
-			spectrogram = new Spectrogram ();
+			this.spectrogram = new Spectrogram ();
 
 			var vbox = new VBox (false, 0);
 			vbox.pack_start (toolbar, false, true, 0);
