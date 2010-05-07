@@ -17,14 +17,29 @@ namespace Spek {
 		private Pad pad = null;
 		private int sample;
 		private float[] values;
+		private uint watch_id;
 
 		public Source (string file_name, int bands, int samples, int threshold, Callback callback) {
 			GLib.Object (file_name: file_name, bands: bands, samples: samples, threshold: threshold);
 			this.callback = callback;
 		}
 
+		public void stop () {
+			if (watch_id > 0) {
+				GLib.Source.remove (watch_id);
+				watch_id = 0;
+			}
+			if (pipeline != null) {
+				pipeline.set_state (State.NULL);
+				pipeline = null;
+			}
+			spectrum = null;
+			pad = null;
+		}
+
 		~Source () {
-			pipeline.set_state (State.NULL);
+			stop ();
+			stdout.printf ("unref\n");
 		}
 
 		construct {
@@ -45,7 +60,7 @@ namespace Spek {
 				decodebin, "new-decoded-pad",
 				(GLib.Callback) on_new_decoded_pad, this);
 
-			pipeline.get_bus ().add_watch (on_bus_watch);
+			this.watch_id = pipeline.get_bus ().add_watch (on_bus_watch);
 			if (pipeline.set_state (State.PAUSED) == StateChangeReturn.ASYNC) {
 				pipeline.get_state (null, null, -1);
 			}

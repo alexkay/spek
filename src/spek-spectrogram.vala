@@ -6,6 +6,7 @@ namespace Spek {
 	class Spectrogram : DrawingArea {
 
 		private Source source;
+		private string file_name;
 		private const int THRESHOLD = -92;
 
 		private ImageSurface image;
@@ -15,11 +16,27 @@ namespace Spek {
 		}
 
 		public void open (string file_name) {
-			image = new ImageSurface (Format.RGB24, allocation.width, allocation.height);
-			source = new Source (
+			this.file_name = file_name;
+			start ();
+		}
+
+		private void start () {
+			this.image = new ImageSurface (Format.RGB24, allocation.width, allocation.height);
+			if (this.source != null) {
+				this.source.stop ();
+				this.source = null;
+			}
+			this.source = new Source (
 				file_name, allocation.height, allocation.width,
 				THRESHOLD, source_callback);
 			queue_draw ();
+		}
+
+		private override void size_allocate (Gdk.Rectangle allocation) {
+			base.size_allocate (allocation);
+			if (file_name != null) {
+				start ();
+			}
 		}
 
 		private void source_callback (int sample, float[] values) {
