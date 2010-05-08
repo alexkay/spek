@@ -9,7 +9,8 @@ SUBDIRS = \
 EXTRA_DIST = \
 	intltool-extract.in \
 	intltool-merge.in \
-	intltool-update.in
+	intltool-update.in \
+	HACKING
 
 DISTCLEANFILES = \
 	intltool-extract \
