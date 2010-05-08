@@ -7,9 +7,10 @@ namespace Spek {
 
 		private Source source;
 		private string file_name;
-		private const int THRESHOLD = -92;
+		private const int THRESHOLD = -100;
 
 		private ImageSurface image;
+		private const int PADDING = 60;
 
 		public Spectrogram () {
 			show_all ();
@@ -21,18 +22,23 @@ namespace Spek {
 		}
 
 		private void start () {
-			this.image = new ImageSurface (Format.RGB24, allocation.width, allocation.height);
+			// The number of bands is the number of pixels available for the image.
+			// The number of samples is fixed, FFT results are very different for
+			// different values but we need some consistency.
+			this.image = new ImageSurface (Format.RGB24, allocation.width - 2 * PADDING, 1024);
+
 			if (this.source != null) {
 				this.source.stop ();
 			}
 			this.source = new Source (
-				file_name, allocation.height, allocation.width,
+				file_name, image.get_height (), image.get_width (),
 				THRESHOLD, source_callback);
 			queue_draw ();
 		}
 
 		private override void size_allocate (Gdk.Rectangle allocation) {
 			base.size_allocate (allocation);
+
 			if (file_name != null) {
 				start ();
 			}
@@ -54,8 +60,7 @@ namespace Spek {
 				uint32 *p = &data[i];
 				*p = color;
 			}
-			//queue_draw_area (sample, 0, 1, allocation.height);
-			queue_draw ();
+			queue_draw_area (PADDING + sample, PADDING, 1, allocation.height - 2 * PADDING);
 		}
 
 		private override bool expose_event (EventExpose event) {
@@ -73,8 +78,10 @@ namespace Spek {
 
 			// Draw the spectrogram.
 			if (image != null) {
-				cr.translate (40, 40);
-				cr.scale ((w - 80) / w, (h - 80) / h);
+				cr.translate (PADDING, PADDING);
+				cr.scale (
+					(w - 2 * PADDING) / image.get_width (),
+					(h - 2 * PADDING) / image.get_height ());
 				cr.set_source_surface (image, 0, 0);
 				cr.paint ();
 				cr.identity_matrix ();
@@ -84,7 +91,7 @@ namespace Spek {
 			cr.set_source_rgb (1, 1, 1);
 			cr.set_line_width (1);
 			cr.set_antialias (Antialias.NONE);
-			cr.rectangle (40, 40, w - 80, h - 80);
+			cr.rectangle (PADDING, PADDING, w - 2 * PADDING, h - 2 * PADDING);
 			cr.stroke ();
 			return true;
 		}
