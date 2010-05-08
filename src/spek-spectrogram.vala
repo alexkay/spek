@@ -54,19 +54,38 @@ namespace Spek {
 				uint32 *p = &data[i];
 				*p = color;
 			}
-			queue_draw_area (sample, 0, 1, allocation.height);
+			//queue_draw_area (sample, 0, 1, allocation.height);
+			queue_draw ();
 		}
 
 		private override bool expose_event (EventExpose event) {
+			double w = allocation.width;
+			double h = allocation.height;
 			var cr = cairo_create (this.window);
 
-			if (image == null) {
-				cr.set_source_rgb (0, 0, 0);
-			} else {
-				cr.set_source_surface (image, 0, 0);
-			}
+			// Clip to the exposed area.
 			cr.rectangle (event.area.x, event.area.y, event.area.width, event.area.height);
-			cr.fill ();
+			cr.clip ();
+
+			// Clean the background.
+			cr.set_source_rgb (0, 0, 0);
+			cr.paint ();
+
+			// Draw the spectrogram.
+			if (image != null) {
+				cr.translate (40, 40);
+				cr.scale ((w - 80) / w, (h - 80) / h);
+				cr.set_source_surface (image, 0, 0);
+				cr.paint ();
+				cr.identity_matrix ();
+			}
+
+			// Border around the spectrogram.
+			cr.set_source_rgb (1, 1, 1);
+			cr.set_line_width (1);
+			cr.set_antialias (Antialias.NONE);
+			cr.rectangle (40, 40, w - 80, h - 80);
+			cr.stroke ();
 			return true;
 		}
 
