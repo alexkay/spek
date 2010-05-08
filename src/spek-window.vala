@@ -7,7 +7,8 @@ namespace Spek {
 		private Spectrogram spectrogram;
 
 		public Window () {
-			this.title = Config.PACKAGE_STRING;
+			this.title = _("Spek - Acoustic Spectrum Analyzer");
+			this.set_icon_name ("spek");
 			this.set_default_size (640, 480);
 			this.destroy.connect (Gtk.main_quit);
 
@@ -56,7 +57,7 @@ namespace Spek {
 
 		private void on_open_clicked () {
 			var chooser = new FileChooserDialog (
-				_ ("Open File"), this, FileChooserAction.OPEN,
+				_("Open File"), this, FileChooserAction.OPEN,
 				STOCK_CANCEL, ResponseType.CANCEL,
 				STOCK_OPEN, ResponseType.ACCEPT, null);
 			if (chooser.run () == ResponseType.ACCEPT) {
@@ -75,7 +76,7 @@ namespace Spek {
 				"program-name", "Spek",
 				"version", Config.PACKAGE_VERSION,
 				"copyright", _("Copyright © 2010 Alexander Kojevnikov"),
-				"comments", _("Spek - Audio Spectrum Viewer"),
+				"comments", this.title,
 				"authors", authors,
 				// TODO
 //				"documenters", documenters,
