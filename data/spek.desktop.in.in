@@ -1,11 +1,12 @@
 [Desktop Entry]
 Type=Application
-Version=1.0
+Version=0.1
 _Name=Spek
-_GenericName=Spectrogram Viewer
-_Comment=Spectrogram viewer
-Exec=sampala
-Icon=sampala
+_GenericName=Spectrum Analyzer
+_Comment=View spectrograms of your audio files
+_X-GNOME-FullName=Spectrum Analyzer
+Exec=spek
+Icon=spek
 Terminal=false
-Categories=Audio
+Categories=AudioVideo;Audio
 StartupNotify=true
