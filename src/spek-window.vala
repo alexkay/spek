@@ -2,18 +2,18 @@
  *
  * Copyright (C) 2010  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
- * This program is free software: you can redistribute it and/or modify
+ * Spek is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * Spek is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 using Gdk;
@@ -88,20 +88,36 @@ namespace Spek {
 			string[] authors = {
 				"Alexander Kojevnikov <alexander@kojevnikov.com>"
 			};
+			string[] artists = {
+				"Olga Vasylevska"
+			};
+			string license = "Copyright (C) 2010  Alexander Kojevnikov";
+			license += "\n\n";
+			license += "Spek is free software: you can redistribute it and/or modify ";
+			license += "it under the terms of the GNU General Public License as published by ";
+			license += "the Free Software Foundation, either version 3 of the License, or ";
+			license += "(at your option) any later version.";
+			license += "\n\n";
+			license += "Spek is distributed in the hope that it will be useful, ";
+			license += "but WITHOUT ANY WARRANTY; without even the implied warranty of ";
+			license += "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the ";
+			license += "GNU General Public License for more details.";
+			license += "\n\n";
+			license += "You should have received a copy of the GNU General Public License ";
+			license += "along with Spek.  If not, see <http://www.gnu.org/licenses/>.";
 
 			show_about_dialog (
 				this,
 				"program-name", "Spek",
 				"version", Config.PACKAGE_VERSION,
-				"copyright", _("Copyright © 2010 Alexander Kojevnikov"),
+				"copyright", _("Copyright \xc2\xa9 2010 Alexander Kojevnikov"),
 				"comments", this.title,
 				"authors", authors,
-				// TODO
 //				"documenters", documenters,
-//				"artists", artists,
-//				"website-label", _("Spek Website"),
-//				"website", "http://TODO",
-//				"license", "GPLv3+",
+				"artists", artists,
+				"website-label", _("Spek Website"),
+				"website", "http://spek-project.org/",
+				"license", license,
 				"wrap-license", true,
 				"logo-icon-name", "spek",
 				"translator-credits", _("translator-credits"));
