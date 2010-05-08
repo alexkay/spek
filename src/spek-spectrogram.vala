@@ -7,12 +7,24 @@ namespace Spek {
 
 		private Source source;
 		private string file_name;
-		private const int THRESHOLD = -100;
+		private const int THRESHOLD = -92;
+		private const int BANDS = 1024;
 
 		private ImageSurface image;
+		private ImageSurface palette;
 		private const int PADDING = 60;
+		private const int GAP = 10;
+		private const int RULER = 10;
 
 		public Spectrogram () {
+			// Pre-draw the palette.
+			palette = new ImageSurface (Format.RGB24, RULER, BANDS);
+			for (int y = 0; y < BANDS; y++) {
+				var color = get_color (y / (float) BANDS);
+				for (int x = 0; x < RULER; x++) {
+					put_pixel (palette, x, y, color);
+				}
+			}
 			show_all ();
 		}
 
@@ -22,10 +34,10 @@ namespace Spek {
 		}
 
 		private void start () {
-			// The number of bands is the number of pixels available for the image.
-			// The number of samples is fixed, FFT results are very different for
+			// The number of samples is the number of pixels available for the image.
+			// The number of bands is fixed, FFT results are very different for
 			// different values but we need some consistency.
-			this.image = new ImageSurface (Format.RGB24, allocation.width - 2 * PADDING, 1024);
+			this.image = new ImageSurface (Format.RGB24, allocation.width - 2 * PADDING, BANDS);
 
 			if (this.source != null) {
 				this.source.stop ();
@@ -45,20 +57,10 @@ namespace Spek {
 		}
 
 		private void source_callback (int sample, float[] values) {
-			var x = sample;
-			var stride = image.get_stride ();
-			unowned uchar[] data = image.get_data ();
 			for (int y = 0; y < values.length; y++) {
-				var i = (values.length - y - 1) * stride + x * 4;
 				var level = float.min (
 					1f, Math.log10f (1f - THRESHOLD + values[y]) / Math.log10f (-THRESHOLD));
-				uint32 color = get_color (level);
-				if (sample < 20) {
-					// TODO: allocate additional space for this.
-					color = get_color (((float) y) / values.length);
-				}
-				uint32 *p = &data[i];
-				*p = color;
+				put_pixel (image, sample, y, get_color (level));
 			}
 			queue_draw_area (PADDING + sample, PADDING, 1, allocation.height - 2 * PADDING);
 		}
@@ -66,6 +68,7 @@ namespace Spek {
 		private override bool expose_event (EventExpose event) {
 			double w = allocation.width;
 			double h = allocation.height;
+
 			var cr = cairo_create (this.window);
 
 			// Clip to the exposed area.
@@ -78,10 +81,8 @@ namespace Spek {
 
 			// Draw the spectrogram.
 			if (image != null) {
-				cr.translate (PADDING, PADDING);
-				cr.scale (
-					(w - 2 * PADDING) / image.get_width (),
-					(h - 2 * PADDING) / image.get_height ());
+				cr.translate (PADDING, h - PADDING);
+				cr.scale (1, -(h - 2 * PADDING) / image.get_height ());
 				cr.set_source_surface (image, 0, 0);
 				cr.paint ();
 				cr.identity_matrix ();
@@ -93,7 +94,24 @@ namespace Spek {
 			cr.set_antialias (Antialias.NONE);
 			cr.rectangle (PADDING, PADDING, w - 2 * PADDING, h - 2 * PADDING);
 			cr.stroke ();
+
+			// The palette.
+			cr.translate (w - PADDING + GAP, h - PADDING);
+			cr.scale (1, -(h - 2 * PADDING) / palette.get_height ());
+			cr.set_source_surface (palette, 0, 0);
+			cr.paint ();
+			cr.identity_matrix ();
+
 			return true;
+		}
+
+		private void put_pixel (ImageSurface surface, int x, int y, uint32 color) {
+			var i = y * surface.get_stride () + x * 4;
+			unowned uchar[] data = surface.get_data ();
+
+			// Translate uchar* to uint32* to avoid dealing with endianness.
+			uint32 *p = &data[i];
+			*p = color;
 		}
 
 		// Modified version of Dan Bruton's algorithm:
