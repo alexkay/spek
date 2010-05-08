@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+/opt/google-appengine/appcfg.py --email=alexander@kojevnikov.com update `dirname $0`

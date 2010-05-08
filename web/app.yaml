@@ -1,0 +1,25 @@
+application: spek-project
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /favicon.ico
+  static_files: favicon.ico
+  upload: favicon.ico
+  mime_type: vnd.microsoft.icon
+
+- url: /robots.txt
+  static_files: robots.txt
+  upload: robots.txt
+  mime_type: text/plain
+
+- url: /
+  static_files: index.html
+  upload: index.html
+  mime_type: text/html
+
+- url: /(.*).bz2
+  static_files: \1.bz2
+  upload: (.*).bz2
+  mime_type: application/x-bzip
