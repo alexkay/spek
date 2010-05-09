@@ -93,9 +93,13 @@ namespace Spek {
 
 		private void on_save_clicked () {
 			var chooser = new FileChooserDialog (
-				_("Save File"), this, FileChooserAction.SAVE,
+				_("Save Spectrogram"), this, FileChooserAction.SAVE,
 				STOCK_CANCEL, ResponseType.CANCEL,
 				STOCK_SAVE, ResponseType.ACCEPT, null);
+			var filter = new FileFilter ();
+			filter.add_pattern ("*.png");
+			filter.set_name (_("PNG Images"));
+			chooser.add_filter (filter);
 			if (chooser.run () == ResponseType.ACCEPT) {
 				spectrogram.save (chooser.get_filename ());
 			}
