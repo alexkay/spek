@@ -43,6 +43,13 @@ namespace Spek {
 			open.clicked.connect (on_open_clicked);
 			toolbar.insert (open, -1);
 
+			var save = new ToolButton.from_stock (STOCK_SAVE);
+			save.is_important = true;
+			save.add_accelerator (
+				"clicked", group, 'S', ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
+			save.clicked.connect (on_save_clicked);
+			toolbar.insert (save, -1);
+
 			toolbar.insert (new SeparatorToolItem (), -1);
 
 			var quit = new ToolButton.from_stock (STOCK_QUIT);
@@ -80,6 +87,17 @@ namespace Spek {
 				STOCK_OPEN, ResponseType.ACCEPT, null);
 			if (chooser.run () == ResponseType.ACCEPT) {
 				spectrogram.open (chooser.get_filename ());
+			}
+			chooser.destroy ();
+		}
+
+		private void on_save_clicked () {
+			var chooser = new FileChooserDialog (
+				_("Save File"), this, FileChooserAction.SAVE,
+				STOCK_CANCEL, ResponseType.CANCEL,
+				STOCK_SAVE, ResponseType.ACCEPT, null);
+			if (chooser.run () == ResponseType.ACCEPT) {
+				spectrogram.save (chooser.get_filename ());
 			}
 			chooser.destroy ();
 		}

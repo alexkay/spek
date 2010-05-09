@@ -30,7 +30,7 @@ namespace Spek {
 
 		private ImageSurface image;
 		private ImageSurface palette;
-		private const int PADDING = 60;
+		private const int PADDING = 40;
 		private const int GAP = 10;
 		private const int RULER = 10;
 
@@ -49,6 +49,12 @@ namespace Spek {
 		public void open (string file_name) {
 			this.file_name = file_name;
 			start ();
+		}
+
+		public void save (string file_name) {
+			var surface = new ImageSurface (Format.RGB24, allocation.width, allocation.height);
+			draw (new Context (surface));
+			surface.write_to_png (file_name);
 		}
 
 		private void start () {
@@ -84,14 +90,19 @@ namespace Spek {
 		}
 
 		private override bool expose_event (EventExpose event) {
-			double w = allocation.width;
-			double h = allocation.height;
-
 			var cr = cairo_create (this.window);
 
 			// Clip to the exposed area.
 			cr.rectangle (event.area.x, event.area.y, event.area.width, event.area.height);
 			cr.clip ();
+
+			draw (cr);
+			return true;
+		}
+
+		private void draw (Context cr) {
+			double w = allocation.width;
+			double h = allocation.height;
 
 			// Clean the background.
 			cr.set_source_rgb (0, 0, 0);
@@ -119,8 +130,6 @@ namespace Spek {
 			cr.set_source_surface (palette, 0, 0);
 			cr.paint ();
 			cr.identity_matrix ();
-
-			return true;
 		}
 
 		private void put_pixel (ImageSurface surface, int x, int y, uint32 color) {
