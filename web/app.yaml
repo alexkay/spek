@@ -23,3 +23,8 @@ handlers:
   static_files: \1.bz2
   upload: (.*).bz2
   mime_type: application/x-bzip
+
+- url: /(.*).png
+  static_files: \1.png
+  upload: (.*).png
+  mime_type: image/png

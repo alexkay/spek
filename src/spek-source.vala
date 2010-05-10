@@ -58,7 +58,8 @@ namespace Spek {
 			sample = 0;
 			values = new float[bands];
 
-			// TODO: catch errors
+			// TODO: Check for gst errors, in particular test the situation when
+			// `spectrum` (good), `decodebin` (base) or `fakesink` (core) plugins are not available.
 			pipeline = new Pipeline ("pipeline");
 			var filesrc = ElementFactory.make ("filesrc", null);
 			var decodebin = ElementFactory.make ("decodebin", null);
