@@ -1,0 +1,13 @@
+Spek 0.1 - Released 2010-05-10
+==============================
+
+Spek is an acoustic spectrum analyser written in Vala.
+It uses the GNOME platform: GLib, GTK+, Cairo and GStreamer.
+
+Find out more about Spek on its website: http://spek-project.org/
+
+Version 0.1 is the first release of Spek. It has the following features:
+
+* Show spectrogram for all audio files supported by GStreamer
+* Re-calculate the spectrogram when the window size changes
+* Save the spectrogram as a PNG image
