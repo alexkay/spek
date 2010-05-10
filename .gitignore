@@ -29,4 +29,5 @@ src/*.o
 src/*.stamp
 src/spek
 stamp-h1
+test*
 xmldocs.make
