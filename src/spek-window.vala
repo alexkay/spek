@@ -25,7 +25,7 @@ namespace Spek {
 		private Spectrogram spectrogram;
 
 		public Window () {
-			this.title = _("Spek - Acoustic Spectrum Analyzer");
+			this.title = _("Spek - Acoustic Spectrum Analyser");
 			this.set_icon_name ("spek");
 			this.set_default_size (640, 480);
 			this.destroy.connect (Gtk.main_quit);

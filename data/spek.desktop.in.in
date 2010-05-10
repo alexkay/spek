@@ -2,9 +2,9 @@
 Type=Application
 Version=0.1
 _Name=Spek
-_GenericName=Spectrum Analyzer
+_GenericName=Spectrum Analyser
 _Comment=View spectrograms of your audio files
-_X-GNOME-FullName=Spectrum Analyzer
+_X-GNOME-FullName=Spectrum Analyser
 Exec=spek
 Icon=spek
 Terminal=false
