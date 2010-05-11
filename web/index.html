@@ -13,6 +13,8 @@
       h1 {font-size: 16pt;}
       h2 {font-size: 12pt;}
       img {border-style: none; outline: none;}
+      #screenshots {width: 100%;}
+      #screenshots td {vertical-align: top; width: 33%; font-size: smaller;}
     </style>
   </head>
   <body>
@@ -20,7 +22,18 @@
     <p>Spek (<a href="http://en.wikipedia.org/wiki/International_Phonetic_Alphabet">IPA</a>: /sp&#603;k/, &lsquo;bacon&rsquo; in Dutch) helps to analyse your audio files by showing their <a href="http://en.wikipedia.org/wiki/Spectrogram">spectrogram</a>.</p>
 
     <h2>Screenshots</h2>
-    <p><a href="mp3.png"><img src="mp3.png" width="262" height="210" alt="Spectrogram of an MP3 file" title="Spectrogram of an MP3 file"/></a>&nbsp;<a href="flac.png"><img src="flac.png" width="262" height="210" alt="Spectrogram of a FLAC file" title="Spectrogram of a FLAC file"/></a></p>
+    <table id="screenshots">
+      <tr>
+        <td><a href="flac.png"><img src="flac-small.png" width="240" height="192" alt="Spek showing a FLAC file"/></a></td>
+        <td><a href="mp3.png"><img src="mp3-small.png" width="240" height="192" alt="Spek showing an MP3 file"/></a></td>
+        <td><a href="transcode.png"><img src="transcode-small.png" width="240" height="192" alt="Spek showing a transcoded file"/></a></td>
+      </tr>
+      <tr>
+        <td>Spek showing the spectrogram of a FLAC file.</td>
+        <td>The same file encoded as a 320kbps MP3.</td>
+        <td>320kbps transcoded to -V2 MP3. <a href="http://wiki.hydrogenaudio.org/index.php?title=Transcoding">Don't do that</a>!</td>
+      </tr>
+    </table>
 
     <h2>Download</h2>
     <p>Spek 0.1: <a href="spek-0.1.tar.bz2">tarball</a>, <a href="http://gitorious.org/spek/spek/blobs/0.1/NEWS">NEWS</a></p>
