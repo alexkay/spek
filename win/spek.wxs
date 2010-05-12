@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?define ProductName = "Spek" ?>
+<?define Manufacturer = "Spek Project" ?>
+<?define ProductVersion = "0.1.0" ?>
+<?define UpgradeCode = "46D51DDF-5749-45E2-818B-1ACADF21C0D9" ?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="A27320AE-35AA-46D0-9CA3-E14EBF42CE66" Name="$(var.ProductName)" Language="0"
+           Version="$(var.ProductVersion)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)">
+    <Package InstallerVersion="301" Compressed="yes" />
+    <Media Id="1" Cabinet="spek.cab" EmbedCab="yes" />
+    <Property Id="ALLUSERS" Value="1" />
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
+    <UIRef Id="WixUI_InstallDir" />
+    <UIRef Id="WixUI_ErrorProgressText" />
+    <WixVariable Id="WixUILicenseRtf" Value="LICENSE.rtf" />
+    <Upgrade Id="$(var.UpgradeCode)">
+      <UpgradeVersion Minimum="$(var.ProductVersion)" OnlyDetect="yes" Property="NEWVERSIONDETECTED" />
+      <UpgradeVersion Minimum="0.0.0" IncludeMinimum="yes" Maximum="$(var.ProductVersion)" IncludeMaximum="no" Property="OLDERVERSIONBEINGUPGRADED" />
+    </Upgrade>
+    <InstallExecuteSequence>
+      <RemoveExistingProducts After="InstallInitialize" />
+    </InstallExecuteSequence>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLLOCATION" Name="$(var.ProductName)">
+          <Component Id="Main" Guid="CD5121AD-F799-4796-9DB8-0C24CA0A4C8E">
+            <File Id="LICENSE.rtf" Name="LICENSE.rtf" Source="LICENSE.rtf" />
+          </Component>
+          <Merge Id="GStreamer-Libraries" Language="1033" SourceFile="x86-OSSBuild-GStreamer-Libraries.msm" DiskId="1" />
+          <Merge Id="GStreamer-Plugins-Base" Language="1033" SourceFile="x86-OSSBuild-GStreamer-Plugins-Base.msm" DiskId="1" />
+          <Merge Id="GStreamer-Plugins-Good" Language="1033" SourceFile="x86-OSSBuild-GStreamer-Plugins-Good.msm" DiskId="1" />
+          <Merge Id="GStreamer-Plugins-Ugly-GPL" Language="1033" SourceFile="x86-OSSBuild-GStreamer-Plugins-Ugly-GPL.msm" DiskId="1" />
+        </Directory>
+      </Directory>
+    </Directory>
+    <Feature Id="All" Title="$(var.ProductName)" Level="1">
+      <ComponentRef Id="Main" />
+      <MergeRef Id="GStreamer-Libraries" />
+      <MergeRef Id="GStreamer-Plugins-Base" />
+      <MergeRef Id="GStreamer-Plugins-Good" />
+      <MergeRef Id="GStreamer-Plugins-Ugly-GPL" />
+    </Feature>
+  </Product>
+</Wix>
+
