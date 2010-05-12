@@ -11,7 +11,7 @@ pushd $(dirname $0)/..
 
 #rm -fr win/msi-data
 #mkdir win/msi-data
-#./configure --prefix=${PWD}/win/msi-data && make && make install
+#CFLAGS="-mwindows" ./configure --prefix=${PWD}/win/msi-data && make && make install
 
 cd win/msi-data
 
