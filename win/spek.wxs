@@ -27,15 +27,18 @@
           <Component Id="Main" Guid="CD5121AD-F799-4796-9DB8-0C24CA0A4C8E">
             <File Id="LICENSE.rtf" Name="LICENSE.rtf" Source="LICENSE.rtf" />
           </Component>
-          <Merge Id="GStreamer-Libraries" Language="1033" SourceFile="x86-OSSBuild-GStreamer-Libraries.msm" DiskId="1" />
-          <Merge Id="GStreamer-Plugins-Base" Language="1033" SourceFile="x86-OSSBuild-GStreamer-Plugins-Base.msm" DiskId="1" />
-          <Merge Id="GStreamer-Plugins-Good" Language="1033" SourceFile="x86-OSSBuild-GStreamer-Plugins-Good.msm" DiskId="1" />
-          <Merge Id="GStreamer-Plugins-Ugly-GPL" Language="1033" SourceFile="x86-OSSBuild-GStreamer-Plugins-Ugly-GPL.msm" DiskId="1" />
+          <Directory Id="bin" Name="bin">
+            <Merge Id="GStreamer-Libraries" Language="1033" SourceFile="x86-OSSBuild-GStreamer-Libraries.msm" DiskId="1" />
+            <Merge Id="GStreamer-Plugins-Base" Language="1033" SourceFile="x86-OSSBuild-GStreamer-Plugins-Base.msm" DiskId="1" />
+            <Merge Id="GStreamer-Plugins-Good" Language="1033" SourceFile="x86-OSSBuild-GStreamer-Plugins-Good.msm" DiskId="1" />
+            <Merge Id="GStreamer-Plugins-Ugly-GPL" Language="1033" SourceFile="x86-OSSBuild-GStreamer-Plugins-Ugly-GPL.msm" DiskId="1" />
+          </Directory>
         </Directory>
       </Directory>
     </Directory>
     <Feature Id="All" Title="$(var.ProductName)" Level="1">
       <ComponentRef Id="Main" />
+      <ComponentGroupRef Id="Files" />
       <MergeRef Id="GStreamer-Libraries" />
       <MergeRef Id="GStreamer-Plugins-Base" />
       <MergeRef Id="GStreamer-Plugins-Good" />
