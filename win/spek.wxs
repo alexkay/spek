@@ -9,6 +9,7 @@
     <Package InstallerVersion="301" Compressed="yes" />
     <Media Id="1" Cabinet="spek.cab" EmbedCab="yes" />
     <Property Id="ALLUSERS" Value="1" />
+    <Property Id="ARPPRODUCTICON" Value="ProgramIcon" />
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
     <UIRef Id="WixUI_InstallDir" />
     <UIRef Id="WixUI_ErrorProgressText" />
@@ -21,7 +22,27 @@
       <RemoveExistingProducts After="InstallInitialize" />
     </InstallExecuteSequence>
 
+    <Icon Id="ProgramIcon" SourceFile="spek.ico"/>
+    <DirectoryRef Id="ProgramMenuSubfolder">
+      <Component Id="StartMenuShortcut" Guid="165DF12B-D970-49BC-B07B-880B62ABC308">
+        <Shortcut Id="StartMenuShortcut" Name="$(var.ProductName)" Icon="ProgramIcon" Target="[INSTALLLOCATION]bin/spek.exe" WorkingDirectory="bin"/>
+        <Shortcut Id="UninstallProduct" Name="Uninstall $(var.ProductName)" Target="[System64Folder]msiexec.exe" Arguments="/x [ProductCode]"/>
+        <RemoveFolder Id="ProgramMenuSubfolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\$(var.Manufacturer)\$(var.ProductName)" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="DesktopShortcut" Guid="ACCE1EDB-87E3-4FE5-B2BF-93113E767381">
+        <Shortcut Id="DesktopShortcut" Name="$(var.ProductName)" Icon="ProgramIcon" Target="[INSTALLLOCATION]bin/spek.exe" WorkingDirectory="bin"/>
+        <RegistryValue Root="HKCU" Key="Software\$(var.Manufacturer)\$(var.ProductName)" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+
     <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ProgramMenuSubfolder" Name="$(var.ProductName)"/>
+      </Directory>
+      <Directory Id="DesktopFolder" />
       <Directory Id="ProgramFilesFolder">
         <Directory Id="INSTALLLOCATION" Name="$(var.ProductName)">
           <Component Id="Main" Guid="CD5121AD-F799-4796-9DB8-0C24CA0A4C8E">
@@ -39,6 +60,8 @@
     <Feature Id="All" Title="$(var.ProductName)" Level="1">
       <ComponentRef Id="Main" />
       <ComponentGroupRef Id="Files" />
+      <ComponentRef Id="StartMenuShortcut" />
+      <ComponentRef Id="DesktopShortcut" />
       <MergeRef Id="GStreamer-Libraries" />
       <MergeRef Id="GStreamer-Plugins-Base" />
       <MergeRef Id="GStreamer-Plugins-Good" />

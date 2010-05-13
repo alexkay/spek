@@ -73,16 +73,14 @@ echo "gtk-theme-name = \"MS-Windows\"" > etc/gtk-2.0/gtkrc
 
 cd ..
 #TODO:
-# * Desktop and Programs shortcuts
 # * Figure out why icons don't work, may be install hi-color icon theme?
-# * Uninstall shortcut
 # * Website link doesn't work
 
 # Generate a wxs for files in msi-data
-"$WIX_PATH"/heat.exe dir msi-data -gg -srd -cg Files -dr INSTALLLOCATION -template fragment -o files.wxs || (popd; exit 1)
+"$WIX_PATH"/heat.exe dir msi-data -gg -ke -srd -cg Files -dr INSTALLLOCATION -template fragment -o files.wxs
 
 # Make the MSI package
-"$WIX_PATH"/candle.exe spek.wxs files.wxs || (popd; exit 1)
-"$WIX_PATH"/light.exe -ext WixUIExtension.dll -b msi-data spek.wixobj files.wixobj -o spek.msi || (popd; exit 1)
+"$WIX_PATH"/candle.exe spek.wxs files.wxs
+"$WIX_PATH"/light.exe -ext WixUIExtension.dll -b msi-data spek.wixobj files.wixobj -o spek.msi
 
 popd
