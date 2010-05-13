@@ -26,7 +26,7 @@ namespace Spek {
 
 		public Window () {
 			title = _("Spek - Acoustic Spectrum Analyser");
-			set_icon_name ("spek");
+			set_default_icon_name ("spek");
 			set_default_size (640, 480);
 			destroy.connect (Gtk.main_quit);
 

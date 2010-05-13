@@ -18,14 +18,15 @@ cd win/msi-data
 urls=(\
 # GTK+ and its dependencies
 "http://ftp.gnome.org/pub/gnome/binaries/win32/atk/1.30/atk_1.30.0-1_win32.zip" \
+"http://ftp.gnome.org/pub/gnome/binaries/win32/glib/2.24/glib_2.24.0-2_win32.zip" \
+"http://ftp.gnome.org/pub/gnome/binaries/win32/gtk+/2.20/gtk+_2.20.0-1_win32.zip" \
+"http://ftp.gnome.org/pub/gnome/binaries/win32/pango/1.28/pango_1.28.0-1_win32.zip" \
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/cairo_1.8.10-3_win32.zip" \
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/expat_2.0.1-1_win32.zip" \
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/fontconfig_2.8.0-2_win32.zip" \
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/freetype_2.3.12-1_win32.zip" \
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/gettext-runtime-0.17-1.zip" \
-"http://ftp.gnome.org/pub/gnome/binaries/win32/glib/2.24/glib_2.24.0-2_win32.zip" \
-"http://ftp.gnome.org/pub/gnome/binaries/win32/gtk+/2.20/gtk+_2.20.0-1_win32.zip" \
-"http://ftp.gnome.org/pub/gnome/binaries/win32/pango/1.28/pango_1.28.0-1_win32.zip" \
+"http://ftp.gnome.org/pub/GNOME/binaries/win32/dependencies/hicolor-icon-theme_0.10-1_win32.zip" \
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/libpng_1.4.0-1_win32.zip" \
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/libxml2_2.7.7-1_win32.zip" \
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/zlib_1.2.4-2_win32.zip" \
@@ -72,9 +73,6 @@ rm *.msm
 echo "gtk-theme-name = \"MS-Windows\"" > etc/gtk-2.0/gtkrc
 
 cd ..
-#TODO:
-# * Figure out why icons don't work, may be install hi-color icon theme?
-# * Website link doesn't work
 
 # Generate a wxs for files in msi-data
 "$WIX_PATH"/heat.exe dir msi-data -gg -ke -srd -cg Files -dr INSTALLLOCATION -template fragment -o files.wxs
