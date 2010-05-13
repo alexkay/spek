@@ -25,13 +25,13 @@ namespace Spek {
 		private Spectrogram spectrogram;
 
 		public Window () {
-			this.title = _("Spek - Acoustic Spectrum Analyser");
-			this.set_icon_name ("spek");
-			this.set_default_size (640, 480);
-			this.destroy.connect (Gtk.main_quit);
+			title = _("Spek - Acoustic Spectrum Analyser");
+			set_icon_name ("spek");
+			set_default_size (640, 480);
+			destroy.connect (Gtk.main_quit);
 
 			var group = new AccelGroup ();
-			this.add_accel_group (group);
+			add_accel_group (group);
 
 			var toolbar = new Toolbar ();
 			toolbar.set_style (ToolbarStyle.BOTH_HORIZ);
@@ -56,7 +56,7 @@ namespace Spek {
 			quit.is_important = true;
 			quit.add_accelerator (
 				"clicked", group, 'Q', ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
-			quit.clicked.connect (s => this.destroy());
+			quit.clicked.connect (s => destroy());
 			toolbar.insert (quit, -1);
 
 			// This separator forces the rest of the items to the end of the toolbar.
@@ -71,13 +71,13 @@ namespace Spek {
 			about.clicked.connect (on_about_clicked);
 			toolbar.insert (about, -1);
 
-			this.spectrogram = new Spectrogram ();
+			spectrogram = new Spectrogram ();
 
 			var vbox = new VBox (false, 0);
 			vbox.pack_start (toolbar, false, true, 0);
 			vbox.pack_start (spectrogram, true, true, 0);
-			this.add (vbox);
-			this.show_all ();
+			add (vbox);
+			show_all ();
 		}
 
 		private void on_open_clicked () {
@@ -126,14 +126,14 @@ namespace Spek {
 			license += "GNU General Public License for more details.";
 			license += "\n\n";
 			license += "You should have received a copy of the GNU General Public License ";
-			license += "along with Spek.  If not, see <http://www.gnu.org/licenses/>.";
+			license += "along with Spek.  If not, see http://www.gnu.org/licenses/";
 
 			show_about_dialog (
 				this,
 				"program-name", "Spek",
 				"version", Config.PACKAGE_VERSION,
 				"copyright", _("Copyright \xc2\xa9 2010 Alexander Kojevnikov"),
-				"comments", this.title,
+				"comments", title,
 				"authors", authors,
 //				"documenters", documenters,
 				"artists", artists,
