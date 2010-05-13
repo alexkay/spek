@@ -34,13 +34,28 @@ urls=(\
 "http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/avcodec-gpl-52.dll" \
 "http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/avformat-gpl-52.dll" \
 "http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/avutil-gpl-50.dll" \
+"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/liba52-0.dll" \
 "http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libbz2.dll" \
+"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libdvdread-4.dll" \
 "http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libfaac-0.dll" \
 "http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libfaad-2.dll" \
 "http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libFLAC-8.dll" \
+"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libgcrypt-11.dll" \
+"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libgnutls-26.dll" \
+"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libgpg-error-0.dll" \
+"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libjpeg-8.dll" \
+"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libmp3lame-0.dll" \
+"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libmpeg2-0.dll" \
 "http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libogg-0.dll" \
+"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/liboil-0.3-0.dll" \
+"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libsoup-2.4-1.dll" \
+"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libtasn1-3.dll" \
+"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libtheoradec-1.dll" \
+"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libtheoraenc-1.dll" \
 "http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libvorbis-0.dll" \
 "http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libvorbisenc-2.dll" \
+"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libwavpack-1.dll" \
+"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libx264-67.dll" \
 "http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/z.dll"
 # GStreamer merge modules
 "http://ossbuild.googlecode.com/files/GStreamer-WinBuilds-Merge-Modules-x86.zip"

@@ -50,9 +50,13 @@
           </Component>
           <Directory Id="bin" Name="bin">
             <Merge Id="GStreamer-Libraries" Language="1033" SourceFile="x86-OSSBuild-GStreamer-Libraries.msm" DiskId="1" />
-            <Merge Id="GStreamer-Plugins-Base" Language="1033" SourceFile="x86-OSSBuild-GStreamer-Plugins-Base.msm" DiskId="1" />
-            <Merge Id="GStreamer-Plugins-Good" Language="1033" SourceFile="x86-OSSBuild-GStreamer-Plugins-Good.msm" DiskId="1" />
-            <Merge Id="GStreamer-Plugins-Ugly-GPL" Language="1033" SourceFile="x86-OSSBuild-GStreamer-Plugins-Ugly-GPL.msm" DiskId="1" />
+          </Directory>
+          <Directory Id="lib" Name="lib">
+            <Directory Id="gstreamer_0.10" Name="gstreamer-0.10">
+              <Merge Id="GStreamer-Plugins-Base" Language="1033" SourceFile="x86-OSSBuild-GStreamer-Plugins-Base.msm" DiskId="1" />
+              <Merge Id="GStreamer-Plugins-Good" Language="1033" SourceFile="x86-OSSBuild-GStreamer-Plugins-Good.msm" DiskId="1" />
+              <Merge Id="GStreamer-Plugins-Ugly-GPL" Language="1033" SourceFile="x86-OSSBuild-GStreamer-Plugins-Ugly-GPL.msm" DiskId="1" />
+            </Directory>
           </Directory>
         </Directory>
       </Directory>
