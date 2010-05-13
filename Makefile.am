@@ -12,6 +12,7 @@ EXTRA_DIST = \
 	intltool-update.in \
 	win/LICENSE.rtf \
 	win/make-win32.sh \
+	win/spek.ico \
 	win/spek.wxs
 
 DISTCLEANFILES = \
