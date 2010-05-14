@@ -30,33 +30,6 @@ urls=(\
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/libpng_1.4.0-1_win32.zip" \
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/libxml2_2.7.7-1_win32.zip" \
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/zlib_1.2.4-2_win32.zip" \
-# GStreamer dependencies
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/avcodec-gpl-52.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/avformat-gpl-52.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/avutil-gpl-50.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/liba52-0.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libbz2.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libdvdread-4.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libfaac-0.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libfaad-2.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libFLAC-8.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libgcrypt-11.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libgnutls-26.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libgpg-error-0.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libjpeg-8.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libmp3lame-0.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libmpeg2-0.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libogg-0.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/liboil-0.3-0.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libsoup-2.4-1.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libtasn1-3.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libtheoradec-1.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libtheoraenc-1.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libvorbis-0.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libvorbisenc-2.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libwavpack-1.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/libx264-67.dll" \
-"http://ossbuild.googlecode.com/svn/trunk/Shared/Build/Windows/Win32/bin/z.dll"
 # GStreamer merge modules
 "http://ossbuild.googlecode.com/files/GStreamer-WinBuilds-Merge-Modules-x86.zip"
 )
@@ -70,16 +43,16 @@ do
     exit 1
   fi
   name=$(basename $url)
-  case $name in
-    *.dll) mv $name bin/;;
-    *) "$SZ_PATH"/7z x -y $name; rm $name;;
-  esac
+  "$SZ_PATH"/7z x -y $name
+  rm $name
 done
 
 # Clean up
 rm -fr share/locale
+mv x86-OSSBuild-GStreamer-Dependencies-GPL.msm ..
 mv x86-OSSBuild-GStreamer-Libraries.msm ..
 mv x86-OSSBuild-GStreamer-Plugins-Base.msm ..
+mv x86-OSSBuild-GStreamer-Plugins-FFmpeg-GPL.msm ..
 mv x86-OSSBuild-GStreamer-Plugins-Good.msm ..
 mv x86-OSSBuild-GStreamer-Plugins-Ugly-GPL.msm ..
 rm *.msm
@@ -89,11 +62,32 @@ echo "gtk-theme-name = \"MS-Windows\"" > etc/gtk-2.0/gtkrc
 
 cd ..
 
+# Extract files from x86-OSSBuild-GStreamer-Dependencies-GPL.msm
+mkdir deps
+"$WIX_PATH"/dark.exe x86-OSSBuild-GStreamer-Dependencies-GPL.msm -o deps/deps.wxs -x deps
+
+#!/usr/bin/env bash
+for line in $(grep "<File" deps/deps.wxs | sed -e "s/.* Name=\"\([^\"]*\)\".* Source=\"\([^\"]*\)\".*/\1;\2/g"); do
+  line=${line//\\/\/}
+  name=${line%;*}
+  src=${line#*;}
+  dst="msi-data/bin/$name"
+  # Move but don't overwrite the existing file
+  if [ ! -f "$dst" ] ; then
+    mv -v "$src" "$dst"
+  fi
+done
+
 # Generate a wxs for files in msi-data
 "$WIX_PATH"/heat.exe dir msi-data -gg -ke -srd -cg Files -dr INSTALLLOCATION -template fragment -o files.wxs
 
 # Make the MSI package
 "$WIX_PATH"/candle.exe spek.wxs files.wxs
 "$WIX_PATH"/light.exe -ext WixUIExtension.dll -b msi-data spek.wixobj files.wixobj -o spek.msi
+
+# Clean up
+rm -fr deps
+rm *.msm
+rm *.wixobj
 
 popd
