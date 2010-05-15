@@ -66,7 +66,6 @@ cd ..
 mkdir deps
 "$WIX_PATH"/dark.exe x86-OSSBuild-GStreamer-Dependencies-GPL.msm -o deps/deps.wxs -x deps
 
-#!/usr/bin/env bash
 for line in $(grep "<File" deps/deps.wxs | sed -e "s/.* Name=\"\([^\"]*\)\".* Source=\"\([^\"]*\)\".*/\1;\2/g"); do
   line=${line//\\/\/}
   name=${line%;*}

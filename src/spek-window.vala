@@ -23,6 +23,7 @@ namespace Spek {
 	public class Window : Gtk.Window {
 
 		private Spectrogram spectrogram;
+		private string path;
 
 		public Window () {
 			title = _("Spek - Acoustic Spectrum Analyser");
@@ -72,6 +73,7 @@ namespace Spek {
 			toolbar.insert (about, -1);
 
 			spectrogram = new Spectrogram ();
+			path = Environment.get_home_dir ();
 
 			var vbox = new VBox (false, 0);
 			vbox.pack_start (toolbar, false, true, 0);
@@ -85,8 +87,14 @@ namespace Spek {
 				_("Open File"), this, FileChooserAction.OPEN,
 				STOCK_CANCEL, ResponseType.CANCEL,
 				STOCK_OPEN, ResponseType.ACCEPT, null);
+			chooser.set_default_response (ResponseType.ACCEPT);
+			chooser.select_multiple = false;
+			chooser.local_only = false;
+			chooser.set_current_folder (path);
 			if (chooser.run () == ResponseType.ACCEPT) {
-				spectrogram.open (chooser.get_filename ());
+				var filename = chooser.get_filename ();
+				path = Path.get_dirname (filename);
+				spectrogram.open (filename);
 			}
 			chooser.destroy ();
 		}
