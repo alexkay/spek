@@ -51,6 +51,7 @@ done
 rm -fr share/locale
 mv x86-OSSBuild-GStreamer-Dependencies-GPL.msm ..
 mv x86-OSSBuild-GStreamer-Libraries.msm ..
+mv x86-OSSBuild-GStreamer-Plugins-Bad-GPL.msm ..
 mv x86-OSSBuild-GStreamer-Plugins-Base.msm ..
 mv x86-OSSBuild-GStreamer-Plugins-FFmpeg-GPL.msm ..
 mv x86-OSSBuild-GStreamer-Plugins-Good.msm ..
