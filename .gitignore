@@ -20,6 +20,7 @@ Makefile.in
 Makefile.in.in
 missing
 mkinstalldirs
+*.msi
 omf.make
 po/.intltool-merge-cache
 po/POTFILES
