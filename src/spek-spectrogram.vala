@@ -23,8 +23,8 @@ using Gtk;
 namespace Spek {
 	class Spectrogram : DrawingArea {
 
+		public string file_name { get; private set; }
 		private Source source;
-		private string file_name;
 		private const int THRESHOLD = -92;
 		private const int BANDS = 1024;
 

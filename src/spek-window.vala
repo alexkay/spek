@@ -23,7 +23,7 @@ namespace Spek {
 	public class Window : Gtk.Window {
 
 		private Spectrogram spectrogram;
-		private string path;
+		private string cur_dir;
 
 		public Window () {
 			title = _("Spek - Acoustic Spectrum Analyser");
@@ -73,7 +73,7 @@ namespace Spek {
 			toolbar.insert (about, -1);
 
 			spectrogram = new Spectrogram ();
-			path = Environment.get_home_dir ();
+			cur_dir = Environment.get_home_dir ();
 
 			var vbox = new VBox (false, 0);
 			vbox.pack_start (toolbar, false, true, 0);
@@ -89,12 +89,11 @@ namespace Spek {
 				STOCK_OPEN, ResponseType.ACCEPT, null);
 			chooser.set_default_response (ResponseType.ACCEPT);
 			chooser.select_multiple = false;
-			chooser.local_only = false;
-			chooser.set_current_folder (path);
+			chooser.set_current_folder (cur_dir);
 			if (chooser.run () == ResponseType.ACCEPT) {
-				var filename = chooser.get_filename ();
-				path = Path.get_dirname (filename);
-				spectrogram.open (filename);
+				var file_name = chooser.get_filename ();
+				cur_dir = Path.get_dirname (file_name);
+				spectrogram.open (file_name);
 			}
 			chooser.destroy ();
 		}
@@ -104,12 +103,22 @@ namespace Spek {
 				_("Save Spectrogram"), this, FileChooserAction.SAVE,
 				STOCK_CANCEL, ResponseType.CANCEL,
 				STOCK_SAVE, ResponseType.ACCEPT, null);
+			chooser.set_default_response (ResponseType.ACCEPT);
+			chooser.set_current_folder (cur_dir);
+
+			// Suggested name is <file_name>.png
+			var file_name = Path.get_basename (spectrogram.file_name);
+			file_name += ".png";
+			chooser.set_current_name (file_name);
+
 			var filter = new FileFilter ();
 			filter.add_pattern ("*.png");
 			filter.set_name (_("PNG Images"));
 			chooser.add_filter (filter);
 			if (chooser.run () == ResponseType.ACCEPT) {
-				spectrogram.save (chooser.get_filename ());
+				file_name = chooser.get_filename ();
+				cur_dir = Path.get_dirname (file_name);
+				spectrogram.save (file_name);
 			}
 			chooser.destroy ();
 		}
