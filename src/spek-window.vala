@@ -86,8 +86,8 @@ namespace Spek {
 			filter_png.add_pattern ("*.png");
 			filter_audio = new FileFilter ();
 			filter_audio.set_name (_("Audio files"));
-			foreach (var mime_type in audio_mime_types) {
-				filter_audio.add_mime_type (mime_type);
+			foreach (var ext in audio_extensions) {
+				filter_audio.add_pattern (ext);
 			}
 
 			var vbox = new VBox (false, 0);
@@ -181,48 +181,32 @@ namespace Spek {
 				"translator-credits", _("translator-credits"));
 		}
 
-		private string[] audio_mime_types = {
-			"audio/3gpp",
-			"audio/ac3",
-			"audio/AMR",
-			"audio/AMR-WB",
-			"audio/basic",
-			"audio/midi",
-			"audio/mp4",
-			"audio/mpeg",
-			"audio/ogg",
-			"audio/prs.sid",
-			"audio/vnd.rn-realaudio",
-			"audio/x-aiff",
-			"audio/x-ape",
-			"audio/x-flac",
-			"audio/x-gsm",
-			"audio/x-it",
-			"audio/x-m4a",
-			"audio/x-matroska",
-			"audio/x-mod",
-			"audio/x-mp3",
-			"audio/x-mpeg",
-			"audio/x-ms-asf",
-			"audio/x-ms-asx",
-			"audio/x-ms-wax",
-			"audio/x-ms-wma",
-			"audio/x-musepack",
-			"audio/x-pn-aiff",
-			"audio/x-pn-au",
-			"audio/x-pn-wav",
-			"audio/x-pn-windows-acm",
-			"audio/x-realaudio",
-			"audio/x-real-audio",
-			"audio/x-sbc",
-			"audio/x-speex",
-			"audio/x-tta",
-			"audio/x-wav",
-			"audio/x-wavpack",
-			"audio/x-vorbis",
-			"audio/x-vorbis+ogg",
-			"audio/x-xm",
-			"application/x-flac"
+		private string[] audio_extensions = {
+			"*.3gp",
+			"*.aif",
+			"*.aifc",
+			"*.aiff",
+			"*.amr",
+			"*.awb",
+			"*.ape",
+			"*.au",
+			"*.flac",
+			"*.gsm",
+			"*.m4a",
+			"*.m4p",
+			"*.mp3",
+			"*.mp4",
+			"*.mp+",
+			"*.mpc",
+			"*.mpp",
+			"*.oga",
+			"*.ogg",
+			"*.ra",
+			"*.ram",
+			"*.snd",
+			"*.wav",
+			"*.wma",
+			"*.wv"
 		};
 	}
 }
