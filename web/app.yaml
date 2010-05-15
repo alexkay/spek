@@ -19,11 +19,6 @@ handlers:
   upload: index.html
   mime_type: text/html
 
-- url: /(.*).bz2
-  static_files: \1.bz2
-  upload: (.*).bz2
-  mime_type: application/x-bzip
-
 - url: /(.*).png
   static_files: \1.png
   upload: (.*).png
