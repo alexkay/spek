@@ -107,7 +107,7 @@ namespace Spek {
 			chooser.set_current_folder (cur_dir);
 
 			// Suggested name is <file_name>.png
-			var file_name = Path.get_basename (spectrogram.file_name);
+			var file_name = Path.get_basename (spectrogram.file_name ?? _("Untitled"));
 			file_name += ".png";
 			chooser.set_current_name (file_name);
 
@@ -115,6 +115,7 @@ namespace Spek {
 			filter.add_pattern ("*.png");
 			filter.set_name (_("PNG Images"));
 			chooser.add_filter (filter);
+			chooser.set_filter (filter);
 			if (chooser.run () == ResponseType.ACCEPT) {
 				file_name = chooser.get_filename ();
 				cur_dir = Path.get_dirname (file_name);
