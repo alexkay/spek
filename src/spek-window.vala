@@ -24,6 +24,9 @@ namespace Spek {
 
 		private Spectrogram spectrogram;
 		private string cur_dir;
+		private FileFilter filter_all;
+		private FileFilter filter_audio;
+		private FileFilter filter_png;
 
 		public Window () {
 			title = _("Spek - Acoustic Spectrum Analyser");
@@ -75,6 +78,18 @@ namespace Spek {
 			spectrogram = new Spectrogram ();
 			cur_dir = Environment.get_home_dir ();
 
+			filter_all = new FileFilter ();
+			filter_all.set_name (_("All files"));
+			filter_all.add_pattern ("*");
+			filter_png = new FileFilter ();
+			filter_png.set_name (_("PNG images"));
+			filter_png.add_pattern ("*.png");
+			filter_audio = new FileFilter ();
+			filter_audio.set_name (_("Audio files"));
+			foreach (var mime_type in audio_mime_types) {
+				filter_audio.add_mime_type (mime_type);
+			}
+
 			var vbox = new VBox (false, 0);
 			vbox.pack_start (toolbar, false, true, 0);
 			vbox.pack_start (spectrogram, true, true, 0);
@@ -90,6 +105,9 @@ namespace Spek {
 			chooser.set_default_response (ResponseType.ACCEPT);
 			chooser.select_multiple = false;
 			chooser.set_current_folder (cur_dir);
+			chooser.add_filter (filter_all);
+			chooser.add_filter (filter_audio);
+			chooser.set_filter (filter_audio);
 			if (chooser.run () == ResponseType.ACCEPT) {
 				var file_name = chooser.get_filename ();
 				cur_dir = Path.get_dirname (file_name);
@@ -110,12 +128,8 @@ namespace Spek {
 			var file_name = Path.get_basename (spectrogram.file_name ?? _("Untitled"));
 			file_name += ".png";
 			chooser.set_current_name (file_name);
-
-			var filter = new FileFilter ();
-			filter.add_pattern ("*.png");
-			filter.set_name (_("PNG Images"));
-			chooser.add_filter (filter);
-			chooser.set_filter (filter);
+			chooser.add_filter (filter_png);
+			chooser.set_filter (filter_png);
 			if (chooser.run () == ResponseType.ACCEPT) {
 				file_name = chooser.get_filename ();
 				cur_dir = Path.get_dirname (file_name);
@@ -166,5 +180,49 @@ namespace Spek {
 				"logo-icon-name", "spek",
 				"translator-credits", _("translator-credits"));
 		}
+
+		private string[] audio_mime_types = {
+			"audio/3gpp",
+			"audio/ac3",
+			"audio/AMR",
+			"audio/AMR-WB",
+			"audio/basic",
+			"audio/midi",
+			"audio/mp4",
+			"audio/mpeg",
+			"audio/ogg",
+			"audio/prs.sid",
+			"audio/vnd.rn-realaudio",
+			"audio/x-aiff",
+			"audio/x-ape",
+			"audio/x-flac",
+			"audio/x-gsm",
+			"audio/x-it",
+			"audio/x-m4a",
+			"audio/x-matroska",
+			"audio/x-mod",
+			"audio/x-mp3",
+			"audio/x-mpeg",
+			"audio/x-ms-asf",
+			"audio/x-ms-asx",
+			"audio/x-ms-wax",
+			"audio/x-ms-wma",
+			"audio/x-musepack",
+			"audio/x-pn-aiff",
+			"audio/x-pn-au",
+			"audio/x-pn-wav",
+			"audio/x-pn-windows-acm",
+			"audio/x-realaudio",
+			"audio/x-real-audio",
+			"audio/x-sbc",
+			"audio/x-speex",
+			"audio/x-tta",
+			"audio/x-wav",
+			"audio/x-wavpack",
+			"audio/x-vorbis",
+			"audio/x-vorbis+ogg",
+			"audio/x-xm",
+			"application/x-flac"
+		};
 	}
 }
