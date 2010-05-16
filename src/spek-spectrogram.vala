@@ -143,11 +143,12 @@ namespace Spek {
 				int[] ticks = { 0, duration_seconds };
 				if (time_factor > 0) {
 					for (var tick = time_factor; tick < duration_seconds; tick += time_factor) {
+						if (time_to_px (duration_seconds - tick, w, duration_seconds) < label_width) {
+							break;
+						}
 						ticks += tick;
 					}
-					// The last item should be skipped, it's too close to the end tick.
 					// TODO: `ticks = ticks[0:-1]` crashes, file a bug.
-					ticks = ticks[0:ticks.length - 1];
 				}
 
 				// Draw the ticks.
