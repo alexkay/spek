@@ -38,7 +38,7 @@ namespace Spek {
 			// Pre-draw the palette.
 			palette = new ImageSurface (Format.RGB24, RULER, BANDS);
 			for (int y = 0; y < BANDS; y++) {
-				var color = get_color (y / (float) BANDS);
+				var color = get_color (y / (double) BANDS);
 				for (int x = 0; x < RULER; x++) {
 					put_pixel (palette, x, y, color);
 				}
@@ -82,8 +82,8 @@ namespace Spek {
 
 		private void source_callback (int sample, float[] values) {
 			for (int y = 0; y < values.length; y++) {
-				var level = float.min (
-					1f, Math.log10f (1f - THRESHOLD + values[y]) / Math.log10f (-THRESHOLD));
+				var level = double.min (
+					1.0, Math.log10 (1.0 - THRESHOLD + values[y]) / Math.log10 (-THRESHOLD));
 				put_pixel (image, sample, y, get_color (level));
 			}
 			queue_draw_area (PADDING + sample, PADDING, 1, allocation.height - 2 * PADDING);
@@ -143,42 +143,42 @@ namespace Spek {
 
 		// Modified version of Dan Bruton's algorithm:
 		// http://www.physics.sfasu.edu/astro/color/spectra.html
-		private uint32 get_color (float level) {
-			level *= 0.6625f;
-			float r = 0.0f, g = 0.0f, b = 0.0f;
-			if (level >= 0f && level < 0.15f) {
-				r = (0.15f - level) / (0.15f + 0.075f);
-				g = 0.0f;
-				b = 1.0f;
-			} else if (level >= 0.15f && level < 0.275f) {
-				r = 0.0f;
-				g = (level - 0.15f) / (0.275f - 0.15f);
-				b = 1.0f;
-			} else if (level >= 0.275f && level < 0.325f) {
-				r = 0.0f;
-				g = 1.0f;
-				b = (0.325f - level) / (0.325f - 0.275f);
-			} else if (level >= 0.325f && level < 0.5f) {
-				r = (level - 0.325f) / (0.5f - 0.325f);
-				g = 1.0f;
-				b = 0.0f;
-			} else if (level >= 0.5f && level < 0.6625f) {
-				r = 1.0f;
-				g = (0.6625f - level) / (0.6625f - 0.5f);
-				b = 0.0f;
+		private uint32 get_color (double level) {
+			level *= 0.6625;
+			double r = 0.0, g = 0.0, b = 0.0;
+			if (level >= 0 && level < 0.15) {
+				r = (0.15 - level) / (0.15 + 0.075);
+				g = 0.0;
+				b = 1.0;
+			} else if (level >= 0.15 && level < 0.275) {
+				r = 0.0;
+				g = (level - 0.15) / (0.275 - 0.15);
+				b = 1.0;
+			} else if (level >= 0.275 && level < 0.325) {
+				r = 0.0;
+				g = 1.0;
+				b = (0.325 - level) / (0.325 - 0.275);
+			} else if (level >= 0.325 && level < 0.5) {
+				r = (level - 0.325) / (0.5 - 0.325);
+				g = 1.0;
+				b = 0.0;
+			} else if (level >= 0.5 && level < 0.6625) {
+				r = 1.0;
+				g = (0.6625 - level) / (0.6625 - 0.5f);
+				b = 0.0;
 			}
 
 			// Intensity correction.
-			float cf = 1.0f;
-			if (level >= 0 && level < 0.1f) {
-				cf = level / 0.1f;
+			double cf = 1.0;
+			if (level >= 0.0 && level < 0.1) {
+				cf = level / 0.1;
 			}
-			cf *= 255f;
+			cf *= 255.0;
 
 			// Pack RGB values into Cairo-happy format.
-			uint32 rr = (uint32) (r * cf + 0.5f);
-			uint32 gg = (uint32) (g * cf + 0.5f);
-			uint32 bb = (uint32) (b * cf + 0.5f);
+			uint32 rr = (uint32) (r * cf + 0.5);
+			uint32 gg = (uint32) (g * cf + 0.5);
+			uint32 bb = (uint32) (b * cf + 0.5);
 			return (rr << 16) + (gg << 8) + bb;
 		}
 	}
