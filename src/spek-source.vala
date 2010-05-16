@@ -27,6 +27,7 @@ namespace Spek {
 		public int threshold { get; construct; }
 		// TODO: file a bug, cannot s/set/construct/
 		public Callback callback {get; set; }
+		public int64 duration { get; private set; }
 
 		public delegate void Callback (int sample, float[] values);
 
@@ -84,6 +85,7 @@ namespace Spek {
 			Format format;
 			int64 duration;
 			query.parse_duration (out format, out duration);
+			this.duration = duration;
 			spectrum.set ("interval", duration / (samples + 1));
 
 			pipeline.set_state (State.PLAYING);

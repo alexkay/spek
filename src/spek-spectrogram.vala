@@ -108,13 +108,35 @@ namespace Spek {
 			cr.set_source_rgb (0, 0, 0);
 			cr.paint ();
 
-			// Draw the spectrogram.
 			if (image != null) {
+				// Draw the spectrogram.
 				cr.translate (PADDING, h - PADDING);
 				cr.scale (1, -(h - 2 * PADDING) / image.get_height ());
 				cr.set_source_surface (image, 0, 0);
 				cr.paint ();
 				cr.identity_matrix ();
+
+				// Time ruler.
+				int64[] time_points = {0, source.duration};
+				cr.set_source_rgb (1, 1, 1);
+				cr.set_line_width (1);
+				cr.set_antialias (Antialias.NONE);
+				cr.select_font_face ("sans-serif", FontSlant.NORMAL, FontWeight.NORMAL);
+				cr.set_font_size (10.0);
+				TextExtents ext;
+				cr.text_extents ("00:00", out ext);
+				double tick_width = ext.width;
+				foreach (var pt in time_points) {
+					var seconds = (int) (pt / 1000000000);
+					var label = "%d:%02d".printf (seconds / 60, seconds % 60);
+					var pos = PADDING + (w - 2 * PADDING) * pt / source.duration;
+					cr.text_extents (label, out ext);
+					cr.move_to (pos - ext.width / 2, h - PADDING + GAP + ext.height);
+					cr.show_text (label);
+					cr.move_to (pos, h - PADDING);
+					cr.rel_line_to (0, 4);
+					cr.stroke ();
+				}
 			}
 
 			// Border around the spectrogram.
