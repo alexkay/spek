@@ -123,46 +123,17 @@ namespace Spek {
 				cr.select_font_face ("sans-serif", FontSlant.NORMAL, FontWeight.NORMAL);
 				cr.set_font_size (10.0);
 
-				// Mesure the label text.
-				TextExtents ext;
-				cr.text_extents ("00:00", out ext);
-				double label_width = ext.width;
-
-				// Select the factor to use, we want some space between the labels.
-				int duration_seconds = (int) (source.duration / 1000000000);
-				int[] time_factors = {1, 2, 5, 10, 20, 30, 1*60, 2*60, 5*60, 10*60, 20*60, 30*60};
-				int time_factor = 0;
-				foreach (var factor in time_factors) {
-					if (time_to_px (factor, w, duration_seconds) >= 1.5 * label_width) {
-						time_factor = factor;
-						break;
-					}
-				}
-
-				// Add the ticks.
-				int[] ticks = { 0, duration_seconds };
-				if (time_factor > 0) {
-					for (var tick = time_factor; tick < duration_seconds; tick += time_factor) {
-						if (time_to_px (duration_seconds - tick, w, duration_seconds) < label_width) {
-							break;
-						}
-						ticks += tick;
-					}
-					// TODO: `ticks = ticks[0:-1]` crashes, file a bug.
-				}
-
-				// Draw the ticks.
-				foreach (var tick in ticks) {
-					var label = "%d:%02d".printf (tick / 60, tick % 60);
-					var pos = PADDING + time_to_px (tick, w, duration_seconds);
-					cr.text_extents (label, out ext);
-					// TODO: use font measurements instead ext.height
-					cr.move_to (pos - ext.width / 2, h - PADDING + GAP + ext.height);
-					cr.show_text (label);
-					cr.move_to (pos, h - PADDING);
-					cr.rel_line_to (0, 4);
-					cr.stroke ();
-				}
+				// Time ruler.
+				var duration_seconds = (int) (source.duration / 1000000000);
+				var time_ruler = new Ruler (
+					"00:00",
+					{1, 2, 5, 10, 20, 30, 1*60, 2*60, 5*60, 10*60, 20*60, 30*60},
+					duration_seconds,
+					unit => (w - 2 * PADDING) * unit / duration_seconds,
+					unit => "%d:%02d".printf (unit / 60, unit % 60));
+				cr.translate (PADDING, h - PADDING);
+				time_ruler.draw (cr);
+				cr.identity_matrix ();
 			}
 
 			// Border around the spectrogram.
@@ -178,11 +149,6 @@ namespace Spek {
 			cr.set_source_surface (palette, 0, 0);
 			cr.paint ();
 			cr.identity_matrix ();
-		}
-
-		// TODO: factor out the ruler logic and pass this as an anonymous method.
-		private double time_to_px (int time, double w, int duration_seconds) {
-			return (w - 2 * PADDING) * time / duration_seconds;
 		}
 
 		private void put_pixel (ImageSurface surface, int x, int y, uint32 color) {

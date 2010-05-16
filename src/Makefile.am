@@ -2,6 +2,7 @@ bin_PROGRAMS = spek
 
 spek_SOURCES = \
 	spek.vala \
+	spek-ruler.vala \
 	spek-source.vala \
 	spek-spectrogram.vala \
 	spek-window.vala
