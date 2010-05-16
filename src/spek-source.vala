@@ -27,7 +27,8 @@ namespace Spek {
 		public int threshold { get; construct; }
 		// TODO: file a bug, cannot s/set/construct/
 		public Callback callback {get; set; }
-		public int64 duration { get; private set; }
+		public int64 duration { get; private set; default = 0; }
+		public int rate { get; private set; default = 0; }
 
 		public delegate void Callback (int sample, float[] values);
 
@@ -79,6 +80,18 @@ namespace Spek {
 				pipeline.get_state (null, null, -1);
 			}
 
+			// Get the sample rate.
+			var caps = pad.get_caps ();
+			for (int i = 0; i < caps.get_size (); i++) {
+				var structure = caps.get_structure (i);
+				int rate;
+				if (structure.get_int ("rate", out rate) && rate > 0) {
+					this.rate = rate;
+					break;
+				}
+			}
+
+			// Get the duration.
 			// TODO: replace with Pad.query_duration when bgo#617260 is fixed
 			var query = new Query.duration (Format.TIME);
 			pad.query (query);
