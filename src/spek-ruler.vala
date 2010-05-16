@@ -1,4 +1,4 @@
-/* spek-spectrogram.vala
+/* spek-ruler.vala
  *
  * Copyright (C) 2010  Alexander Kojevnikov <alexander@kojevnikov.com>
  *

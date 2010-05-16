@@ -58,17 +58,21 @@ namespace Spek {
 		}
 
 		private void start () {
-			// The number of samples is the number of pixels available for the image.
-			// The number of bands is fixed, FFT results are very different for
-			// different values but we need some consistency.
-			this.image = new ImageSurface (Format.RGB24, allocation.width - 2 * PADDING, BANDS);
-
 			if (this.source != null) {
 				this.source.stop ();
 			}
-			this.source = new Source (
-				file_name, image.get_height (), image.get_width (),
-				THRESHOLD, source_callback);
+
+			// The number of samples is the number of pixels available for the image.
+			// The number of bands is fixed, FFT results are very different for
+			// different values but we need some consistency.
+			int samples = allocation.width - 2 * PADDING;
+			if (samples > 0) {
+				image = new ImageSurface (Format.RGB24, samples, BANDS);
+				source = new Source (file_name, BANDS, samples, THRESHOLD, source_callback);
+			} else {
+				image = null;
+				source = null;
+			}
 			queue_draw ();
 		}
 
