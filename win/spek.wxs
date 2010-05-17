@@ -4,7 +4,7 @@
 <?define ProductVersion = "0.3.0" ?>
 <?define UpgradeCode = "46D51DDF-5749-45E2-818B-1ACADF21C0D9" ?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="A27320AE-35AA-46D0-9CA3-E14EBF42CE66" Name="$(var.ProductName)" Language="0"
+  <Product Id="*" Name="$(var.ProductName)" Language="0"
            Version="$(var.ProductVersion)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)">
     <Package InstallerVersion="301" Compressed="yes" />
     <Media Id="1" Cabinet="spek.cab" EmbedCab="yes" />
