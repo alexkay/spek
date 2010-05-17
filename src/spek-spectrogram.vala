@@ -30,7 +30,7 @@ namespace Spek {
 
 		private ImageSurface image;
 		private ImageSurface palette;
-		private const int PADDING = 40;
+		private const int PADDING = 60;
 		private const int GAP = 10;
 		private const int RULER = 10;
 
@@ -120,7 +120,7 @@ namespace Spek {
 				cr.paint ();
 				cr.identity_matrix ();
 
-				// Prepare to draw the time ruler.
+				// Prepare to draw the rulers.
 				cr.set_source_rgb (1, 1, 1);
 				cr.set_line_width (1);
 				cr.set_antialias (Antialias.NONE);
@@ -136,7 +136,19 @@ namespace Spek {
 					unit => (w - 2 * PADDING) * unit / duration_seconds,
 					unit => "%d:%02d".printf (unit / 60, unit % 60));
 				cr.translate (PADDING, h - PADDING);
-				time_ruler.draw (cr);
+				time_ruler.draw (cr, true);
+				cr.identity_matrix ();
+
+				// Frequency ruler.
+				var freq = source.rate / 2;
+				var rate_ruler = new Ruler (
+					"00.0 kHz",
+					{1000, 2000, 5000, 10000, 20000},
+					freq,
+					unit => (h - 2 * PADDING) * unit / freq,
+					unit => "%d.%01d kHz".printf (unit / 1000, (unit % 1000) / 100));
+				cr.translate (PADDING, PADDING);
+				rate_ruler.draw (cr, false);
 				cr.identity_matrix ();
 			}
 

@@ -40,16 +40,16 @@ namespace Spek {
 			this.format_tick = format_tick;
 		}
 
-		public void draw (Context cr) {
+		public void draw (Context cr, bool horizontal) {
 			// Mesure the sample label.
 			TextExtents ext;
 			cr.text_extents (sample_label, out ext);
-			var label_width = ext.width;
+			var size = horizontal ? ext.width : ext.height;
 
 			// Select the factor to use, we want some space between the labels.
 			int factor = 0;
 			foreach (var f in factors) {
-				if (unit_to_pixel (f) >= 1.5 * label_width) {
+				if (unit_to_pixel (f) >= 1.5 * size) {
 					factor = f;
 					break;
 				}
@@ -59,7 +59,7 @@ namespace Spek {
 			int[] ticks = { 0, units };
 			if (factor > 0) {
 				for (var tick = factor; tick < units; tick += factor) {
-					if (unit_to_pixel (units - tick) < label_width) {
+					if (unit_to_pixel (units - tick) < size) {
 						break;
 					}
 					ticks += tick;
@@ -72,13 +72,22 @@ namespace Spek {
 			double TICK_LEN = 4;
 			foreach (var tick in ticks) {
 				var label = format_tick (tick);
-				var pos = unit_to_pixel (tick);
+				var pos = unit_to_pixel (horizontal ? tick : units - tick);
 				cr.text_extents (label, out ext);
 				// TODO: use font measurements instead ext.height
-				cr.move_to (pos - ext.width / 2, GAP + ext.height);
+				if (horizontal) {
+					cr.move_to (pos - ext.width / 2, GAP + ext.height);
+				} else {
+					cr.move_to (-ext.width - GAP, pos + ext.height / 2);
+				}
 				cr.show_text (label);
-				cr.move_to (pos, 0);
-				cr.rel_line_to (0, TICK_LEN);
+				if (horizontal) {
+					cr.move_to (pos, 0);
+					cr.rel_line_to (0, TICK_LEN);
+				} else {
+					cr.move_to (0, pos);
+					cr.rel_line_to (-TICK_LEN, 0);
+				}
 				cr.stroke ();
 			}
 		}
