@@ -28,7 +28,7 @@ namespace Spek {
 		private FileFilter filter_audio;
 		private FileFilter filter_png;
 
-		public Window (string file_name) {
+		public Window (string? file_name) {
 			title = _("Spek - Acoustic Spectrum Analyser");
 			set_default_icon_name ("spek");
 			set_default_size (640, 480);
