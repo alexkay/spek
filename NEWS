@@ -1,4 +1,4 @@
-Spek 0.2 - Released 2010-05-13
+Spek 0.3 - Released 2010-05-17
 ==============================
 
 Spek is an acoustic spectrum analyser written in Vala.
@@ -7,8 +7,9 @@ Spek is available on GNU/Linux and Windows.
 
 Find out more about Spek on its website: http://spek-project.org/
 
-Version 0.2 brings the following features and fixes:
+Version 0.3 brings the following features and fixes:
 
-* Windows installer
-* Fix build on Fedora 13
-* Fix default icon
+* Horizontal (time) and vertical (frequency) auto-adjustable rulers
+* Parse command line arguments, show the version when --version is passed
+* Open the file passed as an argument
+* Fix a crash when the window width becomes very small
