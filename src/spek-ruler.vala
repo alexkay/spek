@@ -24,6 +24,7 @@ namespace Spek {
 		private string sample_label;
 		private int[] factors;
 		private int units;
+		private double spacing;
 		private UnitToPixel unit_to_pixel;
 		private FormatTick format_tick;
 
@@ -31,11 +32,12 @@ namespace Spek {
 		public delegate string FormatTick (int unit);
 
 		public Ruler (
-			string sample_label, int[] factors, int units,
+			string sample_label, int[] factors, int units, double spacing,
 			UnitToPixel unit_to_pixel, FormatTick format_tick) {
 			this.sample_label = sample_label;
 			this.factors = factors;
 			this.units = units;
+			this.spacing = spacing;
 			this.unit_to_pixel = unit_to_pixel;
 			this.format_tick = format_tick;
 		}
@@ -49,7 +51,7 @@ namespace Spek {
 			// Select the factor to use, we want some space between the labels.
 			int factor = 0;
 			foreach (var f in factors) {
-				if (unit_to_pixel (f) >= 1.5 * size) {
+				if (unit_to_pixel (f) >= spacing * size) {
 					factor = f;
 					break;
 				}
@@ -59,7 +61,7 @@ namespace Spek {
 			int[] ticks = { 0, units };
 			if (factor > 0) {
 				for (var tick = factor; tick < units; tick += factor) {
-					if (unit_to_pixel (units - tick) < size) {
+					if (unit_to_pixel (units - tick) < size * 1.2) {
 						break;
 					}
 					ticks += tick;
