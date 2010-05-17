@@ -19,9 +19,12 @@
 using Spek;
 
 bool version = false;
-// TODO: move into main() when bgo#530623 is fixed.
+[CCode (array_length = false, array_null_terminated = true)]
+string[] files = null;
+
 const OptionEntry[] options = {
-	{ "version", 'V', 0, OptionArg.NONE, &version, N_("Display the version and exit"), null },
+	{ "version", 'V', 0, OptionArg.NONE, ref version, N_("Display the version and exit"), null },
+	{ "", 0, 0, OptionArg.FILENAME_ARRAY, ref files, null, null },
 	{ null }
 };
 
@@ -44,8 +47,13 @@ int main (string[] args) {
 		return 0;
 	}
 
+	if (files != null && files.length != 1) {
+		print (_("Specify a single file\n"));
+		return 1;
+	}
+
 	Gst.init (ref args);
-	var window = new Window ();
+	var window = new Window (files == null ? null : files[0]);
 	Gtk.main ();
 	window.destroy ();
 	return 0;

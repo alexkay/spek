@@ -28,7 +28,7 @@ namespace Spek {
 		private FileFilter filter_audio;
 		private FileFilter filter_png;
 
-		public Window () {
+		public Window (string file_name) {
 			title = _("Spek - Acoustic Spectrum Analyser");
 			set_default_icon_name ("spek");
 			set_default_size (640, 480);
@@ -95,6 +95,11 @@ namespace Spek {
 			vbox.pack_start (spectrogram, true, true, 0);
 			add (vbox);
 			show_all ();
+
+			if (file_name != null) {
+				cur_dir = Path.get_dirname (file_name);
+				spectrogram.open (file_name);
+			}
 		}
 
 		private void on_open_clicked () {
