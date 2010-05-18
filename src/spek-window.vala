@@ -97,9 +97,16 @@ namespace Spek {
 			show_all ();
 
 			if (file_name != null) {
-				cur_dir = Path.get_dirname (file_name);
-				spectrogram.open (file_name);
+				open_file (file_name);
 			}
+		}
+
+		private void open_file (string file_name) {
+			cur_dir = Path.get_dirname (file_name);
+			spectrogram.open (file_name);
+
+			// Note to translators: window title, %s is replaced with the file name
+			title = _("Spek - %s").printf (Path.get_basename (file_name));
 		}
 
 		private void on_open_clicked () {
@@ -114,9 +121,7 @@ namespace Spek {
 			chooser.add_filter (filter_audio);
 			chooser.set_filter (filter_audio);
 			if (chooser.run () == ResponseType.ACCEPT) {
-				var file_name = chooser.get_filename ();
-				cur_dir = Path.get_dirname (file_name);
-				spectrogram.open (file_name);
+				open_file (chooser.get_filename ());
 			}
 			chooser.destroy ();
 		}
