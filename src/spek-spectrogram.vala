@@ -30,7 +30,11 @@ namespace Spek {
 
 		private ImageSurface image;
 		private ImageSurface palette;
-		private const int PADDING = 50;
+
+		private const int TPAD = 50;
+		private const int BPAD = 40;
+		private const int LPAD = 50;
+		private const int RPAD = 40;
 		private const int GAP = 10;
 		private const int RULER = 10;
 
@@ -65,7 +69,7 @@ namespace Spek {
 			// The number of samples is the number of pixels available for the image.
 			// The number of bands is fixed, FFT results are very different for
 			// different values but we need some consistency.
-			int samples = allocation.width - 2 * PADDING;
+			int samples = allocation.width - LPAD - RPAD;
 			if (samples > 0) {
 				image = new ImageSurface (Format.RGB24, samples, BANDS);
 				source = new Source (file_name, BANDS, samples, THRESHOLD, source_callback);
@@ -90,7 +94,7 @@ namespace Spek {
 					1.0, Math.log10 (1.0 - THRESHOLD + values[y]) / Math.log10 (-THRESHOLD));
 				put_pixel (image, sample, y, get_color (level));
 			}
-			queue_draw_area (PADDING + sample, PADDING, 1, allocation.height - 2 * PADDING);
+			queue_draw_area (LPAD + sample, TPAD, 1, allocation.height - TPAD - BPAD);
 		}
 
 		private override bool expose_event (EventExpose event) {
@@ -114,8 +118,8 @@ namespace Spek {
 
 			if (image != null) {
 				// Draw the spectrogram.
-				cr.translate (PADDING, h - PADDING);
-				cr.scale (1, -(h - 2 * PADDING) / image.get_height ());
+				cr.translate (LPAD, h - BPAD);
+				cr.scale (1, -(h - TPAD - BPAD) / image.get_height ());
 				cr.set_source_surface (image, 0, 0);
 				cr.paint ();
 				cr.identity_matrix ();
@@ -134,9 +138,9 @@ namespace Spek {
 					{1, 2, 5, 10, 20, 30, 1*60, 2*60, 5*60, 10*60, 20*60, 30*60},
 					duration_seconds,
 					1.5,
-					unit => (w - 2 * PADDING) * unit / duration_seconds,
+					unit => (w - LPAD - RPAD) * unit / duration_seconds,
 					unit => "%d:%02d".printf (unit / 60, unit % 60));
-				cr.translate (PADDING, h - PADDING);
+				cr.translate (LPAD, h - BPAD);
 				time_ruler.draw (cr, true);
 				cr.identity_matrix ();
 
@@ -147,9 +151,9 @@ namespace Spek {
 					{1000, 2000, 5000, 10000, 20000},
 					freq,
 					4.0,
-					unit => (h - 2 * PADDING) * unit / freq,
+					unit => (h - TPAD - BPAD) * unit / freq,
 					unit => "%d kHz".printf (unit / 1000));
-				cr.translate (PADDING, PADDING);
+				cr.translate (LPAD, TPAD);
 				rate_ruler.draw (cr, false);
 				cr.identity_matrix ();
 			}
@@ -158,12 +162,12 @@ namespace Spek {
 			cr.set_source_rgb (1, 1, 1);
 			cr.set_line_width (1);
 			cr.set_antialias (Antialias.NONE);
-			cr.rectangle (PADDING, PADDING, w - 2 * PADDING, h - 2 * PADDING);
+			cr.rectangle (LPAD, TPAD, w - LPAD - RPAD, h - TPAD - BPAD);
 			cr.stroke ();
 
 			// The palette.
-			cr.translate (w - PADDING + GAP, h - PADDING);
-			cr.scale (1, -(h - 2 * PADDING) / palette.get_height ());
+			cr.translate (w - RPAD + GAP, h - BPAD);
+			cr.scale (1, -(h - TPAD - BPAD) / palette.get_height ());
 			cr.set_source_surface (palette, 0, 0);
 			cr.paint ();
 			cr.identity_matrix ();
