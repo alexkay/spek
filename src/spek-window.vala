@@ -113,12 +113,10 @@ namespace Spek {
 				string[] files = data.get_uris ();
 				if (files.length > 0) {
 					try {
-						string hostname;
-						var file = filename_from_uri (files[0], out hostname);
-						open_file (file);
+						open_file (Filename.from_uri (files[0]));
 						drag_finish (cx, true, false, time);
 						return;
-					} catch {}
+					} catch (ConvertError e) {}
 				}
 			}
 			drag_finish (cx, false, false, time);
