@@ -111,11 +111,19 @@ namespace Spek {
 				// We want to construct the spectrum element only for the first decoded pad.
 				return;
 			}
-			source.spectrum = ElementFactory.make ("spectrum", null);
-			source.pipeline.add (source.spectrum);
-			var sinkpad = source.spectrum.get_static_pad ("sink");
+
+			// The audioconvert takes care of caps that `spectrum` can't handle,
+			// for example streams with 24-bit depth.
+			var convert = ElementFactory.make ("audioconvert", null);
+			source.pipeline.add (convert);
+			var sinkpad = convert.get_static_pad ("sink");
 			source.pad = new_pad;
 			source.pad.link (sinkpad);
+			convert.set_state (State.PAUSED);
+
+			source.spectrum = ElementFactory.make ("spectrum", null);
+			source.pipeline.add (source.spectrum);
+			convert.link (source.spectrum);
 			source.spectrum.set ("bands", source.bands);
 			source.spectrum.set ("threshold", source.threshold);
 			source.spectrum.set ("message-magnitude", true);
