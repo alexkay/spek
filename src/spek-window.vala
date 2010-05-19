@@ -27,6 +27,9 @@ namespace Spek {
 		private FileFilter filter_all;
 		private FileFilter filter_audio;
 		private FileFilter filter_png;
+		private const Gtk.TargetEntry[] DEST_TARGET_ENTRIES = {
+			{ "text/uri-list", 0, 0 }
+		};
 
 		public Window (string? file_name) {
 			title = _("Spek - Acoustic Spectrum Analyser");
@@ -96,9 +99,29 @@ namespace Spek {
 			add (vbox);
 			show_all ();
 
+			// Set up Drag and Drop
+			drag_dest_set (this, DestDefaults.ALL, DEST_TARGET_ENTRIES, DragAction.COPY);
+			drag_data_received.connect (on_dropped);
+
 			if (file_name != null) {
 				open_file (file_name);
 			}
+		}
+
+		void on_dropped (DragContext cx, int x, int y, SelectionData data, uint info, uint time) {
+			if (data.length > 0 && data.format == 8) {
+				string[] files = data.get_uris ();
+				if (files.length > 0) {
+					try {
+						string hostname;
+						var file = filename_from_uri (files[0], out hostname);
+						open_file (file);
+						drag_finish (cx, true, false, time);
+						return;
+					} catch {}
+				}
+			}
+			drag_finish (cx, false, false, time);
 		}
 
 		private void open_file (string file_name) {

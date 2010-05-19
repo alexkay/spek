@@ -14,3 +14,9 @@ namespace Config {
 	public const string PKGDATADIR; /* /usr/local/share/spek */
 	public const string PKGLIBDIR;  /* /usr/local/lib/spek   */
 }
+
+// TODO: file a bug to have this included
+[CCode (cprefix = "G", lower_case_cprefix = "g_", cheader_filename = "glib.h", gir_namespace = "GLib", gir_version = "2.0")]
+namespace GLib {
+	public static string filename_from_uri (string uri, out string hostname) throws Error;
+}
