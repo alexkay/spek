@@ -233,8 +233,7 @@ namespace Spek {
 			while (k - i > 1) {
 				var j = (i + k) / 2;
 				cr.text_extents (end ? s[0:j] + fix : fix + s[j:s.length], out ext);
-				// TODO: replace with XOR when bgo#619177 is fixed.
-				if (end && ext.width <= length || !end && ext.width > length) {
+				if (end != (ext.width > length)) {
 					i = j;
 				} else {
 					k = j;
