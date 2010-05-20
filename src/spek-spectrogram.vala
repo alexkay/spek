@@ -160,7 +160,7 @@ namespace Spek {
 				// File properties.
 				cr.set_font_size (11.0);
 				cr.move_to (LPAD, TPAD - GAP);
-				//cr.show_text ("MPEG 1 Audio, Layer 3 (MP3), 320 kbps, 44100 Hz, 2 channels");
+				//cr.show_text (trim (cr, "MPEG 1 Audio, Layer 3 (MP3), 320 kbps, 44100 Hz, 2 channels", w - LPAD - RPAD, true));
 				FontExtents ext;
 				cr.font_extents (out ext);
 
@@ -168,7 +168,7 @@ namespace Spek {
 				cr.select_font_face ("sans-serif", FontSlant.NORMAL, FontWeight.BOLD);
 				cr.set_font_size (12.0);
 				cr.move_to (LPAD, TPAD - 2 * GAP - ext.ascent);
-				cr.show_text (file_name);
+				cr.show_text (trim (cr, file_name, w - LPAD - RPAD, false));
 			}
 
 			// Border around the spectrogram.
@@ -184,6 +184,37 @@ namespace Spek {
 			cr.set_source_surface (palette, 0, 0);
 			cr.paint ();
 			cr.identity_matrix ();
+		}
+
+		// Trim `s` so that it fits into `length`.
+		private string trim (Context cr, string s, double length, bool end) {
+			if (length <= 0.0) {
+				return "";
+			}
+
+			// Check if the entire string fits.
+			TextExtents ext;
+			cr.text_extents (s, out ext);
+			if (ext.width <= length) {
+				return s;
+			}
+
+			// Binary search FTW!
+			var fix = "...";
+			long i = 0;
+			long k = s.length;
+			while (k - i > 1) {
+				var j = (i + k) / 2;
+				cr.text_extents (end ? s[0:j] + fix : fix + s[j:s.length], out ext);
+				// TODO: replace with XOR when bgo#619177 is fixed.
+				if (end && ext.width <= length || !end && ext.width > length) {
+					i = j;
+				} else {
+					k = j;
+				}
+			}
+
+			return end ? s[0:i] + fix : fix + s[k:s.length];
 		}
 
 		private void put_pixel (ImageSurface surface, int x, int y, uint32 color) {
