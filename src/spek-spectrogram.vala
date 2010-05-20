@@ -33,7 +33,7 @@ namespace Spek {
 
 		private const int LPAD = 60;
 		private const int TPAD = 60;
-		private const int RPAD = 40;
+		private const int RPAD = 60;
 		private const int BPAD = 40;
 		private const int GAP = 10;
 		private const int RULER = 10;
