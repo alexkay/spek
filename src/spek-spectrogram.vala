@@ -112,7 +112,7 @@ namespace Spek {
 			}
 			// Show sample rate only if there is no bitrate.
 			if (source.depth != 0 && source.bitrate == 0) {
-				items += _("%d bits").printf (source.depth);
+				items += ngettext ("%d bit", "%d bits", source.depth).printf (source.depth);
 			}
 			if (source.channels != 0) {
 				items += ngettext ("%d channel", "%d channels", source.channels).
