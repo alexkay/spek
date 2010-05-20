@@ -31,10 +31,10 @@ namespace Spek {
 		private ImageSurface image;
 		private ImageSurface palette;
 
-		private const int TPAD = 50;
-		private const int BPAD = 40;
-		private const int LPAD = 50;
+		private const int LPAD = 60;
+		private const int TPAD = 60;
 		private const int RPAD = 40;
+		private const int BPAD = 40;
 		private const int GAP = 10;
 		private const int RULER = 10;
 
@@ -156,6 +156,19 @@ namespace Spek {
 				cr.translate (LPAD, TPAD);
 				rate_ruler.draw (cr, false);
 				cr.identity_matrix ();
+
+				// File properties.
+				cr.set_font_size (11.0);
+				cr.move_to (LPAD, TPAD - GAP);
+				//cr.show_text ("MPEG 1 Audio, Layer 3 (MP3), 320 kbps, 44100 Hz, 2 channels");
+				FontExtents ext;
+				cr.font_extents (out ext);
+
+				// File name.
+				cr.select_font_face ("sans-serif", FontSlant.NORMAL, FontWeight.BOLD);
+				cr.set_font_size (12.0);
+				cr.move_to (LPAD, TPAD - 2 * GAP - ext.ascent);
+				cr.show_text (file_name);
 			}
 
 			// Border around the spectrogram.
