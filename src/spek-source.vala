@@ -26,11 +26,18 @@ namespace Spek {
 		public int samples { get; construct; }
 		public int threshold { get; construct; }
 		// TODO: file a bug, cannot s/set/construct/
-		public Callback callback {get; set; }
+		public DataCallback data_cb { get; set; }
+		public InfoCallback info_cb { get; set; }
+
 		public int64 duration { get; private set; default = 0; }
 		public int rate { get; private set; default = 0; }
+		public string audio_codec { get; private set; default = null; }
+		public uint bitrate { get; private set; default = 0; }
+		public int channels { get; private set; default = 0; }
+		public int depth { get; private set; default = 0; }
 
-		public delegate void Callback (int sample, float[] values);
+		public delegate void DataCallback (int sample, float[] values);
+		public delegate void InfoCallback ();
 
 		private Pipeline pipeline = null;
 		private Element spectrum = null;
@@ -39,9 +46,12 @@ namespace Spek {
 		private float[] values;
 		private uint watch_id;
 
-		public Source (string file_name, int bands, int samples, int threshold, Callback callback) {
+		public Source (
+			string file_name, int bands, int samples, int threshold,
+			DataCallback data_cb, InfoCallback info_cb) {
 			GLib.Object (file_name: file_name, bands: bands, samples: samples, threshold: threshold);
-			this.callback = callback;
+			this.data_cb = data_cb;
+			this.info_cb = info_cb;
 		}
 
 		public void stop () {
@@ -84,10 +94,15 @@ namespace Spek {
 			var caps = pad.get_caps ();
 			for (int i = 0; i < caps.get_size (); i++) {
 				var structure = caps.get_structure (i);
-				int rate;
-				if (structure.get_int ("rate", out rate) && rate > 0) {
-					this.rate = rate;
-					break;
+				int n = 0;
+				if (rate == 0 && structure.get_int ("rate", out n)) {
+					rate = n;
+				}
+				if (channels == 0 && structure.get_int ("channels", out n)) {
+					channels = n;
+				}
+				if (depth == 0 && structure.get_int ("depth", out n)) {
+					depth = n;
 				}
 			}
 
@@ -138,14 +153,42 @@ namespace Spek {
 
 		private bool on_bus_watch (Bus bus, Message message) {
 			var structure = message.get_structure ();
-			if (message.type == MessageType.ELEMENT && structure.get_name () == "spectrum") {
-				var magnitudes = structure.get_value ("magnitude");
-				for (int i = 0; i < bands; i++) {
-					values[i] = magnitudes.list_get_value (i).get_float ();
+			switch (message.type ) {
+			case MessageType.ELEMENT:
+				if (structure.get_name () == "spectrum") {
+					var magnitudes = structure.get_value ("magnitude");
+					for (int i = 0; i < bands; i++) {
+						values[i] = magnitudes.list_get_value (i).get_float ();
+					}
+					data_cb (sample++, values);
 				}
-				callback (sample++, values);
+				break;
+			case MessageType.TAG:
+				TagList tag_list;
+				message.parse_tag (out tag_list);
+				tag_list.foreach (on_tag);
+				break;
 			}
 			return true;
+		}
+
+		private void on_tag (TagList tag_list, string tag) {
+			switch (tag) {
+			case TAG_AUDIO_CODEC:
+				string s = null;
+				if (audio_codec == null && tag_list.get_string (tag, out s)) {
+					audio_codec = s;
+					info_cb ();
+				}
+				break;
+			case TAG_BITRATE:
+				uint u = 0;
+				if (bitrate == 0 && tag_list.get_uint (tag, out u)) {
+					bitrate = u;
+					info_cb ();
+				}
+				break;
+			}
 		}
 	}
 }

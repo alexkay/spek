@@ -25,6 +25,7 @@ namespace Spek {
 
 		public string file_name { get; private set; }
 		private Source source;
+		private string info;
 		private const int THRESHOLD = -92;
 		private const int BANDS = 1024;
 
@@ -52,6 +53,7 @@ namespace Spek {
 
 		public void open (string file_name) {
 			this.file_name = file_name;
+			this.info = "";
 			start ();
 		}
 
@@ -72,7 +74,7 @@ namespace Spek {
 			int samples = allocation.width - LPAD - RPAD;
 			if (samples > 0) {
 				image = new ImageSurface (Format.RGB24, samples, BANDS);
-				source = new Source (file_name, BANDS, samples, THRESHOLD, source_callback);
+				source = new Source (file_name, BANDS, samples, THRESHOLD, data_cb, info_cb);
 			} else {
 				image = null;
 				source = null;
@@ -88,13 +90,38 @@ namespace Spek {
 			}
 		}
 
-		private void source_callback (int sample, float[] values) {
+		private void data_cb (int sample, float[] values) {
 			for (int y = 0; y < values.length; y++) {
 				var level = double.min (
 					1.0, Math.log10 (1.0 - THRESHOLD + values[y]) / Math.log10 (-THRESHOLD));
 				put_pixel (image, sample, y, get_color (level));
 			}
 			queue_draw_area (LPAD + sample, TPAD, 1, allocation.height - TPAD - BPAD);
+		}
+
+		private void info_cb () {
+			string[] items = {};
+			if (source.audio_codec != null) {
+				items += source.audio_codec;
+			}
+			if (source.bitrate != 0) {
+				items += _("%d kbps").printf (source.bitrate / 1000);
+			}
+			if (source.rate != 0) {
+				items += _("%d Hz").printf (source.rate);
+			}
+			// Show sample rate only if there is no bitrate.
+			if (source.depth != 0 && source.bitrate == 0) {
+				items += _("%d bits").printf (source.depth);
+			}
+			if (source.channels != 0) {
+				items += ngettext ("%d channel", "%d channels", source.channels).
+					printf (source.channels);
+			}
+			if (items.length > 0) {
+				info = string.joinv (", ", items);
+				queue_draw_area (LPAD, 0, allocation.width - LPAD - RPAD, TPAD);
+			}
 		}
 
 		private override bool expose_event (EventExpose event) {
@@ -160,7 +187,7 @@ namespace Spek {
 				// File properties.
 				cr.set_font_size (11.0);
 				cr.move_to (LPAD, TPAD - GAP);
-				//cr.show_text (trim (cr, "MPEG 1 Audio, Layer 3 (MP3), 320 kbps, 44100 Hz, 2 channels", w - LPAD - RPAD, true));
+				cr.show_text (trim (cr, info, w - LPAD - RPAD, true));
 				FontExtents ext;
 				cr.font_extents (out ext);
 
