@@ -13,6 +13,7 @@ EXTRA_DIST = \
 	win/LICENSE.rtf \
 	win/make-win32.sh \
 	win/spek.ico \
+	win/spek.rc \
 	win/spek.wxs
 
 DISTCLEANFILES = \
