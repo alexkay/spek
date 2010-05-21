@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?define ProductName = "Spek" ?>
 <?define Manufacturer = "Spek Project" ?>
-<?define ProductVersion = "0.3.0" ?>
+<?define ProductVersion = "0.4.0" ?>
 <?define UpgradeCode = "46D51DDF-5749-45E2-818B-1ACADF21C0D9" ?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="*" Name="$(var.ProductName)" Language="0"
