@@ -11,7 +11,12 @@ pushd $(dirname $0)/..
 
 rm -fr win/msi-data
 mkdir win/msi-data
-CFLAGS="-mwindows" ./configure --prefix=${PWD}/win/msi-data && make && make install
+
+# Compile the resource file
+windres win/spek.rc -O coff -o win/spek.res
+mkdir src/win && cp win/spek.res src/win/
+
+CFLAGS="-mwindows" LDFLAGS="win/spek.res" ./configure --prefix=${PWD}/win/msi-data && make && make install
 
 cd win/msi-data
 
