@@ -25,7 +25,7 @@
     <Icon Id="ProgramIcon" SourceFile="spek.ico"/>
     <DirectoryRef Id="ProgramMenuSubfolder">
       <Component Id="StartMenuShortcut" Guid="165DF12B-D970-49BC-B07B-880B62ABC308">
-        <Shortcut Id="StartMenuShortcut" Name="$(var.ProductName)" Icon="ProgramIcon" Target="[INSTALLLOCATION]bin/spek.exe" WorkingDirectory="bin"/>
+        <Shortcut Id="StartMenuShortcut" Name="$(var.ProductName)" Icon="ProgramIcon" Target="[INSTALLLOCATION]bin\spek.exe" WorkingDirectory="bin"/>
         <Shortcut Id="UninstallProduct" Name="Uninstall $(var.ProductName)" Target="[System64Folder]msiexec.exe" Arguments="/x [ProductCode]"/>
         <RemoveFolder Id="ProgramMenuSubfolder" On="uninstall"/>
         <RegistryValue Root="HKCU" Key="Software\$(var.Manufacturer)\$(var.ProductName)" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
@@ -33,7 +33,7 @@
     </DirectoryRef>
     <DirectoryRef Id="DesktopFolder">
       <Component Id="DesktopShortcut" Guid="ACCE1EDB-87E3-4FE5-B2BF-93113E767381">
-        <Shortcut Id="DesktopShortcut" Name="$(var.ProductName)" Icon="ProgramIcon" Target="[INSTALLLOCATION]bin/spek.exe" WorkingDirectory="bin"/>
+        <Shortcut Id="DesktopShortcut" Name="$(var.ProductName)" Icon="ProgramIcon" Target="[INSTALLLOCATION]bin\spek.exe" WorkingDirectory="bin"/>
         <RegistryValue Root="HKCU" Key="Software\$(var.Manufacturer)\$(var.ProductName)" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
       </Component>
     </DirectoryRef>
@@ -47,6 +47,35 @@
         <Directory Id="INSTALLLOCATION" Name="$(var.ProductName)">
           <Component Id="Main" Guid="CD5121AD-F799-4796-9DB8-0C24CA0A4C8E">
             <File Id="LICENSE.rtf" Name="LICENSE.rtf" Source="LICENSE.rtf" />
+            <File Id="spek.ico" Name="spek.ico" Source="spek.ico" />
+            <!-- Capabilities keys for Vista/7 "Set Program Access and Defaults" -->
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Spek\Capabilities" Name="ApplicationDescription" Value="Acoustic Spectrum Analyser" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Spek\Capabilities" Name="ApplicationIcon" Value="[#spek.ico]" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Spek\Capabilities" Name="ApplicationName" Value="Spek" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Spek\Capabilities\DefaultIcon" Value="[#spek.ico]" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Spek\Capabilities\shell\open\command" Value="&quot;[INSTALLLOCATION]bin\spek.exe&quot; &quot;%1&quot;" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\RegisteredApplications" Name="Spek" Value="SOFTWARE\Spek\Capabilities" Type="string" />
+            <!-- App Paths to support Start,Run -> "spek" -->
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\spek.exe" Value="[INSTALLLOCATION]bin\spek.exe" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\spek.exe" Name="Path" Value="[INSTALLLOCATION]bin" Type="string" />
+            <!-- Extend to the "open with" list + Win7 jump menu pinning  -->
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\spek.exe" Value="Acoustic Spectrum Analyser" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\spek.exe" Name="FriendlyAppName" Value="Spek" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\spek.exe\DefaultIcon" Value="[#spek.ico]" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\spek.exe\shell\open\command" Value="&quot;[INSTALLLOCATION]bin\spek.exe&quot; &quot;%1&quot;" Type="string" />
+            <!-- Spek.Audio class -->
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Spek.Audio" Value="Spek Audio File" KeyPath="yes" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Spek.Audio" Name="FriendlyTypeName" Value="Spek Audio File" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Spek.Audio\DefaultIcon" Value="[#spek.ico]" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Spek.Audio\shell" Value="open" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Spek.Audio\shell\open\command" Value="&quot;[INSTALLLOCATION]bin\spek.exe&quot; &quot;%1&quot;" Type="string" />
+            <!-- Associate with file extensions -->
+            <?foreach ext in "3gp;aac,aif;aifc;aiff;amr;awb;ape;au;flac;gsm;m4a;m4p;mp3;mp4;mp+;mpc;mpp;oga;ogg;ra;ram;snd;wav;wma;wv"?>
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Spek\Capabilities\FileAssociations" Name=".$(var.ext)" Value="Spek.Audio" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\spek.exe\SupportedTypes" Name=".$(var.ext)" Value="" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\.$(var.ext)\OpenWithList\spek.exe" Value="" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\.$(var.ext)\OpenWithProgids" Name="Spek.Audio" Value="" Type="string" />
+            <?endforeach?>
           </Component>
           <Directory Id="bin" Name="bin">
             <Merge Id="GStreamer-Libraries" Language="1033" SourceFile="x86-OSSBuild-GStreamer-Libraries.msm" DiskId="1" />
