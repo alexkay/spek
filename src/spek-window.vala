@@ -215,6 +215,7 @@ namespace Spek {
 
 		private string[] audio_extensions = {
 			"*.3gp",
+			"*.aac",
 			"*.aif",
 			"*.aifc",
 			"*.aiff",
