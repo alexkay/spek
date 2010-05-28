@@ -27,7 +27,8 @@ namespace Spek {
 		private Source source;
 		private string info;
 		private const int THRESHOLD = -92;
-		private const int BANDS = 1024;
+		// For faster FFT BANDS*2-2 should be a multiple of 2,3,5
+		private const int BANDS = 1025;
 
 		private ImageSurface image;
 		private ImageSurface palette;
