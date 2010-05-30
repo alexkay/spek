@@ -94,12 +94,21 @@ namespace Spek {
 			var caps = pad.get_caps ();
 			for (int i = 0; i < caps.get_size (); i++) {
 				var structure = caps.get_structure (i);
-				int n = 0;
-				if (rate == 0 && structure.get_int ("rate", out n)) {
-					rate = n;
+				Gst.Value? val;
+				int n;
+				if (rate == 0 && (val = structure.get_value ("rate")) != null) {
+					if (val.type () == typeof (int)) {
+						rate = val.get_int ();
+					} else if (val.type () == typeof (IntRange)) {
+						rate = val.get_int_range_max ();
+					}
 				}
-				if (channels == 0 && structure.get_int ("channels", out n)) {
-					channels = n;
+				if (channels == 0 && (val = structure.get_value ("channels")) != null) {
+					if (val.type () == typeof (int)) {
+						channels = val.get_int ();
+					} else if (val.type () == typeof (IntRange)) {
+						channels = val.get_int_range_max ();
+					}
 				}
 				if (depth == 0 && structure.get_int ("depth", out n)) {
 					depth = n;
