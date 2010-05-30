@@ -25,6 +25,7 @@ omf.make
 po/.intltool-merge-cache
 po/POTFILES
 po/stamp-it
+samples/
 src/*.c
 src/*.o
 src/*.stamp

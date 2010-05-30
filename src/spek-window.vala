@@ -223,6 +223,7 @@ namespace Spek {
 			"*.awb",
 			"*.ape",
 			"*.au",
+			"*.dts",
 			"*.flac",
 			"*.gsm",
 			"*.m4a",
