@@ -1,0 +1,27 @@
+#summary GNU/Linux installation instructions
+#labels Featured
+
+= GNU/Linux installation instructions =
+
+To build Spek, download the source code tarball then run these commands from terminal:
+
+{{{
+$ tar -xjvf spek-0.x.tar.bz2
+$ cd spek-0.x
+$ ./configure
+$ make
+}}}
+
+You will need GStreamer and GTK+ packages installed to build. On Debian/Ubuntu you will also need development packages: libgstreamer0.10-dev and libgtk2.0-dev.
+
+To start Spek, run:
+
+{{{
+$ src/spek
+}}}
+
+Or install it with:
+
+{{{
+$ sudo make install
+}}}
