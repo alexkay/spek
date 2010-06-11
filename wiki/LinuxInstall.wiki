@@ -1,7 +1,16 @@
-#summary GNU/Linux installation instructions
 #labels Featured
-
 = GNU/Linux installation instructions =
+
+== Binary packages ==
+
+Spek is not yet packaged on many distributions, help in this area will be greatly appreciated.
+
+ * *Arch Linux*: Use one of the packages in the AUR: [http://aur.archlinux.org/packages.php?ID=38001 spek] and [http://aur.archlinux.org/packages.php?ID=37252 spek-git].
+ * *Debian*: RFP (request for packaging): [http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=584524 bug #584524].
+ * *Fedora*: [http://dl.dropbox.com/u/6598054/spek-0.4-5.fc13.x86_64.rpm v0.4 x86_64], [http://dl.dropbox.com/u/6598054/spek-0.4-5.fc13.i686.rpm v0.4 i686] and [http://dl.dropbox.com/u/6598054/spek-0.4-5.fc13.src.rpm v0.4 source] (RPMs by scorp6). There's also a review request needing a sponsor: [https://bugzilla.redhat.com/show_bug.cgi?id=597888 bug #597888].
+ * *Ubuntu*: [http://dl.dropbox.com/u/124437/spek_0.4-1_amd64.deb v0.4 amd64] (DEB by mcnellis).
+
+== Building from the tarball ==
 
 To build Spek, download the source code tarball then run these commands from terminal:
 
@@ -12,7 +21,7 @@ $ ./configure
 $ make
 }}}
 
-You will need GStreamer and GTK+ packages installed to build. On Debian/Ubuntu you will also need development packages: libgstreamer0.10-dev and libgtk2.0-dev.
+To build you will need GTK+ and GStreamer packages, including gst-plugins-base and gst-plugins-good. For MP3 support you need gst-plugins-ugly. On Debian/Ubuntu you also need development packages: libgstreamer0.10-dev and libgtk2.0-dev.
 
 To start Spek, run:
 
@@ -25,3 +34,14 @@ Or install it with:
 {{{
 $ sudo make install
 }}}
+
+== Building from the git repository ==
+
+{{{
+$ git clone git://gitorious.org/spek/spek.git spek
+$ cd spek
+$ ./autogen.sh
+$ make
+}}}
+
+In addition to the packages listed above, you will need autotools and the Vala compiler (normally packaged as valac).
