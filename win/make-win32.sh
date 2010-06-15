@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# This script will build an MSI installer for Win32.
+# This script will build a ZIP archive and an MSI installer for Win32.
 # It requires a fully functioning MinGW/MSYS environment.
 # The script also depends on 7z and WiX.
 
@@ -9,16 +9,16 @@ SZ_PATH=c:/Program\ Files/7-Zip
 
 pushd $(dirname $0)/..
 
-rm -fr win/msi-data
-mkdir win/msi-data
+rm -fr win/Spek
+mkdir win/Spek
 
 # Compile the resource file
 windres win/spek.rc -O coff -o win/spek.res
 mkdir src/win && cp win/spek.res src/win/
 
-CFLAGS="-mwindows" LDFLAGS="win/spek.res" ./configure --prefix=${PWD}/win/msi-data && make && make install
+CFLAGS="-mwindows" LDFLAGS="win/spek.res" ./configure --prefix=${PWD}/win/Spek && make && make install
 
-cd win/msi-data
+cd win/Spek
 
 urls=(\
 # GTK+ and its dependencies
@@ -70,25 +70,28 @@ cd ..
 
 # Extract files from x86-OSSBuild-GStreamer-Dependencies-GPL.msm
 mkdir deps
-"$WIX_PATH"/dark.exe x86-OSSBuild-GStreamer-Dependencies-GPL.msm -o deps/deps.wxs -x deps
+"$WIX_PATH"/dark x86-OSSBuild-GStreamer-Dependencies-GPL.msm -o deps/deps.wxs -x deps
 
 for line in $(grep "<File" deps/deps.wxs | sed -e "s/.* Name=\"\([^\"]*\)\".* Source=\"\([^\"]*\)\".*/\1;\2/g"); do
   line=${line//\\/\/}
   name=${line%;*}
   src=${line#*;}
-  dst="msi-data/bin/$name"
+  dst="Spek/bin/$name"
   # Move but don't overwrite the existing file
   if [ ! -f "$dst" ] ; then
     mv -v "$src" "$dst"
   fi
 done
 
-# Generate a wxs for files in msi-data
-"$WIX_PATH"/heat.exe dir msi-data -gg -ke -srd -cg Files -dr INSTALLLOCATION -template fragment -o files.wxs
+# Create a zip archive
+"$SZ_PATH"/7z a spek.zip Spek
+
+# Generate a wxs for files in Spek
+"$WIX_PATH"/heat dir Spek -gg -ke -srd -cg Files -dr INSTALLLOCATION -template fragment -o files.wxs
 
 # Make the MSI package
-"$WIX_PATH"/candle.exe spek.wxs files.wxs
-"$WIX_PATH"/light.exe -ext WixUIExtension.dll -b msi-data spek.wixobj files.wixobj -o spek.msi
+"$WIX_PATH"/candle spek.wxs files.wxs
+"$WIX_PATH"/light -ext WixUIExtension.dll -b Spek spek.wixobj files.wixobj -o spek.msi
 
 # Clean up
 rm -fr deps
