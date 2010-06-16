@@ -1,0 +1,88 @@
+<?xml version="1.0" standalone="no"?> <!--*- mode: xml -*-->
+<app-bundle>
+
+  <meta>
+    <prefix name="default">${env:JHBUILD_PREFIX}</prefix>
+
+    <destination overwrite="yes">${env:HOME}/Desktop</destination>
+
+    <image>
+      <!-- Not implemented yet (DMG image). -->
+    </image>
+
+    <!-- Comment this out to keep the install names in binaries -->
+    <run-install-name-tool/>
+ 
+    <launcher-script>${project}/launcher.sh</launcher-script >
+
+  </meta>
+
+  <plist>${project}/Info.plist</plist>
+
+  <main-binary>${prefix}/bin/spek</main-binary>
+
+  <!-- Copy in GTK+ modules. Note the use of the
+       "${pkg:module:variable}" macro, which evaluates to a pkg-config
+       variable in the specified module. Note that any libraries that
+       binaries link to are also copied in automatically.
+  -->
+  <binary>
+    ${prefix}/lib/gtk-2.0/${pkg:gtk+-2.0:gtk_binary_version}/loaders/*.so
+  </binary>
+
+  <!-- Copy in GTK+ theme engines. Dunno why this is a dupe of
+  modules, but that's why it's commented out. >
+  <binary>
+    ${prefix}/lib/gtk-2.0/${pkg:gtk+-2.0:gtk_binary_version}/loaders/*.so
+  </binary -->
+
+  <!-- Translation filenames, one for each program or library that you
+       want to copy in to the bundle. The "dest" attribute is
+       optional, as usual. Bundler will find all translations of that
+       library/program under the indicated directory and copy them.-->
+  <translations dest="${bundle}/Contents/Resources" name="gtk20">
+    ${prefix}/share/locale
+  </translations>
+
+  <!-- Data to copy in, usually Glade/UI files, images, sounds files
+       etc. The destination inside the bundle can be specified if the
+       files should end up at a different location, by using the
+       "dest" property. The destination must then start with the macro
+       "${bundle}", which refers to the bundle root directory.
+  -->
+  <!-- data>
+    ${prefix}/share/giggle
+  </data -->
+
+  <!-- Copy in the themes data. You may want to trim this to save space
+       in your bundle. -->
+  <data>
+    ${prefix}/share/themes
+  </data>
+
+  <!-- Copy icons. Note that the .icns file is an Apple format which
+       contains up to 4 sizes of icon. You can use
+       /Developer/Applications/Utilities/Icon Composer.app to import
+       artwork and create the file. >
+  <data dest="${bundle}/Contents/Resources">
+    ${project}/Spek.icns
+  </data -->
+
+  <data dest="${bundle}/Contents/Resources/etc/gtk-2.0/gtkrc">
+    ${project}/gtkrc
+  </data>
+
+  <!-- Icon themes to copy. The "icons" property can be either of
+       "auto", "all", or "none". All or none should be
+       self-explanatory, while auto means that the script will try to
+       figure out which icons are needed. This is done by getting all
+       the strings from all copied binaries, and matching them against
+       icon names. To be safe, you should use "all". "none" is useful
+       if you want just the index.theme file but no icons, mostly
+       needed for the "hicolor" base theme.
+  >
+  <icon-theme icons="auto">
+    Tango
+  </icon-theme -->
+
+</app-bundle>
