@@ -1,49 +1,45 @@
 #!/bin/sh
 
-# This script creates a Mac OS X app bundle and a DMG image from it
-# using jhbuild/ige-mac-bundler. JHBuild scripts from the GTK-OSX
-# project should be installed and properly configured.
-#
-# Also, the script assumes that all dependencies have already been built,
-# including all (not so optional) GStreamer dependencies. GStreamer plugins
-# will happily compile even if essential components such as libmad, libvorbis,
-# flac, etc are missing. Make sure you have everything that you need installed.
-#
-# Example build sequence:
-#
-# $ jhbuild bootstrap
-# $ jhbuild build
-#
-# Download GStreamer dependencies:
-#   BASE: libogg, libvorbis, libtheora
-#   GOOD: speex, flac, taglib, wavpack
+# This script creates a Mac OS X app bundle and a DMG image from it using bockbuild.
+# The bockbuild package should already be installed in ../../bockbuild
+
+# TODO: create these packages for GStreamer:
 #   BAD: orc, schroedinger, faad2, libdca, libmodplug, libmpcdec, xvid
 #   UGLY: a52dec, libid3tag, libmad, libmpeg2
-#
-# Install each one with:
-#
-# $ jhbuild shell
-# $ ./configure --prefix=$PREFIX && make && make install
-# $ exit
-#
-# Install GStreamer:
-#
-# $ jhbuild build meta-gstreamer
-# $ jhbuild build gst-plugins-ugly
-#
-# IMPORTANT: the script must be run from the `jhbuild shell` environment.
 
-pushd $(dirname $0)/..
+# TODO:
+# - DS_Store
+# - gtkrc tune up
+# - ffmpeg and deps above
+# - credit bockbuild
 
-# Build Spek
-./configure --prefix=$PREFIX && make && make install
+pushd $(dirname $0)
+
+case "$(uname)" in
+	Darwin) profile_name=darwin ;;
+	*)
+		echo "Unsupported system type: $(uname)"
+		exit 1
+		;;
+esac
+
+# Copy Spek packages to bockbuild
+cp -prv bockbuild ..
+
+# Build Spek and all its dependencies
+pushd ../bockbuild/profiles/spek
+./profile."$profile_name".py -bvr
+
+# Build Solitary
+pushd ../../solitary
+make
+popd
 
 # Bundle
-cd osx
-ige-mac-bundler spek.bundle
+./profile."$profile_name".py -z
 
 # Make DMG image
-#./make-dmg.sh spek 0.4 spek.app
+cd bundle."$profile_name"
 VOLUME_NAME=Spek
 DMG_APP=Spek.app
 DMG_FILE=$VOLUME_NAME.dmg
@@ -53,7 +49,7 @@ rm -f $DMG_FILE
 rm -f $DMG_FILE.master
 
 # Compute an approximated image size in MB, and bloat by 1MB
-image_size=$(du -ck $DMG_APP dmg-data | tail -n1 | cut -f1)
+image_size=$(du -ck $DMG_APP | tail -n1 | cut -f1)
 image_size=$((($image_size + 5000) / 1000))
 
 echo "Creating disk image (${image_size}MB)..."
@@ -71,10 +67,6 @@ find $MOUNT_POINT -type d -iregex '.*\.svn$' &>/dev/null | xargs rm -rf
 pushd $MOUNT_POINT &>/dev/null
 ln -s /Applications " "
 popd &>/dev/null
-
-#mkdir $MOUNT_POINT/.background
-#cp dmg-data/background.png $MOUNT_POINT/.background
-cp dmg-data/DS_Store $MOUNT_POINT/.DS_Store
 
 echo "Detaching from disk image..."
 hdiutil detach $MOUNT_POINT -quiet

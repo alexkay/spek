@@ -9,6 +9,7 @@ data/spek.desktop
 data/spek.desktop.in
 depcomp
 .deps
+.DS_Store
 install-sh
 intltool-extract.in
 intltool-merge.in
