@@ -9,7 +9,6 @@
 
 # TODO:
 # - DS_Store
-# - gtkrc tune up
 # - ffmpeg and deps above
 # - credit bockbuild
 

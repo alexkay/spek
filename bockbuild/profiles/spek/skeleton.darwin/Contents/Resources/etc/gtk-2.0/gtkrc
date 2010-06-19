@@ -257,7 +257,7 @@ style "murrine-radiocheck" = "murrine-default" {
 }
 
 style "smaller-text" {
-	font_name = "7"
+#	font_name = "7"
 }
 
 style "handle" {

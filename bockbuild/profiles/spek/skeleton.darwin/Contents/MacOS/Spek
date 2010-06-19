@@ -53,6 +53,31 @@ EOF
 	exit 1
 fi
 
-# mkdir -p "$SPEK_CONFIG_DIR"
+mkdir -p "$SPEK_CONFIG_DIR"
+
+if [ -f "$RES_DIR/first-run" ]; then
+        echo "Appears to be first run of this application bundle."
+        rm -f -- "$RES_DIR/first-run"
+        PREVIOUS_APP_ROOT=""
+else
+        PREVIOUS_APP_ROOT="$(cat "$SPEK_CONFIG_DIR/app-bundle-location" 2>/dev/null)"
+fi
+
+if [ ! "$APP_ROOT" = "$PREVIOUS_APP_ROOT" ]; then
+        echo "Application bundle has moved. Adjusting bundle..."
+
+        # Adjust config files that need absolute paths to things
+        # in the bundle (e.g. pango, GDK pixbuf loaders...)
+        IFS=$'\n'
+        for file in $(find "$ETC_DIR" -name \*.in); do
+                sed "s|\${APP_RESOURCES}|${RES_DIR}|g" \
+                        < "${file}" \
+                        > "${file%.in}"
+        done
+        unset IFS
+
+        # Store the new location of the bundle
+        echo "$APP_ROOT" > "$SPEK_CONFIG_DIR/app-bundle-location"
+fi
 
 exec -a $SPEK_EXEC_NAME "$SPEK_BIN"
