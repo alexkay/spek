@@ -59,7 +59,7 @@ class SpekPackages:
 			'gst-plugins-good.py',
 			'gst-plugins-bad.py',
 			'gst-plugins-ugly.py',
-#			'gst-ffmpeg',
+			'gst-ffmpeg.py',
 		])
 
 		if isinstance (self, DarwinProfile):

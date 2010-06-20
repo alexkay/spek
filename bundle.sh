@@ -9,7 +9,8 @@
 
 # TODO:
 # - DS_Store
-# - ffmpeg and deps above
+# - Check which gtkrc other projects are using
+# - deps above
 # - credit bockbuild
 
 pushd $(dirname $0)
