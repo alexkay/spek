@@ -1,0 +1,3 @@
+[submodule "bockbuild"]
+	path = bockbuild
+	url = git://github.com/alexkay/bockbuild.git

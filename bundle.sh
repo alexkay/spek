@@ -1,7 +1,6 @@
 #!/bin/sh
 
 # This script creates a Mac OS X app bundle and a DMG image from it using bockbuild.
-# The bockbuild package should already be installed in ../../bockbuild
 
 # TODO: create these packages for GStreamer:
 #   BAD: orc, schroedinger, faad2, libdca, libmodplug, libmpcdec, xvid
@@ -10,8 +9,6 @@
 # TODO:
 # - DS_Store
 # - Check which gtkrc other projects are using
-# - deps above
-# - credit bockbuild
 
 pushd $(dirname $0)
 
@@ -23,11 +20,8 @@ case "$(uname)" in
 		;;
 esac
 
-# Copy Spek packages to bockbuild
-cp -prv bockbuild ..
-
 # Build Spek and all its dependencies
-pushd ../bockbuild/profiles/spek
+pushd bockbuild/profiles/spek
 ./profile."$profile_name".py -bvr
 
 # Build Solitary
