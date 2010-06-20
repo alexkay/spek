@@ -4,7 +4,7 @@
 
 # TODO: create these packages for GStreamer:
 #   BAD: orc, schroedinger, faad2, libdca, libmodplug, libmpcdec, xvid
-#   UGLY: a52dec, libid3tag, libmad, libmpeg2
+#   UGLY: a52dec, libmpeg2
 
 # TODO:
 # - DS_Store
