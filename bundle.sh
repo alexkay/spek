@@ -9,6 +9,12 @@
 # TODO:
 # - DS_Store
 # - Check which gtkrc other projects are using
+# - Only 0:00 is antialised
+# - Icon
+# - Don't close when clicking the red button
+# - Mac-like toolbar
+# - Lag when resizing
+# - OGG and M4A often crash
 
 pushd $(dirname $0)
 
