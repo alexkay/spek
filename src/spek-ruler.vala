@@ -17,6 +17,7 @@
  */
 
 using Cairo;
+using Pango;
 
 namespace Spek {
 	class Ruler : GLib.Object {
@@ -42,11 +43,12 @@ namespace Spek {
 			this.format_tick = format_tick;
 		}
 
-		public void draw (Context cr, bool horizontal) {
+		public void draw (Cairo.Context cr, Pango.Layout layout, bool horizontal) {
 			// Mesure the sample label.
-			TextExtents ext;
-			cr.text_extents (sample_label, out ext);
-			var size = horizontal ? ext.width : ext.height;
+			int w, h;
+			layout.set_text (sample_label, -1);
+			layout.get_pixel_size (out w, out h);
+			var size = horizontal ? w : h;
 
 			// Select the factor to use, we want some space between the labels.
 			int factor = 0;
@@ -75,14 +77,14 @@ namespace Spek {
 			foreach (var tick in ticks) {
 				var label = format_tick (tick);
 				var pos = unit_to_pixel (horizontal ? tick : units - tick);
-				cr.text_extents (label, out ext);
-				// TODO: use font measurements instead ext.height
+				layout.set_text (label, -1);
+				layout.get_pixel_size (out w, out h);
 				if (horizontal) {
-					cr.move_to (pos - ext.width / 2, GAP + ext.height);
+					cr.move_to (pos - w / 2, GAP + h);
 				} else {
-					cr.move_to (-ext.width - GAP, pos + ext.height / 2);
+					cr.move_to (-w - GAP, pos + h / 2);
 				}
-				cr.show_text (label);
+				cairo_show_layout_line (cr, layout.get_line (0));
 				if (horizontal) {
 					cr.move_to (pos, 0);
 					cr.rel_line_to (0, TICK_LEN);

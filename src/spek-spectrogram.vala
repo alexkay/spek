@@ -19,6 +19,7 @@
 using Cairo;
 using Gdk;
 using Gtk;
+using Pango;
 
 namespace Spek {
 	class Spectrogram : DrawingArea {
@@ -60,7 +61,7 @@ namespace Spek {
 
 		public void save (string file_name) {
 			var surface = new ImageSurface (Format.RGB24, allocation.width, allocation.height);
-			draw (new Context (surface));
+			draw (new Cairo.Context (surface));
 			surface.write_to_png (file_name);
 		}
 
@@ -136,7 +137,7 @@ namespace Spek {
 			return true;
 		}
 
-		private void draw (Context cr) {
+		private void draw (Cairo.Context cr) {
 			double w = allocation.width;
 			double h = allocation.height;
 
@@ -156,8 +157,9 @@ namespace Spek {
 				cr.set_source_rgb (1, 1, 1);
 				cr.set_line_width (1);
 				cr.set_antialias (Antialias.NONE);
-				cr.select_font_face ("sans-serif", FontSlant.NORMAL, FontWeight.NORMAL);
-				cr.set_font_size (10.0);
+				var layout = cairo_create_layout (cr);
+				layout.set_font_description (FontDescription.from_string ("Sans 8"));
+				layout.set_width (-1);
 
 				// Time ruler.
 				var duration_seconds = (int) (source.duration / 1000000000);
@@ -169,7 +171,7 @@ namespace Spek {
 					unit => (w - LPAD - RPAD) * unit / duration_seconds,
 					unit => "%d:%02d".printf (unit / 60, unit % 60));
 				cr.translate (LPAD, h - BPAD);
-				time_ruler.draw (cr, true);
+				time_ruler.draw (cr, layout, true);
 				cr.identity_matrix ();
 
 				// Frequency ruler.
@@ -178,25 +180,30 @@ namespace Spek {
 					"00 kHz",
 					{1000, 2000, 5000, 10000, 20000},
 					freq,
-					4.0,
+					3.0,
 					unit => (h - TPAD - BPAD) * unit / freq,
 					unit => "%d kHz".printf (unit / 1000));
 				cr.translate (LPAD, TPAD);
-				rate_ruler.draw (cr, false);
+				rate_ruler.draw (cr, layout, false);
 				cr.identity_matrix ();
 
 				// File properties.
-				cr.set_font_size (11.0);
 				cr.move_to (LPAD, TPAD - GAP);
-				cr.show_text (trim (cr, info, w - LPAD - RPAD, true));
-				FontExtents ext;
-				cr.font_extents (out ext);
+				layout.set_font_description (FontDescription.from_string ("Sans 9"));
+				layout.set_width ((int) (w - LPAD - RPAD) * Pango.SCALE);
+				layout.set_ellipsize (EllipsizeMode.END);
+				layout.set_text (info, -1);
+				cairo_show_layout_line (cr, layout.get_line (0));
+				int text_width, text_height;
+				layout.get_pixel_size (out text_width, out text_height);
 
 				// File name.
-				cr.select_font_face ("sans-serif", FontSlant.NORMAL, FontWeight.BOLD);
-				cr.set_font_size (12.0);
-				cr.move_to (LPAD, TPAD - 2 * GAP - ext.ascent);
-				cr.show_text (trim (cr, file_name, w - LPAD - RPAD, false));
+				cr.move_to (LPAD, TPAD - 2 * GAP - text_height);
+				layout.set_font_description (FontDescription.from_string ("Sans Bold 10"));
+				layout.set_width ((int) (w - LPAD - RPAD) * Pango.SCALE);
+				layout.set_ellipsize (EllipsizeMode.START);
+				layout.set_text (file_name, -1);
+				cairo_show_layout_line (cr, layout.get_line (0));
 			}
 
 			// Border around the spectrogram.
@@ -212,36 +219,6 @@ namespace Spek {
 			cr.set_source_surface (palette, 0, 0);
 			cr.paint ();
 			cr.identity_matrix ();
-		}
-
-		// Trim `s` so that it fits into `length`.
-		private string trim (Context cr, string s, double length, bool end) {
-			if (length <= 0.0) {
-				return "";
-			}
-
-			// Check if the entire string fits.
-			TextExtents ext;
-			cr.text_extents (s, out ext);
-			if (ext.width <= length) {
-				return s;
-			}
-
-			// Binary search FTW!
-			var fix = "...";
-			long i = 0;
-			long k = s.length;
-			while (k - i > 1) {
-				var j = (i + k) / 2;
-				cr.text_extents (end ? s[0:j] + fix : fix + s[j:s.length], out ext);
-				if (end != (ext.width > length)) {
-					i = j;
-				} else {
-					k = j;
-				}
-			}
-
-			return end ? s[0:i] + fix : fix + s[k:s.length];
 		}
 
 		private void put_pixel (ImageSurface surface, int x, int y, uint32 color) {
