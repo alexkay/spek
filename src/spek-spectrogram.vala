@@ -40,6 +40,12 @@ namespace Spek {
 		private const int BPAD = 40;
 		private const int GAP = 10;
 		private const int RULER = 10;
+		private const double FONT_SCALE = 
+#if MAC_INTEGRATION
+			1.5; // Pango/Quartz fonts are smaller than on X.
+#else
+			1.0;
+#endif
 
 		public Spectrogram () {
 			// Pre-draw the palette.
@@ -158,7 +164,8 @@ namespace Spek {
 				cr.set_line_width (1);
 				cr.set_antialias (Antialias.NONE);
 				var layout = cairo_create_layout (cr);
-				layout.set_font_description (FontDescription.from_string ("Sans 8"));
+				layout.set_font_description (FontDescription.from_string (
+					"Sans " + (8 * FONT_SCALE).to_string ()));
 				layout.set_width (-1);
 
 				// Time ruler.
@@ -189,7 +196,8 @@ namespace Spek {
 
 				// File properties.
 				cr.move_to (LPAD, TPAD - GAP);
-				layout.set_font_description (FontDescription.from_string ("Sans 9"));
+				layout.set_font_description (FontDescription.from_string (
+					"Sans " + (9 * FONT_SCALE).to_string ()));
 				layout.set_width ((int) (w - LPAD - RPAD) * Pango.SCALE);
 				layout.set_ellipsize (EllipsizeMode.END);
 				layout.set_text (info, -1);
@@ -199,7 +207,8 @@ namespace Spek {
 
 				// File name.
 				cr.move_to (LPAD, TPAD - 2 * GAP - text_height);
-				layout.set_font_description (FontDescription.from_string ("Sans Bold 10"));
+				layout.set_font_description (FontDescription.from_string (
+					"Sans Bold " + (10 * FONT_SCALE).to_string ()));
 				layout.set_width ((int) (w - LPAD - RPAD) * Pango.SCALE);
 				layout.set_ellipsize (EllipsizeMode.START);
 				layout.set_text (file_name, -1);
