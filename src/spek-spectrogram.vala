@@ -20,6 +20,7 @@ using Cairo;
 using Gdk;
 using Gtk;
 using Pango;
+using Sys;
 
 namespace Spek {
 	class Spectrogram : DrawingArea {
@@ -40,14 +41,14 @@ namespace Spek {
 		private const int BPAD = 40;
 		private const int GAP = 10;
 		private const int RULER = 10;
-		private const double FONT_SCALE = 
-#if MAC_INTEGRATION
-			1.5; // Pango/Quartz fonts are smaller than on X.
-#else
-			1.0;
-#endif
+		private double FONT_SCALE;
 
 		public Spectrogram () {
+			// Pango/Quartz fonts are smaller than on X.
+			var name = UtsName ();
+			uname (ref name);
+			FONT_SCALE = name.sysname == "Darwin" ? 1.5 : 1.0;
+
 			// Pre-draw the palette.
 			palette = new ImageSurface (Format.RGB24, RULER, BANDS);
 			for (int y = 0; y < BANDS; y++) {
