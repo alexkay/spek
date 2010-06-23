@@ -8,7 +8,6 @@
 
 # TODO:
 # - DS_Store
-# - Check which gtkrc other projects are using
 # - Icon
 # - Don't close when clicking the red button
 # - Mac-like toolbar
