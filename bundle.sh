@@ -2,14 +2,10 @@
 
 # This script creates a Mac OS X app bundle and a DMG image from it using bockbuild.
 
-# TODO: create these packages for GStreamer:
-#   BAD: orc, schroedinger, libdca, libmodplug, libmpcdec, xvid
-#   UGLY: a52dec, libmpeg2
-
 # TODO:
 # - Icon
 # - Don't close when clicking the red button
-# - OGG and M4A often crash
+# - OGG and M4A sometimes crash
 
 pushd $(dirname $0)
 
