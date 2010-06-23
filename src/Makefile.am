@@ -17,8 +17,8 @@ INCLUDES = \
 	-DPKGLIBDIR=\""$(pkglibdir)"\"
 
 VALAFLAGS = \
-	--vapidir=$(srcdir)/../vapi --pkg config --pkg sys \
-	$(IGE_MAC_VALA) \
+	--vapidir=$(srcdir)/../vapi
+	--pkg config --pkg sys \
 	@SPEK_PACKAGES@
 
 spek_LDADD = \

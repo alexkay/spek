@@ -33,8 +33,6 @@ if test "x$_gdk_tgt" = xquartz; then
    PKG_CHECK_MODULES(IGE_MAC, ige-mac-integration)
    AC_SUBST(IGE_MAC_LIBS)
    AC_SUBST(IGE_MAC_CFLAGS)
-   IGE_MAC_VALA="-D MAC_INTEGRATION"
-   AC_SUBST(IGE_MAC_VALA)
 fi
 
 GETTEXT_PACKAGE=spek
