@@ -3,15 +3,12 @@
 # This script creates a Mac OS X app bundle and a DMG image from it using bockbuild.
 
 # TODO: create these packages for GStreamer:
-#   BAD: orc, schroedinger, faad2, libdca, libmodplug, libmpcdec, xvid
+#   BAD: orc, schroedinger, libdca, libmodplug, libmpcdec, xvid
 #   UGLY: a52dec, libmpeg2
 
 # TODO:
-# - DS_Store
 # - Icon
 # - Don't close when clicking the red button
-# - Mac-like toolbar
-# - Lag when resizing
 # - OGG and M4A often crash
 
 pushd $(dirname $0)
@@ -65,6 +62,8 @@ find $MOUNT_POINT -type d -iregex '.*\.svn$' &>/dev/null | xargs rm -rf
 pushd $MOUNT_POINT &>/dev/null
 ln -s /Applications " "
 popd &>/dev/null
+
+cp ../DS_Store $MOUNT_POINT/.DS_Store
 
 echo "Detaching from disk image..."
 hdiutil detach $MOUNT_POINT -quiet
