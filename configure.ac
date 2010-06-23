@@ -26,6 +26,17 @@ AC_SUBST(SPEK_PACKAGES)
 
 AC_CHECK_LIB(m, log10f)
 
+# Check for GDK Quartz and MacOSX integration package
+_gdk_tgt=`$PKG_CONFIG --variable=target gdk-2.0`
+AM_CONDITIONAL([GDK_TARGET_QUARTZ], [test x$_gdk_tgt = xquartz])
+if test "x$_gdk_tgt" = xquartz; then
+   PKG_CHECK_MODULES(IGE_MAC, ige-mac-integration)
+   AC_SUBST(IGE_MAC_LIBS)
+   AC_SUBST(IGE_MAC_CFLAGS)
+   IGE_MAC_VALA="-D MAC_INTEGRATION"
+   AC_SUBST(IGE_MAC_VALA)
+fi
+
 GETTEXT_PACKAGE=spek
 AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["$GETTEXT_PACKAGE"], [Gettext Package])
 AC_SUBST(GETTEXT_PACKAGE)
