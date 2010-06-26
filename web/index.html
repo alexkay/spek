@@ -15,34 +15,77 @@
       img {border-style: none; outline: none;}
       #screenshots {width: 100%;}
       #screenshots td {vertical-align: top; width: 33%; font-size: smaller;}
+      #download {width: 100%;}
+      .dld_col {width: 33%; font-size: smaller;}
+      .dld_link {vertical-align: top; padding-left: 0.5em; line-height: 1.4;}
     </style>
   </head>
   <body>
-    <h1>Spek &ndash; Acoustic Spectrum Analyser <img src="spek.png" alt="Spek logo" align="right"/></h1>
-    <p>Spek (<a href="http://en.wikipedia.org/wiki/International_Phonetic_Alphabet">IPA</a>: /sp&#603;k/, &lsquo;bacon&rsquo; in Dutch) helps to analyse your audio files by showing their <a href="http://en.wikipedia.org/wiki/Spectrogram">spectrogram</a>.</p>
+    <h1>Spek &ndash; Acoustic Spectrum Analyser</h1>
+    <p><img src="spek.png" width="160" height="96" alt="Spek logo" style="float:right;"/>Spek (<a href="http://en.wikipedia.org/wiki/International_Phonetic_Alphabet">IPA</a>: /sp&#603;k/, &lsquo;bacon&rsquo; in Dutch) helps to analyse your audio files by showing their <a href="http://en.wikipedia.org/wiki/Spectrogram">spectrogram</a>.</p>
+    <p>Spek supports all popular lossy and lossless audio file formats. Spek is free software available for GNU/Linux, Windows and Mac OS X.</p>
+
+    <h2>Download</h2>
+    <table id="download">
+      <tr>
+        <td class="dld_col">
+          <table>
+            <tr>
+              <td><img src="logo-linux.png" width="48" height="48" alt="Linux"/></td>
+              <td class="dld_link">
+                <a href="http://spek.googlecode.com/files/spek-0.5.tar.bz2">spek-0.5.tar.bz2</a> (147 KiB)
+                <br/>
+                <a href="http://code.google.com/p/spek/wiki/LinuxInstall">instructions</a>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td class="dld_col">
+          <table>
+            <tr>
+              <td><img src="logo-windows.png" width="48" height="48" alt="Windows"/></td>
+              <td class="dld_link">
+                <a href="http://spek.googlecode.com/files/spek-0.5.msi">spek-0.5.msi</a> (17.1 MiB)
+                <br/>
+                <a href="http://spek.googlecode.com/files/spek-0.5.zip">spek-0.5.zip</a> (16.6 MiB)
+                <br/>
+                <a href="http://code.google.com/p/spek/wiki/WindowsInstall">instructions</a>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td class="dld_col">
+          <table>
+            <tr>
+              <td><img src="logo-osx.png" width="48" height="48" alt="Mac OS X"/></td>
+              <td class="dld_link">
+                <a href="http://spek.googlecode.com/files/spek-0.5.dmg">spek-0.5.dmg</a> (10.5 MiB)
+                <br/>
+                <a href="http://code.google.com/p/spek/wiki/OsxInstall">instructions</a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
 
     <h2>Screenshots</h2>
     <table id="screenshots">
       <tr>
-        <td><a href="flac.png"><img src="flac-small.png" width="240" height="192" alt="Spek showing a FLAC file"/></a></td>
-        <td><a href="mp3.png"><img src="mp3-small.png" width="240" height="192" alt="Spek showing an MP3 file"/></a></td>
+        <td><a href="flac.png"><img src="flac-small.png" width="240" height="192" alt="Spek running under Ubuntu Linux"/></a></td>
         <td><a href="win7.png"><img src="win7-small.png" width="240" height="192" alt="Spek running under Windows 7"/></a></td>
+        <td><a href="osx.png"><img src="osx-small.png" width="240" height="192" alt="Spek running under Mac OS X"/></a></td>
       </tr>
       <tr>
-        <td>Spek in Ubuntu Linux showing the spectrogram of a FLAC file.</td>
-        <td>Spectral of the same sound track encoded as a 320kbps MP3.</td>
-        <td>Spek running under Windows 7.</td>
+        <td>Spek running under Ubuntu Linux and showing the spectrogram of a FLAC file.</td>
+        <td>Spek running under Windows 7 and showing the same sound track encoded as a 320kbps MP3.</td>
+        <td>Spek running under Mac OS X Leopard.</td>
       </tr>
     </table>
 
-    <h2>Download</h2>
-    <p><a href="http://spek.googlecode.com/files/spek-0.4.msi">Spek 0.4 for Windows</a> (x86 MSI installer, 17.1 MiB)</p>
-    <p><a href="http://spek.googlecode.com/files/spek-0.4.tar.bz2">Spek 0.4 for GNU/Linux</a> (source code tar.bz2, 192 KiB)</p>
-    <p>To install on Windows just download and double-click the MSI installer. After asking a few questions, Spek will install automatically.</p>
-    <p>To install on GNU/Linux, follow  <a href="http://code.google.com/p/spek/wiki/LinuxInstall">these instructions</a>.</p>
-
     <h2>News <a href="http://versia.com/category/spek/feed/atom/"><img src="feed-icon-14x14.png" alt="news feed"/></a></h2>
     <ul>
+      <li>2010-06-26: Spek 0.5 - Mac OS X installer</li>
       <li>2010-05-21: <a href="http://versia.com/2010/05/21/spek-0-4-released/">Spek 0.4 Released</a></li>
       <li>2010-05-17: <a href="http://versia.com/2010/05/17/spek-0-3-released/">Spek 0.3 Released</a></li>
       <li>2010-05-15: <a href="http://versia.com/2010/05/15/spek-windows/">Spek 0.2 - now works in Windows</a></li>
@@ -53,7 +96,7 @@
     <p>Features planned for the 1.0 release:</p>
     <ul>
       <li><del>Windows port</del></li>
-      <li>Mac OS X port</li>
+      <li><del>Mac OS X port</del></li>
       <li><del>Time and frequency rulers</del></li>
       <li>Zoom and horizontal scroll</li>
       <li>Adjust spectral density range (dB)</li>
@@ -62,7 +105,7 @@
     </ul>
 
     <h2>Contribute</h2>
-    <p>Spek is free and open source software licensed under <a href="http://www.gnu.org/licenses/gpl.html">GNU GPLv3</a>. The project is written in <a href="http://live.gnome.org/Vala">Vala</a>, the code is hosted on <a href="http://gitorious.org/spek">Gitorious</a>. Patches can be sent by email or as Gitorious merge requests.</p>
+    <p>Spek is free and open source software licensed under <a href="http://www.gnu.org/licenses/gpl.html">GNU GPL v3</a>. The project is written in <a href="http://live.gnome.org/Vala">Vala</a>, the code is hosted on <a href="http://gitorious.org/spek">Gitorious</a>. Patches can be sent by email or as Gitorious merge requests.</p>
     <p>Report bugs and request new features <a href="http://code.google.com/p/spek/issues/list">here</a>.</p>
 
     <h2>Feedback</h2>
