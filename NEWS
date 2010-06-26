@@ -1,4 +1,4 @@
-Spek 0.4 - Released 2010-05-21
+Spek 0.5 - Released 2010-06-26
 ==============================
 
 Spek is an acoustic spectrum analyser written in Vala.
@@ -7,10 +7,11 @@ Spek is available on GNU/Linux and Windows.
 
 Find out more about Spek on its website: http://spek-project.org/
 
-Version 0.4 brings the following features and fixes:
+Version 0.5 brings the following features and fixes:
 
- * Associate with audio files ("Open with..." menu in file managers)
- * Show the name of the open file in the window title
- * Support 24-bit FLACs
- * Drag and Drop support
- * Show file name and its properties in the window
+ * Speed up spectral analysis by using the optimal number of frequency bands.
+ * DTS files support.
+ * Distribute Windows version as a ZIP archive in addition to the MSI installer.
+ * Mac OS X installer.
+ * Use Pango to render text.
+ * Brand new icon.

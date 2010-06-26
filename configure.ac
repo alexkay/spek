@@ -1,6 +1,6 @@
 # configure.ac
 
-AC_INIT([spek], [0.4])
+AC_INIT([spek], [0.5])
 AC_CONFIG_SRCDIR([src/spek.vala])
 AC_CONFIG_HEADERS([config.h])
 
