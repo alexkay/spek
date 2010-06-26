@@ -3,7 +3,9 @@
 
 == Binary package ==
 
-An experimental version of the Spek 0.5 installer can be downloaded [http://spek.googlecode.com/files/spek-0.5-alpha3.dmg here].
+Experimental version of Spek for Mac OS X is available in the download section. Download and open the DMG package, then drag the Spek icon to Applications.
+
+Spek requires OS X 10.5 or 10.6 and an Intel-based Mac.
 
 == Building from the tarball ==
 
