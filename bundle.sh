@@ -2,11 +2,6 @@
 
 # This script creates a Mac OS X app bundle and a DMG image from it using bockbuild.
 
-# TODO:
-# - Icon
-# - Don't close when clicking the red button
-# - OGG and M4A sometimes crash
-
 pushd $(dirname $0)
 
 case "$(uname)" in
