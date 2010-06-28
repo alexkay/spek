@@ -4,6 +4,13 @@ AC_INIT([spek], [0.5])
 AC_CONFIG_SRCDIR([src/spek.vala])
 AC_CONFIG_HEADERS([config.h])
 
+# Determine the system type.
+AC_CANONICAL_HOST
+AC_SUBST(host_os)
+AC_DEFINE_UNQUOTED(HOST_OS, "$host_os",
+  [Define the canonical host OS type.]
+)
+
 AM_INIT_AUTOMAKE([no-dist-gzip dist-bzip2])
 
 # Enable silent rules is available

@@ -9,7 +9,6 @@ spek_SOURCES = \
 
 INCLUDES = \
 	-include config.h \
-	-include sys/utsname.h \
 	$(SPEK_CFLAGS) \
 	$(IGE_MAC_CFLAGS) \
 	-DLOCALEDIR=\""$(localedir)"\" \
@@ -17,8 +16,7 @@ INCLUDES = \
 	-DPKGLIBDIR=\""$(pkglibdir)"\"
 
 VALAFLAGS = \
-	--vapidir=$(srcdir)/../vapi
-	--pkg config --pkg sys \
+	--vapidir=$(srcdir)/../vapi --pkg config \
 	@SPEK_PACKAGES@
 
 spek_LDADD = \
