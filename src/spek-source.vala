@@ -39,7 +39,7 @@ namespace Spek {
 		public delegate void DataCallback (int sample, float[] values);
 		public delegate void InfoCallback ();
 
-		private Pipeline pipeline = null;
+		private Gst.Pipeline pipeline = null;
 		private Element spectrum = null;
 		private Pad pad = null;
 		private int sample;
@@ -72,7 +72,7 @@ namespace Spek {
 
 			// TODO: Check for gst errors, in particular test the situation when
 			// `spectrum` (good), `decodebin` (base) or `fakesink` (core) plugins are not available.
-			pipeline = new Pipeline ("pipeline");
+			pipeline = new Gst.Pipeline ("pipeline");
 			var filesrc = ElementFactory.make ("filesrc", null);
 			var decodebin = ElementFactory.make ("decodebin", null);
 			pipeline.add_many (filesrc, decodebin);

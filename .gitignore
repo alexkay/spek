@@ -28,6 +28,7 @@ po/POTFILES
 po/stamp-it
 samples/
 src/*.c
+!src/spek-audio.c
 src/*.o
 src/*.stamp
 src/spek

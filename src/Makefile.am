@@ -2,6 +2,8 @@ bin_PROGRAMS = spek
 
 spek_SOURCES = \
 	spek.vala \
+	spek-audio.c \
+	spek-pipeline.vala \
 	spek-ruler.vala \
 	spek-source.vala \
 	spek-spectrogram.vala \
@@ -16,7 +18,9 @@ INCLUDES = \
 	-DPKGLIBDIR=\""$(pkglibdir)"\"
 
 VALAFLAGS = \
-	--vapidir=$(srcdir)/../vapi --pkg config \
+	--vapidir=$(srcdir)/../vapi \
+	--pkg config \
+	--pkg spek-audio \
 	@SPEK_PACKAGES@
 
 spek_LDADD = \
