@@ -62,6 +62,11 @@ namespace Spek {
 		public void open (string file_name) {
 			this.file_name = file_name;
 			this.info = "";
+
+			// TODO
+			var pipeline = new Pipeline (file_name);
+			print ("%s:\nbr=%i sr=%i ch=%i\n\n", pipeline.file_name, pipeline.bit_rate, pipeline.sample_rate, pipeline.channels);
+
 			start ();
 		}
 

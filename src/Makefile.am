@@ -26,3 +26,6 @@ VALAFLAGS = \
 spek_LDADD = \
 	$(SPEK_LIBS) \
 	$(IGE_MAC_LIBS)
+
+EXTRA_DIST = \
+	spek-audio.h

@@ -18,15 +18,27 @@
 
 namespace Spek {
 	public class Pipeline {
-		public string file_name { get; private set; }
-		public string audio_codec { get; private set; }
+		private Audio.Context cx;
 
 		public Pipeline (string file_name) {
-			this.file_name = file_name;
+			cx = new Audio.Context (file_name);
+			// TODO: check for errors
 		}
 
-		public void open () {
-			Audio.open (file_name);
+		public string file_name {
+			get { return cx.file_name; }
+		}
+
+		public int bit_rate {
+			get { return cx.bit_rate; }
+		}
+
+		public int sample_rate {
+			get { return cx.sample_rate; }
+		}
+
+		public int channels {
+			get { return cx.channels; }
 		}
 	}
 }

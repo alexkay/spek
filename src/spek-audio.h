@@ -19,6 +19,26 @@
 #ifndef __SPEK_AUDIO_H__
 #define __SPEK_AUDIO_H__
 
-void spek_audio_open (const char *file_name);
+#include <glib.h>
+#include <libavformat/avformat.h>
+#include <libavcodec/avcodec.h>
+
+typedef struct {
+	AVFormatContext *format_context;
+	gint audio_stream;
+	AVCodecContext *codec_context;
+	AVCodec *codec;
+
+	/* Exposed properties
+	 */
+	gchar *file_name;
+	gint bit_rate;
+	gint sample_rate;
+	gint channels;
+} SpekAudioContext;
+
+void spek_audio_init ();
+SpekAudioContext * spek_audio_open (const char *file_name);
+void spek_audio_close (SpekAudioContext *cx);
 
 #endif
