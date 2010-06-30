@@ -5,6 +5,7 @@ namespace Spek.Audio {
 	public class Context {
 		public string file_name;
 		public string codec_name;
+		public string error;
 		public int bit_rate;
 		public int sample_rate;
 		public int bits_per_sample;

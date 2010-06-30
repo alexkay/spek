@@ -22,7 +22,6 @@ namespace Spek {
 		public string description { get; private set; }
 
 		public Pipeline (string file_name) {
-			// TODO: check for errors
 			cx = new Audio.Context (file_name);
 
 			// Build the description string.
@@ -46,6 +45,11 @@ namespace Spek {
 					printf (cx.channels);
 			}
 			description = items.length > 0 ? string.joinv (", ", items) : "";
+
+			if (cx.error != null) {
+				// TRANSLATORS: first %s is the error message, second %s is stream description.
+				description = _("%s: %s").printf (cx.error, description);
+			}
 		}
 
 		public string file_name {

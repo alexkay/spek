@@ -33,6 +33,7 @@ typedef struct {
 	 */
 	gchar *file_name;
 	gchar *codec_name;
+	gchar *error;
 	gint bit_rate;
 	gint sample_rate;
 	gint bits_per_sample;

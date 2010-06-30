@@ -1,3 +1,7 @@
 [encoding: UTF-8]
 data/spek.desktop.in.in
 src/spek.vala
+src/spek-audio.c
+src/spek-pipeline.vala
+src/spek-spectrogram.vala
+src/spek-window.vala

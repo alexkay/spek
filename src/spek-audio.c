@@ -16,6 +16,8 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <glib/gi18n.h>
+
 #include "spek-audio.h"
 
 void spek_audio_init () {
@@ -31,16 +33,15 @@ SpekAudioContext * spek_audio_open (const char *file_name) {
 	cx->file_name = g_strdup (file_name);
 
 	if (av_open_input_file (&cx->format_context, file_name, NULL, 0, NULL) != 0) {
-		/* TODO
-		 */
-		printf ("cannot open\n");
+		cx->error = _("Cannot open input file");
 		return cx;
 	}
 	if (av_find_stream_info (cx->format_context) < 0) {
-		/* TODO
-		 */
-		printf ("cannot find stream info\n");
-		return cx;
+		/* 24-bit APE returns an error but parses the stream info just fine */
+		if (cx->format_context->nb_streams <= 0) {
+			cx->error = _("Cannot find stream info");
+			return cx;
+		}
 	}
 	cx->audio_stream = -1;
 	for (i = 0; i < cx->format_context->nb_streams; i++) {
@@ -50,25 +51,16 @@ SpekAudioContext * spek_audio_open (const char *file_name) {
 		}
 	}
 	if (cx->audio_stream == -1) {
-		/* TODO
-		 */
-		printf ("no audio streams\n");
+		cx->error = _("The file contains no audio streams");
 		return cx;
 	}
 	cx->codec_context = cx->format_context->streams[cx->audio_stream]->codec;
 	cx->codec = avcodec_find_decoder (cx->codec_context->codec_id);
 	if (cx->codec == NULL) {
-		/* TODO
-		 */
-		printf ("cannot find decoder\n");
+		cx->error = _("Cannot find decoder");
 		return cx;
 	}
-	if (avcodec_open (cx->codec_context, cx->codec) < 0) {
-		/* TODO
-		 */
-		printf ("cannot open decoder\n");
-		return cx;
-	}
+	/* We can already fill in the stream info even if the codec won't be able to open it */
 	cx->codec_name = g_strdup (cx->codec->long_name);
 	cx->bit_rate = cx->codec_context->bit_rate;
 	cx->sample_rate = cx->codec_context->sample_rate;
@@ -78,6 +70,10 @@ SpekAudioContext * spek_audio_open (const char *file_name) {
 		cx->bits_per_sample = cx->codec_context->bits_per_coded_sample;
 	}
 	cx->channels = cx->codec_context->channels;
+	if (avcodec_open (cx->codec_context, cx->codec) < 0) {
+		cx->error = _("Cannot open decoder");
+		return cx;
+	}
 	return cx;
 }
 
