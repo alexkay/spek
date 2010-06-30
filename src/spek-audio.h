@@ -32,8 +32,10 @@ typedef struct {
 	/* Exposed properties
 	 */
 	gchar *file_name;
+	gchar *codec_name;
 	gint bit_rate;
 	gint sample_rate;
+	gint bits_per_sample;
 	gint channels;
 } SpekAudioContext;
 

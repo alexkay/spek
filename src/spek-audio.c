@@ -19,6 +19,7 @@
 #include "spek-audio.h"
 
 void spek_audio_init () {
+	avcodec_init ();
 	av_register_all ();
 }
 
@@ -32,11 +33,13 @@ SpekAudioContext * spek_audio_open (const char *file_name) {
 	if (av_open_input_file (&cx->format_context, file_name, NULL, 0, NULL) != 0) {
 		/* TODO
 		 */
+		printf ("cannot open\n");
 		return cx;
 	}
-	if (av_find_stream_info (cx->format_context)) {
+	if (av_find_stream_info (cx->format_context) < 0) {
 		/* TODO
 		 */
+		printf ("cannot find stream info\n");
 		return cx;
 	}
 	cx->audio_stream = -1;
@@ -49,30 +52,41 @@ SpekAudioContext * spek_audio_open (const char *file_name) {
 	if (cx->audio_stream == -1) {
 		/* TODO
 		 */
+		printf ("no audio streams\n");
 		return cx;
 	}
 	cx->codec_context = cx->format_context->streams[cx->audio_stream]->codec;
-	cx->bit_rate = cx->codec_context->bit_rate;
-	cx->sample_rate = cx->codec_context->sample_rate;
-	cx->channels = cx->codec_context->channels;
 	cx->codec = avcodec_find_decoder (cx->codec_context->codec_id);
 	if (cx->codec == NULL) {
 		/* TODO
 		 */
+		printf ("cannot find decoder\n");
 		return cx;
 	}
 	if (avcodec_open (cx->codec_context, cx->codec) < 0) {
 		/* TODO
 		 */
+		printf ("cannot open decoder\n");
 		return cx;
 	}
-
+	cx->codec_name = g_strdup (cx->codec->long_name);
+	cx->bit_rate = cx->codec_context->bit_rate;
+	cx->sample_rate = cx->codec_context->sample_rate;
+	cx->bits_per_sample = cx->codec_context->bits_per_raw_sample;
+	if (!cx->bits_per_sample) {
+		/* APE uses bpcs, FLAC uses bprs. */
+		cx->bits_per_sample = cx->codec_context->bits_per_coded_sample;
+	}
+	cx->channels = cx->codec_context->channels;
 	return cx;
 }
 
 void spek_audio_close (SpekAudioContext *cx) {
 	if (cx->file_name != NULL) {
 		g_free (cx->file_name);
+	}
+	if (cx->codec_name != NULL) {
+		g_free (cx->codec_name);
 	}
 	if (cx->codec_context != NULL) {
 		avcodec_close (cx->codec_context);

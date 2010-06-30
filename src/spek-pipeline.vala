@@ -19,10 +19,33 @@
 namespace Spek {
 	public class Pipeline {
 		private Audio.Context cx;
+		public string description { get; private set; }
 
 		public Pipeline (string file_name) {
-			cx = new Audio.Context (file_name);
 			// TODO: check for errors
+			cx = new Audio.Context (file_name);
+
+			// Build the description string.
+			string[] items = {};
+			if (cx.codec_name != null) {
+				items += cx.codec_name;
+			}
+			if (cx.bit_rate != 0) {
+				items += _("%d kbps").printf (cx.bit_rate / 1000);
+			}
+			if (cx.sample_rate != 0) {
+				items += _("%d Hz").printf (cx.sample_rate);
+			}
+			// Show bits per sample only if there is no bitrate.
+			if (cx.bits_per_sample != 0 && cx.bit_rate == 0) {
+				items += ngettext (
+					"%d bit", "%d bits", cx.bits_per_sample).printf (cx.bits_per_sample);
+			}
+			if (cx.channels != 0) {
+				items += ngettext ("%d channel", "%d channels", cx.channels).
+					printf (cx.channels);
+			}
+			description = items.length > 0 ? string.joinv (", ", items) : "";
 		}
 
 		public string file_name {

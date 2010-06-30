@@ -65,7 +65,7 @@ namespace Spek {
 
 			// TODO
 			var pipeline = new Pipeline (file_name);
-			print ("%s:\nbr=%i sr=%i ch=%i\n\n", pipeline.file_name, pipeline.bit_rate, pipeline.sample_rate, pipeline.channels);
+			print ("%s:\n%s\n", file_name, pipeline.description);
 
 			start ();
 		}
