@@ -169,7 +169,9 @@ namespace Spek {
 					for (int i = 0; i < bands; i++) {
 						values[i] = magnitudes.list_get_value (i).get_float ();
 					}
-					data_cb (sample++, values);
+					if (sample < samples) {
+						data_cb (sample++, values);
+					}
 				}
 				break;
 			case MessageType.TAG:
