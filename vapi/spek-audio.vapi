@@ -10,9 +10,12 @@ namespace Spek.Audio {
 		public int sample_rate;
 		public int bits_per_sample;
 		public int channels;
+		public int buffer_size;
 
 		[CCode (cname = "spek_audio_open")]
 		public Context (string file_name);
+		[CCode (cname = "spek_audio_read")]
+		public int read ([CCode (array_length = false)] uint8[] buffer);
 	}
 	public static void init ();
 }

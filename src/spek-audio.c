@@ -22,6 +22,7 @@
 
 void spek_audio_init () {
 	avcodec_init ();
+	/* TODO: register only audio decoders */
 	av_register_all ();
 }
 
@@ -70,11 +71,62 @@ SpekAudioContext * spek_audio_open (const char *file_name) {
 		cx->bits_per_sample = cx->codec_context->bits_per_coded_sample;
 	}
 	cx->channels = cx->codec_context->channels;
+	cx->buffer_size = (AVCODEC_MAX_AUDIO_FRAME_SIZE * 3) / 2;
 	if (avcodec_open (cx->codec_context, cx->codec) < 0) {
 		cx->error = _("Cannot open decoder");
 		return cx;
 	}
+	av_init_packet (&cx->packet);
+	cx->offset = 0;
 	return cx;
+}
+
+gint spek_audio_read (SpekAudioContext *cx, guint8 *buffer) {
+	gint buffer_size;
+	gint len;
+	gint res;
+
+	if (cx->error) {
+		return -1;
+	}
+
+	for (;;) {
+		while (cx->packet.size > 0) {
+			buffer_size = cx->buffer_size;
+			len = avcodec_decode_audio3 (
+				cx->codec_context, (int16_t *) buffer, &buffer_size, &cx->packet);
+			if (len < 0) {
+				/* Error, skip the frame. */
+				cx->packet.size = 0;
+				break;
+			}
+			cx->packet.data += len;
+			cx->packet.size -= len;
+			cx->offset += len;
+			if (buffer_size <= 0) {
+				/* No data yet, get more frames */
+				continue;
+			}
+			/* We have data, return it and come back for more later */
+			return buffer_size;
+		}
+		if (cx->packet.data) {
+			cx->packet.data -= cx->offset;
+			cx->packet.size += cx->offset;
+			cx->offset = 0;
+			av_free_packet (&cx->packet);
+		}
+		while ((res = av_read_frame (cx->format_context, &cx->packet)) >= 0) {
+			if (cx->packet.stream_index == cx->audio_stream) {
+				break;
+			}
+			av_free_packet (&cx->packet);
+		}
+		if (res < 0) {
+			/* End of file or error. */
+			return 0;
+		}
+	}
 }
 
 void spek_audio_close (SpekAudioContext *cx) {
@@ -83,6 +135,12 @@ void spek_audio_close (SpekAudioContext *cx) {
 	}
 	if (cx->codec_name != NULL) {
 		g_free (cx->codec_name);
+	}
+	if (cx->packet.data) {
+		cx->packet.data -= cx->offset;
+		cx->packet.size += cx->offset;
+		cx->offset = 0;
+		av_free_packet (&cx->packet);
 	}
 	if (cx->codec_context != NULL) {
 		avcodec_close (cx->codec_context);

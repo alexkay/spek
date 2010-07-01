@@ -24,13 +24,15 @@
 #include <libavcodec/avcodec.h>
 
 typedef struct {
+	/* Internal data */
 	AVFormatContext *format_context;
 	gint audio_stream;
 	AVCodecContext *codec_context;
 	AVCodec *codec;
+	AVPacket packet;
+	gint offset;
 
-	/* Exposed properties
-	 */
+	/* Exposed properties */
 	gchar *file_name;
 	gchar *codec_name;
 	gchar *error;
@@ -38,10 +40,28 @@ typedef struct {
 	gint sample_rate;
 	gint bits_per_sample;
 	gint channels;
+	gint buffer_size; /* minimum buffer size for spek_audio_read() */
 } SpekAudioContext;
 
+/* Initialise FFmpeg, should be called once on start up */
 void spek_audio_init ();
-SpekAudioContext * spek_audio_open (const char *file_name);
+
+/* Open the file, check if it has an audio stream which can be decoded.
+ * On error, initialises the `error` field in the returned context.
+ */
+SpekAudioContext * spek_audio_open (const gchar *file_name);
+
+/* Read and decode the opened audio stream.
+ * Returns -1 on error, 0 if there's nothing left to read
+ * or the number of bytes decoded into the buffer.
+ * The buffer must be allocated (and later freed) by the caller,
+ * minimum size is `buffer_size`.
+ */
+gint spek_audio_read (SpekAudioContext *cx, guint8 *buffer);
+
+/* Closes the file opened with spek_audio_open,
+ * frees all allocated buffers and the context
+ */
 void spek_audio_close (SpekAudioContext *cx);
 
 #endif

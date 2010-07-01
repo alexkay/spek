@@ -50,6 +50,9 @@ namespace Spek {
 				// TRANSLATORS: first %s is the error message, second %s is stream description.
 				description = _("%s: %s").printf (cx.error, description);
 			}
+
+			var buffer = new uint8[cx.buffer_size];
+			while (cx.read (buffer) > 0);
 		}
 
 		public string file_name {
