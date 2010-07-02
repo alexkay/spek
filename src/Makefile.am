@@ -3,6 +3,7 @@ bin_PROGRAMS = spek
 spek_SOURCES = \
 	spek.vala \
 	spek-audio.c \
+	spek-fft.c \
 	spek-pipeline.vala \
 	spek-ruler.vala \
 	spek-source.vala \
@@ -21,6 +22,7 @@ VALAFLAGS = \
 	--vapidir=$(srcdir)/../vapi \
 	--pkg config \
 	--pkg spek-audio \
+	--pkg spek-fft \
 	@SPEK_PACKAGES@
 
 spek_LDADD = \
@@ -28,4 +30,5 @@ spek_LDADD = \
 	$(IGE_MAC_LIBS)
 
 EXTRA_DIST = \
-	spek-audio.h
+	spek-audio.h \
+	spek-fft.h

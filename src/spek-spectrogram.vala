@@ -91,6 +91,7 @@ namespace Spek {
 
 			// TODO
 			var pipeline = new Pipeline (file_name, BANDS, samples, THRESHOLD, data_cb);
+			pipeline.start ();
 			print ("\n%s:\n%s\n", file_name, pipeline.description);
 
 			queue_draw ();

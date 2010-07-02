@@ -77,9 +77,13 @@ namespace Spek {
 		public void start () {
 			int nfft = 2 * bands - 2;
 			var input = new float[nfft];
+			var output = new float[bands];
 			int pos = 0;
 			int frames = 0;
 			int size;
+			// TODO: make it a static class variable and experiment with FFTW_MEASURE.
+			var fft = new Fft.Plan (nfft);
+
 			while ((size = cx.read (this.buffer)) > 0) {
 				uint8 *buffer = (uint8 *) this.buffer;
 				var block_size = cx.width * cx.channels;
@@ -90,7 +94,26 @@ namespace Spek {
 					pos = (pos + 1) % nfft;
 					frames++;
 
-					// TODO
+					// If we have enough frames for an FFT or we
+					// have all frames required for the interval run
+					// an FFT. In the last case we probably take the
+					// FFT of frames that we already handled.
+					if (frames % nfft == 0
+						// TODO: error correction
+//						|| ((spectrum->accumulated_error < GST_SECOND
+//							 && spectrum->num_frames == spectrum->frames_per_interval)
+//							||
+//							(spectrum->accumulated_error >= GST_SECOND
+//							 && spectrum->num_frames - 1 == spectrum->frames_per_interval))
+						) {
+						for (int i = 0; i < nfft; i++) {
+							fft.input[i] = input[(pos + i) % nfft];
+						}
+						fft.execute ();
+						for (int i = 0; i < bands; i++) {
+							output[i] += fft.output[i];
+						}
+					}
 				}
 				assert (size == 0);
 			}
