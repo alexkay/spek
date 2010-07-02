@@ -55,7 +55,8 @@ SpekAudioContext * spek_audio_open (const char *file_name) {
 		cx->error = _("The file contains no audio streams");
 		return cx;
 	}
-	cx->codec_context = cx->format_context->streams[cx->audio_stream]->codec;
+	cx->stream = cx->format_context->streams[cx->audio_stream];
+	cx->codec_context = cx->stream->codec;
 	cx->codec = avcodec_find_decoder (cx->codec_context->codec_id);
 	if (cx->codec == NULL) {
 		cx->error = _("Cannot find decoder");
@@ -71,9 +72,34 @@ SpekAudioContext * spek_audio_open (const char *file_name) {
 		cx->bits_per_sample = cx->codec_context->bits_per_coded_sample;
 	}
 	cx->channels = cx->codec_context->channels;
+	if (cx->channels <= 0) {
+		cx->error = _("No audio channels");
+		return cx;
+	}
 	cx->buffer_size = (AVCODEC_MAX_AUDIO_FRAME_SIZE * 3) / 2;
 	if (avcodec_open (cx->codec_context, cx->codec) < 0) {
 		cx->error = _("Cannot open decoder");
+		return cx;
+	}
+	switch (cx->codec_context->sample_fmt) {
+	case SAMPLE_FMT_S16:
+		cx->width = 16;
+		cx->fp = FALSE;
+		break;
+	case SAMPLE_FMT_S32:
+		cx->width = 32;
+		cx->fp = FALSE;
+		break;
+	case SAMPLE_FMT_FLT:
+		cx->width = 32;
+		cx->fp = TRUE;
+		break;
+	case SAMPLE_FMT_DBL:
+		cx->width = 64;
+		cx->fp = TRUE;
+		break;
+	default:
+		cx->error = _("Unsupported sample format");
 		return cx;
 	}
 	av_init_packet (&cx->packet);

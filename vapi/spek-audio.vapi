@@ -9,6 +9,8 @@ namespace Spek.Audio {
 		public int bit_rate;
 		public int sample_rate;
 		public int bits_per_sample;
+		public int width;
+		public bool fp;
 		public int channels;
 		public int buffer_size;
 

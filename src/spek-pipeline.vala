@@ -14,15 +14,34 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Conversion of decoded samples into an FFT-happy format is heavily
+ * influenced by GstSpectrum which is part of gst-plugins-good.
+ * The original code:
+ * (c) 1999 Erik Walthinsen <omega@cse.ogi.edu>
+ * (c) 2006 Stefan Kost <ensonic@users.sf.net>
+ * (c) 2007-2009 Sebastian Dröge <sebastian.droege@collabora.co.uk>
  */
 
 namespace Spek {
 	public class Pipeline {
-		private Audio.Context cx;
 		public string description { get; private set; }
+		public int sample_rate { get; private set; }
+		public delegate void Callback (int sample, float[] values);
 
-		public Pipeline (string file_name) {
-			cx = new Audio.Context (file_name);
+		private Audio.Context cx;
+		private int bands;
+		private int samples;
+		private int threshold;
+		private Callback cb;
+		private uint8[] buffer;
+
+		public Pipeline (string file_name, int bands, int samples, int threshold, Callback cb) {
+			this.cx = new Audio.Context (file_name);
+			this.bands = bands;
+			this.samples = samples;
+			this.threshold = threshold;
+			this.cb = cb;
 
 			// Build the description string.
 			string[] items = {};
@@ -51,24 +70,59 @@ namespace Spek {
 				description = _("%s: %s").printf (cx.error, description);
 			}
 
-			var buffer = new uint8[cx.buffer_size];
-			while (cx.read (buffer) > 0);
+			this.sample_rate = cx.sample_rate;
+			this.buffer = new uint8[cx.buffer_size];
 		}
 
-		public string file_name {
-			get { return cx.file_name; }
+		public void start () {
+			int nfft = 2 * bands - 2;
+			var input = new float[nfft];
+			int pos = 0;
+			int frames = 0;
+			int size;
+			while ((size = cx.read (this.buffer)) > 0) {
+				uint8 *buffer = (uint8 *) this.buffer;
+				var block_size = cx.width * cx.channels;
+				while (size >= block_size) {
+					input[pos] = average_input (buffer);
+					buffer += block_size;
+					size -= block_size;
+					pos = (pos + 1) % nfft;
+					frames++;
+
+					// TODO
+				}
+				assert (size == 0);
+			}
 		}
 
-		public int bit_rate {
-			get { return cx.bit_rate; }
-		}
-
-		public int sample_rate {
-			get { return cx.sample_rate; }
-		}
-
-		public int channels {
-			get { return cx.channels; }
+		private float average_input (uint8 *buffer) {
+			float res = 0f;
+			float max_value = cx.bits_per_sample > 1 ? (1UL << (cx.bits_per_sample - 1)) - 1 : 0;
+			if (cx.fp && cx.width == 32) {
+				float *p = (float *) buffer;
+				for (int i = 0; i < cx.channels; i++) {
+					res += p[i];
+				}
+			} else if (cx.fp && cx.width == 64) {
+				double *p = (double *) buffer;
+				for (int i = 0; i < cx.channels; i++) {
+					res += (float) p[i];
+				}
+			} else if (!cx.fp && cx.width == 32) {
+				int32 *p = (int32 *) buffer;
+				for (int i = 0; i < cx.channels; i++) {
+					res += p[i] / (max_value == 0 ? int32.MAX : max_value);
+				}
+			} else if (!cx.fp && cx.width == 16) {
+				int64 *p = (int64 *) buffer;
+				for (int i = 0; i < cx.channels; i++) {
+					res += p[i] / (max_value == 0 ? int16.MAX : max_value);
+				}
+			} else {
+				assert_not_reached ();
+			}
+			return res / cx.channels;
 		}
 	}
 }

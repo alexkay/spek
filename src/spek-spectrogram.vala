@@ -63,10 +63,6 @@ namespace Spek {
 			this.file_name = file_name;
 			this.info = "";
 
-			// TODO
-			var pipeline = new Pipeline (file_name);
-			print ("\n%s:\n%s\n", file_name, pipeline.description);
-
 			start ();
 		}
 
@@ -92,6 +88,11 @@ namespace Spek {
 				image = null;
 				source = null;
 			}
+
+			// TODO
+			var pipeline = new Pipeline (file_name, BANDS, samples, THRESHOLD, data_cb);
+			print ("\n%s:\n%s\n", file_name, pipeline.description);
+
 			queue_draw ();
 		}
 
@@ -240,7 +241,7 @@ namespace Spek {
 			unowned uchar[] data = surface.get_data ();
 
 			// Translate uchar* to uint32* to avoid dealing with endianness.
-			uint32 *p = &data[i];
+			uint32 *p = (uint32 *) (&data[i]);
 			*p = color;
 		}
 

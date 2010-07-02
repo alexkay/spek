@@ -28,6 +28,7 @@ typedef struct {
 	AVFormatContext *format_context;
 	gint audio_stream;
 	AVCodecContext *codec_context;
+	AVStream *stream;
 	AVCodec *codec;
 	AVPacket packet;
 	gint offset;
@@ -39,6 +40,8 @@ typedef struct {
 	gint bit_rate;
 	gint sample_rate;
 	gint bits_per_sample;
+	gint width; /* number of bits used to store a sample */
+	gboolean fp; /* floating-point sample representation */
 	gint channels;
 	gint buffer_size; /* minimum buffer size for spek_audio_read() */
 } SpekAudioContext;
