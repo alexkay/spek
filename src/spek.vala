@@ -52,7 +52,6 @@ namespace Spek {
 		}
 
 		Audio.init ();
-		Gst.init (ref args);
 		var window = new Window (files == null ? null : files[0]);
 		Gtk.main ();
 		window.destroy ();

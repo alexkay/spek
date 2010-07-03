@@ -72,6 +72,7 @@ SpekAudioContext * spek_audio_open (const char *file_name) {
 		cx->bits_per_sample = cx->codec_context->bits_per_coded_sample;
 	}
 	cx->channels = cx->codec_context->channels;
+	cx->duration = cx->stream->duration * av_q2d (cx->stream->time_base);
 	if (cx->channels <= 0) {
 		cx->error = _("No audio channels");
 		return cx;
@@ -105,6 +106,14 @@ SpekAudioContext * spek_audio_open (const char *file_name) {
 	av_init_packet (&cx->packet);
 	cx->offset = 0;
 	return cx;
+}
+
+void spek_audio_start (SpekAudioContext *cx, gint samples) {
+	gint64 rate = cx->sample_rate * (gint64) cx->stream->time_base.num;
+	cx->error_base = samples * (gint64) cx->stream->time_base.den;
+	cx->frames_per_interval = av_rescale_rnd (
+		cx->stream->duration, rate, cx->error_base, AV_ROUND_DOWN);
+	cx->error_per_interval = (cx->stream->duration * rate) % cx->error_base;
 }
 
 gint spek_audio_read (SpekAudioContext *cx, guint8 *buffer) {

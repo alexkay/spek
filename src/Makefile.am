@@ -6,7 +6,6 @@ spek_SOURCES = \
 	spek-fft.c \
 	spek-pipeline.vala \
 	spek-ruler.vala \
-	spek-source.vala \
 	spek-spectrogram.vala \
 	spek-window.vala
 

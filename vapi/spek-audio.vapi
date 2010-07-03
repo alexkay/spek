@@ -12,10 +12,16 @@ namespace Spek.Audio {
 		public int width;
 		public bool fp;
 		public int channels;
+		public double duration;
 		public int buffer_size;
+		public int64 frames_per_interval;
+		public int64 error_per_interval;
+		public int64 error_base;
 
 		[CCode (cname = "spek_audio_open")]
 		public Context (string file_name);
+		[CCode (cname = "spek_audio_start")]
+		public int start (int samples);
 		[CCode (cname = "spek_audio_read")]
 		public int read ([CCode (array_length = false)] uint8[] buffer);
 	}

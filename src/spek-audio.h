@@ -43,7 +43,11 @@ typedef struct {
 	gint width; /* number of bits used to store a sample */
 	gboolean fp; /* floating-point sample representation */
 	gint channels;
+	gdouble duration;
 	gint buffer_size; /* minimum buffer size for spek_audio_read() */
+	gint64 frames_per_interval;
+	gint64 error_per_interval;
+	gint64 error_base;
 } SpekAudioContext;
 
 /* Initialise FFmpeg, should be called once on start up */
@@ -53,6 +57,9 @@ void spek_audio_init ();
  * On error, initialises the `error` field in the returned context.
  */
 SpekAudioContext * spek_audio_open (const gchar *file_name);
+
+/* Prepare the context for reading audio samples. */
+void spek_audio_start (SpekAudioContext *cx, gint samples);
 
 /* Read and decode the opened audio stream.
  * Returns -1 on error, 0 if there's nothing left to read

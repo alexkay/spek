@@ -27,6 +27,7 @@ namespace Spek {
 	public class Pipeline {
 		public string description { get; private set; }
 		public int sample_rate { get; private set; }
+		public double duration { get { return cx.duration; } }
 		public delegate void Callback (int sample, float[] values);
 
 		private Audio.Context cx;
@@ -34,7 +35,13 @@ namespace Spek {
 		private int samples;
 		private int threshold;
 		private Callback cb;
+
 		private uint8[] buffer;
+		private Fft.Plan fft;
+		private int nfft;
+		float[] input;
+		float[] output;
+		float[] values;
 
 		public Pipeline (string file_name, int bands, int samples, int threshold, Callback cb) {
 			this.cx = new Audio.Context (file_name);
@@ -72,17 +79,22 @@ namespace Spek {
 
 			this.sample_rate = cx.sample_rate;
 			this.buffer = new uint8[cx.buffer_size];
+			this.nfft = 2 * bands - 2;
+			this.fft = new Fft.Plan (nfft);
+			this.input = new float[nfft];
+			this.output = new float[bands];
+			this.values = new float[bands];
+			this.cx.start (samples);
 		}
 
 		public void start () {
-			int nfft = 2 * bands - 2;
-			var input = new float[nfft];
-			var output = new float[bands];
 			int pos = 0;
 			int frames = 0;
+			int num_fft = 0;
+			int sample = 0;
 			int size;
-			// TODO: make it a static class variable and experiment with FFTW_MEASURE.
-			var fft = new Fft.Plan (nfft);
+
+			clear_buffers ();
 
 			while ((size = cx.read (this.buffer)) > 0) {
 				uint8 *buffer = (uint8 *) this.buffer;
@@ -98,25 +110,36 @@ namespace Spek {
 					// have all frames required for the interval run
 					// an FFT. In the last case we probably take the
 					// FFT of frames that we already handled.
-					if (frames % nfft == 0
-						// TODO: error correction
-//						|| ((spectrum->accumulated_error < GST_SECOND
-//							 && spectrum->num_frames == spectrum->frames_per_interval)
-//							||
-//							(spectrum->accumulated_error >= GST_SECOND
-//							 && spectrum->num_frames - 1 == spectrum->frames_per_interval))
-						) {
+					// TODO: error correction
+					if (frames % nfft == 0) {
 						for (int i = 0; i < nfft; i++) {
 							fft.input[i] = input[(pos + i) % nfft];
 						}
 						fft.execute ();
+						num_fft++;
 						for (int i = 0; i < bands; i++) {
 							output[i] += fft.output[i];
 						}
 					}
+					// Do we have the FFTs for one interval?
+					// TODO: error correction
+					if (frames == cx.frames_per_interval) {
+						for (int i = 0; i < bands; i++) {
+							output[i] /= num_fft;
+						}
+						cb (sample++, output);
+						clear_buffers ();
+						frames = 0;
+						num_fft = 0;
+					}
 				}
 				assert (size == 0);
 			}
+		}
+
+		private void clear_buffers () {
+			Posix.memset (input, 0, sizeof (float) * nfft);
+			Posix.memset (output, 0, sizeof (float) * bands);
 		}
 
 		private float average_input (uint8 *buffer) {

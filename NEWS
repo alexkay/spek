@@ -2,8 +2,10 @@ Spek 0.5 - Released 2010-06-26
 ==============================
 
 Spek is an acoustic spectrum analyser written in Vala.
-It uses the GNOME platform: GLib, GTK+, Cairo and GStreamer.
-Spek is available on GNU/Linux and Windows.
+It uses the GNOME platform: GLib, GTK+, Cairo and Pango
+as well as FFmpeg and FFTW libraries.
+
+Spek is available on GNU/Linux, Windows and Mac OS X.
 
 Find out more about Spek on its website: http://spek-project.org/
 

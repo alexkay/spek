@@ -25,7 +25,7 @@ namespace Spek {
 	class Spectrogram : DrawingArea {
 
 		public string file_name { get; private set; }
-		private Source source;
+		private Pipeline pipeline;
 		private string info;
 		private const int THRESHOLD = -92;
 		// For faster FFT BANDS*2-2 should be a multiple of 2,3,5
@@ -73,8 +73,8 @@ namespace Spek {
 		}
 
 		private void start () {
-			if (this.source != null) {
-				this.source.stop ();
+			if (pipeline != null) {
+//				pipeline.stop ();
 			}
 
 			// The number of samples is the number of pixels available for the image.
@@ -83,16 +83,13 @@ namespace Spek {
 			int samples = allocation.width - LPAD - RPAD;
 			if (samples > 0) {
 				image = new ImageSurface (Format.RGB24, samples, BANDS);
-				source = new Source (file_name, BANDS, samples, THRESHOLD, data_cb, info_cb);
+				pipeline = new Pipeline (file_name, BANDS, samples, THRESHOLD, data_cb);
+				pipeline.start ();
+				info = pipeline.description;
 			} else {
 				image = null;
-				source = null;
+				pipeline = null;
 			}
-
-			// TODO
-			var pipeline = new Pipeline (file_name, BANDS, samples, THRESHOLD, data_cb);
-			pipeline.start ();
-			print ("\n%s:\n%s\n", file_name, pipeline.description);
 
 			queue_draw ();
 		}
@@ -106,37 +103,13 @@ namespace Spek {
 		}
 
 		private void data_cb (int sample, float[] values) {
+			print ("%d: %f %f %f %f\n", sample, values[50], values[100], values[150], values[200]);
 			for (int y = 0; y < values.length; y++) {
 				var level = double.min (
 					1.0, Math.log10 (1.0 - THRESHOLD + values[y]) / Math.log10 (-THRESHOLD));
 				put_pixel (image, sample, y, get_color (level));
 			}
 			queue_draw_area (LPAD + sample, TPAD, 1, allocation.height - TPAD - BPAD);
-		}
-
-		private void info_cb () {
-			string[] items = {};
-			if (source.audio_codec != null) {
-				items += source.audio_codec;
-			}
-			if (source.bitrate != 0) {
-				items += _("%d kbps").printf (source.bitrate / 1000);
-			}
-			if (source.rate != 0) {
-				items += _("%d Hz").printf (source.rate);
-			}
-			// Show sample rate only if there is no bitrate.
-			if (source.depth != 0 && source.bitrate == 0) {
-				items += ngettext ("%d bit", "%d bits", source.depth).printf (source.depth);
-			}
-			if (source.channels != 0) {
-				items += ngettext ("%d channel", "%d channels", source.channels).
-					printf (source.channels);
-			}
-			if (items.length > 0) {
-				info = string.joinv (", ", items);
-				queue_draw_area (LPAD, 0, allocation.width - LPAD - RPAD, TPAD);
-			}
 		}
 
 		private override bool expose_event (EventExpose event) {
@@ -176,7 +149,7 @@ namespace Spek {
 				layout.set_width (-1);
 
 				// Time ruler.
-				var duration_seconds = (int) (source.duration / 1000000000);
+				var duration_seconds = (int) pipeline.duration;
 				var time_ruler = new Ruler (
 					"00:00",
 					{1, 2, 5, 10, 20, 30, 1*60, 2*60, 5*60, 10*60, 20*60, 30*60},
@@ -189,7 +162,7 @@ namespace Spek {
 				cr.identity_matrix ();
 
 				// Frequency ruler.
-				var freq = source.rate / 2;
+				var freq = pipeline.sample_rate / 2;
 				var rate_ruler = new Ruler (
 					"00 kHz",
 					{1000, 2000, 5000, 10000, 20000},
