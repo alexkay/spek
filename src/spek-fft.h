@@ -26,6 +26,7 @@ typedef struct {
 	/* Internal data */
 	fftwf_plan plan;
 	gint n;
+	gint threshold;
 	fftwf_complex *result;
 
 	/* Exposed properties */
@@ -34,7 +35,7 @@ typedef struct {
 } SpekFftPlan;
 
 /* Allocate buffers and create a new FFT plan */
-SpekFftPlan * spek_fft_plan_new (gint n);
+SpekFftPlan * spek_fft_plan_new (gint n, gint threshold);
 
 /* Execute the FFT on plan->input */
 void spek_fft_execute (SpekFftPlan *p);

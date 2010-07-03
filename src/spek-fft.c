@@ -20,12 +20,13 @@
 
 #include "spek-fft.h"
 
-SpekFftPlan * spek_fft_plan_new (gint n) {
+SpekFftPlan * spek_fft_plan_new (gint n, gint threshold) {
 	SpekFftPlan *p = g_new0 (SpekFftPlan, 1);
 	p->input = (gfloat *) fftwf_malloc (sizeof (gfloat) * n);
 	p->output = (gfloat *) fftwf_malloc (sizeof (gfloat) * (n / 2 + 1));
 	p->result = (fftwf_complex *) fftwf_malloc (sizeof (fftwf_complex) * (n / 2 + 1));
 	p->n = n;
+	p->threshold = threshold;
 	p->plan = fftwf_plan_dft_r2c_1d (n, p->input, p->result, FFTW_ESTIMATE);
 	return p;
 }
@@ -42,7 +43,7 @@ void spek_fft_execute (SpekFftPlan *p) {
 		val = p->result[i][0] * p->result[i][0] + p->result[i][1] * p->result[i][1];
 		val /= p->n * p->n;
 		val = 10.0 * log10f (val);
-		p->output[i] = val;
+		p->output[i] = val < p->threshold ? p->threshold : val;
 	}
 }
 

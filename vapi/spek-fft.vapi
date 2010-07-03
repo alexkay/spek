@@ -9,7 +9,7 @@ namespace Spek.Fft {
 		public unowned float[] output;
 
 		[CCode (cname = "spek_fft_plan_new")]
-		public Plan (int n);
+		public Plan (int n, int threshold);
 		[CCode (cname = "spek_fft_execute")]
 		public void execute ();
 	}

@@ -41,7 +41,6 @@ namespace Spek {
 		private int nfft;
 		float[] input;
 		float[] output;
-		float[] values;
 
 		public Pipeline (string file_name, int bands, int samples, int threshold, Callback cb) {
 			this.cx = new Audio.Context (file_name);
@@ -80,25 +79,25 @@ namespace Spek {
 			this.sample_rate = cx.sample_rate;
 			this.buffer = new uint8[cx.buffer_size];
 			this.nfft = 2 * bands - 2;
-			this.fft = new Fft.Plan (nfft);
+			this.fft = new Fft.Plan (nfft, threshold);
 			this.input = new float[nfft];
 			this.output = new float[bands];
-			this.values = new float[bands];
 			this.cx.start (samples);
 		}
 
 		public void start () {
 			int pos = 0;
-			int frames = 0;
-			int num_fft = 0;
 			int sample = 0;
+			int64 frames = 0;
+			int64 num_fft = 0;
+			int64 acc_error = 0;
 			int size;
 
-			clear_buffers ();
+			Posix.memset (output, 0, sizeof (float) * bands);
 
 			while ((size = cx.read (this.buffer)) > 0) {
 				uint8 *buffer = (uint8 *) this.buffer;
-				var block_size = cx.width * cx.channels;
+				var block_size = cx.width * cx.channels / 8;
 				while (size >= block_size) {
 					input[pos] = average_input (buffer);
 					buffer += block_size;
@@ -110,8 +109,9 @@ namespace Spek {
 					// have all frames required for the interval run
 					// an FFT. In the last case we probably take the
 					// FFT of frames that we already handled.
-					// TODO: error correction
-					if (frames % nfft == 0) {
+					if (frames % nfft == 0 ||
+						acc_error < cx.error_base && frames == cx.frames_per_interval ||
+						acc_error >= cx.error_base && frames == 1 + cx.frames_per_interval) {
 						for (int i = 0; i < nfft; i++) {
 							fft.input[i] = input[(pos + i) % nfft];
 						}
@@ -122,13 +122,21 @@ namespace Spek {
 						}
 					}
 					// Do we have the FFTs for one interval?
-					// TODO: error correction
-					if (frames == cx.frames_per_interval) {
+					if (acc_error < cx.error_base && frames == cx.frames_per_interval ||
+						acc_error >= cx.error_base && frames == 1 + cx.frames_per_interval) {
+
+						if (acc_error >= cx.error_base) {
+							acc_error -= cx.error_base;
+						} else {
+							acc_error += cx.error_per_interval;
+						}
+
 						for (int i = 0; i < bands; i++) {
 							output[i] /= num_fft;
 						}
+
 						cb (sample++, output);
-						clear_buffers ();
+						Posix.memset (output, 0, sizeof (float) * bands);
 						frames = 0;
 						num_fft = 0;
 					}
@@ -137,14 +145,8 @@ namespace Spek {
 			}
 		}
 
-		private void clear_buffers () {
-			Posix.memset (input, 0, sizeof (float) * nfft);
-			Posix.memset (output, 0, sizeof (float) * bands);
-		}
-
 		private float average_input (uint8 *buffer) {
 			float res = 0f;
-			float max_value = cx.bits_per_sample > 1 ? (1UL << (cx.bits_per_sample - 1)) - 1 : 0;
 			if (cx.fp && cx.width == 32) {
 				float *p = (float *) buffer;
 				for (int i = 0; i < cx.channels; i++) {
@@ -155,15 +157,15 @@ namespace Spek {
 				for (int i = 0; i < cx.channels; i++) {
 					res += (float) p[i];
 				}
+			} else if (!cx.fp && cx.width == 16) {
+				int16 *p = (int16 *) buffer;
+				for (int i = 0; i < cx.channels; i++) {
+					res += p[i] / (float) int16.MAX;
+				}
 			} else if (!cx.fp && cx.width == 32) {
 				int32 *p = (int32 *) buffer;
 				for (int i = 0; i < cx.channels; i++) {
-					res += p[i] / (max_value == 0 ? int32.MAX : max_value);
-				}
-			} else if (!cx.fp && cx.width == 16) {
-				int64 *p = (int64 *) buffer;
-				for (int i = 0; i < cx.channels; i++) {
-					res += p[i] / (max_value == 0 ? int16.MAX : max_value);
+					res += p[i] / (float) int32.MAX;
 				}
 			} else {
 				assert_not_reached ();

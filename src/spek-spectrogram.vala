@@ -27,9 +27,9 @@ namespace Spek {
 		public string file_name { get; private set; }
 		private Pipeline pipeline;
 		private string info;
-		private const int THRESHOLD = -92;
-		// For faster FFT BANDS*2-2 should be a multiple of 2,3,5
-		private const int BANDS = 1025;
+		private const int THRESHOLD = -86;
+		private const int NFFT = 2048;
+		private const int BANDS = NFFT / 2 + 1;
 
 		private ImageSurface image;
 		private ImageSurface palette;
@@ -103,7 +103,6 @@ namespace Spek {
 		}
 
 		private void data_cb (int sample, float[] values) {
-			print ("%d: %f %f %f %f\n", sample, values[50], values[100], values[150], values[200]);
 			for (int y = 0; y < values.length; y++) {
 				var level = double.min (
 					1.0, Math.log10 (1.0 - THRESHOLD + values[y]) / Math.log10 (-THRESHOLD));
