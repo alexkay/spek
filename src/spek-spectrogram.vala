@@ -27,7 +27,7 @@ namespace Spek {
 		public string file_name { get; private set; }
 		private Pipeline pipeline;
 		private string info;
-		private const int THRESHOLD = -86;
+		private const int THRESHOLD = -92;
 		private const int NFFT = 2048;
 		private const int BANDS = NFFT / 2 + 1;
 
@@ -103,7 +103,7 @@ namespace Spek {
 		}
 
 		private void data_cb (int sample, float[] values) {
-			for (int y = 0; y < values.length; y++) {
+			for (int y = 0; y < BANDS; y++) {
 				var level = double.min (
 					1.0, Math.log10 (1.0 - THRESHOLD + values[y]) / Math.log10 (-THRESHOLD));
 				put_pixel (image, sample, y, get_color (level));

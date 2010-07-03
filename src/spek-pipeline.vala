@@ -39,8 +39,8 @@ namespace Spek {
 		private uint8[] buffer;
 		private Fft.Plan fft;
 		private int nfft;
-		float[] input;
-		float[] output;
+		private float[] input;
+		private float[] output;
 
 		public Pipeline (string file_name, int bands, int samples, int threshold, Callback cb) {
 			this.cx = new Audio.Context (file_name);
@@ -113,7 +113,10 @@ namespace Spek {
 						acc_error < cx.error_base && frames == cx.frames_per_interval ||
 						acc_error >= cx.error_base && frames == 1 + cx.frames_per_interval) {
 						for (int i = 0; i < nfft; i++) {
-							fft.input[i] = input[(pos + i) % nfft];
+							double val = input[(pos + i) % nfft];
+							// Hamming window.
+							val *= 0.53836 - 0.46164 * Math.cos (2.0 * Math.PI * i / nfft);
+							fft.input[i] = (float) val;
 						}
 						fft.execute ();
 						num_fft++;
