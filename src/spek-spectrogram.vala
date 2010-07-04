@@ -74,7 +74,7 @@ namespace Spek {
 
 		private void start () {
 			if (pipeline != null) {
-//				pipeline.stop ();
+				pipeline.stop ();
 			}
 
 			// The number of samples is the number of pixels available for the image.
@@ -108,7 +108,7 @@ namespace Spek {
 					1.0, Math.log10 (1.0 - THRESHOLD + values[y]) / Math.log10 (-THRESHOLD));
 				put_pixel (image, sample, y, get_color (level));
 			}
-			queue_draw_area (LPAD + sample, TPAD, 1, allocation.height - TPAD - BPAD);
+			Idle.add (() => { queue_draw (); return false; });
 		}
 
 		private override bool expose_event (EventExpose event) {

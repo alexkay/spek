@@ -42,6 +42,9 @@ namespace Spek {
 		private float[] input;
 		private float[] output;
 
+		private unowned Thread thread = null;
+		private bool quit = false;
+
 		public Pipeline (string file_name, int bands, int samples, int threshold, Callback cb) {
 			this.cx = new Audio.Context (file_name);
 			this.bands = bands;
@@ -85,7 +88,31 @@ namespace Spek {
 			this.cx.start (samples);
 		}
 
+		~Pipeline () {
+			stop ();
+		}
+
 		public void start () {
+			stop ();
+
+			try {
+				thread = Thread.create (thread_func, true);
+				thread.set_priority (ThreadPriority.LOW);
+			} catch (ThreadError e) {
+				assert_not_reached ();
+			}
+		}
+
+		public void stop () {
+			if (thread != null) {
+				quit = true;
+				thread.join ();
+				quit = false;
+				thread = null;
+			}
+		}
+
+		private void * thread_func () {
 			int pos = 0;
 			int sample = 0;
 			int64 frames = 0;
@@ -99,6 +126,9 @@ namespace Spek {
 				uint8 *buffer = (uint8 *) this.buffer;
 				var block_size = cx.width * cx.channels / 8;
 				while (size >= block_size) {
+					if (quit) {
+						return null;
+					}
 					input[pos] = average_input (buffer);
 					buffer += block_size;
 					size -= block_size;
@@ -139,6 +169,9 @@ namespace Spek {
 						}
 
 						cb (sample++, output);
+						if (sample == samples) {
+							return null;
+						}
 						Posix.memset (output, 0, sizeof (float) * bands);
 						frames = 0;
 						num_fft = 0;
@@ -146,6 +179,7 @@ namespace Spek {
 				}
 				assert (size == 0);
 			}
+			return null;
 		}
 
 		private float average_input (uint8 *buffer) {

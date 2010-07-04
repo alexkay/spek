@@ -18,6 +18,7 @@ INCLUDES = \
 	-DPKGLIBDIR=\""$(pkglibdir)"\"
 
 VALAFLAGS = \
+	--thread \
 	--vapidir=$(srcdir)/../vapi \
 	--pkg config \
 	--pkg spek-audio \
