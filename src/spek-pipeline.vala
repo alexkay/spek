@@ -118,6 +118,7 @@ namespace Spek {
 			int64 frames = 0;
 			int64 num_fft = 0;
 			int64 acc_error = 0;
+			float cf = 2f * (float) Math.PI / nfft;
 			int size;
 
 			Posix.memset (output, 0, sizeof (float) * bands);
@@ -143,10 +144,10 @@ namespace Spek {
 						acc_error < cx.error_base && frames == cx.frames_per_interval ||
 						acc_error >= cx.error_base && frames == 1 + cx.frames_per_interval) {
 						for (int i = 0; i < nfft; i++) {
-							double val = input[(pos + i) % nfft];
+							float val = input[(pos + i) % nfft];
 							// Hamming window.
-							val *= 0.53836 - 0.46164 * Math.cos (2.0 * Math.PI * i / nfft);
-							fft.input[i] = (float) val;
+							val *= 0.53836f - 0.46164f * Math.cosf (cf * i);
+							fft.input[i] = val;
 						}
 						fft.execute ();
 						num_fft++;
@@ -183,31 +184,36 @@ namespace Spek {
 		}
 
 		private float average_input (uint8 *buffer) {
+			int channels = cx.channels;
 			float res = 0f;
-			if (cx.fp && cx.width == 32) {
-				float *p = (float *) buffer;
-				for (int i = 0; i < cx.channels; i++) {
-					res += p[i];
-				}
-			} else if (cx.fp && cx.width == 64) {
-				double *p = (double *) buffer;
-				for (int i = 0; i < cx.channels; i++) {
-					res += (float) p[i];
-				}
-			} else if (!cx.fp && cx.width == 16) {
-				int16 *p = (int16 *) buffer;
-				for (int i = 0; i < cx.channels; i++) {
-					res += p[i] / (float) int16.MAX;
-				}
-			} else if (!cx.fp && cx.width == 32) {
-				int32 *p = (int32 *) buffer;
-				for (int i = 0; i < cx.channels; i++) {
-					res += p[i] / (float) int32.MAX;
+			if (cx.fp) {
+				if (cx.width == 32) {
+					float *p = (float *) buffer;
+					for (int i = 0; i < channels; i++) {
+						res += p[i];
+					}
+				} else {
+					assert (cx.width == 64);
+					double *p = (double *) buffer;
+					for (int i = 0; i < channels; i++) {
+						res += (float) p[i];
+					}
 				}
 			} else {
-				assert_not_reached ();
+				if (cx.width == 16) {
+					int16 *p = (int16 *) buffer;
+					for (int i = 0; i < channels; i++) {
+						res += p[i] / (float) int16.MAX;
+					}
+				} else {
+					assert (cx.width == 32);
+					int32 *p = (int32 *) buffer;
+					for (int i = 0; i < channels; i++) {
+						res += p[i] / (float) int32.MAX;
+					}
+				}
 			}
-			return res / cx.channels;
+			return res / channels;
 		}
 	}
 }
