@@ -256,12 +256,48 @@ namespace Spek {
 		};
 
 		private void * check_version () {
-			// TODO: don't check on each start up.
+			var config = Path.build_filename (Environment.get_user_config_dir (), "spek");
+			DirUtils.create_with_parents (config, 0755);
+			config = Path.build_filename (config, "config.ini");
+			var key_file = new KeyFile ();
+			try {
+				key_file.load_from_file (config, KeyFileFlags.NONE);
+			} catch (KeyFileError e) {
+			} catch (FileError e) {
+			}
+
+			// Does the user want to check for updates?
+			bool check = true;
+			try {
+				check = key_file.get_boolean ("update", "check");
+			} catch (KeyFileError e) {
+				check = true;
+			}
+			if (!check) {
+				return null;
+			}
+
+			// When was the last update?
+			var time_val = TimeVal ();
+			time_val.get_current_time ();
+			Date today = Date ();
+			today.set_time_val (time_val);
+			int day = 0;
+			try {
+				day = key_file.get_integer ("update", "last_update");
+			} catch (KeyFileError e) {
+				day = 0;
+			}
+			int diff = (int) today.get_julian () - day;
+			if (diff < 7) {
+				return null;
+			}
+
+			// Get the version number.
 			var file = File.new_for_uri ("http://www.spek-project.org/version");
 			if (!file.query_exists (null)) {
 				return null;
 			}
-
 			string version;
 			try {
 				var stream = new DataInputStream (file.read (null));
@@ -269,6 +305,12 @@ namespace Spek {
 			} catch (Error e) {
 				return null;
 			}
+
+			// Write to the config file.
+			key_file.set_boolean ("update", "check", check);
+			key_file.set_integer ("update", "last_update", (int) today.get_julian ());
+			var output = FileStream.open (config, "w+");
+			output.puts (key_file.to_data ());
 
 			if (version != null && version > Config.PACKAGE_VERSION) {
 				Idle.add (() => { message_bar.show_all (); return false; });
