@@ -24,7 +24,7 @@ AM_PROG_VALAC([0.7.0])
 AC_PROG_INSTALL
 AC_PROG_INTLTOOL([0.35])
 
-pkg_modules="gtk+-2.0 >= 2.14.0 libavformat libavcodec >= 52.23.0 fftw3f"
+pkg_modules="gtk+-2.0 >= 2.14.0 libavformat libavcodec >= 52.23.0"
 PKG_CHECK_MODULES(SPEK, [$pkg_modules])
 AC_SUBST(SPEK_CFLAGS)
 AC_SUBST(SPEK_LIBS)

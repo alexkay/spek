@@ -20,14 +20,13 @@
 #define __SPEK_FFT_H__
 
 #include <glib.h>
-#include <fftw3.h>
+#include <libavcodec/avfft.h>
 
 typedef struct {
 	/* Internal data */
-	fftwf_plan plan;
+	RDFTContext *cx;
 	gint n;
 	gint threshold;
-	fftwf_complex *result;
 
 	/* Exposed properties */
 	gfloat *input;

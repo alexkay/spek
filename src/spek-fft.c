@@ -21,36 +21,38 @@
 #include "spek-fft.h"
 
 SpekFftPlan * spek_fft_plan_new (gint n, gint threshold) {
+	gint bits;
 	SpekFftPlan *p = g_new0 (SpekFftPlan, 1);
-	p->input = (gfloat *) fftwf_malloc (sizeof (gfloat) * n);
-	p->output = (gfloat *) fftwf_malloc (sizeof (gfloat) * (n / 2 + 1));
-	p->result = (fftwf_complex *) fftwf_malloc (sizeof (fftwf_complex) * (n / 2 + 1));
-	p->n = n;
+	p->input = g_new0 (gfloat, n);
+	p->output = g_new0 (gfloat, n / 2 + 1);
 	p->threshold = threshold;
-	p->plan = fftwf_plan_dft_r2c_1d (n, p->input, p->result, FFTW_ESTIMATE);
+	for (bits = 0; n; n >>= 1, bits++);
+	p->n = 1 << --bits;
+	p->cx = av_rdft_init (bits, DFT_R2C);
 	return p;
 }
 
 void spek_fft_execute (SpekFftPlan *p) {
 	int i;
-	int bands = p->n / 2 + 1;
+	int n = p->n;
 
-	fftwf_execute (p->plan);
+	av_rdft_calc (p->cx, p->input);
 
 	/* Calculate magnitudes */
-	for (i = 0; i < bands; i++) {
+	p->output[0] = p->input[0] * p->input[0] / (n * n);
+	p->output[n / 2] = p->input[1] * p->input[1] / (n * n);
+	for (i = 1; i < n / 2; i++) {
 		gfloat val;
-		val = p->result[i][0] * p->result[i][0] + p->result[i][1] * p->result[i][1];
-		val /= p->n * p->n;
+		val = p->input[i * 2] * p->input[i * 2] + p->input[i * 2 + 1] * p->input[i * 2 + 1];
+		val /= n * n;
 		val = 10.0 * log10f (val);
 		p->output[i] = val < p->threshold ? p->threshold : val;
 	}
 }
 
 void spek_fft_destroy (SpekFftPlan *p) {
-	fftwf_destroy_plan (p->plan);
-	fftwf_free (p->result);
-	fftwf_free (p->output);
-	fftwf_free (p->input);
+	av_rdft_end (p->cx);
+	g_free (p->input);
+	g_free (p->output);
 	g_free (p);
 }
