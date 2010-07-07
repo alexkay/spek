@@ -14,6 +14,11 @@ handlers:
   upload: robots.txt
   mime_type: text/plain
 
+- url: /version
+  static_files: version
+  upload: version
+  mime_type: text/plain
+
 - url: /
   static_files: index.html
   upload: index.html

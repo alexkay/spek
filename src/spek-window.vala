@@ -23,6 +23,7 @@ namespace Spek {
 	public class Window : Gtk.Window {
 
 		private const string full_title = _("Spek - Acoustic Spectrum Analyser");
+		private MessageBar message_bar;
 		private Spectrogram spectrogram;
 		private string cur_dir;
 		private FileFilter filter_all;
@@ -79,6 +80,8 @@ namespace Spek {
 			about.clicked.connect (on_about_clicked);
 			toolbar.insert (about, -1);
 
+			message_bar = new MessageBar (_("A new version of Spek is available on <a href=\"http://www.spek-project.org\">www.spek-project.org</a>"));
+
 			spectrogram = new Spectrogram ();
 			cur_dir = Environment.get_home_dir ();
 
@@ -96,9 +99,13 @@ namespace Spek {
 
 			var vbox = new VBox (false, 0);
 			vbox.pack_start (toolbar, false, true, 0);
+			vbox.pack_start (message_bar, false, true, 0);
 			vbox.pack_start (spectrogram, true, true, 0);
 			add (vbox);
-			show_all ();
+			toolbar.show_all ();
+			spectrogram.show_all ();
+			vbox.show ();
+			show ();
 
 			// Set up Drag and Drop
 			drag_dest_set (this, DestDefaults.ALL, DEST_TARGET_ENTRIES, DragAction.COPY);
@@ -106,6 +113,11 @@ namespace Spek {
 
 			if (file_name != null) {
 				open_file (file_name);
+			}
+
+			try {
+				Thread.create (check_version, false);
+			} catch (ThreadError e) {
 			}
 		}
 
@@ -242,5 +254,26 @@ namespace Spek {
 			"*.wma",
 			"*.wv"
 		};
+
+		private void * check_version () {
+			// TODO: don't check on each start up.
+			var file = File.new_for_uri ("http://www.spek-project.org/version");
+			if (!file.query_exists (null)) {
+				return null;
+			}
+
+			string version;
+			try {
+				var stream = new DataInputStream (file.read (null));
+				version = stream.read_line (null, null);
+			} catch (Error e) {
+				return null;
+			}
+
+			if (version != null && version > Config.PACKAGE_VERSION) {
+				Idle.add (() => { message_bar.show_all (); return false; });
+			}
+			return null;
+		}
 	}
 }
