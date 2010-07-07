@@ -94,10 +94,14 @@ namespace Spek {
 			queue_draw ();
 		}
 
+		private int prev_width = -1;
 		private override void size_allocate (Gdk.Rectangle allocation) {
 			base.size_allocate (allocation);
 
-			if (file_name != null) {
+			bool width_changed = prev_width != allocation.width;
+			prev_width = allocation.width;
+
+			if (file_name != null && width_changed) {
 				start ();
 			}
 		}
