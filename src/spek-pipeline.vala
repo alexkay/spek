@@ -42,7 +42,7 @@ namespace Spek {
 		private float[] input;
 		private float[] output;
 
-		private unowned Thread thread = null;
+		private unowned Thread reader_thread = null;
 		private bool quit = false;
 
 		public Pipeline (string file_name, int bands, int samples, int threshold, Callback cb) {
@@ -96,23 +96,24 @@ namespace Spek {
 			stop ();
 
 			try {
-				thread = Thread.create (thread_func, true);
-				thread.set_priority (ThreadPriority.LOW);
+				reader_thread = Thread.create (reader_func, true);
 			} catch (ThreadError e) {
-				assert_not_reached ();
+				stop ();
 			}
 		}
 
 		public void stop () {
-			if (thread != null) {
-				quit = true;
-				thread.join ();
+			if (reader_thread != null) {
+				lock (quit) {
+					quit = true;
+				}
+				reader_thread.join ();
 				quit = false;
-				thread = null;
+				reader_thread = null;
 			}
 		}
 
-		private void * thread_func () {
+		private void * reader_func () {
 			int pos = 0;
 			int sample = 0;
 			int64 frames = 0;
@@ -124,12 +125,15 @@ namespace Spek {
 			Posix.memset (output, 0, sizeof (float) * bands);
 
 			while ((size = cx.read (this.buffer)) > 0) {
-				uint8 *buffer = (uint8 *) this.buffer;
-				var block_size = cx.width * cx.channels / 8;
-				while (size >= block_size) {
+				lock (quit) {
 					if (quit) {
 						return null;
 					}
+				}
+
+				uint8 *buffer = (uint8 *) this.buffer;
+				var block_size = cx.width * cx.channels / 8;
+				while (size >= block_size) {
 					input[pos] = average_input (buffer);
 					buffer += block_size;
 					size -= block_size;
