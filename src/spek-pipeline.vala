@@ -122,7 +122,7 @@ namespace Spek {
 			float cf = 2f * (float) Math.PI / nfft;
 			int size;
 
-			Posix.memset (output, 0, sizeof (float) * bands);
+			Memory.set (output, 0, sizeof (float) * bands);
 
 			while ((size = cx.read (this.buffer)) > 0) {
 				lock (quit) {
@@ -177,7 +177,7 @@ namespace Spek {
 						if (sample == samples) {
 							return null;
 						}
-						Posix.memset (output, 0, sizeof (float) * bands);
+						Memory.set (output, 0, sizeof (float) * bands);
 						frames = 0;
 						num_fft = 0;
 					}
