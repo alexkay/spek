@@ -6,10 +6,10 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="*" Name="$(var.ProductName)" Language="0"
            Version="$(var.ProductVersion)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)">
-    <Package InstallerVersion="301" Compressed="yes" />
+    <Package InstallerVersion="301" Compressed="yes" Platform="x86" InstallScope="perMachine"/>
     <Media Id="1" Cabinet="spek.cab" EmbedCab="yes" />
-    <Property Id="ALLUSERS" Value="1" />
     <Property Id="ARPPRODUCTICON" Value="ProgramIcon" />
+    <Property Id="ARPHELPLINK" Value="http://www.spek-project.org/" />
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
     <UIRef Id="WixUI_InstallDir" />
     <UIRef Id="WixUI_ErrorProgressText" />
