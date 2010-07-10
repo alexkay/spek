@@ -77,7 +77,6 @@ SpekAudioContext * spek_audio_open (const char *file_name) {
 		cx->error = _("No audio channels");
 		return cx;
 	}
-	cx->buffer_size = (AVCODEC_MAX_AUDIO_FRAME_SIZE * 3) / 2;
 	if (avcodec_open (cx->codec_context, cx->codec) < 0) {
 		cx->error = _("Cannot open decoder");
 		return cx;
@@ -103,6 +102,8 @@ SpekAudioContext * spek_audio_open (const char *file_name) {
 		cx->error = _("Unsupported sample format");
 		return cx;
 	}
+	cx->buffer_size = (AVCODEC_MAX_AUDIO_FRAME_SIZE * 3) / 2;
+	cx->buffer = av_malloc (cx->buffer_size);
 	av_init_packet (&cx->packet);
 	cx->offset = 0;
 	return cx;
@@ -116,7 +117,7 @@ void spek_audio_start (SpekAudioContext *cx, gint samples) {
 	cx->error_per_interval = (cx->stream->duration * rate) % cx->error_base;
 }
 
-gint spek_audio_read (SpekAudioContext *cx, guint8 *buffer) {
+gint spek_audio_read (SpekAudioContext *cx) {
 	gint buffer_size;
 	gint len;
 	gint res;
@@ -129,7 +130,7 @@ gint spek_audio_read (SpekAudioContext *cx, guint8 *buffer) {
 		while (cx->packet.size > 0) {
 			buffer_size = cx->buffer_size;
 			len = avcodec_decode_audio3 (
-				cx->codec_context, (int16_t *) buffer, &buffer_size, &cx->packet);
+				cx->codec_context, (int16_t *) cx->buffer, &buffer_size, &cx->packet);
 			if (len < 0) {
 				/* Error, skip the frame. */
 				cx->packet.size = 0;
@@ -170,6 +171,9 @@ void spek_audio_close (SpekAudioContext *cx) {
 	}
 	if (cx->codec_name != NULL) {
 		g_free (cx->codec_name);
+	}
+	if (cx->buffer) {
+		av_free (cx->buffer);
 	}
 	if (cx->packet.data) {
 		cx->packet.data -= cx->offset;

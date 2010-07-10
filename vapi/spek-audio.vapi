@@ -13,7 +13,7 @@ namespace Spek.Audio {
 		public bool fp;
 		public int channels;
 		public double duration;
-		public int buffer_size;
+		public uint8 *buffer;
 		public int64 frames_per_interval;
 		public int64 error_per_interval;
 		public int64 error_base;
@@ -23,7 +23,7 @@ namespace Spek.Audio {
 		[CCode (cname = "spek_audio_start")]
 		public int start (int samples);
 		[CCode (cname = "spek_audio_read")]
-		public int read ([CCode (array_length = false)] uint8[] buffer);
+		public int read ();
 	}
 	public static void init ();
 }

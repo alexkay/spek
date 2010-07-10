@@ -36,7 +36,6 @@ namespace Spek {
 		private int threshold;
 		private Callback cb;
 
-		private uint8[] buffer;
 		private Fft.Plan fft;
 		private int nfft; // Size of the FFT transform.
 		private const int NFFT = 64; // Number of FFTs to pre-fetch.
@@ -89,7 +88,6 @@ namespace Spek {
 			}
 
 			this.sample_rate = cx.sample_rate;
-			this.buffer = new uint8[cx.buffer_size];
 			this.nfft = 2 * bands - 2;
 			this.fft = new Fft.Plan (nfft, threshold);
 			this.input_size = nfft * (NFFT * 2 + 1);
@@ -140,10 +138,10 @@ namespace Spek {
 				return null;
 			}
 
-			while ((size = cx.read (this.buffer)) > 0) {
+			while ((size = cx.read ()) > 0) {
 				lock (quit) if (quit) break;
 
-				uint8 *buffer = (uint8 *) this.buffer;
+				uint8 *buffer = (uint8 *) cx.buffer;
 				while (size >= block_size) {
 					input[pos] = average_input (buffer);
 					buffer += block_size;

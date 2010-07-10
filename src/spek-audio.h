@@ -30,6 +30,7 @@ typedef struct {
 	AVCodecContext *codec_context;
 	AVStream *stream;
 	AVCodec *codec;
+	gint buffer_size;
 	AVPacket packet;
 	gint offset;
 
@@ -44,7 +45,7 @@ typedef struct {
 	gboolean fp; /* floating-point sample representation */
 	gint channels;
 	gdouble duration;
-	gint buffer_size; /* minimum buffer size for spek_audio_read() */
+	guint8 *buffer;
 	gint64 frames_per_interval;
 	gint64 error_per_interval;
 	gint64 error_base;
@@ -64,10 +65,8 @@ void spek_audio_start (SpekAudioContext *cx, gint samples);
 /* Read and decode the opened audio stream.
  * Returns -1 on error, 0 if there's nothing left to read
  * or the number of bytes decoded into the buffer.
- * The buffer must be allocated (and later freed) by the caller,
- * minimum size is `buffer_size`.
  */
-gint spek_audio_read (SpekAudioContext *cx, guint8 *buffer);
+gint spek_audio_read (SpekAudioContext *cx);
 
 /* Closes the file opened with spek_audio_open,
  * frees all allocated buffers and the context
