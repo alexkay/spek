@@ -25,6 +25,7 @@
 
 typedef struct {
 	/* Internal data */
+	gchar *short_name;
 	AVFormatContext *format_context;
 	gint audio_stream;
 	AVCodecContext *codec_context;

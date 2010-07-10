@@ -16,6 +16,7 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <glib.h>
 #include <glib/gi18n.h>
 
 #include "spek-audio.h"
@@ -26,16 +27,26 @@ void spek_audio_init () {
 	av_register_all ();
 }
 
-SpekAudioContext * spek_audio_open (const char *file_name) {
+SpekAudioContext * spek_audio_open (const gchar *file_name) {
 	SpekAudioContext *cx;
 	int i;
 
 	cx = g_new0 (SpekAudioContext, 1);
 	cx->file_name = g_strdup (file_name);
+#ifdef G_OS_WIN32
+	/* av_open_input_file() cannot open files with Unicode chars in it
+	 * when running under Windows. When this happens we will re-try
+	 * using the corresponding short file name.
+	 */
+	cx->short_name = g_win32_locale_filename_from_utf8 (file_name);
+#endif
 
 	if (av_open_input_file (&cx->format_context, file_name, NULL, 0, NULL) != 0) {
-		cx->error = _("Cannot open input file");
-		return cx;
+		if (!cx->short_name ||
+			av_open_input_file (&cx->format_context, cx->short_name, NULL, 0, NULL) != 0 ) {
+			cx->error = _("Cannot open input file");
+			return cx;
+		}
 	}
 	if (av_find_stream_info (cx->format_context) < 0) {
 		/* 24-bit APE returns an error but parses the stream info just fine */
@@ -169,6 +180,9 @@ gint spek_audio_read (SpekAudioContext *cx) {
 void spek_audio_close (SpekAudioContext *cx) {
 	if (cx->file_name != NULL) {
 		g_free (cx->file_name);
+	}
+	if (cx->short_name != NULL) {
+		g_free (cx->short_name);
 	}
 	if (cx->codec_name != NULL) {
 		g_free (cx->codec_name);
