@@ -35,8 +35,8 @@ urls=(\
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/libpng_1.4.0-1_win32.zip" \
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/libxml2_2.7.7-1_win32.zip" \
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/zlib_1.2.4-2_win32.zip" \
-# GStreamer merge modules
-"http://ossbuild.googlecode.com/files/GStreamer-WinBuilds-Merge-Modules-x86.zip"
+# FFmpeg
+"http://ffmpeg.arrozcru.org/autobuilds/ffmpeg/mingw32/shared/ffmpeg-r24135-swscale-r31628-mingw32-shared.7z"
 )
 
 for url in ${urls[*]}
@@ -54,37 +54,16 @@ done
 
 # Clean up
 rm -fr share/locale
-mv x86-OSSBuild-GStreamer-Dependencies-GPL.msm ..
-mv x86-OSSBuild-GStreamer-Libraries.msm ..
-mv x86-OSSBuild-GStreamer-Plugins-Bad-GPL.msm ..
-mv x86-OSSBuild-GStreamer-Plugins-Base.msm ..
-mv x86-OSSBuild-GStreamer-Plugins-FFmpeg-GPL.msm ..
-mv x86-OSSBuild-GStreamer-Plugins-Good.msm ..
-mv x86-OSSBuild-GStreamer-Plugins-Ugly-GPL.msm ..
-rm *.msm
+rm -fr doc
+rm -fr presets
+rm *.txt
+rm bin/avdevice* bin/avfilter* bin/swscale* bin/ff*.exe
+mv licenses share/
 
 # Set the default GTK theme
 echo "gtk-theme-name = \"MS-Windows\"" > etc/gtk-2.0/gtkrc
 
 cd ..
-
-# Extract files from x86-OSSBuild-GStreamer-Dependencies-GPL.msm
-mkdir deps
-"$WIX_PATH"/dark x86-OSSBuild-GStreamer-Dependencies-GPL.msm -o deps/deps.wxs -x deps
-
-for line in $(grep "<File" deps/deps.wxs | sed -e "s/.* Name=\"\([^\"]*\)\".* Source=\"\([^\"]*\)\".*/\1;\2/g"); do
-  line=${line//\\/\/}
-  name=${line%;*}
-  src=${line#*;}
-  dst="Spek/bin/$name"
-  # Move but don't overwrite the existing file
-  if [ ! -f "$dst" ] ; then
-    mv -v "$src" "$dst"
-  fi
-done
-
-# Create a zip archive
-"$SZ_PATH"/7z a spek.zip Spek
 
 # Generate a wxs for files in Spek
 "$WIX_PATH"/heat dir Spek -gg -ke -srd -cg Files -dr INSTALLLOCATION -template fragment -o files.wxs
@@ -94,8 +73,13 @@ done
 "$WIX_PATH"/light -ext WixUIExtension.dll -b Spek spek.wixobj files.wixobj -o spek.msi
 
 # Clean up
-rm -fr deps
-rm *.msm
+rm *.res
 rm *.wixobj
+rm *.wixpdb
+
+# Create a zip archive
+cp LICENSE.rtf Spek/
+cp spek.ico Spek/
+"$SZ_PATH"/7z a spek.zip Spek
 
 popd
