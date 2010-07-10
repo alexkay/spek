@@ -23,7 +23,11 @@
     <InstallExecuteSequence>
       <RemoveExistingProducts After="InstallInitialize" />
     </InstallExecuteSequence>
-
+    <CustomAction Id="StartAppOnExit" FileKey="spek.exe" ExeCommand="" Execute="immediate" Impersonate ="yes" Return="asyncNoWait" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch Spek when setup exits" />
+    <UI>
+      <Publish Dialog="ExitDialog" Control="Finish" Order="1" Event="DoAction" Value="StartAppOnExit">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+    </UI>
     <Icon Id="ProgramIcon" SourceFile="spek.ico"/>
     <DirectoryRef Id="ProgramMenuSubfolder">
       <Component Id="StartMenuShortcut" Guid="165DF12B-D970-49BC-B07B-880B62ABC308">
@@ -79,11 +83,17 @@
             <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\.$(var.ext)\OpenWithProgids" Name="Spek.Audio" Value="" Type="string" />
             <?endforeach?>
           </Component>
+          <Directory Id="bin" Name="bin">
+            <Component Id="Spek" Guid="EC0CA007-EC9E-44E2-B9DE-AE91D3C8EF70">
+              <File Id="spek.exe" Name="spek.exe" Source="spek.exe" />
+            </Component>
+          </Directory>
         </Directory>
       </Directory>
     </Directory>
     <Feature Id="All" Title="$(var.ProductName)" Level="1">
       <ComponentRef Id="Main" />
+      <ComponentRef Id="Spek" />
       <ComponentGroupRef Id="Files" />
       <ComponentRef Id="StartMenuShortcut" />
       <ComponentRef Id="DesktopShortcut" />

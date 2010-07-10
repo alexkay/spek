@@ -11,7 +11,10 @@ EXTRA_DIST = \
 	intltool-merge.in \
 	intltool-update.in \
 	win/LICENSE.rtf \
+	win/banner.bmp \
 	win/bundle.sh \
+	win/dialog.bmp \
+	win/fix-msi.js \
 	win/spek.ico \
 	win/spek.rc \
 	win/spek.wxs

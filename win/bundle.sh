@@ -53,11 +53,13 @@ do
 done
 
 # Clean up
+mv bin/spek.exe ../
 rm -fr share/locale
 rm -fr doc
 rm -fr presets
 rm *.txt
-rm bin/avdevice* bin/avfilter* bin/swscale* bin/ff*.exe
+rm bin/avdevice* bin/avfilter* bin/swscale*
+rm bin/*.exe
 mv licenses share/
 
 # Set the default GTK theme
@@ -71,6 +73,7 @@ cd ..
 # Make the MSI package
 "$WIX_PATH"/candle spek.wxs files.wxs
 "$WIX_PATH"/light -ext WixUIExtension.dll -b Spek spek.wixobj files.wixobj -o spek.msi
+start fix-msi.js spek.msi
 
 # Clean up
 rm *.res
@@ -78,6 +81,7 @@ rm *.wixobj
 rm *.wixpdb
 
 # Create a zip archive
+mv spek.exe Spek/bin/
 cp LICENSE.rtf Spek/
 cp spek.ico Spek/
 "$SZ_PATH"/7z a spek.zip Spek
