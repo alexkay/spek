@@ -41,6 +41,7 @@ namespace Spek {
 			label.set_markup (message);
 			label.ellipsize = Pango.EllipsizeMode.END;
 			label.xalign = 0f;
+			label.activate_link.connect (uri => { Platform.show_uri (uri); return true; });
 			var button_box = new HBox (false, 0);
 			button_box.spacing = 3;
 			var close_button = new Button ();

@@ -6,6 +6,7 @@ spek_SOURCES = \
 	spek-fft.c \
 	spek-message-bar.vala \
 	spek-pipeline.vala \
+	spek-platform.c \
 	spek-ruler.vala \
 	spek-spectrogram.vala \
 	spek-window.vala
@@ -24,6 +25,7 @@ VALAFLAGS = \
 	--pkg config \
 	--pkg spek-audio \
 	--pkg spek-fft \
+	--pkg spek-platform \
 	@SPEK_PACKAGES@
 
 spek_LDADD = \
@@ -32,4 +34,5 @@ spek_LDADD = \
 
 EXTRA_DIST = \
 	spek-audio.h \
-	spek-fft.h
+	spek-fft.h \
+	spek-platform.h

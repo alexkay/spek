@@ -208,21 +208,29 @@ namespace Spek {
 			license += "You should have received a copy of the GNU General Public License ";
 			license += "along with Spek.  If not, see http://www.gnu.org/licenses/";
 
-			show_about_dialog (
-				this,
-				"program-name", "Spek",
-				"version", Config.PACKAGE_VERSION,
-				"copyright", _("Copyright \xc2\xa9 2010 Alexander Kojevnikov"),
-				"comments", full_title,
-				"authors", authors,
-//				"documenters", documenters,
-				"artists", artists,
-				"website-label", _("Spek Website"),
-				"website", "http://spek-project.org/",
-				"license", license,
-				"wrap-license", true,
-				"logo-icon-name", "spek",
-				"translator-credits", _("translator-credits"));
+			var dlg = new AboutDialog ();
+			dlg.program_name = "Spek";
+			dlg.version = Config.PACKAGE_VERSION;
+			dlg.copyright = _("Copyright \xc2\xa9 2010 Alexander Kojevnikov");
+			dlg.comments = full_title;
+			dlg.set ("authors", authors);
+//			dlg.set ("documenters", documenters);
+			dlg.set ("artists", artists);
+			dlg.website_label = _("Spek Website");
+			dlg.website = "http://www.spek-project.org/";
+			dlg.license = license;
+			dlg.wrap_license = true;
+			dlg.logo_icon_name = "spek";
+			dlg.translator_credits = _("translator-credits");
+			dlg.set_transient_for (this);
+			dlg.destroy_with_parent = true;
+			dlg.response.connect (id => dlg.destroy ());
+			dlg.set_url_hook (url_hook);
+			dlg.present ();
+		}
+
+		private void url_hook (AboutDialog about, string link) {
+			Platform.show_uri (link);
 		}
 
 		private string[] audio_extensions = {
