@@ -85,15 +85,15 @@ namespace Spek {
 			if (cx.error != null) {
 				// TRANSLATORS: first %s is the error message, second %s is stream description.
 				description = _("%s: %s").printf (cx.error, description);
+			} else {
+				this.sample_rate = cx.sample_rate;
+				this.nfft = 2 * bands - 2;
+				this.fft = new Fft.Plan (nfft, threshold);
+				this.input_size = nfft * (NFFT * 2 + 1);
+				this.input = new float[input_size];
+				this.output = new float[bands];
+				this.cx.start (samples);
 			}
-
-			this.sample_rate = cx.sample_rate;
-			this.nfft = 2 * bands - 2;
-			this.fft = new Fft.Plan (nfft, threshold);
-			this.input_size = nfft * (NFFT * 2 + 1);
-			this.input = new float[input_size];
-			this.output = new float[bands];
-			this.cx.start (samples);
 		}
 
 		~Pipeline () {
@@ -102,6 +102,8 @@ namespace Spek {
 
 		public void start () {
 			stop ();
+
+			if (cx.error != null) return;
 
 			input_pos = 0;
 			reader_mutex = new Mutex ();
