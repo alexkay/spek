@@ -31,7 +31,7 @@ typedef struct {
 	AVStream *stream;
 	AVCodec *codec;
 	gint buffer_size;
-	AVPacket packet;
+	AVPacket *packet;
 	gint offset;
 
 	/* Exposed properties */

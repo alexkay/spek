@@ -104,7 +104,8 @@ SpekAudioContext * spek_audio_open (const char *file_name) {
 	}
 	cx->buffer_size = (AVCODEC_MAX_AUDIO_FRAME_SIZE * 3) / 2;
 	cx->buffer = av_malloc (cx->buffer_size);
-	av_init_packet (&cx->packet);
+	cx->packet = av_mallocz (sizeof (AVPacket));
+	av_init_packet (cx->packet);
 	cx->offset = 0;
 	return cx;
 }
@@ -127,17 +128,17 @@ gint spek_audio_read (SpekAudioContext *cx) {
 	}
 
 	for (;;) {
-		while (cx->packet.size > 0) {
+		while (cx->packet->size > 0) {
 			buffer_size = cx->buffer_size;
 			len = avcodec_decode_audio3 (
-				cx->codec_context, (int16_t *) cx->buffer, &buffer_size, &cx->packet);
+				cx->codec_context, (int16_t *) cx->buffer, &buffer_size, cx->packet);
 			if (len < 0) {
 				/* Error, skip the frame. */
-				cx->packet.size = 0;
+				cx->packet->size = 0;
 				break;
 			}
-			cx->packet.data += len;
-			cx->packet.size -= len;
+			cx->packet->data += len;
+			cx->packet->size -= len;
 			cx->offset += len;
 			if (buffer_size <= 0) {
 				/* No data yet, get more frames */
@@ -146,17 +147,17 @@ gint spek_audio_read (SpekAudioContext *cx) {
 			/* We have data, return it and come back for more later */
 			return buffer_size;
 		}
-		if (cx->packet.data) {
-			cx->packet.data -= cx->offset;
-			cx->packet.size += cx->offset;
+		if (cx->packet->data) {
+			cx->packet->data -= cx->offset;
+			cx->packet->size += cx->offset;
 			cx->offset = 0;
-			av_free_packet (&cx->packet);
+			av_free_packet (cx->packet);
 		}
-		while ((res = av_read_frame (cx->format_context, &cx->packet)) >= 0) {
-			if (cx->packet.stream_index == cx->audio_stream) {
+		while ((res = av_read_frame (cx->format_context, cx->packet)) >= 0) {
+			if (cx->packet->stream_index == cx->audio_stream) {
 				break;
 			}
-			av_free_packet (&cx->packet);
+			av_free_packet (cx->packet);
 		}
 		if (res < 0) {
 			/* End of file or error. */
@@ -175,11 +176,14 @@ void spek_audio_close (SpekAudioContext *cx) {
 	if (cx->buffer) {
 		av_free (cx->buffer);
 	}
-	if (cx->packet.data) {
-		cx->packet.data -= cx->offset;
-		cx->packet.size += cx->offset;
-		cx->offset = 0;
-		av_free_packet (&cx->packet);
+	if (cx->packet) {
+		if (cx->packet->data) {
+			cx->packet->data -= cx->offset;
+			cx->packet->size += cx->offset;
+			cx->offset = 0;
+			av_free_packet (cx->packet);
+		}
+		av_free (cx->packet);
 	}
 	if (cx->codec_context != NULL) {
 		avcodec_close (cx->codec_context);

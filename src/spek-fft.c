@@ -17,14 +17,15 @@
  */
 
 #include <math.h>
+#include <libavutil/mem.h>
 
 #include "spek-fft.h"
 
 SpekFftPlan * spek_fft_plan_new (gint n, gint threshold) {
 	gint bits;
 	SpekFftPlan *p = g_new0 (SpekFftPlan, 1);
-	p->input = g_new0 (gfloat, n);
-	p->output = g_new0 (gfloat, n / 2 + 1);
+	p->input = av_mallocz (sizeof (gfloat) * n);
+	p->output = av_mallocz (sizeof (gfloat) * (n / 2 + 1));
 	p->threshold = threshold;
 	for (bits = 0; n; n >>= 1, bits++);
 	p->n = 1 << --bits;
@@ -52,7 +53,7 @@ void spek_fft_execute (SpekFftPlan *p) {
 
 void spek_fft_destroy (SpekFftPlan *p) {
 	av_rdft_end (p->cx);
-	g_free (p->input);
-	g_free (p->output);
+	av_free (p->input);
+	av_free (p->output);
 	g_free (p);
 }
