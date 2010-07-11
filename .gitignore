@@ -30,6 +30,7 @@ samples/
 src/*.c
 !src/spek-audio.c
 !src/spek-fft.c
+!src/spek-platform.c
 src/*.o
 src/*.stamp
 src/spek

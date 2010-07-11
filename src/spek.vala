@@ -28,6 +28,8 @@ namespace Spek {
 	};
 
 	int main (string[] args) {
+		Platform.fix_args (args);
+
 		Intl.bindtextdomain (Config.GETTEXT_PACKAGE, Config.LOCALEDIR);
 		Intl.bind_textdomain_codeset (Config.GETTEXT_PACKAGE, "UTF-8");
 		Intl.textdomain (Config.GETTEXT_PACKAGE);
@@ -52,7 +54,14 @@ namespace Spek {
 		}
 
 		Audio.init ();
-		var window = new Window (files == null ? null : files[0]);
+		var file_name = files == null ? null : files[0];
+		if (file_name != null && file_name.has_prefix ("file://")) {
+			try {
+				file_name = Filename.from_uri (file_name);
+			} catch (ConvertError e) {
+			}
+		}
+		var window = new Window (file_name);
 		Gtk.main ();
 		window.destroy ();
 		return 0;
