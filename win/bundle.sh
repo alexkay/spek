@@ -33,7 +33,6 @@ urls=(\
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/gettext-runtime-0.17-1.zip" \
 "http://ftp.gnome.org/pub/GNOME/binaries/win32/dependencies/hicolor-icon-theme_0.10-1_win32.zip" \
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/libpng_1.4.0-1_win32.zip" \
-"http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/libxml2_2.7.7-1_win32.zip" \
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/zlib_1.2.4-2_win32.zip" \
 # FFmpeg
 "http://ffmpeg.arrozcru.org/autobuilds/ffmpeg/mingw32/shared/ffmpeg-r24135-swscale-r31628-mingw32-shared.7z"
