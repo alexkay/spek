@@ -1,19 +1,53 @@
-Spek 0.5 - Released 2010-06-26
-==============================
+Spek 0.6 - Released 2010-07-13
+==============================================================================
 
-Spek is an acoustic spectrum analyser written in Vala.
-It uses the GNOME platform: GLib, GTK+, Cairo and Pango
-as well as FFmpeg and FFTW libraries.
+Spek is an acoustic spectrum analyser written in Vala. It uses the GNOME
+platform: GLib, GTK+, Cairo and Pango as well as the FFmpeg libraries.
 
 Spek is available on GNU/Linux, Windows and Mac OS X.
 
-Find out more about Spek on its website: http://spek-project.org/
+Find out more about Spek on its website: http://www.spek-project.org/
 
-Version 0.5 brings the following features and fixes:
+New Features And Enhancements
+------------------------------------------------------------------------------
 
- * Speed up spectral analysis by using the optimal number of frequency bands.
- * DTS files support.
- * Distribute Windows version as a ZIP archive in addition to the MSI installer.
- * Mac OS X installer.
- * Use Pango to render text.
- * Brand new icon.
+Spek 0.6 is part of beta 0.x releases, leading up to a stable 1.0 release
+later this year. Check Spek website for the roadmap.
+
+New features since 0.5:
+
+ * Switch from GStreamer to FFmpeg libraries for audio decoding. This
+   speeds up the overall analysis by a factor of 1.5 to 2.
+ * Decode audio and perform the analysis in separate threads. This makes
+   the analysis 1.3~1.8 times faster on multi-core systems (issue 11).
+ * Check for a new version once a week and notify when it becomes
+   available (issue 27)
+
+Enhancements:
+
+ * Windows installer branding (issue 32)
+ * Option to launch Spek when the Windows installer exits
+
+Bugfixes:
+
+ * Fix link activation on Windows (issue 31)
+ * Fix ALAC issues on OS X (issue 23)
+ * Re-run the analysis only if the window width has been changed
+ * Fix opening of files containing Unicode symbols in their name on Windows
+
+Sources / Packages
+------------------------------------------------------------------------------
+
+ * Spek 0.6 tarball:
+   http://spek.googlecode.com/files/spek-0.6.tar.bz2
+
+ * Windows and Mac OS X binaries:
+   http://spek.googlecode.com/files/spek-0.6.msi
+   http://spek.googlecode.com/files/spek-0.6.zip
+   http://spek.googlecode.com/files/spek-0.6.dmg
+
+Dependencies
+------------------------------------------------------------------------------
+
+ * GTK+ >= 2.18
+ * FFmpeg >= r18351
