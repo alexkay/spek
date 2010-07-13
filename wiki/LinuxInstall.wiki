@@ -21,7 +21,7 @@ $ ./configure
 $ make
 }}}
 
-To build you will need GTK+ and GStreamer packages, including gst-plugins-base and gst-plugins-good. For MP3 support you need gst-plugins-ugly. On Debian/Ubuntu you also need development packages: libgstreamer0.10-dev and libgtk2.0-dev.
+To build you will need GTK+ and FFmpeg packages. On Debian/Ubuntu you also need development packages: libgtk2.0-dev, libavcodec-dev and libavformat-dev. For MP3 support you will need FFmpeg compiled with restricted codecs. On Ubuntu you can install ubuntu-restricted-extras, on Debian you can use FFmpeg from [http://debian-multimedia.org/ Debian Multimedia]. Also note that Ubuntu's FFmpeg is very outdated, you might need to install it from a third-party PPA.
 
 To start Spek, run:
 
