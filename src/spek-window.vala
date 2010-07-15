@@ -220,12 +220,17 @@ namespace Spek {
 			dlg.website = "http://www.spek-project.org/";
 			dlg.license = license;
 			dlg.wrap_license = true;
-			dlg.logo_icon_name = "spek";
+			try {
+				dlg.logo = IconTheme.get_default ().load_icon ("spek", 128, 0);
+			} catch (Error e) {
+				dlg.logo_icon_name = "spek";
+			}
 			dlg.translator_credits = _("translator-credits");
 			dlg.set_transient_for (this);
 			dlg.destroy_with_parent = true;
 			dlg.response.connect (id => dlg.destroy ());
 			dlg.set_url_hook (url_hook);
+			dlg.modal = true;
 			dlg.present ();
 		}
 

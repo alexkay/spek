@@ -106,10 +106,11 @@ namespace Spek {
 			}
 		}
 
+		private double log10_threshold = Math.log10 (-THRESHOLD);
 		private void data_cb (int sample, float[] values) {
 			for (int y = 0; y < BANDS; y++) {
 				var level = double.min (
-					1.0, Math.log10 (1.0 - THRESHOLD + values[y]) / Math.log10 (-THRESHOLD));
+					1.0, Math.log10 (1.0 - THRESHOLD + values[y]) / log10_threshold);
 				put_pixel (image, sample, y, get_color (level));
 			}
 			Idle.add (() => { queue_draw (); return false; });
