@@ -141,8 +141,14 @@ gint spek_audio_read (SpekAudioContext *cx) {
 	for (;;) {
 		while (cx->packet->size > 0) {
 			buffer_size = cx->buffer_size;
+#if LIBAVCODEC_VERSION_INT >= AV_VERSION_INT (52, 23, 0)
 			len = avcodec_decode_audio3 (
 				cx->codec_context, (int16_t *) cx->buffer, &buffer_size, cx->packet);
+#else
+			len = avcodec_decode_audio2 (
+				cx->codec_context, (int16_t *) cx->buffer, &buffer_size,
+				cx->packet->data, cx->packet->size);
+#endif
 			if (len < 0) {
 				/* Error, skip the frame. */
 				cx->packet->size = 0;
