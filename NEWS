@@ -51,6 +51,6 @@ Dependencies
 
  * GTK+ >= 2.18
  * FFmpeg libraries:
-   * libavcodec
+   * libavcodec >= 52.56.0 (r22291)
    * libavformat
    * libavutil
