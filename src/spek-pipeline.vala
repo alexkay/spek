@@ -66,7 +66,7 @@ namespace Spek {
 				items += cx.codec_name;
 			}
 			if (cx.bit_rate != 0) {
-				items += _("%d kbps").printf (cx.bit_rate / 1000);
+				items += _("%d kbps").printf ((cx.bit_rate + 500) / 1000);
 			}
 			if (cx.sample_rate != 0) {
 				items += _("%d Hz").printf (cx.sample_rate);
