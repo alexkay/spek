@@ -33,6 +33,7 @@ SPEK_PACKAGES="--pkg gtk+-2.0 --pkg gio-2.0"
 AC_SUBST(SPEK_PACKAGES)
 
 AC_CHECK_LIB(m, log10)
+AC_CHECK_LIB(gthread-2.0, g_thread_init)
 
 # Check for GDK Quartz and MacOSX integration package
 _gdk_tgt=`$PKG_CONFIG --variable=target gdk-2.0`
