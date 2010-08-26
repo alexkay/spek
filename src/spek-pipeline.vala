@@ -130,6 +130,9 @@ namespace Spek {
 		}
 
 		private void * reader_func () {
+			var timeval = TimeVal ();
+			timeval.get_current_time ();
+
 			int pos = 0, prev_pos = 0;
 			int block_size = cx.width * cx.channels / 8;
 			int size;
@@ -166,6 +169,11 @@ namespace Spek {
 			reader_sync (-1);
 			worker_thread.join ();
 
+			var newval = TimeVal ();
+			newval.get_current_time ();
+			long ms = (newval.tv_sec - timeval.tv_sec) * 1000 +
+				(newval.tv_usec - timeval.tv_usec) / 1000;
+			print ("%i ms\n", (int) ms);
 			return null;
 		}
 
