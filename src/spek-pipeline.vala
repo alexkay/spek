@@ -38,6 +38,7 @@ namespace Spek {
 
 		private Fft.Plan fft;
 		private int nfft; // Size of the FFT transform.
+		private float[] coss; // Pre-computed cos table.
 		private const int NFFT = 64; // Number of FFTs to pre-fetch.
 		private int input_size;
 		private int input_pos;
@@ -88,6 +89,11 @@ namespace Spek {
 			} else {
 				this.sample_rate = cx.sample_rate;
 				this.nfft = 2 * bands - 2;
+				this.coss = new float[nfft];
+				float cf = 2f * (float) Math.PI / this.nfft;
+				for (int i = 0; i < this.nfft; i++) {
+					this.coss[i] = Math.cosf (cf * i);
+				}
 				this.fft = new Fft.Plan (nfft, threshold);
 				this.input_size = nfft * (NFFT * 2 + 1);
 				this.input = new float[input_size];
@@ -194,7 +200,6 @@ namespace Spek {
 			int64 frames = 0;
 			int64 num_fft = 0;
 			int64 acc_error = 0;
-			float cf = 2f * (float) Math.PI / nfft;
 			int head = 0, tail = 0;
 			int prev_head = 0;
 
@@ -234,7 +239,7 @@ namespace Spek {
 						for (int i = 0; i < nfft; i++) {
 							float val = input[(input_size + head - nfft + i) % input_size];
 							// Hamming window.
-							val *= 0.53836f - 0.46164f * Math.cosf (cf * i);
+							val *= 0.53836f - 0.46164f * coss[i];
 							fft.input[i] = val;
 						}
 						fft.execute ();
