@@ -1,0 +1,50 @@
+#labels Featured
+= Unix installation instructions =
+
+== Binary packages ==
+
+Spek is not yet packaged on many distributions, help in this area will be greatly appreciated.
+
+ * *Arch Linux*: Use one of the packages in the AUR: [http://aur.archlinux.org/packages.php?ID=38001 spek] and [http://aur.archlinux.org/packages.php?ID=37252 spek-git].
+ * *Debian*: RFP (request for packaging): [http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=584524 bug #584524].
+ * *Fedora*: [http://dl.dropbox.com/u/6598054/spek-0.4-5.fc13.x86_64.rpm v0.4 x86_64], [http://dl.dropbox.com/u/6598054/spek-0.4-5.fc13.i686.rpm v0.4 i686] and [http://dl.dropbox.com/u/6598054/spek-0.4-5.fc13.src.rpm v0.4 source] (RPMs by scorp6). There's also a review request needing a sponsor: [https://bugzilla.redhat.com/show_bug.cgi?id=597888 bug #597888].
+ * *FreeBSD*: [http://www.freebsd.org/cgi/query-pr.cgi?pr=150381 ports/150381]
+ * *Ubuntu*: [http://dl.dropbox.com/u/124437/spek_0.4-1_amd64.deb v0.4 amd64] (DEB by mcnellis), [http://dl.dropbox.com/u/1099005/spek_0.4-1_i386.deb v0.4 i386] (DEB by !KoxxBoxx) and [http://sharebee.com/f3899f48 v0.5 i386] (DEB by loskutov0).
+
+== Building from the tarball ==
+
+To build Spek, download the source code tarball then run these commands from terminal:
+
+{{{
+% tar -xjvf spek-0.x.tar.bz2
+% cd spek-0.x
+% ./configure
+% make
+}}}
+
+To build you will need GTK+ and FFmpeg packages. On Debian/Ubuntu you also need development packages: libgtk2.0-dev, libavcodec-dev and libavformat-dev. For MP3 support you will need FFmpeg compiled with restricted codecs. On Ubuntu you can install ubuntu-restricted-extras. On Debian you can use FFmpeg from [http://debian-multimedia.org/ Debian Multimedia]. On Fedora you need ffmpeg-devel from rpmfusion-free-updates.
+
+Also note that Ubuntu's FFmpeg is very outdated, you might need to install it from a third-party [https://launchpad.net/ubuntu/+ppas?name_filter=ffmpeg PPA] or [http://ubuntuforums.org/showthread.php?t=786095 from svn].
+
+To start Spek, run:
+
+{{{
+% src/spek
+}}}
+
+Or install it with:
+
+{{{
+% sudo make install
+}}}
+
+== Building from the git repository ==
+
+{{{
+% git clone git://gitorious.org/spek/spek.git
+% cd spek
+% ./autogen.sh
+% make
+}}}
+
+In addition to the packages listed above, you will need autotools and the Vala compiler (normally packaged as valac).

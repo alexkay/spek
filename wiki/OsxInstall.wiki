@@ -3,7 +3,7 @@
 
 == Binary package ==
 
-Experimental version of Spek for Mac OS X is available in the download section. Download and open the DMG package, then drag the Spek icon to Applications.
+Spek for Mac OS X is available in the download section. Download and open the DMG package, then drag the Spek icon to Applications.
 
 Spek requires OS X 10.5 or 10.6 and an Intel-based Mac.
 
@@ -14,12 +14,7 @@ Spek can be built using packages from [http://www.macports.org/ MacPorts]. After
 {{{
 $ sudo port install intltool
 $ sudo port install gtk2 +quartz +no_x11
-$ sudo port install gstreamer
-$ sudo port install gst-plugins-base +no_gnome_vfs +no_x11
-$ sudo port install gst-plugins-good
-$ sudo port install gst-plugins-bad +no_x11
-$ sudo port install gst-plugins-ugly
-$ sudo port install gst-ffmpeg
+$ sudo port install ffmpeg-devel
 }}}
 
 Then download the source code tarball and run these commands from terminal:
