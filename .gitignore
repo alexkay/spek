@@ -26,6 +26,7 @@ omf.make
 po/.intltool-merge-cache
 po/POTFILES
 po/stamp-it
+po/*.gmo
 samples/
 src/*.c
 !src/spek-audio.c
