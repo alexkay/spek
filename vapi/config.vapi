@@ -14,6 +14,6 @@ namespace Config {
 	public const string PKGDATADIR; /* /usr/local/share/spek */
 	public const string PKGLIBDIR;  /* /usr/local/lib/spek   */
 
-	/* linux*, mingw*, or darwin* */
+	/* freebsd*, linux*, mingw*, darwin*, etc. */
 	public const string HOST_OS;
 }
