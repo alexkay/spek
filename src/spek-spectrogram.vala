@@ -95,7 +95,7 @@ namespace Spek {
 		}
 
 		private int prev_width = -1;
-		private override void size_allocate (Gdk.Rectangle allocation) {
+		protected override void size_allocate (Gdk.Rectangle allocation) {
 			base.size_allocate (allocation);
 
 			bool width_changed = prev_width != allocation.width;
@@ -116,7 +116,7 @@ namespace Spek {
 			Idle.add (() => { queue_draw (); return false; });
 		}
 
-		private override bool expose_event (EventExpose event) {
+		protected override bool expose_event (EventExpose event) {
 			var cr = cairo_create (this.window);
 
 			// Clip to the exposed area.

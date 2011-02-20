@@ -55,7 +55,7 @@ namespace Spek {
 		}
 
 		private bool changing_style = false;
-		private override void style_set (Style? previous_style) {
+		protected override void style_set (Style? previous_style) {
 			if (changing_style) {
 				return;
 			}
@@ -66,7 +66,7 @@ namespace Spek {
 			changing_style = false;
 		}
 
-		private override bool expose_event (Gdk.EventExpose event) {
+		protected override bool expose_event (Gdk.EventExpose event) {
 			if (!is_drawable ()) {
 				return false;
 			}
