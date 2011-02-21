@@ -1,0 +1,48 @@
+<?xml version="1.0" standalone="no"?> <!--*- mode: xml -*-->
+<app-bundle>
+  <meta>
+    <prefix name="default">/opt/local</prefix>
+    <destination overwrite="yes">${project}</destination>
+    <run-install-name-tool/>
+    <launcher-script>${project}/launcher.sh</launcher-script >
+    <gtk>gtk+-2.0</gtk>
+  </meta>
+  <plist>${project}/Info.plist</plist>
+  <main-binary dest="${bundle}/Contents/Resources/bin">
+    ${project}/bin/bin/spek
+  </main-binary>
+  <binary>
+     ${prefix}/lib/${gtkdir}/modules/*.so
+  </binary>
+  <binary>
+    ${prefix}/lib/${gtkdir}/${pkg:${gtk}:gtk_binary_version}/engines/*.so
+  </binary>
+  <binary>
+    ${prefix}/lib/pango/${pkg:pango:pango_module_version}/modules/pango-basic-atsui.so
+  </binary>
+
+  <!-- translations name="gtk20">
+    ${prefix}/share/locale
+  </translations -->
+
+  <data dest="${bundle}/Contents/Resources/share">
+    ${project}/bin/share
+  </data>
+
+  <!-- Copy in the themes data. You may want to trim this to save space
+       in your bundle. -->
+  <!-- data>
+    ${prefix}/share/themes
+  </data -->
+
+  <data dest="${bundle}/Contents/Resources">
+    ${project}/Spek.icns
+  </data>
+  <data dest="${bundle}/Contents/Resources/etc/${gtkdir}/gtkrc">
+    ${project}/gtkrc
+  </data>
+
+  <!-- icon-theme icons="auto">
+    Tango
+  </icon-theme -->
+</app-bundle>
