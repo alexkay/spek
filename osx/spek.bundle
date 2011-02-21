@@ -18,7 +18,10 @@
     ${prefix}/lib/${gtkdir}/${pkg:${gtk}:gtk_binary_version}/engines/*.so
   </binary>
   <binary>
-    ${prefix}/lib/pango/${pkg:pango:pango_module_version}/modules/pango-basic-atsui.so
+    ${prefix}/lib/${gtkdir}/${pkg:${gtk}:gtk_binary_version}/immodules/*.so
+  </binary>
+  <binary>
+    ${prefix}/lib/pango/${pkg:pango:pango_module_version}/modules/*.so
   </binary>
 
   <!-- translations name="gtk20">

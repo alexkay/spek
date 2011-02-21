@@ -41,6 +41,29 @@ cp -Rp $DMG_APP $MOUNT_POINT
 
 find $MOUNT_POINT -type d -iregex '.*\.svn$' &>/dev/null | xargs rm -rf
 
-#pushd $MOUNT_POINT &>/dev/null
+cd $MOUNT_POINT
+ln -s /Applications " "
+cd ..
+
+cp DS_Store $MOUNT_POINT/.DS_Store
+
+echo "Detaching from disk image..."
+hdiutil detach $MOUNT_POINT -quiet
+
+mv $DMG_FILE $DMG_FILE.master
+
+echo "Creating distributable image..."
+hdiutil convert -quiet -format UDBZ -o $DMG_FILE $DMG_FILE.master
+
+#echo "Installing end user license agreement..."
+#hdiutil flatten -quiet $DMG_FILE
+#/Developer/Tools/Rez /Developer/Headers/FlatCarbon/*.r dmg-data/license.r -a -o $DMG_FILE
+#hdiutil unflatten -quiet $DMG_FILE
+
+echo "Done."
+
+if [ ! "x$1" = "x-m" ]; then
+	rm $DMG_FILE.master
+fi
 
 cd ..

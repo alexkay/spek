@@ -28,6 +28,7 @@ missing
 mkinstalldirs
 omf.make
 osx/Spek.app
+osx/Spek.dmg
 osx/bin
 po/*.gmo
 po/.intltool-merge-cache
