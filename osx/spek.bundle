@@ -32,7 +32,7 @@
     ${project}/bin/share
   </data>
   <data>
-    ${prefix}/share/themes
+    ${prefix}/share/themes/Quartz
   </data>
   <data dest="${bundle}/Contents/Resources">
     ${project}/Spek.icns

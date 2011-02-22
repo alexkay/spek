@@ -27,6 +27,19 @@ Note that these ports:
 Also, by some reason MacPorts doesn't install /opt/local/lib/charset.alias,
 copy it from your favourite Unix flavour.
 
+Finally, manually install gtk-quartz-engine into /opt/local:
+
+$ git clone git://github.com/jralls/gtk-quartz-engine.git
+$ cd gtk-quartz-engine
+$ glibtoolize --force --copy
+$ aclocal
+$ autoheader
+$ automake --add-missing
+$ autoconf
+$ ./configure --prefix=/opt/local
+$ gmake
+$ sudo gmake install
+
 After all dependencies are built just run:
 
 $ osx/bundle.sh
