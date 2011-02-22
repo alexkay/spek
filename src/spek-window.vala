@@ -22,7 +22,6 @@ using Gtk;
 namespace Spek {
 	public class Window : Gtk.Window {
 
-		private const string full_title = _("Spek - Acoustic Spectrum Analyser");
 		private MessageBar message_bar;
 		private Spectrogram spectrogram;
 		private string cur_dir;
@@ -34,7 +33,7 @@ namespace Spek {
 		};
 
 		public Window (string? file_name) {
-			title = full_title;
+		        title = _("Spek - Acoustic Spectrum Analyser");
 			set_default_icon_name ("spek");
 			set_default_size (640, 480);
 			destroy.connect (Gtk.main_quit);
@@ -212,7 +211,7 @@ namespace Spek {
 			dlg.program_name = "Spek";
 			dlg.version = Config.PACKAGE_VERSION;
 			dlg.copyright = _("Copyright \xc2\xa9 2010 Alexander Kojevnikov");
-			dlg.comments = full_title;
+			dlg.comments = title;
 			dlg.set ("authors", authors);
 //			dlg.set ("documenters", documenters);
 			dlg.set ("artists", artists);
