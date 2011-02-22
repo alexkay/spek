@@ -5,6 +5,7 @@ Spek bundle uses packages provided by MacPorts. After installing MacPorts build 
 
 $ sudo port install intltool
 $ sudo port install vala
+$ sudo port install cairo-devel +no_x11 +quartz
 $ sudo port install pango +no_x11 +quartz
 $ sudo port install gtk2 +no_x11 +quartz
 $ sudo port install hicolor-icon-theme
