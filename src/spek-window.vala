@@ -220,7 +220,7 @@ namespace Spek {
 			dlg.license = license;
 			dlg.wrap_license = true;
 			try {
-				dlg.logo = IconTheme.get_default ().load_icon ("spek", 128, 0);
+				dlg.logo = IconTheme.get_default ().load_icon ("spek", 128, IconLookupFlags.FORCE_SVG);
 			} catch (Error e) {
 				dlg.logo_icon_name = "spek";
 			}
