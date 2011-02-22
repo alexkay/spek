@@ -31,21 +31,16 @@
   <data dest="${bundle}/Contents/Resources/share">
     ${project}/bin/share
   </data>
-
-  <!-- Copy in the themes data. You may want to trim this to save space
-       in your bundle. -->
-  <!-- data>
+  <data>
     ${prefix}/share/themes
-  </data -->
-
+  </data>
   <data dest="${bundle}/Contents/Resources">
     ${project}/Spek.icns
   </data>
   <data dest="${bundle}/Contents/Resources/etc/${gtkdir}/gtkrc">
     ${project}/gtkrc
   </data>
-
-  <!-- icon-theme icons="auto">
-    Tango
-  </icon-theme -->
+  <icon-theme icons="auto">
+    hicolor
+  </icon-theme>
 </app-bundle>

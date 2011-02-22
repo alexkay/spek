@@ -1,0 +1,32 @@
+Building the OS X bundle
+========================
+
+Spek bundle uses packages provided by MacPorts. After installing MacPorts build all dependencies:
+
+$ sudo port install intltool
+$ sudo port install vala
+$ sudo port install pango +no_x11 +quartz
+$ sudo port install gtk2 +no_x11 +quartz
+$ sudo port install hicolor-icon-theme
+$ sudo port install ffmpeg +no_x11 +no_nonfree
+$ sudo port install ige-mac-integration
+$ sudo port install ige-mac-bundler
+
+Now make sure Spek builds by running `gmake && src/spek`.
+
+Note that these ports:
+
+  ige-mac-integration
+  ffmpeg
+  gtk2
+
+...require this line in their Portfile:
+
+  configure.ldflags-append -headerpad_max_install_names
+
+Also, by some reason MacPorts doesn't install /opt/local/lib/charset.alias,
+copy it from your favourite Unix flavour.
+
+After all dependencies are built just run:
+
+$ osx/bundle.sh
