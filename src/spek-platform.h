@@ -27,4 +27,7 @@ void spek_platform_fix_args (gchar **argv, gint argc);
 /* Open a link in the browser */
 void spek_platform_show_uri (const gchar *uri);
 
+/* Read a line from a uri */
+gchar *spek_platform_read_line (const gchar *uri);
+
 #endif

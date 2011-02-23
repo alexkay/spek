@@ -306,15 +306,8 @@ namespace Spek {
 			}
 
 			// Get the version number.
-			var file = File.new_for_uri ("http://www.spek-project.org/version");
-			if (!file.query_exists (null)) {
-				return null;
-			}
-			string version;
-			try {
-				var stream = new DataInputStream (file.read (null));
-				version = stream.read_line (null, null);
-			} catch (Error e) {
+			var version = Platform.read_line ("http://www.spek-project.org/version");
+			if (version == null) {
 				return null;
 			}
 

@@ -64,3 +64,23 @@ void spek_platform_show_uri (const gchar *uri) {
 	}
 #endif
 }
+
+gchar *spek_platform_read_line (const gchar *uri) {
+	gchar *line = NULL;
+	GFile *file = NULL;
+	GFileInputStream *file_stream = NULL;
+
+	file = g_file_new_for_uri (uri);
+	file_stream = g_file_read (file, NULL, NULL);
+	if (file_stream) {
+		GDataInputStream *data_stream = NULL;
+
+		data_stream = g_data_input_stream_new (G_INPUT_STREAM (file_stream));
+		line = g_data_input_stream_read_line (data_stream, NULL, NULL, NULL);
+
+		g_object_unref (data_stream);
+		g_object_unref (file_stream);
+	}
+	g_object_unref (file);
+	return line;
+}
