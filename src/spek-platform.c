@@ -26,6 +26,7 @@
 
 #ifdef G_OS_DARWIN
 #include <CoreFoundation/CoreFoundation.h>
+#include <ApplicationServices/ApplicationServices.h>
 #endif
 
 #include "spek-platform.h"
@@ -62,10 +63,22 @@ void spek_platform_show_uri (const gchar *uri) {
 	/* gtk_show_uri doesn't work on Windows */
 	ShellExecuteA (NULL, "open", uri, "", NULL, SW_SHOWNORMAL);
 #else
+#ifdef G_OS_DARWIN
+	/* it doesn't work on OS X too */
+        CFStringRef str = NULL;
+        CFURLRef url = NULL;
+
+        str = CFStringCreateWithCString (NULL, uri, kCFStringEncodingASCII);
+        url = CFURLCreateWithString (NULL, str, NULL);
+	LSOpenCFURLRef (url, NULL);
+	CFRelease (url);
+	CFRelease (str);
+#else
 	GError *error = NULL;
 	if (!gtk_show_uri (NULL, uri, gtk_get_current_event_time (), &error)) {
 		g_error_free (error);
 	}
+#endif
 #endif
 }
 
