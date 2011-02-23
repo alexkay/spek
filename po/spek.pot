@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-23 17:10+0800\n"
+"POT-Creation-Date: 2011-02-23 19:43+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,12 +43,13 @@ msgstr ""
 msgid "Run `%s --help` to see a full list of available command line options.\n"
 msgstr ""
 
-#: ../src/spek.vala:47
+#. TRANSLATORS: first %s is the package name, second %s is the package version.
+#: ../src/spek.vala:48
 #, c-format
 msgid "%s version %s\n"
 msgstr ""
 
-#: ../src/spek.vala:52
+#: ../src/spek.vala:53
 msgid "Specify a single file\n"
 msgstr ""
 
@@ -132,7 +133,7 @@ msgstr ""
 msgid "Audio files"
 msgstr ""
 
-#. Note to translators: window title, %s is replaced with the file name
+#. TRANSLATORS: window title, %s is replaced with the file name
 #: ../src/spek-window.vala:142
 #, c-format
 msgid "Spek - %s"
