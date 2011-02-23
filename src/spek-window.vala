@@ -138,7 +138,7 @@ namespace Spek {
 			cur_dir = Path.get_dirname (file_name);
 			spectrogram.open (file_name);
 
-			// Note to translators: window title, %s is replaced with the file name
+			// TRANSLATORS: window title, %s is replaced with the file name
 			title = _("Spek - %s").printf (Path.get_basename (file_name));
 		}
 

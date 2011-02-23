@@ -44,6 +44,7 @@ namespace Spek {
 		}
 
 		if (version) {
+			// TRANSLATORS: first %s is the package name, second %s is the package version.
 			print (_("%s version %s\n"), Config.PACKAGE_NAME, Config.PACKAGE_VERSION);
 			return 0;
 		}
