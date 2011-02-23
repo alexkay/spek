@@ -42,6 +42,7 @@ if test "x$_gdk_tgt" = xquartz; then
    PKG_CHECK_MODULES(IGE_MAC, ige-mac-integration)
    AC_SUBST(IGE_MAC_LIBS)
    AC_SUBST(IGE_MAC_CFLAGS)
+   AC_DEFINE(G_OS_DARWIN, 1, [Platform detection macro missing in GLib])
 fi
 
 GETTEXT_PACKAGE=spek

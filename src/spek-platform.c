@@ -24,6 +24,10 @@
 #include <shellapi.h>
 #endif
 
+#ifdef G_OS_DARWIN
+#include <CoreFoundation/CoreFoundation.h>
+#endif
+
 #include "spek-platform.h"
 
 void spek_platform_fix_args (gchar **argv, gint argc) {
@@ -66,6 +70,27 @@ void spek_platform_show_uri (const gchar *uri) {
 }
 
 gchar *spek_platform_read_line (const gchar *uri) {
+#ifdef G_OS_DARWIN
+	/* GIO doesn't work on OS X */
+	CFStringRef str = NULL;
+	CFURLRef url = NULL;
+	CFDataRef data = NULL;
+	CFIndex length = 0;
+	gchar *buf = NULL;
+
+	str = CFStringCreateWithCString (NULL, uri, kCFStringEncodingASCII);
+	url = CFURLCreateWithString (NULL, str, NULL);
+	if (CFURLCreateDataAndPropertiesFromResource (NULL, url, &data, NULL, NULL, NULL)) {
+		length = CFDataGetLength (data);
+		buf = (gchar *) g_malloc (length + 1);
+		CFDataGetBytes (data, CFRangeMake (0, length), (UInt8 *) buf);
+		buf[length] = '\0';
+		CFRelease (data);
+	}
+	CFRelease (url);
+	CFRelease (str);
+	return buf;
+#else
 	gchar *line = NULL;
 	GFile *file = NULL;
 	GFileInputStream *file_stream = NULL;
@@ -83,4 +108,5 @@ gchar *spek_platform_read_line (const gchar *uri) {
 	}
 	g_object_unref (file);
 	return line;
+#endif
 }
