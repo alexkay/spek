@@ -1,0 +1,8 @@
+[spek.spek]
+file_filter = po/<lang>.po
+source_file = po/spek.pot
+source_lang = en
+
+[main]
+host = http://www.transifex.net
+
