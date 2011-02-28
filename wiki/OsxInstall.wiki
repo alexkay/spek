@@ -13,8 +13,10 @@ Spek can be built using packages from [http://www.macports.org/ MacPorts]. After
 
 {{{
 $ sudo port install intltool
-$ sudo port install gtk2 +quartz +no_x11
-$ sudo port install ffmpeg-devel
+$ sudo port install pango +no_x11 +quartz
+$ sudo port install gtk2 +no_x11 +quartz
+$ sudo port install ffmpeg +no_x11 +no_nonfree
+$ sudo port install ige-mac-integration
 }}}
 
 Then download the source code tarball and run these commands from terminal:
