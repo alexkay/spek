@@ -1,6 +1,6 @@
 /* spek-window.vala
  *
- * Copyright (C) 2010  Alexander Kojevnikov <alexander@kojevnikov.com>
+ * Copyright (C) 2010-2011  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
  * Spek is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -192,7 +192,7 @@ namespace Spek {
 			string[] artists = {
 				"Olga Vasylevska"
 			};
-			string license = "Copyright (C) 2010  Alexander Kojevnikov";
+			string license = "Copyright (C) 2010-2011  Alexander Kojevnikov";
 			license += "\n\n";
 			license += "Spek is free software: you can redistribute it and/or modify ";
 			license += "it under the terms of the GNU General Public License as published by ";
@@ -210,7 +210,7 @@ namespace Spek {
 			var dlg = new AboutDialog ();
 			dlg.program_name = "Spek";
 			dlg.version = Config.PACKAGE_VERSION;
-			dlg.copyright = _("Copyright \xc2\xa9 2010 Alexander Kojevnikov");
+			dlg.copyright = _("Copyright \xc2\xa9 2010-2011 Alexander Kojevnikov");
 			dlg.comments = title;
 			dlg.set ("authors", authors);
 //			dlg.set ("documenters", documenters);
