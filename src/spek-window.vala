@@ -268,23 +268,9 @@ namespace Spek {
 		};
 
 		private void * check_version () {
-			var config = Path.build_filename (Environment.get_user_config_dir (), "spek");
-			DirUtils.create_with_parents (config, 0755);
-			config = Path.build_filename (config, "config.ini");
-			var key_file = new KeyFile ();
-			try {
-				key_file.load_from_file (config, KeyFileFlags.NONE);
-			} catch (KeyFileError e) {
-			} catch (FileError e) {
-			}
-
 			// Does the user want to check for updates?
-			bool check = true;
-			try {
-				check = key_file.get_boolean ("update", "check");
-			} catch (KeyFileError e) {
-				check = true;
-			}
+			var prefs = new Preferences ();
+			var check = prefs.check_update;
 			if (!check) {
 				return null;
 			}
@@ -294,12 +280,7 @@ namespace Spek {
 			time_val.get_current_time ();
 			Date today = Date ();
 			today.set_time_val (time_val);
-			int day = 0;
-			try {
-				day = key_file.get_integer ("update", "last_update");
-			} catch (KeyFileError e) {
-				day = 0;
-			}
+			int day = prefs.last_update;
 			int diff = (int) today.get_julian () - day;
 			if (diff < 7) {
 				return null;
@@ -311,15 +292,13 @@ namespace Spek {
 				return null;
 			}
 
-			// Write to the config file.
-			key_file.set_boolean ("update", "check", check);
-			key_file.set_integer ("update", "last_update", (int) today.get_julian ());
-			var output = FileStream.open (config, "w+");
-			output.puts (key_file.to_data ());
-
 			if (version != null && version > Config.PACKAGE_VERSION) {
 				Idle.add (() => { message_bar.show_all (); return false; });
 			}
+
+			// Update the preferences.
+			prefs.check_update = check;
+			prefs.last_update = (int) today.get_julian ();
 			return null;
 		}
 	}

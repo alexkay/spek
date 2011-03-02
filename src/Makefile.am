@@ -7,6 +7,7 @@ spek_SOURCES = \
 	spek-message-bar.vala \
 	spek-pipeline.vala \
 	spek-platform.c \
+	spek-preferences.vala \
 	spek-ruler.vala \
 	spek-spectrogram.vala \
 	spek-window.vala
