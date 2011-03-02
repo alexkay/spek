@@ -1,0 +1,170 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Spek\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
+"POT-Creation-Date: 2011-03-01 09:44+0800\n"
+"PO-Revision-Date: 2011-03-02 01:12+0000\n"
+"Last-Translator: alexkay <alexander@kojevnikov.com>\n"
+"Language-Team: Swedish <>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sv\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: ../data/spek.desktop.in.in.h:1
+msgid "Spectrum Analyser"
+msgstr "Spektralanalysator"
+
+#: ../data/spek.desktop.in.in.h:2
+msgid "Spek"
+msgstr "Spek"
+
+#: ../data/spek.desktop.in.in.h:3
+msgid "View spectrograms of your audio files"
+msgstr "Visa spektrogram av dina ljudfiler"
+
+#: ../src/spek.vala:25
+msgid "Display the version and exit"
+msgstr "Visa versionen och stäng"
+
+#: ../src/spek.vala:38
+msgid "[FILE]"
+msgstr "[FIL]"
+
+#: ../src/spek.vala:42
+#, c-format
+msgid "Run `%s --help` to see a full list of available command line options.\n"
+msgstr ""
+"Kör `%s --help` för att se en fullständig lista av tillgängliga "
+"kommandorader.\n"
+
+#. TRANSLATORS: first %s is the package name, second %s is the package
+#. version.
+#: ../src/spek.vala:48
+#, c-format
+msgid "%s version %s\n"
+msgstr "%s version %s\n"
+
+#: ../src/spek.vala:53
+msgid "Specify a single file\n"
+msgstr "Välj en fil\n"
+
+#: ../src/spek-audio.c:47
+msgid "Cannot open input file"
+msgstr "Kan ej öppna den valda filen"
+
+#: ../src/spek-audio.c:54
+msgid "Cannot find stream info"
+msgstr "Kunde ej hitta någon flödesinformation"
+
+#: ../src/spek-audio.c:66
+msgid "The file contains no audio streams"
+msgstr "Den här filen innehåller inget ljudflöde"
+
+#: ../src/spek-audio.c:73
+msgid "Cannot find decoder"
+msgstr "Kan ej hitta dekoder"
+
+#: ../src/spek-audio.c:88
+msgid "No audio channels"
+msgstr "Inga ljudkanaler"
+
+#: ../src/spek-audio.c:92
+msgid "Cannot open decoder"
+msgstr "Kan ej öppna dekoder"
+
+#: ../src/spek-audio.c:113
+msgid "Unsupported sample format"
+msgstr "Inget stöd för detta samplingsformatet"
+
+#: ../src/spek-pipeline.vala:70
+#, c-format
+msgid "%d kbps"
+msgstr "%d kbit/s"
+
+#: ../src/spek-pipeline.vala:73
+#, c-format
+msgid "%d Hz"
+msgstr "%d Hz"
+
+#: ../src/spek-pipeline.vala:78
+#, c-format
+msgid "%d bit"
+msgid_plural "%d bits"
+msgstr[0] "%d bit"
+msgstr[1] "%d bitar"
+
+#: ../src/spek-pipeline.vala:81
+#, c-format
+msgid "%d channel"
+msgid_plural "%d channels"
+msgstr[0] "%d kanal"
+msgstr[1] "%d kanaler"
+
+#. TRANSLATORS: first %s is the error message, second %s is stream
+#. description.
+#: ../src/spek-pipeline.vala:88
+#, c-format
+msgid "%s: %s"
+msgstr "%s: %s"
+
+#: ../src/spek-window.vala:36
+msgid "Spek - Acoustic Spectrum Analyser"
+msgstr "Spek - Tonspektrum Analysator"
+
+#: ../src/spek-window.vala:82
+msgid ""
+"A new version of Spek is available on <a href=\"http://www.spek-"
+"project.org\">www.spek-project.org</a>"
+msgstr ""
+"En ny version av Spek finns tillgänglig på <a href=\"http://www.spek-"
+"project.org\">www.spek-project.org</a>"
+
+#: ../src/spek-window.vala:88
+msgid "All files"
+msgstr "Alla filer"
+
+#: ../src/spek-window.vala:91
+msgid "PNG images"
+msgstr "PNG bilder"
+
+#: ../src/spek-window.vala:94
+msgid "Audio files"
+msgstr "Ljud filer"
+
+#. TRANSLATORS: window title, %s is replaced with the file name
+#: ../src/spek-window.vala:142
+#, c-format
+msgid "Spek - %s"
+msgstr "Spek - %s"
+
+#: ../src/spek-window.vala:147
+msgid "Open File"
+msgstr "Öppna fil"
+
+#: ../src/spek-window.vala:164
+msgid "Save Spectrogram"
+msgstr "Spara spektrogram"
+
+#. Suggested name is <file_name>.png
+#: ../src/spek-window.vala:171
+msgid "Untitled"
+msgstr "Utan titel"
+
+#: ../src/spek-window.vala:213
+msgid "Copyright © 2010 Alexander Kojevnikov"
+msgstr "Copyright © 2010 Alexander Kojevnikov"
+
+#: ../src/spek-window.vala:218
+msgid "Spek Website"
+msgstr "Speks webbsajt"
+
+#: ../src/spek-window.vala:227
+msgid "translator-credits"
+msgstr "Jimpalompa"
