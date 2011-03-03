@@ -191,7 +191,7 @@ namespace Spek {
 					freq,
 					3.0,
 					unit => (h - TPAD - BPAD) * unit / freq,
-					unit => "%d kHz".printf (unit / 1000));
+					unit => _("%d kHz").printf (unit / 1000));
 				cr.translate (LPAD, TPAD);
 				rate_ruler.draw (cr, layout, false);
 				cr.identity_matrix ();

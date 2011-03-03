@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-02 20:19+0800\n"
+"POT-Creation-Date: 2011-03-03 21:34+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -109,6 +109,11 @@ msgstr[1] ""
 #: ../src/spek-pipeline.vala:88
 #, c-format
 msgid "%s: %s"
+msgstr ""
+
+#: ../src/spek-spectrogram.vala:194
+#, c-format
+msgid "%d kHz"
 msgstr ""
 
 #: ../src/spek-window.vala:36
