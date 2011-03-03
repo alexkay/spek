@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
-"POT-Creation-Date: 2011-03-01 09:44+0800\n"
-"PO-Revision-Date: 2011-03-02 01:12+0000\n"
+"POT-Creation-Date: 2011-03-03 21:34+0800\n"
+"PO-Revision-Date: 2011-03-03 13:36+0000\n"
 "Last-Translator: alexkay <alexander@kojevnikov.com>\n"
 "Language-Team: Swedish <>\n"
 "MIME-Version: 1.0\n"
@@ -114,6 +114,11 @@ msgstr[1] "%d kanaler"
 msgid "%s: %s"
 msgstr "%s: %s"
 
+#: ../src/spek-spectrogram.vala:194
+#, c-format
+msgid "%d kHz"
+msgstr ""
+
 #: ../src/spek-window.vala:36
 msgid "Spek - Acoustic Spectrum Analyser"
 msgstr "Spek - Tonspektrum Analysator"
@@ -158,8 +163,8 @@ msgid "Untitled"
 msgstr "Utan titel"
 
 #: ../src/spek-window.vala:213
-msgid "Copyright © 2010 Alexander Kojevnikov"
-msgstr "Copyright © 2010 Alexander Kojevnikov"
+msgid "Copyright © 2010-2011 Alexander Kojevnikov"
+msgstr "Copyright © 2010-2011 Alexander Kojevnikov"
 
 #: ../src/spek-window.vala:218
 msgid "Spek Website"
