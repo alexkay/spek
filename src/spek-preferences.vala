@@ -62,5 +62,18 @@ namespace Spek {
 				key_file.set_integer ("update", "last_update", value);
 			}
 		}
+
+		public string language {
+			owned get {
+				try {
+					return key_file.get_string ("general", "language");
+				} catch (KeyFileError e) {
+				}
+				return "";
+			}
+			set {
+				key_file.set_string ("general", "language", value);
+			}
+		}
 	}
 }
