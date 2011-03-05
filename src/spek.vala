@@ -34,6 +34,8 @@ namespace Spek {
 		if (prefs.language.length > 0) {
 			Environment.set_variable ("LC_ALL", prefs.language, true);
 		}
+		prefs = null;
+
 //		Intl.setlocale (LocaleCategory.ALL, prefs.language);
 		Intl.bindtextdomain (Config.GETTEXT_PACKAGE, Config.LOCALEDIR);
 		Intl.bind_textdomain_codeset (Config.GETTEXT_PACKAGE, "UTF-8");
