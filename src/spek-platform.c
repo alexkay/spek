@@ -98,6 +98,7 @@ gchar *spek_platform_read_line (const gchar *uri) {
 		buf = (gchar *) g_malloc (length + 1);
 		CFDataGetBytes (data, CFRangeMake (0, length), (UInt8 *) buf);
 		buf[length] = '\0';
+		g_strchomp (buf);
 		CFRelease (data);
 	}
 	CFRelease (url);
