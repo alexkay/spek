@@ -1,0 +1,25 @@
+bin/spek
+share/applications/spek.desktop
+share/icons/hicolor/16x16/apps/spek.png
+share/icons/hicolor/22x22/apps/spek.png
+share/icons/hicolor/24x24/apps/spek.png
+share/icons/hicolor/32x32/apps/spek.png
+share/icons/hicolor/48x48/apps/spek.png
+share/icons/hicolor/scalable/apps/spek.svg
+@dirrmtry share/applications
+@dirrmtry share/icons/hicolor/16x16/apps
+@dirrmtry share/icons/hicolor/16x16
+@dirrmtry share/icons/hicolor/22x22/apps
+@dirrmtry share/icons/hicolor/22x22
+@dirrmtry share/icons/hicolor/24x24/apps
+@dirrmtry share/icons/hicolor/24x24
+@dirrmtry share/icons/hicolor/32x32/apps
+@dirrmtry share/icons/hicolor/32x32
+@dirrmtry share/icons/hicolor/48x48/apps
+@dirrmtry share/icons/hicolor/48x48
+@dirrmtry share/icons/hicolor/scalable/apps
+@dirrmtry share/icons/hicolor/scalable
+@dirrmtry share/icons/hicolor
+@dirrmtry share/icons
+@exec %%LOCALBASE%%/bin/update-desktop-database > /dev/null || /usr/bin/true
+@unexec %%LOCALBASE%%/bin/update-desktop-database > /dev/null || /usr/bin/true
