@@ -228,13 +228,11 @@ namespace Spek {
 					}
 					frames++;
 
-					// If we have enough frames for an FFT or we
-					// have all frames required for the interval run
-					// an FFT. In the last case we probably take the
-					// FFT of frames that we already handled.
+					// If we have enough frames for an FFT or we have
+					// all frames required for the interval run and FFT.
 					bool int_full = acc_error < cx.error_base && frames == cx.frames_per_interval;
 					bool int_over = acc_error >= cx.error_base && frames == 1 + cx.frames_per_interval;
-					if (frames % nfft == 0 || int_full || int_over) {
+					if (frames % nfft == 0 || ((int_full || int_over) && num_fft == 0)) {
 						prev_head = head;
 						for (int i = 0; i < nfft; i++) {
 							float val = input[(input_size + head - nfft + i) % input_size];
