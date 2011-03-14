@@ -10,15 +10,14 @@ Spek is not yet packaged on many distributions, help in this area will be greatl
  * *Fedora*: [http://dl.dropbox.com/u/6598054/spek-0.4-5.fc13.x86_64.rpm v0.4 x86_64], [http://dl.dropbox.com/u/6598054/spek-0.4-5.fc13.i686.rpm v0.4 i686] and [http://dl.dropbox.com/u/6598054/spek-0.4-5.fc13.src.rpm v0.4 source] (RPMs by scorp6). There's also a review request needing a sponsor: [https://bugzilla.redhat.com/show_bug.cgi?id=597888 bug #597888].
  * *FreeBSD*: [http://www.freshports.org/audio/spek/ audio/spek].
  * *Gentoo*: [http://packages.gentoo.org/package/media-sound/spek media-sound/spek].
- * *Ubuntu*: [http://dl.dropbox.com/u/124437/spek_0.4-1_amd64.deb v0.4 amd64] (DEB by mcnellis), [http://dl.dropbox.com/u/1099005/spek_0.4-1_i386.deb v0.4 i386] (DEB by !KoxxBoxx), [http://sharebee.com/f3899f48 v0.5 i386] (DEB by loskutov0) and [http://rapidshare.com/files/418217245/spek.deb.zip v0.6 i386] (DEB by san).
+ * *Ubuntu*: [https://launchpad.net/~alexk/+archive/spek Official PPA].
 
 == Ubuntu PPA ==
 
-[https://launchpad.net/~san-plusnet San] created [https://launchpad.net/~san-plusnet/+archive/spek-test1/+packages a PPA] for Ubuntu 10.04 users. It depends on [https://launchpad.net/~siretart/+archive/ppa Reinhard's PPA] for FFmpeg libraries, you will need to add both of them:
+To install Spek from the [https://launchpad.net/~alexk/+archive/spek official PPA] on Ubuntu 10.10 (Maverick Meerkat) run these commands:
 
 {{{
-% sudo add-apt-repository ppa:siretart/ppa
-% sudo add-apt-repository ppa:san-plusnet/spek-test1
+% sudo add-apt-repository ppa:alexk/spek
 % sudo apt-get update
 % sudo apt-get install spek
 }}}
