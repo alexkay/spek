@@ -1,0 +1,25 @@
+Source: spek
+Section: sound
+Priority: optional
+Maintainer: Alexander Kojevnikov <alexander@kojevnikov.com>
+Build-Depends: debhelper (>= 7.0.50~),
+               autotools-dev,
+               intltool (>= 0.35),
+               libavcodec-dev (>= 4:0.6),
+               libavformat-dev (>= 4:0.6),
+               libavutil-dev (>= 4:0.6),
+               libcairo2-dev,
+               libgdk-pixbuf2.0-dev,
+               libglib2.0-dev,
+               libgtk2.0-dev (>= 2.18.0),
+               libpango1.0-dev
+Standards-Version: 3.9.1
+Homepage: http://www.spek-project.org/
+Vcs-Git: git://gitorious.org/spek/spek.git
+Vcs-Browser: http://gitorious.org/spek/spek
+
+Package: spek
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: acoustic spectrum analyser
+ Spek helps to analyse your audio files by showing their spectrogram.
