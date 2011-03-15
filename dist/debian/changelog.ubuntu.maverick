@@ -1,0 +1,5 @@
+spek (0.6-0ubuntu1~ppa1~maverick) maverick; urgency=low
+
+  * Fix the version number.
+
+ -- Alexander Kojevnikov <alexander@kojevnikov.com>  Tue, 15 Mar 2011 09:18:54 +0800
