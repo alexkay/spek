@@ -1,0 +1,6 @@
+?package(spek):\
+needs="X11"\
+section="Applications/Sound"\
+title="Spek"\
+icon="/usr/share/pixmaps/spek.xpm"\
+command="/usr/bin/spek"

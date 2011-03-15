@@ -9,7 +9,6 @@ Build-Depends: debhelper (>= 7.0.50~),
                libavformat-dev (>= 4:0.6),
                libavutil-dev (>= 4:0.6),
                libcairo2-dev,
-               libgdk-pixbuf2.0-dev,
                libglib2.0-dev,
                libgtk2.0-dev (>= 2.18.0),
                libpango1.0-dev
