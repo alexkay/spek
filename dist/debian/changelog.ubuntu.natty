@@ -1,0 +1,5 @@
+spek (0.6-0ubuntu1~ppa1~natty) natty; urgency=low
+
+  * New upstream release with lots of bug fixes and feature improvements.
+
+ -- Alexander Kojevnikov <alexander@kojevnikov.com>  Tue, 15 Mar 2011 09:18:54 +0800
