@@ -1,0 +1,177 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Spek\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
+"POT-Creation-Date: 2011-03-03 21:34+0800\n"
+"PO-Revision-Date: 2011-03-16 14:35+0000\n"
+"Last-Translator: raven <piotrdrag@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+
+#: ../data/spek.desktop.in.in.h:1
+msgid "Spectrum Analyser"
+msgstr "Analizator widma"
+
+#: ../data/spek.desktop.in.in.h:2
+msgid "Spek"
+msgstr "Spek"
+
+#: ../data/spek.desktop.in.in.h:3
+msgid "View spectrograms of your audio files"
+msgstr "Wyświetlanie spektrogramów plików dźwiękowych"
+
+#: ../src/spek.vala:25
+msgid "Display the version and exit"
+msgstr "Wyświetla wersję i kończy działanie"
+
+#: ../src/spek.vala:38
+msgid "[FILE]"
+msgstr "[PLIK]"
+
+#: ../src/spek.vala:42
+#, c-format
+msgid "Run `%s --help` to see a full list of available command line options.\n"
+msgstr ""
+"Wykonanie polecenia \"%s --help\" wyświetla pełną listę dostępnych opcji "
+"wiersza poleceń.\n"
+
+#. TRANSLATORS: first %s is the package name, second %s is the package
+#. version.
+#: ../src/spek.vala:48
+#, c-format
+msgid "%s version %s\n"
+msgstr "%s wersja %s\n"
+
+#: ../src/spek.vala:53
+msgid "Specify a single file\n"
+msgstr "Podaje jeden plik\n"
+
+#: ../src/spek-audio.c:47
+msgid "Cannot open input file"
+msgstr "Nie można otworzyć pliku wejściowego"
+
+#: ../src/spek-audio.c:54
+msgid "Cannot find stream info"
+msgstr "Nie można odnaleźć informacji o strumieniu"
+
+#: ../src/spek-audio.c:66
+msgid "The file contains no audio streams"
+msgstr "Plik nie zawiera strumieni dźwięku"
+
+#: ../src/spek-audio.c:73
+msgid "Cannot find decoder"
+msgstr "Nie można odnaleźć dekodera"
+
+#: ../src/spek-audio.c:88
+msgid "No audio channels"
+msgstr "Brak kanałów dźwięku"
+
+#: ../src/spek-audio.c:92
+msgid "Cannot open decoder"
+msgstr "Nie można otworzyć dekodera"
+
+#: ../src/spek-audio.c:113
+msgid "Unsupported sample format"
+msgstr "Nieobsługiwany format próbki"
+
+#: ../src/spek-pipeline.vala:70
+#, c-format
+msgid "%d kbps"
+msgstr "%d kb/s"
+
+#: ../src/spek-pipeline.vala:73
+#, c-format
+msgid "%d Hz"
+msgstr "%d Hz"
+
+#: ../src/spek-pipeline.vala:78
+#, c-format
+msgid "%d bit"
+msgid_plural "%d bits"
+msgstr[0] "%d bit"
+msgstr[1] "%d bity"
+msgstr[2] "%d bitów"
+
+#: ../src/spek-pipeline.vala:81
+#, c-format
+msgid "%d channel"
+msgid_plural "%d channels"
+msgstr[0] "%d kanał"
+msgstr[1] "%d kanały"
+msgstr[2] "%d kanałów"
+
+#. TRANSLATORS: first %s is the error message, second %s is stream
+#. description.
+#: ../src/spek-pipeline.vala:88
+#, c-format
+msgid "%s: %s"
+msgstr "%s: %s"
+
+#: ../src/spek-spectrogram.vala:194
+#, c-format
+msgid "%d kHz"
+msgstr "%d kHz"
+
+#: ../src/spek-window.vala:36
+msgid "Spek - Acoustic Spectrum Analyser"
+msgstr "Spek - analizator widma akustycznego"
+
+#: ../src/spek-window.vala:82
+msgid ""
+"A new version of Spek is available on <a href=\"http://www.spek-"
+"project.org\">www.spek-project.org</a>"
+msgstr ""
+"Nowa wersja programu Spek jest dostępna na stronie <a href=\"http://www"
+".spek-project.org\">www.spek-project.org</a>"
+
+#: ../src/spek-window.vala:88
+msgid "All files"
+msgstr "Wszystkie pliki"
+
+#: ../src/spek-window.vala:91
+msgid "PNG images"
+msgstr "Obrazy PNG"
+
+#: ../src/spek-window.vala:94
+msgid "Audio files"
+msgstr "Pliki dźwiękowe"
+
+#. TRANSLATORS: window title, %s is replaced with the file name
+#: ../src/spek-window.vala:142
+#, c-format
+msgid "Spek - %s"
+msgstr "Spek - %s"
+
+#: ../src/spek-window.vala:147
+msgid "Open File"
+msgstr "Otwarcie pliku"
+
+#: ../src/spek-window.vala:164
+msgid "Save Spectrogram"
+msgstr "Zapis spektogramu"
+
+#. Suggested name is <file_name>.png
+#: ../src/spek-window.vala:171
+msgid "Untitled"
+msgstr "Bez tytułu"
+
+#: ../src/spek-window.vala:213
+msgid "Copyright © 2010-2011 Alexander Kojevnikov"
+msgstr "Copyright © 2010-2011 Alexander Kojevnikov"
+
+#: ../src/spek-window.vala:218
+msgid "Spek Website"
+msgstr "Witryna programu Spek"
+
+#: ../src/spek-window.vala:227
+msgid "translator-credits"
+msgstr "Piotr Drąg <piotrdrag@gmail.com>, 2011"
