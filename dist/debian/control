@@ -22,3 +22,14 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: acoustic spectrum analyser
  Spek helps to analyse your audio files by showing their spectrogram.
+ It supports all popular lossy and lossless audio file formats.
+ .
+ Features:
+ .
+  * Ultra-fast signal processing, uses multiple threads to further
+    speed up the analysis
+  * High number of frequency bands for the best spectrogram quality
+  * Shows the codec name and the audio signal parameters
+  * Allows to save the spectrogram as an image file
+  * Drag-and-drop support; associates with common audio file formats
+  * Auto-fitting time and frequency rulers
