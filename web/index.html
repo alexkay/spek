@@ -14,16 +14,36 @@
       h2 {font-size: 12pt;}
       img {border-style: none; outline: none;}
       #screenshots {width: 100%;}
-      #screenshots td {vertical-align: top; width: 33%; font-size: smaller;}
+      #screenshots td {width: 33%;}
       #download {width: 100%;}
       .dld_col {width: 33%; font-size: smaller;}
       .dld_link {vertical-align: top; padding-left: 0.5em; line-height: 1.4;}
     </style>
   </head>
   <body>
-    <h1>Spek &ndash; Acoustic Spectrum Analyser</h1>
-    <p><img src="spek.png" width="160" height="96" alt="Spek logo" style="float:right;"/>Spek (<a href="http://en.wikipedia.org/wiki/International_Phonetic_Alphabet">IPA</a>: /sp&#603;k/, &lsquo;bacon&rsquo; in Dutch) helps to analyse your audio files by showing their <a href="http://en.wikipedia.org/wiki/Spectrogram">spectrogram</a>.</p>
-    <p>Spek supports all popular lossy and lossless audio file formats. Spek is free software available for Unix, Windows and Mac OS X.</p>
+    <h1>Spek &ndash; Acoustic Spectrum Analyser<img src="spek.png" width="160" height="96" alt="Spek logo" style="float:right;"/></h1>
+    <p>Spek (<a href="http://en.wikipedia.org/wiki/International_Phonetic_Alphabet">IPA</a>: /sp&#603;k/, &lsquo;bacon&rsquo; in Dutch) helps to analyse your audio files by showing their <a href="http://en.wikipedia.org/wiki/Spectrogram">spectrogram</a>. Spek is free software available for Unix, Windows and Mac OS X.</p>
+
+    <h2>Features</h2>
+    <ul>
+      <li>Supports all popular lossy and lossless audio file formats thanks to the <a href="http://www.ffmpeg.org/">FFmpeg</a> libraries.</li>
+      <li>Ultra-fast signal processing, uses multiple threads to further speed up the analysis.</li>
+      <li>High number of frequency bands for the best spectrogram quality.</li>
+      <li>Shows the codec name and the audio signal parameters.</li>
+      <li>Allows to save the spectrogram as an image file.</li>
+      <li>Drag-and-drop support; associates with common audio file formats.</li>
+      <li>Auto-fitting time and frequency rulers.</li>
+      <!-- li>Available in Dutch, English, German, Russian, Swedish and Ukrainian.</li -->
+    </ul>
+
+    <h2>Screenshots</h2>
+    <table id="screenshots">
+      <tr>
+        <td><a href="flac.png"><img src="flac-small.png" width="240" height="192" alt="Spek running under Ubuntu Linux" title="Spek running under Ubuntu Linux and showing the spectrogram of a FLAC file."/></a></td>
+        <td><a href="win7.png"><img src="win7-small.png" width="240" height="192" alt="Spek running under Windows 7" title="Spek running under Windows 7 and showing the same sound track encoded as a 320kbps MP3."/></a></td>
+        <td><a href="osx.png"><img src="osx-small.png" width="240" height="192" alt="Spek running under Mac OS X" title="Spek running under Mac OS X Leopard."/></a></td>
+      </tr>
+    </table>
 
     <h2>Download</h2>
     <table id="download">
@@ -69,20 +89,6 @@
       </tr>
     </table>
 
-    <h2>Screenshots</h2>
-    <table id="screenshots">
-      <tr>
-        <td><a href="flac.png"><img src="flac-small.png" width="240" height="192" alt="Spek running under Ubuntu Linux"/></a></td>
-        <td><a href="win7.png"><img src="win7-small.png" width="240" height="192" alt="Spek running under Windows 7"/></a></td>
-        <td><a href="osx.png"><img src="osx-small.png" width="240" height="192" alt="Spek running under Mac OS X"/></a></td>
-      </tr>
-      <tr>
-        <td>Spek running under Ubuntu Linux and showing the spectrogram of a FLAC file.</td>
-        <td>Spek running under Windows 7 and showing the same sound track encoded as a 320kbps MP3.</td>
-        <td>Spek running under Mac OS X Leopard.</td>
-      </tr>
-    </table>
-
     <h2>News <a href="http://versia.com/category/spek/feed/atom/"><img src="feed-icon-14x14.png" alt="news feed"/></a></h2>
     <ul>
       <li>2010-07-13: <a href="http://versia.com/2010/07/13/spek-0-6-release/">Spek 0.6 Released</a></li>
@@ -95,13 +101,9 @@
     <h2>Roadmap</h2>
     <p>Features planned for the 1.0 release:</p>
     <ul>
-      <li><del>Windows port</del></li>
-      <li><del>Mac OS X port</del></li>
-      <li><del>Time and frequency rulers</del></li>
       <li>Zoom and horizontal scroll</li>
       <li>Adjust spectral density range (dB)</li>
-      <li><del>Open and associate with audio files</del></li>
-      <li><del>Use multiple threads to speed up analysis</del></li>
+      <li>Multilingual support</li>
     </ul>
 
     <h2>Contribute</h2>
