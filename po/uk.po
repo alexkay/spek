@@ -1,0 +1,181 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Spek\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
+"POT-Creation-Date: 2011-03-03 21:34+0800\n"
+"PO-Revision-Date: 2011-03-16 08:54+0000\n"
+"Last-Translator: sacrebleu <olga@vasylevska.com>\n"
+"Language-Team: Ukrainian <None>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: uk\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+
+#: ../data/spek.desktop.in.in.h:1
+msgid "Spectrum Analyser"
+msgstr "Аналізатор спектру"
+
+#: ../data/spek.desktop.in.in.h:2
+msgid "Spek"
+msgstr "Spek"
+
+#: ../data/spek.desktop.in.in.h:3
+msgid "View spectrograms of your audio files"
+msgstr "Перегляд спектрограм аудіо файлів"
+
+#: ../src/spek.vala:25
+msgid "Display the version and exit"
+msgstr "Показати версію і вийти"
+
+#: ../src/spek.vala:38
+msgid "[FILE]"
+msgstr "[ФАЙЛ]"
+
+#: ../src/spek.vala:42
+#, c-format
+msgid "Run `%s --help` to see a full list of available command line options.\n"
+msgstr ""
+"Запустіть `%s --help`, щоб побачити повний список доступних параметрів "
+"командного рядка.\n"
+
+#. TRANSLATORS: first %s is the package name, second %s is the package
+#. version.
+#: ../src/spek.vala:48
+#, c-format
+msgid "%s version %s\n"
+msgstr ""
+"%s версії %s\n"
+"\n"
+"\n"
+"\n"
+
+#: ../src/spek.vala:53
+msgid "Specify a single file\n"
+msgstr "Вкажіть один файл\n"
+
+#: ../src/spek-audio.c:47
+msgid "Cannot open input file"
+msgstr "Не можу відкрити вхідний файл"
+
+#: ../src/spek-audio.c:54
+msgid "Cannot find stream info"
+msgstr "Не можу знайти інформацію про потік"
+
+#: ../src/spek-audio.c:66
+msgid "The file contains no audio streams"
+msgstr "Файл не містить аудіо-потоків"
+
+#: ../src/spek-audio.c:73
+msgid "Cannot find decoder"
+msgstr "Не можу знайти декодер"
+
+#: ../src/spek-audio.c:88
+msgid "No audio channels"
+msgstr "Немає аудіо каналів"
+
+#: ../src/spek-audio.c:92
+msgid "Cannot open decoder"
+msgstr "Не можу відкрити декодер"
+
+#: ../src/spek-audio.c:113
+msgid "Unsupported sample format"
+msgstr "Нупідтримуваний формат семпла"
+
+#: ../src/spek-pipeline.vala:70
+#, c-format
+msgid "%d kbps"
+msgstr "%d кбіт / с"
+
+#: ../src/spek-pipeline.vala:73
+#, c-format
+msgid "%d Hz"
+msgstr "%d Гц"
+
+#: ../src/spek-pipeline.vala:78
+#, c-format
+msgid "%d bit"
+msgid_plural "%d bits"
+msgstr[0] "%d біт"
+msgstr[1] "%d біта"
+msgstr[2] "%d бітів"
+
+#: ../src/spek-pipeline.vala:81
+#, c-format
+msgid "%d channel"
+msgid_plural "%d channels"
+msgstr[0] "%d канал"
+msgstr[1] "%d каналу"
+msgstr[2] "%d каналів"
+
+#. TRANSLATORS: first %s is the error message, second %s is stream
+#. description.
+#: ../src/spek-pipeline.vala:88
+#, c-format
+msgid "%s: %s"
+msgstr "%s: %s"
+
+#: ../src/spek-spectrogram.vala:194
+#, c-format
+msgid "%d kHz"
+msgstr "%d кГц"
+
+#: ../src/spek-window.vala:36
+msgid "Spek - Acoustic Spectrum Analyser"
+msgstr "Spek - Акустичний аналізатор спектру"
+
+#: ../src/spek-window.vala:82
+msgid ""
+"A new version of Spek is available on <a href=\"http://www.spek-"
+"project.org\">www.spek-project.org</a>"
+msgstr ""
+"Нова версія Spek доступна на <a href=\"http://www.spek-project.org\">www"
+".spek-project.org</a>"
+
+#: ../src/spek-window.vala:88
+msgid "All files"
+msgstr "Всі файли"
+
+#: ../src/spek-window.vala:91
+msgid "PNG images"
+msgstr "PNG зображення"
+
+#: ../src/spek-window.vala:94
+msgid "Audio files"
+msgstr "Аудіо файли"
+
+#. TRANSLATORS: window title, %s is replaced with the file name
+#: ../src/spek-window.vala:142
+#, c-format
+msgid "Spek - %s"
+msgstr "Spek - %s"
+
+#: ../src/spek-window.vala:147
+msgid "Open File"
+msgstr "Відкрити файл"
+
+#: ../src/spek-window.vala:164
+msgid "Save Spectrogram"
+msgstr "Зберегти спектрограму"
+
+#. Suggested name is <file_name>.png
+#: ../src/spek-window.vala:171
+msgid "Untitled"
+msgstr "Без назви"
+
+#: ../src/spek-window.vala:213
+msgid "Copyright © 2010-2011 Alexander Kojevnikov"
+msgstr "Авторські права © 2010-2011 Олександр Кожевніков"
+
+#: ../src/spek-window.vala:218
+msgid "Spek Website"
+msgstr "Веб-сайт Spek"
+
+#: ../src/spek-window.vala:227
+msgid "translator-credits"
+msgstr "Ольга Василевська"
