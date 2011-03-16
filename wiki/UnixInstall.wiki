@@ -6,7 +6,7 @@
 Spek is not yet packaged on many distributions, help in this area will be greatly appreciated.
 
  * *Arch Linux*: Use one of the packages in the AUR: [http://aur.archlinux.org/packages.php?ID=38001 spek] and [http://aur.archlinux.org/packages.php?ID=37252 spek-git].
- * *Debian*: RFP (request for packaging): [http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=584524 bug #584524].
+ * *Debian*: [http://mentors.debian.net/cgi-bin/sponsor-pkglist?action=details;package=spek The package] needs a sponsor.
  * *Fedora*: [http://dl.dropbox.com/u/6598054/spek-0.4-5.fc13.x86_64.rpm v0.4 x86_64], [http://dl.dropbox.com/u/6598054/spek-0.4-5.fc13.i686.rpm v0.4 i686] and [http://dl.dropbox.com/u/6598054/spek-0.4-5.fc13.src.rpm v0.4 source] (RPMs by scorp6). There's also a review request needing a sponsor: [https://bugzilla.redhat.com/show_bug.cgi?id=597888 bug #597888].
  * *FreeBSD*: [http://www.freshports.org/audio/spek/ audio/spek].
  * *Gentoo*: [http://packages.gentoo.org/package/media-sound/spek media-sound/spek].
@@ -14,7 +14,7 @@ Spek is not yet packaged on many distributions, help in this area will be greatl
 
 == Ubuntu PPA ==
 
-To install Spek from the [https://launchpad.net/~alexk/+archive/spek official PPA] on Ubuntu 10.10 (Maverick Meerkat) run these commands:
+To install Spek from the [https://launchpad.net/~alexk/+archive/spek official PPA] on Ubuntu 10.10 (Maverick Meerkat) or Ubuntu 11.04 (Natty Narwhal) run these commands:
 
 {{{
 % sudo add-apt-repository ppa:alexk/spek
