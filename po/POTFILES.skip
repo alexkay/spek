@@ -1,5 +1,6 @@
 data/spek.desktop.in
 src/spek.c
 src/spek-pipeline.c
+src/spek-preferences-dialog.c
 src/spek-spectrogram.c
 src/spek-window.c
