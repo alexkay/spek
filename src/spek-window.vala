@@ -61,6 +61,15 @@ namespace Spek {
 
 			toolbar.insert (new SeparatorToolItem (), -1);
 
+			var prefs = new ToolButton.from_stock (STOCK_PREFERENCES);
+			prefs.is_important = true;
+			prefs.add_accelerator (
+				"clicked", group, 'E', ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
+			prefs.clicked.connect (on_prefs_clicked);
+			toolbar.insert (prefs, -1);
+
+			toolbar.insert (new SeparatorToolItem (), -1);
+
 			var quit = new ToolButton.from_stock (STOCK_QUIT);
 			quit.is_important = true;
 			quit.add_accelerator (
@@ -180,6 +189,9 @@ namespace Spek {
 				spectrogram.save (file_name);
 			}
 			chooser.destroy ();
+		}
+
+		private void on_prefs_clicked () {
 		}
 
 		private void on_about_clicked () {
