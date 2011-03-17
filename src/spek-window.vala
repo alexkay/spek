@@ -24,6 +24,7 @@ namespace Spek {
 
 		private MessageBar message_bar;
 		private Spectrogram spectrogram;
+		private string description;
 		private string cur_dir;
 		private FileFilter filter_all;
 		private FileFilter filter_audio;
@@ -33,7 +34,7 @@ namespace Spek {
 		};
 
 		public Window (string? file_name) {
-		        title = _("Spek - Acoustic Spectrum Analyser");
+			description = title = _("Spek - Acoustic Spectrum Analyser");
 			set_default_icon_name ("spek");
 			set_default_size (640, 480);
 			destroy.connect (Gtk.main_quit);
@@ -211,7 +212,7 @@ namespace Spek {
 			dlg.program_name = "Spek";
 			dlg.version = Config.PACKAGE_VERSION;
 			dlg.copyright = _("Copyright \xc2\xa9 2010-2011 Alexander Kojevnikov");
-			dlg.comments = title;
+			dlg.comments = description;
 			dlg.set ("authors", authors);
 //			dlg.set ("documenters", documenters);
 			dlg.set ("artists", artists);
