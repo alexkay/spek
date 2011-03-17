@@ -40,7 +40,16 @@ namespace Spek {
 			general_box.pack_start (general_label, false, false, 0);
 			var general_alignment = new Alignment (0.5f, 0.5f, 1f, 1f);
 			general_alignment.left_padding = 12;
-			var general_subbox = new VBox (false, 0);
+			var general_subbox = new VBox (false, 6);
+			var language_box = new HBox (false, 12);
+			var language_label = new Label.with_mnemonic (_("_Language:"));
+			language_box.pack_start (language_label, false, false, 0);
+			var language_combo = new ComboBox.text ();
+			language_combo.append_text (_("(system default)"));
+			language_combo.append_text ("English");
+			language_label.mnemonic_widget = language_combo;
+			language_box.pack_start (language_combo, false, false, 0);
+			general_subbox.pack_start(language_box, false, false, 0);
 			var check_update = new CheckButton.with_mnemonic (_("Check for _updates"));
 			general_subbox.pack_start (check_update, false, false, 0);
 			general_alignment.add (general_subbox);
