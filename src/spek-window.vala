@@ -192,6 +192,9 @@ namespace Spek {
 		}
 
 		private void on_prefs_clicked () {
+			var dlg = new PreferencesDialog ();
+			dlg.transient_for = this;
+			dlg.run ();
 		}
 
 		private void on_about_clicked () {
