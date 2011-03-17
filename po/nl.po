@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
-"POT-Creation-Date: 2011-02-23 19:43+0800\n"
-"PO-Revision-Date: 2011-03-01 01:42+0000\n"
-"Last-Translator: alexkay <alexander@kojevnikov.com>\n"
+"POT-Creation-Date: 2011-03-03 21:34+0800\n"
+"PO-Revision-Date: 2011-03-16 23:40+0000\n"
+"Last-Translator: wbolster <wbolster@gnome.org>\n"
 "Language-Team: Dutch <None>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../data/spek.desktop.in.in.h:1
 msgid "Spectrum Analyser"
-msgstr "Spectrogram Analyseerder"
+msgstr "Spectrogramanalyse"
 
 #: ../data/spek.desktop.in.in.h:2
 msgid "Spek"
@@ -27,11 +27,11 @@ msgstr "Spek"
 
 #: ../data/spek.desktop.in.in.h:3
 msgid "View spectrograms of your audio files"
-msgstr "Bekijk spectrogram van uw geluidsbestanden"
+msgstr "Spectrogrammen van uw geluidsbestanden bekijken"
 
 #: ../src/spek.vala:25
 msgid "Display the version and exit"
-msgstr "Geef versie weer en sluit af"
+msgstr "Versie tonen afsluiten"
 
 #: ../src/spek.vala:38
 msgid "[FILE]"
@@ -41,8 +41,8 @@ msgstr "[BESTAND]"
 #, c-format
 msgid "Run `%s --help` to see a full list of available command line options.\n"
 msgstr ""
-"Gebruik `%s --help` om een volledige lijst met command line opties te laten "
-"zien.\n"
+"Gebruik ‘%s --help’ om de volledige lijst met opties voor de opdrachtregel "
+"te tonen.\n"
 
 #. TRANSLATORS: first %s is the package name, second %s is the package
 #. version.
@@ -55,7 +55,7 @@ msgstr ""
 
 #: ../src/spek.vala:53
 msgid "Specify a single file\n"
-msgstr "Geef een enkel bestand\n"
+msgstr "Geef een enkel bestand op\n"
 
 #: ../src/spek-audio.c:47
 msgid "Cannot open input file"
@@ -63,7 +63,7 @@ msgstr "Kan bronbestand niet openen"
 
 #: ../src/spek-audio.c:54
 msgid "Cannot find stream info"
-msgstr "Kan streaminformatie niet vinden"
+msgstr "Kan informatie over stream niet vinden"
 
 #: ../src/spek-audio.c:66
 msgid "The file contains no audio streams"
@@ -75,7 +75,7 @@ msgstr "Kan decoder niet vinden"
 
 #: ../src/spek-audio.c:88
 msgid "No audio channels"
-msgstr "Geen audio kanalen"
+msgstr "Geen audiokanalen"
 
 #: ../src/spek-audio.c:92
 msgid "Cannot open decoder"
@@ -83,7 +83,7 @@ msgstr "Kan decoder niet openen"
 
 #: ../src/spek-audio.c:113
 msgid "Unsupported sample format"
-msgstr "Niet-ondersteund sample-formaat"
+msgstr "Sample-formaat niet ondersteund"
 
 #: ../src/spek-pipeline.vala:70
 #, c-format
@@ -106,8 +106,8 @@ msgstr[1] "%d bits"
 #, c-format
 msgid "%d channel"
 msgid_plural "%d channels"
-msgstr[0] "%d channel"
-msgstr[1] "%d channels"
+msgstr[0] "%d kanaal"
+msgstr[1] "%d kanalen"
 
 #. TRANSLATORS: first %s is the error message, second %s is stream
 #. description.
@@ -116,9 +116,14 @@ msgstr[1] "%d channels"
 msgid "%s: %s"
 msgstr "%s: %s"
 
+#: ../src/spek-spectrogram.vala:194
+#, c-format
+msgid "%d kHz"
+msgstr "%d kHz"
+
 #: ../src/spek-window.vala:36
 msgid "Spek - Acoustic Spectrum Analyser"
-msgstr "Spek - Accoustisch Spectrum Analyseerder"
+msgstr "Spek - Akoestische spectrumanalyse"
 
 #: ../src/spek-window.vala:82
 msgid ""
@@ -138,35 +143,37 @@ msgstr "PNG-afbeeldingen"
 
 #: ../src/spek-window.vala:94
 msgid "Audio files"
-msgstr "Audio-bestanden"
+msgstr "Audiobestanden"
 
 #. TRANSLATORS: window title, %s is replaced with the file name
 #: ../src/spek-window.vala:142
 #, c-format
 msgid "Spek - %s"
-msgstr "Spek - %s"
+msgstr "Spek – %s"
 
 #: ../src/spek-window.vala:147
 msgid "Open File"
-msgstr "Open bestand"
+msgstr "Bestand openen"
 
 #: ../src/spek-window.vala:164
 msgid "Save Spectrogram"
-msgstr "Sla spectrogram op"
+msgstr "Spectrogram opslaan"
 
 #. Suggested name is <file_name>.png
 #: ../src/spek-window.vala:171
 msgid "Untitled"
-msgstr "Geen titel"
+msgstr "Naamloos"
 
 #: ../src/spek-window.vala:213
-msgid "Copyright © 2010 Alexander Kojevnikov"
-msgstr "Copyright © 2010 Alexander Kojevnikov"
+msgid "Copyright © 2010-2011 Alexander Kojevnikov"
+msgstr "Copyright © 2010–2011 Alexander Kojevnikov"
 
 #: ../src/spek-window.vala:218
 msgid "Spek Website"
-msgstr "Spek Website"
+msgstr "Spek-website"
 
 #: ../src/spek-window.vala:227
 msgid "translator-credits"
-msgstr "DutchDude <TheGuyOfDoom>"
+msgstr ""
+"DutchDude (TheGuyOfDoom)\n"
+"Wouter Bolsterlee"
