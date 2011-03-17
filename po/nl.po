@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
 "POT-Creation-Date: 2011-03-03 21:34+0800\n"
-"PO-Revision-Date: 2011-03-16 23:40+0000\n"
+"PO-Revision-Date: 2011-03-17 12:51+0000\n"
 "Last-Translator: wbolster <wbolster@gnome.org>\n"
-"Language-Team: Dutch <None>\n"
+"Language-Team: Dutch <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../data/spek.desktop.in.in.h:1
 msgid "Spectrum Analyser"
-msgstr "Spectrogramanalyse"
+msgstr "Spectrumanalyse"
 
 #: ../data/spek.desktop.in.in.h:2
 msgid "Spek"
@@ -31,7 +31,7 @@ msgstr "Spectrogrammen van uw geluidsbestanden bekijken"
 
 #: ../src/spek.vala:25
 msgid "Display the version and exit"
-msgstr "Versie tonen afsluiten"
+msgstr "Versie tonen en afsluiten"
 
 #: ../src/spek.vala:38
 msgid "[FILE]"
