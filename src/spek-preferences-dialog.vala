@@ -31,7 +31,7 @@ namespace Spek {
 			var box = new VBox (false, 0);
 
 			var general_box = new VBox (false, 6);
-			// TRANSLATORS: Name of section in the Preferences dialog.
+			// TRANSLATORS: The name of a section in the Preferences dialog.
 			var general_label = new Label (_("General"));
 			var attributes = new Pango.AttrList ();
 			attributes.insert (Pango.attr_weight_new (Pango.Weight.BOLD));

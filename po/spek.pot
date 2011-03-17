@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-03 21:34+0800\n"
+"POT-Creation-Date: 2011-03-17 22:05+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,29 +28,6 @@ msgstr ""
 
 #: ../data/spek.desktop.in.in.h:3
 msgid "View spectrograms of your audio files"
-msgstr ""
-
-#: ../src/spek.vala:25
-msgid "Display the version and exit"
-msgstr ""
-
-#: ../src/spek.vala:38
-msgid "[FILE]"
-msgstr ""
-
-#: ../src/spek.vala:42
-#, c-format
-msgid "Run `%s --help` to see a full list of available command line options.\n"
-msgstr ""
-
-#. TRANSLATORS: first %s is the package name, second %s is the package version.
-#: ../src/spek.vala:48
-#, c-format
-msgid "%s version %s\n"
-msgstr ""
-
-#: ../src/spek.vala:53
-msgid "Specify a single file\n"
 msgstr ""
 
 #: ../src/spek-audio.c:47
@@ -111,60 +88,96 @@ msgstr[1] ""
 msgid "%s: %s"
 msgstr ""
 
+#: ../src/spek-preferences-dialog.vala:24
+msgid "Preferences"
+msgstr ""
+
+#. TRANSLATORS: The name of a section in the Preferences dialog.
+#: ../src/spek-preferences-dialog.vala:35
+msgid "General"
+msgstr ""
+
+#: ../src/spek-preferences-dialog.vala:44
+msgid "Check for _updates"
+msgstr ""
+
 #: ../src/spek-spectrogram.vala:194
 #, c-format
 msgid "%d kHz"
 msgstr ""
 
-#: ../src/spek-window.vala:36
+#: ../src/spek-window.vala:37
 msgid "Spek - Acoustic Spectrum Analyser"
 msgstr ""
 
-#: ../src/spek-window.vala:82
+#: ../src/spek-window.vala:92
 msgid ""
 "A new version of Spek is available on <a href=\"http://www.spek-project.org"
 "\">www.spek-project.org</a>"
 msgstr ""
 
-#: ../src/spek-window.vala:88
+#: ../src/spek-window.vala:98
 msgid "All files"
 msgstr ""
 
-#: ../src/spek-window.vala:91
+#: ../src/spek-window.vala:101
 msgid "PNG images"
 msgstr ""
 
-#: ../src/spek-window.vala:94
+#: ../src/spek-window.vala:104
 msgid "Audio files"
 msgstr ""
 
 #. TRANSLATORS: window title, %s is replaced with the file name
-#: ../src/spek-window.vala:142
+#: ../src/spek-window.vala:152
 #, c-format
 msgid "Spek - %s"
 msgstr ""
 
-#: ../src/spek-window.vala:147
+#: ../src/spek-window.vala:157
 msgid "Open File"
 msgstr ""
 
-#: ../src/spek-window.vala:164
+#: ../src/spek-window.vala:174
 msgid "Save Spectrogram"
 msgstr ""
 
 #. Suggested name is <file_name>.png
-#: ../src/spek-window.vala:171
+#: ../src/spek-window.vala:181
 msgid "Untitled"
 msgstr ""
 
-#: ../src/spek-window.vala:213
+#: ../src/spek-window.vala:229
 msgid "Copyright © 2010-2011 Alexander Kojevnikov"
 msgstr ""
 
-#: ../src/spek-window.vala:218
+#: ../src/spek-window.vala:234
 msgid "Spek Website"
 msgstr ""
 
-#: ../src/spek-window.vala:227
+#: ../src/spek-window.vala:243
 msgid "translator-credits"
+msgstr ""
+
+#: ../src/spek.vala:25
+msgid "Display the version and exit"
+msgstr ""
+
+#: ../src/spek.vala:45
+msgid "[FILE]"
+msgstr ""
+
+#: ../src/spek.vala:49
+#, c-format
+msgid "Run `%s --help` to see a full list of available command line options.\n"
+msgstr ""
+
+#. TRANSLATORS: first %s is the package name, second %s is the package version.
+#: ../src/spek.vala:55
+#, c-format
+msgid "%s version %s\n"
+msgstr ""
+
+#: ../src/spek.vala:60
+msgid "Specify a single file\n"
 msgstr ""
