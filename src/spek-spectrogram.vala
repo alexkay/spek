@@ -43,10 +43,10 @@ namespace Spek {
 		private double FONT_SCALE = 1.0;
 
 		public Spectrogram () {
+#if G_OS_DARWIN
 			// Pango/Quartz fonts are smaller than on X.
-			if (Config.HOST_OS.down ().has_prefix ("darwin")) {
-				FONT_SCALE = 1.4;
-			}
+			FONT_SCALE = 1.4;
+#endif
 
 			// Pre-draw the palette.
 			palette = new ImageSurface (Format.RGB24, RULER, BANDS);

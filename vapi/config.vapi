@@ -13,7 +13,4 @@ namespace Config {
 	public const string LOCALEDIR;  /* /usr/local/share/locale  */
 	public const string PKGDATADIR; /* /usr/local/share/spek */
 	public const string PKGLIBDIR;  /* /usr/local/lib/spek   */
-
-	/* freebsd*, linux*, mingw*, darwin*, etc. */
-	public const string HOST_OS;
 }
