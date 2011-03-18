@@ -13,7 +13,7 @@ spek_SOURCES = \
 	spek-spectrogram.vala \
 	spek-window.vala
 
-INCLUDES = \
+AM_CPPFLAGS = \
 	-include config.h \
 	$(SPEK_CFLAGS) \
 	$(IGE_MAC_CFLAGS) \
