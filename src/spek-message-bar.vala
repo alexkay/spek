@@ -24,17 +24,17 @@ using Gtk;
 namespace Spek {
 	public class MessageBar : HBox {
 		private Label label;
-        private Gtk.Window win;
+		private Gtk.Window win;
 
 		public MessageBar (string message) {
 			homogeneous = false;
 			spacing = 0;
 			border_width = 6;
 
-            win = new Gtk.Window (WindowType.POPUP);
-            win.name = "gtk-tooltips";
-            win.ensure_style ();
-            win.style_set.connect (() => style = win.style);
+			win = new Gtk.Window (WindowType.POPUP);
+			win.name = "gtk-tooltips";
+			win.ensure_style ();
+			win.style_set.connect (() => style = win.style);
 
 			label = new Label (null);
 			label.use_markup = true;

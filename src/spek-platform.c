@@ -65,11 +65,11 @@ void spek_platform_show_uri (const gchar *uri) {
 #else
 #ifdef G_OS_DARWIN
 	/* it doesn't work on OS X too */
-        CFStringRef str = NULL;
-        CFURLRef url = NULL;
+	CFStringRef str = NULL;
+	CFURLRef url = NULL;
 
-        str = CFStringCreateWithCString (NULL, uri, kCFStringEncodingASCII);
-        url = CFURLCreateWithString (NULL, str, NULL);
+	str = CFStringCreateWithCString (NULL, uri, kCFStringEncodingASCII);
+	url = CFURLCreateWithString (NULL, str, NULL);
 	LSOpenCFURLRef (url, NULL);
 	CFRelease (url);
 	CFRelease (str);
