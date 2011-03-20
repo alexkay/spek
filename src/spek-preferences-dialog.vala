@@ -60,9 +60,13 @@ namespace Spek {
 			vbox.pack_start (alignment, false, false, 0);
 			vbox.show_all ();
 
-			// TODO: clicking doesn't close
 			add_button (STOCK_CLOSE, ResponseType.CLOSE);
 			set_default_response (ResponseType.CLOSE);
+			response.connect (on_response);
+		}
+
+		private void on_response (Dialog dialog, int response_id) {
+			destroy ();
 		}
 	}
 }
