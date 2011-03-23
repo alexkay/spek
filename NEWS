@@ -32,12 +32,18 @@ Sources / Packages
 ------------------------------------------------------------------------------
 
  * Spek 0.6 tarball:
-   * http://spek.googlecode.com/files/spek-0.6.tar.bz2
+   * <http://spek.googlecode.com/files/spek-0.6.tar.bz2>
 
  * Windows and Mac OS X binaries:
-   * http://spek.googlecode.com/files/spek-0.6.msi
-   * http://spek.googlecode.com/files/spek-0.6.zip
-   * http://spek.googlecode.com/files/spek-0.6.dmg
+   * <http://spek.googlecode.com/files/spek-0.6.msi>
+   * <http://spek.googlecode.com/files/spek-0.6.zip>
+   * <http://spek.googlecode.com/files/spek-0.6.dmg>
+
+ * Ubuntu PPA
+   * <https://launchpad.net/~alexk/+archive/spek>
+
+ * Other Unix packages:
+   * <http://code.google.com/p/spek/wiki/UnixInstall>
 
 Dependencies
 ------------------------------------------------------------------------------
