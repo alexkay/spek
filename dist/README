@@ -1,0 +1,26 @@
+Spek release checklist
+==============================================================================
+
+ * Bump the version numbers in configure.ac, spek.1, spek.wxs, web/version.
+ * `cd po && gmake update-po && tx push -s`.
+ * `tx pull -a` and commit with correct `--author`s.
+ * Review translations, translate what I can, Ich spreek un peu по-русски.
+ * `tx pull -a`.
+ * TODO: Update the list of languages in the preferences, 80% or so will do.
+ * Update AUTHORS using `git log X.Y.. --pretty=format:"%an <%ae>" | sort -u`.
+ * Update NEWS.
+ * Commit everything.
+ * Make sure `gmake distcheck` doesn't return errors.
+ * Prepare binaries for OSX and WIN, see README files in dist/*.
+ * Update FreeBSD, Debian and Ubuntu ports, see README files in dist/*.
+ * If anything has been changed, commit and re-make the tarball.
+ * Write the blog post, link from web/index.html, don't publish yet.
+ * Update web/index.html: bump version numbers, binary sizes and news.
+ * `git tag -a X.Y`.
+ * Upload the tarball + OSX and WIN binaries.
+ * Update the Ubuntu PPA.
+ * Upload the website using `web/upload`.
+ * Publish the blog post.
+ * Send an announcement to linux-audio-announce and vala-list.
+ * Update the forum thread on what.
+ * Ping ArchLinux, Debian and FreeBSD maintainers.
