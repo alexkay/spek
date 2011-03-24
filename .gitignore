@@ -24,6 +24,7 @@ intltool-merge.in
 intltool-update.in
 libtool
 ltmain.sh
+man/spek.1
 missing
 mkinstalldirs
 omf.make

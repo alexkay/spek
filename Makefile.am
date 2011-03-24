@@ -2,9 +2,10 @@
 
 SUBDIRS = \
 	data \
+	man \
+	po \
 	src \
-	vapi \
-	po
+	vapi
 
 EXTRA_DIST = \
 	intltool-extract.in \

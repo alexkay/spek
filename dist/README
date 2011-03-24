@@ -1,7 +1,7 @@
 Spek release checklist
 ==============================================================================
 
- * Bump the version numbers in configure.ac, spek.1, spek.wxs, web/version.
+ * Bump the version number in configure.ac.
  * `cd po && gmake update-po && tx push -s`.
  * `tx pull -a` and commit with correct `--author`s.
  * Review translations, translate what I can, Ich spreek un peu по-русски.
