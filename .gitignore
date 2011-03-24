@@ -18,6 +18,7 @@ configure
 data/spek.desktop
 data/spek.desktop.in
 depcomp
+dist/win/spek.wxs
 install-sh
 intltool-extract.in
 intltool-merge.in
@@ -42,4 +43,5 @@ src/*.stamp
 src/spek
 stamp-h1
 test*
+web/version
 xmldocs.make

@@ -54,10 +54,12 @@ AC_CONFIG_FILES([
 	data/icons/32x32/Makefile
 	data/icons/48x48/Makefile
 	data/icons/scalable/Makefile
+	dist/win/spek.wxs
 	man/Makefile
 	man/spek.1
 	po/Makefile.in
 	src/Makefile
 	vapi/Makefile
+	web/version
 ])
 AC_OUTPUT
