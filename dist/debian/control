@@ -19,7 +19,8 @@ Vcs-Browser: http://gitorious.org/spek/spek
 
 Package: spek
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
 Description: acoustic spectrum analyser
  Spek helps to analyse your audio files by showing their spectrogram.
  It supports all popular lossy and lossless audio file formats.

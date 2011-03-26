@@ -6,13 +6,24 @@ It was downloaded from:
 
     http://www.spek-project.org/
 
-Upstream Author(s):
+Upstream Author:
 
     Alexander Kojevnikov <alexander@kojevnikov.com>
 
 Copyright:
 
-    Copyright (C) 2010 Alexander Kojevnikov
+    For everything not noted below:
+      Copyright (C) 2010 Alexander Kojevnikov
+
+    For src/spek-message-bar.*:
+      Copyright (C) 2010 Alexander Kojevnikov
+      Copyright (C) 2008 Novell, Inc
+
+    For src/spek-pipeline.*:
+      Copyright (C) 2010 Alexander Kojevnikov
+      Copyright (C) 1999 Erik Walthinsen
+      Copyright (C) 2006 Stefan Kost
+      Copyright (C) 2007-2009 Sebastian Dröge
 
 License:
 
@@ -36,5 +47,5 @@ The Debian packaging is:
 
     Copyright (C) 2011 Alexander Kojevnikov <alexander@kojevnikov.com>
 
-and is licensed under the GPL version 3, see above.
+and is licensed under the GPL version 3 or any later version, see above.
 
