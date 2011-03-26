@@ -20,6 +20,8 @@ using Gtk;
 
 namespace Spek {
 	public class PreferencesDialog : Gtk.Dialog {
+		private Preferences prefs = new Preferences ();
+
 		public PreferencesDialog () {
 			title = _("Preferences");
 			modal = true;
@@ -45,8 +47,9 @@ namespace Spek {
 			var language_label = new Label.with_mnemonic (_("_Language:"));
 			language_box.pack_start (language_label, false, false, 0);
 			var language_combo = new ComboBox.text ();
-			language_combo.append_text (_("(system default)"));
-			language_combo.append_text ("English");
+			for (int i = 0; i < prefs.languages.length[0]; i++) {
+				language_combo.append_text (prefs.languages[i,1]);
+			}
 			language_label.mnemonic_widget = language_combo;
 			language_box.pack_start (language_combo, false, false, 0);
 			general_subbox.pack_start(language_box, false, false, 0);
