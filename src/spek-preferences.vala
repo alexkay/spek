@@ -79,13 +79,13 @@ namespace Spek {
 		public int last_update {
 			get {
 				try {
-					return key_file.get_integer ("update", "last_update");
+					return key_file.get_integer ("update", "last");
 				} catch (KeyFileError e) {
 				}
 				return 0;
 			}
 			set {
-				key_file.set_integer ("update", "last_update", value);
+				key_file.set_integer ("update", "last", value);
 			}
 		}
 
