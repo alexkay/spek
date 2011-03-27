@@ -26,6 +26,7 @@ namespace Spek {
 		public string[,] languages = {
 			{"", null},
 			{"de", "Deutsch"},
+			{"en", "English"},
 			{"es", "Español"},
 			{"fr", "Français"},
 			{"nl", "Nederlands"},
