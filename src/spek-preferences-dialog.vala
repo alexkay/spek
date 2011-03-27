@@ -60,6 +60,9 @@ namespace Spek {
 			language_box.pack_start (language_combo, false, false, 0);
 			general_subbox.pack_start(language_box, false, false, 0);
 			var check_update = new CheckButton.with_mnemonic (_("Check for _updates"));
+			check_update.active = prefs.check_update;
+			check_update.toggled.connect (
+				() => prefs.check_update = check_update.active);
 			general_subbox.pack_start (check_update, false, false, 0);
 			general_alignment.add (general_subbox);
 			general_box.pack_start (general_alignment, false, false, 0);
