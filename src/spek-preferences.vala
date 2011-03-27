@@ -40,7 +40,7 @@ namespace Spek {
 			languages[0,1] = _("(system default)");
 			file_name = Path.build_filename (Environment.get_user_config_dir (), "spek");
 			DirUtils.create_with_parents (file_name, 0755);
-			file_name = Path.build_filename (file_name, "config.ini");
+			file_name = Path.build_filename (file_name, "preferences");
 			this.key_file = new KeyFile ();
 			try {
 				key_file.load_from_file (file_name, KeyFileFlags.NONE);
