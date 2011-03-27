@@ -3,7 +3,9 @@ Section: sound
 Priority: optional
 Maintainer: Alexander Kojevnikov <alexander@kojevnikov.com>
 Build-Depends: debhelper (>= 7.0.50~),
+               cdbs,
                autotools-dev,
+               valac (>= 0.8.0),
                intltool (>= 0.35),
                libavcodec-dev (>= 4:0.6),
                libavformat-dev (>= 4:0.6),
