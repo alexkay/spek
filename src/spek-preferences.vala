@@ -50,8 +50,7 @@ namespace Spek {
 		}
 
 		~Preferences () {
-			var output = FileStream.open (file_name, "w+");
-			output.puts (key_file.to_data ());
+			save ();
 		}
 
 		private static Preferences _instance;
@@ -62,6 +61,11 @@ namespace Spek {
 				}
 				return _instance;
 			}
+		}
+
+		public void save () {
+			var output = FileStream.open (file_name, "w+");
+			output.puts (key_file.to_data ());
 		}
 
 		public bool check_update {

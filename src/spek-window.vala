@@ -285,7 +285,8 @@ namespace Spek {
 
 		private void * check_version () {
 			// Does the user want to check for updates?
-			var check = Preferences.instance.check_update;
+			var prefs = Preferences.instance;
+			var check = prefs.check_update;
 			if (!check) {
 				return null;
 			}
@@ -295,7 +296,7 @@ namespace Spek {
 			time_val.get_current_time ();
 			Date today = Date ();
 			today.set_time_val (time_val);
-			int day = Preferences.instance.last_update;
+			int day = prefs.last_update;
 			int diff = (int) today.get_julian () - day;
 			if (diff < 7) {
 				return null;
@@ -312,8 +313,9 @@ namespace Spek {
 			}
 
 			// Update the preferences.
-			Preferences.instance.check_update = check;
-			Preferences.instance.last_update = (int) today.get_julian ();
+			prefs.check_update = check;
+			prefs.last_update = (int) today.get_julian ();
+			prefs.save ();
 			return null;
 		}
 	}
