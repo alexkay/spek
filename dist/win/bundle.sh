@@ -7,18 +7,18 @@
 WIX_PATH=c:/Program\ Files/Windows\ Installer\ XML\ v3.5/bin
 SZ_PATH=c:/Program\ Files/7-Zip
 
-pushd $(dirname $0)/..
+pushd $(dirname $0)/../..
 
-rm -fr win/Spek
-mkdir win/Spek
+rm -fr dist/win/Spek
+mkdir dist/win/Spek
 
 # Compile the resource file
-windres win/spek.rc -O coff -o win/spek.res
-mkdir src/win && cp win/spek.res src/win/
+windres dist/win/spek.rc -O coff -o dist/win/spek.res
+mkdir -p src/dist/win && cp dist/win/spek.res src/dist/win/
 
-CFLAGS="-mwindows" LDFLAGS="win/spek.res" ./configure --prefix=${PWD}/win/Spek && make && make install
+CFLAGS="-mwindows" LDFLAGS="dist/win/spek.res" ./configure --prefix=${PWD}/dist/win/Spek && make && make install
 
-cd win/Spek
+cd dist/win/Spek
 
 urls=(\
 # GTK+ and its dependencies
