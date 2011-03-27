@@ -54,6 +54,8 @@ namespace Spek {
 				}
 			}
 			language_combo.active = active_language;
+			language_combo.changed.connect (
+				() => prefs.language = prefs.languages[language_combo.active,0]);
 			language_label.mnemonic_widget = language_combo;
 			language_box.pack_start (language_combo, false, false, 0);
 			general_subbox.pack_start(language_box, false, false, 0);
@@ -73,6 +75,7 @@ namespace Spek {
 		}
 
 		private void on_response (Dialog dialog, int response_id) {
+			Preferences.instance.save ();
 			destroy ();
 		}
 	}
