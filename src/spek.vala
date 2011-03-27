@@ -30,11 +30,9 @@ namespace Spek {
 	int main (string[] args) {
 		Platform.fix_args (args);
 
-		var prefs = new Preferences ();
-		if (prefs.language.length > 0) {
-			Environment.set_variable ("LC_ALL", prefs.language, true);
+		if (Preferences.instance.language.length > 0) {
+			Environment.set_variable ("LC_ALL", Preferences.instance.language, true);
 		}
-		prefs = null;
 
 //		Intl.setlocale (LocaleCategory.ALL, prefs.language);
 		Intl.bindtextdomain (Config.GETTEXT_PACKAGE, Config.LOCALEDIR);
