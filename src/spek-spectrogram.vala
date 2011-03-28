@@ -36,7 +36,7 @@ namespace Spek {
 
 		private const int LPAD = 60;
 		private const int TPAD = 60;
-		private const int RPAD = 60;
+		private const int RPAD = 80;
 		private const int BPAD = 40;
 		private const int GAP = 10;
 		private const int RULER = 10;
@@ -181,11 +181,13 @@ namespace Spek {
 				var duration_seconds = (int) pipeline.duration;
 				var time_ruler = new Ruler (
 					Ruler.Position.BOTTOM,
+					// TODO: i18n
 					"00:00",
 					{1, 2, 5, 10, 20, 30, 1*60, 2*60, 5*60, 10*60, 20*60, 30*60},
 					duration_seconds,
 					1.5,
 					unit => (w - LPAD - RPAD) * unit / duration_seconds,
+					// TODO: i18n
 					unit => "%d:%02d".printf (unit / 60, unit % 60));
 				cr.translate (LPAD, h - BPAD);
 				time_ruler.draw (cr, layout);
@@ -195,7 +197,7 @@ namespace Spek {
 				var freq = pipeline.sample_rate / 2;
 				var rate_ruler = new Ruler (
 					Ruler.Position.LEFT,
-					"00 kHz",
+					_("00 kHz"),
 					{1000, 2000, 5000, 10000, 20000},
 					freq,
 					3.0,
@@ -237,6 +239,27 @@ namespace Spek {
 			cr.scale (1, -(h - TPAD - BPAD) / palette.get_height ());
 			cr.set_source_surface (palette, 0, 0);
 			cr.paint ();
+			cr.identity_matrix ();
+
+			// Prepare to draw the ruler.
+			cr.set_source_rgb (1, 1, 1);
+			cr.set_line_width (1);
+			cr.set_antialias (Antialias.NONE);
+			layout.set_font_description (FontDescription.from_string (
+				"Sans " + (8 * FONT_SCALE).to_string ()));
+			layout.set_width (-1);
+
+			// Spectral density.
+			var density_ruler = new Ruler (
+				Ruler.Position.RIGHT,
+				_("-00 dB"),
+				{1, 2, 5, 10, 20, 50},
+				-THRESHOLD,
+				3.0,
+				unit => -(h - TPAD - BPAD) * unit / THRESHOLD,
+				unit => _("%d dB").printf (unit + THRESHOLD));
+			cr.translate (w - RPAD + GAP + RULER, TPAD);
+			density_ruler.draw (cr, layout);
 			cr.identity_matrix ();
 		}
 

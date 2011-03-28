@@ -93,7 +93,7 @@ namespace Spek {
 				if (pos == Position.TOP) {
 					cr.move_to (p - w / 2, -GAP - h);
 				} else if (pos == Position.RIGHT){
-					cr.move_to (w + GAP, p + h / 2);
+					cr.move_to (GAP, p + h / 2);
 				} else if (pos == Position.BOTTOM) {
 					cr.move_to (p - w / 2, GAP + h);
 				} else if (pos == Position.LEFT){
