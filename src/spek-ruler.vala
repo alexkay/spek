@@ -33,22 +33,25 @@ namespace Spek {
 		private int[] factors;
 		private int units;
 		private double spacing;
-		private UnitToPixel unit_to_pixel;
+		private Measure measure;
+		private Place place;
 		private FormatTick format_tick;
 
-		public delegate double UnitToPixel (int unit);
+		public delegate double Measure (int unit);
+		public delegate double Place (double p);
 		public delegate string FormatTick (int unit);
 
 		public Ruler (
 			Position pos, string sample_label,
 			int[] factors, int units, double spacing,
-			UnitToPixel unit_to_pixel, FormatTick format_tick) {
+			Measure measure, Place place, FormatTick format_tick) {
 			this.pos = pos;
 			this.sample_label = sample_label;
 			this.factors = factors;
 			this.units = units;
 			this.spacing = spacing;
-			this.unit_to_pixel = unit_to_pixel;
+			this.measure = measure;
+			this.place = place;
 			this.format_tick = format_tick;
 		}
 
@@ -62,7 +65,7 @@ namespace Spek {
 			// Select the factor to use, we want some space between the labels.
 			int factor = 0;
 			foreach (var f in factors) {
-				if (unit_to_pixel (f) >= spacing * size) {
+				if (measure (f) >= spacing * size) {
 					factor = f;
 					break;
 				}
@@ -72,7 +75,7 @@ namespace Spek {
 			int[] ticks = { 0, units };
 			if (factor > 0) {
 				for (var tick = factor; tick < units; tick += factor) {
-					if (unit_to_pixel (units - tick) < size * 1.2) {
+					if (measure (units - tick) < size * 1.2) {
 						break;
 					}
 					ticks += tick;
@@ -85,9 +88,9 @@ namespace Spek {
 			double TICK_LEN = 4;
 			foreach (var tick in ticks) {
 				var label = format_tick (tick);
-				var p = unit_to_pixel (
+				var p = place (measure (
 					pos == Position.TOP || pos == Position.BOTTOM
-					? tick : units - tick);
+					? tick : units - tick));
 				layout.set_text (label, -1);
 				layout.get_pixel_size (out w, out h);
 				if (pos == Position.TOP) {

@@ -190,6 +190,7 @@ namespace Spek {
 					duration_seconds,
 					1.5,
 					unit => (w - LPAD - RPAD) * unit / duration_seconds,
+					p => p,
 					// TODO: i18n
 					unit => "%d:%02d".printf (unit / 60, unit % 60));
 				cr.translate (LPAD, h - BPAD);
@@ -205,6 +206,7 @@ namespace Spek {
 					freq,
 					3.0,
 					unit => (h - TPAD - BPAD) * unit / freq,
+					p => p,
 					unit => _("%d kHz").printf (unit / 1000));
 				cr.translate (LPAD, TPAD);
 				rate_ruler.draw (cr, layout);
@@ -260,7 +262,8 @@ namespace Spek {
 				-THRESHOLD,
 				3.0,
 				unit => -(h - TPAD - BPAD) * unit / THRESHOLD,
-				unit => _("%d dB").printf (unit + THRESHOLD));
+				p => h - TPAD - BPAD - p,
+				unit => _("%d dB").printf (-unit));
 			cr.translate (w - RPAD + GAP + RULER, TPAD);
 			density_ruler.draw (cr, layout);
 			cr.identity_matrix ();
