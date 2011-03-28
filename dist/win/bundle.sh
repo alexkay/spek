@@ -11,6 +11,7 @@ pushd $(dirname $0)/../..
 
 rm -fr dist/win/Spek
 mkdir dist/win/Spek
+rm dist/win/spek.{msi,zip}
 
 # Compile the resource file
 windres dist/win/spek.rc -O coff -o dist/win/spek.res
