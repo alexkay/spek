@@ -200,10 +200,11 @@ namespace Spek {
 		private void on_about_clicked () {
 			string[] authors = {
 				"Primary Development:",
-				"\tAlexander Kojevnikov (maintainer) <alexander@kojevnikov.com>",
+				"\tAlexander Kojevnikov (maintainer)",
 				"",
 				"Contributors:",
-				"\tFabian Deutsch"
+				"\tFabian Deutsch",
+				"\tStefan Kost"
 			};
 			string[] artists = {
 				"Olga Vasylevska"
