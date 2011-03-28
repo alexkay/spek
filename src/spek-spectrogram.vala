@@ -149,16 +149,19 @@ namespace Spek {
 			layout.set_font_description (FontDescription.from_string (
 				"Sans " + (9 * FONT_SCALE).to_string ()));
 			layout.set_width (RPAD * Pango.SCALE);
-			layout.set_text ("v" + Config.PACKAGE_VERSION, -1);
+			layout.set_text ("dummy", -1);
 			layout.get_pixel_size (out text_width, out text_height);
 			int line_height = text_height;
-			cr.move_to (w - (RPAD + text_width) / 2, TPAD - GAP);
-			cairo_show_layout_line (cr, layout.get_line (0));
 			layout.set_font_description (FontDescription.from_string (
 				 "Sans Bold " + (10 * FONT_SCALE).to_string ()));
-			layout.set_text (Config.PACKAGE_NAME, -1);
+			layout.set_text (Config.PACKAGE_NAME + " ", -1);
 			layout.get_pixel_size (out text_width, out text_height);
-			cr.move_to (w - (RPAD + text_width) / 2, TPAD - 2 * GAP - line_height);
+			cr.move_to (w - RPAD + GAP, TPAD - 2 * GAP - line_height);
+			cairo_show_layout_line (cr, layout.get_line (0));
+			layout.set_font_description (FontDescription.from_string (
+				"Sans " + (9 * FONT_SCALE).to_string ()));
+			layout.set_text (Config.PACKAGE_VERSION, -1);
+			cr.rel_move_to (text_width, 0);
 			cairo_show_layout_line (cr, layout.get_line (0));
 
 			if (image != null) {
