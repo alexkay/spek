@@ -241,7 +241,7 @@ namespace Spek {
 
 			// The palette.
 			cr.translate (w - RPAD + GAP, h - BPAD);
-			cr.scale (1, -(h - TPAD - BPAD) / palette.get_height ());
+			cr.scale (1, -(h - TPAD - BPAD + 1) / palette.get_height ());
 			cr.set_source_surface (palette, 0, 0);
 			cr.paint ();
 			cr.identity_matrix ();
