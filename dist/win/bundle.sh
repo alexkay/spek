@@ -21,9 +21,11 @@ CFLAGS="-mwindows" LDFLAGS="dist/win/spek.res" ./configure --prefix=${PWD}/dist/
 
 cd dist/win/Spek
 
+FFMPEG_VERSION=ffmpeg-git-2a0d4d4-32-bit-shared
 urls=(\
 # GTK+ and its dependencies
 "http://ftp.gnome.org/pub/gnome/binaries/win32/atk/1.32/atk_1.32.0-1_win32.zip" \
+"http://ftp.gnome.org/pub/gnome/binaries/win32/gdk-pixbuf/2.22/gdk-pixbuf_2.22.1-1_win32.zip" \
 "http://ftp.gnome.org/pub/gnome/binaries/win32/glib/2.28/glib_2.28.1-1_win32.zip" \
 "http://ftp.gnome.org/pub/gnome/binaries/win32/gtk+/2.24/gtk+_2.24.0-1_win32.zip" \
 "http://ftp.gnome.org/pub/gnome/binaries/win32/pango/1.28/pango_1.28.3-1_win32.zip" \
@@ -36,7 +38,7 @@ urls=(\
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/libpng_1.4.3-1_win32.zip" \
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/zlib_1.2.5-2_win32.zip" \
 # FFmpeg
-"http://hawkeye.arrozcru.org/builds/32-bit/shared/ffmpeg-git-2a0d4d4-32-bit-shared.7z"
+"http://hawkeye.arrozcru.org/builds/32-bit/shared/$FFMPEG_VERSION.7z"
 )
 
 for url in ${urls[*]}
@@ -53,14 +55,15 @@ do
 done
 
 # Clean up
+mv $FFMPEG_VERSION/bin/{avcodec-52,avformat-52,avutil-50}.dll bin/
+mv $FFMPEG_VERSION/licenses share/
+rm -fr $FFMPEG_VERSION
 mv bin/spek.exe ../
 rm -fr share/locale
 rm -fr doc
 rm -fr presets
-rm *.txt
-rm bin/avdevice* bin/avfilter* bin/swscale*
+rm -fr manifest
 rm bin/*.exe
-mv licenses share/
 
 # Set the default GTK theme
 echo "gtk-theme-name = \"MS-Windows\"" > etc/gtk-2.0/gtkrc
