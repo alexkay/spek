@@ -21,7 +21,14 @@ using Pango;
 
 namespace Spek {
 	class Ruler : GLib.Object {
+		public enum Position {
+			TOP,
+			RIGHT,
+			BOTTOM,
+			LEFT
+		}
 
+		private Position pos;
 		private string sample_label;
 		private int[] factors;
 		private int units;
@@ -33,8 +40,10 @@ namespace Spek {
 		public delegate string FormatTick (int unit);
 
 		public Ruler (
-			string sample_label, int[] factors, int units, double spacing,
+			Position pos, string sample_label,
+			int[] factors, int units, double spacing,
 			UnitToPixel unit_to_pixel, FormatTick format_tick) {
+			this.pos = pos;
 			this.sample_label = sample_label;
 			this.factors = factors;
 			this.units = units;
@@ -43,12 +52,12 @@ namespace Spek {
 			this.format_tick = format_tick;
 		}
 
-		public void draw (Cairo.Context cr, Pango.Layout layout, bool horizontal) {
+		public void draw (Cairo.Context cr, Pango.Layout layout) {
 			// Mesure the sample label.
 			int w, h;
 			layout.set_text (sample_label, -1);
 			layout.get_pixel_size (out w, out h);
-			var size = horizontal ? w : h;
+			var size = pos == Position.TOP || pos == Position.BOTTOM ? w : h;
 
 			// Select the factor to use, we want some space between the labels.
 			int factor = 0;
@@ -76,20 +85,32 @@ namespace Spek {
 			double TICK_LEN = 4;
 			foreach (var tick in ticks) {
 				var label = format_tick (tick);
-				var pos = unit_to_pixel (horizontal ? tick : units - tick);
+				var p = unit_to_pixel (
+					pos == Position.TOP || pos == Position.BOTTOM
+					? tick : units - tick);
 				layout.set_text (label, -1);
 				layout.get_pixel_size (out w, out h);
-				if (horizontal) {
-					cr.move_to (pos - w / 2, GAP + h);
-				} else {
-					cr.move_to (-w - GAP, pos + h / 2);
+				if (pos == Position.TOP) {
+					cr.move_to (p - w / 2, -GAP - h);
+				} else if (pos == Position.RIGHT){
+					cr.move_to (w + GAP, p + h / 2);
+				} else if (pos == Position.BOTTOM) {
+					cr.move_to (p - w / 2, GAP + h);
+				} else if (pos == Position.LEFT){
+					cr.move_to (-w - GAP, p + h / 2);
 				}
 				cairo_show_layout_line (cr, layout.get_line (0));
-				if (horizontal) {
-					cr.move_to (pos, 0);
+				if (pos == Position.TOP) {
+					cr.move_to (p, 0);
+					cr.rel_line_to (0, -TICK_LEN);
+				} else if (pos == Position.RIGHT) {
+					cr.move_to (0, p);
+					cr.rel_line_to (TICK_LEN, 0);
+				} else if (pos == Position.BOTTOM) {
+					cr.move_to (p, 0);
 					cr.rel_line_to (0, TICK_LEN);
-				} else {
-					cr.move_to (0, pos);
+				} else if (pos == Position.LEFT) {
+					cr.move_to (0, p);
 					cr.rel_line_to (-TICK_LEN, 0);
 				}
 				cr.stroke ();

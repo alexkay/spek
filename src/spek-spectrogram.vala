@@ -180,6 +180,7 @@ namespace Spek {
 				// Time ruler.
 				var duration_seconds = (int) pipeline.duration;
 				var time_ruler = new Ruler (
+					Ruler.Position.BOTTOM,
 					"00:00",
 					{1, 2, 5, 10, 20, 30, 1*60, 2*60, 5*60, 10*60, 20*60, 30*60},
 					duration_seconds,
@@ -187,12 +188,13 @@ namespace Spek {
 					unit => (w - LPAD - RPAD) * unit / duration_seconds,
 					unit => "%d:%02d".printf (unit / 60, unit % 60));
 				cr.translate (LPAD, h - BPAD);
-				time_ruler.draw (cr, layout, true);
+				time_ruler.draw (cr, layout);
 				cr.identity_matrix ();
 
 				// Frequency ruler.
 				var freq = pipeline.sample_rate / 2;
 				var rate_ruler = new Ruler (
+					Ruler.Position.LEFT,
 					"00 kHz",
 					{1000, 2000, 5000, 10000, 20000},
 					freq,
@@ -200,7 +202,7 @@ namespace Spek {
 					unit => (h - TPAD - BPAD) * unit / freq,
 					unit => _("%d kHz").printf (unit / 1000));
 				cr.translate (LPAD, TPAD);
-				rate_ruler.draw (cr, layout, false);
+				rate_ruler.draw (cr, layout);
 				cr.identity_matrix ();
 
 				// File properties.
