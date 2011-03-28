@@ -59,7 +59,10 @@ mv $FFMPEG_VERSION/bin/{avcodec-52,avformat-52,avutil-50}.dll bin/
 mv $FFMPEG_VERSION/licenses share/
 rm -fr $FFMPEG_VERSION
 mv bin/spek.exe ../
+mkdir share/locale_
+mv share/locale/{de,es,fr,nl,pl,ru,sv,uk} share/locale_/
 rm -fr share/locale
+mv share/locale_ share/locale
 rm -fr doc
 rm -fr presets
 rm -fr manifest
