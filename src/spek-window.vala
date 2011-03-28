@@ -131,7 +131,7 @@ namespace Spek {
 		}
 
 		void on_dropped (DragContext cx, int x, int y, SelectionData data, uint info, uint time) {
-			if (data.length > 0 && data.format == 8) {
+			if (data.get_length () > 0 && data.get_format () == 8) {
 				string[] files = data.get_uris ();
 				if (files.length > 0) {
 					try {

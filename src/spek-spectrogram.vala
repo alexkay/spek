@@ -67,6 +67,8 @@ namespace Spek {
 		}
 
 		public void save (string file_name) {
+			Allocation allocation;
+			get_allocation (out allocation);
 			var surface = new ImageSurface (Format.RGB24, allocation.width, allocation.height);
 			draw (new Cairo.Context (surface));
 			surface.write_to_png (file_name);
@@ -80,6 +82,8 @@ namespace Spek {
 			// The number of samples is the number of pixels available for the image.
 			// The number of bands is fixed, FFT results are very different for
 			// different values but we need some consistency.
+			Allocation allocation;
+			get_allocation (out allocation);
 			int samples = allocation.width - LPAD - RPAD;
 			if (samples > 0) {
 				image = new ImageSurface (Format.RGB24, samples, BANDS);
@@ -117,7 +121,8 @@ namespace Spek {
 		}
 
 		protected override bool expose_event (EventExpose event) {
-			var cr = cairo_create (this.window);
+			var window = get_window ();
+			var cr = cairo_create (window);
 
 			// Clip to the exposed area.
 			cr.rectangle (event.area.x, event.area.y, event.area.width, event.area.height);
@@ -128,6 +133,8 @@ namespace Spek {
 		}
 
 		private void draw (Cairo.Context cr) {
+			Allocation allocation;
+			get_allocation (out allocation);
 			double w = allocation.width;
 			double h = allocation.height;
 			int text_width, text_height;

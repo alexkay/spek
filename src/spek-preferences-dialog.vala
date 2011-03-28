@@ -69,6 +69,7 @@ namespace Spek {
 
 			box.pack_start (general_box, false, false, 0);
 			alignment.add (box);
+			var vbox = (VBox) get_content_area ();
 			vbox.pack_start (alignment, false, false, 0);
 			vbox.show_all ();
 
