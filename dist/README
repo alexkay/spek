@@ -6,7 +6,11 @@ Spek release checklist
  * `tx pull -a` and commit with correct `--author`s.
  * Review translations, translate what I can, Ich spreek un peu по-русски.
  * `tx pull -a`.
- * TODO: Update the list of languages in the preferences, 80% or so will do.
+ * Update the list of available languages, 80% or so will do:
+   * po/LINGUAS
+   * src/spek-preferences.vala
+   * dist/win/bundle.sh
+   * TODO: dist/osx/?
  * Update AUTHORS using `git log X.Y.. --pretty=format:"%an <%ae>" | sort -u`.
  * Update NEWS.
  * Commit everything.
