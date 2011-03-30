@@ -67,11 +67,11 @@ void spek_platform_fix_args (gchar **argv, gint argc) {
 
 void spek_platform_show_uri (const gchar *uri) {
 #ifdef G_OS_WIN32
-	/* gtk_show_uri doesn't work on Windows */
+	/* gtk_show_uri doesn't work on Windows... */
 	ShellExecuteA (NULL, "open", uri, "", NULL, SW_SHOWNORMAL);
 #else
 #ifdef G_OS_DARWIN
-	/* it doesn't work on OS X too */
+	/* ...or on OS X */
 	CFStringRef str = NULL;
 	CFURLRef url = NULL;
 
@@ -81,10 +81,7 @@ void spek_platform_show_uri (const gchar *uri) {
 	CFRelease (url);
 	CFRelease (str);
 #else
-	GError *error = NULL;
-	if (!gtk_show_uri (NULL, uri, gtk_get_current_event_time (), &error)) {
-		g_error_free (error);
-	}
+	gtk_show_uri (NULL, uri, gtk_get_current_event_time (), NULL);
 #endif
 #endif
 }
