@@ -21,6 +21,9 @@
 
 #include <glib.h>
 
+/* Platform-specific initialisation */
+void spek_platform_init ();
+
 /* Convert from UTF-16 to UTF-8 when running on Windows */
 void spek_platform_fix_args (gchar **argv, gint argc);
 

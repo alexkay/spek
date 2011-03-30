@@ -59,6 +59,7 @@ namespace Spek {
 			return 1;
 		}
 
+		Platform.init ();
 		Audio.init ();
 		var file_name = files == null ? null : files[0];
 		if (file_name != null && file_name.has_prefix ("file://")) {

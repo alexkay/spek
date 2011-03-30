@@ -25,11 +25,18 @@
 #endif
 
 #ifdef G_OS_DARWIN
+#include <gtkosxapplication.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <ApplicationServices/ApplicationServices.h>
 #endif
 
 #include "spek-platform.h"
+
+void spek_platform_init () {
+#ifdef G_OS_DARWIN
+	GtkOSXApplication *app = g_object_new (GTK_TYPE_OSX_APPLICATION, NULL);
+#endif
+}
 
 void spek_platform_fix_args (gchar **argv, gint argc) {
 #ifdef G_OS_WIN32
