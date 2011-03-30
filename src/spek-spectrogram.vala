@@ -40,14 +40,9 @@ namespace Spek {
 		private const int BPAD = 40;
 		private const int GAP = 10;
 		private const int RULER = 10;
-		private double FONT_SCALE = 1.0;
+		private double FONT_SCALE = Platform.get_font_scale ();
 
 		public Spectrogram () {
-#if G_OS_DARWIN
-			// Pango/Quartz fonts are smaller than on X.
-			FONT_SCALE = 1.4;
-#endif
-
 			// Pre-draw the palette.
 			palette = new ImageSurface (Format.RGB24, RULER, BANDS);
 			for (int y = 0; y < BANDS; y++) {

@@ -33,4 +33,7 @@ void spek_platform_show_uri (const gchar *uri);
 /* Read a line from a uri */
 gchar *spek_platform_read_line (const gchar *uri);
 
+/* Fonts are smaller on OS X */
+gdouble spek_platform_get_font_scale ();
+
 #endif

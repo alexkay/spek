@@ -4,4 +4,5 @@ namespace Spek.Platform {
 	public static void fix_args (string[] args);
 	public static void show_uri (string uri);
 	public static string read_line (string uri);
+	public static double get_font_scale ();
 }

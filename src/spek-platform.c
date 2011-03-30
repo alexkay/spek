@@ -128,3 +128,11 @@ gchar *spek_platform_read_line (const gchar *uri) {
 	return line;
 #endif
 }
+
+gdouble spek_platform_get_font_scale () {
+#ifdef G_OS_DARWIN
+	/* Pango/Quartz fonts are smaller than on X. */
+	return 1.4;
+#endif
+	return 1.0;
+}
