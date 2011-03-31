@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd $(dirname $0)/..
+cd $(dirname $0)/../..
 case "$(uname)" in
     Darwin) profile_name=darwin ;;
     *)
@@ -9,14 +9,14 @@ case "$(uname)" in
         ;;
 esac
 
-./autogen.sh --prefix=$(pwd)/osx/bin
+./autogen.sh --prefix=$(pwd)/dist/osx/bin
 gmake
 gmake install
 
-ige-mac-bundler osx/spek.bundle
+ige-mac-bundler dist/osx/spek.bundle
 
 # Make DMG image
-cd osx
+cd dist/osx
 VOLUME_NAME=Spek
 DMG_APP=Spek.app
 DMG_FILE=$VOLUME_NAME.dmg
@@ -66,4 +66,4 @@ if [ ! "x$1" = "x-m" ]; then
 	rm $DMG_FILE.master
 fi
 
-cd ..
+cd ../..

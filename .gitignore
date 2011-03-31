@@ -18,6 +18,9 @@ configure
 data/spek.desktop
 data/spek.desktop.in
 depcomp
+dist/osx/Spek.app
+dist/osx/Spek.dmg
+dist/osx/bin
 dist/win/spek.wxs
 install-sh
 intltool-extract.in
@@ -29,9 +32,6 @@ man/spek.1
 missing
 mkinstalldirs
 omf.make
-osx/Spek.app
-osx/Spek.dmg
-osx/bin
 po/*.gmo
 po/.intltool-merge-cache
 po/POTFILES
