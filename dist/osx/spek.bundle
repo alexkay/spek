@@ -12,21 +12,21 @@
     ${project}/bin/bin/spek
   </main-binary>
   <binary>
-     ${prefix}/lib/${gtkdir}/modules/*.so
+    ${prefix}/lib/gdk-pixbuf-2.0/${pkg:${gtk}:gtk_binary_version}/loaders/*.so
   </binary>
   <binary>
     ${prefix}/lib/${gtkdir}/${pkg:${gtk}:gtk_binary_version}/engines/*.so
   </binary>
-  <binary>
-    ${prefix}/lib/${gtkdir}/${pkg:${gtk}:gtk_binary_version}/immodules/*.so
-  </binary>
+  <!-- binary>
+    ${prefix}/lib/${gtkdir}/${pkg:${gtk}:gtk_binary_version}/printbackends/*.so
+  </binary -->
   <binary>
     ${prefix}/lib/pango/${pkg:pango:pango_module_version}/modules/*.so
   </binary>
 
-  <!-- translations name="gtk20">
+  <translations name="gtk20">
     ${prefix}/share/locale
-  </translations -->
+  </translations>
 
   <data dest="${bundle}/Contents/Resources/share">
     ${project}/bin/share

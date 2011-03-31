@@ -9,14 +9,17 @@ case "$(uname)" in
         ;;
 esac
 
+rm -fr dist/osx/bin
 ./autogen.sh --prefix=$(pwd)/dist/osx/bin
 gmake
 gmake install
 
-ige-mac-bundler dist/osx/spek.bundle
+cd dist/osx
+mv bin/lib/locale bin/share/
+
+ige-mac-bundler spek.bundle
 
 # Make DMG image
-cd dist/osx
 VOLUME_NAME=Spek
 DMG_APP=Spek.app
 DMG_FILE=$VOLUME_NAME.dmg
