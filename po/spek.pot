@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-17 22:05+0800\n"
+"POT-Creation-Date: 2011-03-31 08:06+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,13 +97,34 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: ../src/spek-preferences-dialog.vala:44
+#: ../src/spek-preferences-dialog.vala:45
+msgid "_Language:"
+msgstr ""
+
+#: ../src/spek-preferences-dialog.vala:62
 msgid "Check for _updates"
 msgstr ""
 
-#: ../src/spek-spectrogram.vala:194
+#: ../src/spek-preferences.vala:40
+msgid "(system default)"
+msgstr ""
+
+#: ../src/spek-spectrogram.vala:199
+msgid "00 kHz"
+msgstr ""
+
+#: ../src/spek-spectrogram.vala:205
 #, c-format
 msgid "%d kHz"
+msgstr ""
+
+#: ../src/spek-spectrogram.vala:255
+msgid "-00 dB"
+msgstr ""
+
+#: ../src/spek-spectrogram.vala:261
+#, c-format
+msgid "%d dB"
 msgstr ""
 
 #: ../src/spek-window.vala:37
@@ -147,15 +168,15 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
-#: ../src/spek-window.vala:229
+#: ../src/spek-window.vala:230
 msgid "Copyright © 2010-2011 Alexander Kojevnikov"
 msgstr ""
 
-#: ../src/spek-window.vala:234
+#: ../src/spek-window.vala:235
 msgid "Spek Website"
 msgstr ""
 
-#: ../src/spek-window.vala:243
+#: ../src/spek-window.vala:244
 msgid "translator-credits"
 msgstr ""
 
@@ -163,21 +184,21 @@ msgstr ""
 msgid "Display the version and exit"
 msgstr ""
 
-#: ../src/spek.vala:45
+#: ../src/spek.vala:43
 msgid "[FILE]"
 msgstr ""
 
-#: ../src/spek.vala:49
+#: ../src/spek.vala:47
 #, c-format
 msgid "Run `%s --help` to see a full list of available command line options.\n"
 msgstr ""
 
 #. TRANSLATORS: first %s is the package name, second %s is the package version.
-#: ../src/spek.vala:55
+#: ../src/spek.vala:53
 #, c-format
 msgid "%s version %s\n"
 msgstr ""
 
-#: ../src/spek.vala:60
+#: ../src/spek.vala:58
 msgid "Specify a single file\n"
 msgstr ""

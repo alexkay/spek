@@ -196,6 +196,7 @@ namespace Spek {
 				var freq = pipeline.sample_rate / 2;
 				var rate_ruler = new Ruler (
 					Ruler.Position.LEFT,
+					// TRANSLATORS: keep "00" unchanged, it's used to calc the text width
 					_("00 kHz"),
 					{1000, 2000, 5000, 10000, 20000},
 					freq,
@@ -252,6 +253,7 @@ namespace Spek {
 			// Spectral density.
 			var density_ruler = new Ruler (
 				Ruler.Position.RIGHT,
+				// TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
 				_("-00 dB"),
 				{1, 2, 5, 10, 20, 50},
 				-THRESHOLD,
