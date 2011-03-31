@@ -19,6 +19,13 @@ mv bin/lib/locale bin/share/
 
 ige-mac-bundler spek.bundle
 
+cd Spek.app/Contents/Resources
+mkdir share/locale_
+mv share/locale/{de,es,fr,nl,pl,ru,sv,uk} share/locale_/
+rm -fr share/locale
+mv share/locale_ share/locale
+cd ../../..
+
 # Make DMG image
 VOLUME_NAME=Spek
 DMG_APP=Spek.app
