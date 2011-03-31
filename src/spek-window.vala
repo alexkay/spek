@@ -22,6 +22,7 @@ using Gtk;
 namespace Spek {
 	public class Window : Gtk.Window {
 
+		private UIManager ui;
 		private MessageBar message_bar;
 		private Spectrogram spectrogram;
 		private string description;
@@ -29,6 +30,15 @@ namespace Spek {
 		private FileFilter filter_all;
 		private FileFilter filter_audio;
 		private FileFilter filter_png;
+
+		private const ActionEntry[] ACTION_ENTRIES = {
+			{ "OpenAction", STOCK_OPEN, null, null, null, on_open_action },
+			{ "SaveAction", STOCK_SAVE, null, null, null, on_save_action },
+			{ "PreferencesAction", STOCK_PREFERENCES, null, "<Ctrl>E", null, on_prefs_action },
+			{ "QuitAction", STOCK_QUIT, null, null, null, on_quit_action },
+			{ "AboutAction", STOCK_ABOUT, null, "F1", null, on_about_action }
+		};
+
 		private const Gtk.TargetEntry[] DEST_TARGET_ENTRIES = {
 			{ "text/uri-list", 0, 0 }
 		};
@@ -39,42 +49,31 @@ namespace Spek {
 			set_default_size (640, 480);
 			destroy.connect (Gtk.main_quit);
 
-			var group = new AccelGroup ();
-			add_accel_group (group);
+			ui = new UIManager ();
+			var actions = new ActionGroup ("Actions");
+			actions.add_actions (ACTION_ENTRIES, this);
 
 			var toolbar = new Toolbar ();
 			toolbar.set_style (ToolbarStyle.BOTH_HORIZ);
 
-			var open = new ToolButton.from_stock (STOCK_OPEN);
+			var open = (ToolButton) actions.get_action ("OpenAction").create_tool_item ();
 			open.is_important = true;
-			open.add_accelerator (
-				"clicked", group, 'O', ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
-			open.clicked.connect (on_open_clicked);
 			toolbar.insert (open, -1);
 
-			var save = new ToolButton.from_stock (STOCK_SAVE);
+			var save = (ToolButton) actions.get_action ("SaveAction").create_tool_item ();
 			save.is_important = true;
-			save.add_accelerator (
-				"clicked", group, 'S', ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
-			save.clicked.connect (on_save_clicked);
 			toolbar.insert (save, -1);
 
 			toolbar.insert (new SeparatorToolItem (), -1);
 
-			var prefs = new ToolButton.from_stock (STOCK_PREFERENCES);
+			var prefs = (ToolButton) actions.get_action ("PreferencesAction").create_tool_item ();
 			prefs.is_important = true;
-			prefs.add_accelerator (
-				"clicked", group, 'E', ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
-			prefs.clicked.connect (on_prefs_clicked);
 			toolbar.insert (prefs, -1);
 
 			toolbar.insert (new SeparatorToolItem (), -1);
 
-			var quit = new ToolButton.from_stock (STOCK_QUIT);
+			var quit = (ToolButton) actions.get_action ("QuitAction").create_tool_item ();
 			quit.is_important = true;
-			quit.add_accelerator (
-				"clicked", group, 'Q', ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
-			quit.clicked.connect (s => destroy());
 			toolbar.insert (quit, -1);
 
 			// This separator forces the rest of the items to the end of the toolbar.
@@ -83,10 +82,8 @@ namespace Spek {
 			sep.draw = false;
 			toolbar.insert (sep, -1);
 
-			var about = new ToolButton.from_stock (STOCK_ABOUT);
+			var about = (ToolButton) actions.get_action ("AboutAction").create_tool_item ();
 			about.is_important = true;
-			about.add_accelerator ("clicked", group, keyval_from_name ("F1"), 0, AccelFlags.VISIBLE);
-			about.clicked.connect (on_about_clicked);
 			toolbar.insert (about, -1);
 
 			message_bar = new MessageBar (_("A new version of Spek is available on <a href=\"http://www.spek-project.org\">www.spek-project.org</a>"));
@@ -115,6 +112,13 @@ namespace Spek {
 			spectrogram.show_all ();
 			vbox.show ();
 			show ();
+
+			ui.insert_action_group (actions, 0);
+			try {
+				ui.add_ui_from_string (get_accel_ui_string (actions), -1);
+			} catch {
+			}
+			add_accel_group (ui.get_accel_group ());
 
 			// Set up Drag and Drop
 			drag_dest_set (this, DestDefaults.ALL, DEST_TARGET_ENTRIES, DragAction.COPY);
@@ -156,7 +160,7 @@ namespace Spek {
 			title = _("Spek - %s").printf (Path.get_basename (file_name));
 		}
 
-		private void on_open_clicked () {
+		private void on_open_action () {
 			var chooser = new FileChooserDialog (
 				_("Open File"), this, FileChooserAction.OPEN,
 				STOCK_CANCEL, ResponseType.CANCEL,
@@ -173,7 +177,7 @@ namespace Spek {
 			chooser.destroy ();
 		}
 
-		private void on_save_clicked () {
+		private void on_save_action () {
 			var chooser = new FileChooserDialog (
 				_("Save Spectrogram"), this, FileChooserAction.SAVE,
 				STOCK_CANCEL, ResponseType.CANCEL,
@@ -195,13 +199,17 @@ namespace Spek {
 			chooser.destroy ();
 		}
 
-		private void on_prefs_clicked () {
+		private void on_prefs_action () {
 			var dlg = new PreferencesDialog ();
 			dlg.transient_for = this;
 			dlg.run ();
 		}
 
-		private void on_about_clicked () {
+		private void on_quit_action () {
+			destroy ();
+		}
+
+		private void on_about_action () {
 			string[] authors = {
 				"Primary Development:",
 				"\tAlexander Kojevnikov (maintainer)",
@@ -322,6 +330,16 @@ namespace Spek {
 			prefs.last_update = (int) today.get_julian ();
 			prefs.save ();
 			return null;
+		}
+
+		private string get_accel_ui_string (ActionGroup actions) {
+			var sb = new StringBuilder ();
+			sb.append ("<ui>");
+			foreach (var action in actions.list_actions ()) {
+				sb.append ("<accelerator name=\"%s\" action=\"%s\" />".printf (action.name, action.name));
+			}
+			sb.append ("</ui>");
+			return sb.str;
 		}
 	}
 }
