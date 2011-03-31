@@ -125,7 +125,11 @@ namespace Spek {
 			}
 
 			try {
+#if VALA_0_12
+				Thread.create<void*> (check_version, false);
+#else
 				Thread.create (check_version, false);
+#endif
 			} catch (ThreadError e) {
 			}
 		}

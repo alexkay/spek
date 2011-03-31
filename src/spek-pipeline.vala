@@ -45,8 +45,13 @@ namespace Spek {
 		private float[] input;
 		private float[] output;
 
+#if VALA_0_12
+		private unowned Thread<void*> reader_thread = null;
+		private unowned Thread<void*> worker_thread;
+#else
 		private unowned Thread reader_thread = null;
 		private unowned Thread worker_thread;
+#endif
 		private Mutex reader_mutex;
 		private Cond reader_cond;
 		private Mutex worker_mutex;
@@ -118,7 +123,11 @@ namespace Spek {
 			worker_cond = new Cond ();
 
 			try {
+#if VALA_0_12
+				reader_thread = Thread.create<void*> (reader_func, true);
+#else
 				reader_thread = Thread.create (reader_func, true);
+#endif
 			} catch (ThreadError e) {
 				stop ();
 			}
@@ -144,7 +153,11 @@ namespace Spek {
 			int size;
 
 			try {
+#if VALA_0_12
+				worker_thread = Thread.create<void*> (worker_func, true);
+#else
 				worker_thread = Thread.create (worker_func, true);
+#endif
 			} catch (ThreadError e) {
 				return null;
 			}
