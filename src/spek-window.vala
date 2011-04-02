@@ -50,7 +50,7 @@ namespace Spek {
 			destroy.connect (Gtk.main_quit);
 
 			ui = new UIManager ();
-			var actions = new ActionGroup ("Actions");
+			var actions = new Gtk.ActionGroup ("Actions");
 			actions.add_actions (ACTION_ENTRIES, this);
 
 			var toolbar = new Toolbar ();
@@ -332,7 +332,7 @@ namespace Spek {
 			return null;
 		}
 
-		private string get_accel_ui_string (ActionGroup actions) {
+		private string get_accel_ui_string (Gtk.ActionGroup actions) {
 			var sb = new StringBuilder ();
 			sb.append ("<ui>");
 			foreach (var action in actions.list_actions ()) {
