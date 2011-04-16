@@ -6,8 +6,8 @@
 Spek is not yet packaged on many distributions, help in this area will be greatly appreciated.
 
  * *Arch Linux*: Use one of the packages in the AUR: [http://aur.archlinux.org/packages.php?ID=38001 spek] and [http://aur.archlinux.org/packages.php?ID=37252 spek-git].
- * *Debian*: [http://mentors.debian.net/cgi-bin/sponsor-pkglist?action=details;package=spek The package] needs a sponsor.
- * *Fedora*: [http://dl.dropbox.com/u/6598054/spek-0.4-5.fc13.x86_64.rpm v0.4 x86_64], [http://dl.dropbox.com/u/6598054/spek-0.4-5.fc13.i686.rpm v0.4 i686] and [http://dl.dropbox.com/u/6598054/spek-0.4-5.fc13.src.rpm v0.4 source] (RPMs by scorp6). There's also a review request needing a sponsor: [https://bugzilla.redhat.com/show_bug.cgi?id=597888 bug #597888].
+ * *Debian*: [http://packages.debian.org/search?keywords=spek spek].
+ * *Fedora*: [https://bugzilla.redhat.com/show_bug.cgi?id=597888 bug #597888].
  * *FreeBSD*: [http://www.freshports.org/audio/spek/ audio/spek].
  * *Gentoo*: [http://packages.gentoo.org/package/media-sound/spek media-sound/spek].
  * *Ubuntu*: [https://launchpad.net/~alexk/+archive/spek Official PPA].
@@ -33,9 +33,7 @@ To build Spek, download the source code tarball then run these commands from ter
 % make
 }}}
 
-To build you will need GTK+ and FFmpeg packages. On Debian/Ubuntu you also need development packages: libgtk2.0-dev, libavcodec-dev and libavformat-dev. For MP3 support you will need FFmpeg compiled with restricted codecs. On Ubuntu you can install ubuntu-restricted-extras. On Debian you can use FFmpeg from [http://debian-multimedia.org/ Debian Multimedia]. On Fedora you need ffmpeg-devel from rpmfusion-free-updates.
-
-Also note that Ubuntu 10.04 and before has a very outdated FFmpeg version, you might need to install it from a third-party [https://launchpad.net/ubuntu/+ppas?name_filter=ffmpeg PPA] or [http://ubuntuforums.org/showthread.php?t=786095 from svn].
+To build you will need GTK+ and FFmpeg packages. On Debian/Ubuntu you also need development packages: libgtk2.0-dev, libavcodec-dev and libavformat-dev.
 
 To start Spek, run:
 
