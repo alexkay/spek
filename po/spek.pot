@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-31 08:06+0800\n"
+"POT-Creation-Date: 2011-04-19 17:52+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,24 +58,24 @@ msgstr ""
 msgid "Unsupported sample format"
 msgstr ""
 
-#: ../src/spek-pipeline.vala:70
+#: ../src/spek-pipeline.vala:75
 #, c-format
 msgid "%d kbps"
 msgstr ""
 
-#: ../src/spek-pipeline.vala:73
+#: ../src/spek-pipeline.vala:78
 #, c-format
 msgid "%d Hz"
 msgstr ""
 
-#: ../src/spek-pipeline.vala:78
+#: ../src/spek-pipeline.vala:83
 #, c-format
 msgid "%d bit"
 msgid_plural "%d bits"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/spek-pipeline.vala:81
+#: ../src/spek-pipeline.vala:86
 #, c-format
 msgid "%d channel"
 msgid_plural "%d channels"
@@ -83,7 +83,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: first %s is the error message, second %s is stream description.
-#: ../src/spek-pipeline.vala:88
+#: ../src/spek-pipeline.vala:93
 #, c-format
 msgid "%s: %s"
 msgstr ""
@@ -109,74 +109,88 @@ msgstr ""
 msgid "(system default)"
 msgstr ""
 
-#: ../src/spek-spectrogram.vala:199
+#. TRANSLATORS: keep "00" unchanged, it's used to calc the text width
+#: ../src/spek-spectrogram.vala:200
 msgid "00 kHz"
 msgstr ""
 
-#: ../src/spek-spectrogram.vala:205
+#: ../src/spek-spectrogram.vala:206
 #, c-format
 msgid "%d kHz"
 msgstr ""
 
-#: ../src/spek-spectrogram.vala:255
+#. TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
+#: ../src/spek-spectrogram.vala:257
 msgid "-00 dB"
 msgstr ""
 
-#: ../src/spek-spectrogram.vala:261
+#: ../src/spek-spectrogram.vala:263
 #, c-format
 msgid "%d dB"
 msgstr ""
 
-#: ../src/spek-window.vala:37
+#: ../src/spek-window.vala:35
+msgid "_File"
+msgstr ""
+
+#: ../src/spek-window.vala:39
+msgid "_Edit"
+msgstr ""
+
+#: ../src/spek-window.vala:41
+msgid "_Help"
+msgstr ""
+
+#: ../src/spek-window.vala:85
 msgid "Spek - Acoustic Spectrum Analyser"
 msgstr ""
 
-#: ../src/spek-window.vala:92
+#: ../src/spek-window.vala:109
 msgid ""
 "A new version of Spek is available on <a href=\"http://www.spek-project.org"
 "\">www.spek-project.org</a>"
 msgstr ""
 
-#: ../src/spek-window.vala:98
+#: ../src/spek-window.vala:115
 msgid "All files"
 msgstr ""
 
-#: ../src/spek-window.vala:101
+#: ../src/spek-window.vala:118
 msgid "PNG images"
 msgstr ""
 
-#: ../src/spek-window.vala:104
+#: ../src/spek-window.vala:121
 msgid "Audio files"
 msgstr ""
 
 #. TRANSLATORS: window title, %s is replaced with the file name
-#: ../src/spek-window.vala:152
+#: ../src/spek-window.vala:175
 #, c-format
 msgid "Spek - %s"
 msgstr ""
 
-#: ../src/spek-window.vala:157
+#: ../src/spek-window.vala:180
 msgid "Open File"
 msgstr ""
 
-#: ../src/spek-window.vala:174
+#: ../src/spek-window.vala:197
 msgid "Save Spectrogram"
 msgstr ""
 
 #. Suggested name is <file_name>.png
-#: ../src/spek-window.vala:181
+#: ../src/spek-window.vala:204
 msgid "Untitled"
 msgstr ""
 
-#: ../src/spek-window.vala:230
+#: ../src/spek-window.vala:257
 msgid "Copyright © 2010-2011 Alexander Kojevnikov"
 msgstr ""
 
-#: ../src/spek-window.vala:235
+#: ../src/spek-window.vala:262
 msgid "Spek Website"
 msgstr ""
 
-#: ../src/spek-window.vala:244
+#: ../src/spek-window.vala:271
 msgid "translator-credits"
 msgstr ""
 
