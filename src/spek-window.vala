@@ -91,7 +91,8 @@ namespace Spek {
 			}
 
 			var menubar = ui.get_widget ("/MenuBar");
-			var toolbar = ui.get_widget ("/ToolBar");
+			var toolbar = (Toolbar) ui.get_widget ("/ToolBar");
+			toolbar.set_style (ToolbarStyle.BOTH_HORIZ);
 			((ToolItem) ui.get_widget ("/ToolBar/FileOpen")).is_important = true;
 			((ToolItem) ui.get_widget ("/ToolBar/FileSave")).is_important = true;
 			((ToolItem) ui.get_widget ("/ToolBar/HelpAbout")).is_important = true;
