@@ -27,7 +27,7 @@ void spek_platform_init ();
 /* Convert from UTF-16 to UTF-8 when running on Windows */
 void spek_platform_fix_args (gchar **argv, gint argc);
 
-/* OSX has its own approach to menu bars */
+/* OSX has its own approach to menus and accelerators */
 void spek_platform_fix_ui (GtkUIManager *ui);
 
 /* Open a link in the browser */
