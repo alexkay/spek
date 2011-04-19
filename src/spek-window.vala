@@ -44,15 +44,6 @@ namespace Spek {
 
 		private const string UI = """
 <ui>
-    <accelerator name='File' action='File'/>
-    <accelerator name='FileOpen' action='FileOpen'/>
-    <accelerator name='FileSave' action='FileSave'/>
-    <accelerator name='FileQuit' action='FileQuit'/>
-    <accelerator name='Edit' action='Edit'/>
-    <accelerator name='EditPreferences' action='EditPreferences'/>
-    <accelerator name='Help' action='Help'/>
-    <accelerator name='HelpAbout' action='HelpAbout'/>
-
     <menubar name='MenuBar'>
         <menu action='File'>
             <menuitem action='FileOpen'/>
