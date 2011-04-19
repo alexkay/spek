@@ -187,12 +187,6 @@ namespace Spek {
 			// Force the worker to quit.
 			reader_sync (-1);
 			worker_thread.join ();
-
-			var newval = TimeVal ();
-			newval.get_current_time ();
-			long ms = (newval.tv_sec - timeval.tv_sec) * 1000 +
-				(newval.tv_usec - timeval.tv_usec) / 1000;
-			print ("%i ms\n", (int) ms);
 			return null;
 		}
 
