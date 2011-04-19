@@ -65,6 +65,18 @@ void spek_platform_fix_args (gchar **argv, gint argc) {
 #endif
 }
 
+#ifdef G_OS_DARWIN
+static void accel_map_foreach (gpointer data, const gchar *accel_path, guint accel_key, GdkModifierType 
+accel_mods, gboolean changed)
+{
+        if (accel_mods & GDK_CONTROL_MASK) {
+                accel_mods &= ~GDK_CONTROL_MASK;
+                accel_mods |= GDK_META_MASK;
+                gtk_accel_map_change_entry (accel_path, accel_key, accel_mods, FALSE);
+        }
+}
+#endif
+
 void spek_platform_fix_ui (GtkUIManager *ui)
 {
 #ifdef G_OS_DARWIN
@@ -89,6 +101,8 @@ void spek_platform_fix_ui (GtkUIManager *ui)
 	gtk_osxapplication_add_app_menu_item (app, group, GTK_MENU_ITEM (help_about));
 	group = gtk_osxapplication_add_app_menu_group (app);
 	gtk_osxapplication_add_app_menu_item (app, group, GTK_MENU_ITEM (edit_preferences));
+
+	gtk_accel_map_foreach (NULL, accel_map_foreach);
 
 	gtk_osxapplication_ready (app);
 #endif
