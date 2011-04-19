@@ -69,12 +69,27 @@ void spek_platform_fix_ui (GtkUIManager *ui)
 {
 #ifdef G_OS_DARWIN
 	GtkOSXApplication *app = NULL;
+	GtkOSXApplicationMenuGroup *group = NULL;
 	GtkWidget *menubar = NULL;
+	GtkWidget *file_quit = NULL;
+	GtkWidget *edit_preferences = NULL;
+	GtkWidget *help_about = NULL;
 
 	app = g_object_new (GTK_TYPE_OSX_APPLICATION, NULL);
 	menubar = gtk_ui_manager_get_widget (ui, "/MenuBar");
+	file_quit = gtk_ui_manager_get_widget (ui, "/MenuBar/File/FileQuit");
+	edit_preferences = gtk_ui_manager_get_widget (ui, "/MenuBar/Edit/EditPreferences");
+	help_about = gtk_ui_manager_get_widget (ui, "/MenuBar/Help/HelpAbout");
+
 	gtk_widget_hide (menubar);
+	gtk_widget_hide (file_quit);
 	gtk_osxapplication_set_menu_bar (app, GTK_MENU_SHELL (menubar));
+
+	group = gtk_osxapplication_add_app_menu_group (app);
+	gtk_osxapplication_add_app_menu_item (app, group, GTK_MENU_ITEM (help_about));
+	group = gtk_osxapplication_add_app_menu_group (app);
+	gtk_osxapplication_add_app_menu_item (app, group, GTK_MENU_ITEM (edit_preferences));
+
 	gtk_osxapplication_ready (app);
 #endif
 }
