@@ -32,11 +32,11 @@ namespace Spek {
 		private FileFilter filter_png;
 
 		private const ActionEntry[] ACTION_ENTRIES = {
-			{ "OpenAction", STOCK_OPEN, null, null, null, on_open_action },
-			{ "SaveAction", STOCK_SAVE, null, null, null, on_save_action },
-			{ "PreferencesAction", STOCK_PREFERENCES, null, "<Ctrl>E", null, on_prefs_action },
-			{ "QuitAction", STOCK_QUIT, null, null, null, on_quit_action },
-			{ "AboutAction", STOCK_ABOUT, null, "F1", null, on_about_action }
+			{ "FileOpenAction", STOCK_OPEN, null, null, null, on_file_open_action },
+			{ "FileSaveAction", STOCK_SAVE, null, null, null, on_file_save_action },
+			{ "FileQuitAction", STOCK_QUIT, null, null, null, on_file_quit_action },
+			{ "EditPreferencesAction", STOCK_PREFERENCES, null, "<Ctrl>E", null, on_edit_preferences_action },
+			{ "HelpAboutAction", STOCK_ABOUT, null, "F1", null, on_help_about_action }
 		};
 
 		private const Gtk.TargetEntry[] DEST_TARGET_ENTRIES = {
@@ -53,28 +53,38 @@ namespace Spek {
 			var actions = new Gtk.ActionGroup ("Actions");
 			actions.add_actions (ACTION_ENTRIES, this);
 
+			var menubar = new MenuBar ();
+			var file_menu_item = new MenuItem.with_mnemonic (_("_File"));
+			var file_menu = new Menu ();
+			file_menu.append ((MenuItem) actions.get_action ("FileOpenAction").create_menu_item ());
+			file_menu.append ((MenuItem) actions.get_action ("FileSaveAction").create_menu_item ());
+			file_menu.append (new SeparatorMenuItem ());
+			file_menu.append ((MenuItem) actions.get_action ("FileQuitAction").create_menu_item ());
+			file_menu_item.set_submenu (file_menu);
+			menubar.append (file_menu_item);
+
+			var edit_menu_item = new MenuItem.with_mnemonic (_("_Edit"));
+			var edit_menu = new Menu ();
+			edit_menu.append ((MenuItem) actions.get_action ("EditPreferencesAction").create_menu_item ());
+			edit_menu_item.set_submenu (edit_menu);
+			menubar.append (edit_menu_item);
+
+			var help_menu_item = new MenuItem.with_mnemonic (_("_Help"));
+			var help_menu = new Menu ();
+			help_menu.append ((MenuItem) actions.get_action ("HelpAboutAction").create_menu_item ());
+			help_menu_item.set_submenu (help_menu);
+			menubar.append (help_menu_item);
+
 			var toolbar = new Toolbar ();
 			toolbar.set_style (ToolbarStyle.BOTH_HORIZ);
 
-			var open = (ToolButton) actions.get_action ("OpenAction").create_tool_item ();
+			var open = (ToolButton) actions.get_action ("FileOpenAction").create_tool_item ();
 			open.is_important = true;
 			toolbar.insert (open, -1);
 
-			var save = (ToolButton) actions.get_action ("SaveAction").create_tool_item ();
+			var save = (ToolButton) actions.get_action ("FileSaveAction").create_tool_item ();
 			save.is_important = true;
 			toolbar.insert (save, -1);
-
-			toolbar.insert (new SeparatorToolItem (), -1);
-
-			var prefs = (ToolButton) actions.get_action ("PreferencesAction").create_tool_item ();
-			prefs.is_important = true;
-			toolbar.insert (prefs, -1);
-
-			toolbar.insert (new SeparatorToolItem (), -1);
-
-			var quit = (ToolButton) actions.get_action ("QuitAction").create_tool_item ();
-			quit.is_important = true;
-			toolbar.insert (quit, -1);
 
 			// This separator forces the rest of the items to the end of the toolbar.
 			var sep = new SeparatorToolItem ();
@@ -82,7 +92,7 @@ namespace Spek {
 			sep.draw = false;
 			toolbar.insert (sep, -1);
 
-			var about = (ToolButton) actions.get_action ("AboutAction").create_tool_item ();
+			var about = (ToolButton) actions.get_action ("HelpAboutAction").create_tool_item ();
 			about.is_important = true;
 			toolbar.insert (about, -1);
 
@@ -104,10 +114,12 @@ namespace Spek {
 			}
 
 			var vbox = new VBox (false, 0);
+			vbox.pack_start (menubar, false, true, 0);
 			vbox.pack_start (toolbar, false, true, 0);
 			vbox.pack_start (message_bar, false, true, 0);
 			vbox.pack_start (spectrogram, true, true, 0);
 			add (vbox);
+			menubar.show_all ();
 			toolbar.show_all ();
 			spectrogram.show_all ();
 			vbox.show ();
@@ -160,7 +172,7 @@ namespace Spek {
 			title = _("Spek - %s").printf (Path.get_basename (file_name));
 		}
 
-		private void on_open_action () {
+		private void on_file_open_action () {
 			var chooser = new FileChooserDialog (
 				_("Open File"), this, FileChooserAction.OPEN,
 				STOCK_CANCEL, ResponseType.CANCEL,
@@ -177,7 +189,7 @@ namespace Spek {
 			chooser.destroy ();
 		}
 
-		private void on_save_action () {
+		private void on_file_save_action () {
 			var chooser = new FileChooserDialog (
 				_("Save Spectrogram"), this, FileChooserAction.SAVE,
 				STOCK_CANCEL, ResponseType.CANCEL,
@@ -199,17 +211,17 @@ namespace Spek {
 			chooser.destroy ();
 		}
 
-		private void on_prefs_action () {
+		private void on_file_quit_action () {
+			destroy ();
+		}
+
+		private void on_edit_preferences_action () {
 			var dlg = new PreferencesDialog ();
 			dlg.transient_for = this;
 			dlg.run ();
 		}
 
-		private void on_quit_action () {
-			destroy ();
-		}
-
-		private void on_about_action () {
+		private void on_help_about_action () {
 			string[] authors = {
 				"Primary Development:",
 				"\tAlexander Kojevnikov (maintainer)",
@@ -266,6 +278,7 @@ namespace Spek {
 			Platform.show_uri (link);
 		}
 
+		// TODO: s/audio/media/
 		private string[] audio_extensions = {
 			"*.3gp",
 			"*.aac",
