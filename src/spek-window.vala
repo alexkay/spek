@@ -32,12 +32,50 @@ namespace Spek {
 		private FileFilter filter_png;
 
 		private const ActionEntry[] ACTION_ENTRIES = {
-			{ "FileOpenAction", STOCK_OPEN, null, null, null, on_file_open_action },
-			{ "FileSaveAction", STOCK_SAVE, null, null, null, on_file_save_action },
-			{ "FileQuitAction", STOCK_QUIT, null, null, null, on_file_quit_action },
-			{ "EditPreferencesAction", STOCK_PREFERENCES, null, "<Ctrl>E", null, on_edit_preferences_action },
-			{ "HelpAboutAction", STOCK_ABOUT, null, "F1", null, on_help_about_action }
+			{ "File", null, N_("_File") },
+			{ "FileOpen", STOCK_OPEN, null, null, null, on_file_open },
+			{ "FileSave", STOCK_SAVE, null, null, null, on_file_save },
+			{ "FileQuit", STOCK_QUIT, null, null, null, on_file_quit },
+			{ "Edit", null, N_("_Edit") },
+			{ "EditPreferences", STOCK_PREFERENCES, null, "<Ctrl>E", null, on_edit_preferences },
+			{ "Help", null, N_("_Help") },
+			{ "HelpAbout", STOCK_ABOUT, null, "F1", null, on_help_about }
 		};
+
+		private const string UI = """
+<ui>
+    <accelerator name='File' action='File'/>
+    <accelerator name='FileOpen' action='FileOpen'/>
+    <accelerator name='FileSave' action='FileSave'/>
+    <accelerator name='FileQuit' action='FileQuit'/>
+    <accelerator name='Edit' action='Edit'/>
+    <accelerator name='EditPreferences' action='EditPreferences'/>
+    <accelerator name='Help' action='Help'/>
+    <accelerator name='HelpAbout' action='HelpAbout'/>
+
+    <menubar name='MenuBar'>
+        <menu action='File'>
+            <menuitem action='FileOpen'/>
+            <menuitem action='FileSave'/>
+            <separator/>
+            <menuitem action='FileQuit'/>
+        </menu>
+        <menu action='Edit'>
+            <menuitem action='EditPreferences'/>
+        </menu>
+        <menu action='Help'>
+            <menuitem action='HelpAbout'/>
+        </menu>
+    </menubar>
+
+    <toolbar name='ToolBar'>
+        <toolitem action='FileOpen'/>
+        <toolitem action='FileSave'/>
+        <separator expand='true'/>
+        <toolitem action='HelpAbout'/>
+    </toolbar>
+</ui>
+""";
 
 		private const Gtk.TargetEntry[] DEST_TARGET_ENTRIES = {
 			{ "text/uri-list", 0, 0 }
@@ -49,52 +87,24 @@ namespace Spek {
 			set_default_size (640, 480);
 			destroy.connect (Gtk.main_quit);
 
-			ui = new UIManager ();
 			var actions = new Gtk.ActionGroup ("Actions");
 			actions.add_actions (ACTION_ENTRIES, this);
 
-			var menubar = new MenuBar ();
-			var file_menu_item = new MenuItem.with_mnemonic (_("_File"));
-			var file_menu = new Menu ();
-			file_menu.append ((MenuItem) actions.get_action ("FileOpenAction").create_menu_item ());
-			file_menu.append ((MenuItem) actions.get_action ("FileSaveAction").create_menu_item ());
-			file_menu.append (new SeparatorMenuItem ());
-			file_menu.append ((MenuItem) actions.get_action ("FileQuitAction").create_menu_item ());
-			file_menu_item.set_submenu (file_menu);
-			menubar.append (file_menu_item);
+			ui = new UIManager ();
+			ui.insert_action_group (actions, 0);
 
-			var edit_menu_item = new MenuItem.with_mnemonic (_("_Edit"));
-			var edit_menu = new Menu ();
-			edit_menu.append ((MenuItem) actions.get_action ("EditPreferencesAction").create_menu_item ());
-			edit_menu_item.set_submenu (edit_menu);
-			menubar.append (edit_menu_item);
+			add_accel_group (ui.get_accel_group ());
 
-			var help_menu_item = new MenuItem.with_mnemonic (_("_Help"));
-			var help_menu = new Menu ();
-			help_menu.append ((MenuItem) actions.get_action ("HelpAboutAction").create_menu_item ());
-			help_menu_item.set_submenu (help_menu);
-			menubar.append (help_menu_item);
+			try {
+				ui.add_ui_from_string (UI, -1);
+			} catch {
+			}
 
-			var toolbar = new Toolbar ();
-			toolbar.set_style (ToolbarStyle.BOTH_HORIZ);
-
-			var open = (ToolButton) actions.get_action ("FileOpenAction").create_tool_item ();
-			open.is_important = true;
-			toolbar.insert (open, -1);
-
-			var save = (ToolButton) actions.get_action ("FileSaveAction").create_tool_item ();
-			save.is_important = true;
-			toolbar.insert (save, -1);
-
-			// This separator forces the rest of the items to the end of the toolbar.
-			var sep = new SeparatorToolItem ();
-			sep.set_expand (true);
-			sep.draw = false;
-			toolbar.insert (sep, -1);
-
-			var about = (ToolButton) actions.get_action ("HelpAboutAction").create_tool_item ();
-			about.is_important = true;
-			toolbar.insert (about, -1);
+			var menubar = ui.get_widget ("/MenuBar");
+			var toolbar = ui.get_widget ("/ToolBar");
+			((ToolItem) ui.get_widget ("/ToolBar/FileOpen")).is_important = true;
+			((ToolItem) ui.get_widget ("/ToolBar/FileSave")).is_important = true;
+			((ToolItem) ui.get_widget ("/ToolBar/HelpAbout")).is_important = true;
 
 			message_bar = new MessageBar (_("A new version of Spek is available on <a href=\"http://www.spek-project.org\">www.spek-project.org</a>"));
 
@@ -124,13 +134,6 @@ namespace Spek {
 			spectrogram.show_all ();
 			vbox.show ();
 			show ();
-
-			ui.insert_action_group (actions, 0);
-			try {
-				ui.add_ui_from_string (get_accel_ui_string (actions), -1);
-			} catch {
-			}
-			add_accel_group (ui.get_accel_group ());
 
 			// Set up Drag and Drop
 			drag_dest_set (this, DestDefaults.ALL, DEST_TARGET_ENTRIES, DragAction.COPY);
@@ -172,7 +175,7 @@ namespace Spek {
 			title = _("Spek - %s").printf (Path.get_basename (file_name));
 		}
 
-		private void on_file_open_action () {
+		private void on_file_open () {
 			var chooser = new FileChooserDialog (
 				_("Open File"), this, FileChooserAction.OPEN,
 				STOCK_CANCEL, ResponseType.CANCEL,
@@ -189,7 +192,7 @@ namespace Spek {
 			chooser.destroy ();
 		}
 
-		private void on_file_save_action () {
+		private void on_file_save () {
 			var chooser = new FileChooserDialog (
 				_("Save Spectrogram"), this, FileChooserAction.SAVE,
 				STOCK_CANCEL, ResponseType.CANCEL,
@@ -211,17 +214,17 @@ namespace Spek {
 			chooser.destroy ();
 		}
 
-		private void on_file_quit_action () {
+		private void on_file_quit () {
 			destroy ();
 		}
 
-		private void on_edit_preferences_action () {
+		private void on_edit_preferences () {
 			var dlg = new PreferencesDialog ();
 			dlg.transient_for = this;
 			dlg.run ();
 		}
 
-		private void on_help_about_action () {
+		private void on_help_about () {
 			string[] authors = {
 				"Primary Development:",
 				"\tAlexander Kojevnikov (maintainer)",
@@ -343,16 +346,6 @@ namespace Spek {
 			prefs.last_update = (int) today.get_julian ();
 			prefs.save ();
 			return null;
-		}
-
-		private string get_accel_ui_string (Gtk.ActionGroup actions) {
-			var sb = new StringBuilder ();
-			sb.append ("<ui>");
-			foreach (var action in actions.list_actions ()) {
-				sb.append ("<accelerator name=\"%s\" action=\"%s\" />".printf (action.name, action.name));
-			}
-			sb.append ("</ui>");
-			return sb.str;
 		}
 	}
 }
