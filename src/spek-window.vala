@@ -79,16 +79,15 @@ namespace Spek {
 			destroy.connect (Gtk.main_quit);
 
 			var actions = new Gtk.ActionGroup ("Actions");
+			actions.set_translation_domain (Config.GETTEXT_PACKAGE);
 			actions.add_actions (ACTION_ENTRIES, this);
-
 			ui = new UIManager ();
 			ui.insert_action_group (actions, 0);
-
 			add_accel_group (ui.get_accel_group ());
-
 			try {
 				ui.add_ui_from_string (UI, -1);
-			} catch {
+			} catch (Error e) {
+				warning ("Could not load the UI: %s\n", e.message);
 			}
 
 			var menubar = ui.get_widget ("/MenuBar");
