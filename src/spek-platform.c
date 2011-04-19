@@ -34,7 +34,7 @@
 
 void spek_platform_init () {
 #ifdef G_OS_DARWIN
-	GtkOSXApplication *app = g_object_new (GTK_TYPE_OSX_APPLICATION, NULL);
+	g_object_new (GTK_TYPE_OSX_APPLICATION, NULL);
 #endif
 }
 
@@ -62,6 +62,20 @@ void spek_platform_fix_args (gchar **argv, gint argc) {
 		}
 	}
 	LocalFree (wargv);
+#endif
+}
+
+void spek_platform_fix_ui (GtkUIManager *ui)
+{
+#ifdef G_OS_DARWIN
+	GtkOSXApplication *app = NULL;
+	GtkWidget *menubar = NULL;
+
+	app = g_object_new (GTK_TYPE_OSX_APPLICATION, NULL);
+	menubar = gtk_ui_manager_get_widget (ui, "/MenuBar");
+	gtk_widget_hide (menubar);
+	gtk_osxapplication_set_menu_bar (app, GTK_MENU_SHELL (menubar));
+	gtk_osxapplication_ready (app);
 #endif
 }
 

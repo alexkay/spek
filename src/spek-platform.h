@@ -19,13 +19,16 @@
 #ifndef __SPEK_PLATFORM_H__
 #define __SPEK_PLATFORM_H__
 
-#include <glib.h>
+#include <gtk/gtk.h>
 
 /* Platform-specific initialisation */
 void spek_platform_init ();
 
 /* Convert from UTF-16 to UTF-8 when running on Windows */
 void spek_platform_fix_args (gchar **argv, gint argc);
+
+/* OSX has its own approach to menu bars */
+void spek_platform_fix_ui (GtkUIManager *ui);
 
 /* Open a link in the browser */
 void spek_platform_show_uri (const gchar *uri);

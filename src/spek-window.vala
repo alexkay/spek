@@ -123,6 +123,8 @@ namespace Spek {
 			toolbar.show_all ();
 			spectrogram.show_all ();
 			vbox.show ();
+
+			Platform.fix_ui (ui);
 			show ();
 
 			// Set up Drag and Drop
