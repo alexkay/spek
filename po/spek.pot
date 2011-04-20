@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-19 17:52+0800\n"
+"POT-Creation-Date: 2011-04-20 21:24+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,6 +27,10 @@ msgid "Spek"
 msgstr ""
 
 #: ../data/spek.desktop.in.in.h:3
+msgid "Spek Spectrum Analyser"
+msgstr ""
+
+#: ../data/spek.desktop.in.in.h:4
 msgid "View spectrograms of your audio files"
 msgstr ""
 
@@ -141,56 +145,56 @@ msgstr ""
 msgid "_Help"
 msgstr ""
 
-#: ../src/spek-window.vala:85
+#: ../src/spek-window.vala:76
 msgid "Spek - Acoustic Spectrum Analyser"
 msgstr ""
 
-#: ../src/spek-window.vala:109
+#: ../src/spek-window.vala:100
 msgid ""
 "A new version of Spek is available on <a href=\"http://www.spek-project.org"
 "\">www.spek-project.org</a>"
 msgstr ""
 
-#: ../src/spek-window.vala:115
+#: ../src/spek-window.vala:106
 msgid "All files"
 msgstr ""
 
-#: ../src/spek-window.vala:118
+#: ../src/spek-window.vala:109
 msgid "PNG images"
 msgstr ""
 
-#: ../src/spek-window.vala:121
+#: ../src/spek-window.vala:112
 msgid "Audio files"
 msgstr ""
 
 #. TRANSLATORS: window title, %s is replaced with the file name
-#: ../src/spek-window.vala:175
+#: ../src/spek-window.vala:168
 #, c-format
 msgid "Spek - %s"
 msgstr ""
 
-#: ../src/spek-window.vala:180
+#: ../src/spek-window.vala:173
 msgid "Open File"
 msgstr ""
 
-#: ../src/spek-window.vala:197
+#: ../src/spek-window.vala:190
 msgid "Save Spectrogram"
 msgstr ""
 
 #. Suggested name is <file_name>.png
-#: ../src/spek-window.vala:204
+#: ../src/spek-window.vala:197
 msgid "Untitled"
 msgstr ""
 
-#: ../src/spek-window.vala:257
+#: ../src/spek-window.vala:250
 msgid "Copyright © 2010-2011 Alexander Kojevnikov"
 msgstr ""
 
-#: ../src/spek-window.vala:262
+#: ../src/spek-window.vala:255
 msgid "Spek Website"
 msgstr ""
 
-#: ../src/spek-window.vala:271
+#: ../src/spek-window.vala:264
 msgid "translator-credits"
 msgstr ""
 
