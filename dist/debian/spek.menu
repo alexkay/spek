@@ -2,5 +2,6 @@
 needs="X11"\
 section="Applications/Sound"\
 title="Spek"\
+longtitle="Spectrum analyser"\
 icon="/usr/share/pixmaps/spek.xpm"\
 command="/usr/bin/spek"
