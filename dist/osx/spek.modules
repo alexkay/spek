@@ -7,6 +7,7 @@
 	<repository type="tarball" name="spek" default="yes" href="http://spek.googlecode.com/files/"/>
 	<repository type="tarball" name="libav" href="http://libav.org/releases/"/>
 	<repository type="tarball" name="cairographics-dev" href="http://cairographics.org/snapshots/"/>
+	<repository type="git" name="github.com" href="git://github.com/"/>
 
 	<autotools id="cairo"  autogen-sh="configure" autogenargs="--enable-pdf --enable-quartz --enable-xlib=no --without-x">
 		<branch module="cairo-1.11.2.tar.gz"  version="1.11.2" repo="cairographics-dev"/>
@@ -20,6 +21,13 @@
 		</after>
 	</autotools>
 
+	<autotools id="gtk-quartz-engine">
+		<branch module="jralls/gtk-quartz-engine" repo="github.com"/>
+		<after>
+			<dep package="meta-gtk-osx-core"/>
+		</after>
+	</autotools>
+
 	<autotools id="libav" autogenargs="--disable-static --enable-shared --enable-gpl --enable-version3 --disable-doc --disable-ffmpeg --disable-ffplay --disable-ffprobe --disable-ffserver --disable-avdevice --disable-swscale --enable-pthreads --disable-encoders --disable-muxers --disable-devices --disable-filters" autogen-sh="configure" autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s --libdir=%(libdir)s %(autogenargs)s">
 		<branch module="libav-0.6.2.tar.bz2" version="0.6.2" repo="libav" hash="sha1:b79dc56a08f4ef07b41d1a78b2251f21fde8b81d"/>
 	</autotools>
@@ -30,6 +38,7 @@
 			<dep package="meta-gtk-osx-bootstrap"/>
 			<dep package="meta-gtk-osx-core"/>
 			<dep package="cairo"/>
+			<dep package="gtk-quartz-engine"/>
 			<dep package="libav"/>
 		</dependencies>
 	</autotools>

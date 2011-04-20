@@ -1,6 +1,5 @@
 #!/bin/sh
 
-cd $(dirname $0)/../..
 case "$(uname)" in
     Darwin) profile_name=darwin ;;
     *)
@@ -9,13 +8,7 @@ case "$(uname)" in
         ;;
 esac
 
-rm -fr dist/osx/bin
-./autogen.sh --prefix=$(pwd)/dist/osx/bin
-gmake
-gmake install
-
-cd dist/osx
-mv bin/lib/locale bin/share/
+cd $(dirname $0)
 
 ige-mac-bundler spek.bundle
 

@@ -1,25 +1,26 @@
 <?xml version="1.0" standalone="no"?> <!--*- mode: xml -*-->
 <app-bundle>
   <meta>
-    <prefix name="default">/opt/local</prefix>
+    <prefix name="default">${env:JHBUILD_PREFIX}</prefix>
     <destination overwrite="yes">${project}</destination>
     <run-install-name-tool/>
     <launcher-script>${project}/launcher.sh</launcher-script >
     <gtk>gtk+-2.0</gtk>
   </meta>
   <plist>${project}/Info.plist</plist>
-  <main-binary dest="${bundle}/Contents/Resources/bin">
-    ${project}/bin/bin/spek
-  </main-binary>
+  <main-binary>${prefix}/bin/spek</main-binary>
   <binary>
-    ${prefix}/lib/gdk-pixbuf-2.0/${pkg:${gtk}:gtk_binary_version}/loaders/*.so
+     ${prefix}/lib/${gtkdir}/modules/*.so
   </binary>
   <binary>
     ${prefix}/lib/${gtkdir}/${pkg:${gtk}:gtk_binary_version}/engines/*.so
   </binary>
-  <!-- binary>
+  <binary>
     ${prefix}/lib/${gtkdir}/${pkg:${gtk}:gtk_binary_version}/printbackends/*.so
-  </binary -->
+  </binary>
+  <binary>
+    ${prefix}/lib/gdk-pixbuf-2.0/${pkg:${gtk}:gtk_binary_version}/loaders/*.so
+  </binary>
   <binary>
     ${prefix}/lib/pango/${pkg:pango:pango_module_version}/modules/*.so
   </binary>
@@ -28,12 +29,9 @@
     ${prefix}/share/locale
   </translations>
 
-  <data dest="${bundle}/Contents/Resources/share">
-    ${project}/bin/share
-  </data>
-  <data>
-    ${prefix}/share/themes/Quartz
-  </data>
+  <data>${prefix}/share/icons</data>
+  <data>${prefix}/share/locale</data>
+  <data>${prefix}/share/themes/Quartz</data>
   <data dest="${bundle}/Contents/Resources">
     ${project}/Spek.icns
   </data>

@@ -12,6 +12,7 @@ Add this line to ~/.jhbuildrc-custom:
 Run:
 
   $ jhbuild build spek
+  $ jhbuild shell
   $ dist/osx/bundle.sh
 
 [1]: http://sourceforge.net/apps/trac/gtk-osx/wiki/Build
