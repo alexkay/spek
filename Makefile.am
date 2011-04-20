@@ -19,6 +19,7 @@ EXTRA_DIST = \
 	dist/osx/gtkrc \
 	dist/osx/launcher.sh \
 	dist/osx/spek.bundle \
+	dist/osx/spek.modules \
 	dist/win/LICENSE.rtf \
 	dist/win/banner.bmp \
 	dist/win/bundle.sh \
