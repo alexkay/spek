@@ -23,8 +23,9 @@ Spek release checklist
  * `git tag -a X.Y`.
  * Upload the tarball + OSX and WIN binaries.
  * Update the Ubuntu PPA.
+ * Request FreeBSD and Debian updates.
  * Upload the website using `web/upload`.
  * Publish the blog post.
  * Send an announcement to linux-audio-announce and vala-list.
  * Update the forum thread on what.
- * Ping ArchLinux, Debian and FreeBSD maintainers.
+ * Ping ArchLinux and Gentoo maintainers.
