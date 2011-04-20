@@ -32,6 +32,7 @@ _gdk_tgt=`$PKG_CONFIG --variable=target gdk-2.0`
 AM_CONDITIONAL([GDK_TARGET_QUARTZ], [test x$_gdk_tgt = xquartz])
 if test "x$_gdk_tgt" = xquartz; then
    PKG_CHECK_MODULES(IGE_MAC, ige-mac-integration)
+   IGE_MAC_LIBS="$IGE_MAC_LIBS -framework CoreFoundation -framework ApplicationServices"
    AC_SUBST(IGE_MAC_LIBS)
    AC_SUBST(IGE_MAC_CFLAGS)
    AC_DEFINE(G_OS_DARWIN, 1, [Platform detection macro missing in GLib])
