@@ -10,9 +10,10 @@ Spek release checklist
    * po/LINGUAS
    * src/spek-preferences.vala
    * dist/win/bundle.sh
-   * TODO: dist/osx/?
+   * dist/osx/bundle.sh
  * Update AUTHORS using `git log X.Y.. --pretty=format:"%an <%ae>" | sort -u`.
  * Update NEWS.
+ * Update and sync wiki pages with the new version number and instructions.
  * Commit everything.
  * Make sure `gmake distcheck` doesn't return errors.
  * Prepare binaries for OSX and WIN, see README files in dist/*.
