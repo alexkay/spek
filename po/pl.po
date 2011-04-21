@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
-"POT-Creation-Date: 2011-03-03 21:34+0800\n"
-"PO-Revision-Date: 2011-03-16 14:35+0000\n"
-"Last-Translator: raven <piotrdrag@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2011-04-20 21:24+0800\n"
+"PO-Revision-Date: 2011-04-20 13:25+0000\n"
+"Last-Translator: alexkay <alexander@kojevnikov.com>\n"
+"Language-Team: Polish <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,34 +26,12 @@ msgid "Spek"
 msgstr "Spek"
 
 #: ../data/spek.desktop.in.in.h:3
+msgid "Spek Spectrum Analyser"
+msgstr ""
+
+#: ../data/spek.desktop.in.in.h:4
 msgid "View spectrograms of your audio files"
 msgstr "Wyświetlanie spektrogramów plików dźwiękowych"
-
-#: ../src/spek.vala:25
-msgid "Display the version and exit"
-msgstr "Wyświetla wersję i kończy działanie"
-
-#: ../src/spek.vala:38
-msgid "[FILE]"
-msgstr "[PLIK]"
-
-#: ../src/spek.vala:42
-#, c-format
-msgid "Run `%s --help` to see a full list of available command line options.\n"
-msgstr ""
-"Wykonanie polecenia \"%s --help\" wyświetla pełną listę dostępnych opcji "
-"wiersza poleceń.\n"
-
-#. TRANSLATORS: first %s is the package name, second %s is the package
-#. version.
-#: ../src/spek.vala:48
-#, c-format
-msgid "%s version %s\n"
-msgstr "%s wersja %s\n"
-
-#: ../src/spek.vala:53
-msgid "Specify a single file\n"
-msgstr "Podaje jeden plik\n"
 
 #: ../src/spek-audio.c:47
 msgid "Cannot open input file"
@@ -83,17 +61,17 @@ msgstr "Nie można otworzyć dekodera"
 msgid "Unsupported sample format"
 msgstr "Nieobsługiwany format próbki"
 
-#: ../src/spek-pipeline.vala:70
+#: ../src/spek-pipeline.vala:75
 #, c-format
 msgid "%d kbps"
 msgstr "%d kb/s"
 
-#: ../src/spek-pipeline.vala:73
+#: ../src/spek-pipeline.vala:78
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../src/spek-pipeline.vala:78
+#: ../src/spek-pipeline.vala:83
 #, c-format
 msgid "%d bit"
 msgid_plural "%d bits"
@@ -101,7 +79,7 @@ msgstr[0] "%d bit"
 msgstr[1] "%d bity"
 msgstr[2] "%d bitów"
 
-#: ../src/spek-pipeline.vala:81
+#: ../src/spek-pipeline.vala:86
 #, c-format
 msgid "%d channel"
 msgid_plural "%d channels"
@@ -111,21 +89,69 @@ msgstr[2] "%d kanałów"
 
 #. TRANSLATORS: first %s is the error message, second %s is stream
 #. description.
-#: ../src/spek-pipeline.vala:88
+#: ../src/spek-pipeline.vala:93
 #, c-format
 msgid "%s: %s"
 msgstr "%s: %s"
 
-#: ../src/spek-spectrogram.vala:194
+#: ../src/spek-preferences-dialog.vala:24
+msgid "Preferences"
+msgstr "Preferencje"
+
+#. TRANSLATORS: The name of a section in the Preferences dialog.
+#: ../src/spek-preferences-dialog.vala:35
+msgid "General"
+msgstr "Ogólne"
+
+#: ../src/spek-preferences-dialog.vala:45
+msgid "_Language:"
+msgstr "_Język:"
+
+#: ../src/spek-preferences-dialog.vala:62
+msgid "Check for _updates"
+msgstr "Sprawdzanie akt_ualizacji"
+
+#: ../src/spek-preferences.vala:40
+msgid "(system default)"
+msgstr "(domyślne systemowe)"
+
+#. TRANSLATORS: keep "00" unchanged, it's used to calc the text width
+#: ../src/spek-spectrogram.vala:200
+msgid "00 kHz"
+msgstr "00 kHz"
+
+#: ../src/spek-spectrogram.vala:206
 #, c-format
 msgid "%d kHz"
 msgstr "%d kHz"
 
-#: ../src/spek-window.vala:36
+#. TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
+#: ../src/spek-spectrogram.vala:257
+msgid "-00 dB"
+msgstr "-00 dB"
+
+#: ../src/spek-spectrogram.vala:263
+#, c-format
+msgid "%d dB"
+msgstr "%d dB"
+
+#: ../src/spek-window.vala:35
+msgid "_File"
+msgstr ""
+
+#: ../src/spek-window.vala:39
+msgid "_Edit"
+msgstr ""
+
+#: ../src/spek-window.vala:41
+msgid "_Help"
+msgstr ""
+
+#: ../src/spek-window.vala:76
 msgid "Spek - Acoustic Spectrum Analyser"
 msgstr "Spek - analizator widma akustycznego"
 
-#: ../src/spek-window.vala:82
+#: ../src/spek-window.vala:100
 msgid ""
 "A new version of Spek is available on <a href=\"http://www.spek-"
 "project.org\">www.spek-project.org</a>"
@@ -133,45 +159,71 @@ msgstr ""
 "Nowa wersja programu Spek jest dostępna na stronie <a href=\"http://www"
 ".spek-project.org\">www.spek-project.org</a>"
 
-#: ../src/spek-window.vala:88
+#: ../src/spek-window.vala:106
 msgid "All files"
 msgstr "Wszystkie pliki"
 
-#: ../src/spek-window.vala:91
+#: ../src/spek-window.vala:109
 msgid "PNG images"
 msgstr "Obrazy PNG"
 
-#: ../src/spek-window.vala:94
+#: ../src/spek-window.vala:112
 msgid "Audio files"
 msgstr "Pliki dźwiękowe"
 
 #. TRANSLATORS: window title, %s is replaced with the file name
-#: ../src/spek-window.vala:142
+#: ../src/spek-window.vala:168
 #, c-format
 msgid "Spek - %s"
 msgstr "Spek - %s"
 
-#: ../src/spek-window.vala:147
+#: ../src/spek-window.vala:173
 msgid "Open File"
 msgstr "Otwarcie pliku"
 
-#: ../src/spek-window.vala:164
+#: ../src/spek-window.vala:190
 msgid "Save Spectrogram"
 msgstr "Zapis spektogramu"
 
 #. Suggested name is <file_name>.png
-#: ../src/spek-window.vala:171
+#: ../src/spek-window.vala:197
 msgid "Untitled"
 msgstr "Bez tytułu"
 
-#: ../src/spek-window.vala:213
+#: ../src/spek-window.vala:250
 msgid "Copyright © 2010-2011 Alexander Kojevnikov"
 msgstr "Copyright © 2010-2011 Alexander Kojevnikov"
 
-#: ../src/spek-window.vala:218
+#: ../src/spek-window.vala:255
 msgid "Spek Website"
 msgstr "Witryna programu Spek"
 
-#: ../src/spek-window.vala:227
+#: ../src/spek-window.vala:264
 msgid "translator-credits"
 msgstr "Piotr Drąg <piotrdrag@gmail.com>, 2011"
+
+#: ../src/spek.vala:25
+msgid "Display the version and exit"
+msgstr "Wyświetla wersję i kończy działanie"
+
+#: ../src/spek.vala:43
+msgid "[FILE]"
+msgstr "[PLIK]"
+
+#: ../src/spek.vala:47
+#, c-format
+msgid "Run `%s --help` to see a full list of available command line options.\n"
+msgstr ""
+"Wykonanie polecenia \"%s --help\" wyświetla pełną listę dostępnych opcji "
+"wiersza poleceń.\n"
+
+#. TRANSLATORS: first %s is the package name, second %s is the package
+#. version.
+#: ../src/spek.vala:53
+#, c-format
+msgid "%s version %s\n"
+msgstr "%s wersja %s\n"
+
+#: ../src/spek.vala:58
+msgid "Specify a single file\n"
+msgstr "Podaje jeden plik\n"
