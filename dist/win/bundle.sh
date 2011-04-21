@@ -21,7 +21,7 @@ CFLAGS="-mwindows" LDFLAGS="dist/win/spek.res" ./configure --prefix=${PWD}/dist/
 
 cd dist/win/Spek
 
-FFMPEG_VERSION=ffmpeg-git-2a0d4d4-32-bit-shared
+LIBAV_VERSION=0.6.2
 urls=(\
 # GTK+ and its dependencies
 "http://ftp.gnome.org/pub/gnome/binaries/win32/atk/1.32/atk_1.32.0-1_win32.zip" \
@@ -37,8 +37,8 @@ urls=(\
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/hicolor-icon-theme_0.10-1_win32.zip" \
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/libpng_1.4.3-1_win32.zip" \
 "http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/zlib_1.2.5-2_win32.zip" \
-# FFmpeg
-"http://hawkeye.arrozcru.org/builds/32-bit/shared/$FFMPEG_VERSION.7z"
+# libav
+"http://libav.org/releases/libav-win32-$LIBAV_VERSION.7z"
 )
 
 for url in ${urls[*]}
@@ -55,9 +55,11 @@ do
 done
 
 # Clean up
-mv $FFMPEG_VERSION/bin/{avcodec-52,avformat-52,avutil-50}.dll bin/
-mv $FFMPEG_VERSION/licenses share/
-rm -fr $FFMPEG_VERSION
+mv libav-win32-$LIBAV_VERSION/usr/bin/avcodec-52.*.dll bin/avcodec-52.dll
+mv libav-win32-$LIBAV_VERSION/usr/bin/avformat-52.*.dll bin/avformat-52.dll
+mv libav-win32-$LIBAV_VERSION/usr/bin/avutil-50.*.dll bin/avutil-50.dll
+mv libav-win32-$LIBAV_VERSION/usr/bin/libx264-114.dll bin/
+rm -fr libav-win32-$LIBAV_VERSION
 mv bin/spek.exe ../
 mkdir share/locale_
 mv share/locale/{de,es,fr,nl,pl,ru,sv,uk} share/locale_/
