@@ -4,7 +4,8 @@ Spek release checklist
  * Bump the version number in configure.ac.
  * `cd po && gmake update-po && tx push -s`.
  * `tx pull -a` and commit with correct `--author`s.
- * Review translations, translate what I can, Ich spreek un peu по-русски.
+ * Review translations, fix things like missing mnemonics and line endings.
+ * Translate what I can, Ich spreek un peu по-русски.
  * `tx pull -a`.
  * Update the list of available languages, 80% or so will do:
    * po/LINGUAS
@@ -13,6 +14,8 @@ Spek release checklist
    * dist/osx/bundle.sh
  * Update AUTHORS using `git log X.Y.. --pretty=format:"%an <%ae>" | sort -u`.
  * Update NEWS.
+ * Update the website and debian/control's description with the new features.
+ * Update sshots if there are user-visible changes.
  * Update and sync wiki pages with the new version number and instructions.
  * Commit everything.
  * Make sure `gmake distcheck` doesn't return errors.
