@@ -57,7 +57,7 @@ SpekAudioContext * spek_audio_open (const gchar *file_name) {
 	}
 	cx->audio_stream = -1;
 	for (i = 0; i < cx->format_context->nb_streams; i++) {
-		if (cx->format_context->streams[i]->codec->codec_type == CODEC_TYPE_AUDIO) {
+		if (cx->format_context->streams[i]->codec->codec_type == AVMEDIA_TYPE_AUDIO) {
 			cx->audio_stream = i;
 			break;
 		}
