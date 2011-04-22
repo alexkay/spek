@@ -13,7 +13,6 @@
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
     <UIRef Id="WixUI_InstallDir" />
     <UIRef Id="WixUI_ErrorProgressText" />
-    <WixVariable Id="WixUILicenseRtf" Value="LICENSE.rtf" />
     <WixVariable Id="WixUIBannerBmp" Value="banner.bmp" />
     <WixVariable Id="WixUIDialogBmp" Value="dialog.bmp" />
     <Upgrade Id="$(var.UpgradeCode)">
@@ -54,7 +53,6 @@
       <Directory Id="ProgramFilesFolder">
         <Directory Id="INSTALLLOCATION" Name="$(var.ProductName)">
           <Component Id="Main" Guid="CD5121AD-F799-4796-9DB8-0C24CA0A4C8E">
-            <File Id="LICENSE.rtf" Name="LICENSE.rtf" Source="LICENSE.rtf" />
             <File Id="spek.ico" Name="spek.ico" Source="spek.ico" />
             <!-- Capabilities keys for Vista/7 "Set Program Access and Defaults" -->
             <RegistryValue Root="HKLM" Key="SOFTWARE\Spek\Capabilities" Name="ApplicationDescription" Value="Acoustic Spectrum Analyser" Type="string" />
