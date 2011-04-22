@@ -1,43 +1,45 @@
-Spek 0.6 - Released 2010-07-13
+Spek 0.7 - Released 2011-04-24
 ==============================================================================
 
 New Features And Enhancements
 ------------------------------------------------------------------------------
 
-Spek 0.6 is part of beta 0.x releases, leading up to a stable 1.0 release
+Spek 0.7 is part of beta 0.x releases, leading up to a stable 1.0 release
 later this year. Check Spek website for the roadmap.
 
-New features since 0.5:
+New features since 0.6:
 
- * Switch from GStreamer to FFmpeg libraries for audio decoding. This
-   speeds up the overall analysis by a factor of 1.5 to 2.
- * Decode audio and perform the analysis in separate threads. This makes
-   the analysis 1.3~1.8 times faster on multi-core systems (issue 11).
- * Check for a new version once a week and notify when it becomes
-   available (issue 27)
+ * Added translations in 8 languages
+ * Preferences to select a language and to check for a new version
+ * Spectral density ruler
+ * Added a menu bar, cleaned up the tool bar.
+ * Better OS X integration
 
 Enhancements:
 
- * Windows installer branding (issue 32)
- * Option to launch Spek when the Windows installer exits
+ * Show the version number in the window
+ * Pre-compute the cosine table to speed up analysis by ±16%
+ * Use jhbuild and ige-mac-bundler to build and package Spek on OS X
+ * spek(1) man page
+ * Avoid using APIs depreciated in GTK3
 
 Bugfixes:
 
- * Fix link activation on Windows (issue 31)
- * Fix ALAC issues on OS X (issue 23)
- * Re-run the analysis only if the window width has been changed
- * Fix opening of files containing Unicode symbols in their name on Windows
+ * Fixed link activation on OS X (issue 31)
+ * Fixed new version detection on OS X
+ * Fixed duration for unsynchronised ID3v24 mp3 tags (upstream fix)
+ * Fixed rigth click → Quit (issue 24) and the ⌘ Q shortcut (issue 44)
 
 Sources / Packages
 ------------------------------------------------------------------------------
 
- * Spek 0.6 tarball:
-   * <http://spek.googlecode.com/files/spek-0.6.tar.bz2>
+ * Spek 0.7 tarball:
+   * <http://spek.googlecode.com/files/spek-0.7.tar.bz2>
 
  * Windows and Mac OS X binaries:
-   * <http://spek.googlecode.com/files/spek-0.6.msi>
-   * <http://spek.googlecode.com/files/spek-0.6.zip>
-   * <http://spek.googlecode.com/files/spek-0.6.dmg>
+   * <http://spek.googlecode.com/files/spek-0.7.msi>
+   * <http://spek.googlecode.com/files/spek-0.7.zip>
+   * <http://spek.googlecode.com/files/spek-0.7.dmg>
 
  * Ubuntu PPA
    * <https://launchpad.net/~alexk/+archive/spek>
