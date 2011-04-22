@@ -224,6 +224,7 @@ namespace Spek {
 				"",
 				"Contributors:",
 				"\tFabian Deutsch",
+				"\tJonathan Gonzalez V",
 				"\tStefan Kost"
 			};
 			string[] artists = {
