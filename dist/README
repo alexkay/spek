@@ -2,7 +2,7 @@ Spek release checklist
 ==============================================================================
 
  * Bump the version number in configure.ac.
- * `cd po && gmake update-po && tx push -s`.
+ * `cd po && make update-po && tx push -s`.
  * `tx pull -a` and commit with correct `--author`s.
  * Review translations, fix things like missing mnemonics and line endings.
  * Translate what I can, Ich spreek un peu по-русски.
@@ -18,8 +18,9 @@ Spek release checklist
  * Update the website and debian/control's description with the new features.
  * Update sshots if there are user-visible changes.
  * Update and sync wiki pages with the new version number and instructions.
+ * Update copyright year of touched code.
  * Commit everything.
- * Make sure `gmake distcheck` doesn't return errors.
+ * Make sure `make distcheck` doesn't return errors.
  * Prepare binaries for OSX and WIN, see README files in dist/*.
  * Update FreeBSD, Debian and Ubuntu ports, see README files in dist/*.
  * If anything has been changed, commit and re-make the tarball.
