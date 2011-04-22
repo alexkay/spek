@@ -13,6 +13,7 @@ Spek release checklist
    * dist/win/bundle.sh
    * dist/osx/bundle.sh
  * Update AUTHORS using `git log X.Y.. --pretty=format:"%an <%ae>" | sort -u`.
+ * Sync AUTHORS with the About dialogue.
  * Update NEWS.
  * Update the website and debian/control's description with the new features.
  * Update sshots if there are user-visible changes.
