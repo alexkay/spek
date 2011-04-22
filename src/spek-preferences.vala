@@ -21,21 +21,6 @@ namespace Spek {
 		private KeyFile key_file;
 		private string file_name;
 
-		// List all languages with a decent (e.g. 80%) number of translated
-		// strings. Don't translate language names. Keep the first line intact.
-		public string[,] languages = {
-			{"", null},
-			{"de", "Deutsch"},
-			{"en", "English"},
-			{"es", "Español"},
-			{"fr", "Français"},
-			{"nl", "Nederlands"},
-			{"pl", "Polski"},
-			{"ru", "Русский"},
-			{"sv", "Svenska"},
-			{"uk", "Українська"}
-		};
-
 		private Preferences () {
 			file_name = Path.build_filename (Environment.get_user_config_dir (), "spek");
 			DirUtils.create_with_parents (file_name, 0755);
@@ -57,9 +42,6 @@ namespace Spek {
 			get {
 				if (_instance == null) {
 					_instance = new Preferences ();
-				}
-				if (_instance.languages[0,1] == null) {
-					_instance.languages[0,1] = _("(system default)");
 				}
 				return _instance;
 			}

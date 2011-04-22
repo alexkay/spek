@@ -20,11 +20,27 @@ using Gtk;
 
 namespace Spek {
 	public class PreferencesDialog : Gtk.Dialog {
+		// List all languages with a decent (e.g. 80%) number of translated
+		// strings. Don't translate language names. Keep the first line intact.
+		private static string[,] languages = {
+			{"", null},
+			{"de", "Deutsch"},
+			{"en", "English"},
+			{"es", "Español"},
+			{"fr", "Français"},
+			{"nl", "Nederlands"},
+			{"pl", "Polski"},
+			{"ru", "Русский"},
+			{"sv", "Svenska"},
+			{"uk", "Українська"}
+		};
+
 		public PreferencesDialog () {
 			title = _("Preferences");
 			modal = true;
 			resizable = false;
 			window_position = WindowPosition.CENTER_ON_PARENT;
+			languages[0,1] = _("(system default)");
 
 			var alignment = new Alignment (0.5f, 0.5f, 1f, 1f);
 			alignment.set_padding (12, 12, 12, 12);
@@ -47,15 +63,15 @@ namespace Spek {
 			var language_combo = new ComboBox.text ();
 			int active_language = 0;
 			var prefs = Preferences.instance;
-			for (int i = 0; i < prefs.languages.length[0]; i++) {
-				language_combo.append_text (prefs.languages[i,1]);
-				if (prefs.languages[i,0] == prefs.language) {
+			for (int i = 0; i < languages.length[0]; i++) {
+				language_combo.append_text (languages[i,1]);
+				if (languages[i,0] == prefs.language) {
 					active_language = i;
 				}
 			}
 			language_combo.active = active_language;
 			language_combo.changed.connect (
-				() => prefs.language = prefs.languages[language_combo.active,0]);
+				() => prefs.language = languages[language_combo.active,0]);
 			language_label.mnemonic_widget = language_combo;
 			language_box.pack_start (language_combo, false, false, 0);
 			general_subbox.pack_start(language_box, false, false, 0);

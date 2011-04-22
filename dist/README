@@ -9,7 +9,7 @@ Spek release checklist
  * `tx pull -a`.
  * Update the list of available languages, 80% or so will do:
    * po/LINGUAS
-   * src/spek-preferences.vala
+   * src/spek-preferences-dialog.vala
    * dist/win/bundle.sh
    * dist/osx/bundle.sh
  * Update AUTHORS using `git log X.Y.. --pretty=format:"%an <%ae>" | sort -u`.
