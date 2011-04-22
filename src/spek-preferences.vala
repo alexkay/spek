@@ -59,7 +59,7 @@ namespace Spek {
 					_instance = new Preferences ();
 				}
 				if (_instance.languages[0,1] == null) {
-					languages[0,1] = _("(system default)");
+					_instance.languages[0,1] = _("(system default)");
 				}
 				return _instance;
 			}
