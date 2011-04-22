@@ -35,4 +35,4 @@ Description: acoustic spectrum analyser
   * Shows the codec name and the audio signal parameters
   * Allows to save the spectrogram as an image file
   * Drag-and-drop support; associates with common audio file formats
-  * Auto-fitting time and frequency rulers
+  * Auto-fitting time, frequency and spectral density rulers
