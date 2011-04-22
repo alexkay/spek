@@ -34,7 +34,6 @@ namespace Spek {
 			Environment.set_variable ("LANGUAGE", Preferences.instance.language, true);
 		}
 
-//		Intl.setlocale (LocaleCategory.ALL, prefs.language);
 		Intl.bindtextdomain (Config.GETTEXT_PACKAGE, Config.LOCALEDIR);
 		Intl.bind_textdomain_codeset (Config.GETTEXT_PACKAGE, "UTF-8");
 		Intl.textdomain (Config.GETTEXT_PACKAGE);

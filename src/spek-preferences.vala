@@ -37,7 +37,6 @@ namespace Spek {
 		};
 
 		private Preferences () {
-			languages[0,1] = _("(system default)");
 			file_name = Path.build_filename (Environment.get_user_config_dir (), "spek");
 			DirUtils.create_with_parents (file_name, 0755);
 			file_name = Path.build_filename (file_name, "preferences");
@@ -58,6 +57,9 @@ namespace Spek {
 			get {
 				if (_instance == null) {
 					_instance = new Preferences ();
+				}
+				if (_instance.languages[0,1] == null) {
+					languages[0,1] = _("(system default)");
 				}
 				return _instance;
 			}
