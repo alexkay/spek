@@ -1,6 +1,6 @@
 # configure.ac
 
-AC_INIT([spek],[0.6])
+AC_INIT([spek],[0.7])
 AC_CONFIG_SRCDIR([src/spek.vala])
 AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([no-dist-gzip dist-bzip2])
