@@ -13,17 +13,17 @@ Upstream Author:
 Copyright:
 
     For everything not noted below:
-      Copyright (C) 2010 Alexander Kojevnikov
+      Copyright (C) 2010-2011 Alexander Kojevnikov
 
     For src/spek-message-bar.*:
       Copyright (C) 2010 Alexander Kojevnikov
       Copyright (C) 2008 Novell, Inc
 
     For src/spek-pipeline.*:
-      Copyright (C) 2010 Alexander Kojevnikov
-      Copyright (C) 1999 Erik Walthinsen
-      Copyright (C) 2006 Stefan Kost
+      Copyright (C) 2010-2011 Alexander Kojevnikov
       Copyright (C) 2007-2009 Sebastian Dröge
+      Copyright (C) 2006 Stefan Kost
+      Copyright (C) 1999 Erik Walthinsen
 
 License:
 
