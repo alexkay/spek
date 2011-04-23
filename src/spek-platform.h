@@ -30,6 +30,9 @@ void spek_platform_fix_args (gchar **argv, gint argc);
 /* OSX has its own approach to menus and accelerators */
 void spek_platform_fix_ui (GtkUIManager *ui);
 
+/* Platform-specific locale directory */
+gchar *spek_platform_locale_dir ();
+
 /* Open a link in the browser */
 void spek_platform_show_uri (const gchar *uri);
 

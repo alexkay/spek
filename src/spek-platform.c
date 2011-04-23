@@ -108,6 +108,34 @@ void spek_platform_fix_ui (GtkUIManager *ui)
 #endif
 }
 
+gchar *spek_platform_locale_dir () {
+	static gchar *locale_dir = NULL;
+
+	if (!locale_dir) {
+#ifdef G_OS_WIN32
+		gchar *win32_dir;
+
+		win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
+		locale_dir = g_build_filename (win32_dir, "share", "locale", NULL);
+
+		g_free (win32_dir);
+#else
+#ifdef G_OS_DARWIN
+		GtkOSXApplication *app = NULL;
+		const gchar *res_dir;
+
+		app = g_object_new (GTK_TYPE_OSX_APPLICATION, NULL);
+		res_dir = gtk_osxapplication_get_resource_path (app);
+		locale_dir = g_build_filename (res_dir, "share", "locale", NULL);
+#else
+#endif
+		locale_dir =  LOCALEDIR;
+#endif
+	}
+
+	return locale_dir;
+}
+
 void spek_platform_show_uri (const gchar *uri) {
 #ifdef G_OS_WIN32
 	/* gtk_show_uri doesn't work on Windows... */
