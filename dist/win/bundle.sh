@@ -90,7 +90,6 @@ rm *.wixpdb
 
 # Create a zip archive
 mv spek.exe Spek/bin/
-cp LICENSE.rtf Spek/
 cp spek.ico Spek/
 "$SZ_PATH"/7z a spek.zip Spek
 
