@@ -16,6 +16,7 @@ Spek release checklist
  * Sync AUTHORS with the About dialogue.
  * Update NEWS.
  * Update the website and debian/control's description with the new features.
+ * Update the manpage if necessary.
  * Update sshots if there are user-visible changes.
  * Update and sync wiki pages with the new version number and instructions.
  * Update copyright year of touched code.

@@ -44,11 +44,12 @@ Ctrl+O   open a new file
 .br
 Ctrl+S   save the spectrogram as an image file
 .br
+Ctrl+E   show the preferences dialog
 Ctrl+Q   quit
 .br
 F1       show the about dialog
 .SH FILES
-.I ~/.config/spek/config.ini
+.I ~/.config/spek/preferences
 .RS
 The configuration file for Spek, stored in a simple INI format.
 .RE
