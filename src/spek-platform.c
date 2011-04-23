@@ -128,8 +128,8 @@ gchar *spek_platform_locale_dir () {
 		res_dir = gtk_osxapplication_get_resource_path (app);
 		locale_dir = g_build_filename (res_dir, "share", "locale", NULL);
 #else
-#endif
 		locale_dir =  LOCALEDIR;
+#endif
 #endif
 	}
 
