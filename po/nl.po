@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
 "POT-Creation-Date: 2011-04-20 21:24+0800\n"
-"PO-Revision-Date: 2011-04-20 13:25+0000\n"
+"PO-Revision-Date: 2011-04-24 00:26+0000\n"
 "Last-Translator: alexkay <alexander@kojevnikov.com>\n"
 "Language-Team: Dutch <>\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgstr "Spek"
 
 #: ../data/spek.desktop.in.in.h:3
 msgid "Spek Spectrum Analyser"
-msgstr ""
+msgstr "Spek Spectrumanalyse"
 
 #: ../data/spek.desktop.in.in.h:4
 msgid "View spectrograms of your audio files"
@@ -94,16 +94,16 @@ msgstr "%s: %s"
 
 #: ../src/spek-preferences-dialog.vala:24
 msgid "Preferences"
-msgstr ""
+msgstr "Einstellungen"
 
 #. TRANSLATORS: The name of a section in the Preferences dialog.
 #: ../src/spek-preferences-dialog.vala:35
 msgid "General"
-msgstr ""
+msgstr "Allgemein"
 
 #: ../src/spek-preferences-dialog.vala:45
 msgid "_Language:"
-msgstr ""
+msgstr "_Taal"
 
 #: ../src/spek-preferences-dialog.vala:62
 msgid "Check for _updates"
@@ -111,12 +111,12 @@ msgstr ""
 
 #: ../src/spek-preferences.vala:40
 msgid "(system default)"
-msgstr ""
+msgstr "(systeem standaard)"
 
 #. TRANSLATORS: keep "00" unchanged, it's used to calc the text width
 #: ../src/spek-spectrogram.vala:200
 msgid "00 kHz"
-msgstr ""
+msgstr "00 kHz"
 
 #: ../src/spek-spectrogram.vala:206
 #, c-format
@@ -126,24 +126,24 @@ msgstr "%d kHz"
 #. TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
 #: ../src/spek-spectrogram.vala:257
 msgid "-00 dB"
-msgstr ""
+msgstr "-00 dB"
 
 #: ../src/spek-spectrogram.vala:263
 #, c-format
 msgid "%d dB"
-msgstr ""
+msgstr "%d dB"
 
 #: ../src/spek-window.vala:35
 msgid "_File"
-msgstr ""
+msgstr "_File"
 
 #: ../src/spek-window.vala:39
 msgid "_Edit"
-msgstr ""
+msgstr "Be_werken"
 
 #: ../src/spek-window.vala:41
 msgid "_Help"
-msgstr ""
+msgstr "_Hulp"
 
 #: ../src/spek-window.vala:76
 msgid "Spek - Acoustic Spectrum Analyser"
@@ -200,7 +200,8 @@ msgstr "Spek-website"
 msgid "translator-credits"
 msgstr ""
 "DutchDude (TheGuyOfDoom)\n"
-"Wouter Bolsterlee"
+"Wouter Bolsterlee\n"
+"Alexander Kojevnikov"
 
 #: ../src/spek.vala:25
 msgid "Display the version and exit"
@@ -222,9 +223,7 @@ msgstr ""
 #: ../src/spek.vala:53
 #, c-format
 msgid "%s version %s\n"
-msgstr ""
-"%s versie %s\n"
-"\n"
+msgstr "%s versie %s\n"
 
 #: ../src/spek.vala:58
 msgid "Specify a single file\n"
