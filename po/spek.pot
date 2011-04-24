@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-20 21:24+0800\n"
+"POT-Creation-Date: 2011-04-24 07:59+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -92,25 +92,25 @@ msgstr[1] ""
 msgid "%s: %s"
 msgstr ""
 
-#: ../src/spek-preferences-dialog.vala:24
+#: ../src/spek-preferences-dialog.vala:39
 msgid "Preferences"
 msgstr ""
 
+#: ../src/spek-preferences-dialog.vala:43
+msgid "(system default)"
+msgstr ""
+
 #. TRANSLATORS: The name of a section in the Preferences dialog.
-#: ../src/spek-preferences-dialog.vala:35
+#: ../src/spek-preferences-dialog.vala:51
 msgid "General"
 msgstr ""
 
-#: ../src/spek-preferences-dialog.vala:45
+#: ../src/spek-preferences-dialog.vala:61
 msgid "_Language:"
 msgstr ""
 
-#: ../src/spek-preferences-dialog.vala:62
+#: ../src/spek-preferences-dialog.vala:78
 msgid "Check for _updates"
-msgstr ""
-
-#: ../src/spek-preferences.vala:40
-msgid "(system default)"
 msgstr ""
 
 #. TRANSLATORS: keep "00" unchanged, it's used to calc the text width
@@ -186,15 +186,15 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
-#: ../src/spek-window.vala:250
+#: ../src/spek-window.vala:251
 msgid "Copyright © 2010-2011 Alexander Kojevnikov"
 msgstr ""
 
-#: ../src/spek-window.vala:255
+#: ../src/spek-window.vala:256
 msgid "Spek Website"
 msgstr ""
 
-#: ../src/spek-window.vala:264
+#: ../src/spek-window.vala:265
 msgid "translator-credits"
 msgstr ""
 
@@ -202,21 +202,21 @@ msgstr ""
 msgid "Display the version and exit"
 msgstr ""
 
-#: ../src/spek.vala:43
+#: ../src/spek.vala:42
 msgid "[FILE]"
 msgstr ""
 
-#: ../src/spek.vala:47
+#: ../src/spek.vala:46
 #, c-format
 msgid "Run `%s --help` to see a full list of available command line options.\n"
 msgstr ""
 
 #. TRANSLATORS: first %s is the package name, second %s is the package version.
-#: ../src/spek.vala:53
+#: ../src/spek.vala:52
 #, c-format
 msgid "%s version %s\n"
 msgstr ""
 
-#: ../src/spek.vala:58
+#: ../src/spek.vala:57
 msgid "Specify a single file\n"
 msgstr ""
