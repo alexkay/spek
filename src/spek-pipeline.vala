@@ -243,8 +243,11 @@ namespace Spek {
 						prev_head = head;
 						for (int i = 0; i < nfft; i++) {
 							float val = input[(input_size + head - nfft + i) % input_size];
+							// TODO: allow the user to chose the window function
 							// Hamming window.
-							val *= 0.53836f - 0.46164f * coss[i];
+//							val *= 0.53836f - 0.46164f * coss[i];
+							// Hann window.
+							val *= 0.5f * (1f - coss[i]);
 							fft.input[i] = val;
 						}
 						fft.execute ();
