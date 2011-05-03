@@ -45,7 +45,7 @@ namespace Spek {
 			var button_box = new HBox (false, 0);
 			button_box.spacing = 3;
 			var close_button = new Button ();
-			close_button.image = new Gtk.Image.from_stock (STOCK_CLOSE, IconSize.MENU);
+			close_button.image = new Gtk.Image.from_stock (Stock.CLOSE, IconSize.MENU);
 			close_button.relief = ReliefStyle.NONE;
 			close_button.clicked.connect (() => hide ());
 

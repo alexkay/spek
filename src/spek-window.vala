@@ -33,13 +33,13 @@ namespace Spek {
 
 		private const ActionEntry[] ACTION_ENTRIES = {
 			{ "File", null, N_("_File") },
-			{ "FileOpen", STOCK_OPEN, null, null, null, on_file_open },
-			{ "FileSave", STOCK_SAVE, null, null, null, on_file_save },
-			{ "FileQuit", STOCK_QUIT, null, null, null, on_file_quit },
+			{ "FileOpen", Stock.OPEN, null, null, null, on_file_open },
+			{ "FileSave", Stock.SAVE, null, null, null, on_file_save },
+			{ "FileQuit", Stock.QUIT, null, null, null, on_file_quit },
 			{ "Edit", null, N_("_Edit") },
-			{ "EditPreferences", STOCK_PREFERENCES, null, "<Ctrl>E", null, on_edit_preferences },
+			{ "EditPreferences", Stock.PREFERENCES, null, "<Ctrl>E", null, on_edit_preferences },
 			{ "Help", null, N_("_Help") },
-			{ "HelpAbout", STOCK_ABOUT, null, "F1", null, on_help_about }
+			{ "HelpAbout", Stock.ABOUT, null, "F1", null, on_help_about }
 		};
 
 		private const string UI = """
@@ -137,11 +137,7 @@ namespace Spek {
 			}
 
 			try {
-#if VALA_0_12
 				Thread.create<void*> (check_version, false);
-#else
-				Thread.create (check_version, false);
-#endif
 			} catch (ThreadError e) {
 			}
 		}
@@ -171,8 +167,8 @@ namespace Spek {
 		private void on_file_open () {
 			var chooser = new FileChooserDialog (
 				_("Open File"), this, FileChooserAction.OPEN,
-				STOCK_CANCEL, ResponseType.CANCEL,
-				STOCK_OPEN, ResponseType.ACCEPT, null);
+				Stock.CANCEL, ResponseType.CANCEL,
+				Stock.OPEN, ResponseType.ACCEPT, null);
 			chooser.set_default_response (ResponseType.ACCEPT);
 			chooser.select_multiple = false;
 			chooser.set_current_folder (cur_dir);
@@ -188,8 +184,8 @@ namespace Spek {
 		private void on_file_save () {
 			var chooser = new FileChooserDialog (
 				_("Save Spectrogram"), this, FileChooserAction.SAVE,
-				STOCK_CANCEL, ResponseType.CANCEL,
-				STOCK_SAVE, ResponseType.ACCEPT, null);
+				Stock.CANCEL, ResponseType.CANCEL,
+				Stock.SAVE, ResponseType.ACCEPT, null);
 			chooser.set_default_response (ResponseType.ACCEPT);
 			chooser.set_current_folder (cur_dir);
 

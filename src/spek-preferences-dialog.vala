@@ -89,7 +89,7 @@ namespace Spek {
 			vbox.pack_start (alignment, false, false, 0);
 			vbox.show_all ();
 
-			add_button (STOCK_CLOSE, ResponseType.CLOSE);
+			add_button (Stock.CLOSE, ResponseType.CLOSE);
 			set_default_response (ResponseType.CLOSE);
 			response.connect (on_response);
 		}
