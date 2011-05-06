@@ -49,7 +49,9 @@ namespace Spek {
 
 		public void save () {
 			var output = FileStream.open (file_name, "w+");
-			output.puts (key_file.to_data ());
+			if (output != null) {
+				output.puts (key_file.to_data ());
+			}
 		}
 
 		public bool check_update {
