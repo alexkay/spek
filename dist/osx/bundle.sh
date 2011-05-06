@@ -14,7 +14,7 @@ ige-mac-bundler spek.bundle
 
 cd Spek.app/Contents/Resources
 mkdir share/locale_
-mv share/locale/{de,es,fr,nl,pl,ru,sv,uk} share/locale_/
+mv share/locale/{de,es,fr,it,nl,pl,ru,sv,uk} share/locale_/
 rm -fr share/locale
 mv share/locale_ share/locale
 cd ../../..
