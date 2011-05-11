@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
 "POT-Creation-Date: 2011-04-24 07:59+0800\n"
-"PO-Revision-Date: 2011-05-06 08:46+0000\n"
-"Last-Translator: alexkay <alexander@kojevnikov.com>\n"
+"PO-Revision-Date: 2011-05-07 16:49+0000\n"
+"Last-Translator: giuped <giuped@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.net/projects/p/spek/team/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,11 +35,11 @@ msgstr "Mostra spettrogrammi per i tuoi file audio"
 
 #: ../src/spek-audio.c:47
 msgid "Cannot open input file"
-msgstr "Impossibile apri file di input"
+msgstr "Impossibile aprire file in ingresso"
 
 #: ../src/spek-audio.c:54
 msgid "Cannot find stream info"
-msgstr "Impossibile trovare informazioni del Flusso audio"
+msgstr "Impossibile trovare informazioni del flusso audio"
 
 #: ../src/spek-audio.c:66
 msgid "The file contains no audio streams"
@@ -111,7 +111,7 @@ msgstr "_Lingua:"
 
 #: ../src/spek-preferences-dialog.vala:78
 msgid "Check for _updates"
-msgstr "Controlla Aggiornamenti"
+msgstr "Controlla a_ggiornamenti"
 
 #. TRANSLATORS: keep "00" unchanged, it's used to calc the text width
 #: ../src/spek-spectrogram.vala:200
@@ -147,7 +147,7 @@ msgstr "_Aiuto"
 
 #: ../src/spek-window.vala:76
 msgid "Spek - Acoustic Spectrum Analyser"
-msgstr "Spek - Alanalizzatore di Spettro Acustico"
+msgstr "Spek - Analizzatore di Spettro Acustico"
 
 #: ../src/spek-window.vala:100
 msgid ""
@@ -163,7 +163,7 @@ msgstr "Tutti i file"
 
 #: ../src/spek-window.vala:109
 msgid "PNG images"
-msgstr "immagini PNG"
+msgstr "Immagini PNG"
 
 #: ../src/spek-window.vala:112
 msgid "Audio files"
@@ -198,7 +198,7 @@ msgstr "Sito Web Spek"
 
 #: ../src/spek-window.vala:265
 msgid "translator-credits"
-msgstr "Giuseppe D. B."
+msgstr "Giuseppe D. Barbagallo"
 
 #: ../src/spek.vala:25
 msgid "Display the version and exit"
@@ -212,8 +212,8 @@ msgstr "[FILE]"
 #, c-format
 msgid "Run `%s --help` to see a full list of available command line options.\n"
 msgstr ""
-"Lancia '%s --help' per vedere una lista completa delle opzioni disponibili "
-"da line di comando.\n"
+"Avvia '%s --help' per vedere una lista completa delle opzioni disponibili da"
+" linea di comando.\n"
 
 #. TRANSLATORS: first %s is the package name, second %s is the package
 #. version.
