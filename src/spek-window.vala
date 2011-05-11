@@ -221,7 +221,8 @@ namespace Spek {
 				"Contributors:",
 				"\tFabian Deutsch",
 				"\tJonathan Gonzalez V",
-				"\tStefan Kost"
+				"\tStefan Kost",
+				"\tThibault North"
 			};
 			string[] artists = {
 				"Olga Vasylevska"
