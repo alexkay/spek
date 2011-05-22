@@ -24,6 +24,7 @@ namespace Spek {
 		// strings. Don't translate language names. Keep the first line intact.
 		private static string[,] languages = {
 			{"", null},
+            {"cs", "Čeština"},
 			{"de", "Deutsch"},
 			{"en", "English"},
 			{"es", "Español"},
