@@ -1,1 +1,0 @@
-Spek source code is hosted on [http://gitorious.org/spek Gitorious].
