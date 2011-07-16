@@ -24,32 +24,32 @@
 #include <libavcodec/avcodec.h>
 
 typedef struct {
-	/* Internal data */
-	gchar *short_name;
-	AVFormatContext *format_context;
-	gint audio_stream;
-	AVCodecContext *codec_context;
-	AVStream *stream;
-	AVCodec *codec;
-	gint buffer_size;
-	AVPacket *packet;
-	gint offset;
+    /* Internal data */
+    gchar *short_name;
+    AVFormatContext *format_context;
+    gint audio_stream;
+    AVCodecContext *codec_context;
+    AVStream *stream;
+    AVCodec *codec;
+    gint buffer_size;
+    AVPacket *packet;
+    gint offset;
 
-	/* Exposed properties */
-	gchar *file_name;
-	gchar *codec_name;
-	gchar *error;
-	gint bit_rate;
-	gint sample_rate;
-	gint bits_per_sample;
-	gint width; /* number of bits used to store a sample */
-	gboolean fp; /* floating-point sample representation */
-	gint channels;
-	gdouble duration;
-	guint8 *buffer;
-	gint64 frames_per_interval;
-	gint64 error_per_interval;
-	gint64 error_base;
+    /* Exposed properties */
+    gchar *file_name;
+    gchar *codec_name;
+    gchar *error;
+    gint bit_rate;
+    gint sample_rate;
+    gint bits_per_sample;
+    gint width; /* number of bits used to store a sample */
+    gboolean fp; /* floating-point sample representation */
+    gint channels;
+    gdouble duration;
+    guint8 *buffer;
+    gint64 frames_per_interval;
+    gint64 error_per_interval;
+    gint64 error_base;
 } SpekAudioContext;
 
 /* Initialise FFmpeg, should be called once on start up */

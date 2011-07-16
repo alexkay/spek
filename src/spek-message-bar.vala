@@ -22,61 +22,61 @@
 using Gtk;
 
 namespace Spek {
-	public class MessageBar : HBox {
-		private Label label;
-		private Gtk.Window win;
+    public class MessageBar : HBox {
+        private Label label;
+        private Gtk.Window win;
 
-		public MessageBar (string message) {
-			homogeneous = false;
-			spacing = 0;
-			border_width = 6;
+        public MessageBar (string message) {
+            homogeneous = false;
+            spacing = 0;
+            border_width = 6;
 
-			win = new Gtk.Window (WindowType.POPUP);
-			win.name = "gtk-tooltips";
-			win.ensure_style ();
-			win.style_set.connect (() => style = win.style);
+            win = new Gtk.Window (WindowType.POPUP);
+            win.name = "gtk-tooltips";
+            win.ensure_style ();
+            win.style_set.connect (() => style = win.style);
 
-			label = new Label (null);
-			label.use_markup = true;
-			label.set_markup (message);
-			label.ellipsize = Pango.EllipsizeMode.END;
-			label.xalign = 0f;
-			label.activate_link.connect (uri => { Platform.show_uri (uri); return true; });
-			var button_box = new HBox (false, 0);
-			button_box.spacing = 3;
-			var close_button = new Button ();
-			close_button.image = new Gtk.Image.from_stock (Stock.CLOSE, IconSize.MENU);
-			close_button.relief = ReliefStyle.NONE;
-			close_button.clicked.connect (() => hide ());
+            label = new Label (null);
+            label.use_markup = true;
+            label.set_markup (message);
+            label.ellipsize = Pango.EllipsizeMode.END;
+            label.xalign = 0f;
+            label.activate_link.connect (uri => { Platform.show_uri (uri); return true; });
+            var button_box = new HBox (false, 0);
+            button_box.spacing = 3;
+            var close_button = new Button ();
+            close_button.image = new Gtk.Image.from_stock (Stock.CLOSE, IconSize.MENU);
+            close_button.relief = ReliefStyle.NONE;
+            close_button.clicked.connect (() => hide ());
 
-			pack_start (label, true, true, 0);
-			pack_start (button_box, false, false, 0);
-			pack_start (close_button, false, false, 0);
-		}
+            pack_start (label, true, true, 0);
+            pack_start (button_box, false, false, 0);
+            pack_start (close_button, false, false, 0);
+        }
 
-		private bool changing_style = false;
-		protected override void style_set (Style? previous_style) {
-			if (changing_style) {
-				return;
-			}
+        private bool changing_style = false;
+        protected override void style_set (Style? previous_style) {
+            if (changing_style) {
+                return;
+            }
 
-			changing_style = true;
-			style = win.style;
-			label.style = style;
-			changing_style = false;
-		}
+            changing_style = true;
+            style = win.style;
+            label.style = style;
+            changing_style = false;
+        }
 
-		protected override bool expose_event (Gdk.EventExpose event) {
-			if (!is_drawable ()) {
-				return false;
-			}
+        protected override bool expose_event (Gdk.EventExpose event) {
+            if (!is_drawable ()) {
+                return false;
+            }
 
-			var cr = Gdk.cairo_create (event.window);
-			var color = style.bg[StateType.NORMAL];
-			cr.set_source_rgb (color.red / 65535.0, color.green / 65535.0, color.blue / 65535.0);
-			cr.rectangle (allocation.x, allocation.y, allocation.width, allocation.height);
-			cr.fill ();
-			return base.expose_event (event);
-		}
-	}
+            var cr = Gdk.cairo_create (event.window);
+            var color = style.bg[StateType.NORMAL];
+            cr.set_source_rgb (color.red / 65535.0, color.green / 65535.0, color.blue / 65535.0);
+            cr.rectangle (allocation.x, allocation.y, allocation.width, allocation.height);
+            cr.fill ();
+            return base.expose_event (event);
+        }
+    }
 }

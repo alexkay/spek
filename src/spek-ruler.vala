@@ -20,104 +20,104 @@ using Cairo;
 using Pango;
 
 namespace Spek {
-	class Ruler : GLib.Object {
-		public enum Position {
-			TOP,
-			RIGHT,
-			BOTTOM,
-			LEFT
-		}
+    class Ruler : GLib.Object {
+        public enum Position {
+            TOP,
+            RIGHT,
+            BOTTOM,
+            LEFT
+        }
 
-		private Position pos;
-		private string sample_label;
-		private int[] factors;
-		private int units;
-		private double spacing;
-		private Measure measure;
-		private Place place;
-		private FormatTick format_tick;
+        private Position pos;
+        private string sample_label;
+        private int[] factors;
+        private int units;
+        private double spacing;
+        private Measure measure;
+        private Place place;
+        private FormatTick format_tick;
 
-		public delegate double Measure (int unit);
-		public delegate double Place (double p);
-		public delegate string FormatTick (int unit);
+        public delegate double Measure (int unit);
+        public delegate double Place (double p);
+        public delegate string FormatTick (int unit);
 
-		public Ruler (
-			Position pos, string sample_label,
-			int[] factors, int units, double spacing,
-			Measure measure, Place place, FormatTick format_tick) {
-			this.pos = pos;
-			this.sample_label = sample_label;
-			this.factors = factors;
-			this.units = units;
-			this.spacing = spacing;
-			this.measure = measure;
-			this.place = place;
-			this.format_tick = format_tick;
-		}
+        public Ruler (
+            Position pos, string sample_label,
+            int[] factors, int units, double spacing,
+            Measure measure, Place place, FormatTick format_tick) {
+            this.pos = pos;
+            this.sample_label = sample_label;
+            this.factors = factors;
+            this.units = units;
+            this.spacing = spacing;
+            this.measure = measure;
+            this.place = place;
+            this.format_tick = format_tick;
+        }
 
-		public void draw (Cairo.Context cr, Pango.Layout layout) {
-			// Mesure the sample label.
-			int w, h;
-			layout.set_text (sample_label, -1);
-			layout.get_pixel_size (out w, out h);
-			var size = pos == Position.TOP || pos == Position.BOTTOM ? w : h;
+        public void draw (Cairo.Context cr, Pango.Layout layout) {
+            // Mesure the sample label.
+            int w, h;
+            layout.set_text (sample_label, -1);
+            layout.get_pixel_size (out w, out h);
+            var size = pos == Position.TOP || pos == Position.BOTTOM ? w : h;
 
-			// Select the factor to use, we want some space between the labels.
-			int factor = 0;
-			foreach (var f in factors) {
-				if (measure (f) >= spacing * size) {
-					factor = f;
-					break;
-				}
-			}
+            // Select the factor to use, we want some space between the labels.
+            int factor = 0;
+            foreach (var f in factors) {
+                if (measure (f) >= spacing * size) {
+                    factor = f;
+                    break;
+                }
+            }
 
-			// Add the ticks.
-			int[] ticks = { 0, units };
-			if (factor > 0) {
-				for (var tick = factor; tick < units; tick += factor) {
-					if (measure (units - tick) < size * 1.2) {
-						break;
-					}
-					ticks += tick;
-				}
-				// TODO: `ticks = ticks[0:-1]` crashes, file a bug.
-			}
+            // Add the ticks.
+            int[] ticks = { 0, units };
+            if (factor > 0) {
+                for (var tick = factor; tick < units; tick += factor) {
+                    if (measure (units - tick) < size * 1.2) {
+                        break;
+                    }
+                    ticks += tick;
+                }
+                // TODO: `ticks = ticks[0:-1]` crashes, file a bug.
+            }
 
-			// Draw the ticks.
-			double GAP = 10;
-			double TICK_LEN = 4;
-			foreach (var tick in ticks) {
-				var label = format_tick (tick);
-				var p = place (measure (
-					pos == Position.TOP || pos == Position.BOTTOM
-					? tick : units - tick));
-				layout.set_text (label, -1);
-				layout.get_pixel_size (out w, out h);
-				if (pos == Position.TOP) {
-					cr.move_to (p - w / 2, -GAP - h);
-				} else if (pos == Position.RIGHT){
-					cr.move_to (GAP, p + h / 4);
-				} else if (pos == Position.BOTTOM) {
-					cr.move_to (p - w / 2, GAP + h);
-				} else if (pos == Position.LEFT){
-					cr.move_to (-w - GAP, p + h / 4);
-				}
-				cairo_show_layout_line (cr, layout.get_line (0));
-				if (pos == Position.TOP) {
-					cr.move_to (p, 0);
-					cr.rel_line_to (0, -TICK_LEN);
-				} else if (pos == Position.RIGHT) {
-					cr.move_to (0, p);
-					cr.rel_line_to (TICK_LEN, 0);
-				} else if (pos == Position.BOTTOM) {
-					cr.move_to (p, 0);
-					cr.rel_line_to (0, TICK_LEN);
-				} else if (pos == Position.LEFT) {
-					cr.move_to (0, p);
-					cr.rel_line_to (-TICK_LEN, 0);
-				}
-				cr.stroke ();
-			}
-		}
-	}
+            // Draw the ticks.
+            double GAP = 10;
+            double TICK_LEN = 4;
+            foreach (var tick in ticks) {
+                var label = format_tick (tick);
+                var p = place (measure (
+                    pos == Position.TOP || pos == Position.BOTTOM
+                    ? tick : units - tick));
+                layout.set_text (label, -1);
+                layout.get_pixel_size (out w, out h);
+                if (pos == Position.TOP) {
+                    cr.move_to (p - w / 2, -GAP - h);
+                } else if (pos == Position.RIGHT){
+                    cr.move_to (GAP, p + h / 4);
+                } else if (pos == Position.BOTTOM) {
+                    cr.move_to (p - w / 2, GAP + h);
+                } else if (pos == Position.LEFT){
+                    cr.move_to (-w - GAP, p + h / 4);
+                }
+                cairo_show_layout_line (cr, layout.get_line (0));
+                if (pos == Position.TOP) {
+                    cr.move_to (p, 0);
+                    cr.rel_line_to (0, -TICK_LEN);
+                } else if (pos == Position.RIGHT) {
+                    cr.move_to (0, p);
+                    cr.rel_line_to (TICK_LEN, 0);
+                } else if (pos == Position.BOTTOM) {
+                    cr.move_to (p, 0);
+                    cr.rel_line_to (0, TICK_LEN);
+                } else if (pos == Position.LEFT) {
+                    cr.move_to (0, p);
+                    cr.rel_line_to (-TICK_LEN, 0);
+                }
+                cr.stroke ();
+            }
+        }
+    }
 }

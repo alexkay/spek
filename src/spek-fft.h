@@ -23,14 +23,14 @@
 #include <libavcodec/avfft.h>
 
 typedef struct {
-	/* Internal data */
-	RDFTContext *cx;
-	gint n;
-	gint threshold;
+    /* Internal data */
+    RDFTContext *cx;
+    gint n;
+    gint threshold;
 
-	/* Exposed properties */
-	gfloat *input;
-	gfloat *output;
+    /* Exposed properties */
+    gfloat *input;
+    gfloat *output;
 } SpekFftPlan;
 
 /* Allocate buffers and create a new FFT plan */

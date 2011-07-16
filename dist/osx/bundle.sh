@@ -66,7 +66,7 @@ hdiutil convert -quiet -format UDBZ -o $DMG_FILE $DMG_FILE.master
 echo "Done."
 
 if [ ! "x$1" = "x-m" ]; then
-	rm $DMG_FILE.master
+    rm $DMG_FILE.master
 fi
 
 cd ../..
