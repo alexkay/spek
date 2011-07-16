@@ -16,8 +16,8 @@ Build-Depends: debhelper (>= 7.0.50~),
                libpango1.0-dev
 Standards-Version: 3.9.2
 Homepage: http://www.spek-project.org/
-Vcs-Git: https://code.google.com/p/spek
-Vcs-Browser: http://code.google.com/p/spek/source/browse
+Vcs-Git: git://github.com/alexkay/spek.git
+Vcs-Browser: https://github.com/alexkay/spek
 
 Package: spek
 Architecture: any

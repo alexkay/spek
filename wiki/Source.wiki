@@ -1,0 +1,1 @@
+Spek source code is hosted on [https://github.com/alexkay/spek GitHub].
