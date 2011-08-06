@@ -15,5 +15,7 @@ Run:
   $ jhbuild shell
   $ dist/osx/bundle.sh
 
+Note: On Lion, built in libiconv conflicts with the bundled version. To work around, accompany all jhbuild commands with `--skip=libiconv` so that everything uses the system version of the library (see issue 51).
+
 [1]: http://sourceforge.net/apps/trac/gtk-osx/wiki/Build
 [2]: http://sourceforge.net/apps/trac/gtk-osx/wiki/Bundle
