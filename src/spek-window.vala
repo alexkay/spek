@@ -31,7 +31,7 @@ namespace Spek {
         private FileFilter filter_audio;
         private FileFilter filter_png;
 
-        private const ActionEntry[] ACTION_ENTRIES = {
+        private const Gtk.ActionEntry[] ACTION_ENTRIES = {
             { "File", null, N_("_File") },
             { "FileOpen", Stock.OPEN, null, null, null, on_file_open },
             { "FileSave", Stock.SAVE, null, null, null, on_file_save },
