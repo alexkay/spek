@@ -130,10 +130,10 @@ SpekAudioContext * spek_audio_open (const gchar *file_name) {
 
 void spek_audio_start (SpekAudioContext *cx, gint samples) {
     gint64 rate = cx->sample_rate * (gint64) cx->stream->time_base.num;
+    gint64 duration = (gint64) (cx->duration * cx->stream->time_base.den / cx->stream->time_base.num);
     cx->error_base = samples * (gint64) cx->stream->time_base.den;
-    cx->frames_per_interval = av_rescale_rnd (
-        cx->stream->duration, rate, cx->error_base, AV_ROUND_DOWN);
-    cx->error_per_interval = (cx->stream->duration * rate) % cx->error_base;
+    cx->frames_per_interval = av_rescale_rnd (duration, rate, cx->error_base, AV_ROUND_DOWN);
+    cx->error_per_interval = (duration * rate) % cx->error_base;
 }
 
 gint spek_audio_read (SpekAudioContext *cx) {
