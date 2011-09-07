@@ -83,7 +83,14 @@ SpekAudioContext * spek_audio_open (const gchar *file_name) {
         cx->bits_per_sample = cx->codec_context->bits_per_coded_sample;
     }
     cx->channels = cx->codec_context->channels;
-    cx->duration = cx->stream->duration * av_q2d (cx->stream->time_base);
+    if (cx->stream->duration != AV_NOPTS_VALUE) {
+        cx->duration = cx->stream->duration * av_q2d (cx->stream->time_base);
+    } else if (cx->format_context->duration != AV_NOPTS_VALUE) {
+        cx->duration = cx->format_context->duration / (double) AV_TIME_BASE;
+    } else {
+        cx->error = _("Unknown duration");
+        return cx;
+    }
     if (cx->channels <= 0) {
         cx->error = _("No audio channels");
         return cx;
