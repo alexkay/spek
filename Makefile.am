@@ -32,3 +32,9 @@ DISTCLEANFILES = \
 	intltool-extract \
 	intltool-merge \
 	intltool-update
+
+.PHONY: upload
+
+upload:
+	rsync -avhz web/nginx.conf server:spek
+	rsync -avhz --delete --exclude="*.in" --exclude="nginx.conf" web/ server:spek/static

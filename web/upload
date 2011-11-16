@@ -1,3 +1,0 @@
-#!/bin/sh
-
-appcfg.py --email=alexander@kojevnikov.com update `dirname $0`
