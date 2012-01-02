@@ -18,6 +18,7 @@
 
 #include <glib.h>
 #include <glib/gi18n.h>
+#include <libavutil/mathematics.h>
 
 #include "spek-audio.h"
 
