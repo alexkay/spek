@@ -32,6 +32,7 @@ namespace Spek {
             {"it", "Italiano"},
             {"nl", "Nederlands"},
             {"pl", "Polski"},
+            {"pt_BR", "Português brasileiro"},
             {"ru", "Русский"},
             {"sv", "Svenska"},
             {"uk", "Українська"}
