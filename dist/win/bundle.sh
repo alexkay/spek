@@ -51,8 +51,8 @@ do
   rm $name
 done
 
-# libav configure options:
-# ./configure --disable-static --enable-shared --enable-gpl --enable-version3 --disable-doc --disable-ffmpeg --disable-ffplay --disable-ffprobe --disable-ffserver --disable-avdevice --disable-swscale --enable-pthreads --disable-encoders --disable-muxers --disable-devices --disable-filters --enable-memalign-hack --enable-runtime-cpudetect --disable-debug --prefix=/usr
+# ffmpeg configure options:
+# ./configure --disable-static --enable-shared --enable-gpl --enable-version3 --disable-doc --disable-ffmpeg --disable-ffplay --disable-ffprobe --disable-ffserver --disable-avdevice --disable-swscale --disable-postproc --enable-pthreads --disable-encoders --disable-muxers --disable-devices --disable-filters --enable-memalign-hack --enable-runtime-cpudetect --disable-debug --prefix=/usr
 
 cp /usr/bin/avcodec-53.dll bin/
 cp /usr/bin/avformat-53.dll bin/
