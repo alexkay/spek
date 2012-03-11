@@ -5,7 +5,7 @@ Maintainer: Alexander Kojevnikov <alexander@kojevnikov.com>
 Build-Depends: debhelper (>= 7.0.50~),
                cdbs,
                autotools-dev,
-               valac-0.12,
+               valac-0.14,
                intltool (>= 0.35),
                libavcodec-dev (>= 4:0.6),
                libavformat-dev (>= 4:0.6),
@@ -14,7 +14,7 @@ Build-Depends: debhelper (>= 7.0.50~),
                libglib2.0-dev,
                libgtk2.0-dev (>= 2.18.0),
                libpango1.0-dev
-Standards-Version: 3.9.2
+Standards-Version: 3.9.3
 Homepage: http://www.spek-project.org/
 Vcs-Git: git://github.com/alexkay/spek.git
 Vcs-Browser: https://github.com/alexkay/spek

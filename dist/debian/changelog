@@ -1,3 +1,10 @@
+spek (0.7-3) unstable; urgency=low
+
+  * Require valac 0.14 (Closes: #663319)
+  * Bump Standards-Version
+
+ -- Alexander Kojevnikov <alexander@kojevnikov.com>  Sun, 11 Mar 2012 13:24:24 +0800
+
 spek (0.7-2) unstable; urgency=low
 
   * Fix Vala build (Closes: #638456)
