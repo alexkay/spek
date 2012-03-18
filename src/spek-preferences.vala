@@ -20,10 +20,13 @@ namespace Spek {
     public class Preferences {
         private KeyFile key_file;
         private string file_name;
+        private bool can_save = true;
 
         private Preferences () {
             file_name = Path.build_filename (Environment.get_user_config_dir (), "spek");
-            DirUtils.create_with_parents (file_name, 0755);
+            if (DirUtils.create_with_parents (file_name, 0755) != 0) {
+                this.can_save = false;
+            }
             file_name = Path.build_filename (file_name, "preferences");
             this.key_file = new KeyFile ();
             try {
@@ -48,6 +51,9 @@ namespace Spek {
         }
 
         public void save () {
+            if (!can_save) {
+                return;
+            }
             var output = FileStream.open (file_name, "w+");
             if (output != null) {
                 output.puts (key_file.to_data ());
