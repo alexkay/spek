@@ -1,16 +1,10 @@
-spek (0.7-4) unstable; urgency=low
+spek (0.7-3) unstable; urgency=low
 
-  * Require valac >= 0.12
+  * Require valac >= 0.12 (Closes: #663319)
+  * Bump Standards-Version
   * Fix the watch file
 
  -- Alexander Kojevnikov <alexander@kojevnikov.com>  Wed, 28 Mar 2012 10:48:01 +0800
-
-spek (0.7-3) unstable; urgency=low
-
-  * Require valac 0.14 (Closes: #663319)
-  * Bump Standards-Version
-
- -- Alexander Kojevnikov <alexander@kojevnikov.com>  Sun, 11 Mar 2012 13:24:24 +0800
 
 spek (0.7-2) unstable; urgency=low
 
