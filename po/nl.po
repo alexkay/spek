@@ -1,16 +1,20 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Alexander Kojevnikov <alexander@kojevnikov.com>, 2011.
+# theguyofdoom <thom.venividivici@gmail.com>, 2011.
+#   <thom.venividivici@gmail.com>, 2012.
+# Wouter Bolsterlee <wbolster@gnome.org>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
-"POT-Creation-Date: 2011-04-20 21:24+0800\n"
-"PO-Revision-Date: 2011-04-24 00:26+0000\n"
-"Last-Translator: alexkay <alexander@kojevnikov.com>\n"
-"Language-Team: Dutch <>\n"
+"POT-Creation-Date: 2011-04-24 07:59+0800\n"
+"PO-Revision-Date: 2012-04-11 21:33+0000\n"
+"Last-Translator: theguyofdoom <thom.venividivici@gmail.com>\n"
+"Language-Team: Dutch (http://www.transifex.com/projects/p/spek/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -92,26 +96,26 @@ msgstr[1] "%d kanalen"
 msgid "%s: %s"
 msgstr "%s: %s"
 
-#: ../src/spek-preferences-dialog.vala:24
+#: ../src/spek-preferences-dialog.vala:39
 msgid "Preferences"
 msgstr "Einstellungen"
 
+#: ../src/spek-preferences-dialog.vala:43
+msgid "(system default)"
+msgstr "(systeem standaard)"
+
 #. TRANSLATORS: The name of a section in the Preferences dialog.
-#: ../src/spek-preferences-dialog.vala:35
+#: ../src/spek-preferences-dialog.vala:51
 msgid "General"
 msgstr "Allgemein"
 
-#: ../src/spek-preferences-dialog.vala:45
+#: ../src/spek-preferences-dialog.vala:61
 msgid "_Language:"
 msgstr "_Taal"
 
-#: ../src/spek-preferences-dialog.vala:62
+#: ../src/spek-preferences-dialog.vala:78
 msgid "Check for _updates"
-msgstr ""
-
-#: ../src/spek-preferences.vala:40
-msgid "(system default)"
-msgstr "(systeem standaard)"
+msgstr "Controleer op _updates"
 
 #. TRANSLATORS: keep "00" unchanged, it's used to calc the text width
 #: ../src/spek-spectrogram.vala:200
@@ -153,9 +157,7 @@ msgstr "Spek - Akoestische spectrumanalyse"
 msgid ""
 "A new version of Spek is available on <a href=\"http://www.spek-"
 "project.org\">www.spek-project.org</a>"
-msgstr ""
-"Een nieuwe versie van Spek is beschikbaar op <a href=\"http://www.spek-"
-"project.org\">www.spek-project.org</a>"
+msgstr "Een nieuwe versie van Spek is beschikbaar op <a href=\"http://www.spek-project.org\">www.spek-project.org</a>"
 
 #: ../src/spek-window.vala:106
 msgid "All files"
@@ -188,43 +190,38 @@ msgstr "Spectrogram opslaan"
 msgid "Untitled"
 msgstr "Naamloos"
 
-#: ../src/spek-window.vala:250
+#: ../src/spek-window.vala:251
 msgid "Copyright © 2010-2011 Alexander Kojevnikov"
 msgstr "Copyright © 2010–2011 Alexander Kojevnikov"
 
-#: ../src/spek-window.vala:255
+#: ../src/spek-window.vala:256
 msgid "Spek Website"
 msgstr "Spek-website"
 
-#: ../src/spek-window.vala:264
+#: ../src/spek-window.vala:265
 msgid "translator-credits"
-msgstr ""
-"DutchDude (TheGuyOfDoom)\n"
-"Wouter Bolsterlee\n"
-"Alexander Kojevnikov"
+msgstr "DutchDude (TheGuyOfDoom)\nWouter Bolsterlee\nAlexander Kojevnikov"
 
 #: ../src/spek.vala:25
 msgid "Display the version and exit"
 msgstr "Versie tonen en afsluiten"
 
-#: ../src/spek.vala:43
+#: ../src/spek.vala:42
 msgid "[FILE]"
 msgstr "[BESTAND]"
 
-#: ../src/spek.vala:47
+#: ../src/spek.vala:46
 #, c-format
 msgid "Run `%s --help` to see a full list of available command line options.\n"
-msgstr ""
-"Gebruik ‘%s --help’ om de volledige lijst met opties voor de opdrachtregel "
-"te tonen.\n"
+msgstr "Gebruik ‘%s --help’ om de volledige lijst met opties voor de opdrachtregel te tonen.\n"
 
 #. TRANSLATORS: first %s is the package name, second %s is the package
 #. version.
-#: ../src/spek.vala:53
+#: ../src/spek.vala:52
 #, c-format
 msgid "%s version %s\n"
 msgstr "%s versie %s\n"
 
-#: ../src/spek.vala:58
+#: ../src/spek.vala:57
 msgid "Specify a single file\n"
 msgstr "Geef een enkel bestand op\n"
