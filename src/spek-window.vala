@@ -259,6 +259,7 @@ namespace Spek {
             } catch (Error e) {
                 dlg.logo_icon_name = "spek";
             }
+            // TRANSLATORS: Add your name here
             dlg.translator_credits = _("translator-credits");
             dlg.set_transient_for (this);
             dlg.destroy_with_parent = true;
