@@ -61,7 +61,7 @@ cp /usr/bin/avutil-51.dll bin/
 # Clean up
 mv bin/spek.exe ../
 mkdir share/locale_
-mv share/locale/{cs,de,es,fr,it,ja,nl,pl,pt_BR,ru,sv,uk,zh_CN,zh_TW} share/locale_/
+mv share/locale/{cs,de,eo,es,fr,it,ja,nl,pl,pt_BR,ru,sv,uk,zh_CN,zh_TW} share/locale_/
 rm -fr share/locale
 mv share/locale_ share/locale
 rm -fr doc

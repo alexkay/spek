@@ -27,6 +27,7 @@ namespace Spek {
             {"cs", "Čeština"},
             {"de", "Deutsch"},
             {"en", "English"},
+            {"eo", "Esperanto"},
             {"es", "Español"},
             {"fr", "Français"},
             {"it", "Italiano"},
