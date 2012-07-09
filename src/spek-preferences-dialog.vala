@@ -36,7 +36,9 @@ namespace Spek {
             {"pt_BR", "Português brasileiro"},
             {"ru", "Русский"},
             {"sv", "Svenska"},
-            {"uk", "Українська"}
+            {"uk", "Українська"},
+            {"zh_CN", "中文(简体)"},
+            {"zh_TW", "中文(台灣)"}
         };
 
         public PreferencesDialog () {
