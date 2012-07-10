@@ -23,9 +23,8 @@
 #include "spek-audio.h"
 
 void spek_audio_init () {
-    avcodec_init ();
     /* TODO: register only audio decoders */
-    av_register_all ();
+    avcodec_register_all ();
 }
 
 SpekAudioContext * spek_audio_open (const gchar *file_name) {
@@ -42,14 +41,14 @@ SpekAudioContext * spek_audio_open (const gchar *file_name) {
     cx->short_name = g_win32_locale_filename_from_utf8 (file_name);
 #endif
 
-    if (av_open_input_file (&cx->format_context, file_name, NULL, 0, NULL) != 0) {
+    if (avformat_open_input (&cx->format_context, file_name, NULL, NULL) != 0) {
         if (!cx->short_name ||
-            av_open_input_file (&cx->format_context, cx->short_name, NULL, 0, NULL) != 0 ) {
+            avformat_open_input (&cx->format_context, cx->short_name, NULL, NULL) != 0 ) {
             cx->error = _("Cannot open input file");
             return cx;
         }
     }
-    if (av_find_stream_info (cx->format_context) < 0) {
+    if (avformat_find_stream_info (cx->format_context, NULL) < 0) {
         /* 24-bit APE returns an error but parses the stream info just fine */
         if (cx->format_context->nb_streams <= 0) {
             cx->error = _("Cannot find stream info");
@@ -96,7 +95,7 @@ SpekAudioContext * spek_audio_open (const gchar *file_name) {
         cx->error = _("No audio channels");
         return cx;
     }
-    if (avcodec_open (cx->codec_context, cx->codec) < 0) {
+    if (avcodec_open2 (cx->codec_context, cx->codec, NULL) < 0) {
         cx->error = _("Cannot open decoder");
         return cx;
     }
@@ -211,7 +210,7 @@ void spek_audio_close (SpekAudioContext *cx) {
         avcodec_close (cx->codec_context);
     }
     if (cx->format_context != NULL) {
-        av_close_input_file (cx->format_context);
+        avformat_close_input (&cx->format_context);
     }
     g_free (cx);
 }
