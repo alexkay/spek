@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
 "POT-Creation-Date: 2011-04-24 07:59+0800\n"
-"PO-Revision-Date: 2012-04-09 01:39+0000\n"
+"PO-Revision-Date: 2012-07-09 02:53+0000\n"
 "Last-Translator: Shibing Huang <mr.shibing@mac.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/spek/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -195,7 +195,7 @@ msgstr "Spek官方"
 
 #: ../src/spek-window.vala:265
 msgid "translator-credits"
-msgstr "翻译者名单"
+msgstr "Shibing Huang"
 
 #: ../src/spek.vala:25
 msgid "Display the version and exit"
