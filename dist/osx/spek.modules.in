@@ -33,7 +33,7 @@
     </autotools>
 
     <autotools id="spek" autogen-sh="configure">
-        <branch module="spek-@VERSION@.tar.bz2" version="@VERSION@" repo="spek"/>
+        <branch module="spek-@VERSION@.tar.xz" version="@VERSION@" repo="spek"/>
         <dependencies>
             <dep package="meta-gtk-osx-bootstrap"/>
             <dep package="meta-gtk-osx-core"/>

@@ -1,7 +1,6 @@
 *~
 aclocal.m4
 autom4te.cache
-*.bz2
 compile
 config.*
 configure
@@ -45,3 +44,4 @@ stamp-h1
 test*
 web/version
 xmldocs.make
+*.xz
