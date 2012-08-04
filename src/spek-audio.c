@@ -24,7 +24,7 @@
 
 void spek_audio_init () {
     /* TODO: register only audio decoders */
-    avcodec_register_all ();
+    av_register_all ();
 }
 
 SpekAudioContext * spek_audio_open (const gchar *file_name) {
@@ -210,7 +210,7 @@ void spek_audio_close (SpekAudioContext *cx) {
         avcodec_close (cx->codec_context);
     }
     if (cx->format_context != NULL) {
-        avformat_close_input (&cx->format_context);
+        av_close_input_file (cx->format_context);
     }
     g_free (cx);
 }
