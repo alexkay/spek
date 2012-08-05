@@ -11,12 +11,32 @@ AC_PROG_CXX
 AC_PROG_INSTALL
 IT_PROG_INTLTOOL([0.35])
 
+AC_CHECK_LIB(m, log10)
+
 pkg_modules="libavformat >= 52.111 libavcodec >= 52.123 libavutil"
 PKG_CHECK_MODULES(SPEK, [$pkg_modules])
 AC_SUBST(SPEK_CFLAGS)
 AC_SUBST(SPEK_LIBS)
 
-AC_CHECK_LIB(m, log10)
+AM_OPTIONS_WXCONFIG
+reqwx=2.8.0
+AM_PATH_WXCONFIG($reqwx, wxWin=1)
+if test "$wxWin" != 1; then
+	AC_MSG_ERROR([
+		wxWidgets must be installed on your system.
+
+		Please check that wx-config is in path, the directory
+		where wxWidgets libraries are installed (returned by
+		'wx-config --libs' or 'wx-config --static --libs' command)
+		is in LD_LIBRARY_PATH or equivalent variable and
+		wxWidgets version is $reqwx or above.
+		])
+fi
+
+CPPFLAGS="$CPPFLAGS $WX_CPPFLAGS"
+CXXFLAGS="$CXXFLAGS $WX_CXXFLAGS_ONLY"
+CFLAGS="$CFLAGS $WX_CFLAGS_ONLY"
+LIBS="$LIBS $WX_LIBS"
 
 GETTEXT_PACKAGE=spek
 AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["$GETTEXT_PACKAGE"], [Gettext Package])
