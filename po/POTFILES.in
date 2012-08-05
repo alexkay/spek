@@ -1,7 +1,6 @@
 [encoding: UTF-8]
 data/spek.desktop.in.in
 src/spek-audio.c
-src/spek-message-bar.vala
 src/spek-pipeline.vala
 src/spek-preferences-dialog.vala
 src/spek-preferences.vala

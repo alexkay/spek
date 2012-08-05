@@ -23,7 +23,7 @@ namespace Spek {
     public class Window : Gtk.Window {
 
         private UIManager ui;
-        private MessageBar message_bar;
+        private InfoBar info_bar;
         private Spectrogram spectrogram;
         private string description;
         private string cur_dir;
@@ -97,7 +97,18 @@ namespace Spek {
             ((ToolItem) ui.get_widget ("/ToolBar/FileSave")).is_important = true;
             ((ToolItem) ui.get_widget ("/ToolBar/HelpAbout")).is_important = true;
 
-            message_bar = new MessageBar (_("A new version of Spek is available on <a href=\"http://www.spek-project.org\">www.spek-project.org</a>"));
+            info_bar = new InfoBar.with_buttons (Stock.OK, ResponseType.OK);
+            var label = new Label (null);
+            label.use_markup = true;
+            label.set_markup (_("A new version of Spek is available on <a href=\"http://www.spek-project.org\">www.spek-project.org</a>"));
+            label.ellipsize = Pango.EllipsizeMode.END;
+            label.xalign = 0f;
+            label.activate_link.connect (uri => { Platform.show_uri (uri); return true; });
+            label.show();
+            var content_area = (Container) info_bar.get_content_area();
+            content_area.add(label);
+            info_bar.message_type = MessageType.INFO;
+            info_bar.response.connect(() => info_bar.hide());
 
             spectrogram = new Spectrogram ();
             cur_dir = Environment.get_home_dir ();
@@ -117,7 +128,7 @@ namespace Spek {
             var vbox = new VBox (false, 0);
             vbox.pack_start (menubar, false, true, 0);
             vbox.pack_start (toolbar, false, true, 0);
-            vbox.pack_start (message_bar, false, true, 0);
+            vbox.pack_start (info_bar, false, true, 0);
             vbox.pack_start (spectrogram, true, true, 0);
             add (vbox);
             menubar.show_all ();
@@ -330,7 +341,7 @@ namespace Spek {
             }
 
             if (version != null && version > Config.PACKAGE_VERSION) {
-                Idle.add (() => { message_bar.show_all (); return false; });
+                Idle.add (() => { info_bar.show_all (); return false; });
             }
 
             // Update the preferences.

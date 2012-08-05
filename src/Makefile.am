@@ -4,7 +4,6 @@ spek_SOURCES = \
 	spek.vala \
 	spek-audio.c \
 	spek-fft.c \
-	spek-message-bar.vala \
 	spek-pipeline.vala \
 	spek-platform.c \
 	spek-preferences.vala \
