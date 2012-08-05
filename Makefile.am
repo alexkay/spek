@@ -1,11 +1,8 @@
-# Makefile.am
-
 SUBDIRS = \
 	data \
 	man \
 	po \
-	src \
-	vapi
+	src
 
 EXTRA_DIST = \
 	intltool-extract.in \
