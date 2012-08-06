@@ -1,6 +1,6 @@
 /* spek-fft.c
  *
- * Copyright (C) 2010  Alexander Kojevnikov <alexander@kojevnikov.com>
+ * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
  * Spek is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,29 +21,31 @@
 
 #include "spek-fft.h"
 
-SpekFftPlan * spek_fft_plan_new (gint n, gint threshold) {
-    gint bits;
-    SpekFftPlan *p = g_new0 (SpekFftPlan, 1);
-    p->input = av_mallocz (sizeof (gfloat) * n);
-    p->output = av_mallocz (sizeof (gfloat) * (n / 2 + 1));
+struct spek_fft_plan * spek_fft_plan_new(int n, int threshold)
+{
+    int bits;
+    struct spek_fft_plan *p = malloc(sizeof(struct spek_fft_plan));
+    p->input = av_mallocz(sizeof(float) * n);
+    p->output = av_mallocz(sizeof(float) * (n / 2 + 1));
     p->threshold = threshold;
-    for (bits = 0; n; n >>= 1, bits++);
+    for(bits = 0; n; n >>= 1, ++bits);
     p->n = 1 << --bits;
-    p->cx = av_rdft_init (bits, DFT_R2C);
+    p->cx = av_rdft_init(bits, DFT_R2C);
     return p;
 }
 
-void spek_fft_execute (SpekFftPlan *p) {
+void spek_fft_execute(struct spek_fft_plan *p)
+{
     int i;
     int n = p->n;
 
-    av_rdft_calc (p->cx, p->input);
+    av_rdft_calc(p->cx, p->input);
 
-    /* Calculate magnitudes */
+    // Calculate magnitudes.
     p->output[0] = p->input[0] * p->input[0] / (n * n);
     p->output[n / 2] = p->input[1] * p->input[1] / (n * n);
     for (i = 1; i < n / 2; i++) {
-        gfloat val;
+        float val;
         val = p->input[i * 2] * p->input[i * 2] + p->input[i * 2 + 1] * p->input[i * 2 + 1];
         val /= n * n;
         val = 10.0 * log10f (val);
@@ -51,9 +53,10 @@ void spek_fft_execute (SpekFftPlan *p) {
     }
 }
 
-void spek_fft_destroy (SpekFftPlan *p) {
-    av_rdft_end (p->cx);
-    av_free (p->input);
-    av_free (p->output);
-    g_free (p);
+void spek_fft_destroy(struct spek_fft_plan *p)
+{
+    av_rdft_end(p->cx);
+    av_free(p->input);
+    av_free(p->output);
+    free(p);
 }

@@ -1,6 +1,6 @@
 /* spek-fft.h
  *
- * Copyright (C) 2010  Alexander Kojevnikov <alexander@kojevnikov.com>
+ * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
  * Spek is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,30 +16,37 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __SPEK_FFT_H__
-#define __SPEK_FFT_H__
+#ifndef SPEK_FFT_H__
+#define SPEK_FFT_H__
 
-#include <glib.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <libavcodec/avfft.h>
 
-typedef struct {
-    /* Internal data */
+struct spek_fft_plan {
+    // Internal data.
     RDFTContext *cx;
-    gint n;
-    gint threshold;
+    int n;
+    int threshold;
 
-    /* Exposed properties */
-    gfloat *input;
-    gfloat *output;
-} SpekFftPlan;
+    // Exposed properties.
+    float *input;
+    float *output;
+};
 
-/* Allocate buffers and create a new FFT plan */
-SpekFftPlan * spek_fft_plan_new (gint n, gint threshold);
+// Allocate buffers and create a new FFT plan.
+struct spek_fft_plan * spek_fft_plan_new(int n, int threshold);
 
-/* Execute the FFT on plan->input */
-void spek_fft_execute (SpekFftPlan *p);
+// Execute the FFT on plan->input.
+void spek_fft_execute(struct spek_fft_plan *p);
 
-/* Destroy the plan and de-allocate buffers */
-void spek_fft_destroy (SpekFftPlan *p);
+// Destroy the plan and de-allocate buffers.
+void spek_fft_delete(struct spek_fft_plan *p);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
