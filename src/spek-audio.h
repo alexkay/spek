@@ -16,62 +16,70 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __SPEK_AUDIO_H__
-#define __SPEK_AUDIO_H__
+#ifndef SPEK_AUDIO_H_
+#define SPEK_AUDIO_H_
 
-#include <glib.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <stdbool.h>
+#include <stdint.h>
+
 #include <libavformat/avformat.h>
 #include <libavcodec/avcodec.h>
 
-typedef struct {
-    /* Internal data */
-    gchar *short_name;
+struct spek_audio_context
+{
+    // Internal data.
+    char *short_name;
     AVFormatContext *format_context;
-    gint audio_stream;
+    int audio_stream;
     AVCodecContext *codec_context;
     AVStream *stream;
     AVCodec *codec;
-    gint buffer_size;
+    int buffer_size;
     AVPacket *packet;
-    gint offset;
+    int offset;
 
-    /* Exposed properties */
-    gchar *file_name;
-    gchar *codec_name;
-    gchar *error;
-    gint bit_rate;
-    gint sample_rate;
-    gint bits_per_sample;
-    gint width; /* number of bits used to store a sample */
-    gboolean fp; /* floating-point sample representation */
-    gint channels;
-    gdouble duration;
-    guint8 *buffer;
-    gint64 frames_per_interval;
-    gint64 error_per_interval;
-    gint64 error_base;
-} SpekAudioContext;
+    // Exposed properties.
+    char *file_name;
+    char *codec_name;
+    char *error;
+    int bit_rate;
+    int sample_rate;
+    int bits_per_sample;
+    int width; // number of bits used to store a sample
+    bool fp; // floating-point sample representation
+    int channels;
+    double duration;
+    uint8_t *buffer;
+    int64_t frames_per_interval;
+    int64_t error_per_interval;
+    int64_t error_base;
+};
 
-/* Initialise FFmpeg, should be called once on start up */
-void spek_audio_init ();
+// Initialise FFmpeg, should be called once on start up.
+void spek_audio_init();
 
-/* Open the file, check if it has an audio stream which can be decoded.
- * On error, initialises the `error` field in the returned context.
- */
-SpekAudioContext * spek_audio_open (const gchar *file_name);
+// Open the file, check if it has an audio stream which can be decoded.
+// On error, initialises the `error` field in the returned context.
+struct spek_audio_context * spek_audio_open(const char *file_name);
 
-/* Prepare the context for reading audio samples. */
-void spek_audio_start (SpekAudioContext *cx, gint samples);
+// Prepare the context for reading audio samples.
+void spek_audio_start(struct spek_audio_context *cx, int samples);
 
-/* Read and decode the opened audio stream.
- * Returns -1 on error, 0 if there's nothing left to read
- * or the number of bytes decoded into the buffer.
- */
-gint spek_audio_read (SpekAudioContext *cx);
+// Read and decode the opened audio stream.
+// Returns -1 on error, 0 if there's nothing left to read
+// or the number of bytes decoded into the buffer.
+int spek_audio_read(struct spek_audio_context *cx);
 
-/* Closes the file opened with spek_audio_open,
- * frees all allocated buffers and the context
- */
-void spek_audio_close (SpekAudioContext *cx);
+// Closes the file opened with spek_audio_open,
+// frees all allocated buffers and the context
+void spek_audio_close(struct spek_audio_context *cx);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

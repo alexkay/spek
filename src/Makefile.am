@@ -2,6 +2,8 @@ bin_PROGRAMS = spek
 
 spek_SOURCES = \
 	spek.cc \
+	spek-audio.c \
+	spek-audio.h \
 	spek-fft.c \
 	spek-fft.h \
 	spek-platform.cc \
