@@ -1,6 +1,6 @@
-/* spek.vala
+/* spek-window.hh
  *
- * Copyright (C) 2010-2011  Alexander Kojevnikov <alexander@kojevnikov.com>
+ * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
  * Spek is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,21 +16,22 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef SPEK_WINDOW_HH_
+#define SPEK_WINDOW_HH_
+
 #include <wx/wx.h>
 
-#include "spek-window.hh"
-
-class Spek: public wxApp
+class SpekWindow : public wxFrame
 {
-    virtual bool OnInit();
+public:
+    SpekWindow(const wxString& title, const wxPoint& pos, const wxSize& size);
+
+protected:
+    void OnQuit(wxCommandEvent& event);
+    void OnAbout(wxCommandEvent& event);
+
+private:
+    DECLARE_EVENT_TABLE()
 };
 
-IMPLEMENT_APP(Spek)
-
-bool Spek::OnInit()
-{
-    SpekWindow *window = new SpekWindow(wxT("Hello World"), wxPoint(50,50), wxSize(450,340));
-    window->Show(true);
-    SetTopWindow(window);
-    return true;
-}
+#endif
