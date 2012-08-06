@@ -2,12 +2,31 @@ AC_INIT([spek],[0.7])
 AC_CONFIG_SRCDIR([src/spek.cc])
 AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([1.11.1 foreign no-dist-gzip dist-xz])
+AM_MAINTAINER_MODE([yes])
 AM_SILENT_RULES([yes])
 
 AC_PROG_CC_C99
 AC_PROG_CXX
 AC_PROG_INSTALL
 IT_PROG_INTLTOOL([0.40.0])
+
+AC_CANONICAL_HOST
+AC_MSG_CHECKING([the OS])
+AS_CASE([$host],
+	[*-*-mingw*], [
+		os="WIN"
+		AC_DEFINE([OS_WIN], [1], [Platform])
+	],
+	[*-*-darwin*], [
+		os="OSX"
+		AC_DEFINE([OS_OSX], [1], [Platform])
+	],
+	[*], [
+		os="UNIX"
+		AC_DEFINE([OS_UNIX], [1], [Platform])
+	]
+)
+AC_MSG_RESULT([$os])
 
 AC_CHECK_LIB(m, log10)
 
