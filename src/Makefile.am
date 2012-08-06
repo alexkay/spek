@@ -4,6 +4,8 @@ spek_SOURCES = \
 	spek.cc \
 	spek-fft.c \
 	spek-fft.h \
+	spek-platform.cc \
+	spek-platform.h \
 	spek-window.cc \
 	spek-window.hh
 

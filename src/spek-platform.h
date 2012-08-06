@@ -1,6 +1,6 @@
 /* spek-platform.h
  *
- * Copyright (C) 2010,2011  Alexander Kojevnikov <alexander@kojevnikov.com>
+ * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
  * Spek is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,30 +16,18 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __SPEK_PLATFORM_H__
-#define __SPEK_PLATFORM_H__
+#ifndef SPEK_PLATFORM_H_
+#define SPEK_PLATFORM_H_
 
-#include <gtk/gtk.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-/* Platform-specific initialisation */
-void spek_platform_init ();
+// Returns a 8.3 version of the UTF8-encoded path on Windows and NULL on other platforms.
+char * spek_platform_short_path (const char *path);
 
-/* Convert from UTF-16 to UTF-8 when running on Windows */
-void spek_platform_fix_args (gchar **argv, gint argc);
-
-/* OSX has its own approach to menus and accelerators */
-void spek_platform_fix_ui (GtkUIManager *ui);
-
-/* Platform-specific locale directory */
-gchar *spek_platform_locale_dir ();
-
-/* Open a link in the browser */
-void spek_platform_show_uri (const gchar *uri);
-
-/* Read a line from a uri */
-gchar *spek_platform_read_line (const gchar *uri);
-
-/* Fonts are smaller on OS X */
-gdouble spek_platform_get_font_scale ();
+#ifdef __cplusplus
+}
+#endif
 
 #endif
