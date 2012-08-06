@@ -23,12 +23,15 @@
 
 struct spek_fft_plan * spek_fft_plan_new(int n, int threshold)
 {
-    int bits;
     struct spek_fft_plan *p = malloc(sizeof(struct spek_fft_plan));
     p->input = av_mallocz(sizeof(float) * n);
     p->output = av_mallocz(sizeof(float) * (n / 2 + 1));
     p->threshold = threshold;
-    for(bits = 0; n; n >>= 1, ++bits);
+    int bits = 0;
+    while (n) {
+        n >>= 1;
+        ++bits;
+    }
     p->n = 1 << --bits;
     p->cx = av_rdft_init(bits, DFT_R2C);
     return p;
@@ -36,17 +39,16 @@ struct spek_fft_plan * spek_fft_plan_new(int n, int threshold)
 
 void spek_fft_execute(struct spek_fft_plan *p)
 {
-    int i;
-    int n = p->n;
-
     av_rdft_calc(p->cx, p->input);
 
     // Calculate magnitudes.
+    int n = p->n;
     p->output[0] = p->input[0] * p->input[0] / (n * n);
     p->output[n / 2] = p->input[1] * p->input[1] / (n * n);
-    for (i = 1; i < n / 2; i++) {
-        float val;
-        val = p->input[i * 2] * p->input[i * 2] + p->input[i * 2 + 1] * p->input[i * 2 + 1];
+    for (int i = 1; i < n / 2; i++) {
+        float val =
+            p->input[i * 2] * p->input[i * 2] +
+            p->input[i * 2 + 1] * p->input[i * 2 + 1];
         val /= n * n;
         val = 10.0 * log10f (val);
         p->output[i] = val < p->threshold ? p->threshold : val;

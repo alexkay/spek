@@ -25,7 +25,8 @@ extern "C" {
 
 #include <libavcodec/avfft.h>
 
-struct spek_fft_plan {
+struct spek_fft_plan
+{
     // Internal data.
     RDFTContext *cx;
     int n;
