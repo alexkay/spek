@@ -1,7 +1,9 @@
 bin_PROGRAMS = spek
 
 spek_SOURCES = \
-	spek.cc
+	spek.cc \
+	spek-window.h \
+	spek-window.cc
 
 spek_CPPFLAGS = \
 	-include config.h \
