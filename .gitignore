@@ -32,15 +32,10 @@ po/.intltool-merge-cache
 po/POTFILES
 po/stamp-it
 samples/
-src/*.c
 src/*.o
 src/spek
-!src/spek-audio.c
-!src/spek-fft.c
-!src/spek-platform.c
 src/*.stamp
 stamp-h1
-.svn
 test*
 web/version
 xmldocs.make
