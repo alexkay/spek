@@ -7,7 +7,9 @@ spek_SOURCES = \
 	spek-fft.c \
 	spek-fft.h \
 	spek-platform.cc \
-	spek-platform.h \
+	spek-platform.hh \
+	spek-preferences.cc \
+	spek-preferences.hh \
 	spek-window.cc \
 	spek-window.hh
 

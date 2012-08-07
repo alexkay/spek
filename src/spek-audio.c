@@ -20,7 +20,7 @@
 
 #include <libavutil/mathematics.h>
 
-#include "spek-platform.h"
+#include "spek-platform.hh"
 
 #include "spek-audio.h"
 

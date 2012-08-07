@@ -1,4 +1,4 @@
-/* spek-platform.cc
+/* spek-platform.hh
  *
  * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
@@ -16,32 +16,27 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <cstring>
+#ifndef SPEK_PLATFORM_HH_
+#define SPEK_PLATFORM_HH_
 
-#include <wx/filename.h>
-#include <wx/stdpaths.h>
-#include <wx/utils.h>
+#ifdef __cplusplus
+#include <wx/string.h>
 
-#include "spek-platform.hh"
-
-wxString SpekPlatform::ConfigPath(const wxString& app_name)
+class SpekPlatform
 {
-#ifdef OS_WIN
-    wxFileName file_name(wxStandardPaths::Get().GetUserConfigDir());
-#else
-    wxFileName file_name(wxGetHomeDir());
-    file_name.AppendDir(wxT(".config"));
-#endif
-    file_name.AppendDir(app_name);
-    file_name.SetFullName(wxT("preferences"));
-    return file_name.GetFullPath();
-}
+public:
+    // Not quite XDG-compatible, but close enough.
+    static wxString ConfigPath(const wxString& app_name);
+};
 
-char * spek_platform_short_path(const char *path)
-{
-#ifdef OS_WIN
-    wxFileName file_name(wxString(path, wxConvUTF8));
-    return strdup(file_name.GetShortPath().char_str(wxConvFile));
+extern "C" {
 #endif
-    return NULL;
+
+// Returns a 8.3 version of the UTF8-encoded path on Windows and NULL on other platforms.
+char * spek_platform_short_path(const char *path);
+
+#ifdef __cplusplus
 }
+#endif
+
+#endif

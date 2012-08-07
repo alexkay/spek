@@ -1,6 +1,6 @@
-/* spek-platform.h
+/* spek-preferences.hh
  *
- * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
+ * Copyright (C) 2011-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
  * Spek is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,22 +16,29 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SPEK_PLATFORM_H_
-#define SPEK_PLATFORM_H_
+#ifndef SPEK_PREFERENCES_HH_
+#define SPEK_PREFERENCES_HH_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include <wx/fileconf.h>
 
-// Returns a 8.3 version of the UTF8-encoded path on Windows and NULL on other platforms.
-char * spek_platform_short_path(const char *path);
+class SpekPreferences
+{
+public:
+    static SpekPreferences& Get();
 
-// Not quite XDG-compatible, but close enough.
-// TODO: implement XDG spec in wxWidgets.
-char * spek_platform_config_dir(const char *app_name); 
+    bool GetCheckUpdate();
+    void SetCheckUpdate(bool value);
+    long GetLastUpdate();
+    void SetLastUpdate(long value);
+    wxString GetLanguage();
+    void SetLanguage(const wxString& value);
 
-#ifdef __cplusplus
-}
-#endif
+private:
+    SpekPreferences();
+    SpekPreferences(const SpekPreferences&);
+    void operator=(const SpekPreferences&);
+
+    wxFileConfig *config;
+};
 
 #endif
