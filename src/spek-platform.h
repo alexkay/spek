@@ -24,7 +24,11 @@ extern "C" {
 #endif
 
 // Returns a 8.3 version of the UTF8-encoded path on Windows and NULL on other platforms.
-char * spek_platform_short_path (const char *path);
+char * spek_platform_short_path(const char *path);
+
+// Not quite XDG-compatible, but close enough.
+// TODO: implement XDG spec in wxWidgets.
+char * spek_platform_config_dir(const char *app_name); 
 
 #ifdef __cplusplus
 }

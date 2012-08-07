@@ -19,6 +19,8 @@
 #include <cstring>
 
 #include <wx/filename.h>
+#include <wx/stdpaths.h>
+#include <wx/utils.h>
 
 #include "spek-platform.h"
 
@@ -31,3 +33,15 @@ char * spek_platform_short_path(const char *path)
     return NULL;
 }
 
+char * spek_platform_config_dir(const char *app_name)
+{
+#ifdef OS_WIN
+    wxFileName file_name(wxStandardPaths::Get().GetUserConfigDir());
+#else
+    wxFileName file_name(wxGetHomeDir());
+    file_name.AppendDir(wxT(".config"));
+#endif
+    file_name.AppendDir(wxString(app_name, wxConvUTF8));
+    file_name.SetFullName(wxT("preferences"));
+    return strdup(file_name.GetFullPath().char_str(wxConvUTF8));
+}
