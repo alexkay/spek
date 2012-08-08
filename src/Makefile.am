@@ -15,17 +15,17 @@ spek_SOURCES = \
 
 spek_CPPFLAGS = \
 	-include config.h \
-	$(SPEK_CFLAGS) \
 	-DLOCALEDIR=\""$(localedir)"\" \
 	-DPKGDATADIR=\""$(pkgdatadir)"\" \
 	-DPKGLIBDIR=\""$(pkglibdir)"\"
 
 spek_CFLAGS = \
+	$(SPEK_CFLAGS) \
 	@CFLAGS@
 
 spek_CXXFLAGS = \
 	@CXXFLAGS@
 
 spek_LDADD = \
-	@LIBS@ \
-	$(SPEK_LIBS)
+	$(SPEK_LIBS) \
+	@LIBS@
