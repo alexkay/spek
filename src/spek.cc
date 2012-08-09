@@ -16,21 +16,71 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <wx/wx.h>
+#include <wx/cmdline.h>
+#include <wx/log.h>
 
 #include "spek-window.hh"
 
 class Spek: public wxApp
 {
+protected:
     virtual bool OnInit();
+    virtual void OnInitCmdLine(wxCmdLineParser& parser);
+    virtual bool OnCmdLineParsed(wxCmdLineParser& parser);
 };
 
 IMPLEMENT_APP(Spek)
 
 bool Spek::OnInit()
 {
+    if (!wxApp::OnInit()) {
+        return false;
+    }
+
     SpekWindow *window = new SpekWindow(wxT("Hello World"), wxPoint(50,50), wxSize(450,340));
     window->Show(true);
     SetTopWindow(window);
+    return true;
+}
+
+void Spek::OnInitCmdLine(wxCmdLineParser& parser)
+{
+    wxCmdLineEntryDesc desc[] = {{
+            wxCMD_LINE_SWITCH, wxT("h"),
+            wxT("help"), _("Show this help message"),
+            wxCMD_LINE_VAL_NONE,
+            wxCMD_LINE_OPTION_HELP
+        }, {
+            wxCMD_LINE_SWITCH,
+            wxT("V"),
+            wxT("version"),
+            _("Display the version and exit")
+        }, {
+            wxCMD_LINE_PARAM,
+            NULL,
+            NULL,
+            _("FILE"),
+            wxCMD_LINE_VAL_STRING,
+            wxCMD_LINE_PARAM_OPTIONAL
+        }, {
+            wxCMD_LINE_NONE
+        }
+    };
+
+    parser.SetDesc(desc);
+}
+
+bool Spek::OnCmdLineParsed(wxCmdLineParser& parser)
+{
+    if (!wxApp::OnCmdLineParsed(parser)) {
+        return false;
+    }
+
+    if (parser.Found(wxT("version"))) {
+        // TRANSLATORS: first %s is the package name, second %s is the package version.
+        wxPrintf(_("%s version %s\n"), wxT(PACKAGE_NAME), wxT(PACKAGE_VERSION));
+        return false;
+    }
+
     return true;
 }
