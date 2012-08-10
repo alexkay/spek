@@ -29,7 +29,7 @@ wxString SpekPlatform::ConfigPath(const wxString& app_name)
 #ifdef OS_WIN
     wxFileName file_name(wxStandardPaths::Get().GetUserConfigDir());
 #else
-    wxFileName file_name(wxGetHomeDir());
+    wxFileName file_name(wxGetHomeDir(), wxEmptyString);
     file_name.AppendDir(wxT(".config"));
 #endif
     file_name.AppendDir(app_name);

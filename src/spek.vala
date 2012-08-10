@@ -26,10 +26,6 @@ namespace Spek {
             Environment.set_variable ("LANGUAGE", Preferences.instance.language, true);
         }
 
-        Intl.bindtextdomain (Config.GETTEXT_PACKAGE, Platform.locale_dir ());
-        Intl.bind_textdomain_codeset (Config.GETTEXT_PACKAGE, "UTF-8");
-        Intl.textdomain (Config.GETTEXT_PACKAGE);
-
         Audio.init ();
         var file_name = files == null ? null : files[0];
         if (file_name != null && file_name.has_prefix ("file://")) {

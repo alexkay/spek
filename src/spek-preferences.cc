@@ -28,7 +28,26 @@ SpekPreferences& SpekPreferences::Get()
     return instance;
 }
 
-SpekPreferences::SpekPreferences()
+void SpekPreferences::Init()
+{
+    if (this->locale) {
+        delete this->locale;
+    }
+    this->locale = new wxLocale();
+
+    int lang = wxLANGUAGE_DEFAULT;
+    wxString code = this->GetLanguage();
+    if (!code.IsEmpty()) {
+        const wxLanguageInfo *info = wxLocale::FindLanguageInfo(code);
+        if (info) {
+            lang = info->Language;
+        }
+    }
+    this->locale->Init(lang);
+    this->locale->AddCatalog(wxT(GETTEXT_PACKAGE));
+}
+
+SpekPreferences::SpekPreferences() : locale(NULL)
 {
     wxString path = SpekPlatform::ConfigPath(wxT("spek"));
     this->config = new wxFileConfig(

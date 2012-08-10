@@ -1,6 +1,6 @@
-/* spek.vala
+/* spek.cc
  *
- * Copyright (C) 2010-2011  Alexander Kojevnikov <alexander@kojevnikov.com>
+ * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
  * Spek is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,6 +19,8 @@
 #include <wx/cmdline.h>
 #include <wx/log.h>
 
+#include "spek-preferences.hh"
+
 #include "spek-window.hh"
 
 class Spek: public wxApp
@@ -33,6 +35,8 @@ IMPLEMENT_APP(Spek)
 
 bool Spek::OnInit()
 {
+    SpekPreferences::Get().Init();
+
     if (!wxApp::OnInit()) {
         return false;
     }
@@ -46,7 +50,8 @@ bool Spek::OnInit()
 void Spek::OnInitCmdLine(wxCmdLineParser& parser)
 {
     wxCmdLineEntryDesc desc[] = {{
-            wxCMD_LINE_SWITCH, wxT("h"),
+            wxCMD_LINE_SWITCH,
+            wxT("h"),
             wxT("help"), _("Show this help message"),
             wxCMD_LINE_VAL_NONE,
             wxCMD_LINE_OPTION_HELP

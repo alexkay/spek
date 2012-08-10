@@ -20,12 +20,14 @@
 #define SPEK_PREFERENCES_HH_
 
 #include <wx/fileconf.h>
+#include <wx/intl.h>
 
 class SpekPreferences
 {
 public:
     static SpekPreferences& Get();
 
+    void Init();
     bool GetCheckUpdate();
     void SetCheckUpdate(bool value);
     long GetLastUpdate();
@@ -38,6 +40,7 @@ private:
     SpekPreferences(const SpekPreferences&);
     void operator=(const SpekPreferences&);
 
+    wxLocale *locale;
     wxFileConfig *config;
 };
 
