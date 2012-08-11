@@ -51,19 +51,10 @@ namespace Spek {
             info_bar.response.connect(() => info_bar.hide());
 
             spectrogram = new Spectrogram ();
-            cur_dir = Environment.get_home_dir ();
 
-            filter_all = new FileFilter ();
-            filter_all.set_name (_("All files"));
-            filter_all.add_pattern ("*");
             filter_png = new FileFilter ();
             filter_png.set_name (_("PNG images"));
             filter_png.add_pattern ("*.png");
-            filter_audio = new FileFilter ();
-            filter_audio.set_name (_("Audio files"));
-            foreach (var ext in audio_extensions) {
-                filter_audio.add_pattern (ext);
-            }
 
             var vbox = new VBox (false, 0);
             vbox.pack_start (info_bar, false, true, 0);
@@ -201,37 +192,6 @@ namespace Spek {
         private void url_hook (AboutDialog about, string link) {
             Platform.show_uri (link);
         }
-
-        // TODO: s/audio/media/
-        private string[] audio_extensions = {
-            "*.3gp",
-            "*.aac",
-            "*.aif",
-            "*.aifc",
-            "*.aiff",
-            "*.amr",
-            "*.awb",
-            "*.ape",
-            "*.au",
-            "*.dts",
-            "*.flac",
-            "*.gsm",
-            "*.m4a",
-            "*.m4p",
-            "*.mp3",
-            "*.mp4",
-            "*.mp+",
-            "*.mpc",
-            "*.mpp",
-            "*.oga",
-            "*.ogg",
-            "*.ra",
-            "*.ram",
-            "*.snd",
-            "*.wav",
-            "*.wma",
-            "*.wv"
-        };
 
         private void * check_version () {
             // Does the user want to check for updates?

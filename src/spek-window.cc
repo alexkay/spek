@@ -75,20 +75,73 @@ SpekWindow::SpekWindow(const wxString& title) : wxFrame(NULL, -1, title)
     toolbar->Realize();
 }
 
+// TODO: s/audio/media/
+static const char *audio_extensions[] = {
+    "3gp",
+    "aac",
+    "aif",
+    "aifc",
+    "aiff",
+    "amr",
+    "awb",
+    "ape",
+    "au",
+    "dts",
+    "flac",
+    "gsm",
+    "m4a",
+    "m4p",
+    "mp3",
+    "mp4",
+    "mp+",
+    "mpc",
+    "mpp",
+    "oga",
+    "ogg",
+    "ra",
+    "ram",
+    "snd",
+    "wav",
+    "wma",
+    "wv",
+    NULL
+};
+
 void SpekWindow::OnOpen(wxCommandEvent& WXUNUSED(event))
 {
     static wxString cur_dir = wxGetHomeDir();
+    static wxString filters = wxEmptyString;
+    static int filter_index = 1;
+
+    if (filters.IsEmpty()) {
+        filters.Alloc(1024);
+        filters += _("All files");
+        filters += wxT("|*.*|");
+        filters += _("Audio files");
+        filters += wxT("|");
+        for (int i = 0; audio_extensions[i]; ++i) {
+            if (i) {
+                filters += wxT(";");
+            }
+            filters += wxT("*.");
+            filters += wxString::FromAscii(audio_extensions[i]);
+        }
+        filters.Shrink();
+    }
+
     wxFileDialog *dlg = new wxFileDialog(
         this,
         _("Open File"),
         cur_dir,
         wxEmptyString,
-        wxT("*.*"),
+        filters,
         wxFD_OPEN
     );
+    dlg->SetFilterIndex(filter_index);
 
     if (dlg->ShowModal() == wxID_OK) {
         cur_dir = dlg->GetDirectory();
+        filter_index = dlg->GetFilterIndex();
         Open(dlg->GetPath());
     }
 
