@@ -77,6 +77,22 @@ SpekWindow::SpekWindow(const wxString& title) : wxFrame(NULL, -1, title)
 
 void SpekWindow::OnOpen(wxCommandEvent& WXUNUSED(event))
 {
+    static wxString cur_dir = wxGetHomeDir();
+    wxFileDialog *dlg = new wxFileDialog(
+        this,
+        _("Open File"),
+        cur_dir,
+        wxEmptyString,
+        wxT("*.*"),
+        wxFD_OPEN
+    );
+
+    if (dlg->ShowModal() == wxID_OK) {
+        cur_dir = dlg->GetDirectory();
+        Open(dlg->GetPath());
+    }
+
+    dlg->Destroy();
 }
 
 void SpekWindow::OnSave(wxCommandEvent& WXUNUSED(event))
@@ -93,5 +109,9 @@ void SpekWindow::OnPreferences(wxCommandEvent& WXUNUSED(event))
 }
 
 void SpekWindow::OnAbout(wxCommandEvent& WXUNUSED(event))
+{
+}
+
+void SpekWindow::Open(const wxString& path)
 {
 }

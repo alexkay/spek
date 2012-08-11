@@ -110,23 +110,6 @@ namespace Spek {
             title = _("Spek - %s").printf (Path.get_basename (file_name));
         }
 
-        private void on_file_open () {
-            var chooser = new FileChooserDialog (
-                _("Open File"), this, FileChooserAction.OPEN,
-                Stock.CANCEL, ResponseType.CANCEL,
-                Stock.OPEN, ResponseType.ACCEPT, null);
-            chooser.set_default_response (ResponseType.ACCEPT);
-            chooser.select_multiple = false;
-            chooser.set_current_folder (cur_dir);
-            chooser.add_filter (filter_all);
-            chooser.add_filter (filter_audio);
-            chooser.set_filter (filter_audio);
-            if (chooser.run () == ResponseType.ACCEPT) {
-                open_file (chooser.get_filename ());
-            }
-            chooser.destroy ();
-        }
-
         private void on_file_save () {
             var chooser = new FileChooserDialog (
                 _("Save Spectrogram"), this, FileChooserAction.SAVE,

@@ -26,14 +26,15 @@ class SpekWindow : public wxFrame
 public:
     SpekWindow(const wxString& title);
 
-protected:
+private:
     void OnOpen(wxCommandEvent& event);
     void OnSave(wxCommandEvent& event);
     void OnExit(wxCommandEvent& event);
     void OnPreferences(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
 
-private:
+    void Open(const wxString& path);
+
     DECLARE_EVENT_TABLE()
 };
 
