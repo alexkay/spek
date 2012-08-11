@@ -15,18 +15,16 @@ spek_SOURCES = \
 
 spek_CPPFLAGS = \
 	-include config.h \
-	-DLOCALEDIR=\""$(localedir)"\" \
-	-DPKGDATADIR=\""$(pkgdatadir)"\" \
-	-DPKGLIBDIR=\""$(pkglibdir)"\"
+	$(WX_CPPFLAGS)
 
 spek_CFLAGS = \
-	$(SPEK_CFLAGS) \
-	@CFLAGS@
+	$(FFMPEG_CFLAGS) \
+	$(WX_CFLAGS_ONLY)
 
 spek_CXXFLAGS = \
-	$(SPEK_CFLAGS) \
-	@CXXFLAGS@
+	$(FFMPEG_CFLAGS) \
+	$(WX_CXXFLAGS_ONLY)
 
 spek_LDADD = \
-	$(SPEK_LIBS) \
-	@LIBS@
+	$(FFMPEG_LIBS) \
+	$(WX_LIBS)

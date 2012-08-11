@@ -14,15 +14,15 @@ AC_MSG_CHECKING([the OS])
 AS_CASE([$host],
 	[*-*-mingw*], [
 		os="WIN"
-		AC_DEFINE([OS_WIN], [1], [Platform])
+		AC_DEFINE([OS_WIN], [1], [Windows])
 	],
 	[*-*-darwin*], [
 		os="OSX"
-		AC_DEFINE([OS_OSX], [1], [Platform])
+		AC_DEFINE([OS_OSX], [1], [OS X])
 	],
 	[*], [
 		os="UNIX"
-		AC_DEFINE([OS_UNIX], [1], [Platform])
+		AC_DEFINE([OS_UNIX], [1], [Unix])
 	]
 )
 AC_MSG_RESULT([$os])
@@ -30,14 +30,12 @@ AC_MSG_RESULT([$os])
 AC_CHECK_LIB(m, log10)
 
 pkg_modules="libavformat >= 52.111 libavcodec >= 52.123 libavutil"
-PKG_CHECK_MODULES(SPEK, [$pkg_modules])
-AC_SUBST(SPEK_CFLAGS)
-AC_SUBST(SPEK_LIBS)
+PKG_CHECK_MODULES(FFMPEG, [$pkg_modules])
 
 AM_OPTIONS_WXCONFIG
 reqwx=2.8.0
-AM_PATH_WXCONFIG($reqwx, wxWin=1)
-if test "$wxWin" != 1; then
+AM_PATH_WXCONFIG($reqwx, wx=1)
+if test "$wx" != 1; then
 	AC_MSG_ERROR([
 		wxWidgets must be installed on your system.
 
@@ -48,11 +46,6 @@ if test "$wxWin" != 1; then
 		wxWidgets version is $reqwx or above.
 		])
 fi
-
-CPPFLAGS="$CPPFLAGS $WX_CPPFLAGS"
-CXXFLAGS="$CXXFLAGS $WX_CXXFLAGS_ONLY"
-CFLAGS="$CFLAGS $WX_CFLAGS_ONLY"
-LIBS="$LIBS $WX_LIBS"
 
 GETTEXT_PACKAGE=spek
 AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["$GETTEXT_PACKAGE"], [Gettext Package])
