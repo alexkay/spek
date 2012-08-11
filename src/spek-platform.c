@@ -32,55 +32,6 @@
 
 #include "spek-platform.h"
 
-gchar *spek_platform_locale_dir () {
-    static gchar *locale_dir = NULL;
-
-    if (!locale_dir) {
-#ifdef G_OS_WIN32
-        gchar *win32_dir;
-
-        win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
-        locale_dir = g_build_filename (win32_dir, "share", "locale", NULL);
-
-        g_free (win32_dir);
-#else
-#ifdef G_OS_DARWIN
-        GtkOSXApplication *app = NULL;
-        const gchar *res_dir;
-
-        app = g_object_new (GTK_TYPE_OSX_APPLICATION, NULL);
-        res_dir = gtk_osxapplication_get_resource_path (app);
-        locale_dir = g_build_filename (res_dir, "share", "locale", NULL);
-#else
-        locale_dir =  LOCALEDIR;
-#endif
-#endif
-    }
-
-    return locale_dir;
-}
-
-void spek_platform_show_uri (const gchar *uri) {
-#ifdef G_OS_WIN32
-    /* gtk_show_uri doesn't work on Windows... */
-    ShellExecuteA (NULL, "open", uri, "", NULL, SW_SHOWNORMAL);
-#else
-#ifdef G_OS_DARWIN
-    /* ...or on OS X */
-    CFStringRef str = NULL;
-    CFURLRef url = NULL;
-
-    str = CFStringCreateWithCString (NULL, uri, kCFStringEncodingASCII);
-    url = CFURLCreateWithString (NULL, str, NULL);
-    LSOpenCFURLRef (url, NULL);
-    CFRelease (url);
-    CFRelease (str);
-#else
-    gtk_show_uri (NULL, uri, gtk_get_current_event_time (), NULL);
-#endif
-#endif
-}
-
 gchar *spek_platform_read_line (const gchar *uri) {
 #ifdef G_OS_DARWIN
     /* GIO doesn't work on OS X */
@@ -122,12 +73,4 @@ gchar *spek_platform_read_line (const gchar *uri) {
     g_object_unref (file);
     return line;
 #endif
-}
-
-gdouble spek_platform_get_font_scale () {
-#ifdef G_OS_DARWIN
-    /* Pango/Quartz fonts are smaller than on X. */
-    return 1.4;
-#endif
-    return 1.0;
 }

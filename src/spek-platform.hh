@@ -27,6 +27,10 @@ class SpekPlatform
 public:
     // Not quite XDG-compatible, but close enough.
     static wxString ConfigPath(const wxString& app_name);
+
+    // Setting non-default locale under GTK+ is tricky (see e.g. how FileZilla does it). We will
+    // just disable the language setting for GTK+ users and will always use the system locale.
+    static bool CanChangeLanguage();
 };
 
 extern "C" {

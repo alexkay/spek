@@ -24,6 +24,7 @@ spek_CFLAGS = \
 	@CFLAGS@
 
 spek_CXXFLAGS = \
+	$(SPEK_CFLAGS) \
 	@CXXFLAGS@
 
 spek_LDADD = \

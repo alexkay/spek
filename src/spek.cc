@@ -19,6 +19,7 @@
 #include <wx/cmdline.h>
 #include <wx/log.h>
 
+#include "spek-audio.h"
 #include "spek-preferences.hh"
 
 #include "spek-window.hh"
@@ -36,6 +37,7 @@ IMPLEMENT_APP(Spek)
 bool Spek::OnInit()
 {
     SpekPreferences::Get().Init();
+    spek_audio_init();
 
     if (!wxApp::OnInit()) {
         return false;

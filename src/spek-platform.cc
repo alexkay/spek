@@ -37,6 +37,15 @@ wxString SpekPlatform::ConfigPath(const wxString& app_name)
     return file_name.GetFullPath();
 }
 
+bool SpekPlatform::CanChangeLanguage()
+{
+#ifdef OS_UNIX
+    return false;
+#else
+    return true;
+#endif
+}
+
 char * spek_platform_short_path(const char *path)
 {
 #ifdef OS_WIN
