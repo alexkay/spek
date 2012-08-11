@@ -24,10 +24,13 @@
 class SpekWindow : public wxFrame
 {
 public:
-    SpekWindow(const wxString& title, const wxPoint& pos, const wxSize& size);
+    SpekWindow(const wxString& title);
 
 protected:
-    void OnQuit(wxCommandEvent& event);
+    void OnOpen(wxCommandEvent& event);
+    void OnSave(wxCommandEvent& event);
+    void OnExit(wxCommandEvent& event);
+    void OnPreferences(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
 
 private:

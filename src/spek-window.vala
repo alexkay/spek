@@ -31,72 +31,12 @@ namespace Spek {
         private FileFilter filter_audio;
         private FileFilter filter_png;
 
-        private const Gtk.ActionEntry[] ACTION_ENTRIES = {
-            { "File", null, N_("_File") },
-            { "FileOpen", Stock.OPEN, null, null, null, on_file_open },
-            { "FileSave", Stock.SAVE, null, null, null, on_file_save },
-            { "FileQuit", Stock.QUIT, null, null, null, on_file_quit },
-            { "Edit", null, N_("_Edit") },
-            { "EditPreferences", Stock.PREFERENCES, null, "<Ctrl>E", null, on_edit_preferences },
-            { "Help", null, N_("_Help") },
-            { "HelpAbout", Stock.ABOUT, null, "F1", null, on_help_about }
-        };
-
-        private const string UI = """
-<ui>
-    <menubar name='MenuBar'>
-        <menu action='File'>
-            <menuitem action='FileOpen'/>
-            <menuitem action='FileSave'/>
-            <separator/>
-            <menuitem action='FileQuit'/>
-        </menu>
-        <menu action='Edit'>
-            <menuitem action='EditPreferences'/>
-        </menu>
-        <menu action='Help'>
-            <menuitem action='HelpAbout'/>
-        </menu>
-    </menubar>
-
-    <toolbar name='ToolBar'>
-        <toolitem action='FileOpen'/>
-        <toolitem action='FileSave'/>
-        <separator expand='true'/>
-        <toolitem action='HelpAbout'/>
-    </toolbar>
-</ui>
-""";
 
         private const Gtk.TargetEntry[] DEST_TARGET_ENTRIES = {
             { "text/uri-list", 0, 0 }
         };
 
         public Window (string? file_name) {
-            description = title = _("Spek - Acoustic Spectrum Analyser");
-            set_default_icon_name ("spek");
-            set_default_size (640, 480);
-            destroy.connect (Gtk.main_quit);
-
-            var actions = new Gtk.ActionGroup ("Actions");
-            actions.set_translation_domain (Config.GETTEXT_PACKAGE);
-            actions.add_actions (ACTION_ENTRIES, this);
-            ui = new UIManager ();
-            ui.insert_action_group (actions, 0);
-            add_accel_group (ui.get_accel_group ());
-            try {
-                ui.add_ui_from_string (UI, -1);
-            } catch (Error e) {
-                warning ("Could not load the UI: %s\n", e.message);
-            }
-
-            var menubar = ui.get_widget ("/MenuBar");
-            var toolbar = (Toolbar) ui.get_widget ("/ToolBar");
-            toolbar.set_style (ToolbarStyle.BOTH_HORIZ);
-            ((ToolItem) ui.get_widget ("/ToolBar/FileOpen")).is_important = true;
-            ((ToolItem) ui.get_widget ("/ToolBar/FileSave")).is_important = true;
-            ((ToolItem) ui.get_widget ("/ToolBar/HelpAbout")).is_important = true;
-
             info_bar = new InfoBar.with_buttons (Stock.OK, ResponseType.OK);
             var label = new Label (null);
             label.use_markup = true;
@@ -126,17 +66,12 @@ namespace Spek {
             }
 
             var vbox = new VBox (false, 0);
-            vbox.pack_start (menubar, false, true, 0);
-            vbox.pack_start (toolbar, false, true, 0);
             vbox.pack_start (info_bar, false, true, 0);
             vbox.pack_start (spectrogram, true, true, 0);
             add (vbox);
-            menubar.show_all ();
-            toolbar.show_all ();
             spectrogram.show_all ();
             vbox.show ();
 
-            Platform.fix_ui (ui);
             show ();
 
             // Set up Drag and Drop

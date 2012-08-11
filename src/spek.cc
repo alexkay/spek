@@ -43,7 +43,7 @@ bool Spek::OnInit()
         return false;
     }
 
-    SpekWindow *window = new SpekWindow(wxT("Hello World"), wxPoint(50,50), wxSize(450,340));
+    SpekWindow *window = new SpekWindow(_("Spek - Acoustic Spectrum Analyser"));
     window->Show(true);
     SetTopWindow(window);
     return true;
