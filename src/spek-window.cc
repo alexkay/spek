@@ -17,6 +17,7 @@
  */
 
 #include <wx/artprov.h>
+#include <wx/filename.h>
 
 #include "spek-window.hh"
 
@@ -28,8 +29,9 @@ BEGIN_EVENT_TABLE(SpekWindow, wxFrame)
     EVT_MENU(wxID_ABOUT, SpekWindow::OnAbout)
 END_EVENT_TABLE()
 
-SpekWindow::SpekWindow(const wxString& title) : wxFrame(NULL, -1, title)
+SpekWindow::SpekWindow() : wxFrame(NULL, -1, wxEmptyString)
 {
+    SetTitle(_("Spek - Acoustic Spectrum Analyser"));
     // TODO: test on all platforms
     SetIcon(wxIcon(wxT("spek")));
 
@@ -167,4 +169,12 @@ void SpekWindow::OnAbout(wxCommandEvent& WXUNUSED(event))
 
 void SpekWindow::Open(const wxString& path)
 {
+    wxFileName file_name(path);
+    if (file_name.FileExists()) {
+        wxString full_name = file_name.GetFullName();
+        // TRANSLATORS: window title, %s is replaced with the file name
+        wxString title = wxString::Format(_("Spek - %s"), full_name.c_str());
+        // TODO: make sure the above works on all platforms, both in x32 and x64.
+        SetTitle(title);
+    }
 }

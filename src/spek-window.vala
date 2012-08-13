@@ -94,11 +94,7 @@ namespace Spek {
         }
 
         private void open_file (string file_name) {
-            cur_dir = Path.get_dirname (file_name);
             spectrogram.open (file_name);
-
-            // TRANSLATORS: window title, %s is replaced with the file name
-            title = _("Spek - %s").printf (Path.get_basename (file_name));
         }
 
         private void on_file_save () {

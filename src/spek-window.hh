@@ -24,7 +24,7 @@
 class SpekWindow : public wxFrame
 {
 public:
-    SpekWindow(const wxString& title);
+    SpekWindow();
 
 private:
     void OnOpen(wxCommandEvent& event);
