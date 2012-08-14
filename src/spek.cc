@@ -26,11 +26,12 @@
 
 class Spek: public wxApp
 {
-private:
+protected:
     virtual bool OnInit();
     virtual void OnInitCmdLine(wxCmdLineParser& parser);
     virtual bool OnCmdLineParsed(wxCmdLineParser& parser);
 
+private:
     wxString path;
 };
 
@@ -38,7 +39,7 @@ IMPLEMENT_APP(Spek)
 
 bool Spek::OnInit()
 {
-    SpekPreferences::Get().Init();
+    SpekPreferences::get().init();
     spek_audio_init();
 
     if (!wxApp::OnInit()) {

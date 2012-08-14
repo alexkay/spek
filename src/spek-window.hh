@@ -29,13 +29,12 @@ public:
     SpekWindow(const wxString& path);
 
 private:
-    void OnOpen(wxCommandEvent& event);
-    void OnSave(wxCommandEvent& event);
-    void OnExit(wxCommandEvent& event);
-    void OnPreferences(wxCommandEvent& event);
-    void OnAbout(wxCommandEvent& event);
-
-    void Open(const wxString& path);
+    void on_open(wxCommandEvent& event);
+    void on_save(wxCommandEvent& event);
+    void on_exit(wxCommandEvent& event);
+    void on_preferences(wxCommandEvent& event);
+    void on_about(wxCommandEvent& event);
+    void open(const wxString& path);
 
     SpekSpectrogram *spectrogram;
 

@@ -25,15 +25,15 @@ class SpekSpectrogram : public wxPanel
 {
 public:
     SpekSpectrogram(wxFrame *parent);
-    void Open(const wxString& path);
-    void Save(const wxString& path);
+    void open(const wxString& path);
+    void save(const wxString& path);
 
 private:
-    void OnPaint(wxPaintEvent& evt);
-    void Render(wxDC& dc);
+    void on_paint(wxPaintEvent& evt);
+    void render(wxDC& dc);
 
-    void Start();
-    uint32_t GetColor(double level);
+    void start();
+    uint32_t get_color(double level);
 
     wxString path;
     wxString info;

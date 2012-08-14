@@ -24,7 +24,7 @@
 
 #include "spek-platform.hh"
 
-wxString SpekPlatform::ConfigPath(const wxString& app_name)
+wxString SpekPlatform::config_path(const wxString& app_name)
 {
 #ifdef OS_WIN
     wxFileName file_name(wxStandardPaths::Get().GetUserConfigDir());
@@ -37,7 +37,7 @@ wxString SpekPlatform::ConfigPath(const wxString& app_name)
     return file_name.GetFullPath();
 }
 
-bool SpekPlatform::CanChangeLanguage()
+bool SpekPlatform::can_change_language()
 {
 #ifdef OS_UNIX
     return false;

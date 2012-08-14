@@ -22,13 +22,13 @@
 
 #include "spek-preferences.hh"
 
-SpekPreferences& SpekPreferences::Get()
+SpekPreferences& SpekPreferences::get()
 {
     static SpekPreferences instance;
     return instance;
 }
 
-void SpekPreferences::Init()
+void SpekPreferences::init()
 {
     if (this->locale) {
         delete this->locale;
@@ -36,7 +36,7 @@ void SpekPreferences::Init()
     this->locale = new wxLocale();
 
     int lang = wxLANGUAGE_DEFAULT;
-    wxString code = this->GetLanguage();
+    wxString code = this->get_language();
     if (!code.IsEmpty()) {
         const wxLanguageInfo *info = wxLocale::FindLanguageInfo(code);
         if (info) {
@@ -49,7 +49,7 @@ void SpekPreferences::Init()
 
 SpekPreferences::SpekPreferences() : locale(NULL)
 {
-    wxString path = SpekPlatform::ConfigPath(wxT("spek"));
+    wxString path = SpekPlatform::config_path(wxT("spek"));
     this->config = new wxFileConfig(
         wxEmptyString,
         wxEmptyString,
@@ -60,40 +60,40 @@ SpekPreferences::SpekPreferences() : locale(NULL)
     );
 }
 
-bool SpekPreferences::GetCheckUpdate()
+bool SpekPreferences::get_check_update()
 {
     bool result = true;
     this->config->Read(wxT("/update/check"), &result);
     return result;
 }
 
-void SpekPreferences::SetCheckUpdate(bool value)
+void SpekPreferences::set_check_update(bool value)
 {
     this->config->Write(wxT("/update/check"), value);
     this->config->Flush();
 }
 
-long SpekPreferences::GetLastUpdate()
+long SpekPreferences::get_last_update()
 {
     long result = 0;
     this->config->Read(wxT("/update/last"), &result);
     return result;
 }
 
-void SpekPreferences::SetLastUpdate(long value)
+void SpekPreferences::set_last_update(long value)
 {
     this->config->Write(wxT("/update/last"), value);
     this->config->Flush();
 }
 
-wxString SpekPreferences::GetLanguage()
+wxString SpekPreferences::get_language()
 {
     wxString result(wxT(""));
     this->config->Read(wxT("/general/language"), &result);
     return result;
 }
 
-void SpekPreferences::SetLanguage(const wxString& value)
+void SpekPreferences::set_language(const wxString& value)
 {
     this->config->Write(wxT("/general/language"), value);
     this->config->Flush();

@@ -21,7 +21,7 @@
 #include "spek-spectrogram.hh"
 
 BEGIN_EVENT_TABLE(SpekSpectrogram, wxPanel)
-    EVT_PAINT(SpekSpectrogram::OnPaint)
+    EVT_PAINT(SpekSpectrogram::on_paint)
 END_EVENT_TABLE()
 
 enum
@@ -45,7 +45,7 @@ SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
 
     // Pre-draw the palette.
     for (int y = 0; y < BANDS; y++) {
-        uint32_t color = GetColor(y / (double) BANDS);
+        uint32_t color = get_color(y / (double) BANDS);
         this->palette.SetRGB(
             wxRect(0, BANDS - y - 1, RULER, 1),
             color >> 16,
@@ -55,23 +55,23 @@ SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
     }
 }
 
-void SpekSpectrogram::Open(const wxString& path)
+void SpekSpectrogram::open(const wxString& path)
 {
     this->path = path;
-    Start();
+    start();
 }
 
-void SpekSpectrogram::Save(const wxString& path)
+void SpekSpectrogram::save(const wxString& path)
 {
 }
 
-void SpekSpectrogram::OnPaint(wxPaintEvent& evt)
+void SpekSpectrogram::on_paint(wxPaintEvent& evt)
 {
     wxAutoBufferedPaintDC dc(this);
-    Render(dc);
+    render(dc);
 }
 
-void SpekSpectrogram::Render(wxDC& dc)
+void SpekSpectrogram::render(wxDC& dc)
 {
     wxSize size = GetClientSize();
     int w = size.GetWidth();
@@ -122,14 +122,14 @@ void SpekSpectrogram::Render(wxDC& dc)
     dc.DrawBitmap(bmp, w - RPAD + GAP, TPAD);
 }
 
-void SpekSpectrogram::Start()
+void SpekSpectrogram::start()
 {
 }
 
 // Modified version of Dan Bruton's algorithm:
 // http://www.physics.sfasu.edu/astro/color/spectra.html
 // TODO: Move out to a C function.
-uint32_t SpekSpectrogram::GetColor(double level)
+uint32_t SpekSpectrogram::get_color(double level)
 {
     level *= 0.6625;
     double r = 0.0, g = 0.0, b = 0.0;

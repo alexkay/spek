@@ -24,11 +24,11 @@
 #include "spek-window.hh"
 
 BEGIN_EVENT_TABLE(SpekWindow, wxFrame)
-    EVT_MENU(wxID_OPEN, SpekWindow::OnOpen)
-    EVT_MENU(wxID_SAVE, SpekWindow::OnSave)
-    EVT_MENU(wxID_EXIT, SpekWindow::OnExit)
-    EVT_MENU(wxID_PREFERENCES, SpekWindow::OnPreferences)
-    EVT_MENU(wxID_ABOUT, SpekWindow::OnAbout)
+    EVT_MENU(wxID_OPEN, SpekWindow::on_open)
+    EVT_MENU(wxID_SAVE, SpekWindow::on_save)
+    EVT_MENU(wxID_EXIT, SpekWindow::on_exit)
+    EVT_MENU(wxID_PREFERENCES, SpekWindow::on_preferences)
+    EVT_MENU(wxID_ABOUT, SpekWindow::on_about)
 END_EVENT_TABLE()
 
 SpekWindow::SpekWindow(const wxString& path) : wxFrame(NULL, -1, wxEmptyString)
@@ -81,7 +81,7 @@ SpekWindow::SpekWindow(const wxString& path) : wxFrame(NULL, -1, wxEmptyString)
     this->spectrogram = new SpekSpectrogram(this);
 
     if (!path.IsEmpty()) {
-        Open(path);
+        open(path);
     }
 }
 
@@ -117,7 +117,7 @@ static const char *audio_extensions[] = {
     NULL
 };
 
-void SpekWindow::OnOpen(wxCommandEvent& WXUNUSED(event))
+void SpekWindow::on_open(wxCommandEvent& WXUNUSED(event))
 {
     static wxString cur_dir = wxGetHomeDir();
     static wxString filters = wxEmptyString;
@@ -152,30 +152,30 @@ void SpekWindow::OnOpen(wxCommandEvent& WXUNUSED(event))
     if (dlg->ShowModal() == wxID_OK) {
         cur_dir = dlg->GetDirectory();
         filter_index = dlg->GetFilterIndex();
-        Open(dlg->GetPath());
+        open(dlg->GetPath());
     }
 
     dlg->Destroy();
 }
 
-void SpekWindow::OnSave(wxCommandEvent& WXUNUSED(event))
+void SpekWindow::on_save(wxCommandEvent& WXUNUSED(event))
 {
 }
 
-void SpekWindow::OnExit(wxCommandEvent& WXUNUSED(event))
+void SpekWindow::on_exit(wxCommandEvent& WXUNUSED(event))
 {
     Close(true);
 }
 
-void SpekWindow::OnPreferences(wxCommandEvent& WXUNUSED(event))
+void SpekWindow::on_preferences(wxCommandEvent& WXUNUSED(event))
 {
 }
 
-void SpekWindow::OnAbout(wxCommandEvent& WXUNUSED(event))
+void SpekWindow::on_about(wxCommandEvent& WXUNUSED(event))
 {
 }
 
-void SpekWindow::Open(const wxString& path)
+void SpekWindow::open(const wxString& path)
 {
     wxFileName file_name(path);
     if (file_name.FileExists()) {
@@ -185,6 +185,6 @@ void SpekWindow::Open(const wxString& path)
         // TODO: make sure the above works on all platforms, both in x32 and x64.
         SetTitle(title);
 
-        this->spectrogram->Open(path);
+        this->spectrogram->open(path);
     }
 }
