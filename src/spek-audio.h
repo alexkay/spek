@@ -26,8 +26,11 @@ extern "C" {
 #include <stdbool.h>
 #include <stdint.h>
 
-#include <libavformat/avformat.h>
-#include <libavcodec/avcodec.h>
+struct AVFormatContext;
+struct AVCodecContext;
+struct AVStream;
+struct AVCodec;
+struct AVPacket;
 
 struct spek_audio_context
 {

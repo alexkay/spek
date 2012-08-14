@@ -18,6 +18,8 @@
 
 #include <string.h>
 
+#include <libavformat/avformat.h>
+#include <libavcodec/avcodec.h>
 #include <libavutil/mathematics.h>
 
 #include "spek-platform.hh"

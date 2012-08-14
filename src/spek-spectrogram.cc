@@ -83,22 +83,22 @@ void SpekSpectrogram::render(wxDC& dc)
     dc.SetPen(*wxWHITE_PEN);
     dc.SetBrush(*wxTRANSPARENT_BRUSH);
     dc.SetTextForeground(wxColour(255, 255, 255));
-    wxFont normal = wxFont(9, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-    wxFont large = wxFont(normal);
-    large.SetPointSize(10);
-    large.SetWeight(wxFONTWEIGHT_BOLD);
-    wxFont small = wxFont(normal);
-    small.SetPointSize(8);
-    dc.SetFont(normal);
+    wxFont normal_font = wxFont(9, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+    wxFont large_font = wxFont(normal_font);
+    large_font.SetPointSize(10);
+    large_font.SetWeight(wxFONTWEIGHT_BOLD);
+    wxFont small_font = wxFont(normal_font);
+    small_font.SetPointSize(8);
+    dc.SetFont(normal_font);
     int normal_height = dc.GetTextExtent(wxT("dummy")).GetHeight();
-    dc.SetFont(large);
+    dc.SetFont(large_font);
     int large_height = dc.GetTextExtent(wxT("dummy")).GetHeight();
 
     // Clean the background.
     dc.Clear();
 
     // Spek version
-    dc.SetFont(large);
+    dc.SetFont(large_font);
     wxString package_name(wxT(PACKAGE_NAME));
     dc.DrawText(
         package_name,
@@ -106,7 +106,7 @@ void SpekSpectrogram::render(wxDC& dc)
         TPAD - 2 * GAP - normal_height - large_height
     );
     int package_name_width = dc.GetTextExtent(package_name + wxT(" ")).GetWidth();
-    dc.SetFont(normal);
+    dc.SetFont(normal_font);
     dc.DrawText(
         wxT(PACKAGE_VERSION),
         w - RPAD + GAP + package_name_width,
