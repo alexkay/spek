@@ -10,6 +10,8 @@ spek_SOURCES = \
 	spek-platform.hh \
 	spek-preferences.cc \
 	spek-preferences.hh \
+	spek-spectrogram.cc \
+	spek-spectrogram.hh \
 	spek-window.cc \
 	spek-window.hh
 

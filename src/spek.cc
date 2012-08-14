@@ -26,10 +26,12 @@
 
 class Spek: public wxApp
 {
-protected:
+private:
     virtual bool OnInit();
     virtual void OnInitCmdLine(wxCmdLineParser& parser);
     virtual bool OnCmdLineParsed(wxCmdLineParser& parser);
+
+    wxString path;
 };
 
 IMPLEMENT_APP(Spek)
@@ -43,7 +45,7 @@ bool Spek::OnInit()
         return false;
     }
 
-    SpekWindow *window = new SpekWindow();
+    SpekWindow *window = new SpekWindow(this->path);
     window->Show(true);
     SetTopWindow(window);
     return true;
@@ -88,6 +90,8 @@ bool Spek::OnCmdLineParsed(wxCmdLineParser& parser)
         wxPrintf(_("%s version %s\n"), wxT(PACKAGE_NAME), wxT(PACKAGE_VERSION));
         return false;
     }
+
+    this->path = parser.GetParam();
 
     return true;
 }

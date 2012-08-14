@@ -19,6 +19,8 @@
 #include <wx/artprov.h>
 #include <wx/filename.h>
 
+#include "spek-spectrogram.hh"
+
 #include "spek-window.hh"
 
 BEGIN_EVENT_TABLE(SpekWindow, wxFrame)
@@ -29,7 +31,7 @@ BEGIN_EVENT_TABLE(SpekWindow, wxFrame)
     EVT_MENU(wxID_ABOUT, SpekWindow::OnAbout)
 END_EVENT_TABLE()
 
-SpekWindow::SpekWindow() : wxFrame(NULL, -1, wxEmptyString)
+SpekWindow::SpekWindow(const wxString& path) : wxFrame(NULL, -1, wxEmptyString)
 {
     SetTitle(_("Spek - Acoustic Spectrum Analyser"));
     // TODO: test on all platforms
@@ -75,6 +77,12 @@ SpekWindow::SpekWindow() : wxFrame(NULL, -1, wxEmptyString)
         wxArtProvider::GetBitmap(wxART_FILE_SAVE)
     );
     toolbar->Realize();
+
+    this->spectrogram = new SpekSpectrogram(this);
+
+    if (!path.IsEmpty()) {
+        Open(path);
+    }
 }
 
 // TODO: s/audio/media/
@@ -176,5 +184,7 @@ void SpekWindow::Open(const wxString& path)
         wxString title = wxString::Format(_("Spek - %s"), full_name.c_str());
         // TODO: make sure the above works on all platforms, both in x32 and x64.
         SetTitle(title);
+
+        this->spectrogram->Open(path);
     }
 }

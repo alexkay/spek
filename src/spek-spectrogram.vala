@@ -24,42 +24,11 @@ using Pango;
 namespace Spek {
     class Spectrogram : DrawingArea {
 
-        public string file_name { get; private set; }
         private Pipeline pipeline;
-        private string info;
-        private const int THRESHOLD = -92;
-        private const int NFFT = 2048;
-        private const int BANDS = NFFT / 2 + 1;
 
         private ImageSurface image;
-        private ImageSurface palette;
-
-        private const int LPAD = 60;
-        private const int TPAD = 60;
-        private const int RPAD = 80;
-        private const int BPAD = 40;
-        private const int GAP = 10;
-        private const int RULER = 10;
-        private double FONT_SCALE = Platform.get_font_scale ();
 
         public Spectrogram () {
-            // Pre-draw the palette.
-            palette = new ImageSurface (Format.RGB24, RULER, BANDS);
-            for (int y = 0; y < BANDS; y++) {
-                var color = get_color (y / (double) BANDS);
-                for (int x = 0; x < RULER; x++) {
-                    put_pixel (palette, x, y, color);
-                }
-            }
-            show_all ();
-        }
-
-        public void open (string file_name) {
-            this.file_name = file_name;
-            this.info = "";
-
-            start ();
-        }
 
         public void save (string file_name) {
             Allocation allocation;
@@ -128,36 +97,7 @@ namespace Spek {
         }
 
         private void draw (Cairo.Context cr) {
-            Allocation allocation;
-            get_allocation (out allocation);
-            double w = allocation.width;
-            double h = allocation.height;
             int text_width, text_height;
-
-            // Clean the background.
-            cr.set_source_rgb (0, 0, 0);
-            cr.paint ();
-
-            // Spek version
-            cr.set_source_rgb (1, 1, 1);
-            var layout = cairo_create_layout (cr);
-            layout.set_font_description (FontDescription.from_string (
-                "Sans " + (9 * FONT_SCALE).to_string ()));
-            layout.set_width (RPAD * Pango.SCALE);
-            layout.set_text ("dummy", -1);
-            layout.get_pixel_size (out text_width, out text_height);
-            int line_height = text_height;
-            layout.set_font_description (FontDescription.from_string (
-                 "Sans Bold " + (10 * FONT_SCALE).to_string ()));
-            layout.set_text (Config.PACKAGE_NAME + " ", -1);
-            layout.get_pixel_size (out text_width, out text_height);
-            cr.move_to (w - RPAD + GAP, TPAD - 2 * GAP - line_height);
-            cairo_show_layout_line (cr, layout.get_line (0));
-            layout.set_font_description (FontDescription.from_string (
-                "Sans " + (9 * FONT_SCALE).to_string ()));
-            layout.set_text (Config.PACKAGE_VERSION, -1);
-            cr.rel_move_to (text_width, 0);
-            cairo_show_layout_line (cr, layout.get_line (0));
 
             if (image != null) {
                 // Draw the spectrogram.
@@ -228,20 +168,6 @@ namespace Spek {
                 cairo_show_layout_line (cr, layout.get_line (0));
             }
 
-            // Border around the spectrogram.
-            cr.set_source_rgb (1, 1, 1);
-            cr.set_line_width (1);
-            cr.set_antialias (Antialias.NONE);
-            cr.rectangle (LPAD, TPAD, w - LPAD - RPAD, h - TPAD - BPAD);
-            cr.stroke ();
-
-            // The palette.
-            cr.translate (w - RPAD + GAP, h - BPAD);
-            cr.scale (1, -(h - TPAD - BPAD + 1) / palette.get_height ());
-            cr.set_source_surface (palette, 0, 0);
-            cr.paint ();
-            cr.identity_matrix ();
-
             // Prepare to draw the ruler.
             cr.set_source_rgb (1, 1, 1);
             cr.set_line_width (1);
@@ -264,56 +190,6 @@ namespace Spek {
             cr.translate (w - RPAD + GAP + RULER, TPAD);
             density_ruler.draw (cr, layout);
             cr.identity_matrix ();
-        }
-
-        private void put_pixel (ImageSurface surface, int x, int y, uint32 color) {
-            var i = y * surface.get_stride () + x * 4;
-            unowned uchar[] data = surface.get_data ();
-
-            // Translate uchar* to uint32* to avoid dealing with endianness.
-            uint32 *p = (uint32 *) (&data[i]);
-            *p = color;
-        }
-
-        // Modified version of Dan Bruton's algorithm:
-        // http://www.physics.sfasu.edu/astro/color/spectra.html
-        private uint32 get_color (double level) {
-            level *= 0.6625;
-            double r = 0.0, g = 0.0, b = 0.0;
-            if (level >= 0 && level < 0.15) {
-                r = (0.15 - level) / (0.15 + 0.075);
-                g = 0.0;
-                b = 1.0;
-            } else if (level >= 0.15 && level < 0.275) {
-                r = 0.0;
-                g = (level - 0.15) / (0.275 - 0.15);
-                b = 1.0;
-            } else if (level >= 0.275 && level < 0.325) {
-                r = 0.0;
-                g = 1.0;
-                b = (0.325 - level) / (0.325 - 0.275);
-            } else if (level >= 0.325 && level < 0.5) {
-                r = (level - 0.325) / (0.5 - 0.325);
-                g = 1.0;
-                b = 0.0;
-            } else if (level >= 0.5 && level < 0.6625) {
-                r = 1.0;
-                g = (0.6625 - level) / (0.6625 - 0.5f);
-                b = 0.0;
-            }
-
-            // Intensity correction.
-            double cf = 1.0;
-            if (level >= 0.0 && level < 0.1) {
-                cf = level / 0.1;
-            }
-            cf *= 255.0;
-
-            // Pack RGB values into Cairo-happy format.
-            uint32 rr = (uint32) (r * cf + 0.5);
-            uint32 gg = (uint32) (g * cf + 0.5);
-            uint32 bb = (uint32) (b * cf + 0.5);
-            return (rr << 16) + (gg << 8) + bb;
         }
     }
 }

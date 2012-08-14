@@ -1,4 +1,4 @@
-/* spek-window.hh
+/* spek-spectrogram.hh
  *
  * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
@@ -16,28 +16,28 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SPEK_WINDOW_HH_
-#define SPEK_WINDOW_HH_
+#ifndef SPEK_SPECTROGRAM_HH_
+#define SPEK_SPECTROGRAM_HH_
 
 #include <wx/wx.h>
 
-class SpekSpectrogram;
-
-class SpekWindow : public wxFrame
+class SpekSpectrogram : public wxPanel
 {
 public:
-    SpekWindow(const wxString& path);
+    SpekSpectrogram(wxFrame *parent);
+    void Open(const wxString& path);
+    void Save(const wxString& path);
 
 private:
-    void OnOpen(wxCommandEvent& event);
-    void OnSave(wxCommandEvent& event);
-    void OnExit(wxCommandEvent& event);
-    void OnPreferences(wxCommandEvent& event);
-    void OnAbout(wxCommandEvent& event);
+    void OnPaint(wxPaintEvent& evt);
+    void Render(wxDC& dc);
 
-    void Open(const wxString& path);
+    void Start();
+    uint32_t GetColor(double level);
 
-    SpekSpectrogram *spectrogram;
+    wxString path;
+    wxString info;
+    wxImage palette;
 
     DECLARE_EVENT_TABLE()
 };

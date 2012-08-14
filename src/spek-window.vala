@@ -50,17 +50,13 @@ namespace Spek {
             info_bar.message_type = MessageType.INFO;
             info_bar.response.connect(() => info_bar.hide());
 
-            spectrogram = new Spectrogram ();
-
             filter_png = new FileFilter ();
             filter_png.set_name (_("PNG images"));
             filter_png.add_pattern ("*.png");
 
             var vbox = new VBox (false, 0);
             vbox.pack_start (info_bar, false, true, 0);
-            vbox.pack_start (spectrogram, true, true, 0);
             add (vbox);
-            spectrogram.show_all ();
             vbox.show ();
 
             show ();
@@ -68,10 +64,6 @@ namespace Spek {
             // Set up Drag and Drop
             drag_dest_set (this, DestDefaults.ALL, DEST_TARGET_ENTRIES, DragAction.COPY);
             drag_data_received.connect (on_dropped);
-
-            if (file_name != null) {
-                open_file (file_name);
-            }
 
             try {
                 Thread.create<void*> (check_version, false);
@@ -91,10 +83,6 @@ namespace Spek {
                 }
             }
             drag_finish (cx, false, false, time);
-        }
-
-        private void open_file (string file_name) {
-            spectrogram.open (file_name);
         }
 
         private void on_file_save () {
@@ -117,10 +105,6 @@ namespace Spek {
                 spectrogram.save (file_name);
             }
             chooser.destroy ();
-        }
-
-        private void on_file_quit () {
-            destroy ();
         }
 
         private void on_edit_preferences () {
