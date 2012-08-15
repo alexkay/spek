@@ -26,8 +26,22 @@
 
 #include "spek-audio.h"
 
-// TODO: move translations to UI code, return an error code instead.
-#define _
+struct spek_audio_context
+{
+    char *file_name; // TODO: needed?
+    char *short_name;
+    AVFormatContext *format_context;
+    int audio_stream;
+    AVCodecContext *codec_context;
+    AVStream *stream;
+    AVCodec *codec;
+    int buffer_size;
+    AVPacket *packet;
+    int offset;
+
+    struct spek_audio_properties properties;
+};
+
 
 void spek_audio_init()
 {
@@ -35,26 +49,33 @@ void spek_audio_init()
     av_register_all();
 }
 
-struct spek_audio_context * spek_audio_open(const char *file_name)
+const struct spek_audio_properties * spek_audio_get_properties(struct spek_audio_context *cx)
 {
-    struct spek_audio_context *cx = malloc(sizeof(struct spek_audio_context));
-    cx->file_name = strdup(file_name);
+    return &cx->properties;
+}
+
+struct spek_audio_context * spek_audio_open(const char *path)
+{
+    // TODO: malloc and initialise explicitely
+    struct spek_audio_context *cx = calloc(1, sizeof(struct spek_audio_context));
+    cx->file_name = strdup(path);
     // av_open_input_file() cannot open files with Unicode chars in it
     // when running under Windows. When this happens we will re-try
     // using the corresponding short file name.
-    cx->short_name = spek_platform_short_path(file_name);
+    // TODO: test if it's already fixed in FFmpeg
+    cx->short_name = spek_platform_short_path(path);
 
-    if (avformat_open_input(&cx->format_context, file_name, NULL, NULL) != 0) {
+    if (avformat_open_input(&cx->format_context, path, NULL, NULL) != 0) {
         if (!cx->short_name ||
             avformat_open_input(&cx->format_context, cx->short_name, NULL, NULL) != 0 ) {
-            cx->error = _("Cannot open input file");
+            cx->properties.error = SPEK_AUDIO_CANNOT_OPEN_FILE;
             return cx;
         }
     }
     if (avformat_find_stream_info(cx->format_context, NULL) < 0) {
         // 24-bit APE returns an error but parses the stream info just fine.
         if (cx->format_context->nb_streams <= 0) {
-            cx->error = _("Cannot find stream info");
+            cx->properties.error = SPEK_AUDIO_NO_STREAMS;
             return cx;
         }
     }
@@ -66,65 +87,65 @@ struct spek_audio_context * spek_audio_open(const char *file_name)
         }
     }
     if (cx->audio_stream == -1) {
-        cx->error = _("The file contains no audio streams");
+        cx->properties.error = SPEK_AUDIO_NO_AUDIO;
         return cx;
     }
     cx->stream = cx->format_context->streams[cx->audio_stream];
     cx->codec_context = cx->stream->codec;
     cx->codec = avcodec_find_decoder(cx->codec_context->codec_id);
     if (cx->codec == NULL) {
-        cx->error = _("Cannot find decoder");
+        cx->properties.error = SPEK_AUDIO_NO_DECODER;
         return cx;
     }
     // We can already fill in the stream info even if the codec won't be able to open it.
-    cx->codec_name = strdup(cx->codec->long_name);
-    cx->bit_rate = cx->codec_context->bit_rate;
-    cx->sample_rate = cx->codec_context->sample_rate;
-    cx->bits_per_sample = cx->codec_context->bits_per_raw_sample;
-    if (!cx->bits_per_sample) {
+    cx->properties.codec_name = strdup(cx->codec->long_name);
+    cx->properties.bit_rate = cx->codec_context->bit_rate;
+    cx->properties.sample_rate = cx->codec_context->sample_rate;
+    cx->properties.bits_per_sample = cx->codec_context->bits_per_raw_sample;
+    if (!cx->properties.bits_per_sample) {
         // APE uses bpcs, FLAC uses bprs.
-        cx->bits_per_sample = cx->codec_context->bits_per_coded_sample;
+        cx->properties.bits_per_sample = cx->codec_context->bits_per_coded_sample;
     }
-    cx->channels = cx->codec_context->channels;
+    cx->properties.channels = cx->codec_context->channels;
     if (cx->stream->duration != AV_NOPTS_VALUE) {
-        cx->duration = cx->stream->duration * av_q2d(cx->stream->time_base);
+        cx->properties.duration = cx->stream->duration * av_q2d(cx->stream->time_base);
     } else if (cx->format_context->duration != AV_NOPTS_VALUE) {
-        cx->duration = cx->format_context->duration / (double) AV_TIME_BASE;
+        cx->properties.duration = cx->format_context->duration / (double) AV_TIME_BASE;
     } else {
-        cx->error = _("Unknown duration");
+        cx->properties.error = SPEK_AUDIO_NO_DURATION;
         return cx;
     }
-    if (cx->channels <= 0) {
-        cx->error = _("No audio channels");
+    if (cx->properties.channels <= 0) {
+        cx->properties.error = SPEK_AUDIO_NO_CHANNELS;
         return cx;
     }
     if (avcodec_open2(cx->codec_context, cx->codec, NULL) < 0) {
-        cx->error = _("Cannot open decoder");
+        cx->properties.error = SPEK_AUDIO_CANNOT_OPEN_DECODER;
         return cx;
     }
     switch (cx->codec_context->sample_fmt) {
     case SAMPLE_FMT_S16:
-        cx->width = 16;
-        cx->fp = false;
+        cx->properties.width = 16;
+        cx->properties.fp = false;
         break;
     case SAMPLE_FMT_S32:
-        cx->width = 32;
-        cx->fp = false;
+        cx->properties.width = 32;
+        cx->properties.fp = false;
         break;
     case SAMPLE_FMT_FLT:
-        cx->width = 32;
-        cx->fp = true;
+        cx->properties.width = 32;
+        cx->properties.fp = true;
         break;
     case SAMPLE_FMT_DBL:
-        cx->width = 64;
-        cx->fp = true;
+        cx->properties.width = 64;
+        cx->properties.fp = true;
         break;
     default:
-        cx->error = _("Unsupported sample format");
+        cx->properties.error = SPEK_AUDIO_BAD_SAMPLE_FORMAT;
         return cx;
     }
     cx->buffer_size = (AVCODEC_MAX_AUDIO_FRAME_SIZE * 3) / 2;
-    cx->buffer = av_malloc(cx->buffer_size);
+    cx->properties.buffer = av_malloc(cx->buffer_size);
     cx->packet = av_mallocz(sizeof(AVPacket));
     av_init_packet(cx->packet);
     cx->offset = 0;
@@ -133,16 +154,17 @@ struct spek_audio_context * spek_audio_open(const char *file_name)
 
 void spek_audio_start(struct spek_audio_context *cx, int samples)
 {
-    int64_t rate = cx->sample_rate * (int64_t) cx->stream->time_base.num;
+    int64_t rate = cx->properties.sample_rate * (int64_t) cx->stream->time_base.num;
     int64_t duration = (int64_t)
-        (cx->duration * cx->stream->time_base.den / cx->stream->time_base.num);
-    cx->error_base = samples * (int64_t)cx->stream->time_base.den;
-    cx->frames_per_interval = av_rescale_rnd(duration, rate, cx->error_base, AV_ROUND_DOWN);
-    cx->error_per_interval = (duration * rate) % cx->error_base;
+        (cx->properties.duration * cx->stream->time_base.den / cx->stream->time_base.num);
+    cx->properties.error_base = samples * (int64_t)cx->stream->time_base.den;
+    cx->properties.frames_per_interval = av_rescale_rnd(
+        duration, rate, cx->properties.error_base, AV_ROUND_DOWN);
+    cx->properties.error_per_interval = (duration * rate) % cx->properties.error_base;
 }
 
 int spek_audio_read(struct spek_audio_context *cx) {
-    if (cx->error) {
+    if (cx->properties.error) {
         return -1;
     }
 
@@ -150,7 +172,7 @@ int spek_audio_read(struct spek_audio_context *cx) {
         while (cx->packet->size > 0) {
             int buffer_size = cx->buffer_size;
             int len = avcodec_decode_audio3(
-                cx->codec_context, (int16_t *)cx->buffer, &buffer_size, cx->packet);
+                cx->codec_context, (int16_t *)cx->properties.buffer, &buffer_size, cx->packet);
             if (len < 0) {
                 // Error, skip the frame.
                 cx->packet->size = 0;
@@ -195,11 +217,11 @@ void spek_audio_close (struct spek_audio_context *cx)
     if (cx->short_name != NULL) {
         free(cx->short_name);
     }
-    if (cx->codec_name != NULL) {
-        free(cx->codec_name);
+    if (cx->properties.codec_name != NULL) {
+        free(cx->properties.codec_name);
     }
-    if (cx->buffer) {
-        av_free(cx->buffer);
+    if (cx->properties.buffer) {
+        av_free(cx->properties.buffer);
     }
     if (cx->packet) {
         if (cx->packet->data) {

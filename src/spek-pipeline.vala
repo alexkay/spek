@@ -25,9 +25,6 @@
 
 namespace Spek {
     public class Pipeline {
-        public string description { get; private set; }
-        public int sample_rate { get; private set; }
-        public double duration { get { return cx.duration; } }
         public delegate void Callback (int sample, float[] values);
 
         private Audio.Context cx;
@@ -61,33 +58,7 @@ namespace Spek {
             this.threshold = threshold;
             this.cb = cb;
 
-            // Build the description string.
-            string[] items = {};
-            if (cx.codec_name != null) {
-                items += cx.codec_name;
-            }
-            if (cx.bit_rate != 0) {
-                items += _("%d kbps").printf ((cx.bit_rate + 500) / 1000);
-            }
-            if (cx.sample_rate != 0) {
-                items += _("%d Hz").printf (cx.sample_rate);
-            }
-            // Show bits per sample only if there is no bitrate.
-            if (cx.bits_per_sample != 0 && cx.bit_rate == 0) {
-                items += ngettext (
-                    "%d bit", "%d bits", cx.bits_per_sample).printf (cx.bits_per_sample);
-            }
-            if (cx.channels != 0) {
-                items += ngettext ("%d channel", "%d channels", cx.channels).
-                    printf (cx.channels);
-            }
-            description = items.length > 0 ? string.joinv (", ", items) : "";
-
-            if (cx.error != null) {
-                // TRANSLATORS: first %s is the error message, second %s is stream description.
-                description = _("%s: %s").printf (cx.error, description);
-            } else {
-                this.sample_rate = cx.sample_rate;
+            if (!cx.error) {
                 this.nfft = 2 * bands - 2;
                 this.coss = new float[nfft];
                 float cf = 2f * (float) Math.PI / this.nfft;
@@ -109,7 +80,7 @@ namespace Spek {
         public void start () {
             stop ();
 
-            if (cx.error != null) return;
+            if (!cx.error) return;
 
             input_pos = 0;
             reader_mutex = new Mutex ();

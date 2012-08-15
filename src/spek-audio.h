@@ -26,29 +26,25 @@ extern "C" {
 #include <stdbool.h>
 #include <stdint.h>
 
-struct AVFormatContext;
-struct AVCodecContext;
-struct AVStream;
-struct AVCodec;
-struct AVPacket;
+struct spek_audio_context;
 
-struct spek_audio_context
+enum spek_audio_error
 {
-    // Internal data.
-    char *short_name;
-    AVFormatContext *format_context;
-    int audio_stream;
-    AVCodecContext *codec_context;
-    AVStream *stream;
-    AVCodec *codec;
-    int buffer_size;
-    AVPacket *packet;
-    int offset;
+    SPEK_AUDIO_OK = 0,
+    SPEK_AUDIO_CANNOT_OPEN_FILE,
+    SPEK_AUDIO_NO_STREAMS,
+    SPEK_AUDIO_NO_AUDIO,
+    SPEK_AUDIO_NO_DECODER,
+    SPEK_AUDIO_NO_DURATION,
+    SPEK_AUDIO_NO_CHANNELS,
+    SPEK_AUDIO_CANNOT_OPEN_DECODER,
+    SPEK_AUDIO_BAD_SAMPLE_FORMAT,
+};
 
-    // Exposed properties.
-    char *file_name;
+struct spek_audio_properties
+{
     char *codec_name;
-    char *error;
+    enum spek_audio_error error;
     int bit_rate;
     int sample_rate;
     int bits_per_sample;
@@ -56,6 +52,7 @@ struct spek_audio_context
     bool fp; // floating-point sample representation
     int channels;
     double duration;
+    // TODO: these four guys don't belong here, move them somewhere else when revamping the pipeline
     uint8_t *buffer;
     int64_t frames_per_interval;
     int64_t error_per_interval;
@@ -67,7 +64,9 @@ void spek_audio_init();
 
 // Open the file, check if it has an audio stream which can be decoded.
 // On error, initialises the `error` field in the returned context.
-struct spek_audio_context * spek_audio_open(const char *file_name);
+struct spek_audio_context * spek_audio_open(const char *path);
+
+const struct spek_audio_properties * spek_audio_get_properties(struct spek_audio_context *cs);
 
 // Prepare the context for reading audio samples.
 void spek_audio_start(struct spek_audio_context *cx, int samples);
