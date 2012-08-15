@@ -25,6 +25,7 @@
 #include "spek-spectrogram.hh"
 
 BEGIN_EVENT_TABLE(SpekSpectrogram, wxPanel)
+    EVT_IDLE(SpekSpectrogram::on_idle)
     EVT_PAINT(SpekSpectrogram::on_paint)
     EVT_SIZE(SpekSpectrogram::on_size)
 END_EVENT_TABLE()
@@ -71,6 +72,11 @@ void SpekSpectrogram::open(const wxString& path)
 
 void SpekSpectrogram::save(const wxString& path)
 {
+}
+
+void SpekSpectrogram::on_idle(wxIdleEvent& evt)
+{
+    Update();
 }
 
 void SpekSpectrogram::on_paint(wxPaintEvent& evt)
@@ -176,6 +182,7 @@ void SpekSpectrogram::pipeline_cb(int sample, float *values, void *cb_data)
     }
 
     s->Refresh(); // TODO: refresh only one pixel column
+    wxWakeUpIdle();
 }
 
 

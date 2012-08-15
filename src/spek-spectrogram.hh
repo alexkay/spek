@@ -31,6 +31,7 @@ public:
     void save(const wxString& path);
 
 private:
+    void on_idle(wxIdleEvent& evt);
     void on_paint(wxPaintEvent& evt);
     void on_size(wxSizeEvent& evt);
     void render(wxDC& dc);
