@@ -136,6 +136,16 @@ void SpekSpectrogram::render(wxDC& dc)
         // Draw the spectrogram.
         wxBitmap bmp(this->image.Scale(w - LPAD - RPAD, h - TPAD - BPAD /*TODO:, wxIMAGE_QUALITY_HIGH*/));
         dc.DrawBitmap(bmp, LPAD, TPAD);
+
+        // File name.
+        dc.SetFont(large_font);
+        // TODO: ellipsize
+        dc.DrawText(this->path, LPAD, TPAD - 2 * GAP - normal_height - large_height);
+
+        // File properties.
+        dc.SetFont(normal_font);
+        // TODO: ellipsize
+        dc.DrawText(this->desc, LPAD, TPAD - GAP - normal_height);
     }
 
     // Border around the spectrogram.

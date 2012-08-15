@@ -92,25 +92,6 @@ namespace Spek {
                 cr.translate (LPAD, TPAD);
                 rate_ruler.draw (cr, layout);
                 cr.identity_matrix ();
-
-                // File properties.
-                cr.move_to (LPAD, TPAD - GAP);
-                layout.set_font_description (FontDescription.from_string (
-                    "Sans " + (9 * FONT_SCALE).to_string ()));
-                layout.set_width ((int) (w - LPAD - RPAD) * Pango.SCALE);
-                layout.set_ellipsize (EllipsizeMode.END);
-                layout.set_text (info, -1);
-                cairo_show_layout_line (cr, layout.get_line (0));
-                layout.get_pixel_size (out text_width, out text_height);
-
-                // File name.
-                cr.move_to (LPAD, TPAD - 2 * GAP - text_height);
-                layout.set_font_description (FontDescription.from_string (
-                    "Sans Bold " + (10 * FONT_SCALE).to_string ()));
-                layout.set_width ((int) (w - LPAD - RPAD) * Pango.SCALE);
-                layout.set_ellipsize (EllipsizeMode.START);
-                layout.set_text (file_name, -1);
-                cairo_show_layout_line (cr, layout.get_line (0));
             }
 
             // Prepare to draw the ruler.
