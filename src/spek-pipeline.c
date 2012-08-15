@@ -47,6 +47,7 @@ struct spek_pipeline
     int samples;
     int threshold;
     spek_pipeline_cb cb;
+    void *cb_data;
 
     struct spek_fft_plan *fft;
     float *coss; // Pre-computed cos table.
@@ -79,7 +80,7 @@ static void reader_sync(struct spek_pipeline *p, int pos);
 static float average_input(const struct spek_pipeline *p, void *buffer);
 
 struct spek_pipeline * spek_pipeline_open(
-    const char *path, int bands, int samples, int threshold, spek_pipeline_cb cb)
+    const char *path, int bands, int samples, int threshold, spek_pipeline_cb cb, void *cb_data)
 {
     struct spek_pipeline *p = malloc(sizeof(struct spek_pipeline));
     p->cx = spek_audio_open(path);
@@ -88,6 +89,7 @@ struct spek_pipeline * spek_pipeline_open(
     p->samples = samples;
     p->threshold = threshold;
     p->cb = cb;
+    p->cb_data = cb_data;
 
     p->coss = NULL;
     p->fft = NULL;
@@ -113,6 +115,11 @@ struct spek_pipeline * spek_pipeline_open(
         p->output = malloc(bands * sizeof(float));
         spek_audio_start(p->cx, samples);
     }
+}
+
+const struct spek_audio_properties * spek_pipeline_properties(struct spek_pipeline *pipeline)
+{
+    return pipeline->properties;
 }
 
 void spek_pipeline_start(struct spek_pipeline *p)
@@ -176,6 +183,7 @@ void spek_pipeline_close(struct spek_pipeline *p) {
         spek_audio_close(p->cx);
         p->cx = NULL;
     }
+    free(p);
 }
 
 static void * reader_func (void *pp) {
@@ -310,7 +318,7 @@ static void * worker_func (void *pp) {
                 }
 
                 if (sample == p->samples) break;
-                p->cb(sample++, p->output);
+                p->cb(sample++, p->output, p->cb_data);
 
                 memset(p->output, 0, sizeof(float) * p->bands);
                 frames = 0;

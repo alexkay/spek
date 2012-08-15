@@ -21,6 +21,8 @@
 
 #include <wx/wx.h>
 
+struct spek_pipeline;
+
 class SpekSpectrogram : public wxPanel
 {
 public:
@@ -33,11 +35,14 @@ private:
     void render(wxDC& dc);
 
     void start();
-    uint32_t get_color(double level);
+    static void pipeline_cb(int sample, float *values, void *cb_data);
+    static uint32_t get_color(double level);
 
+    spek_pipeline *pipeline;
     wxString path;
-    wxString info;
+    wxString desc;
     wxImage palette;
+    wxImage image;
 
     DECLARE_EVENT_TABLE()
 };

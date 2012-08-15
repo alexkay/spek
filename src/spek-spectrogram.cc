@@ -16,7 +16,11 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <cmath>
 #include <wx/dcbuffer.h>
+
+#include "spek-audio-desc.hh"
+#include "spek-pipeline.h"
 
 #include "spek-spectrogram.hh"
 
@@ -39,7 +43,9 @@ enum
 
 SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
     wxPanel(parent, -1, wxDefaultPosition, wxDefaultSize, wxFULL_REPAINT_ON_RESIZE),
-    palette(RULER, BANDS)
+    pipeline(NULL),
+    palette(RULER, BANDS),
+    image()
 {
     SetBackgroundStyle(wxBG_STYLE_CUSTOM);
 
@@ -122,8 +128,57 @@ void SpekSpectrogram::render(wxDC& dc)
     dc.DrawBitmap(bmp, w - RPAD + GAP, TPAD);
 }
 
+void SpekSpectrogram::pipeline_cb(int sample, float *values, void *cb_data)
+{
+    static double log10_threshold = log10(-THRESHOLD);
+    SpekSpectrogram *s = (SpekSpectrogram *)cb_data;
+
+    for (int y = 0; y < BANDS; y++) {
+        double level = log10(1.0 - THRESHOLD + values[y]) / log10_threshold;
+        if (level > 1.0) level = 1.0;
+        uint32_t color = get_color(level);
+        s->image.SetRGB(
+            sample,
+            y,
+            color >> 16,
+            (color >> 8) & 0xFF,
+            color & 0xFF
+        );
+    }
+
+    s->Refresh(false); // TODO: refresh only one pixel column
+}
+
+
 void SpekSpectrogram::start()
 {
+    if(this->pipeline) {
+        spek_pipeline_close(this->pipeline);
+        this->pipeline = NULL;
+    }
+
+    // The number of samples is the number of pixels available for the image.
+    // The number of bands is fixed, FFT results are very different for
+    // different values but we need some consistency.
+    wxSize size = GetClientSize();
+    int samples = size.GetWidth() - LPAD - RPAD;
+    if (samples > 0) {
+        this->image.Create(samples, BANDS);
+        this->pipeline = spek_pipeline_open(
+            this->path.utf8_str(),
+            BANDS,
+            samples,
+            THRESHOLD,
+            pipeline_cb,
+            this
+        );
+        spek_pipeline_start(this->pipeline);
+        this->desc = spek_audio_desc(spek_pipeline_properties(this->pipeline));
+    } else {
+        this->image.Create(1, 1);
+    }
+
+    Refresh(false);
 }
 
 // Modified version of Dan Bruton's algorithm:

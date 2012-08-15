@@ -24,8 +24,6 @@ using Pango;
 namespace Spek {
     class Spectrogram : DrawingArea {
 
-        private Pipeline pipeline;
-
         private ImageSurface image;
 
         public Spectrogram () {
@@ -38,30 +36,6 @@ namespace Spek {
             surface.write_to_png (file_name);
         }
 
-        private void start () {
-            if (pipeline != null) {
-                pipeline.stop ();
-            }
-
-            // The number of samples is the number of pixels available for the image.
-            // The number of bands is fixed, FFT results are very different for
-            // different values but we need some consistency.
-            Allocation allocation;
-            get_allocation (out allocation);
-            int samples = allocation.width - LPAD - RPAD;
-            if (samples > 0) {
-                image = new ImageSurface (Format.RGB24, samples, BANDS);
-                pipeline = new Pipeline (file_name, BANDS, samples, THRESHOLD, data_cb);
-                pipeline.start ();
-                info = pipeline.description;
-            } else {
-                image = null;
-                pipeline = null;
-            }
-
-            queue_draw ();
-        }
-
         private int prev_width = -1;
         protected override void size_allocate (Gdk.Rectangle allocation) {
             base.size_allocate (allocation);
@@ -72,16 +46,6 @@ namespace Spek {
             if (file_name != null && width_changed) {
                 start ();
             }
-        }
-
-        private double log10_threshold = Math.log10 (-THRESHOLD);
-        private void data_cb (int sample, float[] values) {
-            for (int y = 0; y < BANDS; y++) {
-                var level = double.min (
-                    1.0, Math.log10 (1.0 - THRESHOLD + values[y]) / log10_threshold);
-                put_pixel (image, sample, y, get_color (level));
-            }
-            Idle.add (() => { queue_draw (); return false; });
         }
 
         protected override bool expose_event (EventExpose event) {
