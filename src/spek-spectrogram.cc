@@ -26,6 +26,7 @@
 
 BEGIN_EVENT_TABLE(SpekSpectrogram, wxPanel)
     EVT_PAINT(SpekSpectrogram::on_paint)
+    EVT_SIZE(SpekSpectrogram::on_size)
 END_EVENT_TABLE()
 
 enum
@@ -45,7 +46,8 @@ SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
     wxPanel(parent, -1, wxDefaultPosition, wxDefaultSize, wxFULL_REPAINT_ON_RESIZE),
     pipeline(NULL),
     palette(RULER, BANDS),
-    image()
+    image(1, 1),
+    prev_width(-1)
 {
     SetBackgroundStyle(wxBG_STYLE_CUSTOM);
 
@@ -75,6 +77,17 @@ void SpekSpectrogram::on_paint(wxPaintEvent& evt)
 {
     wxAutoBufferedPaintDC dc(this);
     render(dc);
+}
+
+void SpekSpectrogram::on_size(wxSizeEvent& evt)
+{
+    wxSize size = GetClientSize();
+    bool width_changed = this->prev_width != size.GetWidth();
+    this->prev_width = size.GetWidth();
+
+    if (!this->path.IsEmpty() && width_changed) {
+        start();
+    }
 }
 
 void SpekSpectrogram::render(wxDC& dc)
@@ -119,6 +132,12 @@ void SpekSpectrogram::render(wxDC& dc)
         TPAD - 2 * GAP - 2 * normal_height
     );
 
+    if (this->image.GetHeight() > 1) {
+        // Draw the spectrogram.
+        wxBitmap bmp(this->image.Scale(w - LPAD - RPAD, h - TPAD - BPAD /*TODO:, wxIMAGE_QUALITY_HIGH*/));
+        dc.DrawBitmap(bmp, LPAD, TPAD);
+    }
+
     // Border around the spectrogram.
     // TODO: check if this uses antialiasing
     dc.DrawRectangle(LPAD, TPAD, w - LPAD - RPAD, h - TPAD - BPAD);
@@ -139,20 +158,20 @@ void SpekSpectrogram::pipeline_cb(int sample, float *values, void *cb_data)
         uint32_t color = get_color(level);
         s->image.SetRGB(
             sample,
-            y,
+            BANDS - y - 1,
             color >> 16,
             (color >> 8) & 0xFF,
             color & 0xFF
         );
     }
 
-    s->Refresh(false); // TODO: refresh only one pixel column
+    s->Refresh(); // TODO: refresh only one pixel column
 }
 
 
 void SpekSpectrogram::start()
 {
-    if(this->pipeline) {
+    if (this->pipeline) {
         spek_pipeline_close(this->pipeline);
         this->pipeline = NULL;
     }
@@ -178,7 +197,7 @@ void SpekSpectrogram::start()
         this->image.Create(1, 1);
     }
 
-    Refresh(false);
+    Refresh();
 }
 
 // Modified version of Dan Bruton's algorithm:

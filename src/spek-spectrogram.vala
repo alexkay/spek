@@ -36,18 +36,6 @@ namespace Spek {
             surface.write_to_png (file_name);
         }
 
-        private int prev_width = -1;
-        protected override void size_allocate (Gdk.Rectangle allocation) {
-            base.size_allocate (allocation);
-
-            bool width_changed = prev_width != allocation.width;
-            prev_width = allocation.width;
-
-            if (file_name != null && width_changed) {
-                start ();
-            }
-        }
-
         protected override bool expose_event (EventExpose event) {
             var window = get_window ();
             var cr = cairo_create (window);
@@ -64,13 +52,6 @@ namespace Spek {
             int text_width, text_height;
 
             if (image != null) {
-                // Draw the spectrogram.
-                cr.translate (LPAD, h - BPAD);
-                cr.scale (1, -(h - TPAD - BPAD) / image.get_height ());
-                cr.set_source_surface (image, 0, 0);
-                cr.paint ();
-                cr.identity_matrix ();
-
                 // Prepare to draw the rulers.
                 cr.set_source_rgb (1, 1, 1);
                 cr.set_line_width (1);

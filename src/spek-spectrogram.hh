@@ -32,6 +32,7 @@ public:
 
 private:
     void on_paint(wxPaintEvent& evt);
+    void on_size(wxSizeEvent& evt);
     void render(wxDC& dc);
 
     void start();
@@ -43,6 +44,7 @@ private:
     wxString desc;
     wxImage palette;
     wxImage image;
+    int prev_width;
 
     DECLARE_EVENT_TABLE()
 };

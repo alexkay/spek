@@ -115,6 +115,8 @@ struct spek_pipeline * spek_pipeline_open(
         p->output = malloc(bands * sizeof(float));
         spek_audio_start(p->cx, samples);
     }
+
+    return p;
 }
 
 const struct spek_audio_properties * spek_pipeline_properties(struct spek_pipeline *pipeline)
@@ -124,7 +126,7 @@ const struct spek_audio_properties * spek_pipeline_properties(struct spek_pipeli
 
 void spek_pipeline_start(struct spek_pipeline *p)
 {
-    if (!p->properties->error) return;
+    if (p->properties->error) return;
 
     p->input_pos = 0;
     p->worker_done = false;
