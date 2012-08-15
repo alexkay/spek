@@ -29,8 +29,7 @@ AC_MSG_RESULT([$os])
 
 AC_CHECK_LIB(m, log10)
 
-pkg_modules="libavformat >= 52.111 libavcodec >= 52.123 libavutil"
-PKG_CHECK_MODULES(FFMPEG, [$pkg_modules])
+PKG_CHECK_MODULES(FFMPEG, [libavformat >= 52.111 libavcodec >= 52.123 libavutil])
 
 AM_OPTIONS_WXCONFIG
 reqwx=2.8.0

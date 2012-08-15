@@ -1,4 +1,4 @@
-/* spek-fft.h
+/* spek-pipeline.h
  *
  * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
@@ -16,35 +16,26 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SPEK_FFT_H_
-#define SPEK_FFT_H_
+#ifndef SPEK_PIPELINE_H_
+#define SPEK_PIPELINE_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-struct RDFTContext;
+struct spek_pipeline;
+struct spek_audio_properties;
 
-struct spek_fft_plan
-{
-    // Internal data.
-    struct RDFTContext *cx;
-    int n;
-    int threshold;
+typedef void (*spek_pipeline_cb)(int sample, float *values);
 
-    // Exposed properties.
-    float *input;
-    float *output;
-};
+struct spek_pipeline * spek_pipeline_open(
+    const char *path, int bands, int samples, int threshold, spek_pipeline_cb cb);
 
-// Allocate buffers and create a new FFT plan.
-struct spek_fft_plan * spek_fft_plan_new(int n, int threshold);
+void spek_pipeline_start(struct spek_pipeline *pipeline);
 
-// Execute the FFT on plan->input.
-void spek_fft_execute(struct spek_fft_plan *p);
+const struct spek_audio_properties * spek_pipeline_properties(struct spek_pipeline *pipeline);
 
-// Destroy the plan and de-allocate buffers.
-void spek_fft_delete(struct spek_fft_plan *p);
+void spek_pipeline_close(struct spek_pipeline *pipeline);
 
 #ifdef __cplusplus
 }

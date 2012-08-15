@@ -8,6 +8,8 @@ spek_SOURCES = \
 	spek-audio-desc.hh \
 	spek-fft.c \
 	spek-fft.h \
+	spek-pipeline.c \
+	spek-pipeline.h \
 	spek-platform.cc \
 	spek-platform.hh \
 	spek-preferences.cc \
@@ -19,6 +21,7 @@ spek_SOURCES = \
 
 spek_CPPFLAGS = \
 	-include config.h \
+	-pthread \
 	$(WX_CPPFLAGS)
 
 spek_CFLAGS = \
@@ -26,9 +29,11 @@ spek_CFLAGS = \
 	$(WX_CFLAGS_ONLY)
 
 spek_CXXFLAGS = \
-	$(FFMPEG_CFLAGS) \
 	$(WX_CXXFLAGS_ONLY)
 
 spek_LDADD = \
 	$(FFMPEG_LIBS) \
 	$(WX_LIBS)
+
+spek_LDFLAGS = \
+	-pthread

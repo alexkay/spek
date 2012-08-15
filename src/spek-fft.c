@@ -17,6 +17,7 @@
  */
 
 #include <math.h>
+#include <libavcodec/avfft.h>
 #include <libavutil/mem.h>
 
 #include "spek-fft.h"
@@ -55,7 +56,7 @@ void spek_fft_execute(struct spek_fft_plan *p)
     }
 }
 
-void spek_fft_destroy(struct spek_fft_plan *p)
+void spek_fft_delete(struct spek_fft_plan *p)
 {
     av_rdft_end(p->cx);
     av_free(p->input);
