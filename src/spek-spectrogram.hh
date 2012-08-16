@@ -22,6 +22,7 @@
 #include <stdint.h>
 #include <wx/wx.h>
 
+struct spek_audio_properties;
 struct spek_pipeline;
 
 class SpekSpectrogram : public wxPanel
@@ -42,6 +43,7 @@ private:
     static uint32_t get_color(double level);
 
     spek_pipeline *pipeline;
+    const spek_audio_properties *properties;
     wxString path;
     wxString desc;
     wxImage palette;

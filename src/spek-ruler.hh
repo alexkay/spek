@@ -33,22 +33,29 @@ public:
         LEFT
     };
 
-    SpekRuler(Position pos, wxString sample_label, int *factors, int units, double spacing);
+    typedef wxString (*formatter_cb)(int unit);
+
+    SpekRuler(
+        int x, int y, Position pos, wxString sample_label,
+        int *factors, int units, double spacing,
+        double scale, double offset, formatter_cb formatter
+    );
 
     void draw(wxDC& dc);
 
 protected:
-    virtual double measure(int unit) = 0;
-    virtual double place(double p) = 0;
-    virtual wxString format(int unit) = 0;
-
     void draw_tick(wxDC& dc, int tick);
 
+    int x;
+    int y;
     Position pos;
     wxString sample_label;
     int *factors;
     int units;
     double spacing;
+    double scale;
+    double offset;
+    formatter_cb formatter;
 };
 
 #endif

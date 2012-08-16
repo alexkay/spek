@@ -19,8 +19,10 @@
 #include <cmath>
 #include <wx/dcbuffer.h>
 
+#include "spek-audio.h"
 #include "spek-audio-desc.hh"
 #include "spek-pipeline.h"
+#include "spek-ruler.hh"
 
 #include "spek-spectrogram.hh"
 
@@ -46,6 +48,7 @@ enum
 SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
     wxPanel(parent, -1, wxDefaultPosition, wxDefaultSize, wxFULL_REPAINT_ON_RESIZE),
     pipeline(NULL),
+    properties(NULL),
     palette(RULER, BANDS),
     image(1, 1),
     prev_width(-1)
@@ -94,6 +97,22 @@ void SpekSpectrogram::on_size(wxSizeEvent& evt)
     if (!this->path.IsEmpty() && width_changed) {
         start();
     }
+}
+
+static wxString time_formatter(int unit)
+{
+    // TODO: i18n
+    return wxString::Format(wxT("%d:%02d"), unit / 60, unit % 60);
+}
+
+static wxString freq_formatter(int unit)
+{
+    return wxString::Format(_("%d kHz"), unit / 1000);
+}
+
+static wxString density_formatter(int unit)
+{
+    return wxString::Format(_("%d dB"), -unit);
 }
 
 void SpekSpectrogram::render(wxDC& dc)
@@ -152,6 +171,45 @@ void SpekSpectrogram::render(wxDC& dc)
         dc.SetFont(normal_font);
         // TODO: ellipsize
         dc.DrawText(this->desc, LPAD, TPAD - GAP - normal_height);
+
+        // Prepare to draw the rulers.
+        dc.SetFont(small_font);
+
+        // Time ruler.
+        double duration = this->properties->duration;
+        int time_factors[] = {1, 2, 5, 10, 20, 30, 1*60, 2*60, 5*60, 10*60, 20*60, 30*60, 0};
+        SpekRuler time_ruler(
+            LPAD,
+            h - BPAD,
+            SpekRuler::BOTTOM,
+            // TODO: i18n
+            wxT("00:00"),
+            time_factors,
+            (int)duration,
+            1.5,
+            (w - LPAD - RPAD) / duration,
+            0.0,
+            time_formatter
+        );
+        time_ruler.draw(dc);
+
+        // Frequency ruler.
+        int freq = this->properties->sample_rate / 2;
+        int freq_factors[] = {1000, 2000, 5000, 10000, 20000, 0};
+        SpekRuler freq_ruler(
+            LPAD,
+            TPAD,
+            SpekRuler::LEFT,
+            // TRANSLATORS: keep "00" unchanged, it's used to calc the text width
+            _("00 kHz"),
+            freq_factors,
+            freq,
+            3.0,
+            (h - TPAD - BPAD) / (double)freq,
+            0.0,
+            freq_formatter
+        );
+        freq_ruler.draw(dc);
     }
 
     // Border around the spectrogram.
@@ -161,6 +219,26 @@ void SpekSpectrogram::render(wxDC& dc)
     // The palette.
     wxBitmap bmp(this->palette.Scale(RULER, h - TPAD - BPAD + 1 /*TODO:, wxIMAGE_QUALITY_HIGH*/));
     dc.DrawBitmap(bmp, w - RPAD + GAP, TPAD);
+
+    // Prepare to draw the ruler.
+    dc.SetFont(small_font);
+
+    // Spectral density.
+    int density_factors[] = {1, 2, 5, 10, 20, 50, 0};
+    SpekRuler density_ruler(
+        w - RPAD + GAP + RULER,
+        TPAD,
+        SpekRuler::RIGHT,
+        // TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
+        _("-00 dB"),
+        density_factors,
+        -THRESHOLD,
+        3.0,
+        (h - TPAD - BPAD) / (double)THRESHOLD,
+        h - TPAD - BPAD,
+        density_formatter
+    );
+    density_ruler.draw(dc);
 }
 
 void SpekSpectrogram::pipeline_cb(int sample, float *values, void *cb_data)
@@ -191,6 +269,7 @@ void SpekSpectrogram::start()
     if (this->pipeline) {
         spek_pipeline_close(this->pipeline);
         this->pipeline = NULL;
+        this->properties = NULL;
     }
 
     // The number of samples is the number of pixels available for the image.
@@ -209,7 +288,8 @@ void SpekSpectrogram::start()
             this
         );
         spek_pipeline_start(this->pipeline);
-        this->desc = spek_audio_desc(spek_pipeline_properties(this->pipeline));
+        this->properties = spek_pipeline_properties(this->pipeline);
+        this->desc = spek_audio_desc(this->properties);
     } else {
         this->image.Create(1, 1);
     }
