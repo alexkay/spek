@@ -34,6 +34,9 @@ public:
     // Setting non-default locale under GTK+ is tricky (see e.g. how FileZilla does it). We will
     // just disable the language setting for GTK+ users and will always use the system locale.
     static bool can_change_language();
+
+    // Fonts are smaller on OSX.
+    static double font_scale();
 };
 
 extern "C" {

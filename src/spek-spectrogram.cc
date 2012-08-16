@@ -22,6 +22,7 @@
 #include "spek-audio.h"
 #include "spek-audio-desc.hh"
 #include "spek-pipeline.h"
+#include "spek-platform.hh"
 #include "spek-ruler.hh"
 
 #include "spek-spectrogram.hh"
@@ -127,12 +128,17 @@ void SpekSpectrogram::render(wxDC& dc)
     dc.SetPen(*wxWHITE_PEN);
     dc.SetBrush(*wxTRANSPARENT_BRUSH);
     dc.SetTextForeground(wxColour(255, 255, 255));
-    wxFont normal_font = wxFont(9, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+    wxFont normal_font = wxFont(
+        (int)round(9 * SpekPlatform::font_scale()),
+        wxFONTFAMILY_SWISS,
+        wxFONTSTYLE_NORMAL,
+        wxFONTWEIGHT_NORMAL
+    );
     wxFont large_font = wxFont(normal_font);
-    large_font.SetPointSize(10);
+    large_font.SetPointSize((int)round(10 * SpekPlatform::font_scale()));
     large_font.SetWeight(wxFONTWEIGHT_BOLD);
     wxFont small_font = wxFont(normal_font);
-    small_font.SetPointSize(8);
+    small_font.SetPointSize((int)round(8 * SpekPlatform::font_scale()));
     dc.SetFont(normal_font);
     int normal_height = dc.GetTextExtent(wxT("dummy")).GetHeight();
     dc.SetFont(large_font);

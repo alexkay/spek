@@ -59,6 +59,15 @@ bool SpekPlatform::can_change_language()
 #endif
 }
 
+double SpekPlatform::font_scale()
+{
+#ifdef OS_OSX
+    return 1.3;
+#else
+    return 1.0;
+#endif
+}
+
 char * spek_platform_short_path(const char *path)
 {
 #ifdef OS_WIN
