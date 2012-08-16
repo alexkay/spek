@@ -36,18 +36,6 @@ namespace Spek {
             surface.write_to_png (file_name);
         }
 
-        protected override bool expose_event (EventExpose event) {
-            var window = get_window ();
-            var cr = cairo_create (window);
-
-            // Clip to the exposed area.
-            cr.rectangle (event.area.x, event.area.y, event.area.width, event.area.height);
-            cr.clip ();
-
-            draw (cr);
-            return true;
-        }
-
         private void draw (Cairo.Context cr) {
             int text_width, text_height;
 

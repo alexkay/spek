@@ -14,6 +14,8 @@ spek_SOURCES = \
 	spek-platform.hh \
 	spek-preferences.cc \
 	spek-preferences.hh \
+	spek-ruler.cc \
+	spek-ruler.hh \
 	spek-spectrogram.cc \
 	spek-spectrogram.hh \
 	spek-window.cc \
