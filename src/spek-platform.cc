@@ -18,11 +18,24 @@
 
 #include <cstring>
 
+#ifdef OS_OSX
+#include <ApplicationServices/ApplicationServices.h>
+#endif
+
 #include <wx/filename.h>
 #include <wx/stdpaths.h>
 #include <wx/utils.h>
 
 #include "spek-platform.hh"
+
+void SpekPlatform::init()
+{
+#ifdef OS_OSX
+    ProcessSerialNumber PSN;
+    GetCurrentProcess(&PSN);
+    TransformProcessType(&PSN, kProcessTransformToForegroundApplication);
+#endif
+}
 
 wxString SpekPlatform::config_path(const wxString& app_name)
 {
