@@ -19,6 +19,7 @@
 #ifndef SPEK_SPECTROGRAM_HH_
 #define SPEK_SPECTROGRAM_HH_
 
+#include <stdint.h>
 #include <wx/wx.h>
 
 struct spek_pipeline;
