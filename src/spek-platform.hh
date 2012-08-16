@@ -26,7 +26,7 @@ class SpekPlatform
 {
 public:
     // Platform-specific initialisation code.
-    void init();
+    static void init();
 
     // Not quite XDG-compatible, but close enough.
     static wxString config_path(const wxString& app_name);

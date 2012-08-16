@@ -20,6 +20,7 @@
 #include <wx/log.h>
 
 #include "spek-audio.h"
+#include "spek-platform.hh"
 #include "spek-preferences.hh"
 
 #include "spek-window.hh"
@@ -39,6 +40,7 @@ IMPLEMENT_APP(Spek)
 
 bool Spek::OnInit()
 {
+    SpekPlatform::init();
     SpekPreferences::get().init();
     spek_audio_init();
 
