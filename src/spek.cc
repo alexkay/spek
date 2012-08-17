@@ -58,20 +58,21 @@ void Spek::OnInitCmdLine(wxCmdLineParser& parser)
 {
     wxCmdLineEntryDesc desc[] = {{
             wxCMD_LINE_SWITCH,
-            wxT("h"),
-            wxT("help"), _("Show this help message"),
+            wxT_2("h"),
+            wxT_2("help"),
+            wxT_2("Show this help message"),
             wxCMD_LINE_VAL_NONE,
             wxCMD_LINE_OPTION_HELP
         }, {
             wxCMD_LINE_SWITCH,
-            wxT("V"),
-            wxT("version"),
-            _("Display the version and exit")
+            wxT_2("V"),
+            wxT_2("version"),
+            wxT_2("Display the version and exit")
         }, {
             wxCMD_LINE_PARAM,
             NULL,
             NULL,
-            _("FILE"),
+            wxT_2("FILE"),
             wxCMD_LINE_VAL_STRING,
             wxCMD_LINE_PARAM_OPTIONAL
         }, {
