@@ -47,6 +47,9 @@ enum
     RULER = 10,
 };
 
+// Forward declarations.
+static wxString trim(wxDC& dc, const wxString& s, int length, bool trim_end);
+
 SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
     wxPanel(parent, -1, wxDefaultPosition, wxDefaultSize, wxFULL_REPAINT_ON_RESIZE),
     pipeline(NULL),
@@ -176,13 +179,19 @@ void SpekSpectrogram::render(wxDC& dc)
 
         // File name.
         dc.SetFont(large_font);
-        // TODO: ellipsize
-        dc.DrawText(this->path, LPAD, TPAD - 2 * GAP - normal_height - large_height);
+        dc.DrawText(
+            trim(dc, this->path, w - LPAD - RPAD, false),
+            LPAD,
+            TPAD - 2 * GAP - normal_height - large_height
+        );
 
         // File properties.
         dc.SetFont(normal_font);
-        // TODO: ellipsize
-        dc.DrawText(this->desc, LPAD, TPAD - GAP - normal_height);
+        dc.DrawText(
+            trim(dc, this->desc, w - LPAD - RPAD, true),
+            LPAD,
+            TPAD - GAP - normal_height
+        );
 
         // Prepare to draw the rulers.
         dc.SetFont(small_font);
@@ -307,4 +316,34 @@ void SpekSpectrogram::start()
     }
 
     Refresh();
+}
+
+// Trim `s` so that it fits into `length`.
+static wxString trim(wxDC& dc, const wxString& s, int length, bool trim_end)
+{
+    if (length <= 0) {
+        return wxEmptyString;
+    }
+
+    // Check if the entire string fits.
+    wxSize size = dc.GetTextExtent(s);
+    if (size.GetWidth() <= length) {
+        return s;
+    }
+
+    // Binary search FTW!
+    wxString fix(wxT("..."));
+    int i = 0;
+    int k = s.length();
+    while (k - i > 1) {
+        int j = (i + k) / 2;
+        size = dc.GetTextExtent(trim_end ? s.substr(0, j) + fix : fix + s.substr(j));
+        if (trim_end != (size.GetWidth() > length)) {
+            i = j;
+        } else {
+            k = j;
+        }
+    }
+
+    return trim_end ? s.substr(0, i) + fix : fix + s.substr(k);
 }
