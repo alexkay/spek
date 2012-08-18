@@ -1,13 +1,14 @@
 bin_PROGRAMS = spek
 
 spek_SOURCES = \
-	spek.cc \
-	spek-audio.c \
-	spek-audio.h \
 	spek-audio-desc.cc \
 	spek-audio-desc.hh \
+	spek-audio.c \
+	spek-audio.h \
 	spek-fft.c \
 	spek-fft.h \
+	spek-palette.c \
+	spek-palette.h \
 	spek-pipeline.c \
 	spek-pipeline.h \
 	spek-platform.cc \
@@ -19,7 +20,8 @@ spek_SOURCES = \
 	spek-spectrogram.cc \
 	spek-spectrogram.hh \
 	spek-window.cc \
-	spek-window.hh
+	spek-window.hh \
+	spek.cc
 
 spek_CPPFLAGS = \
 	-include config.h \

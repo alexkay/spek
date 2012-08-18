@@ -21,6 +21,7 @@
 
 #include "spek-audio.h"
 #include "spek-audio-desc.hh"
+#include "spek-palette.h"
 #include "spek-pipeline.h"
 #include "spek-platform.hh"
 #include "spek-ruler.hh"
@@ -58,7 +59,7 @@ SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
 
     // Pre-draw the palette.
     for (int y = 0; y < BANDS; y++) {
-        uint32_t color = get_color(y / (double) BANDS);
+        uint32_t color = spek_palette_spectrum(y / (double) BANDS);
         this->palette.SetRGB(
             wxRect(0, BANDS - y - 1, RULER, 1),
             color >> 16,
@@ -260,7 +261,7 @@ void SpekSpectrogram::pipeline_cb(int sample, float *values, void *cb_data)
     for (int y = 0; y < BANDS; y++) {
         double level = log10(1.0 - THRESHOLD + values[y]) / log10_threshold;
         if (level > 1.0) level = 1.0;
-        uint32_t color = get_color(level);
+        uint32_t color = spek_palette_spectrum(level);
         s->image.SetRGB(
             sample,
             BANDS - y - 1,
@@ -306,47 +307,4 @@ void SpekSpectrogram::start()
     }
 
     Refresh();
-}
-
-// Modified version of Dan Bruton's algorithm:
-// http://www.physics.sfasu.edu/astro/color/spectra.html
-// TODO: Move out to a C function.
-uint32_t SpekSpectrogram::get_color(double level)
-{
-    level *= 0.6625;
-    double r = 0.0, g = 0.0, b = 0.0;
-    if (level >= 0 && level < 0.15) {
-        r = (0.15 - level) / (0.15 + 0.075);
-        g = 0.0;
-        b = 1.0;
-    } else if (level >= 0.15 && level < 0.275) {
-        r = 0.0;
-        g = (level - 0.15) / (0.275 - 0.15);
-        b = 1.0;
-    } else if (level >= 0.275 && level < 0.325) {
-        r = 0.0;
-        g = 1.0;
-        b = (0.325 - level) / (0.325 - 0.275);
-    } else if (level >= 0.325 && level < 0.5) {
-        r = (level - 0.325) / (0.5 - 0.325);
-        g = 1.0;
-        b = 0.0;
-    } else if (level >= 0.5 && level < 0.6625) {
-        r = 1.0;
-        g = (0.6625 - level) / (0.6625 - 0.5f);
-        b = 0.0;
-    }
-
-    // Intensity correction.
-    double cf = 1.0;
-    if (level >= 0.0 && level < 0.1) {
-        cf = level / 0.1;
-    }
-    cf *= 255.0;
-
-    // Pack RGB values into a 32-bit uint.
-    uint32_t rr = (uint32_t) (r * cf + 0.5);
-    uint32_t gg = (uint32_t) (g * cf + 0.5);
-    uint32_t bb = (uint32_t) (b * cf + 0.5);
-    return (rr << 16) + (gg << 8) + bb;
 }

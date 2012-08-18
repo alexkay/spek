@@ -19,7 +19,6 @@
 #ifndef SPEK_SPECTROGRAM_HH_
 #define SPEK_SPECTROGRAM_HH_
 
-#include <stdint.h>
 #include <wx/wx.h>
 
 struct spek_audio_properties;
@@ -40,7 +39,6 @@ private:
 
     void start();
     static void pipeline_cb(int sample, float *values, void *cb_data);
-    static uint32_t get_color(double level);
 
     spek_pipeline *pipeline;
     const spek_audio_properties *properties;
