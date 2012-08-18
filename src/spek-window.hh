@@ -37,6 +37,8 @@ private:
     void open(const wxString& path);
 
     SpekSpectrogram *spectrogram;
+    wxString path;
+    wxString cur_dir;
 
     DECLARE_EVENT_TABLE()
 };

@@ -31,7 +31,8 @@ BEGIN_EVENT_TABLE(SpekWindow, wxFrame)
     EVT_MENU(wxID_ABOUT, SpekWindow::on_about)
 END_EVENT_TABLE()
 
-SpekWindow::SpekWindow(const wxString& path) : wxFrame(NULL, -1, wxEmptyString)
+SpekWindow::SpekWindow(const wxString& path) :
+    path(path), wxFrame(NULL, -1, wxEmptyString)
 {
     SetTitle(_("Spek - Acoustic Spectrum Analyser"));
     // TODO: test on all platforms
@@ -79,6 +80,7 @@ SpekWindow::SpekWindow(const wxString& path) : wxFrame(NULL, -1, wxEmptyString)
     toolbar->Realize();
 
     this->spectrogram = new SpekSpectrogram(this);
+    this->cur_dir = wxGetHomeDir();
 
     if (!path.IsEmpty()) {
         open(path);
@@ -119,7 +121,6 @@ static const char *audio_extensions[] = {
 
 void SpekWindow::on_open(wxCommandEvent& WXUNUSED(event))
 {
-    static wxString cur_dir = wxGetHomeDir();
     static wxString filters = wxEmptyString;
     static int filter_index = 1;
 
@@ -142,7 +143,7 @@ void SpekWindow::on_open(wxCommandEvent& WXUNUSED(event))
     wxFileDialog *dlg = new wxFileDialog(
         this,
         _("Open File"),
-        cur_dir,
+        this->cur_dir,
         wxEmptyString,
         filters,
         wxFD_OPEN
@@ -150,7 +151,7 @@ void SpekWindow::on_open(wxCommandEvent& WXUNUSED(event))
     dlg->SetFilterIndex(filter_index);
 
     if (dlg->ShowModal() == wxID_OK) {
-        cur_dir = dlg->GetDirectory();
+        this->cur_dir = dlg->GetDirectory();
         filter_index = dlg->GetFilterIndex();
         open(dlg->GetPath());
     }
@@ -160,6 +161,37 @@ void SpekWindow::on_open(wxCommandEvent& WXUNUSED(event))
 
 void SpekWindow::on_save(wxCommandEvent& WXUNUSED(event))
 {
+    static wxString filters = wxEmptyString;
+
+    if (filters.IsEmpty()) {
+        filters = _("PNG images");
+        filters += wxT("|*.png");
+    }
+
+    wxFileDialog *dlg = new wxFileDialog(
+        this,
+        _("Save Spectrogram"),
+        this->cur_dir,
+        wxEmptyString,
+        filters,
+        wxFD_SAVE
+    );
+
+    // Suggested name is <file_name>.png
+    wxString name = _("Untitled");
+    if (!this->path.IsEmpty()) {
+        wxFileName file_name(this->path);
+        name = file_name.GetFullName();
+    }
+    name += wxT(".png");
+    dlg->SetFilename(name);
+
+    if (dlg->ShowModal() == wxID_OK) {
+        this->cur_dir = dlg->GetDirectory();
+        this->spectrogram->save(dlg->GetPath());
+    }
+
+    dlg->Destroy();
 }
 
 void SpekWindow::on_exit(wxCommandEvent& WXUNUSED(event))
@@ -179,6 +211,7 @@ void SpekWindow::open(const wxString& path)
 {
     wxFileName file_name(path);
     if (file_name.FileExists()) {
+        this->path = path;
         wxString full_name = file_name.GetFullName();
         // TRANSLATORS: window title, %s is replaced with the file name
         wxString title = wxString::Format(_("Spek - %s"), full_name.c_str());

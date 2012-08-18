@@ -40,6 +40,8 @@ IMPLEMENT_APP(Spek)
 
 bool Spek::OnInit()
 {
+    wxInitAllImageHandlers();
+
     SpekPlatform::init();
     SpekPreferences::get().init();
     spek_audio_init();

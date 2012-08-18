@@ -50,10 +50,6 @@ namespace Spek {
             info_bar.message_type = MessageType.INFO;
             info_bar.response.connect(() => info_bar.hide());
 
-            filter_png = new FileFilter ();
-            filter_png.set_name (_("PNG images"));
-            filter_png.add_pattern ("*.png");
-
             var vbox = new VBox (false, 0);
             vbox.pack_start (info_bar, false, true, 0);
             add (vbox);
@@ -83,28 +79,6 @@ namespace Spek {
                 }
             }
             drag_finish (cx, false, false, time);
-        }
-
-        private void on_file_save () {
-            var chooser = new FileChooserDialog (
-                _("Save Spectrogram"), this, FileChooserAction.SAVE,
-                Stock.CANCEL, ResponseType.CANCEL,
-                Stock.SAVE, ResponseType.ACCEPT, null);
-            chooser.set_default_response (ResponseType.ACCEPT);
-            chooser.set_current_folder (cur_dir);
-
-            // Suggested name is <file_name>.png
-            var file_name = Path.get_basename (spectrogram.file_name ?? _("Untitled"));
-            file_name += ".png";
-            chooser.set_current_name (file_name);
-            chooser.add_filter (filter_png);
-            chooser.set_filter (filter_png);
-            if (chooser.run () == ResponseType.ACCEPT) {
-                file_name = chooser.get_filename ();
-                cur_dir = Path.get_dirname (file_name);
-                spectrogram.save (file_name);
-            }
-            chooser.destroy ();
         }
 
         private void on_edit_preferences () {

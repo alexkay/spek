@@ -76,6 +76,11 @@ void SpekSpectrogram::open(const wxString& path)
 
 void SpekSpectrogram::save(const wxString& path)
 {
+    wxSize size = GetClientSize();
+    wxBitmap bitmap(size.GetWidth(), size.GetHeight());
+    wxMemoryDC dc(bitmap);
+    render(dc);
+    bitmap.SaveFile(path, wxBITMAP_TYPE_PNG);
 }
 
 void SpekSpectrogram::on_idle(wxIdleEvent& evt)
