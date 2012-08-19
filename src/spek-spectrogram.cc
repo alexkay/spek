@@ -174,7 +174,7 @@ void SpekSpectrogram::render(wxDC& dc)
 
     if (this->image.GetHeight() > 1) {
         // Draw the spectrogram.
-        wxBitmap bmp(this->image.Scale(w - LPAD - RPAD, h - TPAD - BPAD /*TODO:, wxIMAGE_QUALITY_HIGH*/));
+        wxBitmap bmp(this->image.Scale(w - LPAD - RPAD, h - TPAD - BPAD));
         dc.DrawBitmap(bmp, LPAD, TPAD);
 
         // File name.
@@ -234,11 +234,10 @@ void SpekSpectrogram::render(wxDC& dc)
     }
 
     // Border around the spectrogram.
-    // TODO: check if this uses antialiasing
     dc.DrawRectangle(LPAD, TPAD, w - LPAD - RPAD, h - TPAD - BPAD);
 
     // The palette.
-    wxBitmap bmp(this->palette.Scale(RULER, h - TPAD - BPAD + 1 /*TODO:, wxIMAGE_QUALITY_HIGH*/));
+    wxBitmap bmp(this->palette.Scale(RULER, h - TPAD - BPAD + 1));
     dc.DrawBitmap(bmp, w - RPAD + GAP, TPAD);
 
     // Prepare to draw the ruler.
