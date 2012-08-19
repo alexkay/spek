@@ -68,8 +68,10 @@ bool Spek::OnInit()
             wxT_2("FILE"),
             wxCMD_LINE_VAL_STRING,
             wxCMD_LINE_PARAM_OPTIONAL
-        },
-        wxCMD_LINE_DESC_END
+        }, {
+            // TODO: use wxCMD_LINE_DESC_END after settling on wx29.
+            wxCMD_LINE_NONE, NULL, NULL, NULL, wxCMD_LINE_VAL_NONE, 0
+        }
     };
 
     wxCmdLineParser parser(desc, argc, argv);

@@ -36,7 +36,7 @@ SpekWindow::SpekWindow(const wxString& path) :
 {
     SetTitle(_("Spek - Acoustic Spectrum Analyser"));
     // TODO: test on all platforms
-    SetIcon(wxIcon(wxT("spek")));
+    //SetIcon(wxIcon(wxT("spek")));
 
     wxMenuBar *menu = new wxMenuBar();
 
