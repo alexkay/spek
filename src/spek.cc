@@ -27,13 +27,16 @@
 
 class Spek: public wxApp
 {
+public:
+    Spek() : wxApp(), quit(false) {}
+
 protected:
     virtual bool OnInit();
-    virtual void OnInitCmdLine(wxCmdLineParser& parser);
-    virtual bool OnCmdLineParsed(wxCmdLineParser& parser);
+    virtual int OnRun();
 
 private:
     wxString path;
+    bool quit;
 };
 
 IMPLEMENT_APP(Spek)
@@ -46,19 +49,7 @@ bool Spek::OnInit()
     SpekPreferences::get().init();
     spek_audio_init();
 
-    if (!wxApp::OnInit()) {
-        return false;
-    }
-
-    SpekWindow *window = new SpekWindow(this->path);
-    window->Show(true);
-    SetTopWindow(window);
-    return true;
-}
-
-void Spek::OnInitCmdLine(wxCmdLineParser& parser)
-{
-    wxCmdLineEntryDesc desc[] = {{
+    static const wxCmdLineEntryDesc desc[] = {{
             wxCMD_LINE_SWITCH,
             wxT_2("h"),
             wxT_2("help"),
@@ -77,27 +68,40 @@ void Spek::OnInitCmdLine(wxCmdLineParser& parser)
             wxT_2("FILE"),
             wxCMD_LINE_VAL_STRING,
             wxCMD_LINE_PARAM_OPTIONAL
-        }, {
-            wxCMD_LINE_NONE
-        }
+        },
+        wxCMD_LINE_DESC_END
     };
 
-    parser.SetDesc(desc);
-}
-
-bool Spek::OnCmdLineParsed(wxCmdLineParser& parser)
-{
-    if (!wxApp::OnCmdLineParsed(parser)) {
+    wxCmdLineParser parser(desc, argc, argv);
+    int ret = parser.Parse(true);
+    if (ret == 1) {
         return false;
     }
-
+    if (ret == -1) {
+        this->quit = true;
+        return true;
+    }
     if (parser.Found(wxT("version"))) {
         // TRANSLATORS: first %s is the package name, second %s is the package version.
         wxPrintf(_("%s version %s\n"), wxT(PACKAGE_NAME), wxT(PACKAGE_VERSION));
-        return false;
+        this->quit = true;
+        return true;
+    }
+    if (parser.GetParamCount()) {
+        this->path = parser.GetParam();
     }
 
-    this->path = parser.GetParam();
-
+    SpekWindow *window = new SpekWindow(this->path);
+    window->Show(true);
+    SetTopWindow(window);
     return true;
+}
+
+int Spek::OnRun()
+{
+    if (quit) {
+        return 0;
+    }
+
+    return wxApp::OnRun();
 }

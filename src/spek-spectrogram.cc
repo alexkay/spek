@@ -123,6 +123,7 @@ void SpekSpectrogram::on_have_sample(SpekHaveSampleEvent& event)
     int sample = event.get_sample();
     const float *values = event.get_values();
 
+    // TODO: check image size, quit if wrong.
     for (int y = 0; y < bands; y++) {
         double level = log10(1.0 - THRESHOLD + values[y]) / log10_threshold;
         if (level > 1.0) level = 1.0;
