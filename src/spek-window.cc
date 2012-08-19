@@ -17,6 +17,7 @@
  */
 
 #include <wx/artprov.h>
+#include <wx/dnd.h>
 #include <wx/filename.h>
 
 #include "spek-spectrogram.hh"
@@ -30,6 +31,24 @@ BEGIN_EVENT_TABLE(SpekWindow, wxFrame)
     EVT_MENU(wxID_PREFERENCES, SpekWindow::on_preferences)
     EVT_MENU(wxID_ABOUT, SpekWindow::on_about)
 END_EVENT_TABLE()
+
+class SpekDropTarget : public wxFileDropTarget
+{
+public:
+    SpekDropTarget(SpekWindow *window) : wxFileDropTarget(), window(window) {}
+
+protected:
+    virtual bool OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames){
+        if (filenames.GetCount() == 1) {
+            window->open(filenames[0]);
+            return true;
+        }
+        return false;
+    }
+
+private:
+    SpekWindow *window;
+};
 
 SpekWindow::SpekWindow(const wxString& path) :
     path(path), wxFrame(NULL, -1, wxEmptyString)
@@ -84,6 +103,23 @@ SpekWindow::SpekWindow(const wxString& path) :
 
     if (!path.IsEmpty()) {
         open(path);
+    }
+
+    SetDropTarget(new SpekDropTarget(this));
+}
+
+void SpekWindow::open(const wxString& path)
+{
+    wxFileName file_name(path);
+    if (file_name.FileExists()) {
+        this->path = path;
+        wxString full_name = file_name.GetFullName();
+        // TRANSLATORS: window title, %s is replaced with the file name
+        wxString title = wxString::Format(_("Spek - %s"), full_name.c_str());
+        // TODO: make sure the above works on all platforms, both in x32 and x64.
+        SetTitle(title);
+
+        this->spectrogram->open(path);
     }
 }
 
@@ -205,19 +241,4 @@ void SpekWindow::on_preferences(wxCommandEvent& WXUNUSED(event))
 
 void SpekWindow::on_about(wxCommandEvent& WXUNUSED(event))
 {
-}
-
-void SpekWindow::open(const wxString& path)
-{
-    wxFileName file_name(path);
-    if (file_name.FileExists()) {
-        this->path = path;
-        wxString full_name = file_name.GetFullName();
-        // TRANSLATORS: window title, %s is replaced with the file name
-        wxString title = wxString::Format(_("Spek - %s"), full_name.c_str());
-        // TODO: make sure the above works on all platforms, both in x32 and x64.
-        SetTitle(title);
-
-        this->spectrogram->open(path);
-    }
 }

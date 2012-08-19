@@ -27,6 +27,7 @@ class SpekWindow : public wxFrame
 {
 public:
     SpekWindow(const wxString& path);
+    void open(const wxString& path);
 
 private:
     void on_open(wxCommandEvent& event);
@@ -34,7 +35,6 @@ private:
     void on_exit(wxCommandEvent& event);
     void on_preferences(wxCommandEvent& event);
     void on_about(wxCommandEvent& event);
-    void open(const wxString& path);
 
     SpekSpectrogram *spectrogram;
     wxString path;

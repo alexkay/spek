@@ -57,28 +57,10 @@ namespace Spek {
 
             show ();
 
-            // Set up Drag and Drop
-            drag_dest_set (this, DestDefaults.ALL, DEST_TARGET_ENTRIES, DragAction.COPY);
-            drag_data_received.connect (on_dropped);
-
             try {
                 Thread.create<void*> (check_version, false);
             } catch (ThreadError e) {
             }
-        }
-
-        void on_dropped (DragContext cx, int x, int y, SelectionData data, uint info, uint time) {
-            if (data.get_length () > 0 && data.get_format () == 8) {
-                string[] files = data.get_uris ();
-                if (files.length > 0) {
-                    try {
-                        open_file (Filename.from_uri (files[0]));
-                        drag_finish (cx, true, false, time);
-                        return;
-                    } catch (ConvertError e) {}
-                }
-            }
-            drag_finish (cx, false, false, time);
         }
 
         private void on_edit_preferences () {
