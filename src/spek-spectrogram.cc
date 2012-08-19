@@ -21,6 +21,7 @@
 
 #include "spek-audio.h"
 #include "spek-audio-desc.hh"
+#include "spek-events.hh"
 #include "spek-palette.h"
 #include "spek-pipeline.h"
 #include "spek-platform.hh"
@@ -32,6 +33,7 @@ BEGIN_EVENT_TABLE(SpekSpectrogram, wxPanel)
     EVT_IDLE(SpekSpectrogram::on_idle)
     EVT_PAINT(SpekSpectrogram::on_paint)
     EVT_SIZE(SpekSpectrogram::on_size)
+    SPEK_EVT_HAVE_SAMPLE(SpekSpectrogram::on_have_sample)
 END_EVENT_TABLE()
 
 enum
@@ -72,6 +74,11 @@ SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
     }
 }
 
+SpekSpectrogram::~SpekSpectrogram()
+{
+    this->stop();
+}
+
 void SpekSpectrogram::open(const wxString& path)
 {
     this->path = path;
@@ -107,6 +114,30 @@ void SpekSpectrogram::on_size(wxSizeEvent& evt)
     if (!this->path.IsEmpty() && width_changed) {
         start();
     }
+}
+
+void SpekSpectrogram::on_have_sample(SpekHaveSampleEvent& event)
+{
+    static double log10_threshold = log10(-THRESHOLD);
+    int bands = event.get_bands();
+    int sample = event.get_sample();
+    const float *values = event.get_values();
+
+    for (int y = 0; y < bands; y++) {
+        double level = log10(1.0 - THRESHOLD + values[y]) / log10_threshold;
+        if (level > 1.0) level = 1.0;
+        uint32_t color = spek_palette_spectrum(level);
+        this->image.SetRGB(
+            sample,
+            bands - y - 1,
+            color >> 16,
+            (color >> 8) & 0xFF,
+            color & 0xFF
+        );
+    }
+
+    // TODO: refresh only one pixel column
+    this->Refresh();
 }
 
 static wxString time_formatter(int unit)
@@ -261,36 +292,16 @@ void SpekSpectrogram::render(wxDC& dc)
     density_ruler.draw(dc);
 }
 
-void SpekSpectrogram::pipeline_cb(int sample, float *values, void *cb_data)
+static void pipeline_cb(int sample, float *values, void *cb_data)
 {
-    static double log10_threshold = log10(-THRESHOLD);
+    SpekHaveSampleEvent event(BANDS, sample, values, false);
     SpekSpectrogram *s = (SpekSpectrogram *)cb_data;
-
-    for (int y = 0; y < BANDS; y++) {
-        double level = log10(1.0 - THRESHOLD + values[y]) / log10_threshold;
-        if (level > 1.0) level = 1.0;
-        uint32_t color = spek_palette_spectrum(level);
-        s->image.SetRGB(
-            sample,
-            BANDS - y - 1,
-            color >> 16,
-            (color >> 8) & 0xFF,
-            color & 0xFF
-        );
-    }
-
-    s->Refresh(); // TODO: refresh only one pixel column
-    wxWakeUpIdle();
+    wxPostEvent(s, event);
 }
-
 
 void SpekSpectrogram::start()
 {
-    if (this->pipeline) {
-        spek_pipeline_close(this->pipeline);
-        this->pipeline = NULL;
-        this->properties = NULL;
-    }
+    this->stop();
 
     // The number of samples is the number of pixels available for the image.
     // The number of bands is fixed, FFT results are very different for
@@ -315,6 +326,15 @@ void SpekSpectrogram::start()
     }
 
     Refresh();
+}
+
+void SpekSpectrogram::stop()
+{
+    if (this->pipeline) {
+        spek_pipeline_close(this->pipeline);
+        this->pipeline = NULL;
+        this->properties = NULL;
+    }
 }
 
 // Trim `s` so that it fits into `length`.

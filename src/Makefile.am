@@ -5,6 +5,8 @@ spek_SOURCES = \
 	spek-audio-desc.hh \
 	spek-audio.c \
 	spek-audio.h \
+	spek-events.cc \
+	spek-events.hh \
 	spek-fft.c \
 	spek-fft.h \
 	spek-palette.c \

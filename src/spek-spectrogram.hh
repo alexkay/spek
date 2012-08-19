@@ -21,6 +21,7 @@
 
 #include <wx/wx.h>
 
+class SpekHaveSampleEvent;
 struct spek_audio_properties;
 struct spek_pipeline;
 
@@ -28,6 +29,7 @@ class SpekSpectrogram : public wxPanel
 {
 public:
     SpekSpectrogram(wxFrame *parent);
+    ~SpekSpectrogram();
     void open(const wxString& path);
     void save(const wxString& path);
 
@@ -35,10 +37,11 @@ private:
     void on_idle(wxIdleEvent& evt);
     void on_paint(wxPaintEvent& evt);
     void on_size(wxSizeEvent& evt);
+    void on_have_sample(SpekHaveSampleEvent& evt);
     void render(wxDC& dc);
 
     void start();
-    static void pipeline_cb(int sample, float *values, void *cb_data);
+    void stop();
 
     spek_pipeline *pipeline;
     const spek_audio_properties *properties;
