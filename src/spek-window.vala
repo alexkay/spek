@@ -69,66 +69,6 @@ namespace Spek {
             dlg.run ();
         }
 
-        private void on_help_about () {
-            string[] authors = {
-                "Primary Development:",
-                "\tAlexander Kojevnikov (maintainer)",
-                "",
-                "Contributors:",
-                "\tFabian Deutsch",
-                "\tJonathan Gonzalez V",
-                "\tStefan Kost",
-                "\tThibault North"
-            };
-            string[] artists = {
-                "Olga Vasylevska"
-            };
-            string license = "Copyright (C) 2010-2011  Alexander Kojevnikov";
-            license += "\n\n";
-            license += "Spek is free software: you can redistribute it and/or modify ";
-            license += "it under the terms of the GNU General Public License as published by ";
-            license += "the Free Software Foundation, either version 3 of the License, or ";
-            license += "(at your option) any later version.";
-            license += "\n\n";
-            license += "Spek is distributed in the hope that it will be useful, ";
-            license += "but WITHOUT ANY WARRANTY; without even the implied warranty of ";
-            license += "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the ";
-            license += "GNU General Public License for more details.";
-            license += "\n\n";
-            license += "You should have received a copy of the GNU General Public License ";
-            license += "along with Spek.  If not, see http://www.gnu.org/licenses/";
-
-            var dlg = new AboutDialog ();
-            dlg.program_name = "Spek";
-            dlg.version = Config.PACKAGE_VERSION;
-            dlg.copyright = _("Copyright \xc2\xa9 2010-2011 Alexander Kojevnikov");
-            dlg.comments = description;
-            dlg.set ("authors", authors);
-//          dlg.set ("documenters", documenters);
-            dlg.set ("artists", artists);
-            dlg.website_label = _("Spek Website");
-            dlg.website = "http://www.spek-project.org/";
-            dlg.license = license;
-            dlg.wrap_license = true;
-            try {
-                dlg.logo = IconTheme.get_default ().load_icon ("spek", 128, IconLookupFlags.FORCE_SVG);
-            } catch (Error e) {
-                dlg.logo_icon_name = "spek";
-            }
-            // TRANSLATORS: Add your name here
-            dlg.translator_credits = _("translator-credits");
-            dlg.set_transient_for (this);
-            dlg.destroy_with_parent = true;
-            dlg.response.connect (id => dlg.destroy ());
-            dlg.set_url_hook (url_hook);
-            dlg.modal = true;
-            dlg.present ();
-        }
-
-        private void url_hook (AboutDialog about, string link) {
-            Platform.show_uri (link);
-        }
-
         private void * check_version () {
             // Does the user want to check for updates?
             var prefs = Preferences.instance;

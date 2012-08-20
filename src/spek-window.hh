@@ -39,6 +39,7 @@ private:
     SpekSpectrogram *spectrogram;
     wxString path;
     wxString cur_dir;
+    wxString description;
 
     DECLARE_EVENT_TABLE()
 };

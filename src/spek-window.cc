@@ -16,6 +16,7 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <wx/aboutdlg.h>
 #include <wx/artprov.h>
 #include <wx/dnd.h>
 #include <wx/filename.h>
@@ -53,7 +54,8 @@ private:
 SpekWindow::SpekWindow(const wxString& path) :
     path(path), wxFrame(NULL, -1, wxEmptyString)
 {
-    SetTitle(_("Spek - Acoustic Spectrum Analyser"));
+    this->description = _("Spek - Acoustic Spectrum Analyser");
+    SetTitle(this->description);
     // TODO: test on all platforms
     //SetIcon(wxIcon(wxT("spek")));
 
@@ -155,7 +157,7 @@ static const char *audio_extensions[] = {
     NULL
 };
 
-void SpekWindow::on_open(wxCommandEvent& WXUNUSED(event))
+void SpekWindow::on_open(wxCommandEvent& event)
 {
     static wxString filters = wxEmptyString;
     static int filter_index = 1;
@@ -195,7 +197,7 @@ void SpekWindow::on_open(wxCommandEvent& WXUNUSED(event))
     dlg->Destroy();
 }
 
-void SpekWindow::on_save(wxCommandEvent& WXUNUSED(event))
+void SpekWindow::on_save(wxCommandEvent& event)
 {
     static wxString filters = wxEmptyString;
 
@@ -230,15 +232,37 @@ void SpekWindow::on_save(wxCommandEvent& WXUNUSED(event))
     dlg->Destroy();
 }
 
-void SpekWindow::on_exit(wxCommandEvent& WXUNUSED(event))
+void SpekWindow::on_exit(wxCommandEvent& event)
 {
     Close(true);
 }
 
-void SpekWindow::on_preferences(wxCommandEvent& WXUNUSED(event))
+void SpekWindow::on_preferences(wxCommandEvent& event)
 {
 }
 
-void SpekWindow::on_about(wxCommandEvent& WXUNUSED(event))
+void SpekWindow::on_about(wxCommandEvent& event)
 {
+    wxAboutDialogInfo info;
+    info.AddDeveloper(wxT("Alexander Kojevnikov"));
+    info.AddDeveloper(wxT("Fabian Deutsch"));
+    info.AddDeveloper(wxT("Jonathan Gonzalez V"));
+    info.AddDeveloper(wxT("Stefan Kost"));
+    info.AddDeveloper(wxT("Thibault North"));
+    info.AddArtist(wxT("Olga Vasylevska"));
+    // TRANSLATORS: Add your name here
+    wxString translator = _("translator-credits");
+    if (translator != wxT("translator-credits")) {
+        info.AddTranslator(translator);
+    }
+    info.SetName(wxT("Spek"));
+    info.SetVersion(wxT(PACKAGE_VERSION));
+    info.SetCopyright(_("Copyright (c) 2010-2012 Alexander Kojevnikov and contributors"));
+    info.SetDescription(this->description);
+#ifdef OS_UNIX
+    info.SetWebSite(wxT("http://spek-project.org/"), _("Spek Website"));
+    // TODO
+    // info.SetIcon();
+#endif
+    wxAboutBox(info);
 }
