@@ -22,41 +22,7 @@ using Gtk;
 namespace Spek {
     public class Window : Gtk.Window {
 
-        private UIManager ui;
-        private InfoBar info_bar;
-        private Spectrogram spectrogram;
-        private string description;
-        private string cur_dir;
-        private FileFilter filter_all;
-        private FileFilter filter_audio;
-        private FileFilter filter_png;
-
-
-        private const Gtk.TargetEntry[] DEST_TARGET_ENTRIES = {
-            { "text/uri-list", 0, 0 }
-        };
-
         public Window (string? file_name) {
-            info_bar = new InfoBar.with_buttons (Stock.OK, ResponseType.OK);
-            var label = new Label (null);
-            label.use_markup = true;
-            label.set_markup (_("A new version of Spek is available on <a href=\"http://www.spek-project.org\">www.spek-project.org</a>"));
-            label.ellipsize = Pango.EllipsizeMode.END;
-            label.xalign = 0f;
-            label.activate_link.connect (uri => { Platform.show_uri (uri); return true; });
-            label.show();
-            var content_area = (Container) info_bar.get_content_area();
-            content_area.add(label);
-            info_bar.message_type = MessageType.INFO;
-            info_bar.response.connect(() => info_bar.hide());
-
-            var vbox = new VBox (false, 0);
-            vbox.pack_start (info_bar, false, true, 0);
-            add (vbox);
-            vbox.show ();
-
-            show ();
-
             try {
                 Thread.create<void*> (check_version, false);
             } catch (ThreadError e) {

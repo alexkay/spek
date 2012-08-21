@@ -100,7 +100,32 @@ SpekWindow::SpekWindow(const wxString& path) :
     );
     toolbar->Realize();
 
+    wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
+
+    // wxInfoBar is too limited, construct a custom one.
+    wxPanel *info_bar = new wxPanel(this);
+    info_bar->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_INFOTEXT));
+    info_bar->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_INFOBK));
+    wxSizer *info_sizer = new wxBoxSizer(wxHORIZONTAL);
+    wxStaticText *label = new wxStaticText(
+        info_bar, -1, _("A new version of Spek is available, click to download."));
+    label->SetCursor(*new wxCursor(wxCURSOR_HAND));
+    label->Connect(wxEVT_LEFT_DOWN, wxCommandEventHandler(SpekWindow::on_visit));
+    // This second Connect() handles clicks on the border
+    info_bar->Connect(wxEVT_LEFT_DOWN, wxCommandEventHandler(SpekWindow::on_visit));
+    info_sizer->Add(label, 1, wxALIGN_CENTER_VERTICAL | wxALL, 6);
+    // TODO: gtk-close won't work on win/osx
+    wxBitmapButton *button = new wxBitmapButton(
+        info_bar, -1, wxArtProvider::GetBitmap(wxT("gtk-close")),
+        wxDefaultPosition, wxDefaultSize, wxNO_BORDER);
+    button->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SpekWindow::on_close));
+    info_sizer->Add(button, 0, 0);
+    info_bar->SetSizer(info_sizer);
+    sizer->Add(info_bar, 0, wxEXPAND);
+
     this->spectrogram = new SpekSpectrogram(this);
+    sizer->Add(this->spectrogram, 1, wxEXPAND);
+
     this->cur_dir = wxGetHomeDir();
 
     if (!path.IsEmpty()) {
@@ -108,6 +133,8 @@ SpekWindow::SpekWindow(const wxString& path) :
     }
 
     SetDropTarget(new SpekDropTarget(this));
+
+    SetSizer(sizer);
 }
 
 void SpekWindow::open(const wxString& path)
@@ -265,4 +292,16 @@ void SpekWindow::on_about(wxCommandEvent& event)
     // info.SetIcon();
 #endif
     wxAboutBox(info);
+}
+
+void SpekWindow::on_visit(wxCommandEvent& event)
+{
+    wxLaunchDefaultBrowser(wxT("http://spek-project.org"));
+}
+
+void SpekWindow::on_close(wxCommandEvent& event)
+{
+    wxWindow *self = ((wxWindow *)event.GetEventObject())->GetGrandParent();
+    self->GetSizer()->Hide((size_t)0);
+    self->Layout();
 }
