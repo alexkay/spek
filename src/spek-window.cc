@@ -16,14 +16,20 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <pthread.h>
+
 #include <wx/aboutdlg.h>
 #include <wx/artprov.h>
 #include <wx/dnd.h>
 #include <wx/filename.h>
 
+#include "spek-preferences.hh"
 #include "spek-spectrogram.hh"
 
 #include "spek-window.hh"
+
+DECLARE_EVENT_TYPE(SPEK_NOTIFY_EVENT, -1)
+DEFINE_EVENT_TYPE(SPEK_NOTIFY_EVENT)
 
 BEGIN_EVENT_TABLE(SpekWindow, wxFrame)
     EVT_MENU(wxID_OPEN, SpekWindow::on_open)
@@ -31,7 +37,11 @@ BEGIN_EVENT_TABLE(SpekWindow, wxFrame)
     EVT_MENU(wxID_EXIT, SpekWindow::on_exit)
     EVT_MENU(wxID_PREFERENCES, SpekWindow::on_preferences)
     EVT_MENU(wxID_ABOUT, SpekWindow::on_about)
+    EVT_COMMAND(-1, SPEK_NOTIFY_EVENT, SpekWindow::on_notify)
 END_EVENT_TABLE()
+
+// Forward declarations.
+static void * check_version(void *);
 
 class SpekDropTarget : public wxFileDropTarget
 {
@@ -104,6 +114,7 @@ SpekWindow::SpekWindow(const wxString& path) :
 
     // wxInfoBar is too limited, construct a custom one.
     wxPanel *info_bar = new wxPanel(this);
+    info_bar->Hide();
     info_bar->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_INFOTEXT));
     info_bar->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_INFOBK));
     wxSizer *info_sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -135,6 +146,9 @@ SpekWindow::SpekWindow(const wxString& path) :
     SetDropTarget(new SpekDropTarget(this));
 
     SetSizer(sizer);
+
+    pthread_t thread;
+    pthread_create(&thread, NULL, &check_version, this);
 }
 
 void SpekWindow::open(const wxString& path)
@@ -294,6 +308,12 @@ void SpekWindow::on_about(wxCommandEvent& event)
     wxAboutBox(info);
 }
 
+void SpekWindow::on_notify(wxCommandEvent& event)
+{
+    this->GetSizer()->Show((size_t)0);
+    this->Layout();
+}
+
 void SpekWindow::on_visit(wxCommandEvent& event)
 {
     wxLaunchDefaultBrowser(wxT("http://spek-project.org"));
@@ -304,4 +324,46 @@ void SpekWindow::on_close(wxCommandEvent& event)
     wxWindow *self = ((wxWindow *)event.GetEventObject())->GetGrandParent();
     self->GetSizer()->Hide((size_t)0);
     self->Layout();
+}
+
+static void * check_version(void *p)
+{
+    // Does the user want to check for updates?
+    SpekPreferences& prefs = SpekPreferences::get();
+    if (!prefs.get_check_update()) {
+        return NULL;
+    }
+
+    // Calculate the number of days since 0001-01-01, borrowed from GLib.
+    wxDateTime now = wxDateTime::Now();
+    int year = now.GetYear() - 1;
+    int days = year * 365;
+    days += (year >>= 2); // divide by 4 and add
+    days -= (year /= 25); // divides original # years by 100
+    days += year >> 2; // divides by 4, which divides original by 400
+    days += now.GetDayOfYear();
+
+    // When was the last update?
+    int diff = days - prefs.get_last_update();
+    if (diff < 7) {
+        return NULL;
+    }
+
+    // Get the version number.
+    wxString version = wxT("0.8.1"); //Platform.read_line ("http://www.spek-project.org/version");
+    if (version.IsEmpty()) {
+        return NULL;
+    }
+
+    if (version > wxT(PACKAGE_VERSION)) {
+        SpekWindow *self = (SpekWindow *)p;
+        wxCommandEvent event(SPEK_NOTIFY_EVENT, -1);
+        event.SetEventObject(self);
+        wxPostEvent(self, event);
+    }
+
+    // Update the preferences.
+    prefs.set_check_update(true);
+    prefs.set_last_update(days);
+    return NULL;
 }

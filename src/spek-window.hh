@@ -35,6 +35,7 @@ private:
     void on_exit(wxCommandEvent& event);
     void on_preferences(wxCommandEvent& event);
     void on_about(wxCommandEvent& event);
+    void on_notify(wxCommandEvent& event);
     void on_visit(wxCommandEvent& event);
     void on_close(wxCommandEvent& event);
 
