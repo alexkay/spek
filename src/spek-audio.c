@@ -124,19 +124,19 @@ struct spek_audio_context * spek_audio_open(const char *path)
         return cx;
     }
     switch (cx->codec_context->sample_fmt) {
-    case SAMPLE_FMT_S16:
+    case AV_SAMPLE_FMT_S16:
         cx->properties.width = 16;
         cx->properties.fp = false;
         break;
-    case SAMPLE_FMT_S32:
+    case AV_SAMPLE_FMT_S32:
         cx->properties.width = 32;
         cx->properties.fp = false;
         break;
-    case SAMPLE_FMT_FLT:
+    case AV_SAMPLE_FMT_FLT:
         cx->properties.width = 32;
         cx->properties.fp = true;
         break;
-    case SAMPLE_FMT_DBL:
+    case AV_SAMPLE_FMT_DBL:
         cx->properties.width = 64;
         cx->properties.fp = true;
         break;
