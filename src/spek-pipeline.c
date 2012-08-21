@@ -143,7 +143,8 @@ void spek_pipeline_start(struct spek_pipeline *p)
     }
 }
 
-void spek_pipeline_close(struct spek_pipeline *p) {
+void spek_pipeline_close(struct spek_pipeline *p)
+{
     if (p->has_reader_thread) {
         p->quit = true;
         pthread_join(p->reader_thread, NULL);
@@ -188,7 +189,8 @@ void spek_pipeline_close(struct spek_pipeline *p) {
     free(p);
 }
 
-static void * reader_func (void *pp) {
+static void * reader_func(void *pp)
+{
     struct spek_pipeline *p = pp;
 
     p->has_worker_thread = !pthread_create(&p->worker_thread, NULL, &worker_func, p);
@@ -243,7 +245,8 @@ static void reader_sync(struct spek_pipeline *p, int pos)
     pthread_mutex_unlock(&p->worker_mutex);
 }
 
-static void * worker_func (void *pp) {
+static void * worker_func(void *pp)
+{
     struct spek_pipeline *p = pp;
 
     int sample = 0;

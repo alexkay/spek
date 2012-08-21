@@ -43,7 +43,7 @@ enum
     BANDS = NFFT / 2 + 1,
     LPAD = 60,
     TPAD = 60,
-    RPAD = 80,
+    RPAD = 90,
     BPAD = 40,
     GAP = 10,
     RULER = 10,
@@ -184,6 +184,8 @@ void SpekSpectrogram::render(wxDC& dc)
     int normal_height = dc.GetTextExtent(wxT("dummy")).GetHeight();
     dc.SetFont(large_font);
     int large_height = dc.GetTextExtent(wxT("dummy")).GetHeight();
+    dc.SetFont(small_font);
+    int small_height = dc.GetTextExtent(wxT("dummy")).GetHeight();
 
     // Clean the background.
     dc.Clear();
@@ -197,11 +199,11 @@ void SpekSpectrogram::render(wxDC& dc)
         TPAD - 2 * GAP - normal_height - large_height
     );
     int package_name_width = dc.GetTextExtent(package_name + wxT(" ")).GetWidth();
-    dc.SetFont(normal_font);
+    dc.SetFont(small_font);
     dc.DrawText(
         wxT(PACKAGE_VERSION),
         w - RPAD + GAP + package_name_width,
-        TPAD - 2 * GAP - 2 * normal_height
+        TPAD - 2 * GAP - normal_height - small_height
     );
 
     if (this->image.GetHeight() > 1) {

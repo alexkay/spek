@@ -119,7 +119,7 @@ SpekWindow::SpekWindow(const wxString& path) :
         info_bar, -1, wxArtProvider::GetBitmap(wxT("gtk-close")),
         wxDefaultPosition, wxDefaultSize, wxNO_BORDER);
     button->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SpekWindow::on_close));
-    info_sizer->Add(button, 0, 0);
+    info_sizer->Add(button, 0, wxALIGN_CENTER_VERTICAL);
     info_bar->SetSizer(info_sizer);
     sizer->Add(info_bar, 0, wxEXPAND);
 
