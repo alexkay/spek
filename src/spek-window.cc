@@ -22,6 +22,8 @@
 #include <wx/artprov.h>
 #include <wx/dnd.h>
 #include <wx/filename.h>
+#include <wx/protocol/http.h>
+#include <wx/sstream.h>
 
 #include "spek-preferences.hh"
 #include "spek-spectrogram.hh"
@@ -350,7 +352,18 @@ static void * check_version(void *p)
     }
 
     // Get the version number.
-    wxString version = wxT("0.8.1"); //Platform.read_line ("http://www.spek-project.org/version");
+    wxString version;
+    wxHTTP http;
+    if (http.Connect(wxT("spek-project.org"))) {
+        wxInputStream *stream = http.GetInputStream(wxT("/version"));
+        if (stream) {
+            wxStringOutputStream out(&version);
+            stream->Read(out);
+            version.Trim();
+            delete stream;
+        }
+    }
+
     if (version.IsEmpty()) {
         return NULL;
     }
