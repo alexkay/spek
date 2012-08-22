@@ -18,6 +18,7 @@
 
 #include <wx/cmdline.h>
 #include <wx/log.h>
+#include <wx/socket.h>
 
 #include "spek-audio.h"
 #include "spek-platform.hh"
@@ -44,6 +45,7 @@ IMPLEMENT_APP(Spek)
 bool Spek::OnInit()
 {
     wxInitAllImageHandlers();
+    wxSocketBase::Initialize();
 
     SpekPlatform::init();
     SpekPreferences::get().init();
