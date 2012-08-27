@@ -1,16 +1,18 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Alexander Kojevnikov <alexander@kojevnikov.com>, 2011, 2012.
+# zeus <jonathan.abdiel@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
-"POT-Creation-Date: 2011-04-20 21:24+0800\n"
-"PO-Revision-Date: 2011-04-24 00:15+0000\n"
-"Last-Translator: alexkay <alexander@kojevnikov.com>\n"
-"Language-Team: Spanish (Castilian) <>\n"
+"POT-Creation-Date: 2012-08-27 09:20-0700\n"
+"PO-Revision-Date: 2012-08-27 16:41+0000\n"
+"Last-Translator: Alexander Kojevnikov <alexander@kojevnikov.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/projects/p/spek/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -33,195 +35,176 @@ msgstr "Analizador de Espectro Spek"
 msgid "View spectrograms of your audio files"
 msgstr "Ver espectrogramas de sus archivos de audio"
 
-#: ../src/spek-audio.c:47
-msgid "Cannot open input file"
-msgstr "No se puede abrir el archivo de entrada"
-
-#: ../src/spek-audio.c:54
-msgid "Cannot find stream info"
-msgstr "No se pudo encontrar información del flujo"
-
-#: ../src/spek-audio.c:66
-msgid "The file contains no audio streams"
-msgstr "El archivo no contiene flujos de audio"
-
-#: ../src/spek-audio.c:73
-msgid "Cannot find decoder"
-msgstr "No se puede encontrar el decodificador"
-
-#: ../src/spek-audio.c:88
-msgid "No audio channels"
-msgstr "Sin canales de audio"
-
-#: ../src/spek-audio.c:92
-msgid "Cannot open decoder"
-msgstr "No se puede abrir el decodificador"
-
-#: ../src/spek-audio.c:113
-msgid "Unsupported sample format"
-msgstr "Formato de muestra no soportado"
-
-#: ../src/spek-pipeline.vala:75
+#: ../src/spek-audio-desc.cc:36
 #, c-format
 msgid "%d kbps"
 msgstr "%d kbps"
 
-#: ../src/spek-pipeline.vala:78
+#: ../src/spek-audio-desc.cc:39
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../src/spek-pipeline.vala:83
+#: ../src/spek-audio-desc.cc:44
 #, c-format
 msgid "%d bit"
 msgid_plural "%d bits"
 msgstr[0] "%d bit"
 msgstr[1] "%d bits"
 
-#: ../src/spek-pipeline.vala:86
+#: ../src/spek-audio-desc.cc:50
 #, c-format
 msgid "%d channel"
 msgid_plural "%d channels"
 msgstr[0] "%d canal"
 msgstr[1] "%d canales"
 
+#: ../src/spek-audio-desc.cc:67
+msgid "Cannot open input file"
+msgstr "No se puede abrir el archivo de entrada"
+
+#: ../src/spek-audio-desc.cc:70
+msgid "Cannot find stream info"
+msgstr "No se pudo encontrar información del flujo"
+
+#: ../src/spek-audio-desc.cc:73
+msgid "The file contains no audio streams"
+msgstr "El archivo no contiene flujos de audio"
+
+#: ../src/spek-audio-desc.cc:76
+msgid "Cannot find decoder"
+msgstr "No se puede encontrar el decodificador"
+
+#: ../src/spek-audio-desc.cc:79
+msgid "Unknown duration"
+msgstr ""
+
+#: ../src/spek-audio-desc.cc:82
+msgid "No audio channels"
+msgstr "Sin canales de audio"
+
+#: ../src/spek-audio-desc.cc:85
+msgid "Cannot open decoder"
+msgstr "No se puede abrir el decodificador"
+
+#: ../src/spek-audio-desc.cc:88
+msgid "Unsupported sample format"
+msgstr "Formato de muestra no soportado"
+
 #. TRANSLATORS: first %s is the error message, second %s is stream
 #. description.
-#: ../src/spek-pipeline.vala:93
+#: ../src/spek-audio-desc.cc:93
 #, c-format
 msgid "%s: %s"
 msgstr "%s: %s"
 
-#: ../src/spek-preferences-dialog.vala:24
+#: ../src/spek-preferences-dialog.cc:62
 msgid "Preferences"
 msgstr "Preferencias"
 
-#. TRANSLATORS: The name of a section in the Preferences dialog.
-#: ../src/spek-preferences-dialog.vala:35
-msgid "General"
-msgstr "General"
-
-#: ../src/spek-preferences-dialog.vala:45
-msgid "_Language:"
-msgstr "_Lenguaje:"
-
-#: ../src/spek-preferences-dialog.vala:62
-msgid "Check for _updates"
-msgstr "Revisar _actualizaciones"
-
-#: ../src/spek-preferences.vala:40
+#: ../src/spek-preferences-dialog.cc:67
 msgid "(system default)"
 msgstr "(por defecto)"
 
-#. TRANSLATORS: keep "00" unchanged, it's used to calc the text width
-#: ../src/spek-spectrogram.vala:200
-msgid "00 kHz"
-msgstr "00 kHz"
+#. TRANSLATORS: The name of a section in the Preferences dialog.
+#: ../src/spek-preferences-dialog.cc:74
+msgid "General"
+msgstr "General"
 
-#: ../src/spek-spectrogram.vala:206
+#: ../src/spek-preferences-dialog.cc:82
+msgid "Language:"
+msgstr "Lenguaje:"
+
+#: ../src/spek-preferences-dialog.cc:97
+msgid "Check for &updates"
+msgstr "Revisar &actualizaciones"
+
+#: ../src/spek-spectrogram.cc:152
 #, c-format
 msgid "%d kHz"
 msgstr "%d kHz"
 
-#. TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
-#: ../src/spek-spectrogram.vala:257
-msgid "-00 dB"
-msgstr "-00 dB"
-
-#: ../src/spek-spectrogram.vala:263
+#: ../src/spek-spectrogram.cc:157
 #, c-format
 msgid "%d dB"
 msgstr "%d dB"
 
-#: ../src/spek-window.vala:35
-msgid "_File"
-msgstr "_Archivo"
+#. TRANSLATORS: keep "00" unchanged, it's used to calc the text width
+#: ../src/spek-spectrogram.cc:259
+msgid "00 kHz"
+msgstr "00 kHz"
 
-#: ../src/spek-window.vala:39
-msgid "_Edit"
-msgstr "_Editar"
+#. TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
+#: ../src/spek-spectrogram.cc:287
+msgid "-00 dB"
+msgstr "-00 dB"
 
-#: ../src/spek-window.vala:41
-msgid "_Help"
-msgstr "_Ayuda"
-
-#: ../src/spek-window.vala:76
+#: ../src/spek-window.cc:70
 msgid "Spek - Acoustic Spectrum Analyser"
 msgstr "Spek - Analizador Acústico de Espectro"
 
-#: ../src/spek-window.vala:100
-msgid ""
-"A new version of Spek is available on <a href=\"http://www.spek-"
-"project.org\">www.spek-project.org</a>"
+#: ../src/spek-window.cc:84
+msgid "&File"
+msgstr "&Archivo"
+
+#: ../src/spek-window.cc:91
+msgid "&Edit"
+msgstr "&Editar"
+
+#: ../src/spek-window.cc:98
+msgid "&Help"
+msgstr "&Ayuda"
+
+#: ../src/spek-window.cc:125
+msgid "A new version of Spek is available, click to download."
 msgstr ""
-"Una nueva versión de Spek está disponible en <a href=\"http://www.spek-"
-"project.org\">www.spek-project.org</a>"
-
-#: ../src/spek-window.vala:106
-msgid "All files"
-msgstr "Todos los archivos"
-
-#: ../src/spek-window.vala:109
-msgid "PNG images"
-msgstr "Imagenes PNG"
-
-#: ../src/spek-window.vala:112
-msgid "Audio files"
-msgstr "Archivos de audio"
 
 #. TRANSLATORS: window title, %s is replaced with the file name
-#: ../src/spek-window.vala:168
+#: ../src/spek-window.cc:164
 #, c-format
 msgid "Spek - %s"
 msgstr "Spek - %s"
 
-#: ../src/spek-window.vala:173
+#: ../src/spek-window.cc:211
+msgid "All files"
+msgstr "Todos los archivos"
+
+#: ../src/spek-window.cc:213
+msgid "Audio files"
+msgstr "Archivos de audio"
+
+#: ../src/spek-window.cc:227
 msgid "Open File"
 msgstr "Abrir Archivo"
 
-#: ../src/spek-window.vala:190
+#: ../src/spek-window.cc:249
+msgid "PNG images"
+msgstr "Imagenes PNG"
+
+#: ../src/spek-window.cc:255
 msgid "Save Spectrogram"
 msgstr "Guardar Espectograma"
 
 #. Suggested name is <file_name>.png
-#: ../src/spek-window.vala:197
+#: ../src/spek-window.cc:263
 msgid "Untitled"
 msgstr "Sin Título"
 
-#: ../src/spek-window.vala:250
-msgid "Copyright © 2010-2011 Alexander Kojevnikov"
-msgstr "Copyright © 2010-2011 Alexander Kojevnikov"
-
-#: ../src/spek-window.vala:255
-msgid "Spek Website"
-msgstr "Website de Spek"
-
-#: ../src/spek-window.vala:264
+#. TRANSLATORS: Add your name here
+#: ../src/spek-window.cc:300
 msgid "translator-credits"
 msgstr "Jonathan Gonzalez V."
 
-#: ../src/spek.vala:25
-msgid "Display the version and exit"
-msgstr "Muestra la version y sale"
-
-#: ../src/spek.vala:43
-msgid "[FILE]"
-msgstr "[ARCHIVO]"
-
-#: ../src/spek.vala:47
-#, c-format
-msgid "Run `%s --help` to see a full list of available command line options.\n"
+#: ../src/spek-window.cc:306
+msgid "Copyright (c) 2010-2012 Alexander Kojevnikov and contributors"
 msgstr ""
-"Ejecutar `%s --help` para ver una lista completa de las opciones de linea de"
-" comando disponibles.\n"
 
-#. TRANSLATORS: first %s is the package name, second %s is the package
-#. version.
-#: ../src/spek.vala:53
+#: ../src/spek-window.cc:309
+msgid "Spek Website"
+msgstr "Website de Spek"
+
+#. TRANSLATORS: the %s is the package version.
+#: ../src/spek.cc:90
 #, c-format
-msgid "%s version %s\n"
-msgstr "%s version %s\n"
-
-#: ../src/spek.vala:58
-msgid "Specify a single file\n"
-msgstr "Especifique un solo archivo\n"
+msgid "Spek version %s"
+msgstr "Spek version %s"
