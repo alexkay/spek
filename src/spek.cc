@@ -87,7 +87,8 @@ bool Spek::OnInit()
     }
     if (parser.Found(wxT("version"))) {
         // TRANSLATORS: first %s is the package name, second %s is the package version.
-        wxPrintf(_("%s version %s\n"), wxT(PACKAGE_NAME), wxT(PACKAGE_VERSION));
+        wxPrintf(_("%s version %s"), wxT(PACKAGE_NAME), wxT(PACKAGE_VERSION));
+        wxPrintf(wxT("\n"));
         this->quit = true;
         return true;
     }
