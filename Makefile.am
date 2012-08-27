@@ -2,7 +2,8 @@ SUBDIRS = \
 	data \
 	man \
 	po \
-	src
+	src \
+	tests
 
 EXTRA_DIST = \
 	intltool-extract.in \

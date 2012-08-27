@@ -69,6 +69,7 @@ AC_CONFIG_FILES([
 	man/spek.1
 	po/Makefile.in
 	src/Makefile
+	tests/Makefile
 	web/version
 ])
 AC_OUTPUT
