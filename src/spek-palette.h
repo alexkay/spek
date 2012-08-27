@@ -1,4 +1,4 @@
-/* spek-fft.h
+/* spek-palette.h
  *
  * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
@@ -16,35 +16,16 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SPEK_FFT_H_
-#define SPEK_FFT_H_
+#ifndef SPEK_PALETTE_HH_
+#define SPEK_PALETTE_HH_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-struct RDFTContext;
+#include <stdint.h>
 
-struct spek_fft_plan
-{
-    // Internal data.
-    struct RDFTContext *cx;
-    int n;
-    int threshold;
-
-    // Exposed properties.
-    float *input;
-    float *output;
-};
-
-// Allocate buffers and create a new FFT plan.
-struct spek_fft_plan * spek_fft_plan_new(int n, int threshold);
-
-// Execute the FFT on plan->input.
-void spek_fft_execute(struct spek_fft_plan *p);
-
-// Destroy the plan and de-allocate buffers.
-void spek_fft_delete(struct spek_fft_plan *p);
+uint32_t spek_palette_spectrum(double level);
 
 #ifdef __cplusplus
 }

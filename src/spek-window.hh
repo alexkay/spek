@@ -1,4 +1,4 @@
-/* spek-fft.h
+/* spek-window.hh
  *
  * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
@@ -16,38 +16,35 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SPEK_FFT_H_
-#define SPEK_FFT_H_
+#ifndef SPEK_WINDOW_HH_
+#define SPEK_WINDOW_HH_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include <wx/wx.h>
 
-struct RDFTContext;
+class SpekSpectrogram;
 
-struct spek_fft_plan
+class SpekWindow : public wxFrame
 {
-    // Internal data.
-    struct RDFTContext *cx;
-    int n;
-    int threshold;
+public:
+    SpekWindow(const wxString& path);
+    void open(const wxString& path);
 
-    // Exposed properties.
-    float *input;
-    float *output;
+private:
+    void on_open(wxCommandEvent& event);
+    void on_save(wxCommandEvent& event);
+    void on_exit(wxCommandEvent& event);
+    void on_preferences(wxCommandEvent& event);
+    void on_about(wxCommandEvent& event);
+    void on_notify(wxCommandEvent& event);
+    void on_visit(wxCommandEvent& event);
+    void on_close(wxCommandEvent& event);
+
+    SpekSpectrogram *spectrogram;
+    wxString path;
+    wxString cur_dir;
+    wxString description;
+
+    DECLARE_EVENT_TABLE()
 };
-
-// Allocate buffers and create a new FFT plan.
-struct spek_fft_plan * spek_fft_plan_new(int n, int threshold);
-
-// Execute the FFT on plan->input.
-void spek_fft_execute(struct spek_fft_plan *p);
-
-// Destroy the plan and de-allocate buffers.
-void spek_fft_delete(struct spek_fft_plan *p);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

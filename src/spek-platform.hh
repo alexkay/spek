@@ -1,4 +1,4 @@
-/* spek-fft.h
+/* spek-platform.hh
  *
  * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
@@ -16,35 +16,34 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SPEK_FFT_H_
-#define SPEK_FFT_H_
+#ifndef SPEK_PLATFORM_HH_
+#define SPEK_PLATFORM_HH_
 
 #ifdef __cplusplus
+#include <wx/string.h>
+
+class SpekPlatform
+{
+public:
+    // Platform-specific initialisation code.
+    static void init();
+
+    // Not quite XDG-compatible, but close enough.
+    static wxString config_path(const wxString& app_name);
+
+    // Setting non-default locale under GTK+ is tricky (see e.g. how FileZilla does it). We will
+    // just disable the language setting for GTK+ users and will always use the system locale.
+    static bool can_change_language();
+
+    // Fonts are smaller on OSX.
+    static double font_scale();
+};
+
 extern "C" {
 #endif
 
-struct RDFTContext;
-
-struct spek_fft_plan
-{
-    // Internal data.
-    struct RDFTContext *cx;
-    int n;
-    int threshold;
-
-    // Exposed properties.
-    float *input;
-    float *output;
-};
-
-// Allocate buffers and create a new FFT plan.
-struct spek_fft_plan * spek_fft_plan_new(int n, int threshold);
-
-// Execute the FFT on plan->input.
-void spek_fft_execute(struct spek_fft_plan *p);
-
-// Destroy the plan and de-allocate buffers.
-void spek_fft_delete(struct spek_fft_plan *p);
+// Returns a 8.3 version of the UTF8-encoded path on Windows and NULL on other platforms.
+char * spek_platform_short_path(const char *path);
 
 #ifdef __cplusplus
 }

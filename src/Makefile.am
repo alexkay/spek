@@ -1,39 +1,47 @@
 bin_PROGRAMS = spek
 
 spek_SOURCES = \
-	spek.vala \
+	spek-audio-desc.cc \
+	spek-audio-desc.hh \
 	spek-audio.c \
+	spek-audio.h \
+	spek-events.cc \
+	spek-events.hh \
 	spek-fft.c \
-	spek-pipeline.vala \
-	spek-platform.c \
-	spek-preferences.vala \
-	spek-preferences-dialog.vala \
-	spek-ruler.vala \
-	spek-spectrogram.vala \
-	spek-window.vala
+	spek-fft.h \
+	spek-palette.c \
+	spek-palette.h \
+	spek-pipeline.c \
+	spek-pipeline.h \
+	spek-platform.cc \
+	spek-platform.hh \
+	spek-preferences-dialog.cc \
+	spek-preferences-dialog.hh \
+	spek-preferences.cc \
+	spek-preferences.hh \
+	spek-ruler.cc \
+	spek-ruler.hh \
+	spek-spectrogram.cc \
+	spek-spectrogram.hh \
+	spek-window.cc \
+	spek-window.hh \
+	spek.cc
 
-AM_CPPFLAGS = \
+spek_CPPFLAGS = \
 	-include config.h \
-	$(SPEK_CFLAGS) \
-	$(IGE_MAC_CFLAGS) \
-	-DLOCALEDIR=\""$(localedir)"\" \
-	-DPKGDATADIR=\""$(pkgdatadir)"\" \
-	-DPKGLIBDIR=\""$(pkglibdir)"\"
+	-pthread \
+	$(WX_CPPFLAGS)
 
-VALAFLAGS = \
-	--thread \
-	--vapidir=$(srcdir)/../vapi \
-	--pkg config \
-	--pkg spek-audio \
-	--pkg spek-fft \
-	--pkg spek-platform \
-	@SPEK_PACKAGES@
+spek_CFLAGS = \
+	$(FFMPEG_CFLAGS) \
+	$(WX_CFLAGS_ONLY)
+
+spek_CXXFLAGS = \
+	$(WX_CXXFLAGS_ONLY)
 
 spek_LDADD = \
-	$(SPEK_LIBS) \
-	$(IGE_MAC_LIBS)
+	$(FFMPEG_LIBS) \
+	$(WX_LIBS)
 
-EXTRA_DIST = \
-	spek-audio.h \
-	spek-fft.h \
-	spek-platform.h
+spek_LDFLAGS = \
+	-pthread

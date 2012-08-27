@@ -1,4 +1,4 @@
-/* spek-fft.h
+/* spek-ruler.hh
  *
  * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
@@ -16,38 +16,46 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SPEK_FFT_H_
-#define SPEK_FFT_H_
+#ifndef SPEK_RULER_HH_
+#define SPEK_RULER_HH_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include <wx/dc.h>
+#include <wx/string.h>
 
-struct RDFTContext;
-
-struct spek_fft_plan
+class SpekRuler
 {
-    // Internal data.
-    struct RDFTContext *cx;
-    int n;
-    int threshold;
+public:
+    enum Position
+    {
+        TOP,
+        RIGHT,
+        BOTTOM,
+        LEFT
+    };
 
-    // Exposed properties.
-    float *input;
-    float *output;
+    typedef wxString (*formatter_cb)(int unit);
+
+    SpekRuler(
+        int x, int y, Position pos, wxString sample_label,
+        int *factors, int units, double spacing,
+        double scale, double offset, formatter_cb formatter
+    );
+
+    void draw(wxDC& dc);
+
+protected:
+    void draw_tick(wxDC& dc, int tick);
+
+    int x;
+    int y;
+    Position pos;
+    wxString sample_label;
+    int *factors;
+    int units;
+    double spacing;
+    double scale;
+    double offset;
+    formatter_cb formatter;
 };
-
-// Allocate buffers and create a new FFT plan.
-struct spek_fft_plan * spek_fft_plan_new(int n, int threshold);
-
-// Execute the FFT on plan->input.
-void spek_fft_execute(struct spek_fft_plan *p);
-
-// Destroy the plan and de-allocate buffers.
-void spek_fft_delete(struct spek_fft_plan *p);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif
