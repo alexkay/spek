@@ -1,6 +1,6 @@
-/* spek-window.vala
+/* spek-preferences-dialog.hh
  *
- * Copyright (C) 2010-2011  Alexander Kojevnikov <alexander@kojevnikov.com>
+ * Copyright (C) 2011-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
  * Spek is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,16 +16,23 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using Gdk;
-using Gtk;
+#ifndef SPEK_PREFERENCES_DIALOG_HH_
+#define SPEK_PREFERENCES_DIALOG_HH_
 
-namespace Spek {
-    public class Window : Gtk.Window {
+#include <wx/wx.h>
 
-        private void on_edit_preferences () {
-            var dlg = new PreferencesDialog ();
-            dlg.transient_for = this;
-            dlg.run ();
-        }
-    }
-}
+class SpekPreferencesDialog : public wxDialog
+{
+public:
+    SpekPreferencesDialog(wxWindow *parent);
+
+private:
+    void on_language(wxCommandEvent& event);
+    void on_check(wxCommandEvent& event);
+
+    wxArrayString languages;
+
+    DECLARE_EVENT_TABLE()
+};
+
+#endif

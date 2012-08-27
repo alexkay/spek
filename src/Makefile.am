@@ -15,6 +15,8 @@ spek_SOURCES = \
 	spek-pipeline.h \
 	spek-platform.cc \
 	spek-platform.hh \
+	spek-preferences-dialog.cc \
+	spek-preferences-dialog.hh \
 	spek-preferences.cc \
 	spek-preferences.hh \
 	spek-ruler.cc \

@@ -25,6 +25,7 @@
 #include <wx/protocol/http.h>
 #include <wx/sstream.h>
 
+#include "spek-preferences-dialog.hh"
 #include "spek-preferences.hh"
 #include "spek-spectrogram.hh"
 
@@ -282,6 +283,8 @@ void SpekWindow::on_exit(wxCommandEvent& event)
 
 void SpekWindow::on_preferences(wxCommandEvent& event)
 {
+    SpekPreferencesDialog dlg(this);
+    dlg.ShowModal();
 }
 
 void SpekWindow::on_about(wxCommandEvent& event)
