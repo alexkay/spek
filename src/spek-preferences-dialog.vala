@@ -25,6 +25,7 @@ namespace Spek {
         private static string[,] languages = {
             {"", null},
             {"cs", "Čeština"},
+            {"da", "Dansk"},
             {"de", "Deutsch"},
             {"en", "English"},
             {"eo", "Esperanto"},
