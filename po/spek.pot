@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-27 08:38-0700\n"
+"POT-Creation-Date: 2012-08-27 09:20-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: ../data/spek.desktop.in.in.h:1
 msgid "Spectrum Analyser"
@@ -33,50 +34,64 @@ msgstr ""
 msgid "View spectrograms of your audio files"
 msgstr ""
 
-#: ../src/spek-audio-desc.cc:34
+#: ../src/spek-audio-desc.cc:36
 #, c-format
 msgid "%d kbps"
 msgstr ""
 
-#: ../src/spek-audio-desc.cc:37
+#: ../src/spek-audio-desc.cc:39
 #, c-format
 msgid "%d Hz"
 msgstr ""
 
-#: ../src/spek-audio-desc.cc:65
+#: ../src/spek-audio-desc.cc:44
+#, c-format
+msgid "%d bit"
+msgid_plural "%d bits"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/spek-audio-desc.cc:50
+#, c-format
+msgid "%d channel"
+msgid_plural "%d channels"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/spek-audio-desc.cc:67
 msgid "Cannot open input file"
 msgstr ""
 
-#: ../src/spek-audio-desc.cc:68
+#: ../src/spek-audio-desc.cc:70
 msgid "Cannot find stream info"
 msgstr ""
 
-#: ../src/spek-audio-desc.cc:71
+#: ../src/spek-audio-desc.cc:73
 msgid "The file contains no audio streams"
 msgstr ""
 
-#: ../src/spek-audio-desc.cc:74
+#: ../src/spek-audio-desc.cc:76
 msgid "Cannot find decoder"
 msgstr ""
 
-#: ../src/spek-audio-desc.cc:77
+#: ../src/spek-audio-desc.cc:79
 msgid "Unknown duration"
 msgstr ""
 
-#: ../src/spek-audio-desc.cc:80
+#: ../src/spek-audio-desc.cc:82
 msgid "No audio channels"
 msgstr ""
 
-#: ../src/spek-audio-desc.cc:83
+#: ../src/spek-audio-desc.cc:85
 msgid "Cannot open decoder"
 msgstr ""
 
-#: ../src/spek-audio-desc.cc:86
+#: ../src/spek-audio-desc.cc:88
 msgid "Unsupported sample format"
 msgstr ""
 
 #. TRANSLATORS: first %s is the error message, second %s is stream description.
-#: ../src/spek-audio-desc.cc:91
+#: ../src/spek-audio-desc.cc:93
 #, c-format
 msgid "%s: %s"
 msgstr ""

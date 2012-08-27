@@ -23,6 +23,8 @@
 
 #include "spek-audio-desc.hh"
 
+#define ngettext wxPLURAL
+
 wxString spek_audio_desc(const struct spek_audio_properties *properties)
 {
     wxArrayString items;
@@ -39,13 +41,13 @@ wxString spek_audio_desc(const struct spek_audio_properties *properties)
     // Include bits per sample only if there is no bitrate.
     if (properties->bits_per_sample && !properties->bit_rate) {
         items.Add(wxString::Format(
-            wxPLURAL("%d bit", "%d bits", properties->bits_per_sample),
+            ngettext("%d bit", "%d bits", properties->bits_per_sample),
             properties->bits_per_sample
         ));
     }
     if (properties->channels) {
         items.Add(wxString::Format(
-            wxPLURAL("%d channel", "%d channels", properties->channels),
+            ngettext("%d channel", "%d channels", properties->channels),
             properties->channels
         ));
     }
