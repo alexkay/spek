@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-26 19:50-0700\n"
+"POT-Creation-Date: 2012-08-27 08:38-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -186,8 +186,8 @@ msgstr ""
 msgid "Spek Website"
 msgstr ""
 
-#. TRANSLATORS: first %s is the package name, second %s is the package version.
+#. TRANSLATORS: the %s is the package version.
 #: ../src/spek.cc:90
 #, c-format
-msgid "%s version %s"
+msgid "Spek version %s"
 msgstr ""
