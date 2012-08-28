@@ -12,7 +12,7 @@ EXTRA_DIST = \
 	intltool-update.in \
 	dist/osx/DS_Store \
 	dist/osx/Info.plist \
-	dist/osx/README \
+	dist/osx/README.md \
 	dist/osx/Spek.icns \
 	dist/osx/bundle.sh \
 	dist/osx/gtkrc \
