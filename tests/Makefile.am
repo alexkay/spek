@@ -1,19 +1,21 @@
-TESTS = tests
-check_PROGRAMS = tests
+TESTS = \
+	test
 
-tests_SOURCES = \
-	test.c
+check_PROGRAMS = $(TESTS)
 
-tests_CPPFLAGS = \
+noinst_HEADERS = \
+	test.h
+
+AM_CPPFLAGS = \
 	-include config.h \
 	-I$(top_builddir)/src \
 	-pthread
 
-tests_CFLAGS = \
+AM_CFLAGS = \
 	$(FFMPEG_CFLAGS)
 
-tests_LDADD = \
+AM_LDADD = \
 	$(FFMPEG_LIBS)
 
-tests_LDFLAGS = \
+AM_LDFLAGS = \
 	-pthread

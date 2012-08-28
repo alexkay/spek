@@ -1,4 +1,4 @@
-/* test.c
+/* test.h
  *
  * Copyright (C) 2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
@@ -16,11 +16,19 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "test.h"
+#ifndef TEST_H_
+#define TEST_H_
 
-int main()
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+inline void ensure(bool test, const char *message)
 {
-    ensure(2 + 2 == 4, "Hello, tests!");
-
-    return 0;
+    if (!test) {
+        printf("ERROR: %s\n", message);
+        exit(1);
+    }
 }
+
+#endif
