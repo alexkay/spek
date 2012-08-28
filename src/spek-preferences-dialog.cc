@@ -45,11 +45,6 @@ static const char *available_languages[] =
     NULL
 };
 
-#ifndef wxCLOSE
-// wxWidgets 2.8 doesn't have wxCLOSE, replace with wxOK for now.
-#define wxCLOSE wxOK
-#endif
-
 #define ID_LANGUAGE (wxID_HIGHEST + 1)
 #define ID_CHECK (wxID_HIGHEST + 2)
 
@@ -98,7 +93,7 @@ SpekPreferencesDialog::SpekPreferencesDialog(wxWindow *parent) :
     inner_sizer->Add(check_update, 0 ,wxLEFT | wxTOP, 12);
     check_update->SetValue(SpekPreferences::get().get_check_update());
 
-    sizer->Add(CreateButtonSizer(wxCLOSE), 0, wxALIGN_RIGHT | wxBOTTOM | wxRIGHT, 12);
+    sizer->Add(CreateButtonSizer(wxOK), 0, wxALIGN_RIGHT | wxBOTTOM | wxRIGHT, 12);
     sizer->SetSizeHints(this);
     SetSizer(sizer);
 }
