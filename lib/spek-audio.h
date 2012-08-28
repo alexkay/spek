@@ -19,10 +19,6 @@
 #ifndef SPEK_AUDIO_H_
 #define SPEK_AUDIO_H_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -79,9 +75,5 @@ int spek_audio_read(struct spek_audio_context *cx);
 // Closes the file opened with spek_audio_open,
 // frees all allocated buffers and the context
 void spek_audio_close(struct spek_audio_context *cx);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

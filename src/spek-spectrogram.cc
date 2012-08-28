@@ -19,9 +19,11 @@
 #include <cmath>
 #include <wx/dcbuffer.h>
 
+extern "C" {
 #include <spek-audio.h>
 #include <spek-palette.h>
 #include <spek-pipeline.h>
+}
 
 #include "spek-audio-desc.hh"
 #include "spek-events.hh"

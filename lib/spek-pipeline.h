@@ -19,10 +19,6 @@
 #ifndef SPEK_PIPELINE_H_
 #define SPEK_PIPELINE_H_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 struct spek_pipeline;
 struct spek_audio_properties;
 
@@ -36,9 +32,5 @@ const struct spek_audio_properties * spek_pipeline_properties(struct spek_pipeli
 void spek_pipeline_start(struct spek_pipeline *pipeline);
 
 void spek_pipeline_close(struct spek_pipeline *pipeline);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

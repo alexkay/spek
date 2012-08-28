@@ -19,16 +19,8 @@
 #ifndef SPEK_PALETTE_HH_
 #define SPEK_PALETTE_HH_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <stdint.h>
 
 uint32_t spek_palette_spectrum(double level);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

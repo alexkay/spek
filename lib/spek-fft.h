@@ -19,10 +19,6 @@
 #ifndef SPEK_FFT_H_
 #define SPEK_FFT_H_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 struct RDFTContext;
 
 struct spek_fft_plan
@@ -45,9 +41,5 @@ void spek_fft_execute(struct spek_fft_plan *p);
 
 // Destroy the plan and de-allocate buffers.
 void spek_fft_delete(struct spek_fft_plan *p);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

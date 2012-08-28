@@ -20,7 +20,9 @@
 #include <wx/log.h>
 #include <wx/socket.h>
 
+extern "C" {
 #include <spek-audio.h>
+}
 
 #include "spek-platform.hh"
 #include "spek-preferences.hh"

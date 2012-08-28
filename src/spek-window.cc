@@ -26,7 +26,9 @@
 // WX on WIN doesn't like it when pthread.h is included first.
 #include <pthread.h>
 
+extern "C" {
 #include <spek-utils.h>
+}
 
 #include "spek-preferences-dialog.hh"
 #include "spek-preferences.hh"

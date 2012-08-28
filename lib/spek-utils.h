@@ -19,15 +19,7 @@
 #ifndef SPEK_UTILS_H_
 #define SPEK_UTILS_H_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 // Compare version numbers, e.g. 1.9.2 < 1.10.0
 int spek_vercmp(const char *a, const char *b);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif
