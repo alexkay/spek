@@ -8,7 +8,9 @@ libspek_a_SOURCES = \
 	spek-palette.c \
 	spek-palette.h \
 	spek-pipeline.c \
-	spek-pipeline.h
+	spek-pipeline.h \
+	spek-utils.c \
+	spek-utils.h
 
 libspek_a_CPPFLAGS = \
 	-include config.h \

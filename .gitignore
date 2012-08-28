@@ -38,6 +38,7 @@ samples/
 src/*.stamp
 src/spek
 stamp-h1
+tests/test-utils
 tests/test
 web/version
 xmldocs.make

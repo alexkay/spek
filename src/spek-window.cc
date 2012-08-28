@@ -26,6 +26,8 @@
 // WX on WIN doesn't like it when pthread.h is included first.
 #include <pthread.h>
 
+#include <spek-utils.h>
+
 #include "spek-preferences-dialog.hh"
 #include "spek-preferences.hh"
 #include "spek-spectrogram.hh"
@@ -372,7 +374,7 @@ static void * check_version(void *p)
         return NULL;
     }
 
-    if (version > wxT(PACKAGE_VERSION)) {
+    if (1 == spek_vercmp(version.mb_str(wxConvLibc), PACKAGE_VERSION)) {
         SpekWindow *self = (SpekWindow *)p;
         wxCommandEvent event(SPEK_NOTIFY_EVENT, -1);
         event.SetEventObject(self);
