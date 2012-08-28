@@ -1,3 +1,4 @@
+TESTS = tests
 check_PROGRAMS = tests
 
 tests_SOURCES = \
