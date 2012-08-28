@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-27 09:20-0700\n"
+"POT-Creation-Date: 2012-08-27 21:55-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -137,67 +137,67 @@ msgstr ""
 msgid "-00 dB"
 msgstr ""
 
-#: ../src/spek-window.cc:70
+#: ../src/spek-window.cc:71
 msgid "Spek - Acoustic Spectrum Analyser"
 msgstr ""
 
-#: ../src/spek-window.cc:84
+#: ../src/spek-window.cc:85
 msgid "&File"
 msgstr ""
 
-#: ../src/spek-window.cc:91
+#: ../src/spek-window.cc:92
 msgid "&Edit"
 msgstr ""
 
-#: ../src/spek-window.cc:98
+#: ../src/spek-window.cc:99
 msgid "&Help"
 msgstr ""
 
-#: ../src/spek-window.cc:125
+#: ../src/spek-window.cc:126
 msgid "A new version of Spek is available, click to download."
 msgstr ""
 
 #. TRANSLATORS: window title, %s is replaced with the file name
-#: ../src/spek-window.cc:164
+#: ../src/spek-window.cc:165
 #, c-format
 msgid "Spek - %s"
 msgstr ""
 
-#: ../src/spek-window.cc:211
+#: ../src/spek-window.cc:212
 msgid "All files"
 msgstr ""
 
-#: ../src/spek-window.cc:213
+#: ../src/spek-window.cc:214
 msgid "Audio files"
 msgstr ""
 
-#: ../src/spek-window.cc:227
+#: ../src/spek-window.cc:228
 msgid "Open File"
 msgstr ""
 
-#: ../src/spek-window.cc:249
+#: ../src/spek-window.cc:250
 msgid "PNG images"
 msgstr ""
 
-#: ../src/spek-window.cc:255
+#: ../src/spek-window.cc:256
 msgid "Save Spectrogram"
 msgstr ""
 
 #. Suggested name is <file_name>.png
-#: ../src/spek-window.cc:263
+#: ../src/spek-window.cc:264
 msgid "Untitled"
 msgstr ""
 
 #. TRANSLATORS: Add your name here
-#: ../src/spek-window.cc:300
+#: ../src/spek-window.cc:301
 msgid "translator-credits"
 msgstr ""
 
-#: ../src/spek-window.cc:306
+#: ../src/spek-window.cc:307
 msgid "Copyright (c) 2010-2012 Alexander Kojevnikov and contributors"
 msgstr ""
 
-#: ../src/spek-window.cc:309
+#: ../src/spek-window.cc:310
 msgid "Spek Website"
 msgstr ""
 
