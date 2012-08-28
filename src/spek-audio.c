@@ -28,8 +28,6 @@
 
 struct spek_audio_context
 {
-    char *file_name; // TODO: needed?
-    char *short_name;
     AVFormatContext *format_context;
     int audio_stream;
     AVCodecContext *codec_context;
@@ -58,19 +56,10 @@ struct spek_audio_context * spek_audio_open(const char *path)
 {
     // TODO: malloc and initialise explicitely
     struct spek_audio_context *cx = calloc(1, sizeof(struct spek_audio_context));
-    cx->file_name = strdup(path);
-    // av_open_input_file() cannot open files with Unicode chars in it
-    // when running under Windows. When this happens we will re-try
-    // using the corresponding short file name.
-    // TODO: test if it's already fixed in FFmpeg
-    cx->short_name = spek_platform_short_path(path);
 
     if (avformat_open_input(&cx->format_context, path, NULL, NULL) != 0) {
-        if (!cx->short_name ||
-            avformat_open_input(&cx->format_context, cx->short_name, NULL, NULL) != 0 ) {
-            cx->properties.error = SPEK_AUDIO_CANNOT_OPEN_FILE;
-            return cx;
-        }
+        cx->properties.error = SPEK_AUDIO_CANNOT_OPEN_FILE;
+        return cx;
     }
     if (avformat_find_stream_info(cx->format_context, NULL) < 0) {
         // 24-bit APE returns an error but parses the stream info just fine.
@@ -211,12 +200,6 @@ int spek_audio_read(struct spek_audio_context *cx) {
 
 void spek_audio_close (struct spek_audio_context *cx)
 {
-    if (cx->file_name != NULL) {
-        free(cx->file_name);
-    }
-    if (cx->short_name != NULL) {
-        free(cx->short_name);
-    }
     if (cx->properties.codec_name != NULL) {
         free(cx->properties.codec_name);
     }
