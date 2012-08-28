@@ -1,5 +1,6 @@
 SUBDIRS = \
 	data \
+	lib \
 	man \
 	po \
 	src \

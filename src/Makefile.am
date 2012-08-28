@@ -3,16 +3,8 @@ bin_PROGRAMS = spek
 spek_SOURCES = \
 	spek-audio-desc.cc \
 	spek-audio-desc.hh \
-	spek-audio.c \
-	spek-audio.h \
 	spek-events.cc \
 	spek-events.hh \
-	spek-fft.c \
-	spek-fft.h \
-	spek-palette.c \
-	spek-palette.h \
-	spek-pipeline.c \
-	spek-pipeline.h \
 	spek-platform.cc \
 	spek-platform.hh \
 	spek-preferences-dialog.cc \
@@ -30,16 +22,14 @@ spek_SOURCES = \
 spek_CPPFLAGS = \
 	-include config.h \
 	-pthread \
+	-I$(top_srcdir)/lib \
 	$(WX_CPPFLAGS)
-
-spek_CFLAGS = \
-	$(FFMPEG_CFLAGS) \
-	$(WX_CFLAGS_ONLY)
 
 spek_CXXFLAGS = \
 	$(WX_CXXFLAGS_ONLY)
 
 spek_LDADD = \
+	../lib/libspek.a \
 	$(FFMPEG_LIBS) \
 	$(WX_LIBS)
 

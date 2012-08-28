@@ -6,6 +6,7 @@ AM_SILENT_RULES([yes])
 
 AC_PROG_CC_C99
 AC_PROG_CXX
+AC_PROG_RANLIB
 AC_PROG_INSTALL
 IT_PROG_INTLTOOL([0.40.0])
 
@@ -65,6 +66,7 @@ AC_CONFIG_FILES([
 	data/icons/scalable/Makefile
 	dist/osx/spek.modules
 	dist/win/spek.wxs
+	lib/Makefile
 	man/Makefile
 	man/spek.1
 	po/Makefile.in
