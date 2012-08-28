@@ -19,7 +19,7 @@
 #include <wx/arrstr.h>
 #include <wx/intl.h>
 
-#include "spek-audio.h"
+#include <spek-audio.h>
 
 #include "spek-audio-desc.hh"
 
