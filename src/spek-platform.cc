@@ -68,12 +68,3 @@ double SpekPlatform::font_scale()
     return 1.0;
 #endif
 }
-
-char * spek_platform_short_path(const char *path)
-{
-#ifdef OS_WIN
-    wxFileName file_name(wxString(path, wxConvUTF8));
-    return strdup(file_name.GetShortPath().char_str(wxConvFile));
-#endif
-    return NULL;
-}

@@ -22,8 +22,6 @@
 #include <libavcodec/avcodec.h>
 #include <libavutil/mathematics.h>
 
-#include "spek-platform.hh"
-
 #include "spek-audio.h"
 
 struct spek_audio_context

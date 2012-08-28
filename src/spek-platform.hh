@@ -19,7 +19,6 @@
 #ifndef SPEK_PLATFORM_HH_
 #define SPEK_PLATFORM_HH_
 
-#ifdef __cplusplus
 #include <wx/string.h>
 
 class SpekPlatform
@@ -38,15 +37,5 @@ public:
     // Fonts are smaller on OSX.
     static double font_scale();
 };
-
-extern "C" {
-#endif
-
-// Returns a 8.3 version of the UTF8-encoded path on Windows and NULL on other platforms.
-char * spek_platform_short_path(const char *path);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif
