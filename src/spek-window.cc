@@ -16,14 +16,15 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <pthread.h>
-
 #include <wx/aboutdlg.h>
 #include <wx/artprov.h>
 #include <wx/dnd.h>
 #include <wx/filename.h>
 #include <wx/protocol/http.h>
 #include <wx/sstream.h>
+
+// WX on WIN doesn't like it when pthread.h is included first.
+#include <pthread.h>
 
 #include "spek-preferences-dialog.hh"
 #include "spek-preferences.hh"
