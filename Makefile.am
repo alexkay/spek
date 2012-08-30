@@ -7,6 +7,7 @@ SUBDIRS = \
 	tests
 
 EXTRA_DIST = \
+	AUTHORS.md \
 	INSTALL.md \
 	README.md \
 	dist/osx/DS_Store \

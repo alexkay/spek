@@ -1,6 +1,6 @@
 ## Building the Windows installer
 
-This is be done in two steps:
+This is done in two steps:
 
  * Cross-compiling spek.exe using [MXE](http://mxe.cc/).
  * Building the MSI package under Windows.

@@ -8,16 +8,16 @@
  * `tx pull -a`.
  * Update the list of available languages, 80% or so will do:
    * po/LINGUAS
-   * src/spek-preferences-dialog.vala
+   * src/spek-preferences-dialog.cc
    * dist/win/bundle.sh
    * dist/osx/bundle.sh
- * Update AUTHORS using `git log X.Y.. --pretty=format:"%an <%ae>" | sort -u`.
+ * Update AUTHORS using `git log X.Y.Z. --pretty=format:"%an <%ae>" | sort -u`.
  * Sync AUTHORS with the About dialogue.
  * Update news in README.md.
  * Update the website and debian/control's description with the new features.
  * Update the manpage if necessary.
  * Update sshots if there are user-visible changes.
- * Update and sync wiki pages with the new version number and instructions.
+ * Update INSTALL.md with the new version number and instructions.
  * Update copyright year of touched code.
  * Commit everything.
  * Make sure `make distcheck` doesn't return errors.
@@ -26,12 +26,12 @@
  * If anything has been changed, commit and re-make the tarball.
  * Write the blog post, link from web/index.html, don't publish yet.
  * Update web/index.html: bump version numbers, binary sizes and news.
- * `git tag -a X.Y`.
+ * `git tag -a X.Y.Z`.
  * Upload the tarball + OSX and WIN binaries.
  * Update the Ubuntu PPA.
  * Request FreeBSD and Debian updates.
  * Upload the website using `web/upload`.
  * Publish the blog post.
- * Send an announcement to linux-audio-announce and vala-list.
+ * Send an announcement to the LAA list.
  * Update the forum thread on what.
  * Ping ArchLinux and Gentoo maintainers.

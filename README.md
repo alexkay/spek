@@ -7,53 +7,47 @@ Spek is available on *BSD, GNU/Linux, Windows and Mac OS X.
 
 Find out more about Spek on its website: <http://www.spek-project.org/>
 
-## Spek 0.7 - Released 2011-04-24
+## Spek 0.8.0 - Released 2012-TODO
 
 ### New Features And Enhancements
 
-Spek 0.7 is part of beta 0.x releases, leading up to a stable 1.0 release
-later this year. Check Spek website for the roadmap.
+Spek 0.8.0 is part of beta 0.x releases, leading up to a stable 1.0 release
+(hopefully) later this year. Check Spek website for the roadmap.
 
-New features since 0.6:
+New features since 0.7:
 
- * Added translations in 8 languages
- * Preferences to select a language and to check for a new version
- * Spectral density ruler
- * Added a menu bar, cleaned up the tool bar.
- * Better OS X integration
+ * Switched from GTK+ to wxWidgets for better Windows and OS X integration.
+ * Single .exe version for Windows.
+ * Added translations in 8 more languages (totalling 16).
 
 Enhancements:
 
- * Show the version number in the window
- * Pre-compute the cosine table to speed up analysis by ±16%
- * Use jhbuild and ige-mac-bundler to build and package Spek on OS X
- * spek(1) man page
- * Avoid using APIs depreciated in GTK3
+ * Switched to .xz tarballs.
+ * Split out libspek and added unit tests.
+ * 24-bit APE support (upstream fix).
 
 Bugfixes:
 
- * Fixed link activation on OS X (issue 31)
- * Fixed new version detection on OS X
- * Fixed duration for unsynchronised ID3v24 mp3 tags (upstream fix)
- * Fixed rigth click → Quit (issue 24) and the ⌘ Q shortcut (issue 44)
+ * Fixed crash when the preferences file is not writable.
+ * Fixed crash when the home directory is not writable.
+ * Fixed duration and rendering for some video files.
+ * Fixed compilation with newer FFmpeg and libav versions.
+ * Proper handling of Unicode file names under Windows (upstream fix).
 
 ### Sources / Packages
 
- * Spek 0.7 tarball:
-   * <http://spek.googlecode.com/files/spek-0.7.tar.bz2>
+ * Spek 0.8.0 tarball:
+   * <https://github.com/downloads/alexkay/spek/spek-0.8.0.tar.xz>
 
  * Windows and Mac OS X binaries:
-   * <http://spek.googlecode.com/files/spek-0.7.msi>
-   * <http://spek.googlecode.com/files/spek-0.7.zip>
-   * <http://spek.googlecode.com/files/spek-0.7.dmg>
+   * <https://github.com/downloads/alexkay/spek/spek-0.8.0.msi>
+   * <https://github.com/downloads/alexkay/spek/spek-0.8.0.zip>
+   * <https://github.com/downloads/alexkay/spek/spek-0.8.0.dmg>
 
  * Unix packages:
-   * <https://github.com/alexkay/spek/blob/master/INSTALL.md>
+   * <https://github.com/alexkay/spek/blob/master/INSTALL.md#bsd-and-gnulinux>
 
 ### Dependencies
 
  * wxWidgets >= 2.8
- * FFmpeg libraries:
-   * libavcodec >= 52.123
-   * libavformat >= 52.111
-   * libavutil
+ * FFmpeg >= 0.7 or libav >= 0.8
