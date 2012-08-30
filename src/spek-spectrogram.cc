@@ -209,7 +209,7 @@ void SpekSpectrogram::render(wxDC& dc)
         TPAD - 2 * GAP - normal_height - small_height
     );
 
-    if (this->image.GetHeight() > 1) {
+    if (this->image.GetWidth() > 1 && this->image.GetHeight() > 1) {
         // Draw the spectrogram.
         wxBitmap bmp(this->image.Scale(w - LPAD - RPAD, h - TPAD - BPAD));
         dc.DrawBitmap(bmp, LPAD, TPAD);
@@ -274,28 +274,30 @@ void SpekSpectrogram::render(wxDC& dc)
     dc.DrawRectangle(LPAD, TPAD, w - LPAD - RPAD, h - TPAD - BPAD);
 
     // The palette.
-    wxBitmap bmp(this->palette.Scale(RULER, h - TPAD - BPAD + 1));
-    dc.DrawBitmap(bmp, w - RPAD + GAP, TPAD);
+    if (h - TPAD - BPAD > 0) {
+        wxBitmap bmp(this->palette.Scale(RULER, h - TPAD - BPAD + 1));
+        dc.DrawBitmap(bmp, w - RPAD + GAP, TPAD);
 
-    // Prepare to draw the ruler.
-    dc.SetFont(small_font);
+        // Prepare to draw the ruler.
+        dc.SetFont(small_font);
 
-    // Spectral density.
-    int density_factors[] = {1, 2, 5, 10, 20, 50, 0};
-    SpekRuler density_ruler(
-        w - RPAD + GAP + RULER,
-        TPAD,
-        SpekRuler::RIGHT,
-        // TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
-        _("-00 dB"),
-        density_factors,
-        -THRESHOLD,
-        3.0,
-        (h - TPAD - BPAD) / (double)THRESHOLD,
-        h - TPAD - BPAD,
-        density_formatter
-    );
-    density_ruler.draw(dc);
+        // Spectral density.
+        int density_factors[] = {1, 2, 5, 10, 20, 50, 0};
+        SpekRuler density_ruler(
+            w - RPAD + GAP + RULER,
+            TPAD,
+            SpekRuler::RIGHT,
+            // TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
+            _("-00 dB"),
+            density_factors,
+            -THRESHOLD,
+            3.0,
+            (h - TPAD - BPAD) / (double)THRESHOLD,
+            h - TPAD - BPAD,
+            density_formatter
+        );
+        density_ruler.draw(dc);
+    }
 }
 
 static void pipeline_cb(int sample, float *values, void *cb_data)
