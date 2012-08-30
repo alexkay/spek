@@ -1,5 +1,4 @@
-Spek release checklist
-==============================================================================
+# Spek release checklist
 
  * Bump the version number in configure.ac.
  * `cd po && make update-po && tx push -s`.

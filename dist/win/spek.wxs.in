@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?define ProductName = "Spek" ?>
 <?define Manufacturer = "Spek Project" ?>
-<?define ProductVersion = "@VERSION@.0" ?>
+<?define ProductVersion = "@VERSION@" ?>
 <?define UpgradeCode = "46D51DDF-5749-45E2-818B-1ACADF21C0D9" ?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="*" Name="$(var.ProductName)" Language="0"
@@ -32,7 +32,7 @@
     <Icon Id="ProgramIcon" SourceFile="spek.ico"/>
     <DirectoryRef Id="ProgramMenuSubfolder">
       <Component Id="StartMenuShortcut" Guid="165DF12B-D970-49BC-B07B-880B62ABC308">
-        <Shortcut Id="StartMenuShortcut" Name="$(var.ProductName)" Icon="ProgramIcon" Target="[INSTALLLOCATION]bin\spek.exe" WorkingDirectory="bin"/>
+        <Shortcut Id="StartMenuShortcut" Name="$(var.ProductName)" Icon="ProgramIcon" Target="[INSTALLLOCATION]spek.exe" WorkingDirectory="INSTALLLOCATION"/>
         <Shortcut Id="UninstallProduct" Name="Uninstall $(var.ProductName)" Target="[System64Folder]msiexec.exe" Arguments="/x [ProductCode]"/>
         <RemoveFolder Id="ProgramMenuSubfolder" On="uninstall"/>
         <RegistryValue Root="HKCU" Key="Software\$(var.Manufacturer)\$(var.ProductName)" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
@@ -40,7 +40,7 @@
     </DirectoryRef>
     <DirectoryRef Id="DesktopFolder">
       <Component Id="DesktopShortcut" Guid="ACCE1EDB-87E3-4FE5-B2BF-93113E767381">
-        <Shortcut Id="DesktopShortcut" Name="$(var.ProductName)" Icon="ProgramIcon" Target="[INSTALLLOCATION]bin\spek.exe" WorkingDirectory="bin"/>
+        <Shortcut Id="DesktopShortcut" Name="$(var.ProductName)" Icon="ProgramIcon" Target="[INSTALLLOCATION]spek.exe" WorkingDirectory="INSTALLLOCATION"/>
         <RegistryValue Root="HKCU" Key="Software\$(var.Manufacturer)\$(var.ProductName)" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
       </Component>
     </DirectoryRef>
@@ -54,27 +54,28 @@
         <Directory Id="INSTALLLOCATION" Name="$(var.ProductName)">
           <Component Id="Main" Guid="CD5121AD-F799-4796-9DB8-0C24CA0A4C8E">
             <File Id="spek.ico" Name="spek.ico" Source="spek.ico" />
+            <File Id="spek.exe" Name="spek.exe" Source="spek.exe" />
             <!-- Capabilities keys for Vista/7 "Set Program Access and Defaults" -->
             <RegistryValue Root="HKLM" Key="SOFTWARE\Spek\Capabilities" Name="ApplicationDescription" Value="Acoustic Spectrum Analyser" Type="string" />
             <RegistryValue Root="HKLM" Key="SOFTWARE\Spek\Capabilities" Name="ApplicationIcon" Value="[#spek.ico]" Type="string" />
             <RegistryValue Root="HKLM" Key="SOFTWARE\Spek\Capabilities" Name="ApplicationName" Value="Spek" Type="string" />
             <RegistryValue Root="HKLM" Key="SOFTWARE\Spek\Capabilities\DefaultIcon" Value="[#spek.ico]" Type="string" />
-            <RegistryValue Root="HKLM" Key="SOFTWARE\Spek\Capabilities\shell\open\command" Value="&quot;[INSTALLLOCATION]bin\spek.exe&quot; &quot;%1&quot;" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Spek\Capabilities\shell\open\command" Value="&quot;[INSTALLLOCATION]spek.exe&quot; &quot;%1&quot;" Type="string" />
             <RegistryValue Root="HKLM" Key="SOFTWARE\RegisteredApplications" Name="Spek" Value="SOFTWARE\Spek\Capabilities" Type="string" />
             <!-- App Paths to support Start,Run -> "spek" -->
-            <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\spek.exe" Value="[INSTALLLOCATION]bin\spek.exe" Type="string" />
-            <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\spek.exe" Name="Path" Value="[INSTALLLOCATION]bin" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\spek.exe" Value="[INSTALLLOCATION]spek.exe" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\spek.exe" Name="Path" Value="[INSTALLLOCATION]" Type="string" />
             <!-- Extend to the "open with" list + Win7 jump menu pinning  -->
             <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\spek.exe" Value="Acoustic Spectrum Analyser" Type="string" />
             <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\spek.exe" Name="FriendlyAppName" Value="Spek" Type="string" />
             <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\spek.exe\DefaultIcon" Value="[#spek.ico]" Type="string" />
-            <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\spek.exe\shell\open\command" Value="&quot;[INSTALLLOCATION]bin\spek.exe&quot; &quot;%1&quot;" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\spek.exe\shell\open\command" Value="&quot;[INSTALLLOCATION]spek.exe&quot; &quot;%1&quot;" Type="string" />
             <!-- Spek.Audio class -->
             <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Spek.Audio" Value="Spek Audio File" KeyPath="yes" Type="string" />
             <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Spek.Audio" Name="FriendlyTypeName" Value="Spek Audio File" Type="string" />
             <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Spek.Audio\DefaultIcon" Value="[#spek.ico]" Type="string" />
             <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Spek.Audio\shell" Value="open" Type="string" />
-            <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Spek.Audio\shell\open\command" Value="&quot;[INSTALLLOCATION]bin\spek.exe&quot; &quot;%1&quot;" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Spek.Audio\shell\open\command" Value="&quot;[INSTALLLOCATION]spek.exe&quot; &quot;%1&quot;" Type="string" />
             <!-- Associate with file extensions -->
             <?foreach ext in "3gp;aac,aif;aifc;aiff;amr;awb;ape;au;dts;flac;gsm;m4a;m4p;mp3;mp4;mp+;mpc;mpp;oga;ogg;ra;ram;snd;wav;wma;wv"?>
             <RegistryValue Root="HKLM" Key="SOFTWARE\Spek\Capabilities\FileAssociations" Name=".$(var.ext)" Value="Spek.Audio" Type="string" />
@@ -83,17 +84,11 @@
             <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\.$(var.ext)\OpenWithProgids" Name="Spek.Audio" Value="" Type="string" />
             <?endforeach?>
           </Component>
-          <Directory Id="bin" Name="bin">
-            <Component Id="Spek" Guid="EC0CA007-EC9E-44E2-B9DE-AE91D3C8EF70">
-              <File Id="spek.exe" Name="spek.exe" Source="spek.exe" />
-            </Component>
-          </Directory>
         </Directory>
       </Directory>
     </Directory>
     <Feature Id="All" Title="$(var.ProductName)" Level="1">
       <ComponentRef Id="Main" />
-      <ComponentRef Id="Spek" />
       <ComponentGroupRef Id="Files" />
       <ComponentRef Id="StartMenuShortcut" />
       <ComponentRef Id="DesktopShortcut" />

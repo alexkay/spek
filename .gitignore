@@ -1,7 +1,9 @@
 *.a
+*.exe
 *.msi
 *.o
 *.xz
+*.zip
 *~
 .DS_Store
 .deps
@@ -19,6 +21,7 @@ depcomp
 dist/osx/Spek.app
 dist/osx/Spek.dmg
 dist/osx/spek.modules
+dist/win/Spek
 dist/win/spek.wxs
 install-sh
 intltool-extract.in

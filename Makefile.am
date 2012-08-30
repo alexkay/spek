@@ -7,9 +7,6 @@ SUBDIRS = \
 	tests
 
 EXTRA_DIST = \
-	intltool-extract.in \
-	intltool-merge.in \
-	intltool-update.in \
 	dist/osx/DS_Store \
 	dist/osx/Info.plist \
 	dist/osx/README.md \
@@ -19,13 +16,18 @@ EXTRA_DIST = \
 	dist/osx/launcher.sh \
 	dist/osx/spek.bundle \
 	dist/osx/spek.modules \
+	dist/win/README.md \
 	dist/win/banner.bmp \
+	dist/win/bundle.bat \
 	dist/win/bundle.sh \
 	dist/win/dialog.bmp \
 	dist/win/fix-msi.js \
 	dist/win/spek.ico \
 	dist/win/spek.rc \
-	dist/win/spek.wxs
+	dist/win/spek.wxs \
+	intltool-extract.in \
+	intltool-merge.in \
+	intltool-update.in
 
 DISTCLEANFILES = \
 	intltool-extract \
