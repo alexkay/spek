@@ -1,10 +1,10 @@
 # Building the OS X bundle
 
-Using MacPorts install build dependencies:
+Using [MacPorts](http://www.macports.org/) install build dependencies:
 
     port install git-core autoconf automake intltool yasm.
 
-Download and build wxWidgets, example configure flags:
+Download and build wxWidgets 2.9+, example configure flags:
 
     ./configure --prefix=$HOME/usr --disable-shared --with-osx_cocoa \
         --with-jpeg=builtin --with-png=builtin --with-regex=builtin \
@@ -31,4 +31,3 @@ Clone and build Spek, example configure flags:
 Bundle Spek:
 
     ./dist/osx/bundle.sh
-

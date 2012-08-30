@@ -1,8 +1,0 @@
-#labels Featured
-= Windows installation instructions =
-
-== Binary packages ==
-
-Download section offers two packages: an MSI installer and a ZIP archive. To install Spek, download the MSI installer, double-click it and follow the instructions.
-
-If by some reason you don't want to use the installer, you can download the ZIP archive and unpack it somewhere on your disk. Spek executable is located under .\Spek\bin\spek.exe

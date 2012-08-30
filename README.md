@@ -1,18 +1,15 @@
-Spek
-==============================================================================
+# Spek
 
-Spek is an acoustic spectrum analyser written in C and Vala. It uses the GNOME
-platform: GLib, GTK+, Cairo and Pango as well as the FFmpeg libraries.
+Spek is an acoustic spectrum analyser written in C and C++. It uses wxWidgets
+for the GUI and FFmpeg libraries for audio decoding.
 
 Spek is available on *BSD, GNU/Linux, Windows and Mac OS X.
 
 Find out more about Spek on its website: <http://www.spek-project.org/>
 
-Spek 0.7 - Released 2011-04-24
-==============================================================================
+## Spek 0.7 - Released 2011-04-24
 
-New Features And Enhancements
-------------------------------------------------------------------------------
+### New Features And Enhancements
 
 Spek 0.7 is part of beta 0.x releases, leading up to a stable 1.0 release
 later this year. Check Spek website for the roadmap.
@@ -40,8 +37,7 @@ Bugfixes:
  * Fixed duration for unsynchronised ID3v24 mp3 tags (upstream fix)
  * Fixed rigth click → Quit (issue 24) and the ⌘ Q shortcut (issue 44)
 
-Sources / Packages
-------------------------------------------------------------------------------
+### Sources / Packages
 
  * Spek 0.7 tarball:
    * <http://spek.googlecode.com/files/spek-0.7.tar.bz2>
@@ -51,17 +47,13 @@ Sources / Packages
    * <http://spek.googlecode.com/files/spek-0.7.zip>
    * <http://spek.googlecode.com/files/spek-0.7.dmg>
 
- * Ubuntu PPA
-   * <https://launchpad.net/~alexk/+archive/spek>
+ * Unix packages:
+   * <https://github.com/alexkay/spek/blob/master/INSTALL.md>
 
- * Other Unix packages:
-   * <http://code.google.com/p/spek/wiki/UnixInstall>
+### Dependencies
 
-Dependencies
-------------------------------------------------------------------------------
-
- * GTK+ >= 2.18
+ * wxWidgets >= 2.8
  * FFmpeg libraries:
-   * libavcodec >= 52.56.0 (r22291)
-   * libavformat
+   * libavcodec >= 52.123
+   * libavformat >= 52.111
    * libavutil

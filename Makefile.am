@@ -7,6 +7,8 @@ SUBDIRS = \
 	tests
 
 EXTRA_DIST = \
+	INSTALL.md \
+	README.md \
 	dist/osx/DS_Store \
 	dist/osx/Info.plist \
 	dist/osx/README.md \
