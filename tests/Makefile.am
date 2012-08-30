@@ -9,7 +9,7 @@ noinst_HEADERS = \
 
 AM_CPPFLAGS = \
 	-include config.h \
-	-I$(top_builddir)/lib \
+	-I$(top_srcdir)/lib \
 	-pthread
 
 AM_CFLAGS = \
