@@ -14,10 +14,6 @@ EXTRA_DIST = \
 	dist/osx/README.md \
 	dist/osx/Spek.icns \
 	dist/osx/bundle.sh \
-	dist/osx/gtkrc \
-	dist/osx/launcher.sh \
-	dist/osx/spek.bundle \
-	dist/osx/spek.modules \
 	dist/win/README.md \
 	dist/win/banner.bmp \
 	dist/win/bundle.bat \

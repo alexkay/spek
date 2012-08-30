@@ -1,23 +1,29 @@
 #!/bin/sh
 
 case "$(uname)" in
-    Darwin) profile_name=darwin ;;
+    Darwin) ;;
     *)
         echo "Unsupported system type: $(uname)"
         exit 1
         ;;
 esac
 
-cd $(dirname $0)
+cd $(dirname $0)/../..
 
-ige-mac-bundler spek.bundle
+rm -f src/spek
+make || exit 1
+strip src/spek
+upx src/spek
 
-cd Spek.app/Contents/Resources
-mkdir share/locale_
-mv share/locale/{cs,da,de,eo,es,fr,it,ja,nl,pl,pt_BR,ru,sv,uk,zh_CN,zh_TW} share/locale_/
-rm -fr share/locale
-mv share/locale_ share/locale
-cd ../../..
+cd dist/osx
+rm -fr Spek.app
+mkdir -p Spek.app/Contents/MacOS
+mkdir -p Spek.app/Contents/Resources
+mv ../../src/spek Spek.app/Contents/MacOS/Spek
+cp Info.plist Spek.app/Contents/
+cp Spek.icns Spek.app/Contents/Resources/
+
+# mv share/locale/{cs,da,de,eo,es,fr,it,ja,nl,pl,pt_BR,ru,sv,uk,zh_CN,zh_TW} share/locale_/
 
 # Make DMG image
 VOLUME_NAME=Spek
@@ -57,11 +63,6 @@ mv $DMG_FILE $DMG_FILE.master
 
 echo "Creating distributable image..."
 hdiutil convert -quiet -format UDBZ -o $DMG_FILE $DMG_FILE.master
-
-#echo "Installing end user license agreement..."
-#hdiutil flatten -quiet $DMG_FILE
-#/Developer/Tools/Rez /Developer/Headers/FlatCarbon/*.r dmg-data/license.r -a -o $DMG_FILE
-#hdiutil unflatten -quiet $DMG_FILE
 
 echo "Done."
 

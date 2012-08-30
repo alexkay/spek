@@ -2,7 +2,7 @@
 
 Using [MacPorts](http://www.macports.org/) install build dependencies:
 
-    port install git-core autoconf automake intltool yasm.
+    port install git-core autoconf automake intltool upx yasm.
 
 Download and build wxWidgets 2.9+, example configure flags:
 
@@ -17,10 +17,12 @@ Copy the wxWidgets m4 macro to the MacPorts tree:
 
 Download and build FFmpeg, example configure flags:
 
-    ./configure  --prefix=$HOME/usr --disable-shared --disable-debug --disable-doc \
-        --enable-gpl --enable-version3 --disable-nonfree --disable-ffmpeg --disable-ffplay \
+    ./configure  --prefix=$HOME/usr --enable-gpl --enable-version3 \
+        --enable-runtime-cpudetect --enable-pthreads \
+        --disable-shared --disable-debug --disable-doc \
+        --disable-nonfree --disable-ffmpeg --disable-ffplay \
         --disable-ffprobe --disable-ffserver --disable-avdevice --disable-swscale \
-        --disable-postproc --enable-pthreads --disable-encoders --disable-muxers \
+        --disable-postproc --disable-encoders --disable-muxers \
         --disable-devices --disable-filters --disable-swresample
     make && make install
 
