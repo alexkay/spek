@@ -6,9 +6,11 @@ Using [MacPorts](http://www.macports.org/) install build dependencies:
 
 Download and build wxWidgets 2.9+, example configure flags:
 
-    ./configure --prefix=$HOME/usr --disable-shared --with-osx_cocoa \
+    ./configure --prefix=$HOME/usr --disable-shared \
+        --enable-intl --with-osx_cocoa \
         --with-jpeg=builtin --with-png=builtin --with-regex=builtin \
         --with-tiff=builtin --with-zlib=builtin --with-expat=builtin
+    cd locale; make allmo; cd ..
     make && make install
 
 Copy the wxWidgets m4 macro to the MacPorts tree:
