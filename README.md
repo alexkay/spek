@@ -5,7 +5,7 @@ for the GUI and FFmpeg libraries for audio decoding.
 
 Spek is available on *BSD, GNU/Linux, Windows and Mac OS X.
 
-Find out more about Spek on its website: <http://www.spek-project.org/>
+Find out more about Spek on its website: <http://spek-project.org/>
 
 ## Spek 0.8.0 - Released 2012-TODO
 
