@@ -86,26 +86,23 @@ SpekWindow::SpekWindow(const wxString& path) :
     menu_file->Append(menu_file_save);
     menu_file->AppendSeparator();
     menu_file->Append(wxID_EXIT);
-    menu->Append(menu_file, _("&File")); // TODO: stock text
+    menu->Append(menu_file, _("&File"));
 
     wxMenu *menu_edit = new wxMenu();
     wxMenuItem *menu_edit_prefs = new wxMenuItem(menu_edit, wxID_PREFERENCES);
-    // TODO: check if this is needed
     menu_edit_prefs->SetItemLabel(menu_edit_prefs->GetItemLabelText() + wxT("\tCtrl+E"));
     menu_edit->Append(menu_edit_prefs);
-    menu->Append(menu_edit, _("&Edit")); // TODO: stock text
+    menu->Append(menu_edit, _("&Edit"));
 
     wxMenu *menu_help = new wxMenu();
     wxMenuItem *menu_help_about = new wxMenuItem(menu_help, wxID_ABOUT);
-    // TODO: check if this is needed
     menu_help_about->SetItemLabel(menu_help_about->GetItemLabelText() + wxT("\tF1"));
     menu_help->Append(menu_help_about);
-    menu->Append(menu_help, _("&Help")); // TODO: stock text
+    menu->Append(menu_help, _("&Help"));
 
     SetMenuBar(menu);
 
     wxToolBar *toolbar = CreateToolBar();
-    // TODO: bundled file open/save icons suck, provide our own (tango?)
     toolbar->AddTool(
         wxID_OPEN,
         menu_file_open->GetItemLabelText(),
@@ -133,7 +130,6 @@ SpekWindow::SpekWindow(const wxString& path) :
     // This second Connect() handles clicks on the border
     info_bar->Connect(wxEVT_LEFT_DOWN, wxCommandEventHandler(SpekWindow::on_visit));
     info_sizer->Add(label, 1, wxALIGN_CENTER_VERTICAL | wxALL, 6);
-    // TODO: gtk-close won't work on win/osx
     wxBitmapButton *button = new wxBitmapButton(
         info_bar, -1, wxArtProvider::GetBitmap(wxT("gtk-close")),
         wxDefaultPosition, wxDefaultSize, wxNO_BORDER);
@@ -167,7 +163,6 @@ void SpekWindow::open(const wxString& path)
         wxString full_name = file_name.GetFullName();
         // TRANSLATORS: window title, %s is replaced with the file name
         wxString title = wxString::Format(_("Spek - %s"), full_name.c_str());
-        // TODO: make sure the above works on all platforms, both in x32 and x64.
         SetTitle(title);
 
         this->spectrogram->open(path);
