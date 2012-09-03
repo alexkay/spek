@@ -16,6 +16,7 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "spek-platform.hh"
 #include "spek-preferences.hh"
 
 #include "spek-preferences-dialog.hh"
@@ -72,22 +73,24 @@ SpekPreferencesDialog::SpekPreferencesDialog(wxWindow *parent) :
     general_label->SetFont(font);
     inner_sizer->Add(general_label);
 
-    wxSizer *language_sizer = new wxBoxSizer(wxHORIZONTAL);
-    inner_sizer->Add(language_sizer, 0, wxLEFT | wxTOP, 12);
-    wxStaticText *language_label = new wxStaticText(this, -1, _("Language:"));
-    language_sizer->Add(language_label, 0, wxALIGN_CENTER_VERTICAL);
+    if (spek_platform_can_change_language()) {
+        wxSizer *language_sizer = new wxBoxSizer(wxHORIZONTAL);
+        inner_sizer->Add(language_sizer, 0, wxLEFT | wxTOP, 12);
+        wxStaticText *language_label = new wxStaticText(this, -1, _("Language:"));
+        language_sizer->Add(language_label, 0, wxALIGN_CENTER_VERTICAL);
 
-    wxChoice *language_choice = new wxChoice(this, ID_LANGUAGE);
-    language_sizer->Add(language_choice, 0, wxALIGN_CENTER_VERTICAL | wxLEFT, 12);
-    int active_index = 0;
-    wxString active_language = SpekPreferences::get().get_language();
-    for (int i = 0; i < this->languages.GetCount(); i += 2) {
-        language_choice->Append(this->languages[i + 1]);
-        if (this->languages[i] == active_language) {
-            active_index = i / 2;
+        wxChoice *language_choice = new wxChoice(this, ID_LANGUAGE);
+        language_sizer->Add(language_choice, 0, wxALIGN_CENTER_VERTICAL | wxLEFT, 12);
+        int active_index = 0;
+        wxString active_language = SpekPreferences::get().get_language();
+        for (int i = 0; i < this->languages.GetCount(); i += 2) {
+            language_choice->Append(this->languages[i + 1]);
+            if (this->languages[i] == active_language) {
+                active_index = i / 2;
+            }
         }
+        language_choice->SetSelection(active_index);
     }
-    language_choice->SetSelection(active_index);
 
     wxCheckBox *check_update = new wxCheckBox(this, ID_CHECK, _("Check for &updates"));
     inner_sizer->Add(check_update, 0 ,wxLEFT | wxTOP, 12);

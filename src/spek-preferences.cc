@@ -37,7 +37,7 @@ void SpekPreferences::init()
 
     int lang = wxLANGUAGE_DEFAULT;
     wxString code = this->get_language();
-    if (!code.IsEmpty()) {
+    if (spek_platform_can_change_language() && !code.IsEmpty()) {
         const wxLanguageInfo *info = wxLocale::FindLanguageInfo(code);
         if (info) {
             lang = info->Language;
