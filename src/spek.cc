@@ -50,9 +50,9 @@ bool Spek::OnInit()
     wxInitAllImageHandlers();
     wxSocketBase::Initialize();
 
-    SpekPlatform::init();
-    SpekPreferences::get().init();
     spek_audio_init();
+    spek_platform_init();
+    SpekPreferences::get().init();
 
     static const wxCmdLineEntryDesc desc[] = {{
             wxCMD_LINE_SWITCH,

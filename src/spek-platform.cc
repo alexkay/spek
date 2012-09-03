@@ -28,7 +28,7 @@
 
 #include "spek-platform.hh"
 
-void SpekPlatform::init()
+void spek_platform_init()
 {
 #ifdef OS_OSX
     ProcessSerialNumber PSN;
@@ -37,7 +37,7 @@ void SpekPlatform::init()
 #endif
 }
 
-wxString SpekPlatform::config_path(const wxString& app_name)
+wxString spek_platform_config_path(const wxString& app_name)
 {
 #ifdef OS_WIN
     wxFileName file_name(wxStandardPaths::Get().GetUserConfigDir(), wxEmptyString);
@@ -51,7 +51,7 @@ wxString SpekPlatform::config_path(const wxString& app_name)
     return file_name.GetFullPath();
 }
 
-bool SpekPlatform::can_change_language()
+bool spek_platform_can_change_language()
 {
 #ifdef OS_UNIX
     return false;
@@ -60,7 +60,7 @@ bool SpekPlatform::can_change_language()
 #endif
 }
 
-double SpekPlatform::font_scale()
+double spek_platform_font_scale()
 {
 #ifdef OS_OSX
     return 1.3;

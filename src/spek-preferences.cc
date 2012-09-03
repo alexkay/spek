@@ -49,7 +49,7 @@ void SpekPreferences::init()
 
 SpekPreferences::SpekPreferences() : locale(NULL)
 {
-    wxString path = SpekPlatform::config_path(wxT("spek"));
+    wxString path = spek_platform_config_path(wxT("spek"));
     this->config = new wxFileConfig(
         wxEmptyString,
         wxEmptyString,
