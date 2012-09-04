@@ -1,7 +1,7 @@
 # Spek
 
-Spek is an acoustic spectrum analyser written in C and C++. It uses wxWidgets
-for the GUI and FFmpeg libraries for audio decoding.
+Spek is an acoustic spectrum analyser written in C and C++. It uses FFmpeg
+libraries for audio decoding and wxWidgets for the GUI.
 
 Spek is available on *BSD, GNU/Linux, Windows and Mac OS X.
 
@@ -36,16 +36,19 @@ Bugfixes:
 
 ### Sources / Packages
 
- * Spek 0.8.0 tarball:
-   * <https://github.com/downloads/alexkay/spek/spek-0.8.0.tar.xz>
+Spek 0.8.0 tarball:
 
- * Windows and Mac OS X binaries:
-   * <https://github.com/downloads/alexkay/spek/spek-0.8.0.msi>
-   * <https://github.com/downloads/alexkay/spek/spek-0.8.0.zip>
-   * <https://github.com/downloads/alexkay/spek/spek-0.8.0.dmg>
+ * <https://github.com/downloads/alexkay/spek/spek-0.8.0.tar.xz>
 
- * Unix packages:
-   * <https://github.com/alexkay/spek/blob/master/INSTALL.md#bsd-and-gnulinux>
+Windows and Mac OS X binaries:
+
+ * <https://github.com/downloads/alexkay/spek/spek-0.8.0.msi>
+ * <https://github.com/downloads/alexkay/spek/spek-0.8.0.zip>
+ * <https://github.com/downloads/alexkay/spek/spek-0.8.0.dmg>
+
+Unix packages:
+
+ * <https://github.com/alexkay/spek/blob/master/INSTALL.md#bsd-and-gnulinux>
 
 ### Dependencies
 
