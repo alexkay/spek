@@ -111,13 +111,13 @@ SpekWindow::SpekWindow(const wxString& path) :
     toolbar->AddTool(
         wxID_OPEN,
         wxEmptyString,
-        wxArtProvider::GetBitmap(wxART_FILE_OPEN, wxART_TOOLBAR),
+        wxArtProvider::GetBitmap(ART_OPEN, wxART_TOOLBAR),
         menu_file_open->GetItemLabelText()
     );
     toolbar->AddTool(
         wxID_SAVE,
         wxEmptyString,
-        wxArtProvider::GetBitmap(wxART_FILE_SAVE, wxART_TOOLBAR),
+        wxArtProvider::GetBitmap(ART_SAVE, wxART_TOOLBAR),
         menu_file_save->GetItemLabelText()
     );
 #if wxCHECK_VERSION(2, 9, 1)
@@ -125,7 +125,7 @@ SpekWindow::SpekWindow(const wxString& path) :
     toolbar->AddTool(
         wxID_ABOUT,
         wxEmptyString,
-        wxArtProvider::GetBitmap(wxART_HELP, wxART_TOOLBAR),
+        wxArtProvider::GetBitmap(ART_ABOUT, wxART_TOOLBAR),
         menu_help_about->GetItemLabelText()
     );
 #endif

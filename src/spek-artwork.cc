@@ -38,6 +38,21 @@ wxBitmap SpekArtProvider::CreateBitmap(
         return wxArtProvider::GetBitmap(wxT("spek"), client, size);
 #endif
     }
+    if (id == ART_OPEN) {
+#ifdef OS_UNIX
+        return wxArtProvider::GetBitmap(wxT("gtk-open"), client, size);
+#endif
+    }
+    if (id == ART_SAVE) {
+#ifdef OS_UNIX
+        return wxArtProvider::GetBitmap(wxT("gtk-save"), client, size);
+#endif
+    }
+    if (id == ART_ABOUT) {
+#ifdef OS_UNIX
+        return wxArtProvider::GetBitmap(wxT("gtk-about"), client, size);
+#endif
+    }
     return wxNullBitmap;
 }
 
