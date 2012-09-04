@@ -110,13 +110,15 @@ SpekWindow::SpekWindow(const wxString& path) :
     wxToolBar *toolbar = CreateToolBar();
     toolbar->AddTool(
         wxID_OPEN,
-        menu_file_open->GetItemLabelText(),
-        wxArtProvider::GetBitmap(wxART_FILE_OPEN)
+        wxEmptyString,
+        wxArtProvider::GetBitmap(wxART_FILE_OPEN),
+        menu_file_open->GetItemLabelText()
     );
     toolbar->AddTool(
         wxID_SAVE,
-        menu_file_save->GetItemLabelText(),
-        wxArtProvider::GetBitmap(wxART_FILE_SAVE)
+        wxEmptyString,
+        wxArtProvider::GetBitmap(wxART_FILE_SAVE),
+        menu_file_save->GetItemLabelText()
     );
     toolbar->Realize();
 
