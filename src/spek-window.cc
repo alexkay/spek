@@ -30,6 +30,7 @@ extern "C" {
 #include <spek-utils.h>
 }
 
+#include "spek-artwork.hh"
 #include "spek-preferences-dialog.hh"
 #include "spek-preferences.hh"
 #include "spek-spectrogram.hh"
@@ -74,8 +75,12 @@ SpekWindow::SpekWindow(const wxString& path) :
 {
     this->description = _("Spek - Acoustic Spectrum Analyser");
     SetTitle(this->description);
-    // TODO: test on all platforms
-    //SetIcon(wxIcon(wxT("spek")));
+
+#if ART_HAS_ICON_BUNDLES
+    SetIcons(wxArtProvider::GetIconBundle(ART_SPEK));
+#else
+    SetIcon(wxArtProvider::GetIcon(ART_SPEK, wxART_OTHER, wxSize(48, 48)));
+#endif
 
     wxMenuBar *menu = new wxMenuBar();
 

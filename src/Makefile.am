@@ -1,6 +1,8 @@
 bin_PROGRAMS = spek
 
 spek_SOURCES = \
+	spek-artwork.hh \
+	spek-artwork.cc \
 	spek-audio-desc.cc \
 	spek-audio-desc.hh \
 	spek-events.cc \

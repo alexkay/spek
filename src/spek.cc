@@ -24,6 +24,7 @@ extern "C" {
 #include <spek-audio.h>
 }
 
+#include "spek-artwork.hh"
 #include "spek-platform.hh"
 #include "spek-preferences.hh"
 
@@ -51,6 +52,8 @@ bool Spek::OnInit()
     wxSocketBase::Initialize();
 
     spek_audio_init();
+
+    spek_artwork_init();
     spek_platform_init();
     SpekPreferences::get().init();
 
