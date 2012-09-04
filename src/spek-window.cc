@@ -77,9 +77,9 @@ SpekWindow::SpekWindow(const wxString& path) :
     SetTitle(this->description);
 
 #if ART_HAS_ICON_BUNDLES
-    SetIcons(wxArtProvider::GetIconBundle(ART_SPEK));
+    SetIcons(wxArtProvider::GetIconBundle(ART_SPEK, wxART_FRAME_ICON));
 #else
-    SetIcon(wxArtProvider::GetIcon(ART_SPEK, wxART_OTHER, wxSize(48, 48)));
+    SetIcon(wxArtProvider::GetIcon(ART_SPEK, wxART_FRAME_ICON, wxSize(48, 48)));
 #endif
 
     wxMenuBar *menu = new wxMenuBar();
@@ -111,15 +111,24 @@ SpekWindow::SpekWindow(const wxString& path) :
     toolbar->AddTool(
         wxID_OPEN,
         wxEmptyString,
-        wxArtProvider::GetBitmap(wxART_FILE_OPEN),
+        wxArtProvider::GetBitmap(wxART_FILE_OPEN, wxART_TOOLBAR),
         menu_file_open->GetItemLabelText()
     );
     toolbar->AddTool(
         wxID_SAVE,
         wxEmptyString,
-        wxArtProvider::GetBitmap(wxART_FILE_SAVE),
+        wxArtProvider::GetBitmap(wxART_FILE_SAVE, wxART_TOOLBAR),
         menu_file_save->GetItemLabelText()
     );
+#if wxCHECK_VERSION(2, 9, 1)
+    toolbar->AddStretchableSpace();
+    toolbar->AddTool(
+        wxID_ABOUT,
+        wxEmptyString,
+        wxArtProvider::GetBitmap(wxART_HELP, wxART_TOOLBAR),
+        menu_help_about->GetItemLabelText()
+    );
+#endif
     toolbar->Realize();
 
     wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
