@@ -28,7 +28,7 @@ LDFLAGS="dist/win/spek.res" ./configure \
     --with-wx-config="$WX_CONFIG" \
     --prefix=${PWD}/dist/win/build && \
     "$MAKE" && \
-    "$MAKE" install
+    "$MAKE" install || exit 1
 "$STRIP" dist/win/build/bin/spek.exe
 "$UPX" dist/win/build/bin/spek.exe
 

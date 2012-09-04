@@ -48,6 +48,14 @@ wxIconBundle SpekArtProvider::CreateIconBundle(const wxArtID& id, const wxArtCli
 #ifdef OS_UNIX
         return wxArtProvider::GetIconBundle(wxT("spek"), client);
 #endif
+#ifdef OS_WIN
+        wxIconBundle bundle;
+        bundle.AddIcon(wxIcon(wxT("aaaa"), wxBITMAP_TYPE_ICO_RESOURCE, 16, 16));
+        bundle.AddIcon(wxIcon(wxT("aaaa"), wxBITMAP_TYPE_ICO_RESOURCE, 24, 24));
+        bundle.AddIcon(wxIcon(wxT("aaaa"), wxBITMAP_TYPE_ICO_RESOURCE, 32, 32));
+        bundle.AddIcon(wxIcon(wxT("aaaa"), wxBITMAP_TYPE_ICO_RESOURCE, 48, 48));
+        return bundle;
+#endif
     }
     return wxNullIconBundle;
 }
