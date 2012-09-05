@@ -312,6 +312,7 @@ void SpekWindow::on_about(wxCommandEvent& event)
     info.AddDeveloper(wxT("Stefan Kost"));
     info.AddDeveloper(wxT("Thibault North"));
     info.AddArtist(wxT("Olga Vasylevska"));
+    info.AddArtist(wxT("Silvestre Herrera"));
     // TRANSLATORS: Add your name here
     wxString translator = _("translator-credits");
     if (translator != wxT("translator-credits")) {

@@ -26,3 +26,4 @@ Translators:
 Artist:
 
 * Olga Vasylevska
+* Silvestre Herrera
