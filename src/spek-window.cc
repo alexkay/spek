@@ -76,8 +76,10 @@ SpekWindow::SpekWindow(const wxString& path) :
     this->description = _("Spek - Acoustic Spectrum Analyser");
     SetTitle(this->description);
 
-#if ART_HAS_ICON_BUNDLES
+#if wxCHECK_VERSION(2, 9, 0)
+#ifndef OS_OSX
     SetIcons(wxArtProvider::GetIconBundle(ART_SPEK, wxART_FRAME_ICON));
+#endif
 #else
     SetIcon(wxArtProvider::GetIcon(ART_SPEK, wxART_FRAME_ICON, wxSize(48, 48)));
 #endif

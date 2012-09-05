@@ -21,8 +21,6 @@
 
 #include <wx/string.h>
 
-#define ART_HAS_ICON_BUNDLES wxCHECK_VERSION(2, 9, 0)
-
 #define ART_SPEK wxT("art-spek")
 #define ART_OPEN wxT("art-open")
 #define ART_SAVE wxT("art-save")

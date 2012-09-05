@@ -17,6 +17,7 @@ mkdir -p Spek.app/Contents/Resources
 mv ../../src/spek Spek.app/Contents/MacOS/Spek
 cp Info.plist Spek.app/Contents/
 cp Spek.icns Spek.app/Contents/Resources/
+cp *.png Spek.app/Contents/Resources/
 
 for lang in $LANGUAGES; do
     mkdir -p Spek.app/Contents/Resources/"$lang".lproj
