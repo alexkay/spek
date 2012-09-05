@@ -209,7 +209,8 @@ void SpekSpectrogram::render(wxDC& dc)
         TPAD - 2 * GAP - normal_height - small_height
     );
 
-    if (this->image.GetWidth() > 1 && this->image.GetHeight() > 1) {
+    if (this->image.GetWidth() > 1 && this->image.GetHeight() > 1 &&
+        w - LPAD - RPAD > 0 && h - TPAD - BPAD > 0) {
         // Draw the spectrogram.
         wxBitmap bmp(this->image.Scale(w - LPAD - RPAD, h - TPAD - BPAD));
         dc.DrawBitmap(bmp, LPAD, TPAD);
