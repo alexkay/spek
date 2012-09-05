@@ -62,6 +62,14 @@ wxBitmap SpekArtProvider::CreateBitmap(
         return wxIcon(wxT("save"), wxBITMAP_TYPE_ICO_RESOURCE, 24, 24);
 #endif
     }
+    if (id == ART_CLOSE) {
+#ifdef OS_UNIX
+        return wxArtProvider::GetBitmap(wxT("gtk-close"), client, size);
+#endif
+#ifdef OS_WIN
+        return wxIcon(wxT("close"), wxBITMAP_TYPE_ICO_RESOURCE, 16, 16);
+#endif
+    }
     return wxNullBitmap;
 }
 

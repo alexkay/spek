@@ -147,7 +147,7 @@ SpekWindow::SpekWindow(const wxString& path) :
     info_bar->Connect(wxEVT_LEFT_DOWN, wxCommandEventHandler(SpekWindow::on_visit));
     info_sizer->Add(label, 1, wxALIGN_CENTER_VERTICAL | wxALL, 6);
     wxBitmapButton *button = new wxBitmapButton(
-        info_bar, -1, wxArtProvider::GetBitmap(wxT("gtk-close")),
+        info_bar, -1, wxArtProvider::GetBitmap(ART_CLOSE, wxART_BUTTON),
         wxDefaultPosition, wxDefaultSize, wxNO_BORDER);
     button->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SpekWindow::on_close));
     info_sizer->Add(button, 0, wxALIGN_CENTER_VERTICAL);
