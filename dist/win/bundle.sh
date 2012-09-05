@@ -19,6 +19,7 @@ cd $(dirname $0)/../..
 rm -fr dist/win/build && mkdir dist/win/build
 
 # Compile the resource file
+rm -f dist/win/spek.res
 "$WINDRES" dist/win/spek.rc -O coff -o dist/win/spek.res
 mkdir -p src/dist/win && cp dist/win/spek.res src/dist/win/
 

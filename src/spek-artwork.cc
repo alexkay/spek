@@ -38,19 +38,28 @@ wxBitmap SpekArtProvider::CreateBitmap(
         return wxArtProvider::GetBitmap(wxT("spek"), client, size);
 #endif
     }
+    if (id == ART_ABOUT) {
+#ifdef OS_UNIX
+        return wxArtProvider::GetBitmap(wxT("gtk-about"), client, size);
+#endif
+#ifdef OS_WIN
+        return wxIcon(wxT("about"), wxBITMAP_TYPE_ICO_RESOURCE, 24, 24);
+#endif
+    }
     if (id == ART_OPEN) {
 #ifdef OS_UNIX
         return wxArtProvider::GetBitmap(wxT("gtk-open"), client, size);
+#endif
+#ifdef OS_WIN
+        return wxIcon(wxT("open"), wxBITMAP_TYPE_ICO_RESOURCE, 24, 24);
 #endif
     }
     if (id == ART_SAVE) {
 #ifdef OS_UNIX
         return wxArtProvider::GetBitmap(wxT("gtk-save"), client, size);
 #endif
-    }
-    if (id == ART_ABOUT) {
-#ifdef OS_UNIX
-        return wxArtProvider::GetBitmap(wxT("gtk-about"), client, size);
+#ifdef OS_WIN
+        return wxIcon(wxT("save"), wxBITMAP_TYPE_ICO_RESOURCE, 24, 24);
 #endif
     }
     return wxNullBitmap;
