@@ -241,40 +241,44 @@ void SpekSpectrogram::render(wxDC& dc)
         // Prepare to draw the rulers.
         dc.SetFont(small_font);
 
-        // Time ruler.
-        int time_factors[] = {1, 2, 5, 10, 20, 30, 1*60, 2*60, 5*60, 10*60, 20*60, 30*60, 0};
-        SpekRuler time_ruler(
-            LPAD,
-            h - BPAD,
-            SpekRuler::BOTTOM,
-            // TODO: i18n
-            wxT("00:00"),
-            time_factors,
-            (int)this->duration,
-            1.5,
-            (w - LPAD - RPAD) / this->duration,
-            0.0,
-            time_formatter
-        );
-        time_ruler.draw(dc);
+        if (this->duration) {
+            // Time ruler.
+            int time_factors[] = {1, 2, 5, 10, 20, 30, 1*60, 2*60, 5*60, 10*60, 20*60, 30*60, 0};
+            SpekRuler time_ruler(
+                LPAD,
+                h - BPAD,
+                SpekRuler::BOTTOM,
+                // TODO: i18n
+                wxT("00:00"),
+                time_factors,
+                (int)this->duration,
+                1.5,
+                (w - LPAD - RPAD) / this->duration,
+                0.0,
+                time_formatter
+                );
+            time_ruler.draw(dc);
+        }
 
-        // Frequency ruler.
-        int freq = this->sample_rate / 2;
-        int freq_factors[] = {1000, 2000, 5000, 10000, 20000, 0};
-        SpekRuler freq_ruler(
-            LPAD,
-            TPAD,
-            SpekRuler::LEFT,
-            // TRANSLATORS: keep "00" unchanged, it's used to calc the text width
-            _("00 kHz"),
-            freq_factors,
-            freq,
-            3.0,
-            (h - TPAD - BPAD) / (double)freq,
-            0.0,
-            freq_formatter
-        );
-        freq_ruler.draw(dc);
+        if (this->sample_rate) {
+            // Frequency ruler.
+            int freq = this->sample_rate / 2;
+            int freq_factors[] = {1000, 2000, 5000, 10000, 20000, 0};
+            SpekRuler freq_ruler(
+                LPAD,
+                TPAD,
+                SpekRuler::LEFT,
+                // TRANSLATORS: keep "00" unchanged, it's used to calc the text width
+                _("00 kHz"),
+                freq_factors,
+                freq,
+                3.0,
+                (h - TPAD - BPAD) / (double)freq,
+                0.0,
+                freq_formatter
+                );
+            freq_ruler.draw(dc);
+        }
     }
 
     // Border around the spectrogram.
