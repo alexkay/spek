@@ -227,6 +227,9 @@ static void * reader_func(void *pp)
     // Force the worker to quit.
     reader_sync(p, -1);
     pthread_join(p->worker_thread, NULL);
+
+    // Notify the client.
+    p->cb(-1, NULL, p->cb_data);
     return NULL;
 }
 

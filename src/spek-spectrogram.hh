@@ -44,9 +44,10 @@ private:
     void stop();
 
     spek_pipeline *pipeline;
-    const spek_audio_properties *properties;
     wxString path;
     wxString desc;
+    double duration;
+    int sample_rate;
     wxImage palette;
     wxImage image;
     int prev_width;

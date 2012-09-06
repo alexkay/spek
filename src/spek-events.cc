@@ -32,9 +32,14 @@ SpekHaveSampleEvent::SpekHaveSampleEvent(const SpekHaveSampleEvent& other)
     SetEventType(SPEK_HAVE_SAMPLE);
     this->bands = other.bands;
     this->sample = other.sample;
-    this->values = (float *)malloc(this->bands * sizeof(float));
-    memcpy(this->values, other.values, this->bands * sizeof(float));
-    this->free_values = true;
+    if (other.values) {
+        this->values = (float *)malloc(this->bands * sizeof(float));
+        memcpy(this->values, other.values, this->bands * sizeof(float));
+        this->free_values = true;
+    } else {
+        this->values = NULL;
+        this->free_values = false;
+    }
 }
 
 SpekHaveSampleEvent::~SpekHaveSampleEvent()

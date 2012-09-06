@@ -58,7 +58,8 @@ static wxString trim(wxDC& dc, const wxString& s, int length, bool trim_end);
 SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
     wxPanel(parent, -1, wxDefaultPosition, wxDefaultSize, wxFULL_REPAINT_ON_RESIZE),
     pipeline(NULL),
-    properties(NULL),
+    duration(0.0),
+    sample_rate(0),
     palette(RULER, BANDS),
     image(1, 1),
     prev_width(-1)
@@ -99,6 +100,7 @@ void SpekSpectrogram::save(const wxString& path)
 
 void SpekSpectrogram::on_idle(wxIdleEvent& evt)
 {
+    // TODO: remove?
     Update();
 }
 
@@ -125,6 +127,11 @@ void SpekSpectrogram::on_have_sample(SpekHaveSampleEvent& event)
     int bands = event.get_bands();
     int sample = event.get_sample();
     const float *values = event.get_values();
+
+    if (sample == -1) {
+        this->stop();
+        return;
+    }
 
     // TODO: check image size, quit if wrong.
     for (int y = 0; y < bands; y++) {
@@ -235,7 +242,6 @@ void SpekSpectrogram::render(wxDC& dc)
         dc.SetFont(small_font);
 
         // Time ruler.
-        double duration = this->properties->duration;
         int time_factors[] = {1, 2, 5, 10, 20, 30, 1*60, 2*60, 5*60, 10*60, 20*60, 30*60, 0};
         SpekRuler time_ruler(
             LPAD,
@@ -244,16 +250,16 @@ void SpekSpectrogram::render(wxDC& dc)
             // TODO: i18n
             wxT("00:00"),
             time_factors,
-            (int)duration,
+            (int)this->duration,
             1.5,
-            (w - LPAD - RPAD) / duration,
+            (w - LPAD - RPAD) / this->duration,
             0.0,
             time_formatter
         );
         time_ruler.draw(dc);
 
         // Frequency ruler.
-        int freq = this->properties->sample_rate / 2;
+        int freq = this->sample_rate / 2;
         int freq_factors[] = {1000, 2000, 5000, 10000, 20000, 0};
         SpekRuler freq_ruler(
             LPAD,
@@ -328,8 +334,10 @@ void SpekSpectrogram::start()
             this
         );
         spek_pipeline_start(this->pipeline);
-        this->properties = spek_pipeline_properties(this->pipeline);
-        this->desc = spek_audio_desc(this->properties);
+        const spek_audio_properties *properties = spek_pipeline_properties(this->pipeline);
+        this->desc = spek_audio_desc(properties);
+        this->duration = properties->duration;
+        this->sample_rate = properties->sample_rate;
     } else {
         this->image.Create(1, 1);
     }
@@ -342,7 +350,6 @@ void SpekSpectrogram::stop()
     if (this->pipeline) {
         spek_pipeline_close(this->pipeline);
         this->pipeline = NULL;
-        this->properties = NULL;
     }
 }
 
