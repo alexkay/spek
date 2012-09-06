@@ -91,8 +91,12 @@ wxString spek_audio_desc(const struct spek_audio_properties *properties)
             break;
         }
 
-        // TRANSLATORS: first %s is the error message, second %s is stream description.
-        desc = wxString::Format(_("%s: %s"), error.c_str(), desc.c_str());
+        if (desc.IsEmpty()) {
+            desc = error;
+        } else {
+            // TRANSLATORS: first %s is the error message, second %s is stream description.
+            desc = wxString::Format(_("%s: %s"), error.c_str(), desc.c_str());
+        }
     }
 
     return desc;
