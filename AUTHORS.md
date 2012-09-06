@@ -23,7 +23,7 @@ Translators:
 * Tiago Rinaldi
 * Wouter Bolsterlee
 
-Artist:
+Artists:
 
 * Olga Vasylevska
 * Silvestre Herrera

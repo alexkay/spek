@@ -196,7 +196,7 @@ int spek_audio_read(struct spek_audio_context *cx) {
     }
 }
 
-void spek_audio_close (struct spek_audio_context *cx)
+void spek_audio_close(struct spek_audio_context *cx)
 {
     if (cx->properties.codec_name != NULL) {
         free(cx->properties.codec_name);

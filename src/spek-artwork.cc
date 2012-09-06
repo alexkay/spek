@@ -25,7 +25,7 @@ class SpekArtProvider : public wxArtProvider
 {
 protected:
     virtual wxBitmap CreateBitmap(const wxArtID& id, const wxArtClient& client, const wxSize& size);
-#if ART_HAS_ICON_BUNDLES
+#if wxCHECK_VERSION(2, 9, 0)
     virtual wxIconBundle CreateIconBundle(const wxArtID& id, const wxArtClient& client);
 #endif
 };
@@ -33,74 +33,72 @@ protected:
 wxBitmap SpekArtProvider::CreateBitmap(
     const wxArtID& id, const wxArtClient& client, const wxSize& size)
 {
-    if (id == ART_SPEK) {
 #ifdef OS_UNIX
+    if (id == ART_SPEK) {
         return wxArtProvider::GetBitmap(wxT("spek"), client, size);
-#endif
     }
     if (id == ART_ABOUT) {
-#ifdef OS_UNIX
         return wxArtProvider::GetBitmap(wxT("gtk-about"), client, size);
-#endif
-#ifdef OS_WIN
-        return wxIcon(wxT("about"), wxBITMAP_TYPE_ICO_RESOURCE, 24, 24);
-#endif
-#ifdef OS_OSX
-        return wxBitmap(wxT("about"), wxBITMAP_TYPE_PNG_RESOURCE);
-#endif
     }
     if (id == ART_OPEN) {
-#ifdef OS_UNIX
         return wxArtProvider::GetBitmap(wxT("gtk-open"), client, size);
-#endif
-#ifdef OS_WIN
-        return wxIcon(wxT("open"), wxBITMAP_TYPE_ICO_RESOURCE, 24, 24);
-#endif
-#ifdef OS_OSX
-        return wxBitmap(wxT("open"), wxBITMAP_TYPE_PNG_RESOURCE);
-#endif
     }
     if (id == ART_SAVE) {
-#ifdef OS_UNIX
         return wxArtProvider::GetBitmap(wxT("gtk-save"), client, size);
-#endif
-#ifdef OS_WIN
-        return wxIcon(wxT("save"), wxBITMAP_TYPE_ICO_RESOURCE, 24, 24);
-#endif
-#ifdef OS_OSX
-        return wxBitmap(wxT("save"), wxBITMAP_TYPE_PNG_RESOURCE);
-#endif
     }
     if (id == ART_CLOSE) {
-#ifdef OS_UNIX
         return wxArtProvider::GetBitmap(wxT("gtk-close"), client, size);
+    }
 #endif
 #ifdef OS_WIN
+    if (id == ART_ABOUT) {
+        return wxIcon(wxT("about"), wxBITMAP_TYPE_ICO_RESOURCE, 24, 24);
+    }
+    if (id == ART_OPEN) {
+        return wxIcon(wxT("open"), wxBITMAP_TYPE_ICO_RESOURCE, 24, 24);
+    }
+    if (id == ART_SAVE) {
+        return wxIcon(wxT("save"), wxBITMAP_TYPE_ICO_RESOURCE, 24, 24);
+    }
+    if (id == ART_CLOSE) {
         return wxIcon(wxT("close"), wxBITMAP_TYPE_ICO_RESOURCE, 16, 16);
+    }
 #endif
 #ifdef OS_OSX
-        return wxBitmap(wxT("close"), wxBITMAP_TYPE_PNG_RESOURCE);
-#endif
+    if (id == ART_ABOUT) {
+        return wxBitmap(wxT("about"), wxBITMAP_TYPE_PNG_RESOURCE);
     }
+    if (id == ART_OPEN) {
+        return wxBitmap(wxT("open"), wxBITMAP_TYPE_PNG_RESOURCE);
+    }
+    if (id == ART_SAVE) {
+        return wxBitmap(wxT("save"), wxBITMAP_TYPE_PNG_RESOURCE);
+    }
+    if (id == ART_CLOSE) {
+        return wxBitmap(wxT("close"), wxBITMAP_TYPE_PNG_RESOURCE);
+    }
+#endif
     return wxNullBitmap;
 }
 
-#if ART_HAS_ICON_BUNDLES
+#if wxCHECK_VERSION(2, 9, 0)
 wxIconBundle SpekArtProvider::CreateIconBundle(const wxArtID& id, const wxArtClient& client)
 {
-    if (id == ART_SPEK) {
 #ifdef OS_UNIX
+    if (id == ART_SPEK) {
         return wxArtProvider::GetIconBundle(wxT("spek"), client);
+    }
 #endif
 #ifdef OS_WIN
+    if (id == ART_SPEK) {
         wxIconBundle bundle;
         bundle.AddIcon(wxIcon(wxT("aaaa"), wxBITMAP_TYPE_ICO_RESOURCE, 16, 16));
         bundle.AddIcon(wxIcon(wxT("aaaa"), wxBITMAP_TYPE_ICO_RESOURCE, 24, 24));
         bundle.AddIcon(wxIcon(wxT("aaaa"), wxBITMAP_TYPE_ICO_RESOURCE, 32, 32));
         bundle.AddIcon(wxIcon(wxT("aaaa"), wxBITMAP_TYPE_ICO_RESOURCE, 48, 48));
         return bundle;
-#endif
     }
+#endif
     return wxNullIconBundle;
 }
 #endif
