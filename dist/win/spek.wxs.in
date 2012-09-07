@@ -11,8 +11,10 @@
     <Property Id="ARPPRODUCTICON" Value="ProgramIcon" />
     <Property Id="ARPHELPLINK" Value="http://spek-project.org/" />
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
-    <UIRef Id="WixUI_InstallDir" />
+    <UIRef Id="SpekInstallDir" />
     <UIRef Id="WixUI_ErrorProgressText" />
+    <Property Id="INSTALLSTARTMENUSHORTCUT" Value="1" />
+    <Property Id="INSTALLDESKTOPSHORTCUT" Value="1" />
     <WixVariable Id="WixUIBannerBmp" Value="banner.bmp" />
     <WixVariable Id="WixUIDialogBmp" Value="dialog.bmp" />
     <Upgrade Id="$(var.UpgradeCode)">
@@ -25,13 +27,14 @@
     <CustomAction Id="StartAppOnExit" FileKey="spek.exe" ExeCommand="" Execute="immediate" Impersonate ="yes" Return="asyncNoWait" />
     <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch Spek when setup exits" />
     <UI>
-      <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="InstallDirDlg" Order="2">1</Publish>
-      <Publish Dialog="InstallDirDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" Order="2">1</Publish>
+      <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="SpekInstallDirDlg" Order="2">1</Publish>
+      <Publish Dialog="SpekInstallDirDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" Order="2">1</Publish>
       <Publish Dialog="ExitDialog" Control="Finish" Order="1" Event="DoAction" Value="StartAppOnExit">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
     </UI>
     <Icon Id="ProgramIcon" SourceFile="spek.ico"/>
     <DirectoryRef Id="ProgramMenuSubfolder">
       <Component Id="StartMenuShortcut" Guid="165DF12B-D970-49BC-B07B-880B62ABC308">
+        <Condition>INSTALLSTARTMENUSHORTCUT</Condition>
         <Shortcut Id="StartMenuShortcut" Name="$(var.ProductName)" Icon="ProgramIcon" Target="[INSTALLLOCATION]spek.exe" WorkingDirectory="INSTALLLOCATION"/>
         <Shortcut Id="UninstallProduct" Name="Uninstall $(var.ProductName)" Target="[System64Folder]msiexec.exe" Arguments="/x [ProductCode]"/>
         <RemoveFolder Id="ProgramMenuSubfolder" On="uninstall"/>
@@ -40,6 +43,7 @@
     </DirectoryRef>
     <DirectoryRef Id="DesktopFolder">
       <Component Id="DesktopShortcut" Guid="ACCE1EDB-87E3-4FE5-B2BF-93113E767381">
+        <Condition>INSTALLDESKTOPSHORTCUT</Condition>
         <Shortcut Id="DesktopShortcut" Name="$(var.ProductName)" Icon="ProgramIcon" Target="[INSTALLLOCATION]spek.exe" WorkingDirectory="INSTALLLOCATION"/>
         <RegistryValue Root="HKCU" Key="Software\$(var.Manufacturer)\$(var.ProductName)" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
       </Component>

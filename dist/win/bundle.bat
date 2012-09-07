@@ -11,8 +11,8 @@ move Spek\spek.exe .\
 move spek.exe Spek\
 
 rem Make the MSI package
-"%WIX_PATH%"\candle spek.wxs files.wxs
-"%WIX_PATH%"\light -ext WixUIExtension.dll -b Spek spek.wixobj files.wixobj -o spek.msi
+"%WIX_PATH%"\candle SpekInstallDirDlg.wxs SpekInstallDir.wxs spek.wxs files.wxs
+"%WIX_PATH%"\light -b Spek SpekInstallDirDlg.wixobj SpekInstallDir.wixobj spek.wixobj files.wixobj -ext WixUIExtension.dll -o spek.msi
 start /wait fix-msi.js spek.msi
 
 rem Clean up
