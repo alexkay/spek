@@ -25,6 +25,26 @@
     <key>NSHumanReadableCopyright</key>
     <string>Copyright (c) 2010-2012 Alexander Kojevnikov and contributors</string>
     <key>LSMinimumSystemVersion</key>
-    <string>10.4</string>
+    <string>10.5</string>
+    <key>CFBundleDocumentTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeIconFiles</key>
+            <array>
+                <string>Spek.icns</string>
+            </array>
+            <key>CFBundleTypeName</key>
+            <string>Spek File</string>
+            <key>CFBundleTypeRole</key>
+            <string>Viewer</string>
+            <key>LSHandlerRank</key>
+            <string>Alternate</string>
+            <key>LSItemContentTypes</key>
+            <array>
+                <string>public.audio</string>
+                <string>public.movie</string>
+            </array>
+        </dict>
+    </array>
 </dict>
 </plist>

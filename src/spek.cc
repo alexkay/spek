@@ -33,13 +33,17 @@ extern "C" {
 class Spek: public wxApp
 {
 public:
-    Spek() : wxApp(), quit(false) {}
+    Spek() : wxApp(), window(NULL), quit(false) {}
 
 protected:
     virtual bool OnInit();
     virtual int OnRun();
+#ifdef OS_OSX
+    virtual void MacOpenFiles(const wxArrayString& files);
+#endif
 
 private:
+    SpekWindow *window;
     wxString path;
     bool quit;
 };
@@ -102,9 +106,9 @@ bool Spek::OnInit()
         this->path = parser.GetParam();
     }
 
-    SpekWindow *window = new SpekWindow(this->path);
-    window->Show(true);
-    SetTopWindow(window);
+    this->window = new SpekWindow(this->path);
+    this->window->Show(true);
+    SetTopWindow(this->window);
     return true;
 }
 
@@ -116,3 +120,12 @@ int Spek::OnRun()
 
     return wxApp::OnRun();
 }
+
+#ifdef OS_OSX
+void Spek::MacOpenFiles(const wxArrayString& files)
+{
+    if (files.GetCount() == 1) {
+        this->window->open(files[0]);
+    }
+}
+#endif
