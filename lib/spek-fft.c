@@ -22,12 +22,11 @@
 
 #include "spek-fft.h"
 
-struct spek_fft_plan * spek_fft_plan_new(int n, int threshold)
+struct spek_fft_plan * spek_fft_plan_new(int n)
 {
     struct spek_fft_plan *p = malloc(sizeof(struct spek_fft_plan));
     p->input = av_mallocz(sizeof(float) * n);
     p->output = av_mallocz(sizeof(float) * (n / 2 + 1));
-    p->threshold = threshold;
     int bits = 0;
     while (n) {
         n >>= 1;
@@ -51,8 +50,7 @@ void spek_fft_execute(struct spek_fft_plan *p)
             p->input[i * 2] * p->input[i * 2] +
             p->input[i * 2 + 1] * p->input[i * 2 + 1];
         val /= n * n;
-        val = 10.0 * log10f (val);
-        p->output[i] = val < p->threshold ? p->threshold : val;
+        p->output[i] = 10.0 * log10f (val);
     }
 }
 

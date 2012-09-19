@@ -25,7 +25,7 @@ struct spek_audio_properties;
 typedef void (*spek_pipeline_cb)(int sample, float *values, void *cb_data);
 
 struct spek_pipeline * spek_pipeline_open(
-    const char *path, int bands, int samples, int threshold, spek_pipeline_cb cb, void *cb_data);
+    const char *path, int bands, int samples, spek_pipeline_cb cb, void *cb_data);
 
 const struct spek_audio_properties * spek_pipeline_properties(struct spek_pipeline *pipeline);
 

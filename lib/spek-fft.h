@@ -26,7 +26,6 @@ struct spek_fft_plan
     // Internal data.
     struct RDFTContext *cx;
     int n;
-    int threshold;
 
     // Exposed properties.
     float *input;
@@ -34,7 +33,7 @@ struct spek_fft_plan
 };
 
 // Allocate buffers and create a new FFT plan.
-struct spek_fft_plan * spek_fft_plan_new(int n, int threshold);
+struct spek_fft_plan * spek_fft_plan_new(int n);
 
 // Execute the FFT on plan->input.
 void spek_fft_execute(struct spek_fft_plan *p);

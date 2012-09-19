@@ -45,7 +45,6 @@ struct spek_pipeline
     const struct spek_audio_properties *properties;
     int bands;
     int samples;
-    int threshold;
     spek_pipeline_cb cb;
     void *cb_data;
 
@@ -80,14 +79,13 @@ static void reader_sync(struct spek_pipeline *p, int pos);
 static float average_input(const struct spek_pipeline *p, void *buffer);
 
 struct spek_pipeline * spek_pipeline_open(
-    const char *path, int bands, int samples, int threshold, spek_pipeline_cb cb, void *cb_data)
+    const char *path, int bands, int samples, spek_pipeline_cb cb, void *cb_data)
 {
     struct spek_pipeline *p = malloc(sizeof(struct spek_pipeline));
     p->cx = spek_audio_open(path);
     p->properties = spek_audio_get_properties(p->cx);
     p->bands = bands;
     p->samples = samples;
-    p->threshold = threshold;
     p->cb = cb;
     p->cb_data = cb_data;
 
@@ -109,7 +107,7 @@ struct spek_pipeline * spek_pipeline_open(
         for (int i = 0; i < p->nfft; ++i) {
             p->coss[i] = cosf(cf * i);
         }
-        p->fft = spek_fft_plan_new(p->nfft, threshold);
+        p->fft = spek_fft_plan_new(p->nfft);
         p->input_size = p->nfft * (NFFT * 2 + 1);
         p->input = malloc(p->input_size * sizeof(float));
         p->output = malloc(bands * sizeof(float));

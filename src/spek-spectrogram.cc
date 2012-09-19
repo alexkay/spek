@@ -17,6 +17,8 @@
  */
 
 #include <cmath>
+#include <sys/param.h>
+
 #include <wx/dcbuffer.h>
 
 extern "C" {
@@ -143,7 +145,6 @@ void SpekSpectrogram::on_size(wxSizeEvent& evt)
 
 void SpekSpectrogram::on_have_sample(SpekHaveSampleEvent& event)
 {
-    static double log10_threshold = log10(-THRESHOLD);
     int bands = event.get_bands();
     int sample = event.get_sample();
     const float *values = event.get_values();
@@ -154,9 +155,10 @@ void SpekSpectrogram::on_have_sample(SpekHaveSampleEvent& event)
     }
 
     // TODO: check image size, quit if wrong.
+    double range = log(1.0 - THRESHOLD);
     for (int y = 0; y < bands; y++) {
-        double level = log10(1.0 - THRESHOLD + values[y]) / log10_threshold;
-        if (level > 1.0) level = 1.0;
+        double value = MAX(THRESHOLD, values[y]);
+        double level = log(1.0 - THRESHOLD + value) / range;
         uint32_t color = spek_palette_spectrum(level);
         this->image.SetRGB(
             sample,
@@ -353,7 +355,6 @@ void SpekSpectrogram::start()
             this->path.utf8_str(),
             BANDS,
             samples,
-            THRESHOLD,
             pipeline_cb,
             this
         );
