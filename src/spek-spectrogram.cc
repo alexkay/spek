@@ -32,7 +32,8 @@ extern "C" {
 
 #include "spek-spectrogram.hh"
 
-BEGIN_EVENT_TABLE(SpekSpectrogram, wxPanel)
+BEGIN_EVENT_TABLE(SpekSpectrogram, wxWindow)
+    EVT_CHAR(SpekSpectrogram::on_char)
     EVT_IDLE(SpekSpectrogram::on_idle)
     EVT_PAINT(SpekSpectrogram::on_paint)
     EVT_SIZE(SpekSpectrogram::on_size)
@@ -56,7 +57,10 @@ enum
 static wxString trim(wxDC& dc, const wxString& s, int length, bool trim_end);
 
 SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
-    wxPanel(parent, -1, wxDefaultPosition, wxDefaultSize, wxFULL_REPAINT_ON_RESIZE),
+    wxWindow(
+        parent, -1, wxDefaultPosition, wxDefaultSize,
+        wxFULL_REPAINT_ON_RESIZE | wxWANTS_CHARS
+    ),
     pipeline(NULL),
     duration(0.0),
     sample_rate(0),
@@ -65,6 +69,7 @@ SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
     prev_width(-1)
 {
     SetBackgroundStyle(wxBG_STYLE_CUSTOM);
+    SetFocus();
 
     // Pre-draw the palette.
     for (int y = 0; y < BANDS; y++) {
@@ -96,6 +101,21 @@ void SpekSpectrogram::save(const wxString& path)
     wxMemoryDC dc(bitmap);
     render(dc);
     bitmap.SaveFile(path, wxBITMAP_TYPE_PNG);
+}
+
+void SpekSpectrogram::on_char(wxKeyEvent& evt)
+{
+    bool C = evt.GetModifiers() == wxMOD_CONTROL;
+    bool S = evt.GetModifiers() == wxMOD_SHIFT;
+    bool CS = evt.GetModifiers() == (wxMOD_CONTROL | wxMOD_SHIFT);
+    bool dn = evt.GetKeyCode() == WXK_DOWN;
+    bool up = evt.GetKeyCode() == WXK_UP;
+
+    if (C && up) {
+    } else if (C && dn) {
+    } else if (CS && up) {
+    } else if (CS && dn) {
+    }
 }
 
 void SpekSpectrogram::on_idle(wxIdleEvent& evt)

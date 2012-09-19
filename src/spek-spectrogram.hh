@@ -25,7 +25,7 @@ class SpekHaveSampleEvent;
 struct spek_audio_properties;
 struct spek_pipeline;
 
-class SpekSpectrogram : public wxPanel
+class SpekSpectrogram : public wxWindow
 {
 public:
     SpekSpectrogram(wxFrame *parent);
@@ -34,6 +34,7 @@ public:
     void save(const wxString& path);
 
 private:
+    void on_char(wxKeyEvent& evt);
     void on_idle(wxIdleEvent& evt);
     void on_paint(wxPaintEvent& evt);
     void on_size(wxSizeEvent& evt);
