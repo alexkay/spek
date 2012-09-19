@@ -18,7 +18,7 @@
 Spek \- Acoustic Spectrum Analyser
 .SH SYNOPSIS
 .B spek
-.RI [OPTION...] " " [FILE]
+[OPTION...] " " [FILE]
 .SH DESCRIPTION
 .B Spek
 helps to analyse your audio files by showing their spectrogram.
@@ -28,16 +28,15 @@ to decode audio files and as such supports all popular lossy
 and lossless file formats.
 .SH OPTIONS
 .TP
-.B \-h, --help
+.BR \-h , " --help"
 Output a longer help message then quit.  (Any discrepancies
 between this man page and the output of
 .B spek --help
 should be reported as a documentation bug.)
 .TP
-.B \-V, --version
+.BR \-V , " --version"
 Output version information then quit.
 .SH KEYBINDINGS
-.P
 .TP
 .B Ctrl-O
 Open a new file.
@@ -54,22 +53,19 @@ Quit.
 .B F1
 Show the about dialog.
 .TP
-.B Ctrl-up, Ctrl-down
+.BR Ctrl-up , " Ctrl-down"
 Change the lower limit of the dynamic range in dBFS.
 .TP
-.B Ctrl-Shift-up, Ctrl-Shift-down
+.BR Ctrl-Shift-up , " Ctrl-Shift-down"
 Change the upper limit of the dynamic range in dBFS.
 .SH FILES
+.TP
 .I ~/.config/spek/preferences
-.RS
 The configuration file for Spek, stored in a simple INI format.
-.RE
 .SH AUTHOR
 Alexander Kojevnikov <alexander@kojevnikov.com>
 .SH DISTRIBUTION
 The latest version of
 .B Spek
 may be downloaded from
-.UR http://spek-project.org/
-<http://spek\-project.org/>
-.UE
+.IR http://spek\-project.org/ .
