@@ -99,6 +99,7 @@ void SpekSpectrogram::open(const wxString& path)
 {
     this->path = path;
     start();
+    Refresh();
 }
 
 void SpekSpectrogram::save(const wxString& path)
@@ -119,10 +120,17 @@ void SpekSpectrogram::on_char(wxKeyEvent& evt)
     bool up = evt.GetKeyCode() == WXK_UP;
 
     if (C && up) {
+        this->lrange = MIN(this->lrange + 1, this->urange - 1);
     } else if (C && dn) {
+        this->lrange = MAX(this->lrange - 1, MIN_RANGE);
     } else if (CS && up) {
+        this->urange = MIN(this->urange + 1, MAX_RANGE);
     } else if (CS && dn) {
+        this->urange = MAX(this->urange - 1, this->lrange + 1);
     }
+
+    start();
+    Refresh();
 }
 
 void SpekSpectrogram::on_idle(wxIdleEvent& evt)
@@ -143,7 +151,7 @@ void SpekSpectrogram::on_size(wxSizeEvent& evt)
     bool width_changed = this->prev_width != size.GetWidth();
     this->prev_width = size.GetWidth();
 
-    if (!this->path.IsEmpty() && width_changed) {
+    if (width_changed) {
         start();
     }
 }
@@ -347,6 +355,10 @@ static void pipeline_cb(int sample, float *values, void *cb_data)
 
 void SpekSpectrogram::start()
 {
+    if (this->path.IsEmpty()) {
+        return;
+    }
+
     this->stop();
 
     // The number of samples is the number of pixels available for the image.
@@ -371,8 +383,6 @@ void SpekSpectrogram::start()
     } else {
         this->image.Create(1, 1);
     }
-
-    Refresh();
 }
 
 void SpekSpectrogram::stop()
