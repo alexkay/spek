@@ -37,17 +37,28 @@ should be reported as a documentation bug.)
 .B \-V, --version
 Output version information then quit.
 .SH KEYBINDINGS
-Global keybindings for
-.BR Spek :
 .P
-Ctrl+O   open a new file
-.br
-Ctrl+S   save the spectrogram as an image file
-.br
-Ctrl+E   show the preferences dialog
-Ctrl+Q   quit
-.br
-F1       show the about dialog
+.TP
+.B Ctrl-O
+Open a new file.
+.TP
+.B Ctrl-S
+Save the spectrogram as an image file.
+.TP
+.B Ctrl-E
+Show the preferences dialog.
+.TP
+.B Ctrl-Q
+Quit.
+.TP
+.B F1
+Show the about dialog.
+.TP
+.B Ctrl-up, Ctrl-down
+Change the lower limit of the dynamic range in dBFS.
+.TP
+.B Ctrl-Shift-up, Ctrl-Shift-down
+Change the upper limit of the dynamic range in dBFS.
 .SH FILES
 .I ~/.config/spek/preferences
 .RS
