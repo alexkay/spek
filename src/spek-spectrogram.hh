@@ -52,6 +52,8 @@ private:
     wxImage palette;
     wxImage image;
     int prev_width;
+    int urange;
+    int lrange;
 
     DECLARE_EVENT_TABLE()
 };

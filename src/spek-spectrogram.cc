@@ -44,7 +44,10 @@ END_EVENT_TABLE()
 
 enum
 {
-    THRESHOLD = -92,
+    MAX_RANGE = 0,
+    MIN_RANGE = -140,
+    URANGE = -20,
+    LRANGE = -100,
     NFFT = 2048,
     BANDS = NFFT / 2 + 1,
     LPAD = 60,
@@ -68,7 +71,9 @@ SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
     sample_rate(0),
     palette(RULER, BANDS),
     image(1, 1),
-    prev_width(-1)
+    prev_width(-1),
+    urange(URANGE),
+    lrange(LRANGE)
 {
     SetBackgroundStyle(wxBG_STYLE_CUSTOM);
     SetFocus();
@@ -155,10 +160,10 @@ void SpekSpectrogram::on_have_sample(SpekHaveSampleEvent& event)
     }
 
     // TODO: check image size, quit if wrong.
-    double range = log(1.0 - THRESHOLD);
+    double range = log(1.0 + this->urange - this->lrange);
     for (int y = 0; y < bands; y++) {
-        double value = MAX(THRESHOLD, values[y]);
-        double level = log(1.0 - THRESHOLD + value) / range;
+        double value = MIN(this->urange, MAX(this->lrange, values[y]));
+        double level = log(1.0 + value - this->lrange) / range;
         uint32_t color = spek_palette_spectrum(level);
         this->image.SetRGB(
             sample,
@@ -323,9 +328,9 @@ void SpekSpectrogram::render(wxDC& dc)
             // TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
             _("-00 dB"),
             density_factors,
-            -THRESHOLD,
+            this->urange - this->lrange,
             3.0,
-            (h - TPAD - BPAD) / (double)THRESHOLD,
+            (h - TPAD - BPAD) / (double)(this->lrange - this->urange),
             h - TPAD - BPAD,
             density_formatter
         );
