@@ -22,11 +22,11 @@
 
 SpekRuler::SpekRuler(
     int x, int y, Position pos, wxString sample_label,
-    int *factors, int units, double spacing,
+    int *factors, int min_units, int max_units, double spacing,
     double scale, double offset, formatter_cb formatter)
     :
     x(x), y(y), pos(pos), sample_label(sample_label),
-    factors(factors), units(units), spacing(spacing),
+    factors(factors), min_units(min_units), max_units(max_units), spacing(spacing),
     scale(scale), offset(offset), formatter(formatter)
 {
 }
@@ -47,12 +47,12 @@ void SpekRuler::draw(wxDC& dc)
     }
 
     // Draw the ticks.
-    this->draw_tick(dc, 0);
-    this->draw_tick(dc, units);
+    this->draw_tick(dc, min_units);
+    this->draw_tick(dc, max_units);
 
     if (factor > 0) {
-        for (int tick = factor; tick < units; tick += factor) {
-            if (fabs(this->scale * (units - tick)) < len * 1.2) {
+        for (int tick = min_units + factor; tick < max_units; tick += factor) {
+            if (fabs(this->scale * (max_units - tick)) < len * 1.2) {
                 break;
             }
             this->draw_tick(dc, tick);
@@ -66,8 +66,9 @@ void SpekRuler::draw_tick(wxDC& dc, int tick)
     double TICK_LEN = 4;
 
     wxString label = this->formatter(tick);
-    int value = this->pos == TOP || this->pos == BOTTOM ? tick : this->units - tick;
-    double p = this->offset + this->scale * value;
+    int value = this->pos == TOP || this->pos == BOTTOM ?
+        tick : this->max_units + this->min_units - tick;
+    double p = this->offset + this->scale * (value - min_units);
     wxSize size = dc.GetTextExtent(label);
     int w = size.GetWidth();
     int h = size.GetHeight();

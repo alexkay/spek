@@ -37,7 +37,7 @@ public:
 
     SpekRuler(
         int x, int y, Position pos, wxString sample_label,
-        int *factors, int units, double spacing,
+        int *factors, int min_units, int max_units, double spacing,
         double scale, double offset, formatter_cb formatter
     );
 
@@ -51,7 +51,8 @@ protected:
     Position pos;
     wxString sample_label;
     int *factors;
-    int units;
+    int min_units;
+    int max_units;
     double spacing;
     double scale;
     double offset;

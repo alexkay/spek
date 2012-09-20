@@ -282,6 +282,7 @@ void SpekSpectrogram::render(wxDC& dc)
                 // TODO: i18n
                 wxT("00:00"),
                 time_factors,
+                0,
                 (int)this->duration,
                 1.5,
                 (w - LPAD - RPAD) / this->duration,
@@ -302,6 +303,7 @@ void SpekSpectrogram::render(wxDC& dc)
                 // TRANSLATORS: keep "00" unchanged, it's used to calc the text width
                 _("00 kHz"),
                 freq_factors,
+                0,
                 freq,
                 3.0,
                 (h - TPAD - BPAD) / (double)freq,
@@ -332,7 +334,8 @@ void SpekSpectrogram::render(wxDC& dc)
             // TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
             _("-00 dB"),
             density_factors,
-            this->urange - this->lrange,
+            -this->urange,
+            -this->lrange,
             3.0,
             (h - TPAD - BPAD) / (double)(this->lrange - this->urange),
             h - TPAD - BPAD,
