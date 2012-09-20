@@ -35,7 +35,6 @@ public:
 
 private:
     void on_char(wxKeyEvent& evt);
-    void on_idle(wxIdleEvent& evt);
     void on_paint(wxPaintEvent& evt);
     void on_size(wxSizeEvent& evt);
     void on_have_sample(SpekHaveSampleEvent& evt);

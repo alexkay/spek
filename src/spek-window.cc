@@ -104,7 +104,7 @@ SpekWindow::SpekWindow(const wxString& path) :
 
     wxMenu *menu_help = new wxMenu();
     wxMenuItem *menu_help_contents = new wxMenuItem(
-        menu_help, wxID_HELP, _("&Help") + wxT("\tF1"));
+        menu_help, wxID_HELP, wxString(_("&Help")) + wxT("\tF1"));
     menu_help->Append(menu_help_contents);
     wxMenuItem *menu_help_about = new wxMenuItem(menu_help, wxID_ABOUT);
     menu_help_about->SetItemLabel(menu_help_about->GetItemLabelText() + wxT("\tShift-F1"));

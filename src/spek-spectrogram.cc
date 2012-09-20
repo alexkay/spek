@@ -36,7 +36,6 @@ extern "C" {
 
 BEGIN_EVENT_TABLE(SpekSpectrogram, wxWindow)
     EVT_CHAR(SpekSpectrogram::on_char)
-    EVT_IDLE(SpekSpectrogram::on_idle)
     EVT_PAINT(SpekSpectrogram::on_paint)
     EVT_SIZE(SpekSpectrogram::on_size)
     SPEK_EVT_HAVE_SAMPLE(SpekSpectrogram::on_have_sample)
@@ -134,12 +133,6 @@ void SpekSpectrogram::on_char(wxKeyEvent& evt)
 
     start();
     Refresh();
-}
-
-void SpekSpectrogram::on_idle(wxIdleEvent& evt)
-{
-    // TODO: remove?
-    Update();
 }
 
 void SpekSpectrogram::on_paint(wxPaintEvent& evt)
@@ -393,6 +386,9 @@ void SpekSpectrogram::stop()
     if (this->pipeline) {
         spek_pipeline_close(this->pipeline);
         this->pipeline = NULL;
+
+        // Make sure all have_sample events are processed before returning.
+        wxApp::GetInstance()->ProcessPendingEvents();
     }
 }
 
