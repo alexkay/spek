@@ -37,8 +37,8 @@ wxBitmap SpekArtProvider::CreateBitmap(
     if (id == ART_SPEK) {
         return wxArtProvider::GetBitmap(wxT("spek"), client, size);
     }
-    if (id == ART_ABOUT) {
-        return wxArtProvider::GetBitmap(wxT("gtk-about"), client, size);
+    if (id == ART_HELP) {
+        return wxArtProvider::GetBitmap(wxT("gtk-help"), client, size);
     }
     if (id == ART_OPEN) {
         return wxArtProvider::GetBitmap(wxT("gtk-open"), client, size);
@@ -51,8 +51,8 @@ wxBitmap SpekArtProvider::CreateBitmap(
     }
 #endif
 #ifdef OS_WIN
-    if (id == ART_ABOUT) {
-        return wxIcon(wxT("about"), wxBITMAP_TYPE_ICO_RESOURCE, 24, 24);
+    if (id == ART_HELP) {
+        return wxIcon(wxT("help"), wxBITMAP_TYPE_ICO_RESOURCE, 24, 24);
     }
     if (id == ART_OPEN) {
         return wxIcon(wxT("open"), wxBITMAP_TYPE_ICO_RESOURCE, 24, 24);
@@ -65,8 +65,8 @@ wxBitmap SpekArtProvider::CreateBitmap(
     }
 #endif
 #ifdef OS_OSX
-    if (id == ART_ABOUT) {
-        return wxBitmap(wxT("about"), wxBITMAP_TYPE_PNG_RESOURCE);
+    if (id == ART_HELP) {
+        return wxBitmap(wxT("help"), wxBITMAP_TYPE_PNG_RESOURCE);
     }
     if (id == ART_OPEN) {
         return wxBitmap(wxT("open"), wxBITMAP_TYPE_PNG_RESOURCE);

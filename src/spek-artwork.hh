@@ -24,7 +24,7 @@
 #define ART_SPEK wxT("art-spek")
 #define ART_OPEN wxT("art-open")
 #define ART_SAVE wxT("art-save")
-#define ART_ABOUT wxT("art-about")
+#define ART_HELP wxT("art-help")
 #define ART_CLOSE wxT("art-close")
 
 void spek_artwork_init();

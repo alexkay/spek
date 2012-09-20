@@ -45,6 +45,7 @@ BEGIN_EVENT_TABLE(SpekWindow, wxFrame)
     EVT_MENU(wxID_SAVE, SpekWindow::on_save)
     EVT_MENU(wxID_EXIT, SpekWindow::on_exit)
     EVT_MENU(wxID_PREFERENCES, SpekWindow::on_preferences)
+    EVT_MENU(wxID_HELP, SpekWindow::on_help)
     EVT_MENU(wxID_ABOUT, SpekWindow::on_about)
     EVT_COMMAND(-1, SPEK_NOTIFY_EVENT, SpekWindow::on_notify)
 END_EVENT_TABLE()
@@ -97,13 +98,16 @@ SpekWindow::SpekWindow(const wxString& path) :
 
     wxMenu *menu_edit = new wxMenu();
     wxMenuItem *menu_edit_prefs = new wxMenuItem(menu_edit, wxID_PREFERENCES);
-    menu_edit_prefs->SetItemLabel(menu_edit_prefs->GetItemLabelText() + wxT("\tCtrl+E"));
+    menu_edit_prefs->SetItemLabel(menu_edit_prefs->GetItemLabelText() + wxT("\tCtrl-E"));
     menu_edit->Append(menu_edit_prefs);
     menu->Append(menu_edit, _("&Edit"));
 
     wxMenu *menu_help = new wxMenu();
+    wxMenuItem *menu_help_contents = new wxMenuItem(
+        menu_help, wxID_HELP, _("&Help") + wxT("\tF1"));
+    menu_help->Append(menu_help_contents);
     wxMenuItem *menu_help_about = new wxMenuItem(menu_help, wxID_ABOUT);
-    menu_help_about->SetItemLabel(menu_help_about->GetItemLabelText() + wxT("\tF1"));
+    menu_help_about->SetItemLabel(menu_help_about->GetItemLabelText() + wxT("\tShift-F1"));
     menu_help->Append(menu_help_about);
     menu->Append(menu_help, _("&Help"));
 
@@ -125,10 +129,10 @@ SpekWindow::SpekWindow(const wxString& path) :
 #if wxCHECK_VERSION(2, 9, 1)
     toolbar->AddStretchableSpace();
     toolbar->AddTool(
-        wxID_ABOUT,
+        wxID_HELP,
         wxEmptyString,
-        wxArtProvider::GetBitmap(ART_ABOUT, wxART_TOOLBAR),
-        menu_help_about->GetItemLabelText()
+        wxArtProvider::GetBitmap(ART_HELP, wxART_TOOLBAR),
+        _("Help")
     );
 #endif
     toolbar->Realize();
@@ -303,6 +307,13 @@ void SpekWindow::on_preferences(wxCommandEvent& event)
 {
     SpekPreferencesDialog dlg(this);
     dlg.ShowModal();
+}
+
+void SpekWindow::on_help(wxCommandEvent& event)
+{
+    wxLaunchDefaultBrowser(
+        wxString::Format(wxT("http://spek-project.org/man-%s.html"), wxT(PACKAGE_VERSION))
+    );
 }
 
 void SpekWindow::on_about(wxCommandEvent& event)

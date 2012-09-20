@@ -14,21 +14,21 @@ EXTRA_DIST = \
 	dist/osx/Info.plist \
 	dist/osx/README.md \
 	dist/osx/Spek.icns \
-	dist/osx/about.png \
 	dist/osx/bundle.sh \
 	dist/osx/close.png \
+	dist/osx/help.png \
 	dist/osx/open.png \
 	dist/osx/save.png \
 	dist/win/README.md \
 	dist/win/SpekInstallDir.wxs \
 	dist/win/SpekInstallDirDlg.wxs
-	dist/win/about.ico \
 	dist/win/banner.bmp \
 	dist/win/bundle.bat \
 	dist/win/bundle.sh \
 	dist/win/close.ico \
 	dist/win/dialog.bmp \
 	dist/win/fix-msi.js \
+	dist/win/help.ico \
 	dist/win/open.ico \
 	dist/win/save.ico \
 	dist/win/spek.ico \

@@ -127,6 +127,9 @@ void SpekSpectrogram::on_char(wxKeyEvent& evt)
         this->urange = MIN(this->urange + 1, MAX_RANGE);
     } else if (CS && dn) {
         this->urange = MAX(this->urange - 1, this->lrange + 1);
+    } else {
+        evt.Skip();
+        return;
     }
 
     start();
