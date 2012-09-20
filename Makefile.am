@@ -43,7 +43,11 @@ DISTCLEANFILES = \
 	intltool-merge \
 	intltool-update
 
-.PHONY: upload
+.PHONY: man upload
+
+man:
+	mandoc -man -Thtml -Ostyle=style.css man/spek.1 > web/man-@VERSION@.html
+	sed -e 's#<i>\(http://[^<]*\)</i>#<i><a href="\1">\1</a></i>#g' -i '' web/man-@VERSION@.html
 
 upload:
 	rsync -avhz web/nginx.conf server:spek

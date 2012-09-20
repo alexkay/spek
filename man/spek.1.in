@@ -1,4 +1,4 @@
-.\" Copyright (C) 2011  Alexander Kojevnikov <alexander@kojevnikov.com>
+.\" Copyright (C) 2011-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
 .\"
 .\" Spek is free software: you can redistribute it and/or modify
 .\" it under the terms of the GNU General Public License as published by
@@ -13,30 +13,24 @@
 .\" You should have received a copy of the GNU General Public License
 .\" along with Spek.  If not, see <http://www.gnu.org/licenses/>.
 .\"
-.TH SPEK "1" "" "Spek @VERSION@"
+.TH SPEK "1" "2012-09-19" "Spek @VERSION@" ""
 .SH NAME
 Spek \- Acoustic Spectrum Analyser
 .SH SYNOPSIS
 .B spek
-[OPTION...] " " [FILE]
+[OPTION...] [FILE]
 .SH DESCRIPTION
 .B Spek
-helps to analyse your audio files by showing their spectrogram.
-It uses
-.B FFmpeg
-to decode audio files and as such supports all popular lossy
-and lossless file formats.
+generates a spectrogram for the input audio file.
 .SH OPTIONS
 .TP
 .BR \-h , " --help"
-Output a longer help message then quit.  (Any discrepancies
-between this man page and the output of
-.B spek --help
-should be reported as a documentation bug.)
+Output the help message then quit.
 .TP
 .BR \-V , " --version"
 Output version information then quit.
 .SH KEYBINDINGS
+.SS Menu
 .TP
 .B Ctrl-O
 Open a new file.
@@ -52,6 +46,7 @@ Quit.
 .TP
 .B F1
 Show the about dialog.
+.SS Spectrogram
 .TP
 .BR Ctrl-up , " Ctrl-down"
 Change the lower limit of the dynamic range in dBFS.
@@ -62,10 +57,11 @@ Change the upper limit of the dynamic range in dBFS.
 .TP
 .I ~/.config/spek/preferences
 The configuration file for Spek, stored in a simple INI format.
-.SH AUTHOR
-Alexander Kojevnikov <alexander@kojevnikov.com>
+.SH AUTHORS
+Alexander Kojevnikov <alexander@kojevnikov.com>. Other contributors are listed
+in the AUTHORS.md file distributed with the source code.
 .SH DISTRIBUTION
 The latest version of
 .B Spek
 may be downloaded from
-.IR http://spek\-project.org/ .
+.IR http://spek\-project.org .
