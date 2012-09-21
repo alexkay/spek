@@ -2,9 +2,3 @@ body {font-family: sans-serif; font-size: 11pt; width: 760px; margin: 20px auto;
 h1, h2 {font-weight: bold;}
 h1 {font-size: 16pt;}
 h2 {font-size: 12pt;}
-img {border-style: none; outline: none;}
-#screenshots {width: 100%;}
-#screenshots td {width: 33%;}
-#download {width: 100%;}
-.dld_col {width: 33%; font-size: smaller;}
-.dld_link {vertical-align: top; padding-left: 0.5em; line-height: 1.4;}
