@@ -1,120 +1,88 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="resource-type" content="document">
-<link rel="stylesheet" href="style.css" type="text/css" media="all">
-<title>
-SPEK(1)</title>
-</head>
-<body>
-<div class="mandoc">
-<table summary="Document Header" class="head" width="100%">
-<col width="30%">
-<col width="30%">
-<col width="30%">
-<tbody>
-<tr>
-<td class="head-ltitle">
-SPEK(1)</td>
-<td class="head-vol" align="center">
-</td>
-<td class="head-rtitle" align="right">
-SPEK(1)</td>
-</tr>
-</tbody>
-</table>
-<div class="section">
-<h1>NAME</h1> Spek &#45; Acoustic Spectrum Analyser</div>
-<div class="section">
-<h1>SYNOPSIS</h1> <b>spek</b> [OPTION...] [FILE]</div>
-<div class="section">
-<h1>DESCRIPTION</h1> <b>Spek</b> generates a spectrogram for the input audio file.</div>
-<div class="section">
-<h1>OPTIONS</h1><dl>
-<dt>
-<b>&#45;h</b>,<b> --help</b></dt>
-<dd>
-Output the help message then quit.</dd>
-</dl>
-<dl>
-<dt>
-<b>&#45;V</b>,<b> --version</b></dt>
-<dd>
-Output version information then quit.</dd>
-</dl>
-</div>
-<div class="section">
-<h1>KEYBINDINGS</h1><div class="subsection">
-<h2>Menu</h2><dl>
-<dt>
-<b>Ctrl-O</b></dt>
-<dd>
-Open a new file.</dd>
-</dl>
-<dl>
-<dt>
-<b>Ctrl-S</b></dt>
-<dd>
-Save the spectrogram as an image file.</dd>
-</dl>
-<dl>
-<dt>
-<b>Ctrl-E</b></dt>
-<dd>
-Show the preferences dialog.</dd>
-</dl>
-<dl>
-<dt>
-<b>Ctrl-Q</b></dt>
-<dd>
-Quit.</dd>
-</dl>
-<dl>
-<dt>
-<b>F1</b></dt>
-<dd>
-Show the about dialog.</dd>
-</dl>
-</div>
-<div class="subsection">
-<h2>Spectrogram</h2><dl>
-<dt>
-<b>Ctrl-up</b>,<b> Ctrl-down</b></dt>
-<dd>
-Change the lower limit of the dynamic range in dBFS.</dd>
-</dl>
-<dl>
-<dt>
-<b>Ctrl-Shift-up</b>,<b> Ctrl-Shift-down</b></dt>
-<dd>
-Change the upper limit of the dynamic range in dBFS.</dd>
-</dl>
-</div>
-</div>
-<div class="section">
-<h1>FILES</h1><dl>
-<dt>
-<i>~/.config/spek/preferences</i></dt>
-<dd>
-The configuration file for Spek, stored in a simple INI format.</dd>
-</dl>
-</div>
-<div class="section">
-<h1>AUTHORS</h1> Alexander Kojevnikov &lt;alexander@kojevnikov.com&gt;. Other contributors are listed in the AUTHORS.md file distributed with the source code.</div>
-<div class="section">
-<h1>DISTRIBUTION</h1> The latest version of <b>Spek</b> may be downloaded from <i><a href="http://spek&#45;project.org">http://spek&#45;project.org</a></i>.</div>
-<table summary="Document Footer" class="foot" width="100%">
-<col width="50%">
-<col width="50%">
-<tr>
-<td class="foot-date">
-2012-09-19</td>
-<td class="foot-os" align="right">
-Spek 0.8.0</td>
-</tr>
-</table>
-</div>
-</body>
-</html>
+<HTML>
+<HEAD>
+	<style type="text/css">
+		body {font-size: 11pt;}
+		h1, h2 {font-weight: bold;}
+		h1 {font-size: 16pt;}
+		h2 {font-size: 12pt;}
+	</style>
+<TITLE>Spek 0.8.0 manual</TITLE>
+</HEAD>
+<BODY>
+<H1>Spek 0.8.0 manual</H1>
+<HR>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
 
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>spek</B> [OPTION...]	[FILE]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>Spek</B> generates a	spectrogram for	the input audio	file.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-h</B>, <B>--help</B>
+	      Output the help message then quit.
+
+       <B>-V</B>, <B>--version</B>
+	      Output version information then quit.
+
+
+</PRE>
+<H2>KEYBINDINGS</H2><PRE>
+   <B>Notes</B>
+       On OS X use the Command key instead of Ctrl.
+
+   <B>Menu</B>
+       <B>Ctrl-O</B> Open a new file.
+
+       <B>Ctrl-S</B> Save the spectrogram as an image file.
+
+       <B>Ctrl-E</B> Show the preferences dialog.
+
+       <B>F1</B>     Open online manual in the	browser.
+
+       <B>Shift-F1</B>
+	      Show the about dialog.
+
+   <B>Spectrogram</B>
+       <B>Ctrl-up</B>,	<B>Ctrl-down</B>
+	      Change the lower limit of	the dynamic range in dBFS.
+
+       <B>Ctrl-Shift-up</B>, <B>Ctrl-Shift-down</B>
+	      Change the upper limit of	the dynamic range in dBFS.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <I>~/.config/spek/preferences</I>
+	      The  configuration file for Spek,	stored in a simple INI format.
+
+
+</PRE>
+<H2>AUTHORS</H2><PRE>
+       Alexander Kojevnikov &lt;alexander@kojevnikov.com&gt;.	Other contributors are
+       listed in the LICENCE.md	file distributed with the source code.
+
+
+</PRE>
+<H2>DISTRIBUTION</H2><PRE>
+       The    latest	version	   of	 <B>Spek</B>	 may	be   downloaded	  from
+       <I><a href="http://spek-project.org">http://spek-project.org</a></I>.
+
+
+
+Spek 0.8.0			  2012-09-19			       <B>SPEK(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

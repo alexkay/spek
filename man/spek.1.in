@@ -30,6 +30,8 @@ Output the help message then quit.
 .BR \-V , " --version"
 Output version information then quit.
 .SH KEYBINDINGS
+.SS Notes
+On OS X use the Command key instead of Ctrl.
 .SS Menu
 .TP
 .B Ctrl-O
@@ -41,10 +43,10 @@ Save the spectrogram as an image file.
 .B Ctrl-E
 Show the preferences dialog.
 .TP
-.B Ctrl-Q
-Quit.
-.TP
 .B F1
+Open online manual in the browser.
+.TP
+.B Shift-F1
 Show the about dialog.
 .SS Spectrogram
 .TP
@@ -59,7 +61,7 @@ Change the upper limit of the dynamic range in dBFS.
 The configuration file for Spek, stored in a simple INI format.
 .SH AUTHORS
 Alexander Kojevnikov <alexander@kojevnikov.com>. Other contributors are listed
-in the AUTHORS.md file distributed with the source code.
+in the LICENCE.md file distributed with the source code.
 .SH DISTRIBUTION
 The latest version of
 .B Spek
