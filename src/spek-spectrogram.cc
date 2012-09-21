@@ -17,7 +17,6 @@
  */
 
 #include <cmath>
-#include <sys/param.h>
 
 #include <wx/dcbuffer.h>
 
@@ -25,6 +24,7 @@ extern "C" {
 #include <spek-audio.h>
 #include <spek-palette.h>
 #include <spek-pipeline.h>
+#include <spek-utils.h>
 }
 
 #include "spek-audio-desc.hh"
@@ -119,13 +119,13 @@ void SpekSpectrogram::on_char(wxKeyEvent& evt)
     bool up = evt.GetKeyCode() == WXK_UP;
 
     if (C && up) {
-        this->lrange = MIN(this->lrange + 1, this->urange - 1);
+        this->lrange = spek_min(this->lrange + 1, this->urange - 1);
     } else if (C && dn) {
-        this->lrange = MAX(this->lrange - 1, MIN_RANGE);
+        this->lrange = spek_max(this->lrange - 1, MIN_RANGE);
     } else if (CS && up) {
-        this->urange = MIN(this->urange + 1, MAX_RANGE);
+        this->urange = spek_min(this->urange + 1, MAX_RANGE);
     } else if (CS && dn) {
-        this->urange = MAX(this->urange - 1, this->lrange + 1);
+        this->urange = spek_max(this->urange - 1, this->lrange + 1);
     } else {
         evt.Skip();
         return;
@@ -166,7 +166,7 @@ void SpekSpectrogram::on_have_sample(SpekHaveSampleEvent& event)
     // TODO: check image size, quit if wrong.
     double range = log(1.0 + this->urange - this->lrange);
     for (int y = 0; y < bands; y++) {
-        double value = MIN(this->urange, MAX(this->lrange, values[y]));
+        double value = fmin(this->urange, fmax(this->lrange, values[y]));
         double level = log(1.0 + value - this->lrange) / range;
         uint32_t color = spek_palette_spectrum(level);
         this->image.SetRGB(
