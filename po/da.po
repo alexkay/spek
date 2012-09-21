@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
-"POT-Creation-Date: 2012-08-27 09:20-0700\n"
-"PO-Revision-Date: 2012-08-27 16:48+0000\n"
-"Last-Translator: Alexander Kojevnikov <alexander@kojevnikov.com>\n"
+"POT-Creation-Date: 2012-08-28 10:10-0700\n"
+"PO-Revision-Date: 2012-09-20 21:29+0000\n"
+"Last-Translator: nbca <aparthia@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/spek/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,176 +35,176 @@ msgstr "Spek Spektrum Analysator"
 msgid "View spectrograms of your audio files"
 msgstr "Vis spektrogrammer af dine lydfiler"
 
-#: ../src/spek-audio-desc.cc:36
+#: ../src/spek-audio-desc.cc:38
 #, c-format
 msgid "%d kbps"
 msgstr "%d kbps"
 
-#: ../src/spek-audio-desc.cc:39
+#: ../src/spek-audio-desc.cc:41
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../src/spek-audio-desc.cc:44
+#: ../src/spek-audio-desc.cc:46
 #, c-format
 msgid "%d bit"
 msgid_plural "%d bits"
 msgstr[0] "%d bit"
 msgstr[1] "%d bits"
 
-#: ../src/spek-audio-desc.cc:50
+#: ../src/spek-audio-desc.cc:52
 #, c-format
 msgid "%d channel"
 msgid_plural "%d channels"
 msgstr[0] "%d kanal"
 msgstr[1] "%d kanaler"
 
-#: ../src/spek-audio-desc.cc:67
+#: ../src/spek-audio-desc.cc:69
 msgid "Cannot open input file"
 msgstr "Kan ikke åbne filen"
 
-#: ../src/spek-audio-desc.cc:70
+#: ../src/spek-audio-desc.cc:72
 msgid "Cannot find stream info"
 msgstr "Kan ikke finde oplysninger om lydfil"
 
-#: ../src/spek-audio-desc.cc:73
+#: ../src/spek-audio-desc.cc:75
 msgid "The file contains no audio streams"
 msgstr "Denne fil indeholder ingen lyd"
 
-#: ../src/spek-audio-desc.cc:76
+#: ../src/spek-audio-desc.cc:78
 msgid "Cannot find decoder"
 msgstr "Kan ikke finde afkoder"
 
-#: ../src/spek-audio-desc.cc:79
+#: ../src/spek-audio-desc.cc:81
 msgid "Unknown duration"
-msgstr ""
+msgstr "Ukendt varighed"
 
-#: ../src/spek-audio-desc.cc:82
+#: ../src/spek-audio-desc.cc:84
 msgid "No audio channels"
 msgstr "Ingen lydkanaler"
 
-#: ../src/spek-audio-desc.cc:85
+#: ../src/spek-audio-desc.cc:87
 msgid "Cannot open decoder"
 msgstr "Kan ikke åbne afkoder"
 
-#: ../src/spek-audio-desc.cc:88
+#: ../src/spek-audio-desc.cc:90
 msgid "Unsupported sample format"
 msgstr "Ikke-understøttet lydformat"
 
 #. TRANSLATORS: first %s is the error message, second %s is stream
 #. description.
-#: ../src/spek-audio-desc.cc:93
+#: ../src/spek-audio-desc.cc:95
 #, c-format
 msgid "%s: %s"
 msgstr "%s: %s"
 
-#: ../src/spek-preferences-dialog.cc:62
+#: ../src/spek-preferences-dialog.cc:57
 msgid "Preferences"
 msgstr "Præferencer"
 
-#: ../src/spek-preferences-dialog.cc:67
+#: ../src/spek-preferences-dialog.cc:62
 msgid "(system default)"
-msgstr ""
+msgstr "(system standard)"
 
 #. TRANSLATORS: The name of a section in the Preferences dialog.
-#: ../src/spek-preferences-dialog.cc:74
+#: ../src/spek-preferences-dialog.cc:69
 msgid "General"
 msgstr "Det meste"
 
-#: ../src/spek-preferences-dialog.cc:82
+#: ../src/spek-preferences-dialog.cc:77
 msgid "Language:"
 msgstr "Sprog:"
 
-#: ../src/spek-preferences-dialog.cc:97
+#: ../src/spek-preferences-dialog.cc:92
 msgid "Check for &updates"
-msgstr ""
+msgstr "Tjek for &updates"
 
-#: ../src/spek-spectrogram.cc:152
+#: ../src/spek-spectrogram.cc:155
 #, c-format
 msgid "%d kHz"
 msgstr "%d kHz"
 
-#: ../src/spek-spectrogram.cc:157
+#: ../src/spek-spectrogram.cc:160
 #, c-format
 msgid "%d dB"
 msgstr "%d dB"
 
 #. TRANSLATORS: keep "00" unchanged, it's used to calc the text width
-#: ../src/spek-spectrogram.cc:259
+#: ../src/spek-spectrogram.cc:262
 msgid "00 kHz"
 msgstr "00 kHz"
 
 #. TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
-#: ../src/spek-spectrogram.cc:287
+#: ../src/spek-spectrogram.cc:290
 msgid "-00 dB"
 msgstr "-00 dB"
 
-#: ../src/spek-window.cc:70
+#: ../src/spek-window.cc:75
 msgid "Spek - Acoustic Spectrum Analyser"
 msgstr "Spek - akustisk spectrum analysator"
 
-#: ../src/spek-window.cc:84
+#: ../src/spek-window.cc:89
 msgid "&File"
 msgstr "&Fil"
 
-#: ../src/spek-window.cc:91
+#: ../src/spek-window.cc:96
 msgid "&Edit"
 msgstr "&Redigér"
 
-#: ../src/spek-window.cc:98
+#: ../src/spek-window.cc:103
 msgid "&Help"
 msgstr "&Hjælp"
 
-#: ../src/spek-window.cc:125
+#: ../src/spek-window.cc:130
 msgid "A new version of Spek is available, click to download."
-msgstr ""
+msgstr "En ny version af Spek er tilgængelig, tryk her for at downloade."
 
 #. TRANSLATORS: window title, %s is replaced with the file name
-#: ../src/spek-window.cc:164
+#: ../src/spek-window.cc:169
 #, c-format
 msgid "Spek - %s"
 msgstr "Spek - %s"
 
-#: ../src/spek-window.cc:211
+#: ../src/spek-window.cc:216
 msgid "All files"
 msgstr "Alle filer"
 
-#: ../src/spek-window.cc:213
+#: ../src/spek-window.cc:218
 msgid "Audio files"
 msgstr "Lydfiler"
 
-#: ../src/spek-window.cc:227
+#: ../src/spek-window.cc:232
 msgid "Open File"
 msgstr "Åben fil"
 
-#: ../src/spek-window.cc:249
+#: ../src/spek-window.cc:254
 msgid "PNG images"
 msgstr "PNG billeder"
 
-#: ../src/spek-window.cc:255
+#: ../src/spek-window.cc:260
 msgid "Save Spectrogram"
 msgstr "Gem spektrogram"
 
 #. Suggested name is <file_name>.png
-#: ../src/spek-window.cc:263
+#: ../src/spek-window.cc:268
 msgid "Untitled"
 msgstr "Ikke-navngivet"
 
 #. TRANSLATORS: Add your name here
-#: ../src/spek-window.cc:300
+#: ../src/spek-window.cc:305
 msgid "translator-credits"
 msgstr "nbca"
 
-#: ../src/spek-window.cc:306
+#: ../src/spek-window.cc:311
 msgid "Copyright (c) 2010-2012 Alexander Kojevnikov and contributors"
-msgstr ""
+msgstr "Copyright (c) 2010-2012 Alexander Kojevnikov and bidragsydere"
 
-#: ../src/spek-window.cc:309
+#: ../src/spek-window.cc:314
 msgid "Spek Website"
 msgstr "Spek hjemmeside"
 
 #. TRANSLATORS: the %s is the package version.
-#: ../src/spek.cc:90
+#: ../src/spek.cc:93
 #, c-format
 msgid "Spek version %s"
 msgstr "Spek version %s"
