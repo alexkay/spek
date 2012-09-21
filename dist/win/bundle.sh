@@ -37,6 +37,10 @@ LDFLAGS="dist/win/spek.res" ./configure \
 cd dist/win
 rm -fr Spek && mkdir Spek
 cp build/bin/spek.exe Spek/
+cp ../../LICENCE.md Spek/
+cp ../../README.md Spek/
+mkdir Spek/lic
+cp ../../lic/* Spek/lic/
 for lang in $LANGUAGES; do
     mkdir -p Spek/"$lang"
     cp build/lib/locale/"$lang"/LC_MESSAGES/spek.mo Spek/"$lang"/

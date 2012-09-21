@@ -18,6 +18,10 @@ mv ../../src/spek Spek.app/Contents/MacOS/Spek
 cp Info.plist Spek.app/Contents/
 cp Spek.icns Spek.app/Contents/Resources/
 cp *.png Spek.app/Contents/Resources/
+cp ../../LICENCE.md Spek.app/Contents/Resources/
+cp ../../README.md Spek.app/Contents/Resources/
+mkdir Spek.app/Contents/Resources/lic
+cp ../../lic/* Spek.app/Contents/Resources/lic/
 
 for lang in $LANGUAGES; do
     mkdir -p Spek.app/Contents/Resources/"$lang".lproj

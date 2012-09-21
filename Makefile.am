@@ -7,36 +7,21 @@ SUBDIRS = \
 	tests
 
 EXTRA_DIST = \
-	AUTHORS.md \
 	INSTALL.md \
+	LICENCE.md \
 	README.md \
-	dist/osx/DS_Store \
-	dist/osx/Info.plist \
-	dist/osx/README.md \
-	dist/osx/Spek.icns \
-	dist/osx/bundle.sh \
-	dist/osx/close.png \
-	dist/osx/help.png \
-	dist/osx/open.png \
-	dist/osx/save.png \
-	dist/win/README.md \
-	dist/win/SpekInstallDir.wxs \
-	dist/win/SpekInstallDirDlg.wxs
-	dist/win/banner.bmp \
-	dist/win/bundle.bat \
-	dist/win/bundle.sh \
-	dist/win/close.ico \
-	dist/win/dialog.bmp \
-	dist/win/fix-msi.js \
-	dist/win/help.ico \
-	dist/win/open.ico \
-	dist/win/save.ico \
-	dist/win/spek.ico \
-	dist/win/spek.rc \
-	dist/win/spek.wxs \
 	intltool-extract.in \
 	intltool-merge.in \
-	intltool-update.in
+	intltool-update.in \
+	lic/Expat \
+	lic/GPL \
+	lic/IJG \
+	lic/LGPL \
+	lic/libpng \
+	lic/libtiff \
+	lic/regex \
+	lic/wxWindows \
+	lic/zlib
 
 DISTCLEANFILES = \
 	intltool-extract \
