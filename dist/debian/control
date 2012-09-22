@@ -31,8 +31,8 @@ Description: acoustic spectrum analyser
  .
   * Ultra-fast signal processing, uses multiple threads to further
     speed up the analysis
-  * High number of frequency bands for the best spectrogram quality
   * Shows the codec name and the audio signal parameters
   * Can save the spectrogram as an image file
   * Drag-and-drop support; associates with common audio file formats
   * Auto-fitting time, frequency and spectral density rulers
+  * Adjustable spectral density range
