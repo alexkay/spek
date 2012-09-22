@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-28 10:10-0700\n"
+"POT-Creation-Date: 2012-09-21 19:49-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -91,118 +91,122 @@ msgid "Unsupported sample format"
 msgstr ""
 
 #. TRANSLATORS: first %s is the error message, second %s is stream description.
-#: ../src/spek-audio-desc.cc:95
+#: ../src/spek-audio-desc.cc:98
 #, c-format
 msgid "%s: %s"
 msgstr ""
 
-#: ../src/spek-preferences-dialog.cc:57
+#: ../src/spek-preferences-dialog.cc:58
 msgid "Preferences"
 msgstr ""
 
-#: ../src/spek-preferences-dialog.cc:62
+#: ../src/spek-preferences-dialog.cc:63
 msgid "(system default)"
 msgstr ""
 
 #. TRANSLATORS: The name of a section in the Preferences dialog.
-#: ../src/spek-preferences-dialog.cc:69
+#: ../src/spek-preferences-dialog.cc:70
 msgid "General"
 msgstr ""
 
-#: ../src/spek-preferences-dialog.cc:77
+#: ../src/spek-preferences-dialog.cc:79
 msgid "Language:"
 msgstr ""
 
-#: ../src/spek-preferences-dialog.cc:92
+#: ../src/spek-preferences-dialog.cc:95
 msgid "Check for &updates"
 msgstr ""
 
-#: ../src/spek-spectrogram.cc:155
+#: ../src/spek-spectrogram.cc:193
 #, c-format
 msgid "%d kHz"
 msgstr ""
 
-#: ../src/spek-spectrogram.cc:160
+#: ../src/spek-spectrogram.cc:198
 #, c-format
 msgid "%d dB"
 msgstr ""
 
 #. TRANSLATORS: keep "00" unchanged, it's used to calc the text width
-#: ../src/spek-spectrogram.cc:262
+#: ../src/spek-spectrogram.cc:304
 msgid "00 kHz"
 msgstr ""
 
 #. TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
-#: ../src/spek-spectrogram.cc:290
+#: ../src/spek-spectrogram.cc:335
 msgid "-00 dB"
 msgstr ""
 
-#: ../src/spek-window.cc:75
+#: ../src/spek-window.cc:77
 msgid "Spek - Acoustic Spectrum Analyser"
 msgstr ""
 
-#: ../src/spek-window.cc:89
+#: ../src/spek-window.cc:97
 msgid "&File"
 msgstr ""
 
-#: ../src/spek-window.cc:96
+#: ../src/spek-window.cc:103
 msgid "&Edit"
 msgstr ""
 
-#: ../src/spek-window.cc:103
+#: ../src/spek-window.cc:107 ../src/spek-window.cc:112
 msgid "&Help"
 msgstr ""
 
-#: ../src/spek-window.cc:130
+#: ../src/spek-window.cc:135
+msgid "Help"
+msgstr ""
+
+#: ../src/spek-window.cc:149
 msgid "A new version of Spek is available, click to download."
 msgstr ""
 
 #. TRANSLATORS: window title, %s is replaced with the file name
-#: ../src/spek-window.cc:169
+#: ../src/spek-window.cc:187
 #, c-format
 msgid "Spek - %s"
 msgstr ""
 
-#: ../src/spek-window.cc:216
+#: ../src/spek-window.cc:233
 msgid "All files"
 msgstr ""
 
-#: ../src/spek-window.cc:218
+#: ../src/spek-window.cc:235
 msgid "Audio files"
 msgstr ""
 
-#: ../src/spek-window.cc:232
+#: ../src/spek-window.cc:249
 msgid "Open File"
 msgstr ""
 
-#: ../src/spek-window.cc:254
+#: ../src/spek-window.cc:271
 msgid "PNG images"
 msgstr ""
 
-#: ../src/spek-window.cc:260
+#: ../src/spek-window.cc:277
 msgid "Save Spectrogram"
 msgstr ""
 
 #. Suggested name is <file_name>.png
-#: ../src/spek-window.cc:268
+#: ../src/spek-window.cc:285
 msgid "Untitled"
 msgstr ""
 
 #. TRANSLATORS: Add your name here
-#: ../src/spek-window.cc:305
+#: ../src/spek-window.cc:330
 msgid "translator-credits"
 msgstr ""
 
-#: ../src/spek-window.cc:311
+#: ../src/spek-window.cc:336
 msgid "Copyright (c) 2010-2012 Alexander Kojevnikov and contributors"
 msgstr ""
 
-#: ../src/spek-window.cc:314
+#: ../src/spek-window.cc:339
 msgid "Spek Website"
 msgstr ""
 
 #. TRANSLATORS: the %s is the package version.
-#: ../src/spek.cc:93
+#: ../src/spek.cc:100
 #, c-format
 msgid "Spek version %s"
 msgstr ""
