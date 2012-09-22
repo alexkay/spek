@@ -320,12 +320,13 @@ void SpekWindow::on_about(wxCommandEvent& event)
 {
     wxAboutDialogInfo info;
     info.AddDeveloper(wxT("Alexander Kojevnikov"));
+    info.AddDeveloper(wxT("Colin Watson"));
+    info.AddDeveloper(wxT("Daniel Hams"));
     info.AddDeveloper(wxT("Fabian Deutsch"));
     info.AddDeveloper(wxT("Jonathan Gonzalez V"));
     info.AddDeveloper(wxT("Stefan Kost"));
     info.AddDeveloper(wxT("Thibault North"));
     info.AddArtist(wxT("Olga Vasylevska"));
-    info.AddArtist(wxT("Silvestre Herrera"));
     // TRANSLATORS: Add your name here
     wxString translator = _("translator-credits");
     if (translator != wxT("translator-credits")) {

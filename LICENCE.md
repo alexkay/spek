@@ -11,6 +11,8 @@ Maintainer:
 
 Contributors:
 
+* Colin Watson
+* Daniel Hams
 * Fabian Deutsch
 * Jonathan Gonzalez V
 * Stefan Kost
