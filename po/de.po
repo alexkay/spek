@@ -3,16 +3,16 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Alexander Kojevnikov <alexander@kojevnikov.com>, 2011, 2012.
+# Alexander Kojevnikov <alexander@kojevnikov.com>, 2011-2012.
 # dewey <mewantlockerz@gmail.com>, 2011.
 #   <mewantlockerz@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
-"POT-Creation-Date: 2012-08-28 10:10-0700\n"
-"PO-Revision-Date: 2012-09-20 20:17+0000\n"
-"Last-Translator: dewey <mewantlockerz@gmail.com>\n"
+"POT-Creation-Date: 2012-09-21 19:49-0700\n"
+"PO-Revision-Date: 2012-09-22 02:58+0000\n"
+"Last-Translator: Alexander Kojevnikov <alexander@kojevnikov.com>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/spek/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -94,118 +94,122 @@ msgstr "Format nicht unterstützt"
 
 #. TRANSLATORS: first %s is the error message, second %s is stream
 #. description.
-#: ../src/spek-audio-desc.cc:95
+#: ../src/spek-audio-desc.cc:98
 #, c-format
 msgid "%s: %s"
 msgstr "%s: %s"
 
-#: ../src/spek-preferences-dialog.cc:57
+#: ../src/spek-preferences-dialog.cc:58
 msgid "Preferences"
 msgstr "Einstellungen"
 
-#: ../src/spek-preferences-dialog.cc:62
+#: ../src/spek-preferences-dialog.cc:63
 msgid "(system default)"
 msgstr "(System Standard)"
 
 #. TRANSLATORS: The name of a section in the Preferences dialog.
-#: ../src/spek-preferences-dialog.cc:69
+#: ../src/spek-preferences-dialog.cc:70
 msgid "General"
 msgstr "Allgemein"
 
-#: ../src/spek-preferences-dialog.cc:77
+#: ../src/spek-preferences-dialog.cc:79
 msgid "Language:"
 msgstr "Sprache:"
 
-#: ../src/spek-preferences-dialog.cc:92
+#: ../src/spek-preferences-dialog.cc:95
 msgid "Check for &updates"
 msgstr "Nach &Aktualisierungen suchen"
 
-#: ../src/spek-spectrogram.cc:155
+#: ../src/spek-spectrogram.cc:193
 #, c-format
 msgid "%d kHz"
 msgstr "%d kHz"
 
-#: ../src/spek-spectrogram.cc:160
+#: ../src/spek-spectrogram.cc:198
 #, c-format
 msgid "%d dB"
 msgstr "%d dB"
 
 #. TRANSLATORS: keep "00" unchanged, it's used to calc the text width
-#: ../src/spek-spectrogram.cc:262
+#: ../src/spek-spectrogram.cc:304
 msgid "00 kHz"
 msgstr "00 kHz"
 
 #. TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
-#: ../src/spek-spectrogram.cc:290
+#: ../src/spek-spectrogram.cc:335
 msgid "-00 dB"
 msgstr "-00 dB"
 
-#: ../src/spek-window.cc:75
+#: ../src/spek-window.cc:77
 msgid "Spek - Acoustic Spectrum Analyser"
 msgstr "Spek - Tonspektrum Analysator"
 
-#: ../src/spek-window.cc:89
+#: ../src/spek-window.cc:97
 msgid "&File"
 msgstr "&Datei"
 
-#: ../src/spek-window.cc:96
+#: ../src/spek-window.cc:103
 msgid "&Edit"
 msgstr "&Bearbeiten"
 
-#: ../src/spek-window.cc:103
+#: ../src/spek-window.cc:107 ../src/spek-window.cc:112
 msgid "&Help"
 msgstr "&Hilfe"
 
-#: ../src/spek-window.cc:130
+#: ../src/spek-window.cc:135
+msgid "Help"
+msgstr "Hilfe"
+
+#: ../src/spek-window.cc:149
 msgid "A new version of Spek is available, click to download."
 msgstr "Eine neue Spek Version ist verfügbar, klicke um sie herunterzuladen."
 
 #. TRANSLATORS: window title, %s is replaced with the file name
-#: ../src/spek-window.cc:169
+#: ../src/spek-window.cc:187
 #, c-format
 msgid "Spek - %s"
 msgstr "Spek - %s"
 
-#: ../src/spek-window.cc:216
+#: ../src/spek-window.cc:233
 msgid "All files"
 msgstr "Alle Dateien"
 
-#: ../src/spek-window.cc:218
+#: ../src/spek-window.cc:235
 msgid "Audio files"
 msgstr "Audiodateien"
 
-#: ../src/spek-window.cc:232
+#: ../src/spek-window.cc:249
 msgid "Open File"
 msgstr "Datei öffnen"
 
-#: ../src/spek-window.cc:254
+#: ../src/spek-window.cc:271
 msgid "PNG images"
 msgstr "PNG Bilddatei"
 
-#: ../src/spek-window.cc:260
+#: ../src/spek-window.cc:277
 msgid "Save Spectrogram"
 msgstr "Spektrogramm speichern"
 
 #. Suggested name is <file_name>.png
-#: ../src/spek-window.cc:268
+#: ../src/spek-window.cc:285
 msgid "Untitled"
 msgstr "Unbenannt"
 
 #. TRANSLATORS: Add your name here
-#: ../src/spek-window.cc:305
+#: ../src/spek-window.cc:330
 msgid "translator-credits"
 msgstr "dewey"
 
-#: ../src/spek-window.cc:311
+#: ../src/spek-window.cc:336
 msgid "Copyright (c) 2010-2012 Alexander Kojevnikov and contributors"
 msgstr "Copyright (c) 2010-2012 Alexander Kojevnikov und Helfer"
 
-#: ../src/spek-window.cc:314
+#: ../src/spek-window.cc:339
 msgid "Spek Website"
 msgstr "Spek Website"
 
 #. TRANSLATORS: the %s is the package version.
-#: ../src/spek.cc:93
+#: ../src/spek.cc:100
 #, c-format
 msgid "Spek version %s"
 msgstr "Spek Version %s"

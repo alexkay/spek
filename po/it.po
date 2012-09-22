@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Alexander Kojevnikov <alexander@kojevnikov.com>, 2011, 2012.
+# Alexander Kojevnikov <alexander@kojevnikov.com>, 2011-2012.
 # Giuseppe D. B. <giuped@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
-"POT-Creation-Date: 2012-08-27 09:20-0700\n"
-"PO-Revision-Date: 2012-08-27 16:39+0000\n"
+"POT-Creation-Date: 2012-09-21 19:49-0700\n"
+"PO-Revision-Date: 2012-09-22 03:03+0000\n"
 "Last-Translator: Alexander Kojevnikov <alexander@kojevnikov.com>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/spek/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -35,176 +35,180 @@ msgstr "Spek Spectrum Analyser"
 msgid "View spectrograms of your audio files"
 msgstr "Mostra spettrogrammi per i tuoi file audio"
 
-#: ../src/spek-audio-desc.cc:36
+#: ../src/spek-audio-desc.cc:38
 #, c-format
 msgid "%d kbps"
 msgstr "%d kbps"
 
-#: ../src/spek-audio-desc.cc:39
+#: ../src/spek-audio-desc.cc:41
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../src/spek-audio-desc.cc:44
+#: ../src/spek-audio-desc.cc:46
 #, c-format
 msgid "%d bit"
 msgid_plural "%d bits"
 msgstr[0] "%d bit"
 msgstr[1] "%d bit"
 
-#: ../src/spek-audio-desc.cc:50
+#: ../src/spek-audio-desc.cc:52
 #, c-format
 msgid "%d channel"
 msgid_plural "%d channels"
 msgstr[0] "%d canale"
 msgstr[1] "%d canali"
 
-#: ../src/spek-audio-desc.cc:67
+#: ../src/spek-audio-desc.cc:69
 msgid "Cannot open input file"
 msgstr "Impossibile aprire file in ingresso"
 
-#: ../src/spek-audio-desc.cc:70
+#: ../src/spek-audio-desc.cc:72
 msgid "Cannot find stream info"
 msgstr "Impossibile trovare informazioni del flusso audio"
 
-#: ../src/spek-audio-desc.cc:73
+#: ../src/spek-audio-desc.cc:75
 msgid "The file contains no audio streams"
 msgstr "Il file non contiene flussi audio"
 
-#: ../src/spek-audio-desc.cc:76
+#: ../src/spek-audio-desc.cc:78
 msgid "Cannot find decoder"
 msgstr "Impossibile trovare decoder"
 
-#: ../src/spek-audio-desc.cc:79
+#: ../src/spek-audio-desc.cc:81
 msgid "Unknown duration"
 msgstr ""
 
-#: ../src/spek-audio-desc.cc:82
+#: ../src/spek-audio-desc.cc:84
 msgid "No audio channels"
 msgstr "Nessun canale Audio"
 
-#: ../src/spek-audio-desc.cc:85
+#: ../src/spek-audio-desc.cc:87
 msgid "Cannot open decoder"
 msgstr "Impossibile aprire decoder"
 
-#: ../src/spek-audio-desc.cc:88
+#: ../src/spek-audio-desc.cc:90
 msgid "Unsupported sample format"
 msgstr "Formato non supportato"
 
 #. TRANSLATORS: first %s is the error message, second %s is stream
 #. description.
-#: ../src/spek-audio-desc.cc:93
+#: ../src/spek-audio-desc.cc:98
 #, c-format
 msgid "%s: %s"
 msgstr "%s: %s"
 
-#: ../src/spek-preferences-dialog.cc:62
+#: ../src/spek-preferences-dialog.cc:58
 msgid "Preferences"
 msgstr "Preferenze"
 
-#: ../src/spek-preferences-dialog.cc:67
+#: ../src/spek-preferences-dialog.cc:63
 msgid "(system default)"
 msgstr "(Sistema di Default)"
 
 #. TRANSLATORS: The name of a section in the Preferences dialog.
-#: ../src/spek-preferences-dialog.cc:74
+#: ../src/spek-preferences-dialog.cc:70
 msgid "General"
 msgstr "Generale"
 
-#: ../src/spek-preferences-dialog.cc:82
+#: ../src/spek-preferences-dialog.cc:79
 msgid "Language:"
 msgstr "Lingua:"
 
-#: ../src/spek-preferences-dialog.cc:97
+#: ../src/spek-preferences-dialog.cc:95
 msgid "Check for &updates"
 msgstr "Controlla a&ggiornamenti"
 
-#: ../src/spek-spectrogram.cc:152
+#: ../src/spek-spectrogram.cc:193
 #, c-format
 msgid "%d kHz"
 msgstr "%d kHz"
 
-#: ../src/spek-spectrogram.cc:157
+#: ../src/spek-spectrogram.cc:198
 #, c-format
 msgid "%d dB"
 msgstr "%d dB"
 
 #. TRANSLATORS: keep "00" unchanged, it's used to calc the text width
-#: ../src/spek-spectrogram.cc:259
+#: ../src/spek-spectrogram.cc:304
 msgid "00 kHz"
 msgstr "00 kHz"
 
 #. TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
-#: ../src/spek-spectrogram.cc:287
+#: ../src/spek-spectrogram.cc:335
 msgid "-00 dB"
 msgstr "-00 dB"
 
-#: ../src/spek-window.cc:70
+#: ../src/spek-window.cc:77
 msgid "Spek - Acoustic Spectrum Analyser"
 msgstr "Spek - Analizzatore di Spettro Acustico"
 
-#: ../src/spek-window.cc:84
+#: ../src/spek-window.cc:97
 msgid "&File"
 msgstr "&File"
 
-#: ../src/spek-window.cc:91
+#: ../src/spek-window.cc:103
 msgid "&Edit"
 msgstr "&Modifica"
 
-#: ../src/spek-window.cc:98
+#: ../src/spek-window.cc:107 ../src/spek-window.cc:112
 msgid "&Help"
 msgstr "&Aiuto"
 
-#: ../src/spek-window.cc:125
+#: ../src/spek-window.cc:135
+msgid "Help"
+msgstr "Aiuto"
+
+#: ../src/spek-window.cc:149
 msgid "A new version of Spek is available, click to download."
 msgstr ""
 
 #. TRANSLATORS: window title, %s is replaced with the file name
-#: ../src/spek-window.cc:164
+#: ../src/spek-window.cc:187
 #, c-format
 msgid "Spek - %s"
 msgstr "Spek - %s"
 
-#: ../src/spek-window.cc:211
+#: ../src/spek-window.cc:233
 msgid "All files"
 msgstr "Tutti i file"
 
-#: ../src/spek-window.cc:213
+#: ../src/spek-window.cc:235
 msgid "Audio files"
 msgstr "File Audio"
 
-#: ../src/spek-window.cc:227
+#: ../src/spek-window.cc:249
 msgid "Open File"
 msgstr "Apri File"
 
-#: ../src/spek-window.cc:249
+#: ../src/spek-window.cc:271
 msgid "PNG images"
 msgstr "Immagini PNG"
 
-#: ../src/spek-window.cc:255
+#: ../src/spek-window.cc:277
 msgid "Save Spectrogram"
 msgstr "Salva Spettrogramma"
 
 #. Suggested name is <file_name>.png
-#: ../src/spek-window.cc:263
+#: ../src/spek-window.cc:285
 msgid "Untitled"
 msgstr "Senza Titolo"
 
 #. TRANSLATORS: Add your name here
-#: ../src/spek-window.cc:300
+#: ../src/spek-window.cc:330
 msgid "translator-credits"
 msgstr "Giuseppe D. Barbagallo"
 
-#: ../src/spek-window.cc:306
+#: ../src/spek-window.cc:336
 msgid "Copyright (c) 2010-2012 Alexander Kojevnikov and contributors"
 msgstr ""
 
-#: ../src/spek-window.cc:309
+#: ../src/spek-window.cc:339
 msgid "Spek Website"
 msgstr "Sito Web Spek"
 
 #. TRANSLATORS: the %s is the package version.
-#: ../src/spek.cc:90
+#: ../src/spek.cc:100
 #, c-format
 msgid "Spek version %s"
 msgstr "Spek versione %s"
