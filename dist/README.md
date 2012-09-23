@@ -22,16 +22,15 @@
  * Commit everything.
  * Make sure `make distcheck` doesn't return errors.
  * Prepare binaries for OSX and WIN, see README files in dist/*.
- * Update FreeBSD, Debian and Ubuntu ports, see README files in dist/*.
  * If anything has been changed, commit and re-make the tarball.
- * Write the blog post, link from web/index.html, don't publish yet.
  * Update web/index.html: bump version numbers, binary sizes and news.
+ * Write the blog post, link from web/index.html, don't publish yet.
  * `git tag -a X.Y.Z`.
  * Upload the tarball + OSX and WIN binaries.
- * Update the Ubuntu PPA.
- * Request FreeBSD and Debian updates.
  * Upload the website using `web/upload`.
  * Publish the blog post.
  * Send an announcement to the LAA list.
  * Update the forum thread on what.
  * Ping ArchLinux and Gentoo maintainers.
+ * Update FreeBSD, Debian and Ubuntu ports, see README files in dist/*.
+ * Request FreeBSD and Debian updates.

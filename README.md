@@ -7,7 +7,7 @@ Spek is available on *BSD, GNU/Linux, Windows and Mac OS X.
 
 Find out more about Spek on its website: <http://spek-project.org/>
 
-## Spek 0.8.0 - Released 2012-09-22
+## Spek 0.8.0 - Released 2012-09-23
 
 ### New Features And Enhancements
 

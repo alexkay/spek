@@ -39,7 +39,8 @@ terminal, adjusting the path to wx-config as necessary:
     make
 
 To build you will need wxWidgets and FFmpeg packages. On Debian/Ubuntu you also
-need development packages: libwxgtk2.8-dev, libavcodec-dev and libavformat-dev.
+need development packages: libwxgtk2.8-dev, wx-common, libavcodec-dev and
+libavformat-dev.
 
 To start Spek, run:
 
