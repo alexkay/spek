@@ -26,10 +26,8 @@
  * Write the blog post, link from web/index.html, don't publish yet.
  * Upload the tarball + OSX and WIN binaries.
  * `git tag -a X.Y.Z`.
- * Upload the website using `web/upload`.
+ * Upload the website using `gmake upload`.
  * Publish the blog post.
  * Send an announcement to the LAA list.
  * Update the forum thread on what.
- * Ping ArchLinux and Gentoo maintainers.
  * Update FreeBSD and Debian ports, see README files in dist/*.
- * Request FreeBSD and Debian updates.
