@@ -61,7 +61,6 @@ mv $DMG_FILE $DMG_FILE.master
 
 echo "Creating distributable image..."
 hdiutil convert -quiet -format UDBZ -o $DMG_FILE $DMG_FILE.master
-hdiutil internet-enable -yes $DMG_FILE
 rm $DMG_FILE.master
 
 echo "Done."
