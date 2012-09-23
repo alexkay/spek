@@ -24,12 +24,12 @@
  * If anything has been changed, commit and re-make the tarball.
  * Update web/index.html: bump version numbers, binary sizes and news.
  * Write the blog post, link from web/index.html, don't publish yet.
- * `git tag -a X.Y.Z`.
  * Upload the tarball + OSX and WIN binaries.
+ * `git tag -a X.Y.Z`.
  * Upload the website using `web/upload`.
  * Publish the blog post.
  * Send an announcement to the LAA list.
  * Update the forum thread on what.
  * Ping ArchLinux and Gentoo maintainers.
- * Update FreeBSD, Debian and Ubuntu ports, see README files in dist/*.
+ * Update FreeBSD and Debian ports, see README files in dist/*.
  * Request FreeBSD and Debian updates.
