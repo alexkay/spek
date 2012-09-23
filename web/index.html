@@ -21,6 +21,13 @@
         vertical-align: top;
         padding-top: 2px;
       }
+      .shadow {
+        -moz-box-shadow: 3px 3px 4px #000;
+        -webkit-box-shadow: 3px 3px 4px #000;
+        box-shadow: 3px 3px 4px #000;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+        filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+      }
     </style>
   </head>
   <body>
@@ -64,9 +71,9 @@
     <h2>Screenshots</h2>
     <table id="screenshots">
       <tr>
-        <td><a href="flac.png"><img src="flac-small.png" width="240" height="192" alt="Spek running under Ubuntu Linux" title="Spek running under Ubuntu Linux and showing the spectrogram of a FLAC file."/></a></td>
-        <td><a href="win7.png"><img src="win7-small.png" width="240" height="192" alt="Spek running under Windows 7" title="Spek running under Windows 7 and showing the same sound track encoded as a 320kbps MP3."/></a></td>
-        <td><a href="osx.png"><img src="osx-small.png" width="240" height="192" alt="Spek running under Mac OS X" title="Russian-speaking version of Spek running under Mac OS X Leopard."/></a></td>
+        <td><a href="flac.png"><img class="shadow" src="flac-small.png" width="240" height="192" alt="Spek running under Ubuntu Linux" title="Spek running under Ubuntu Linux and showing the spectrogram of a FLAC file."/></a></td>
+        <td><a href="win7.png"><img class="shadow" src="win7-small.png" width="240" height="192" alt="Spek running under Windows 7" title="Spek running under Windows 7 and showing the same sound track encoded as a 320kbps MP3."/></a></td>
+        <td><a href="osx.png"><img class="shadow" src="osx-small.png" width="240" height="192" alt="Spek running under Mac OS X" title="Russian-speaking version of Spek running under Mac OS X Leopard."/></a></td>
       </tr>
     </table>
 
