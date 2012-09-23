@@ -19,7 +19,6 @@
  * Update sshots if there are user-visible changes.
  * Update INSTALL.md with the new version number and instructions.
  * Update copyright year of touched code.
- * Commit everything.
  * Make sure `make distcheck` doesn't return errors.
  * Prepare binaries for OSX and WIN, see README files in dist/*.
  * If anything has been changed, commit and re-make the tarball.
