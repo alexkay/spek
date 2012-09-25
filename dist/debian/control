@@ -3,17 +3,14 @@ Section: sound
 Priority: optional
 Maintainer: Alexander Kojevnikov <alexander@kojevnikov.com>
 Build-Depends: debhelper (>= 7.0.50~),
-               cdbs,
                autotools-dev,
-               valac (>= 0.12),
+               pkg-config,
                intltool (>= 0.35),
-               libavcodec-dev (>= 4:0.6),
-               libavformat-dev (>= 4:0.6),
-               libavutil-dev (>= 4:0.6),
-               libcairo2-dev,
-               libglib2.0-dev,
-               libgtk2.0-dev (>= 2.18.0),
-               libpango1.0-dev
+               libavcodec-dev (>= 6:0.8),
+               libavformat-dev (>= 6:0.8),
+               libavutil-dev (>= 6:0.8),
+               libwxgtk2.8-dev,
+               wx-common
 Standards-Version: 3.9.3
 Homepage: http://spek-project.org/
 Vcs-Git: git://github.com/alexkay/spek.git
