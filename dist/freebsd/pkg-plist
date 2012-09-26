@@ -6,14 +6,22 @@ share/icons/hicolor/24x24/apps/spek.png
 share/icons/hicolor/32x32/apps/spek.png
 share/icons/hicolor/48x48/apps/spek.png
 share/icons/hicolor/scalable/apps/spek.svg
+share/locale/cs/LC_MESSAGES/spek.mo
+share/locale/da/LC_MESSAGES/spek.mo
 share/locale/de/LC_MESSAGES/spek.mo
+share/locale/eo/LC_MESSAGES/spek.mo
 share/locale/es/LC_MESSAGES/spek.mo
 share/locale/fr/LC_MESSAGES/spek.mo
+share/locale/it/LC_MESSAGES/spek.mo
+share/locale/ja/LC_MESSAGES/spek.mo
 share/locale/nl/LC_MESSAGES/spek.mo
 share/locale/pl/LC_MESSAGES/spek.mo
+share/locale/pt_BR/LC_MESSAGES/spek.mo
 share/locale/ru/LC_MESSAGES/spek.mo
 share/locale/sv/LC_MESSAGES/spek.mo
 share/locale/uk/LC_MESSAGES/spek.mo
+share/locale/zh_CN/LC_MESSAGES/spek.mo
+share/locale/zh_TW/LC_MESSAGES/spek.mo
 @dirrmtry share/applications
 @dirrmtry share/icons/hicolor/16x16/apps
 @dirrmtry share/icons/hicolor/16x16
