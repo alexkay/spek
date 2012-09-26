@@ -164,10 +164,10 @@ void SpekSpectrogram::on_have_sample(SpekHaveSampleEvent& event)
     }
 
     // TODO: check image size, quit if wrong.
-    double range = log(1.0 + this->urange - this->lrange);
+    double range = this->urange - this->lrange;
     for (int y = 0; y < bands; y++) {
         double value = fmin(this->urange, fmax(this->lrange, values[y]));
-        double level = log(1.0 + value - this->lrange) / range;
+        double level = (value - this->lrange) / range;
         uint32_t color = spek_palette_spectrum(level);
         this->image.SetRGB(
             sample,
