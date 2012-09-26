@@ -2,11 +2,12 @@
 # Date created:				2010-09-07
 # Whom:					Alexander Kojevnikov <alexander@kojevnikov.com>
 #
-# $FreeBSD: ports/audio/spek/Makefile,v 1.1 2010/09/10 20:16:08 makc Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	spek
 PORTVERSION=	0.7
+PORTREVISION=	3
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_GOOGLE_CODE}
 
