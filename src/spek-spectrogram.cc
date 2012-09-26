@@ -46,7 +46,7 @@ enum
     MAX_RANGE = 0,
     MIN_RANGE = -140,
     URANGE = -20,
-    LRANGE = -100,
+    LRANGE = -120,
     NFFT = 2048,
     BANDS = NFFT / 2 + 1,
     LPAD = 60,
