@@ -7,11 +7,11 @@ Spek is available on *BSD, GNU/Linux, Windows and Mac OS X.
 
 Find out more about Spek on its website: <http://spek-project.org/>
 
-## Spek 0.8.0 - Released 2012-09-23
+## Spek 0.8.1 - Released 2012-09-27
 
 ### New Features And Enhancements
 
-Spek 0.8.0 is part of beta 0.x releases, leading up to a stable 1.0 release
+Spek 0.8.1 is part of beta 0.x releases, leading up to a stable 1.0 release
 (hopefully) later this year. The roadmap is available on
 [GitHub](https://github.com/alexkay/spek/issues/milestones).
 
@@ -40,18 +40,19 @@ Bugfixes:
  * Fixed compilation with newer FFmpeg and libav versions.
  * Proper handling of Unicode file names under Windows (upstream fix).
  * Don't lock the input file on Windows (#26).
+ * Fixed mapping of the spectral density into the palette.
 
 ### Sources / Packages
 
-Spek 0.8.0 tarball:
+Spek 0.8.1 tarball:
 
- * <https://github.com/downloads/alexkay/spek/spek-0.8.0.tar.xz>
+ * <https://github.com/downloads/alexkay/spek/spek-0.8.1.tar.xz>
 
 Windows and Mac OS X binaries:
 
- * <https://github.com/downloads/alexkay/spek/spek-0.8.0.msi>
- * <https://github.com/downloads/alexkay/spek/spek-0.8.0.zip>
- * <https://github.com/downloads/alexkay/spek/spek-0.8.0.dmg>
+ * <https://github.com/downloads/alexkay/spek/spek-0.8.1.msi>
+ * <https://github.com/downloads/alexkay/spek/spek-0.8.1.zip>
+ * <https://github.com/downloads/alexkay/spek/spek-0.8.1.dmg>
 
 Unix packages:
 

@@ -33,8 +33,8 @@ Spek requires OS X 10.5+ and an Intel-based Mac.
 To build Spek, download the source code tarball then run these commands from
 terminal, adjusting the path to wx-config as necessary:
 
-    tar -xJvf spek-0.8.0.tar.xz
-    cd spek-0.8.0
+    tar -xJvf spek-0.8.1.tar.xz
+    cd spek-0.8.1
     ./configure --with-wx-config=/path/to/wx-config
     make
 
