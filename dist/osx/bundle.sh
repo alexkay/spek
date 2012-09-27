@@ -28,6 +28,7 @@ for lang in $LANGUAGES; do
     cp -v ../../po/"$lang".gmo Spek.app/Contents/Resources/"$lang".lproj/spek.mo
     cp -v "$INSTALL_PATH"/share/locale/"$lang"/LC_MESSAGES/wxstd.mo Spek.app/Contents/Resources/"$lang".lproj/
 done
+mkdir -p Spek.app/Contents/Resources/en.lproj
 
 # Make DMG image
 VOLUME_NAME=Spek
