@@ -6,7 +6,7 @@
 #
 
 PORTNAME=	spek
-PORTVERSION=	0.8.0
+PORTVERSION=	0.8.1
 CATEGORIES=	audio
 MASTER_SITES=	http://cloud.github.com/downloads/alexkay/${PORTNAME}/
 
