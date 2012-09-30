@@ -1,3 +1,10 @@
+spek (0.8.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * Enable hardening flags (Closes: #689130)
+
+ -- Alexander Kojevnikov <alexander@kojevnikov.com>  Sat, 29 Sep 2012 17:43:46 -0700
+
 spek (0.8.0-1) unstable; urgency=low
 
   * New upstream release.
