@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
 "POT-Creation-Date: 2012-09-21 19:49-0700\n"
-"PO-Revision-Date: 2012-09-22 03:06+0000\n"
-"Last-Translator: Alexander Kojevnikov <alexander@kojevnikov.com>\n"
+"PO-Revision-Date: 2012-09-27 18:04+0000\n"
+"Last-Translator: Shibing Huang <mr.shibing@mac.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/spek/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -195,7 +195,7 @@ msgstr "未命名"
 #. TRANSLATORS: Add your name here
 #: ../src/spek-window.cc:330
 msgid "translator-credits"
-msgstr "Shibing Huang <mr.shibing@mac.com>"
+msgstr "Shibing Huang <mr.shibing@mac.com> 提供"
 
 #: ../src/spek-window.cc:336
 msgid "Copyright (c) 2010-2012 Alexander Kojevnikov and contributors"
