@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Alexander Kojevnikov <alexander@kojevnikov.com>, 2011-2012.
-# sacrebleu <olga@vasylevska.com>, 2011.
+# sacrebleu, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
