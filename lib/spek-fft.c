@@ -43,14 +43,15 @@ void spek_fft_execute(struct spek_fft_plan *p)
 
     // Calculate magnitudes.
     int n = p->n;
-    p->output[0] = p->input[0] * p->input[0] / (n * n);
-    p->output[n / 2] = p->input[1] * p->input[1] / (n * n);
+    float n2 = n * n;
+    p->output[0] = 10.0f * log10f(p->input[0] * p->input[0] / n2);
+    p->output[n / 2] = 10.0f * log10f(p->input[1] * p->input[1] / n2);
     for (int i = 1; i < n / 2; i++) {
         float val =
             p->input[i * 2] * p->input[i * 2] +
             p->input[i * 2 + 1] * p->input[i * 2 + 1];
-        val /= n * n;
-        p->output[i] = 10.0 * log10f (val);
+        val /= n2;
+        p->output[i] = 10.0f * log10f(val);
     }
 }
 
