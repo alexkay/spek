@@ -6,7 +6,7 @@
 
 # Adjust these variables if necessary.
 HOST=i686-pc-mingw32
-LANGUAGES="cs da de eo es fr it ja nl pl pt_BR ru sv uk zh_CN zh_TW"
+LANGUAGES="cs da de eo es fr it ja nl pl pt_BR ru sv tr uk zh_CN zh_TW"
 MAKE=gmake
 MXE=$(realpath $(dirname $0)/../../../mxe/usr/i686-pc-mingw32)
 STRIP=$(which i686-pc-mingw32-strip)
