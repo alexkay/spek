@@ -1,7 +1,7 @@
 #!/bin/sh
 
 INSTALL_PATH=$HOME/usr
-LANGUAGES="cs da de eo es fr it ja nl pl pt_BR ru sv tr uk zh_CN zh_TW"
+LANGUAGES="cs da de eo es fr it ja nb nl pl pt_BR ru sv tr uk vi zh_CN zh_TW"
 
 cd $(dirname $0)/../..
 

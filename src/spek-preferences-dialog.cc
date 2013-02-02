@@ -35,6 +35,7 @@ static const char *available_languages[] =
     "fr", "Français",
     "it", "Italiano",
     "ja", "日本語",
+    "nb", "Norsk (bokmål)",
     "nl", "Nederlands",
     "pl", "Polski",
     "pt_BR", "Português brasileiro",
@@ -42,6 +43,7 @@ static const char *available_languages[] =
     "sv", "Svenska",
     "tr", "Türkçe",
     "uk", "Українська",
+    "vi", "Tiếng Việt",
     "zh_CN", "中文(简体)",
     "zh_TW", "中文(台灣)",
     NULL
