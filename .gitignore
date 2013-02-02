@@ -23,6 +23,7 @@ dist/osx/Spek.app
 dist/osx/Spek.dmg
 dist/win/Spek
 dist/win/spek.wxs
+env
 install-sh
 intltool-extract.in
 intltool-merge.in
@@ -41,7 +42,7 @@ samples/
 src/*.stamp
 src/spek
 stamp-h1
-tests/test-utils
 tests/test
+tests/test-utils
 web/version
 xmldocs.make
