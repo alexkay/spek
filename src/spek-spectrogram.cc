@@ -20,19 +20,17 @@
 
 #include <wx/dcbuffer.h>
 
-extern "C" {
 #include <spek-audio.h>
 #include <spek-palette.h>
 #include <spek-pipeline.h>
 #include <spek-utils.h>
-}
 
-#include "spek-audio-desc.hh"
-#include "spek-events.hh"
-#include "spek-platform.hh"
-#include "spek-ruler.hh"
+#include "spek-audio-desc.h"
+#include "spek-events.h"
+#include "spek-platform.h"
+#include "spek-ruler.h"
 
-#include "spek-spectrogram.hh"
+#include "spek-spectrogram.h"
 
 BEGIN_EVENT_TABLE(SpekSpectrogram, wxWindow)
     EVT_CHAR(SpekSpectrogram::on_char)

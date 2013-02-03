@@ -1,4 +1,4 @@
-/* spek-fft.c
+/* spek-fft.cc
  *
  * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
@@ -17,16 +17,20 @@
  */
 
 #include <math.h>
+
+#define __STDC_CONSTANT_MACROS
+extern "C" {
 #include <libavcodec/avfft.h>
 #include <libavutil/mem.h>
+}
 
 #include "spek-fft.h"
 
 struct spek_fft_plan * spek_fft_plan_new(int n)
 {
-    struct spek_fft_plan *p = malloc(sizeof(struct spek_fft_plan));
-    p->input = av_mallocz(sizeof(float) * n);
-    p->output = av_mallocz(sizeof(float) * (n / 2 + 1));
+    struct spek_fft_plan *p = (spek_fft_plan*)malloc(sizeof(struct spek_fft_plan));
+    p->input = (float*)av_mallocz(sizeof(float) * n);
+    p->output = (float*)av_mallocz(sizeof(float) * (n / 2 + 1));
     int bits = 0;
     while (n) {
         n >>= 1;

@@ -26,7 +26,7 @@
 #include <wx/stdpaths.h>
 #include <wx/utils.h>
 
-#include "spek-platform.hh"
+#include "spek-platform.h"
 
 void spek_platform_init()
 {

@@ -18,7 +18,7 @@
 
 #include <cmath>
 
-#include "spek-ruler.hh"
+#include "spek-ruler.h"
 
 SpekRuler::SpekRuler(
     int x, int y, Position pos, wxString sample_label,

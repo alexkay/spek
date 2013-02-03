@@ -18,9 +18,9 @@
 
 #include <wx/string.h>
 
-#include "spek-platform.hh"
+#include "spek-platform.h"
 
-#include "spek-preferences.hh"
+#include "spek-preferences.h"
 
 SpekPreferences& SpekPreferences::get()
 {

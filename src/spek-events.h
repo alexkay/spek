@@ -1,4 +1,4 @@
-/* spek-events.hh
+/* spek-events.h
  *
  * Copyright (C) 2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
@@ -16,8 +16,8 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SPEK_EVENTS_HH_
-#define SPEK_EVENTS_HH_
+#ifndef SPEK_EVENTS_H_
+#define SPEK_EVENTS_H_
 
 #include <wx/wx.h>
 

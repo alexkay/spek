@@ -16,10 +16,10 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "spek-platform.hh"
-#include "spek-preferences.hh"
+#include "spek-platform.h"
+#include "spek-preferences.h"
 
-#include "spek-preferences-dialog.hh"
+#include "spek-preferences-dialog.h"
 
 // List all languages with a decent (e.g. 80%) number of translated
 // strings. Don't translate language names. Keep the first line intact.

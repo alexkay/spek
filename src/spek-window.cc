@@ -26,16 +26,14 @@
 // WX on WIN doesn't like it when pthread.h is included first.
 #include <pthread.h>
 
-extern "C" {
 #include <spek-utils.h>
-}
 
-#include "spek-artwork.hh"
-#include "spek-preferences-dialog.hh"
-#include "spek-preferences.hh"
-#include "spek-spectrogram.hh"
+#include "spek-artwork.h"
+#include "spek-preferences-dialog.h"
+#include "spek-preferences.h"
+#include "spek-spectrogram.h"
 
-#include "spek-window.hh"
+#include "spek-window.h"
 
 DECLARE_EVENT_TYPE(SPEK_NOTIFY_EVENT, -1)
 DEFINE_EVENT_TYPE(SPEK_NOTIFY_EVENT)

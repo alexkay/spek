@@ -20,15 +20,13 @@
 #include <wx/log.h>
 #include <wx/socket.h>
 
-extern "C" {
 #include <spek-audio.h>
-}
 
-#include "spek-artwork.hh"
-#include "spek-platform.hh"
-#include "spek-preferences.hh"
+#include "spek-artwork.h"
+#include "spek-platform.h"
+#include "spek-preferences.h"
 
-#include "spek-window.hh"
+#include "spek-window.h"
 
 class Spek: public wxApp
 {

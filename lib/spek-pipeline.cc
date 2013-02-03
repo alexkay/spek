@@ -1,4 +1,4 @@
-/* spek-pipeline.c
+/* spek-pipeline.cc
  *
  * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
@@ -23,9 +23,12 @@
  * (c) 2007-2009 Sebastian Dröge <sebastian.droege@collabora.co.uk>
  */
 
+#define __STDC_LIMIT_MACROS
+
 #include <assert.h>
 #include <math.h>
 #include <pthread.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -81,7 +84,7 @@ static float average_input(const struct spek_pipeline *p, void *buffer);
 struct spek_pipeline * spek_pipeline_open(
     const char *path, int bands, int samples, spek_pipeline_cb cb, void *cb_data)
 {
-    struct spek_pipeline *p = malloc(sizeof(struct spek_pipeline));
+    struct spek_pipeline *p = (spek_pipeline*)malloc(sizeof(struct spek_pipeline));
     p->cx = spek_audio_open(path);
     p->properties = spek_audio_get_properties(p->cx);
     p->bands = bands;
@@ -102,15 +105,15 @@ struct spek_pipeline * spek_pipeline_open(
 
     if (!p->properties->error) {
         p->nfft = 2 * bands - 2;
-        p->coss = malloc(p->nfft * sizeof(float));
+        p->coss = (float*)malloc(p->nfft * sizeof(float));
         float cf = 2.0f * (float)M_PI / p->nfft;
         for (int i = 0; i < p->nfft; ++i) {
             p->coss[i] = cosf(cf * i);
         }
         p->fft = spek_fft_plan_new(p->nfft);
         p->input_size = p->nfft * (NFFT * 2 + 1);
-        p->input = malloc(p->input_size * sizeof(float));
-        p->output = malloc(bands * sizeof(float));
+        p->input = (float*)malloc(p->input_size * sizeof(float));
+        p->output = (float*)malloc(bands * sizeof(float));
         spek_audio_start(p->cx, samples);
     }
 
@@ -189,7 +192,7 @@ void spek_pipeline_close(struct spek_pipeline *p)
 
 static void * reader_func(void *pp)
 {
-    struct spek_pipeline *p = pp;
+    struct spek_pipeline *p = (spek_pipeline*)pp;
 
     p->has_worker_thread = !pthread_create(&p->worker_thread, NULL, &worker_func, p);
     if (!p->has_worker_thread) {
@@ -248,7 +251,7 @@ static void reader_sync(struct spek_pipeline *p, int pos)
 
 static void * worker_func(void *pp)
 {
-    struct spek_pipeline *p = pp;
+    struct spek_pipeline *p = (spek_pipeline*)pp;
 
     int sample = 0;
     int64_t frames = 0;
@@ -340,26 +343,26 @@ static float average_input(const struct spek_pipeline *p, void *buffer)
     float res = 0.0f;
     if (p->properties->fp) {
         if (p->properties->width == 32) {
-            float *b = buffer;
+            float *b = (float*)buffer;
             for (int i = 0; i < channels; i++) {
                 res += b[i];
             }
         } else {
             assert(p->properties->width == 64);
-            double *b = buffer;
+            double *b = (double*)buffer;
             for (int i = 0; i < channels; i++) {
                 res += (float) b[i];
             }
         }
     } else {
         if (p->properties->width == 16) {
-            int16_t *b = buffer;
+            int16_t *b = (int16_t*)buffer;
             for (int i = 0; i < channels; i++) {
                 res += b[i] / (float) INT16_MAX;
             }
         } else {
             assert (p->properties->width == 32);
-            int32_t *b = buffer;
+            int32_t *b = (int32_t*)buffer;
             for (int i = 0; i < channels; i++) {
                 res += b[i] / (float) INT32_MAX;
             }

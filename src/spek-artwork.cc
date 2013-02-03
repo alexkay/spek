@@ -19,7 +19,7 @@
 #include <wx/artprov.h>
 #include <wx/iconbndl.h>
 
-#include "spek-artwork.hh"
+#include "spek-artwork.h"
 
 class SpekArtProvider : public wxArtProvider
 {

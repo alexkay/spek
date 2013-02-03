@@ -1,4 +1,4 @@
-/* spek-audio-desc.hh
+/* spek-audio-desc.h
  *
  * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
@@ -16,8 +16,8 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SPEK_AUDIO_DESC_HH_
-#define SPEK_AUDIO_DESC_HH_
+#ifndef SPEK_AUDIO_DESC_H_
+#define SPEK_AUDIO_DESC_H_
 
 #include <wx/string.h>
 

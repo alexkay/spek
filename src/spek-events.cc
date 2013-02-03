@@ -16,7 +16,7 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "spek-events.hh"
+#include "spek-events.h"
 
 //IMPLEMENT_DYNAMIC_CLASS(SpekHaveSampleEvent, wxEvent)
 DEFINE_EVENT_TYPE(SPEK_HAVE_SAMPLE)

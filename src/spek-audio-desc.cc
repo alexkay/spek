@@ -19,11 +19,9 @@
 #include <wx/arrstr.h>
 #include <wx/intl.h>
 
-extern "C" {
 #include <spek-audio.h>
-}
 
-#include "spek-audio-desc.hh"
+#include "spek-audio-desc.h"
 
 #define ngettext wxPLURAL
 

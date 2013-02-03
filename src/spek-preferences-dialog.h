@@ -1,4 +1,4 @@
-/* spek-preferences.hh
+/* spek-preferences-dialog.h
  *
  * Copyright (C) 2011-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
@@ -16,32 +16,23 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SPEK_PREFERENCES_HH_
-#define SPEK_PREFERENCES_HH_
+#ifndef SPEK_PREFERENCES_DIALOG_H_
+#define SPEK_PREFERENCES_DIALOG_H_
 
-#include <wx/fileconf.h>
-#include <wx/intl.h>
+#include <wx/wx.h>
 
-class SpekPreferences
+class SpekPreferencesDialog : public wxDialog
 {
 public:
-    static SpekPreferences& get();
-
-    void init();
-    bool get_check_update();
-    void set_check_update(bool value);
-    long get_last_update();
-    void set_last_update(long value);
-    wxString get_language();
-    void set_language(const wxString& value);
+    SpekPreferencesDialog(wxWindow *parent);
 
 private:
-    SpekPreferences();
-    SpekPreferences(const SpekPreferences&);
-    void operator=(const SpekPreferences&);
+    void on_language(wxCommandEvent& event);
+    void on_check(wxCommandEvent& event);
 
-    wxLocale *locale;
-    wxFileConfig *config;
+    wxArrayString languages;
+
+    DECLARE_EVENT_TABLE()
 };
 
 #endif

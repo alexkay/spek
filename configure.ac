@@ -4,7 +4,7 @@ AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([1.11.1 foreign no-dist-gzip dist-xz])
 AM_SILENT_RULES([yes])
 
-AC_PROG_CC_C99
+AC_LANG([C++])
 AC_PROG_CXX
 AC_PROG_RANLIB
 AC_PROG_INSTALL
@@ -71,7 +71,6 @@ AC_CONFIG_FILES([
 	man/spek.1
 	po/Makefile.in
 	src/Makefile
-	tests/Makefile
 	web/version
 ])
 AC_OUTPUT

@@ -1,4 +1,4 @@
-/* spek-palette.c
+/* spek-palette.cc
  *
  * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *

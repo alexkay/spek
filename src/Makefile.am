@@ -1,24 +1,24 @@
 bin_PROGRAMS = spek
 
 spek_SOURCES = \
-	spek-artwork.hh \
 	spek-artwork.cc \
+	spek-artwork.h \
 	spek-audio-desc.cc \
-	spek-audio-desc.hh \
+	spek-audio-desc.h \
 	spek-events.cc \
-	spek-events.hh \
+	spek-events.h \
 	spek-platform.cc \
-	spek-platform.hh \
+	spek-platform.h \
 	spek-preferences-dialog.cc \
-	spek-preferences-dialog.hh \
+	spek-preferences-dialog.h \
 	spek-preferences.cc \
-	spek-preferences.hh \
+	spek-preferences.h \
 	spek-ruler.cc \
-	spek-ruler.hh \
+	spek-ruler.h \
 	spek-spectrogram.cc \
-	spek-spectrogram.hh \
+	spek-spectrogram.h \
 	spek-window.cc \
-	spek-window.hh \
+	spek-window.h \
 	spek.cc
 
 spek_CPPFLAGS = \

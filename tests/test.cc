@@ -1,4 +1,4 @@
-/* test.c
+/* test.cc
  *
  * Copyright (C) 2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *

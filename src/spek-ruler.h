@@ -1,4 +1,4 @@
-/* spek-platform.hh
+/* spek-ruler.h
  *
  * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
@@ -16,22 +16,47 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SPEK_PLATFORM_HH_
-#define SPEK_PLATFORM_HH_
+#ifndef SPEK_RULER_H_
+#define SPEK_RULER_H_
 
+#include <wx/dc.h>
 #include <wx/string.h>
 
-// Platform-specific initialisation code.
-void spek_platform_init();
+class SpekRuler
+{
+public:
+    enum Position
+    {
+        TOP,
+        RIGHT,
+        BOTTOM,
+        LEFT
+    };
 
-// Not quite XDG-compatible, but close enough.
-wxString spek_platform_config_path(const wxString& app_name);
+    typedef wxString (*formatter_cb)(int unit);
 
-// Setting non-default locale under GTK+ is tricky (see e.g. how FileZilla does it). We will
-// just disable the language setting for GTK+ users and will always use the system locale.
-bool spek_platform_can_change_language();
+    SpekRuler(
+        int x, int y, Position pos, wxString sample_label,
+        int *factors, int min_units, int max_units, double spacing,
+        double scale, double offset, formatter_cb formatter
+    );
 
-// Fonts are smaller on OSX.
-double spek_platform_font_scale();
+    void draw(wxDC& dc);
+
+protected:
+    void draw_tick(wxDC& dc, int tick);
+
+    int x;
+    int y;
+    Position pos;
+    wxString sample_label;
+    int *factors;
+    int min_units;
+    int max_units;
+    double spacing;
+    double scale;
+    double offset;
+    formatter_cb formatter;
+};
 
 #endif

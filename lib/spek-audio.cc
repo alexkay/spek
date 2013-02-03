@@ -1,4 +1,4 @@
-/* spek-audio.c
+/* spek-audio.cc
  *
  * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
@@ -18,9 +18,12 @@
 
 #include <string.h>
 
+#define __STDC_CONSTANT_MACROS
+extern "C" {
 #include <libavformat/avformat.h>
 #include <libavcodec/avcodec.h>
 #include <libavutil/mathematics.h>
+}
 
 #include "spek-audio.h"
 
@@ -53,7 +56,8 @@ const struct spek_audio_properties * spek_audio_get_properties(struct spek_audio
 struct spek_audio_context * spek_audio_open(const char *path)
 {
     // TODO: malloc and initialise explicitely
-    struct spek_audio_context *cx = calloc(1, sizeof(struct spek_audio_context));
+    struct spek_audio_context *cx =
+        (spek_audio_context *)calloc(1, sizeof(struct spek_audio_context));
 
     if (avformat_open_input(&cx->format_context, path, NULL, NULL) != 0) {
         cx->properties.error = SPEK_AUDIO_CANNOT_OPEN_FILE;
@@ -132,8 +136,8 @@ struct spek_audio_context * spek_audio_open(const char *path)
         return cx;
     }
     cx->buffer_size = (AVCODEC_MAX_AUDIO_FRAME_SIZE * 3) / 2;
-    cx->properties.buffer = av_malloc(cx->buffer_size);
-    cx->packet = av_mallocz(sizeof(AVPacket));
+    cx->properties.buffer = (uint8_t*)av_malloc(cx->buffer_size);
+    cx->packet = (AVPacket*)av_mallocz(sizeof(AVPacket));
     av_init_packet(cx->packet);
     cx->offset = 0;
     return cx;

@@ -1,20 +1,20 @@
 noinst_LIBRARIES = libspek.a
 
 libspek_a_SOURCES = \
-	spek-audio.c \
+	spek-audio.cc \
 	spek-audio.h \
-	spek-fft.c \
+	spek-fft.cc \
 	spek-fft.h \
-	spek-palette.c \
+	spek-palette.cc \
 	spek-palette.h \
-	spek-pipeline.c \
+	spek-pipeline.cc \
 	spek-pipeline.h \
-	spek-utils.c \
+	spek-utils.cc \
 	spek-utils.h
 
 libspek_a_CPPFLAGS = \
 	-include config.h \
 	-pthread
 
-libspek_a_CFLAGS = \
+libspek_a_CXXFLAGS = \
 	$(FFMPEG_CFLAGS)

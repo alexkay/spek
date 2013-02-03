@@ -1,4 +1,4 @@
-/* spek-spectrogram.hh
+/* spek-window.h
  *
  * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
@@ -16,43 +16,34 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SPEK_SPECTROGRAM_HH_
-#define SPEK_SPECTROGRAM_HH_
+#ifndef SPEK_WINDOW_H_
+#define SPEK_WINDOW_H_
 
 #include <wx/wx.h>
 
-class SpekHaveSampleEvent;
-struct spek_audio_properties;
-struct spek_pipeline;
+class SpekSpectrogram;
 
-class SpekSpectrogram : public wxWindow
+class SpekWindow : public wxFrame
 {
 public:
-    SpekSpectrogram(wxFrame *parent);
-    ~SpekSpectrogram();
+    SpekWindow(const wxString& path);
     void open(const wxString& path);
-    void save(const wxString& path);
 
 private:
-    void on_char(wxKeyEvent& evt);
-    void on_paint(wxPaintEvent& evt);
-    void on_size(wxSizeEvent& evt);
-    void on_have_sample(SpekHaveSampleEvent& evt);
-    void render(wxDC& dc);
+    void on_open(wxCommandEvent& event);
+    void on_save(wxCommandEvent& event);
+    void on_exit(wxCommandEvent& event);
+    void on_preferences(wxCommandEvent& event);
+    void on_help(wxCommandEvent& event);
+    void on_about(wxCommandEvent& event);
+    void on_notify(wxCommandEvent& event);
+    void on_visit(wxCommandEvent& event);
+    void on_close(wxCommandEvent& event);
 
-    void start();
-    void stop();
-
-    spek_pipeline *pipeline;
+    SpekSpectrogram *spectrogram;
     wxString path;
-    wxString desc;
-    double duration;
-    int sample_rate;
-    wxImage palette;
-    wxImage image;
-    int prev_width;
-    int urange;
-    int lrange;
+    wxString cur_dir;
+    wxString description;
 
     DECLARE_EVENT_TABLE()
 };

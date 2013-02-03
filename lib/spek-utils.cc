@@ -1,4 +1,4 @@
-/* spek-utils.c
+/* spek-utils.cc
  *
  * Copyright (C) 2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *

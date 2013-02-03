@@ -1,6 +1,6 @@
-/* spek-preferences-dialog.hh
+/* spek-artwork.h
  *
- * Copyright (C) 2011-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
+ * Copyright (C) 2012  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
  * Spek is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,23 +16,17 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SPEK_PREFERENCES_DIALOG_HH_
-#define SPEK_PREFERENCES_DIALOG_HH_
+#ifndef SPEK_ARTWORK_H_
+#define SPEK_ARTWORK_H_
 
-#include <wx/wx.h>
+#include <wx/string.h>
 
-class SpekPreferencesDialog : public wxDialog
-{
-public:
-    SpekPreferencesDialog(wxWindow *parent);
+#define ART_SPEK wxT("art-spek")
+#define ART_OPEN wxT("art-open")
+#define ART_SAVE wxT("art-save")
+#define ART_HELP wxT("art-help")
+#define ART_CLOSE wxT("art-close")
 
-private:
-    void on_language(wxCommandEvent& event);
-    void on_check(wxCommandEvent& event);
-
-    wxArrayString languages;
-
-    DECLARE_EVENT_TABLE()
-};
+void spek_artwork_init();
 
 #endif

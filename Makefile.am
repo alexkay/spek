@@ -3,8 +3,7 @@ SUBDIRS = \
 	lib \
 	man \
 	po \
-	src \
-	tests
+	src
 
 EXTRA_DIST = \
 	INSTALL.md \

@@ -16,8 +16,8 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SPEK_PALETTE_HH_
-#define SPEK_PALETTE_HH_
+#ifndef SPEK_PALETTE_H_
+#define SPEK_PALETTE_H_
 
 #include <stdint.h>
 
