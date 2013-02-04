@@ -15,7 +15,7 @@ Copyright:
     For everything not noted below:
       Copyright (C) 2010-2012 Alexander Kojevnikov
 
-    For lib/spek-pipeline.c:
+    For src/spek-pipeline.c:
       Copyright (C) 2010-2012 Alexander Kojevnikov
       Copyright (C) 2007-2009 Sebastian Dröge
       Copyright (C) 2006 Stefan Kost

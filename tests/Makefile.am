@@ -1,22 +1,22 @@
-TESTS = \
-	test-utils \
-	test
+TESTS = test
 
 check_PROGRAMS = $(TESTS)
 
-noinst_HEADERS = \
+test_SOURCES = \
+	test-utils.cc \
+	test.cc \
 	test.h
 
 AM_CPPFLAGS = \
 	-include config.h \
-	-I$(top_srcdir)/lib \
+	-I$(top_srcdir)/src \
 	-pthread
 
-AM_CFLAGS = \
+AM_CXXFLAGS = \
 	$(FFMPEG_CFLAGS)
 
 LDADD = \
-	../lib/libspek.a \
+	../src/libspek.a \
 	$(FFMPEG_LIBS)
 
 AM_LDFLAGS = \

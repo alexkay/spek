@@ -1,6 +1,6 @@
 /* test-utils.cc
  *
- * Copyright (C) 2012  Alexander Kojevnikov <alexander@kojevnikov.com>
+ * Copyright (C) 2012-2013  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
  * Spek is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,25 +20,28 @@
 
 #include "test.h"
 
-int main()
+void test_utils()
 {
-    ensure(0 == spek_vercmp("1.2.3", "1.2.3"), "1.2.3 == 1.2.3");
-    ensure(1 == spek_vercmp("1.2.3", "1.2.2"), "1.2.3 > 1.2.2");
-    ensure(-1 == spek_vercmp("1.2.2", "1.2.3"), "1.2.2 < 1.2.3");
-    ensure(1 == spek_vercmp("1.2.3", "1"), "1.2.3 > 1");
-    ensure(1 == spek_vercmp("1.2.3", "1."), "1.2.3 > 1.");
-    ensure(1 == spek_vercmp("1.2.3", "1.2"), "1.2.3 > 1.2");
-    ensure(1 == spek_vercmp("1.2.3", "1.2."), "1.2.3 > 1.2.");
-    ensure(1 == spek_vercmp("1.15.3", "1.2"), "1.15.3 > 1.2");
-    ensure(1 == spek_vercmp("2", "1.2.2"), "2 > 1.2.2");
-    ensure(1 == spek_vercmp("1.2.3", ""), "1.2.3 > ''");
-    ensure(0 == spek_vercmp("", ""), "'' == ''");
-    ensure(0 == spek_vercmp("123", "123"), "123 == 123");
-    ensure(-1 == spek_vercmp("0.2.3", "1"), "0.2.3 < 1");
-    ensure(-1 == spek_vercmp("0.9.8", "0.10.1"), "0.9.8 < 0.10.1");
-    ensure(-1 == spek_vercmp("1.200", "2.20"), "1.200 < 2.20");
-    ensure(-1 == spek_vercmp("1.0.0", "2.0.0"), "1.0.0 < 2.0.0");
-    ensure(-1 == spek_vercmp("1.0.0", "1.0.1"), "1.0.0 < 1.0.1");
+    test_vercmp();
+}
 
-    return 0;
+static void test_vercmp()
+{
+    test(0 == spek_vercmp("1.2.3", "1.2.3"), "1.2.3 == 1.2.3");
+    test(1 == spek_vercmp("1.2.3", "1.2.2"), "1.2.3 > 1.2.2");
+    test(-1 == spek_vercmp("1.2.2", "1.2.3"), "1.2.2 < 1.2.3");
+    test(1 == spek_vercmp("1.2.3", "1"), "1.2.3 > 1");
+    test(1 == spek_vercmp("1.2.3", "1."), "1.2.3 > 1.");
+    test(1 == spek_vercmp("1.2.3", "1.2"), "1.2.3 > 1.2");
+    test(1 == spek_vercmp("1.2.3", "1.2."), "1.2.3 > 1.2.");
+    test(1 == spek_vercmp("1.15.3", "1.2"), "1.15.3 > 1.2");
+    test(1 == spek_vercmp("2", "1.2.2"), "2 > 1.2.2");
+    test(1 == spek_vercmp("1.2.3", ""), "1.2.3 > ''");
+    test(0 == spek_vercmp("", ""), "'' == ''");
+    test(0 == spek_vercmp("123", "123"), "123 == 123");
+    test(-1 == spek_vercmp("0.2.3", "1"), "0.2.3 < 1");
+    test(-1 == spek_vercmp("0.9.8", "0.10.1"), "0.9.8 < 0.10.1");
+    test(-1 == spek_vercmp("1.200", "2.20"), "1.200 < 2.20");
+    test(-1 == spek_vercmp("1.0.0", "2.0.0"), "1.0.0 < 2.0.0");
+    test(-1 == spek_vercmp("1.0.0", "1.0.1"), "1.0.0 < 1.0.1");
 }

@@ -1,9 +1,9 @@
 SUBDIRS = \
 	data \
-	lib \
 	man \
 	po \
-	src
+	src \
+	tests
 
 EXTRA_DIST = \
 	INSTALL.md \

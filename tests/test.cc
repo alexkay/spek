@@ -1,6 +1,6 @@
 /* test.cc
  *
- * Copyright (C) 2012  Alexander Kojevnikov <alexander@kojevnikov.com>
+ * Copyright (C) 2012-2013  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
  * Spek is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,31 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <iostream>
+
 #include "test.h"
+
+static int g_passes = 0;
+static int g_total = 0;
 
 int main()
 {
-    ensure(2 + 2 == 4, "Hello, tests!");
+    test_utils();
 
-    return 0;
+    std::cerr << g_passes << " / " << g_total << " test passed" << std::endl;
+    if (g_passes < g_total) {
+        return -1;
+    } else {
+        return 0;
+    }
+}
+
+void test(bool condition, const std::string& message)
+{
+    g_total++;
+    if (!condition) {
+        std::cerr << "FAIL: " << message << std::endl;
+    } else {
+        g_passes++;
+    }
 }

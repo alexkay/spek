@@ -1,6 +1,6 @@
 /* test.h
  *
- * Copyright (C) 2012  Alexander Kojevnikov <alexander@kojevnikov.com>
+ * Copyright (C) 2012-2013  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
  * Spek is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,16 +19,10 @@
 #ifndef TEST_H_
 #define TEST_H_
 
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <string>
 
-inline void ensure(bool test, const char *message)
-{
-    if (!test) {
-        printf("ERROR: %s\n", message);
-        exit(1);
-    }
-}
+void test(bool condition, const std::string& message);
+
+void test_utils();
 
 #endif

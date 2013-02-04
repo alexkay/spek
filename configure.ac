@@ -66,11 +66,11 @@ AC_CONFIG_FILES([
 	data/icons/scalable/Makefile
 	dist/osx/Info.plist
 	dist/win/spek.wxs
-	lib/Makefile
 	man/Makefile
 	man/spek.1
 	po/Makefile.in
 	src/Makefile
+	tests/Makefile
 	web/version
 ])
 AC_OUTPUT
