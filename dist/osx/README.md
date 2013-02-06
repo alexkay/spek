@@ -2,7 +2,7 @@
 
 Using [MacPorts](http://www.macports.org/) install build dependencies:
 
-    port install git-core autoconf automake intltool upx yasm.
+    port install autoconf automake clang-3.2 git-core intltool upx yasm.
 
 Download and build wxWidgets 2.9+, example configure flags:
 

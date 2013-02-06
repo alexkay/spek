@@ -6,9 +6,8 @@ AM_SILENT_RULES([yes])
 
 AC_LANG([C++])
 AC_PROG_CXX([clang++ g++])
+CXXFLAGS="$CXXFLAGS -std=gnu++11"
 AC_PROG_CXXCPP
-m4_include([m4/ax_cxx_compile_stdcxx_11.m4])
-AX_CXX_COMPILE_STDCXX_11()
 AC_PROG_RANLIB
 AC_PROG_INSTALL
 IT_PROG_INTLTOOL([0.40.0])
