@@ -61,4 +61,4 @@ Unix packages:
 ### Dependencies
 
  * wxWidgets >= 2.8
- * FFmpeg >= 0.7 or libav >= 0.8
+ * A recent version of FFmpeg or libav

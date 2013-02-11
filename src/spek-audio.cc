@@ -235,7 +235,7 @@ void spek_audio_close(struct spek_audio_context *cx)
         av_free_packet(&cx->packet);
     }
     if (cx->properties.buffer) {
-        av_free(cx->properties.buffer);
+        av_freep(&cx->properties.buffer);
     }
     if (cx->codec_context != NULL) {
         avcodec_close(cx->codec_context);

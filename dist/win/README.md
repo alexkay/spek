@@ -6,8 +6,7 @@ This is done in two steps:
  * Building the MSI package under Windows.
 
 For the first step you can use any Unix-y environment. Set up
-[MXE](http://mxe.cc/#tutorial), you can use the code from
-[this repository](https://github.com/alexkay/mxe/tree/spek) or the official one.
+[MXE](http://mxe.cc/#tutorial).
 
 Build Spek dependencies:
 
