@@ -116,7 +116,7 @@ struct spek_audio_context * spek_audio_open(const char *path)
         return cx;
     }
     cx->is_planar = av_sample_fmt_is_planar(cx->codec_context->sample_fmt);
-    cx->properties.width = 8 * av_get_bytes_per_sample(cx->codec_context->sample_fmt);
+    cx->properties.width = av_get_bytes_per_sample(cx->codec_context->sample_fmt);
     switch (cx->codec_context->sample_fmt) {
     case AV_SAMPLE_FMT_S16:
     case AV_SAMPLE_FMT_S16P:
@@ -176,8 +176,7 @@ int spek_audio_read(struct spek_audio_context *cx) {
             }
             // We have data, return it and come back for more later.
             int buffer_size =
-                cx->frame->nb_samples * cx->properties.channels *
-                (cx->properties.width / 8);
+                cx->frame->nb_samples * cx->properties.channels * cx->properties.width;
             if (buffer_size > cx->buffer_size) {
                 cx->properties.buffer = (uint8_t*)av_realloc(cx->properties.buffer, buffer_size);
                 cx->buffer_size = buffer_size;

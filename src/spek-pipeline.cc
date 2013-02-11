@@ -200,7 +200,7 @@ static void * reader_func(void *pp)
     }
 
     int pos = 0, prev_pos = 0;
-    int block_size = p->properties->width * p->properties->channels / 8;
+    int block_size = p->properties->width * p->properties->channels;
     int size;
     while ((size = spek_audio_read(p->cx)) > 0) {
         if (p->quit) break;
@@ -342,26 +342,26 @@ static float average_input(const struct spek_pipeline *p, void *buffer)
     int channels = p->properties->channels;
     float res = 0.0f;
     if (p->properties->fp) {
-        if (p->properties->width == 32) {
+        if (p->properties->width == 4) {
             float *b = (float*)buffer;
             for (int i = 0; i < channels; i++) {
                 res += b[i];
             }
         } else {
-            assert(p->properties->width == 64);
+            assert(p->properties->width == 8);
             double *b = (double*)buffer;
             for (int i = 0; i < channels; i++) {
                 res += (float) b[i];
             }
         }
     } else {
-        if (p->properties->width == 16) {
+        if (p->properties->width == 2) {
             int16_t *b = (int16_t*)buffer;
             for (int i = 0; i < channels; i++) {
                 res += b[i] / (float) INT16_MAX;
             }
         } else {
-            assert (p->properties->width == 32);
+            assert (p->properties->width == 4);
             int32_t *b = (int32_t*)buffer;
             for (int i = 0; i < channels; i++) {
                 res += b[i] / (float) INT32_MAX;
