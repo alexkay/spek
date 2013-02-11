@@ -175,13 +175,28 @@ int spek_audio_read(struct spek_audio_context *cx) {
                 continue;
             }
             // We have data, return it and come back for more later.
-            int buffer_size =
-                cx->frame->nb_samples * cx->properties.channels * cx->properties.width;
+            int samples = cx->frame->nb_samples;
+            int channels = cx->properties.channels;
+            int width = cx->properties.width;
+            int buffer_size = samples * channels * width;
             if (buffer_size > cx->buffer_size) {
                 cx->properties.buffer = (uint8_t*)av_realloc(cx->properties.buffer, buffer_size);
                 cx->buffer_size = buffer_size;
             }
-            memcpy(cx->properties.buffer, cx->frame->data[0], buffer_size);
+            if (cx->is_planar) {
+                for (int channel = 0; channel < channels; ++channel) {
+                    uint8_t *buffer = cx->properties.buffer + channel * width;
+                    uint8_t *data = cx->frame->data[channel];
+                    for (int sample = 0; sample < samples; ++sample) {
+                        for (int i = 0; i < width; ++i) {
+                            *buffer++ = *data++;
+                        }
+                        buffer += (channels - 1) * width;
+                    }
+                }
+            } else {
+                memcpy(cx->properties.buffer, cx->frame->data[0], buffer_size);
+            }
             return buffer_size;
         }
         if (cx->packet.data) {
