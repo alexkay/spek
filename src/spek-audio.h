@@ -1,6 +1,6 @@
 /* spek-audio.h
  *
- * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
+ * Copyright (C) 2010-2013  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
  * Spek is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,8 +19,8 @@
 #ifndef SPEK_AUDIO_H_
 #define SPEK_AUDIO_H_
 
-#include <stdbool.h>
-#include <stdint.h>
+#include <tr1/cstdint>
+#include <string>
 
 struct spek_audio_context;
 

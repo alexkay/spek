@@ -1,6 +1,6 @@
 /* spek-audio.cc
  *
- * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
+ * Copyright (C) 2010-2013  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
  * Spek is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,8 +35,10 @@ struct spek_audio_context
     AVStream *stream;
     AVCodec *codec;
     int buffer_size;
-    AVPacket *packet;
+    AVPacket packet;
     int offset;
+    int is_planar;
+    AVFrame *frame;
 
     struct spek_audio_properties properties;
 };
@@ -44,7 +46,6 @@ struct spek_audio_context
 
 void spek_audio_init()
 {
-    // TODO: register only audio decoders.
     av_register_all();
 }
 
@@ -114,31 +115,29 @@ struct spek_audio_context * spek_audio_open(const char *path)
         cx->properties.error = SPEK_AUDIO_CANNOT_OPEN_DECODER;
         return cx;
     }
+    cx->is_planar = av_sample_fmt_is_planar(cx->codec_context->sample_fmt);
+    cx->properties.width = 8 * av_get_bytes_per_sample(cx->codec_context->sample_fmt);
     switch (cx->codec_context->sample_fmt) {
     case AV_SAMPLE_FMT_S16:
-        cx->properties.width = 16;
-        cx->properties.fp = false;
-        break;
+    case AV_SAMPLE_FMT_S16P:
     case AV_SAMPLE_FMT_S32:
-        cx->properties.width = 32;
+    case AV_SAMPLE_FMT_S32P:
         cx->properties.fp = false;
         break;
     case AV_SAMPLE_FMT_FLT:
-        cx->properties.width = 32;
-        cx->properties.fp = true;
-        break;
+    case AV_SAMPLE_FMT_FLTP:
     case AV_SAMPLE_FMT_DBL:
-        cx->properties.width = 64;
+    case AV_SAMPLE_FMT_DBLP:
         cx->properties.fp = true;
         break;
     default:
         cx->properties.error = SPEK_AUDIO_BAD_SAMPLE_FORMAT;
         return cx;
     }
-    cx->buffer_size = (AVCODEC_MAX_AUDIO_FRAME_SIZE * 3) / 2;
-    cx->properties.buffer = (uint8_t*)av_malloc(cx->buffer_size);
-    cx->packet = (AVPacket*)av_mallocz(sizeof(AVPacket));
-    av_init_packet(cx->packet);
+    cx->buffer_size = 0;
+    cx->properties.buffer = NULL;
+    av_init_packet(&cx->packet);
+    cx->frame = avcodec_alloc_frame();
     cx->offset = 0;
     return cx;
 }
@@ -160,38 +159,45 @@ int spek_audio_read(struct spek_audio_context *cx) {
     }
 
     for (;;) {
-        while (cx->packet->size > 0) {
-            int buffer_size = cx->buffer_size;
-            int len = avcodec_decode_audio3(
-                cx->codec_context, (int16_t *)cx->properties.buffer, &buffer_size, cx->packet);
+        while (cx->packet.size > 0) {
+            avcodec_get_frame_defaults(cx->frame);
+            int got_frame = 0;
+            int len = avcodec_decode_audio4(cx->codec_context, cx->frame, &got_frame, &cx->packet);
             if (len < 0) {
                 // Error, skip the frame.
-                cx->packet->size = 0;
                 break;
             }
-            cx->packet->data += len;
-            cx->packet->size -= len;
+            cx->packet.data += len;
+            cx->packet.size -= len;
             cx->offset += len;
-            if (buffer_size <= 0) {
+            if (!got_frame) {
                 // No data yet, get more frames.
                 continue;
             }
             // We have data, return it and come back for more later.
+            int buffer_size =
+                cx->frame->nb_samples * cx->properties.channels *
+                (cx->properties.width / 8);
+            if (buffer_size > cx->buffer_size) {
+                cx->properties.buffer = (uint8_t*)av_realloc(cx->properties.buffer, buffer_size);
+                cx->buffer_size = buffer_size;
+            }
+            memcpy(cx->properties.buffer, cx->frame->data[0], buffer_size);
             return buffer_size;
         }
-        if (cx->packet->data) {
-            cx->packet->data -= cx->offset;
-            cx->packet->size += cx->offset;
+        if (cx->packet.data) {
+            cx->packet.data -= cx->offset;
+            cx->packet.size += cx->offset;
             cx->offset = 0;
-            av_free_packet (cx->packet);
+            av_free_packet (&cx->packet);
         }
 
         int res = 0;
-        while ((res = av_read_frame(cx->format_context, cx->packet)) >= 0) {
-            if (cx->packet->stream_index == cx->audio_stream) {
+        while ((res = av_read_frame(cx->format_context, &cx->packet)) >= 0) {
+            if (cx->packet.stream_index == cx->audio_stream) {
                 break;
             }
-            av_free_packet(cx->packet);
+            av_free_packet(&cx->packet);
         }
         if (res < 0) {
             // End of file or error.
@@ -205,23 +211,23 @@ void spek_audio_close(struct spek_audio_context *cx)
     if (cx->properties.codec_name != NULL) {
         free(cx->properties.codec_name);
     }
+    if (cx->frame != NULL) {
+        avcodec_free_frame(&cx->frame);
+    }
+    if (cx->packet.data) {
+        cx->packet.data -= cx->offset;
+        cx->packet.size += cx->offset;
+        cx->offset = 0;
+        av_free_packet(&cx->packet);
+    }
     if (cx->properties.buffer) {
         av_free(cx->properties.buffer);
-    }
-    if (cx->packet) {
-        if (cx->packet->data) {
-            cx->packet->data -= cx->offset;
-            cx->packet->size += cx->offset;
-            cx->offset = 0;
-            av_free_packet(cx->packet);
-        }
-        av_free(cx->packet);
     }
     if (cx->codec_context != NULL) {
         avcodec_close(cx->codec_context);
     }
     if (cx->format_context != NULL) {
-        av_close_input_file(cx->format_context);
+        avformat_close_input(&cx->format_context);
     }
     free(cx);
 }
