@@ -87,6 +87,8 @@ wxString spek_audio_desc(const struct spek_audio_properties *properties)
         case SPEK_AUDIO_BAD_SAMPLE_FORMAT:
             error = _("Unsupported sample format");
             break;
+        case SPEK_AUDIO_OK:
+            break;
         }
 
         if (desc.IsEmpty()) {
