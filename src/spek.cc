@@ -20,8 +20,6 @@
 #include <wx/log.h>
 #include <wx/socket.h>
 
-#include <spek-audio.h>
-
 #include "spek-artwork.h"
 #include "spek-platform.h"
 #include "spek-preferences.h"
@@ -53,8 +51,6 @@ bool Spek::OnInit()
     wxInitAllImageHandlers();
     wxSocketBase::Initialize();
 
-    spek_audio_init();
-
     spek_artwork_init();
     spek_platform_init();
     SpekPreferences::get().init();
@@ -70,7 +66,9 @@ bool Spek::OnInit()
             wxCMD_LINE_SWITCH,
             wxT_2("V"),
             wxT_2("version"),
-            wxT_2("Display the version and exit")
+            wxT_2("Display the version and exit"),
+            wxCMD_LINE_VAL_NONE,
+            wxCMD_LINE_PARAM_OPTIONAL
         }, {
             wxCMD_LINE_PARAM,
             NULL,

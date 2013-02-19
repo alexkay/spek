@@ -1,6 +1,6 @@
 /* spek-events.cc
  *
- * Copyright (C) 2012  Alexander Kojevnikov <alexander@kojevnikov.com>
+ * Copyright (C) 2012-2013  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
  * Spek is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ SpekHaveSampleEvent::SpekHaveSampleEvent(int bands, int sample, float *values, b
     SetEventType(SPEK_HAVE_SAMPLE);
 }
 
-SpekHaveSampleEvent::SpekHaveSampleEvent(const SpekHaveSampleEvent& other)
+SpekHaveSampleEvent::SpekHaveSampleEvent(const SpekHaveSampleEvent& other) : wxEvent(other)
 {
     SetEventType(SPEK_HAVE_SAMPLE);
     this->bands = other.bands;

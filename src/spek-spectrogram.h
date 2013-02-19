@@ -1,6 +1,6 @@
 /* spek-spectrogram.h
  *
- * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
+ * Copyright (C) 2010-2013  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
  * Spek is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,10 +19,12 @@
 #ifndef SPEK_SPECTROGRAM_H_
 #define SPEK_SPECTROGRAM_H_
 
+#include <memory>
+
 #include <wx/wx.h>
 
+class Audio;
 class SpekHaveSampleEvent;
-struct spek_audio_properties;
 struct spek_pipeline;
 
 class SpekSpectrogram : public wxWindow
@@ -43,6 +45,7 @@ private:
     void start();
     void stop();
 
+    std::unique_ptr<Audio> audio;
     spek_pipeline *pipeline;
     wxString path;
     wxString desc;

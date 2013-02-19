@@ -1,6 +1,6 @@
 /* spek-spectrogram.cc
  *
- * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
+ * Copyright (C) 2010-2013  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
  * Spek is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,15 +20,13 @@
 
 #include <wx/dcbuffer.h>
 
-#include <spek-audio.h>
-#include <spek-palette.h>
-#include <spek-pipeline.h>
-#include <spek-utils.h>
-
-#include "spek-audio-desc.h"
+#include "spek-audio.h"
 #include "spek-events.h"
+#include "spek-palette.h"
+#include "spek-pipeline.h"
 #include "spek-platform.h"
 #include "spek-ruler.h"
+#include "spek-utils.h"
 
 #include "spek-spectrogram.h"
 
@@ -63,6 +61,7 @@ SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
         parent, -1, wxDefaultPosition, wxDefaultSize,
         wxFULL_REPAINT_ON_RESIZE | wxWANTS_CHARS
     ),
+    audio(new Audio()), // TODO: refactor
     pipeline(NULL),
     duration(0.0),
     sample_rate(0),
@@ -111,7 +110,6 @@ void SpekSpectrogram::save(const wxString& path)
 void SpekSpectrogram::on_char(wxKeyEvent& evt)
 {
     bool C = evt.GetModifiers() == wxMOD_CONTROL;
-    bool S = evt.GetModifiers() == wxMOD_SHIFT;
     bool CS = evt.GetModifiers() == (wxMOD_CONTROL | wxMOD_SHIFT);
     bool dn = evt.GetKeyCode() == WXK_DOWN;
     bool up = evt.GetKeyCode() == WXK_UP;
@@ -133,13 +131,13 @@ void SpekSpectrogram::on_char(wxKeyEvent& evt)
     Refresh();
 }
 
-void SpekSpectrogram::on_paint(wxPaintEvent& evt)
+void SpekSpectrogram::on_paint(wxPaintEvent&)
 {
     wxAutoBufferedPaintDC dc(this);
     render(dc);
 }
 
-void SpekSpectrogram::on_size(wxSizeEvent& evt)
+void SpekSpectrogram::on_size(wxSizeEvent&)
 {
     wxSize size = GetClientSize();
     bool width_changed = this->prev_width != size.GetWidth();
@@ -366,17 +364,17 @@ void SpekSpectrogram::start()
     if (samples > 0) {
         this->image.Create(samples, BANDS);
         this->pipeline = spek_pipeline_open(
-            this->path.utf8_str(),
+            this->audio->open(std::string(this->path.utf8_str())),
             BANDS,
             samples,
             pipeline_cb,
             this
         );
         spek_pipeline_start(this->pipeline);
-        const spek_audio_properties *properties = spek_pipeline_properties(this->pipeline);
-        this->desc = spek_audio_desc(properties);
-        this->duration = properties->duration;
-        this->sample_rate = properties->sample_rate;
+        // TODO: extract conversion into a utility function.
+        this->desc = wxString::FromUTF8(spek_pipeline_desc(this->pipeline).c_str());
+        this->duration = spek_pipeline_duration(this->pipeline);
+        this->sample_rate = spek_pipeline_sample_rate(this->pipeline);
     } else {
         this->image.Create(1, 1);
     }

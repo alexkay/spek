@@ -57,7 +57,7 @@ public:
     SpekDropTarget(SpekWindow *window) : wxFileDropTarget(), window(window) {}
 
 protected:
-    virtual bool OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames){
+    virtual bool OnDropFiles(wxCoord, wxCoord, const wxArrayString& filenames){
         if (filenames.GetCount() == 1) {
             window->open(filenames[0]);
             return true;
@@ -70,7 +70,7 @@ private:
 };
 
 SpekWindow::SpekWindow(const wxString& path) :
-    path(path), wxFrame(NULL, -1, wxEmptyString, wxDefaultPosition, wxSize(640, 480))
+    wxFrame(NULL, -1, wxEmptyString, wxDefaultPosition, wxSize(640, 480)), path(path)
 {
     this->description = _("Spek - Acoustic Spectrum Analyser");
     SetTitle(this->description);
@@ -221,7 +221,7 @@ static const char *audio_extensions[] = {
     NULL
 };
 
-void SpekWindow::on_open(wxCommandEvent& event)
+void SpekWindow::on_open(wxCommandEvent&)
 {
     static wxString filters = wxEmptyString;
     static int filter_index = 1;
@@ -261,7 +261,7 @@ void SpekWindow::on_open(wxCommandEvent& event)
     dlg->Destroy();
 }
 
-void SpekWindow::on_save(wxCommandEvent& event)
+void SpekWindow::on_save(wxCommandEvent&)
 {
     static wxString filters = wxEmptyString;
 
@@ -296,25 +296,25 @@ void SpekWindow::on_save(wxCommandEvent& event)
     dlg->Destroy();
 }
 
-void SpekWindow::on_exit(wxCommandEvent& event)
+void SpekWindow::on_exit(wxCommandEvent&)
 {
     Close(true);
 }
 
-void SpekWindow::on_preferences(wxCommandEvent& event)
+void SpekWindow::on_preferences(wxCommandEvent&)
 {
     SpekPreferencesDialog dlg(this);
     dlg.ShowModal();
 }
 
-void SpekWindow::on_help(wxCommandEvent& event)
+void SpekWindow::on_help(wxCommandEvent&)
 {
     wxLaunchDefaultBrowser(
         wxString::Format(wxT("http://spek-project.org/man-%s.html"), wxT(PACKAGE_VERSION))
     );
 }
 
-void SpekWindow::on_about(wxCommandEvent& event)
+void SpekWindow::on_about(wxCommandEvent&)
 {
     wxAboutDialogInfo info;
     info.AddDeveloper(wxT("Alexander Kojevnikov"));
@@ -341,13 +341,13 @@ void SpekWindow::on_about(wxCommandEvent& event)
     wxAboutBox(info);
 }
 
-void SpekWindow::on_notify(wxCommandEvent& event)
+void SpekWindow::on_notify(wxCommandEvent&)
 {
     this->GetSizer()->Show((size_t)0);
     this->Layout();
 }
 
-void SpekWindow::on_visit(wxCommandEvent& event)
+void SpekWindow::on_visit(wxCommandEvent&)
 {
     wxLaunchDefaultBrowser(wxT("http://spek-project.org"));
 }

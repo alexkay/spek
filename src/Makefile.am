@@ -14,18 +14,18 @@ libspek_a_SOURCES = \
 
 libspek_a_CPPFLAGS = \
 	-include config.h \
-	-pthread
+	-pthread \
+	$(WX_CPPFLAGS)
 
 libspek_a_CXXFLAGS = \
-	$(FFMPEG_CFLAGS)
+	$(FFMPEG_CFLAGS) \
+	$(WX_CXXFLAGS_ONLY)
 
 bin_PROGRAMS = spek
 
 spek_SOURCES = \
 	spek-artwork.cc \
 	spek-artwork.h \
-	spek-audio-desc.cc \
-	spek-audio-desc.h \
 	spek-events.cc \
 	spek-events.h \
 	spek-platform.cc \

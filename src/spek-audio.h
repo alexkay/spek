@@ -19,61 +19,58 @@
 #ifndef SPEK_AUDIO_H_
 #define SPEK_AUDIO_H_
 
-#include <tr1/cstdint>
+#include <memory>
 #include <string>
 
-struct spek_audio_context;
+class AudioFile;
+enum class AudioError;
 
-enum spek_audio_error
+class Audio
 {
-    SPEK_AUDIO_OK = 0,
-    SPEK_AUDIO_CANNOT_OPEN_FILE,
-    SPEK_AUDIO_NO_STREAMS,
-    SPEK_AUDIO_NO_AUDIO,
-    SPEK_AUDIO_NO_DECODER,
-    SPEK_AUDIO_NO_DURATION,
-    SPEK_AUDIO_NO_CHANNELS,
-    SPEK_AUDIO_CANNOT_OPEN_DECODER,
-    SPEK_AUDIO_BAD_SAMPLE_FORMAT,
+public:
+    Audio();
+
+    std::unique_ptr<AudioFile> open(const std::string& file_name);
 };
 
-struct spek_audio_properties
+class AudioFile
 {
-    char *codec_name;
-    enum spek_audio_error error;
-    int bit_rate;
-    int sample_rate;
-    int bits_per_sample;
-    int width; // number of bits used to store a sample
-    bool fp; // floating-point sample representation
-    int channels;
-    double duration;
-    // TODO: these four guys don't belong here, move them somewhere else when revamping the pipeline
-    uint8_t *buffer;
-    int64_t frames_per_interval;
-    int64_t error_per_interval;
-    int64_t error_base;
+public:
+    virtual ~AudioFile() {}
+
+    virtual void start(int samples) = 0;
+    virtual int read() = 0;
+
+    virtual AudioError get_error() const = 0;
+    virtual std::string get_codec_name() const = 0;
+    virtual int get_bit_rate() const = 0;
+    virtual int get_sample_rate() const = 0;
+    virtual int get_bits_per_sample() const = 0;
+    virtual int get_channels() const = 0;
+    virtual double get_duration() const = 0;
+    virtual int get_width() const = 0;
+    virtual bool get_fp() const = 0;
+    virtual const uint8_t *get_buffer() const = 0;
+    virtual int64_t get_frames_per_interval() const = 0;
+    virtual int64_t get_error_per_interval() const = 0;
+    virtual int64_t get_error_base() const = 0;
 };
 
-// Initialise FFmpeg, should be called once on start up.
-void spek_audio_init();
+enum class AudioError
+{
+    OK,
+    CANNOT_OPEN_FILE,
+    NO_STREAMS,
+    NO_AUDIO,
+    NO_DECODER,
+    NO_DURATION,
+    NO_CHANNELS,
+    CANNOT_OPEN_DECODER,
+    BAD_SAMPLE_FORMAT,
+};
 
-// Open the file, check if it has an audio stream which can be decoded.
-// On error, initialises the `error` field in the returned context.
-struct spek_audio_context * spek_audio_open(const char *path);
-
-const struct spek_audio_properties * spek_audio_get_properties(struct spek_audio_context *cs);
-
-// Prepare the context for reading audio samples.
-void spek_audio_start(struct spek_audio_context *cx, int samples);
-
-// Read and decode the opened audio stream.
-// Returns -1 on error, 0 if there's nothing left to read
-// or the number of bytes decoded into the buffer.
-int spek_audio_read(struct spek_audio_context *cx);
-
-// Closes the file opened with spek_audio_open,
-// frees all allocated buffers and the context
-void spek_audio_close(struct spek_audio_context *cx);
+inline bool operator!(AudioError error) {
+    return error == AudioError::OK;
+}
 
 #endif

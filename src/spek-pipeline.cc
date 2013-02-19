@@ -1,6 +1,6 @@
 /* spek-pipeline.cc
  *
- * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
+ * Copyright (C) 2010-2013  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
  * Spek is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,10 +32,16 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <vector>
+
+#include <wx/intl.h>
+
 #include "spek-audio.h"
 #include "spek-fft.h"
 
 #include "spek-pipeline.h"
+
+#define ngettext wxPLURAL
 
 enum
 {
@@ -44,8 +50,7 @@ enum
 
 struct spek_pipeline
 {
-    struct spek_audio_context *cx;
-    const struct spek_audio_properties *properties;
+    std::unique_ptr<AudioFile> file;
     int bands;
     int samples;
     spek_pipeline_cb cb;
@@ -79,14 +84,13 @@ struct spek_pipeline
 static void * reader_func(void *);
 static void * worker_func(void *);
 static void reader_sync(struct spek_pipeline *p, int pos);
-static float average_input(const struct spek_pipeline *p, void *buffer);
+static float average_input(const struct spek_pipeline *p, const void *buffer);
 
 struct spek_pipeline * spek_pipeline_open(
-    const char *path, int bands, int samples, spek_pipeline_cb cb, void *cb_data)
+    std::unique_ptr<AudioFile> file, int bands, int samples, spek_pipeline_cb cb, void *cb_data)
 {
-    struct spek_pipeline *p = (spek_pipeline*)malloc(sizeof(struct spek_pipeline));
-    p->cx = spek_audio_open(path);
-    p->properties = spek_audio_get_properties(p->cx);
+    spek_pipeline *p = new spek_pipeline();
+    p->file = std::move(file);
     p->bands = bands;
     p->samples = samples;
     p->cb = cb;
@@ -103,7 +107,7 @@ struct spek_pipeline * spek_pipeline_open(
     p->has_worker_mutex = false;
     p->has_worker_cond = false;
 
-    if (!p->properties->error) {
+    if (!p->file->get_error()) {
         p->nfft = 2 * bands - 2;
         p->coss = (float*)malloc(p->nfft * sizeof(float));
         float cf = 2.0f * (float)M_PI / p->nfft;
@@ -114,20 +118,17 @@ struct spek_pipeline * spek_pipeline_open(
         p->input_size = p->nfft * (NFFT * 2 + 1);
         p->input = (float*)malloc(p->input_size * sizeof(float));
         p->output = (float*)malloc(bands * sizeof(float));
-        spek_audio_start(p->cx, samples);
+        p->file->start(samples);
     }
 
     return p;
 }
 
-const struct spek_audio_properties * spek_pipeline_properties(struct spek_pipeline *pipeline)
-{
-    return pipeline->properties;
-}
-
 void spek_pipeline_start(struct spek_pipeline *p)
 {
-    if (p->properties->error) return;
+    if (!!p->file->get_error()) {
+        return;
+    }
 
     p->input_pos = 0;
     p->worker_done = false;
@@ -183,11 +184,106 @@ void spek_pipeline_close(struct spek_pipeline *p)
         free(p->coss);
         p->coss = NULL;
     }
-    if (p->cx) {
-        spek_audio_close(p->cx);
-        p->cx = NULL;
+
+    p->file.reset();
+
+    delete p;
+}
+
+std::string spek_pipeline_desc(const struct spek_pipeline *pipeline)
+{
+    std::vector<std::string> items;
+
+    if (!pipeline->file->get_codec_name().empty()) {
+        items.push_back(pipeline->file->get_codec_name());
     }
-    free(p);
+    if (pipeline->file->get_bit_rate()) {
+        items.push_back(std::string(
+            wxString::Format(_("%d kbps"), (pipeline->file->get_bit_rate() + 500) / 1000).utf8_str()
+        ));
+    }
+    if (pipeline->file->get_sample_rate()) {
+        items.push_back(std::string(
+            wxString::Format(_("%d Hz"), pipeline->file->get_sample_rate()).utf8_str()
+        ));
+    }
+    // Include bits per sample only if there is no bitrate.
+    if (pipeline->file->get_bits_per_sample() && !pipeline->file->get_bit_rate()) {
+        items.push_back(std::string(
+            wxString::Format(
+                ngettext("%d bit", "%d bits", pipeline->file->get_bits_per_sample()),
+                pipeline->file->get_bits_per_sample()
+            ).utf8_str()
+        ));
+    }
+    if (pipeline->file->get_channels()) {
+        items.push_back(std::string(
+            wxString::Format(
+                ngettext("%d channel", "%d channels", pipeline->file->get_channels()),
+                pipeline->file->get_channels()
+            ).utf8_str()
+        ));
+    }
+
+    std::string desc;
+    for (const auto& item : items) {
+        if (!desc.empty()) {
+            desc.append(", ");
+        }
+        desc.append(item);
+    }
+
+    wxString error;
+    switch (pipeline->file->get_error()) {
+    case AudioError::CANNOT_OPEN_FILE:
+        error = _("Cannot open input file");
+        break;
+    case AudioError::NO_STREAMS:
+        error = _("Cannot find stream info");
+        break;
+    case AudioError::NO_AUDIO:
+        error = _("The file contains no audio streams");
+        break;
+    case AudioError::NO_DECODER:
+        error = _("Cannot find decoder");
+        break;
+    case AudioError::NO_DURATION:
+        error = _("Unknown duration");
+        break;
+    case AudioError::NO_CHANNELS:
+        error = _("No audio channels");
+        break;
+    case AudioError::CANNOT_OPEN_DECODER:
+        error = _("Cannot open decoder");
+        break;
+    case AudioError::BAD_SAMPLE_FORMAT:
+        error = _("Unsupported sample format");
+        break;
+    case AudioError::OK:
+        break;
+    }
+
+    auto error_string = std::string(error.utf8_str());
+    if (desc.empty()) {
+        desc = error_string;
+    } else if (!error_string.empty()) {
+        // TRANSLATORS: first %s is the error message, second %s is stream description.
+        desc = std::string(
+            wxString::Format(_("%s: %s"), error_string.c_str(), desc.c_str()).utf8_str()
+        );
+    }
+
+    return desc;
+}
+
+double spek_pipeline_duration(const struct spek_pipeline *pipeline)
+{
+    return pipeline->file->get_duration();
+}
+
+int spek_pipeline_sample_rate(const struct spek_pipeline *pipeline)
+{
+    return pipeline->file->get_sample_rate();
 }
 
 static void * reader_func(void *pp)
@@ -200,12 +296,12 @@ static void * reader_func(void *pp)
     }
 
     int pos = 0, prev_pos = 0;
-    int block_size = p->properties->width * p->properties->channels;
+    int block_size = p->file->get_width() * p->file->get_channels();
     int size;
-    while ((size = spek_audio_read(p->cx)) > 0) {
+    while ((size = p->file->read()) > 0) {
         if (p->quit) break;
 
-        uint8_t *buffer = p->properties->buffer;
+        const uint8_t *buffer = p->file->get_buffer();
         while (size >= block_size) {
             p->input[pos] = average_input(p, buffer);
             buffer += block_size;
@@ -290,11 +386,11 @@ static void * worker_func(void *pp)
             // If we have enough frames for an FFT or we have
             // all frames required for the interval run and FFT.
             bool int_full =
-                acc_error < p->properties->error_base &&
-                frames == p->properties->frames_per_interval;
+                acc_error < p->file->get_error_base() &&
+                frames == p->file->get_frames_per_interval();
             bool int_over =
-                acc_error >= p->properties->error_base &&
-                frames == 1 + p->properties->frames_per_interval;
+                acc_error >= p->file->get_error_base() &&
+                frames == 1 + p->file->get_frames_per_interval();
 
             if (frames % p->nfft == 0 || ((int_full || int_over) && num_fft == 0)) {
                 prev_head = head;
@@ -317,9 +413,9 @@ static void * worker_func(void *pp)
             // Do we have the FFTs for one interval?
             if (int_full || int_over) {
                 if (int_over) {
-                    acc_error -= p->properties->error_base;
+                    acc_error -= p->file->get_error_base();
                 } else {
-                    acc_error += p->properties->error_per_interval;
+                    acc_error += p->file->get_error_per_interval();
                 }
 
                 for (int i = 0; i < p->bands; i++) {
@@ -337,31 +433,31 @@ static void * worker_func(void *pp)
     }
 }
 
-static float average_input(const struct spek_pipeline *p, void *buffer)
+static float average_input(const struct spek_pipeline *p, const void *buffer)
 {
-    int channels = p->properties->channels;
+    int channels = p->file->get_channels();
     float res = 0.0f;
-    if (p->properties->fp) {
-        if (p->properties->width == 4) {
+    if (p->file->get_fp()) {
+        if (p->file->get_width() == 4) {
             float *b = (float*)buffer;
             for (int i = 0; i < channels; i++) {
                 res += b[i];
             }
         } else {
-            assert(p->properties->width == 8);
+            assert(p->file->get_width() == 8);
             double *b = (double*)buffer;
             for (int i = 0; i < channels; i++) {
                 res += (float) b[i];
             }
         }
     } else {
-        if (p->properties->width == 2) {
+        if (p->file->get_width() == 2) {
             int16_t *b = (int16_t*)buffer;
             for (int i = 0; i < channels; i++) {
                 res += b[i] / (float) INT16_MAX;
             }
         } else {
-            assert (p->properties->width == 4);
+            assert (p->file->get_width() == 4);
             int32_t *b = (int32_t*)buffer;
             for (int i = 0; i < channels; i++) {
                 res += b[i] / (float) INT32_MAX;
