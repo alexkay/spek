@@ -267,8 +267,8 @@ std::string spek_pipeline_desc(const struct spek_pipeline *pipeline)
     if (desc.empty()) {
         desc = error_string;
     } else if (!error_string.empty()) {
-        // TRANSLATORS: first %s is the error message, second %s is stream description.
         desc = std::string(
+            // TRANSLATORS: first %s is the error message, second %s is stream description.
             wxString::Format(_("%s: %s"), error_string.c_str(), desc.c_str()).utf8_str()
         );
     }
