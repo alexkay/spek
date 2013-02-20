@@ -10,14 +10,17 @@ test_SOURCES = \
 AM_CPPFLAGS = \
 	-include config.h \
 	-I$(top_srcdir)/src \
-	-pthread
+	-pthread \
+	$(WX_CPPFLAGS)
 
 AM_CXXFLAGS = \
-	$(FFMPEG_CFLAGS)
+	$(FFMPEG_CFLAGS) \
+	$(WX_CXXFLAGS_ONLY)
 
 LDADD = \
 	../src/libspek.a \
-	$(FFMPEG_LIBS)
+	$(FFMPEG_LIBS) \
+	$(WX_LIBS)
 
 AM_LDFLAGS = \
 	-pthread

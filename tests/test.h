@@ -21,7 +21,12 @@
 
 #include <string>
 
-void test(bool condition, const std::string& message);
+void test(const std::string& message, bool condition);
+
+template<class T> void test(const std::string& message, const T& expected, const T& actual)
+{
+    test(message, expected == actual);
+}
 
 void test_utils();
 

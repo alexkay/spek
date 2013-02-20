@@ -27,7 +27,9 @@ int main()
 {
     test_utils();
 
-    std::cerr << g_passes << " / " << g_total << " test passed" << std::endl;
+    std::cerr << "-------------" << std::endl;
+    std::cerr << g_passes << "/" << g_total << " tests passed" << std::endl;
+    std::cerr << "-------------" << std::endl;
     if (g_passes < g_total) {
         return -1;
     } else {
@@ -35,12 +37,12 @@ int main()
     }
 }
 
-void test(bool condition, const std::string& message)
+void test(const std::string& message, bool condition)
 {
     g_total++;
-    if (!condition) {
-        std::cerr << "FAIL: " << message << std::endl;
-    } else {
+    if (condition) {
         g_passes++;
+    } else {
+        std::cerr << "FAIL: " << message << std::endl;
     }
 }

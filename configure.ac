@@ -5,8 +5,8 @@ AM_INIT_AUTOMAKE([1.11.1 foreign no-dist-gzip dist-xz])
 AM_SILENT_RULES([yes])
 
 AC_LANG([C++])
-AC_PROG_CXX([g++47 g++])
-CXXFLAGS="$CXXFLAGS -std=gnu++0x -Wall -Wextra"
+AC_PROG_CXX
+CXXFLAGS="$CXXFLAGS -std=c++11 -Wall -Wextra"
 AC_PROG_CXXCPP
 AC_PROG_RANLIB
 AC_PROG_INSTALL
