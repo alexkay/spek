@@ -19,8 +19,10 @@
 #ifndef TEST_H_
 #define TEST_H_
 
+#include <functional>
 #include <string>
 
+void run(std::function<void ()> func, const std::string& message);
 void test(const std::string& message, bool condition);
 
 template<class T> void test(const std::string& message, const T& expected, const T& actual)

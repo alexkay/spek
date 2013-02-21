@@ -16,7 +16,7 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <spek-utils.h>
+#include "spek-utils.h"
 
 #include "test.h"
 
@@ -43,5 +43,5 @@ static void test_vercmp()
 
 void test_utils()
 {
-    test_vercmp();
+    run(test_vercmp, "vercmp");
 }
