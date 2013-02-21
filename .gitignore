@@ -38,11 +38,9 @@ po/*.gmo
 po/.intltool-merge-cache
 po/POTFILES
 po/stamp-it
-samples/
 src/*.stamp
 src/spek
 stamp-h1
 tests/test
-tests/test-utils
 web/version
 xmldocs.make

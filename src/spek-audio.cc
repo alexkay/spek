@@ -222,6 +222,12 @@ AudioFileImpl::~AudioFileImpl()
         av_free_packet(&this->packet);
     }
     if (this->format_context) {
+        if (this->audio_stream >= 0) {
+            auto codec_context = this->format_context->streams[this->audio_stream]->codec;
+            if (codec_context) {
+                avcodec_close(codec_context);
+            }
+        }
         avformat_close_input(&this->format_context);
     }
 }
