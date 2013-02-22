@@ -1,5 +1,9 @@
 TESTS = test
 
+if USE_VALGRIND
+TESTS_ENVIRONMENT = valgrind --leak-check=full --quiet --error-exitcode=1
+endif
+
 check_PROGRAMS = $(TESTS)
 
 test_SOURCES = \

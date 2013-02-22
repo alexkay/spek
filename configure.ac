@@ -30,6 +30,9 @@ AS_CASE([$host],
 )
 AC_MSG_RESULT([$os])
 
+AC_CHECK_PROG(HAVE_VALGRIND, valgrind, yes, no)
+AM_CONDITIONAL([USE_VALGRIND], [test x$HAVE_VALGRIND = xyes])
+
 AC_CHECK_LIB(m, log10)
 
 PKG_CHECK_MODULES(FFMPEG, [libavformat >= 54.2 libavcodec >= 53.25 libavutil >= 51.18])
