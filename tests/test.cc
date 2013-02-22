@@ -23,9 +23,11 @@ int g_total = 0;
 
 int main()
 {
+    std::cerr << "-------------" << std::endl;
+
+    test_audio_info();
     test_utils();
 
-    std::cerr << "-------------" << std::endl;
     std::cerr << g_passes << "/" << g_total << " tests passed" << std::endl;
     std::cerr << "-------------" << std::endl;
     if (g_passes < g_total) {

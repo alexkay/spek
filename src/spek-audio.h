@@ -20,6 +20,7 @@
 #define SPEK_AUDIO_H_
 
 #include <memory>
+#include <ostream>
 #include <string>
 
 class AudioFile;
@@ -71,6 +72,10 @@ enum class AudioError
 
 inline bool operator!(AudioError error) {
     return error == AudioError::OK;
+}
+
+inline std::ostream& operator<<(std::ostream& os, AudioError error) {
+    return os << static_cast<int>(error);
 }
 
 #endif
