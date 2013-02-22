@@ -19,6 +19,7 @@
 #ifndef TEST_H_
 #define TEST_H_
 
+#include <cmath>
 #include <functional>
 #include <iostream>
 #include <string>
@@ -28,10 +29,20 @@ void run(std::function<void ()> func, const std::string& message);
 extern int g_total;
 extern int g_passes;
 
+template<class T> bool equal(const T& a, const T& b)
+{
+    return a == b;
+}
+
+template<> inline bool equal<double>(const double& a, const double& b)
+{
+    return std::abs(a - b) < 1e-8;
+}
+
 template<class T> void test(const std::string& message, const T& expected, const T& actual)
 {
     g_total++;
-    if (expected == actual) {
+    if (equal(expected, actual)) {
         g_passes++;
     } else {
         std::cerr << "FAIL: " << message;
