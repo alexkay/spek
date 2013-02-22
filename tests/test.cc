@@ -16,12 +16,10 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <iostream>
-
 #include "test.h"
 
-static int g_passes = 0;
-static int g_total = 0;
+int g_passes = 0;
+int g_total = 0;
 
 int main()
 {
@@ -41,14 +39,4 @@ void run(std::function<void ()> func, const std::string& message)
 {
     std::cerr << message << std::endl;
     func();
-}
-
-void test(const std::string& message, bool condition)
-{
-    g_total++;
-    if (condition) {
-        g_passes++;
-    } else {
-        std::cerr << "FAIL: " << message << std::endl;
-    }
 }

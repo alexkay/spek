@@ -20,14 +20,24 @@
 #define TEST_H_
 
 #include <functional>
+#include <iostream>
 #include <string>
 
 void run(std::function<void ()> func, const std::string& message);
-void test(const std::string& message, bool condition);
+
+extern int g_total;
+extern int g_passes;
 
 template<class T> void test(const std::string& message, const T& expected, const T& actual)
 {
-    test(message, expected == actual);
+    g_total++;
+    if (expected == actual) {
+        g_passes++;
+    } else {
+        std::cerr << "FAIL: " << message;
+        std::cerr << ", expected: " << expected;
+        std::cerr << ", actual: " << actual << std::endl;
+    }
 }
 
 void test_utils();
