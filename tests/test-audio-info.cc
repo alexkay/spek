@@ -35,7 +35,7 @@ struct FileInfo
 static void test_file(const std::string& name, const FileInfo& info)
 {
     Audio audio;
-    auto file = audio.open("samples/" + name);
+    auto file = audio.open(SAMPLES_DIR "/" + name);
     test("error", AudioError::OK, file->get_error());
     test("codec", info.codec_name, file->get_codec_name());
     test("bit rate", info.bit_rate, file->get_bit_rate());

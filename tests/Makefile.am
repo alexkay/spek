@@ -15,6 +15,7 @@ test_SOURCES = \
 AM_CPPFLAGS = \
 	-include config.h \
 	-I$(top_srcdir)/src \
+	-DSAMPLES_DIR=\"$(srcdir)/samples\" \
 	-pthread \
 	$(WX_CPPFLAGS)
 

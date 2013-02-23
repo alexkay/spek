@@ -20,7 +20,8 @@ EXTRA_DIST = \
 	lic/libtiff \
 	lic/regex \
 	lic/wxWindows \
-	lic/zlib
+	lic/zlib \
+	tests/samples
 
 DISTCLEANFILES = \
 	intltool-extract \
