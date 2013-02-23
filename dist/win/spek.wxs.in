@@ -81,7 +81,7 @@
             <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Spek.Audio\shell" Value="open" Type="string" />
             <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Spek.Audio\shell\open\command" Value="&quot;[INSTALLLOCATION]spek.exe&quot; &quot;%1&quot;" Type="string" />
             <!-- Associate with file extensions -->
-            <?foreach ext in "3gp;aac,aif;aifc;aiff;amr;awb;ape;au;dts;flac;gsm;m4a;m4p;mp3;mp4;mp+;mpc;mpp;oga;ogg;ra;ram;snd;wav;wma;wv"?>
+            <?foreach ext in "3gp;aac,aif;aifc;aiff;amr;awb;ape;au;dts;flac;gsm;m4a;m4p;mp3;mp4;mp+;mpc;mpp;oga;ogg;opus;ra;ram;snd;wav;wma;wv"?>
             <RegistryValue Root="HKLM" Key="SOFTWARE\Spek\Capabilities\FileAssociations" Name=".$(var.ext)" Value="Spek.Audio" Type="string" />
             <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\spek.exe\SupportedTypes" Name=".$(var.ext)" Value="" Type="string" />
             <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\.$(var.ext)\OpenWithList\spek.exe" Value="" Type="string" />

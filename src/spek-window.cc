@@ -212,6 +212,7 @@ static const char *audio_extensions[] = {
     "mpp",
     "oga",
     "ogg",
+    "opus",
     "ra",
     "ram",
     "snd",

@@ -2,7 +2,7 @@
 
 Using [MacPorts](http://www.macports.org/) install build dependencies:
 
-    port install autoconf automake clang-3.2 git-core intltool upx yasm.
+    port install autoconf automake gcc47 git-core intltool upx yasm.
 
 Download and build wxWidgets 2.9+, example configure flags:
 
@@ -17,20 +17,27 @@ Copy the wxWidgets m4 macro to the MacPorts tree:
 
     sudo cp $HOME/usr/share/aclocal/wxwin.m4 /opt/local/share/aclocal/
 
+Download and build libopus, example configure flags:
+
+    ./configure --prefix=$HOME/usr --disable-shared
+    make && make install
+
 Download and build FFmpeg, example configure flags:
 
-    ./configure  --prefix=$HOME/usr --enable-gpl --enable-version3 \
+    ./configure --prefix=$HOME/usr --enable-gpl --enable-version3 \
         --enable-runtime-cpudetect --enable-pthreads \
         --disable-shared --disable-debug --disable-doc \
         --disable-nonfree --disable-ffmpeg --disable-ffplay \
         --disable-ffprobe --disable-ffserver --disable-avdevice --disable-swscale \
         --disable-postproc --disable-encoders --disable-muxers \
-        --disable-devices --disable-filters --disable-swresample
+        --disable-devices --disable-filters --disable-swresample \
+        --enable-libopus
     make && make install
 
 Clone and build Spek, example configure flags:
 
-    PKG_CONFIG_PATH=$HOME/usr/lib/pkgconfig ./autogen.sh --with-wx-config=$HOME/usr/bin/wx-config
+    PKG_CONFIG_PATH=$HOME/usr/lib/pkgconfig CXX=/opt/local/bin/g++-mp-4.7
+        ./autogen.sh --with-wx-config=$HOME/usr/bin/wx-config
 
 Bundle Spek:
 
