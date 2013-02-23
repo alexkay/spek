@@ -8,7 +8,7 @@
 PORTNAME=	spek
 PORTVERSION=	0.8.1
 CATEGORIES=	audio
-MASTER_SITES=	http://cloud.github.com/downloads/alexkay/${PORTNAME}/
+MASTER_SITES=	${MASTER_SITE_GOOGLE_CODE}
 
 MAINTAINER=	alexander@kojevnikov.com
 COMMENT=	Acoustic spectrum analyser

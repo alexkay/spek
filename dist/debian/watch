@@ -1,3 +1,3 @@
 version=3
-https://github.com/alexkay/spek/downloads \
+http://code.google.com/p/spek/downloads/list \
   .*/spek-([0-9.]+)\.tar\.xz
