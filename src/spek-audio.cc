@@ -213,7 +213,12 @@ AudioFileImpl::~AudioFileImpl()
         av_freep(&this->buffer);
     }
     if (this->frame) {
+        // TODO: Remove this check after Debian switches to libav 9.
+#if LIBAVCODEC_VERSION_INT >= AV_VERSION_INT(54, 28, 0)
         avcodec_free_frame(&this->frame);
+#else
+        av_freep(&this->frame);
+#endif
     }
     if (this->packet.data) {
         this->packet.data -= this->offset;

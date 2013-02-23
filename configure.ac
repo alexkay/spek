@@ -35,7 +35,7 @@ AM_CONDITIONAL([USE_VALGRIND], [test x$HAVE_VALGRIND = xyes])
 
 AC_CHECK_LIB(m, log10)
 
-PKG_CHECK_MODULES(FFMPEG, [libavformat >= 54.2 libavcodec >= 53.25 libavutil >= 51.18])
+PKG_CHECK_MODULES(FFMPEG, [libavcodec >= 53.25 libavformat >= 53.17 libavutil >= 51.17])
 
 AM_OPTIONS_WXCONFIG
 reqwx=2.8.0
