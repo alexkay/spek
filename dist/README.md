@@ -16,7 +16,7 @@
  * Update the copyright year in the About dialogue along with all the .po files.
  * Update news in README.md.
  * Update the website and debian/control's description with the new features.
- * Update the manpage, don't forget the release date.
+ * Update the manpage, don't forget the release date. Run `make man`.
  * Update sshots if there are user-visible changes.
  * Update INSTALL.md with the new version number and instructions.
  * Update copyright year of touched code.
