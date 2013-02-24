@@ -6,7 +6,10 @@ LANGUAGES="cs da de eo es fr it ja nb nl pl pt_BR ru sv tr uk vi zh_CN zh_TW"
 cd $(dirname $0)/../..
 
 rm -f src/spek
-make || exit 1
+
+PKG_CONFIG_PATH=$INSTALL_PATH/lib/pkgconfig CXX=/opt/local/bin/g++-mp-4.7 \
+    ./autogen.sh --with-wx-config=$INSTALL_PATH/bin/wx-config \
+    && make || exit 1
 strip src/spek
 upx src/spek
 

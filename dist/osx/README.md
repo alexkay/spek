@@ -34,11 +34,6 @@ Download and build FFmpeg, example configure flags:
         --enable-libopus
     make && make install
 
-Clone and build Spek, example configure flags:
-
-    PKG_CONFIG_PATH=$HOME/usr/lib/pkgconfig CXX=/opt/local/bin/g++-mp-4.7
-        ./autogen.sh --with-wx-config=$HOME/usr/bin/wx-config
-
 Bundle Spek:
 
     ./dist/osx/bundle.sh
