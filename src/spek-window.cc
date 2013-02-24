@@ -1,6 +1,6 @@
 /* spek-window.cc
  *
- * Copyright (C) 2010-2012  Alexander Kojevnikov <alexander@kojevnikov.com>
+ * Copyright (C) 2010-2013  Alexander Kojevnikov <alexander@kojevnikov.com>
  *
  * Spek is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -323,6 +323,7 @@ void SpekWindow::on_about(wxCommandEvent&)
     info.AddDeveloper(wxT("Daniel Hams"));
     info.AddDeveloper(wxT("Fabian Deutsch"));
     info.AddDeveloper(wxT("Jonathan Gonzalez V"));
+    info.AddDeveloper(wxT("Simon Ruderich"));
     info.AddDeveloper(wxT("Stefan Kost"));
     info.AddDeveloper(wxT("Thibault North"));
     info.AddArtist(wxT("Olga Vasylevska"));
@@ -333,7 +334,7 @@ void SpekWindow::on_about(wxCommandEvent&)
     }
     info.SetName(wxT("Spek"));
     info.SetVersion(wxT(PACKAGE_VERSION));
-    info.SetCopyright(_("Copyright (c) 2010-2012 Alexander Kojevnikov and contributors"));
+    info.SetCopyright(_("Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"));
     info.SetDescription(this->description);
 #ifdef OS_UNIX
     info.SetWebSite(wxT("http://spek-project.org/"), _("Spek Website"));

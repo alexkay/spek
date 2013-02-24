@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Alexander Kojevnikov <alexander@kojevnikov.com>, 2011-2012.
 # theguyofdoom <thom.venividivici@gmail.com>, 2011.
@@ -10,16 +10,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-19 20:05-0800\n"
-"PO-Revision-Date: 2012-09-22 03:03+0000\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
+"POT-Creation-Date: 2013-02-23 20:00-0800\n"
+"PO-Revision-Date: 2013-02-24 04:10+0000\n"
 "Last-Translator: Alexander Kojevnikov <alexander@kojevnikov.com>\n"
-"Language-Team: Dutch (http://www.transifex.com/projects/p/spek/language/"
-"nl/)\n"
-"Language: nl\n"
+"Language-Team: Dutch (http://www.transifex.com/projects/p/spek/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/spek.desktop.in.in.h:1
@@ -38,64 +37,65 @@ msgstr "Spek Spectrumanalyse"
 msgid "View spectrograms of your audio files"
 msgstr "Spectrogrammen van uw geluidsbestanden bekijken"
 
-#: ../src/spek-pipeline.cc:202
+#: ../src/spek-pipeline.cc:201
 #, c-format
 msgid "%d kbps"
 msgstr "%d kbps"
 
-#: ../src/spek-pipeline.cc:207
+#: ../src/spek-pipeline.cc:206
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../src/spek-pipeline.cc:214
+#: ../src/spek-pipeline.cc:213
 #, c-format
 msgid "%d bit"
 msgid_plural "%d bits"
 msgstr[0] "%d bits"
 msgstr[1] "%d bits"
 
-#: ../src/spek-pipeline.cc:222
+#: ../src/spek-pipeline.cc:221
 #, c-format
 msgid "%d channel"
 msgid_plural "%d channels"
 msgstr[0] "%d kanaal"
 msgstr[1] "%d kanalen"
 
-#: ../src/spek-pipeline.cc:239
+#: ../src/spek-pipeline.cc:238
 msgid "Cannot open input file"
 msgstr "Kan bronbestand niet openen"
 
-#: ../src/spek-pipeline.cc:242
+#: ../src/spek-pipeline.cc:241
 msgid "Cannot find stream info"
 msgstr "Kan informatie over stream niet vinden"
 
-#: ../src/spek-pipeline.cc:245
+#: ../src/spek-pipeline.cc:244
 msgid "The file contains no audio streams"
 msgstr "Het bestand bevat geen audiostreams"
 
-#: ../src/spek-pipeline.cc:248
+#: ../src/spek-pipeline.cc:247
 msgid "Cannot find decoder"
 msgstr "Kan decoder niet vinden"
 
-#: ../src/spek-pipeline.cc:251
+#: ../src/spek-pipeline.cc:250
 msgid "Unknown duration"
 msgstr ""
 
-#: ../src/spek-pipeline.cc:254
+#: ../src/spek-pipeline.cc:253
 msgid "No audio channels"
 msgstr "Geen audiokanalen"
 
-#: ../src/spek-pipeline.cc:257
+#: ../src/spek-pipeline.cc:256
 msgid "Cannot open decoder"
 msgstr "Kan decoder niet openen"
 
-#: ../src/spek-pipeline.cc:260
+#: ../src/spek-pipeline.cc:259
 msgid "Unsupported sample format"
 msgstr "Sample-formaat niet ondersteund"
 
-#. TRANSLATORS: first %s is the error message, second %s is stream description.
-#: ../src/spek-pipeline.cc:272
+#. TRANSLATORS: first %s is the error message, second %s is stream
+#. description.
+#: ../src/spek-pipeline.cc:271
 #, c-format
 msgid "%s: %s"
 msgstr "%s: %s"
@@ -171,44 +171,41 @@ msgstr ""
 msgid "Spek - %s"
 msgstr "Spek – %s"
 
-#: ../src/spek-window.cc:231
+#: ../src/spek-window.cc:232
 msgid "All files"
 msgstr "Alle bestanden"
 
-#: ../src/spek-window.cc:233
+#: ../src/spek-window.cc:234
 msgid "Audio files"
 msgstr "Audiobestanden"
 
-#: ../src/spek-window.cc:247
+#: ../src/spek-window.cc:248
 msgid "Open File"
 msgstr "Bestand openen"
 
-#: ../src/spek-window.cc:269
+#: ../src/spek-window.cc:270
 msgid "PNG images"
 msgstr "PNG-afbeeldingen"
 
-#: ../src/spek-window.cc:275
+#: ../src/spek-window.cc:276
 msgid "Save Spectrogram"
 msgstr "Spectrogram opslaan"
 
 #. Suggested name is <file_name>.png
-#: ../src/spek-window.cc:283
+#: ../src/spek-window.cc:284
 msgid "Untitled"
 msgstr "Naamloos"
 
 #. TRANSLATORS: Add your name here
-#: ../src/spek-window.cc:329
+#: ../src/spek-window.cc:331
 msgid "translator-credits"
-msgstr ""
-"DutchDude (TheGuyOfDoom)\n"
-"Wouter Bolsterlee\n"
-"Alexander Kojevnikov"
+msgstr "DutchDude (TheGuyOfDoom)\nWouter Bolsterlee\nAlexander Kojevnikov"
 
-#: ../src/spek-window.cc:335
-msgid "Copyright (c) 2010-2012 Alexander Kojevnikov and contributors"
+#: ../src/spek-window.cc:337
+msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
 msgstr ""
 
-#: ../src/spek-window.cc:338
+#: ../src/spek-window.cc:340
 msgid "Spek Website"
 msgstr "Spek-website"
 

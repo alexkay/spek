@@ -31,11 +31,11 @@ Spek requires OS X 10.5+ and an Intel-based Mac.
 ### Building from the tarball
 
 To build Spek, download the source code tarball then run these commands from
-terminal, adjusting the path to wx-config as necessary:
+terminal:
 
-    tar -xJvf spek-0.8.1.tar.xz
-    cd spek-0.8.1
-    ./configure --with-wx-config=/path/to/wx-config
+    tar -xvf spek-0.8.2.tar.xz
+    cd spek-0.8.2
+    ./configure
     make
 
 To build you will need wxWidgets and FFmpeg packages. On Debian/Ubuntu you also
@@ -54,5 +54,5 @@ Or install it with:
 
     git clone git://github.com/alexkay/spek.git
     cd spek
-    /autogen.sh --with-wx-config=/path/to/wx-config
+    /autogen.sh
     make

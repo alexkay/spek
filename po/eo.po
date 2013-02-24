@@ -1,23 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Alexander Kojevnikov <alexander@kojevnikov.com>, 2012.
 # Ryan Smith <rnsmith2@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-19 20:05-0800\n"
-"PO-Revision-Date: 2012-09-22 02:58+0000\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
+"POT-Creation-Date: 2013-02-23 20:00-0800\n"
+"PO-Revision-Date: 2013-02-24 04:10+0000\n"
 "Last-Translator: Alexander Kojevnikov <alexander@kojevnikov.com>\n"
-"Language-Team: Esperanto (http://www.transifex.com/projects/p/spek/language/"
-"eo/)\n"
-"Language: eo\n"
+"Language-Team: Esperanto (http://www.transifex.com/projects/p/spek/language/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: eo\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/spek.desktop.in.in.h:1
@@ -36,64 +35,65 @@ msgstr "Spek Spektro Analizilo"
 msgid "View spectrograms of your audio files"
 msgstr "Rigardi spektrogramojn de via sondosieroj"
 
-#: ../src/spek-pipeline.cc:202
+#: ../src/spek-pipeline.cc:201
 #, c-format
 msgid "%d kbps"
 msgstr "%d kbps"
 
-#: ../src/spek-pipeline.cc:207
+#: ../src/spek-pipeline.cc:206
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../src/spek-pipeline.cc:214
+#: ../src/spek-pipeline.cc:213
 #, c-format
 msgid "%d bit"
 msgid_plural "%d bits"
 msgstr[0] "%d bito"
 msgstr[1] "%d bitoj"
 
-#: ../src/spek-pipeline.cc:222
+#: ../src/spek-pipeline.cc:221
 #, c-format
 msgid "%d channel"
 msgid_plural "%d channels"
 msgstr[0] "%d sonkanalo"
 msgstr[1] "%d sonkanaloj"
 
-#: ../src/spek-pipeline.cc:239
+#: ../src/spek-pipeline.cc:238
 msgid "Cannot open input file"
 msgstr "Ne eblas malfermi la enigan dosieron"
 
-#: ../src/spek-pipeline.cc:242
+#: ../src/spek-pipeline.cc:241
 msgid "Cannot find stream info"
 msgstr "Ne eblas trovi la informon de la fluo"
 
-#: ../src/spek-pipeline.cc:245
+#: ../src/spek-pipeline.cc:244
 msgid "The file contains no audio streams"
 msgstr "Doserio ne enhavas sonfluojn"
 
-#: ../src/spek-pipeline.cc:248
+#: ../src/spek-pipeline.cc:247
 msgid "Cannot find decoder"
 msgstr "Ne eblas trovi malkodilon"
 
-#: ../src/spek-pipeline.cc:251
+#: ../src/spek-pipeline.cc:250
 msgid "Unknown duration"
 msgstr "Nekonata daŭro"
 
-#: ../src/spek-pipeline.cc:254
+#: ../src/spek-pipeline.cc:253
 msgid "No audio channels"
 msgstr "Ne sonkanaloj"
 
-#: ../src/spek-pipeline.cc:257
+#: ../src/spek-pipeline.cc:256
 msgid "Cannot open decoder"
 msgstr "Ne eblas malfermi malkodilon"
 
-#: ../src/spek-pipeline.cc:260
+#: ../src/spek-pipeline.cc:259
 msgid "Unsupported sample format"
 msgstr "Nesubtenata sonpecformo"
 
-#. TRANSLATORS: first %s is the error message, second %s is stream description.
-#: ../src/spek-pipeline.cc:272
+#. TRANSLATORS: first %s is the error message, second %s is stream
+#. description.
+#: ../src/spek-pipeline.cc:271
 #, c-format
 msgid "%s: %s"
 msgstr "%s: %s"
@@ -169,41 +169,41 @@ msgstr "Nova versio de Spek estas disponebla, klaku por elŝuti."
 msgid "Spek - %s"
 msgstr "Spek - %s"
 
-#: ../src/spek-window.cc:231
+#: ../src/spek-window.cc:232
 msgid "All files"
 msgstr "Ĉiuj dosieroj"
 
-#: ../src/spek-window.cc:233
+#: ../src/spek-window.cc:234
 msgid "Audio files"
 msgstr "Sondosieroj"
 
-#: ../src/spek-window.cc:247
+#: ../src/spek-window.cc:248
 msgid "Open File"
 msgstr "Malfermi dosieron"
 
-#: ../src/spek-window.cc:269
+#: ../src/spek-window.cc:270
 msgid "PNG images"
 msgstr "PNG bildoj"
 
-#: ../src/spek-window.cc:275
+#: ../src/spek-window.cc:276
 msgid "Save Spectrogram"
 msgstr "Konservi spektron"
 
 #. Suggested name is <file_name>.png
-#: ../src/spek-window.cc:283
+#: ../src/spek-window.cc:284
 msgid "Untitled"
 msgstr "Sentitola"
 
 #. TRANSLATORS: Add your name here
-#: ../src/spek-window.cc:329
+#: ../src/spek-window.cc:331
 msgid "translator-credits"
 msgstr "Ryan Smith"
 
-#: ../src/spek-window.cc:335
-msgid "Copyright (c) 2010-2012 Alexander Kojevnikov and contributors"
-msgstr "Kopirajto  (c) 2010-2012 Alexander Kojevnikov kaj kontribuistoj."
+#: ../src/spek-window.cc:337
+msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
+msgstr "Kopirajto  (c) 2010-2013 Alexander Kojevnikov kaj kontribuistoj."
 
-#: ../src/spek-window.cc:338
+#: ../src/spek-window.cc:340
 msgid "Spek Website"
 msgstr "Spek Retejo"
 

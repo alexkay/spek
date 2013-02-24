@@ -7,11 +7,11 @@ Spek is available on *BSD, GNU/Linux, Windows and Mac OS X.
 
 Find out more about Spek on its website: <http://spek-project.org/>
 
-## Spek 0.8.1 - Released 2012-09-27
+## Spek 0.8.2 - Released 2013-02-24
 
 ### New Features And Enhancements
 
-Spek 0.8.1 is part of beta 0.x releases, leading up to a stable 1.0 release
+Spek 0.8.2 is part of beta 0.x releases, leading up to a stable 1.0 release
 (hopefully) later this year. The roadmap is available on
 [GitHub](https://github.com/alexkay/spek/issues/milestones).
 
@@ -20,7 +20,8 @@ New features since 0.7:
  * Adjustable spectral density range (#4).
  * Switched from GTK+ to wxWidgets for better Windows and OS X integration.
  * Single .exe version for Windows.
- * Added translations in 8 more languages (totalling 16).
+ * Added translations in 11 more languages (totalling 19).
+ * Open .opus audio files (#39).
 
 Enhancements:
 
@@ -31,6 +32,9 @@ Enhancements:
  * Installer options for app shortcuts on Windows (#1).
  * Associate with audio/video files on OS X (#2).
  * Online manual (#24).
+ * Use non-deprecated FFmpeg decoding API.
+ * Moved downloads to Google Code since GitHub no longer offers downloads (#38).
+ * Compatibility with retina-based Macs (#32).
 
 Bugfixes:
 
@@ -41,18 +45,20 @@ Bugfixes:
  * Proper handling of Unicode file names under Windows (upstream fix).
  * Don't lock the input file on Windows (#26).
  * Fixed mapping of the spectral density into the palette.
+ * Fix magnitude calculation for the first and the last frequency band.
+ * Support planar sample formats (#44).
 
 ### Sources / Packages
 
-Spek 0.8.1 tarball:
+Spek 0.8.2 tarball:
 
- * <https://spek.googlecode.com/files/spek-0.8.1.tar.xz>
+ * <https://spek.googlecode.com/files/spek-0.8.2.tar.xz>
 
 Windows and Mac OS X binaries:
 
- * <https://spek.googlecode.com/files/spek-0.8.1.msi>
- * <https://spek.googlecode.com/files/spek-0.8.1.zip>
- * <https://spek.googlecode.com/files/spek-0.8.1.dmg>
+ * <https://spek.googlecode.com/files/spek-0.8.2.msi>
+ * <https://spek.googlecode.com/files/spek-0.8.2.zip>
+ * <https://spek.googlecode.com/files/spek-0.8.2.dmg>
 
 Unix packages:
 

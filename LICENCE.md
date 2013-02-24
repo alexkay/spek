@@ -15,6 +15,7 @@ Contributors:
 * Daniel Hams
 * Fabian Deutsch
 * Jonathan Gonzalez V
+* Simon Ruderich
 * Stefan Kost
 * Thibault North
 
@@ -31,6 +32,8 @@ Translators:
 * Ryan Smith
 * Tiago Rinaldi
 * Wouter Bolsterlee
+* Many more (let me know if you translated Spek and want your full name
+  listed here)
 
 Artist:
 

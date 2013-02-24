@@ -11,11 +11,12 @@
    * src/spek-preferences-dialog.cc
    * dist/win/bundle.sh
    * dist/osx/bundle.sh
- * Update AUTHORS using `git log X.Y.Z. --pretty=format:"%an <%ae>" | sort -u`.
- * Sync AUTHORS with the About dialogue.
+ * Update authors using `git log X.Y.Z.. --pretty=format:"%an <%ae>" | sort -u`.
+ * Sync the list of authors with the About dialogue.
+ * Update the copyright year in the About dialogue along with all the .po files.
  * Update news in README.md.
  * Update the website and debian/control's description with the new features.
- * Update the manpage if necessary.
+ * Update the manpage, don't forget the release date.
  * Update sshots if there are user-visible changes.
  * Update INSTALL.md with the new version number and instructions.
  * Update copyright year of touched code.
@@ -26,8 +27,8 @@
  * Write the blog post, link from web/index.html, don't publish yet.
  * Upload the tarball + OSX and WIN binaries.
  * `git tag -a X.Y.Z`.
- * Upload the website using `gmake upload`.
+ * Upload the website using `make upload`.
  * Publish the blog post.
  * Send an announcement to the LAA list.
  * Update the forum thread on what.
- * Update FreeBSD and Debian ports, see README files in dist/*.
+ * Update FreeBSD and Debian ports.

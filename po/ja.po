@@ -1,23 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Alexander Kojevnikov <alexander@kojevnikov.com>, 2012.
 #   <mathew1800@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-19 20:05-0800\n"
-"PO-Revision-Date: 2012-09-22 02:59+0000\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
+"POT-Creation-Date: 2013-02-23 20:00-0800\n"
+"PO-Revision-Date: 2013-02-24 04:17+0000\n"
 "Last-Translator: Alexander Kojevnikov <alexander@kojevnikov.com>\n"
-"Language-Team: Japanese (http://www.transifex.com/projects/p/spek/language/"
-"ja/)\n"
-"Language: ja\n"
+"Language-Team: Japanese (http://www.transifex.com/projects/p/spek/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../data/spek.desktop.in.in.h:1
@@ -36,62 +35,63 @@ msgstr "Spek スペクトラムアナライザ"
 msgid "View spectrograms of your audio files"
 msgstr "オーディオファイルのスペクトログラムを表示します。"
 
-#: ../src/spek-pipeline.cc:202
+#: ../src/spek-pipeline.cc:201
 #, c-format
 msgid "%d kbps"
 msgstr "%d kbps"
 
-#: ../src/spek-pipeline.cc:207
+#: ../src/spek-pipeline.cc:206
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../src/spek-pipeline.cc:214
+#: ../src/spek-pipeline.cc:213
 #, c-format
 msgid "%d bit"
 msgid_plural "%d bits"
 msgstr[0] "%d ビット"
 
-#: ../src/spek-pipeline.cc:222
+#: ../src/spek-pipeline.cc:221
 #, c-format
 msgid "%d channel"
 msgid_plural "%d channels"
 msgstr[0] "%d チャンネル"
 
-#: ../src/spek-pipeline.cc:239
+#: ../src/spek-pipeline.cc:238
 msgid "Cannot open input file"
 msgstr "入力ファイルを開くことができません。"
 
-#: ../src/spek-pipeline.cc:242
+#: ../src/spek-pipeline.cc:241
 msgid "Cannot find stream info"
 msgstr "ストリームの情報を見つけることができません。"
 
-#: ../src/spek-pipeline.cc:245
+#: ../src/spek-pipeline.cc:244
 msgid "The file contains no audio streams"
 msgstr "ファイルは、オーディオストリームが含まれていません。"
 
-#: ../src/spek-pipeline.cc:248
+#: ../src/spek-pipeline.cc:247
 msgid "Cannot find decoder"
 msgstr "デコーダを見つけることができません。"
 
-#: ../src/spek-pipeline.cc:251
+#: ../src/spek-pipeline.cc:250
 msgid "Unknown duration"
 msgstr "不明期間"
 
-#: ../src/spek-pipeline.cc:254
+#: ../src/spek-pipeline.cc:253
 msgid "No audio channels"
 msgstr "オーディオチャンネルはありません。"
 
-#: ../src/spek-pipeline.cc:257
+#: ../src/spek-pipeline.cc:256
 msgid "Cannot open decoder"
 msgstr "デコーダを開くことができません。"
 
-#: ../src/spek-pipeline.cc:260
+#: ../src/spek-pipeline.cc:259
 msgid "Unsupported sample format"
 msgstr "サポートされていないサンプル形式。"
 
-#. TRANSLATORS: first %s is the error message, second %s is stream description.
-#: ../src/spek-pipeline.cc:272
+#. TRANSLATORS: first %s is the error message, second %s is stream
+#. description.
+#: ../src/spek-pipeline.cc:271
 #, c-format
 msgid "%s: %s"
 msgstr "%s: %s"
@@ -167,41 +167,41 @@ msgstr "Spekの新しいバージョンが利用可能です。クリックし�
 msgid "Spek - %s"
 msgstr "Spek - %s"
 
-#: ../src/spek-window.cc:231
+#: ../src/spek-window.cc:232
 msgid "All files"
 msgstr "すべてのファイル"
 
-#: ../src/spek-window.cc:233
+#: ../src/spek-window.cc:234
 msgid "Audio files"
 msgstr "オーディオファイル"
 
-#: ../src/spek-window.cc:247
+#: ../src/spek-window.cc:248
 msgid "Open File"
 msgstr "ファイル開く"
 
-#: ../src/spek-window.cc:269
+#: ../src/spek-window.cc:270
 msgid "PNG images"
 msgstr "PNG画像"
 
-#: ../src/spek-window.cc:275
+#: ../src/spek-window.cc:276
 msgid "Save Spectrogram"
 msgstr "スペクトログラム保存"
 
 #. Suggested name is <file_name>.png
-#: ../src/spek-window.cc:283
+#: ../src/spek-window.cc:284
 msgid "Untitled"
 msgstr "Untitled"
 
 #. TRANSLATORS: Add your name here
-#: ../src/spek-window.cc:329
+#: ../src/spek-window.cc:331
 msgid "translator-credits"
 msgstr "Lioncash"
 
-#: ../src/spek-window.cc:335
-msgid "Copyright (c) 2010-2012 Alexander Kojevnikov and contributors"
-msgstr "著作権 (c) 2010-2012 Alexander Kojevnikovと貢献者"
+#: ../src/spek-window.cc:337
+msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
+msgstr "著作権 (c) 2010-2013 Alexander Kojevnikovと貢献者"
 
-#: ../src/spek-window.cc:338
+#: ../src/spek-window.cc:340
 msgid "Spek Website"
 msgstr "Spekのウェブサイト"
 
