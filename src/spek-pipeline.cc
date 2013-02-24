@@ -24,6 +24,7 @@
  */
 
 #define __STDC_LIMIT_MACROS
+#include <wx/intl.h>
 
 #include <assert.h>
 #include <math.h>
@@ -33,8 +34,6 @@
 #include <string.h>
 
 #include <vector>
-
-#include <wx/intl.h>
 
 #include "spek-audio.h"
 #include "spek-fft.h"

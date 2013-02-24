@@ -24,7 +24,7 @@ rm -f dist/win/spek.res
 mkdir -p src/dist/win && cp dist/win/spek.res src/dist/win/
 
 # Compile and strip spek.exe
-LDFLAGS="dist/win/spek.res" ./configure \
+LDFLAGS="dist/win/spek.res" ./autogen.sh \
     --host="$HOST" \
     --with-wx-config="$WX_CONFIG" \
     --prefix=${PWD}/dist/win/build && \
