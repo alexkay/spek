@@ -5,15 +5,17 @@
 # Check README.md in this directory for instructions.
 
 # Adjust these variables if necessary.
+MXE=$(realpath $(dirname $0)/../../../mxe/usr)
+MAKE=gmake
+UPX=upx
+ZIP=zip
+
 HOST=i686-pc-mingw32
 LANGUAGES="cs da de eo es fr it ja nb nl pl pt_BR ru sv tr uk vi zh_CN zh_TW"
-MAKE=gmake
-MXE=$(realpath $(dirname $0)/../../../mxe/usr/i686-pc-mingw32)
-STRIP=$(which i686-pc-mingw32-strip)
-UPX=$(which upx)
-WINDRES=$(which i686-pc-mingw32-windres)
-WX_CONFIG="$MXE"/bin/wx-config
-ZIP=$(which zip)
+PATH="$MXE"/bin:$PATH
+STRIP=i686-pc-mingw32-strip
+WINDRES=i686-pc-mingw32-windres
+WX_CONFIG="$MXE"/i686-pc-mingw32/bin/wx-config
 
 cd $(dirname $0)/../..
 rm -fr dist/win/build && mkdir dist/win/build
@@ -44,7 +46,7 @@ cp ../../lic/* Spek/lic/
 for lang in $LANGUAGES; do
     mkdir -p Spek/"$lang"
     cp build/lib/locale/"$lang"/LC_MESSAGES/spek.mo Spek/"$lang"/
-    cp "$MXE"/share/locale/"$lang"/LC_MESSAGES/wxstd.mo Spek/"$lang"/
+    cp "$MXE"/i686-pc-mingw32/share/locale/"$lang"/LC_MESSAGES/wxstd.mo Spek/"$lang"/
 done
 rm -fr build
 
