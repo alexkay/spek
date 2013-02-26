@@ -14,12 +14,15 @@ share/locale/es/LC_MESSAGES/spek.mo
 share/locale/fr/LC_MESSAGES/spek.mo
 share/locale/it/LC_MESSAGES/spek.mo
 share/locale/ja/LC_MESSAGES/spek.mo
+share/locale/nb/LC_MESSAGES/spek.mo
 share/locale/nl/LC_MESSAGES/spek.mo
 share/locale/pl/LC_MESSAGES/spek.mo
 share/locale/pt_BR/LC_MESSAGES/spek.mo
 share/locale/ru/LC_MESSAGES/spek.mo
 share/locale/sv/LC_MESSAGES/spek.mo
+share/locale/tr/LC_MESSAGES/spek.mo
 share/locale/uk/LC_MESSAGES/spek.mo
+share/locale/vi/LC_MESSAGES/spek.mo
 share/locale/zh_CN/LC_MESSAGES/spek.mo
 share/locale/zh_TW/LC_MESSAGES/spek.mo
 @dirrmtry share/applications
