@@ -141,6 +141,9 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name)
             // TODO: old comment, verify
             bits_per_sample = codec_context->bits_per_coded_sample;
         }
+        if (bits_per_sample) {
+            bit_rate = 0;
+        }
         channels = codec_context->channels;
 
         if (stream->duration != AV_NOPTS_VALUE) {
