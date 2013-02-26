@@ -27,10 +27,10 @@ Download and build FFmpeg, example configure flags:
     ./configure --prefix=$HOME/usr --enable-gpl --enable-version3 \
         --enable-runtime-cpudetect --enable-pthreads \
         --disable-shared --disable-debug --disable-doc \
-        --disable-nonfree --disable-ffmpeg --disable-ffplay \
-        --disable-ffprobe --disable-ffserver --disable-avdevice --disable-swscale \
-        --disable-postproc --disable-encoders --disable-muxers \
-        --disable-devices --disable-filters --disable-swresample \
+        --disable-nonfree --disable-programs --disable-avdevice \
+        --disable-swresample --disable-swscale --disable-postproc \
+        --disable-avfilter --disable-encoders --disable-muxers \
+        --disable-devices --disable-filters \
         --enable-libopus
     make && make install
 
