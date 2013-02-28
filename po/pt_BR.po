@@ -4,14 +4,15 @@
 # 
 # Translators:
 # Alexander Kojevnikov <alexander@kojevnikov.com>, 2012.
+#  <trinaldi@gmail.com>, 2013.
 #   <trinaldi@gmail.com>, 2011-2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
 "POT-Creation-Date: 2013-02-23 20:00-0800\n"
-"PO-Revision-Date: 2013-02-24 04:10+0000\n"
-"Last-Translator: Alexander Kojevnikov <alexander@kojevnikov.com>\n"
+"PO-Revision-Date: 2013-02-28 11:16+0000\n"
+"Last-Translator: Tiago Rinaldi <trinaldi@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/spek/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +22,7 @@ msgstr ""
 
 #: ../data/spek.desktop.in.in.h:1
 msgid "Spectrum Analyser"
-msgstr "Analisador de Espectro"
+msgstr "Analisador de Espectro "
 
 #: ../data/spek.desktop.in.in.h:2
 msgid "Spek"
@@ -29,7 +30,7 @@ msgstr "Spek"
 
 #: ../data/spek.desktop.in.in.h:3
 msgid "Spek Spectrum Analyser"
-msgstr "Spek Analisador de Espectro"
+msgstr "Spek - Analisador de Espectro"
 
 #: ../data/spek.desktop.in.in.h:4
 msgid "View spectrograms of your audio files"
@@ -61,11 +62,11 @@ msgstr[1] "%d canais"
 
 #: ../src/spek-pipeline.cc:238
 msgid "Cannot open input file"
-msgstr "Impossível abrir arquivo"
+msgstr "Não foi possível abrir o arquivo"
 
 #: ../src/spek-pipeline.cc:241
 msgid "Cannot find stream info"
-msgstr "Impossível localizar informações da trilha"
+msgstr "Não há informações sobre a trilha"
 
 #: ../src/spek-pipeline.cc:244
 msgid "The file contains no audio streams"
@@ -73,7 +74,7 @@ msgstr "Este arquivo não contêm trilhas de áudio"
 
 #: ../src/spek-pipeline.cc:247
 msgid "Cannot find decoder"
-msgstr "Impossível encontrar o decodificador"
+msgstr "Não foi possível encontrar o decodificador"
 
 #: ../src/spek-pipeline.cc:250
 msgid "Unknown duration"
@@ -85,7 +86,7 @@ msgstr "Não existem canais de áudio"
 
 #: ../src/spek-pipeline.cc:256
 msgid "Cannot open decoder"
-msgstr "Impossível abrir o decodificador"
+msgstr "Não foi possível abrir o decodificador"
 
 #: ../src/spek-pipeline.cc:259
 msgid "Unsupported sample format"
