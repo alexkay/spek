@@ -49,9 +49,7 @@ public:
     virtual int get_bits_per_sample() const = 0;
     virtual int get_channels() const = 0;
     virtual double get_duration() const = 0;
-    virtual int get_width() const = 0;
-    virtual bool get_fp() const = 0;
-    virtual const uint8_t *get_buffer() const = 0;
+    virtual const float *get_buffer() const = 0;
     virtual int64_t get_frames_per_interval() const = 0;
     virtual int64_t get_error_per_interval() const = 0;
     virtual int64_t get_error_base() const = 0;

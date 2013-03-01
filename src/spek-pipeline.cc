@@ -83,7 +83,6 @@ struct spek_pipeline
 static void * reader_func(void *);
 static void * worker_func(void *);
 static void reader_sync(struct spek_pipeline *p, int pos);
-static float average_input(const struct spek_pipeline *p, const void *buffer);
 
 struct spek_pipeline * spek_pipeline_open(
     std::unique_ptr<AudioFile> file, int bands, int samples, spek_pipeline_cb cb, void *cb_data)
@@ -295,16 +294,20 @@ static void * reader_func(void *pp)
     }
 
     int pos = 0, prev_pos = 0;
-    int block_size = p->file->get_width() * p->file->get_channels();
-    int size;
-    while ((size = p->file->read()) > 0) {
+    int channels = p->file->get_channels();
+    int len;
+    while ((len = p->file->read()) > 0) {
         if (p->quit) break;
 
-        const uint8_t *buffer = p->file->get_buffer();
-        while (size >= block_size) {
-            p->input[pos] = average_input(p, buffer);
-            buffer += block_size;
-            size -= block_size;
+        const float *buffer = p->file->get_buffer();
+        while (len >= channels) {
+            float val = 0.0f;
+            for (int i = 0; i < channels; i++) {
+                val += buffer[i];
+            }
+            p->input[pos] = val / channels;
+            buffer += channels;
+            len -= channels;
             pos = (pos + 1) % p->input_size;
 
             // Wake up the worker if we have enough data.
@@ -312,7 +315,7 @@ static void * reader_func(void *pp)
                 reader_sync(p, prev_pos = pos);
             }
         }
-        assert(size == 0);
+        assert(len == 0);
     }
 
     if (pos != prev_pos) {
@@ -430,38 +433,4 @@ static void * worker_func(void *pp)
             }
         }
     }
-}
-
-static float average_input(const struct spek_pipeline *p, const void *buffer)
-{
-    int channels = p->file->get_channels();
-    float res = 0.0f;
-    if (p->file->get_fp()) {
-        if (p->file->get_width() == 4) {
-            float *b = (float*)buffer;
-            for (int i = 0; i < channels; i++) {
-                res += b[i];
-            }
-        } else {
-            assert(p->file->get_width() == 8);
-            double *b = (double*)buffer;
-            for (int i = 0; i < channels; i++) {
-                res += (float) b[i];
-            }
-        }
-    } else {
-        if (p->file->get_width() == 2) {
-            int16_t *b = (int16_t*)buffer;
-            for (int i = 0; i < channels; i++) {
-                res += b[i] / (float) INT16_MAX;
-            }
-        } else {
-            assert (p->file->get_width() == 4);
-            int32_t *b = (int32_t*)buffer;
-            for (int i = 0; i < channels; i++) {
-                res += b[i] / (float) INT32_MAX;
-            }
-        }
-    }
-    return res / channels;
 }

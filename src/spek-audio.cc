@@ -31,7 +31,7 @@ public:
     AudioFileImpl(
         AudioError error, AVFormatContext *format_context, int audio_stream,
         const std::string& codec_name, int bit_rate, int sample_rate, int bits_per_sample,
-        int channels, double duration, bool is_planar, int width, bool fp
+        int channels, double duration
     );
     ~AudioFileImpl() override;
     void start(int samples) override;
@@ -44,9 +44,7 @@ public:
     int get_bits_per_sample() const override { return this->bits_per_sample; }
     int get_channels() const override { return this->channels; }
     double get_duration() const override { return this->duration; }
-    int get_width() const override { return this->width; }
-    bool get_fp() const override { return this->fp; }
-    const uint8_t *get_buffer() const override { return this->buffer; }
+    const float *get_buffer() const override { return this->buffer; }
     int64_t get_frames_per_interval() const override { return this->frames_per_interval; }
     int64_t get_error_per_interval() const override { return this->error_per_interval; }
     int64_t get_error_base() const override { return this->error_base; }
@@ -61,15 +59,12 @@ private:
     int bits_per_sample;
     int channels;
     double duration;
-    bool is_planar;
-    int width;
-    bool fp;
 
     AVPacket packet;
     int offset;
     AVFrame *frame;
-    int buffer_size;
-    uint8_t *buffer;
+    int buffer_len;
+    float *buffer;
     // TODO: these guys don't belong here, move them somewhere else when revamping the pipeline
     int64_t frames_per_interval;
     int64_t error_per_interval;
@@ -163,20 +158,12 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name)
         error = AudioError::CANNOT_OPEN_DECODER;
     }
 
-    bool is_planar = false;
-    int width = 0;
-    bool fp = false;
     if (!error) {
-        is_planar = av_sample_fmt_is_planar(codec_context->sample_fmt);
-        width = av_get_bytes_per_sample(codec_context->sample_fmt);
         AVSampleFormat fmt = codec_context->sample_fmt;
-        if (fmt == AV_SAMPLE_FMT_S16 || fmt == AV_SAMPLE_FMT_S16P ||
-            fmt == AV_SAMPLE_FMT_S32 || fmt == AV_SAMPLE_FMT_S32P) {
-            fp = false;
-        } else if (fmt == AV_SAMPLE_FMT_FLT || fmt == AV_SAMPLE_FMT_FLTP ||
-            fmt == AV_SAMPLE_FMT_DBL || fmt == AV_SAMPLE_FMT_DBLP ) {
-            fp = true;
-        } else {
+        if (fmt != AV_SAMPLE_FMT_S16 && fmt != AV_SAMPLE_FMT_S16P &&
+            fmt != AV_SAMPLE_FMT_S32 && fmt != AV_SAMPLE_FMT_S32P &&
+            fmt != AV_SAMPLE_FMT_FLT && fmt != AV_SAMPLE_FMT_FLTP &&
+            fmt != AV_SAMPLE_FMT_DBL && fmt != AV_SAMPLE_FMT_DBLP ) {
             error = AudioError::BAD_SAMPLE_FORMAT;
         }
     }
@@ -184,26 +171,26 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name)
     return std::unique_ptr<AudioFile>(new AudioFileImpl(
         error, format_context, audio_stream,
         codec_name, bit_rate, sample_rate, bits_per_sample,
-        channels, duration, is_planar, width, fp
+        channels, duration
     ));
 }
 
 AudioFileImpl::AudioFileImpl(
     AudioError error, AVFormatContext *format_context, int audio_stream,
     const std::string& codec_name, int bit_rate, int sample_rate, int bits_per_sample,
-    int channels, double duration, bool is_planar, int width, bool fp
+    int channels, double duration
 ) :
     error(error), format_context(format_context), audio_stream(audio_stream),
     codec_name(codec_name), bit_rate(bit_rate),
     sample_rate(sample_rate), bits_per_sample(bits_per_sample),
-    channels(channels), duration(duration), is_planar(is_planar), width(width), fp(fp)
+    channels(channels), duration(duration)
 {
     av_init_packet(&this->packet);
     this->packet.data = nullptr;
     this->packet.size = 0;
     this->offset = 0;
     this->frame = avcodec_alloc_frame();
-    this->buffer_size = 0;
+    this->buffer_len = 0;
     this->buffer = nullptr;
     this->frames_per_interval = 0;
     this->error_per_interval = 0;
@@ -276,27 +263,56 @@ int AudioFileImpl::read()
             // We have data, return it and come back for more later.
             int samples = this->frame->nb_samples;
             int channels = this->channels;
-            int width = this->width;
-            int buffer_size = samples * channels * width;
-            if (buffer_size > this->buffer_size) {
-                this->buffer = (uint8_t*)av_realloc(this->buffer, buffer_size);
-                this->buffer_size = buffer_size;
+            int buffer_len = samples * channels;
+            if (buffer_len > this->buffer_len) {
+                this->buffer = static_cast<float*>(
+                    av_realloc(this->buffer, buffer_len * sizeof(float))
+                );
+                this->buffer_len = buffer_len;
             }
-            if (this->is_planar) {
+
+            AVSampleFormat format = static_cast<AVSampleFormat>(this->frame->format);
+            int is_planar = av_sample_fmt_is_planar(format);
+            int i = 0;
+            for (int sample = 0; sample < samples; ++sample) {
                 for (int channel = 0; channel < channels; ++channel) {
-                    uint8_t *buffer = this->buffer + channel * width;
-                    uint8_t *data = this->frame->data[channel];
-                    for (int sample = 0; sample < samples; ++sample) {
-                        for (int i = 0; i < width; ++i) {
-                            *buffer++ = *data++;
-                        }
-                        buffer += (channels - 1) * width;
+                    uint8_t *data;
+                    int offset;
+                    if (is_planar) {
+                        data = this->frame->data[channel];
+                        offset = sample;
+                    } else {
+                        data = this->frame->data[0];
+                        offset = i;
                     }
+                    float value;
+                    switch (format) {
+                    case AV_SAMPLE_FMT_S16:
+                    case AV_SAMPLE_FMT_S16P:
+                        value = reinterpret_cast<int16_t*>(data)[offset]
+                            / static_cast<float>(INT16_MAX);
+                        break;
+                    case AV_SAMPLE_FMT_S32:
+                    case AV_SAMPLE_FMT_S32P:
+                        value = reinterpret_cast<int32_t*>(data)[offset]
+                            / static_cast<float>(INT32_MAX);
+                        break;
+                    case AV_SAMPLE_FMT_FLT:
+                    case AV_SAMPLE_FMT_FLTP:
+                        value = reinterpret_cast<float*>(data)[offset];
+                        break;
+                    case AV_SAMPLE_FMT_DBL:
+                    case AV_SAMPLE_FMT_DBLP:
+                        value = reinterpret_cast<double*>(data)[offset];
+                        break;
+                    default:
+                        value = 0.0f;
+                        break;
+                    }
+                    this->buffer[i++] = value;
                 }
-            } else {
-                memcpy(this->buffer, this->frame->data[0], buffer_size);
             }
-            return buffer_size;
+            return buffer_len;
         }
         if (this->packet.data) {
             this->packet.data -= this->offset;
