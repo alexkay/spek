@@ -23,7 +23,6 @@
  * (c) 2007-2009 Sebastian Dröge <sebastian.droege@collabora.co.uk>
  */
 
-#define __STDC_LIMIT_MACROS
 #include <wx/intl.h>
 
 #include <assert.h>

@@ -47,10 +47,16 @@ static void test_file(const std::string& name, const FileInfo& info)
 
 void test_audio_info()
 {
+    const double MP3_T = 5.0 * 1152 / 44100; // 5 frames * duration per mp3 frame
+
     std::map<std::string, FileInfo> files = {
-        { "1ch-96000Hz-24bps.flac", {"FLAC (Free Lossless Audio Codec)", 0, 96000, 24, 1, 0.1} },
-        { "2ch-48000Hz-16bps.flac", {"FLAC (Free Lossless Audio Codec)", 0, 48000, 16, 2, 0.1} },
-        { "2ch-44100Hz-16bps.wav", {"PCM signed 16-bit little-endian", 0, 44100, 16, 2, 0.1} },
+        {"1ch-96000Hz-24bps.flac", {"FLAC (Free Lossless Audio Codec)", 0, 96000, 24, 1, 0.1}},
+        {"2ch-48000Hz-16bps.flac", {"FLAC (Free Lossless Audio Codec)", 0, 48000, 16, 2, 0.1}},
+        {"2ch-44100Hz-16bps.wav", {"PCM signed 16-bit little-endian", 0, 44100, 16, 2, 0.1}},
+        {"2ch-44100Hz-128cbr.mp3", {"MP3 (MPEG audio layer 3)", 128000, 44100, 0, 2, MP3_T}},
+        {"2ch-44100Hz-320cbr.mp3", {"MP3 (MPEG audio layer 3)", 320000, 44100, 0, 2, MP3_T}},
+        {"2ch-44100Hz-V0.mp3", {"MP3 (MPEG audio layer 3)", 112000, 44100, 0, 2, MP3_T}},
+        {"2ch-44100Hz-V2.mp3", {"MP3 (MPEG audio layer 3)", 64000, 44100, 0, 2, MP3_T}},
     };
     for (const auto& item : files) {
         run([&] () { test_file(item.first, item.second); }, "audio info: " + item.first);

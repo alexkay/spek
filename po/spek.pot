@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-23 20:00-0800\n"
+"POT-Creation-Date: 2013-03-01 20:01-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,64 +34,64 @@ msgstr ""
 msgid "View spectrograms of your audio files"
 msgstr ""
 
-#: ../src/spek-pipeline.cc:201
+#: ../src/spek-pipeline.cc:199
 #, c-format
 msgid "%d kbps"
 msgstr ""
 
-#: ../src/spek-pipeline.cc:206
+#: ../src/spek-pipeline.cc:204
 #, c-format
 msgid "%d Hz"
 msgstr ""
 
-#: ../src/spek-pipeline.cc:213
+#: ../src/spek-pipeline.cc:211
 #, c-format
 msgid "%d bit"
 msgid_plural "%d bits"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/spek-pipeline.cc:221
+#: ../src/spek-pipeline.cc:219
 #, c-format
 msgid "%d channel"
 msgid_plural "%d channels"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/spek-pipeline.cc:238
+#: ../src/spek-pipeline.cc:236
 msgid "Cannot open input file"
 msgstr ""
 
-#: ../src/spek-pipeline.cc:241
+#: ../src/spek-pipeline.cc:239
 msgid "Cannot find stream info"
 msgstr ""
 
-#: ../src/spek-pipeline.cc:244
+#: ../src/spek-pipeline.cc:242
 msgid "The file contains no audio streams"
 msgstr ""
 
-#: ../src/spek-pipeline.cc:247
+#: ../src/spek-pipeline.cc:245
 msgid "Cannot find decoder"
 msgstr ""
 
-#: ../src/spek-pipeline.cc:250
+#: ../src/spek-pipeline.cc:248
 msgid "Unknown duration"
 msgstr ""
 
-#: ../src/spek-pipeline.cc:253
+#: ../src/spek-pipeline.cc:251
 msgid "No audio channels"
 msgstr ""
 
-#: ../src/spek-pipeline.cc:256
+#: ../src/spek-pipeline.cc:254
 msgid "Cannot open decoder"
 msgstr ""
 
-#: ../src/spek-pipeline.cc:259
+#: ../src/spek-pipeline.cc:257
 msgid "Unsupported sample format"
 msgstr ""
 
 #. TRANSLATORS: first %s is the error message, second %s is stream description.
-#: ../src/spek-pipeline.cc:271
+#: ../src/spek-pipeline.cc:269
 #, c-format
 msgid "%s: %s"
 msgstr ""
