@@ -21,6 +21,7 @@ Contributors:
 
 Translators:
 
+* Aleksandar Todorovic
 * Florent Thoumie
 * Giuseppe D. Barbagallo
 * Huang Shibing
