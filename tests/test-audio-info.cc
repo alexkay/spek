@@ -59,6 +59,9 @@ void test_audio_info()
         {"2ch-44100Hz-V2.mp3", {"MP3 (MPEG audio layer 3)", 64000, 44100, 0, 2, MP3_T}},
     };
     for (const auto& item : files) {
-        run([&] () { test_file(item.first, item.second); }, "audio info: " + item.first);
+        run(
+            "audio info: " + item.first,
+            [&] () { test_file(item.first, item.second); }
+        );
     }
 }

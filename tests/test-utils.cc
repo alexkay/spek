@@ -43,5 +43,5 @@ static void test_vercmp()
 
 void test_utils()
 {
-    run(test_vercmp, "vercmp");
+    run("vercmp", test_vercmp);
 }

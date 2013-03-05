@@ -24,7 +24,7 @@
 #include <iostream>
 #include <string>
 
-void run(std::function<void ()> func, const std::string& message);
+void run(const std::string& message, std::function<void ()> func);
 
 extern int g_total;
 extern int g_passes;

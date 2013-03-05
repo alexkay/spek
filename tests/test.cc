@@ -37,7 +37,7 @@ int main()
     }
 }
 
-void run(std::function<void ()> func, const std::string& message)
+void run(const std::string& message, std::function<void ()> func)
 {
     std::cerr << message << std::endl;
     func();
