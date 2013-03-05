@@ -40,6 +40,7 @@ static const char *available_languages[] =
     "pl", "Polski",
     "pt_BR", "Português brasileiro",
     "ru", "Русский",
+    "sr@latin", "Srpski",
     "sv", "Svenska",
     "tr", "Türkçe",
     "uk", "Українська",
