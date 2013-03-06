@@ -8,6 +8,7 @@ check_PROGRAMS = $(TESTS)
 
 test_SOURCES = \
 	test-audio-info.cc \
+	test-audio-read.cc \
 	test-utils.cc \
 	test.cc \
 	test.h
