@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
-"POT-Creation-Date: 2013-02-23 20:00-0800\n"
-"PO-Revision-Date: 2013-02-28 11:16+0000\n"
+"POT-Creation-Date: 2013-03-01 20:01-0800\n"
+"PO-Revision-Date: 2013-03-06 10:22+0000\n"
 "Last-Translator: Tiago Rinaldi <trinaldi@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/spek/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -34,67 +34,67 @@ msgstr "Spek - Analisador de Espectro"
 
 #: ../data/spek.desktop.in.in.h:4
 msgid "View spectrograms of your audio files"
-msgstr "Analisar os espectrogramas dos arquivos de áudio "
+msgstr "Analisar espectrogramas dos arquivos de áudio "
 
-#: ../src/spek-pipeline.cc:201
+#: ../src/spek-pipeline.cc:199
 #, c-format
 msgid "%d kbps"
 msgstr "%d kbps"
 
-#: ../src/spek-pipeline.cc:206
+#: ../src/spek-pipeline.cc:204
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../src/spek-pipeline.cc:213
+#: ../src/spek-pipeline.cc:211
 #, c-format
 msgid "%d bit"
 msgid_plural "%d bits"
 msgstr[0] "%d bit"
 msgstr[1] "%d bits"
 
-#: ../src/spek-pipeline.cc:221
+#: ../src/spek-pipeline.cc:219
 #, c-format
 msgid "%d channel"
 msgid_plural "%d channels"
 msgstr[0] "%d canal"
 msgstr[1] "%d canais"
 
-#: ../src/spek-pipeline.cc:238
+#: ../src/spek-pipeline.cc:236
 msgid "Cannot open input file"
 msgstr "Não foi possível abrir o arquivo"
 
-#: ../src/spek-pipeline.cc:241
+#: ../src/spek-pipeline.cc:239
 msgid "Cannot find stream info"
 msgstr "Não há informações sobre a trilha"
 
-#: ../src/spek-pipeline.cc:244
+#: ../src/spek-pipeline.cc:242
 msgid "The file contains no audio streams"
-msgstr "Este arquivo não contêm trilhas de áudio"
+msgstr "Este arquivo não contém trilhas de áudio"
 
-#: ../src/spek-pipeline.cc:247
+#: ../src/spek-pipeline.cc:245
 msgid "Cannot find decoder"
 msgstr "Não foi possível encontrar o decodificador"
 
-#: ../src/spek-pipeline.cc:250
+#: ../src/spek-pipeline.cc:248
 msgid "Unknown duration"
 msgstr "Duração desconhecida"
 
-#: ../src/spek-pipeline.cc:253
+#: ../src/spek-pipeline.cc:251
 msgid "No audio channels"
 msgstr "Não existem canais de áudio"
 
-#: ../src/spek-pipeline.cc:256
+#: ../src/spek-pipeline.cc:254
 msgid "Cannot open decoder"
 msgstr "Não foi possível abrir o decodificador"
 
-#: ../src/spek-pipeline.cc:259
+#: ../src/spek-pipeline.cc:257
 msgid "Unsupported sample format"
 msgstr "Formato não suportado"
 
 #. TRANSLATORS: first %s is the error message, second %s is stream
 #. description.
-#: ../src/spek-pipeline.cc:271
+#: ../src/spek-pipeline.cc:269
 #, c-format
 msgid "%s: %s"
 msgstr "%s: %s"
