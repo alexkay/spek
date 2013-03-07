@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-01 20:01-0800\n"
+"POT-Creation-Date: 2013-03-06 09:06-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,24 +96,24 @@ msgstr ""
 msgid "%s: %s"
 msgstr ""
 
-#: ../src/spek-preferences-dialog.cc:61
+#: ../src/spek-preferences-dialog.cc:62
 msgid "Preferences"
 msgstr ""
 
-#: ../src/spek-preferences-dialog.cc:66
+#: ../src/spek-preferences-dialog.cc:67
 msgid "(system default)"
 msgstr ""
 
 #. TRANSLATORS: The name of a section in the Preferences dialog.
-#: ../src/spek-preferences-dialog.cc:73
+#: ../src/spek-preferences-dialog.cc:74
 msgid "General"
 msgstr ""
 
-#: ../src/spek-preferences-dialog.cc:82
+#: ../src/spek-preferences-dialog.cc:83
 msgid "Language:"
 msgstr ""
 
-#: ../src/spek-preferences-dialog.cc:98
+#: ../src/spek-preferences-dialog.cc:99
 msgid "Check for &updates"
 msgstr ""
 
