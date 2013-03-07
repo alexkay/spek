@@ -54,6 +54,10 @@ void test_audio_info()
     std::map<std::string, FileInfo> files = {
         {"1ch-96000Hz-24bps.flac", {"FLAC", 0, 96000, 24, 1, 0.1}},
         {"2ch-48000Hz-16bps.flac", {"FLAC", 0, 48000, 16, 2, 0.1}},
+        {"1ch-96000Hz-24bps.ape", {"Monkey", 0, 96000, 24, 1, 0.1}},
+        {"2ch-48000Hz-16bps.ape", {"Monkey", 0, 48000, 16, 2, 0.1}},
+        {"1ch-96000Hz-24bps.wv", {"WavPack", 0, 96000, 24, 1, 0.1}},
+        {"2ch-48000Hz-16bps.wv", {"WavPack", 0, 48000, 16, 2, 0.1}},
         {"2ch-44100Hz-16bps.wav", {"PCM", 0, 44100, 16, 2, 0.1}},
         {"2ch-44100Hz-128cbr.mp3", {"MP3", 128000, 44100, 0, 2, MP3_T}},
         {"2ch-44100Hz-320cbr.mp3", {"MP3", 320000, 44100, 0, 2, MP3_T}},
