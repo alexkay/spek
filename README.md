@@ -5,7 +5,7 @@ libraries for audio decoding and wxWidgets for the GUI.
 
 Spek is available on *BSD, GNU/Linux, Windows and Mac OS X.
 
-Find out more about Spek on its website: <http://spek-project.org/>
+Find out more about Spek on its website: <http://spek.cc/>
 
 ## Spek 0.8.2 - Released 2013-02-24
 
