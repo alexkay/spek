@@ -79,3 +79,13 @@ AC_CONFIG_FILES([
 	web/version
 ])
 AC_OUTPUT
+
+cat <<EOF
+
+${PACKAGE}-${VERSION}
+
+    Install Prefix: ${prefix}
+    C++ Compiler:   ${CXX}
+    Use Valgrind:   ${HAVE_VALGRIND}
+
+EOF
