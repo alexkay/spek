@@ -31,7 +31,17 @@ AS_CASE([$host],
 AC_MSG_RESULT([$os])
 
 AC_CHECK_PROG(HAVE_VALGRIND, valgrind, yes, no)
-AM_CONDITIONAL([USE_VALGRIND], [test x$HAVE_VALGRIND = xyes])
+AC_ARG_ENABLE(
+    [valgrind],
+    AS_HELP_STRING([--enable-valgrind], [Run tests under valgrind]),
+    [use_valgrind=$enableval],
+    [use_valgrind=auto]
+)
+AS_IF(
+    [test "x$use_valgrind" = xyes -a "x$HAVE_VALGRIND" = xno], [AC_MSG_ERROR([Valgrind not found])],
+    [AM_CONDITIONAL([USE_VALGRIND], [test "x$use_valgrind" != xno -a x$HAVE_VALGRIND = xyes])]
+)
+AM_COND_IF([USE_VALGRIND], [use_valgrind=yes], [use_valgrind=no])
 
 AC_CHECK_LIB(m, log10)
 
@@ -86,6 +96,7 @@ ${PACKAGE}-${VERSION}
 
     Install Prefix: ${prefix}
     C++ Compiler:   ${CXX}
-    Use Valgrind:   ${HAVE_VALGRIND}
+    OS:             ${os}
+    Use Valgrind:   ${use_valgrind}
 
 EOF
