@@ -29,11 +29,13 @@ int main()
     test_audio_read();
     test_utils();
 
-    std::cerr << g_passes << "/" << g_total << " tests passed" << std::endl;
-    std::cerr << "-------------" << std::endl;
     if (g_passes < g_total) {
+        std::cerr << "\x1b[31;1m" << (g_total - g_passes) << "/" << g_total;
+        std::cerr << " tests failed" << "\x1b[0m" << std::endl;
         return -1;
     } else {
+        std::cerr << "\x1b[32;1m" << g_passes << "/" << g_total;
+        std::cerr << " tests passed" << "\x1b[0m" << std::endl;
         return 0;
     }
 }

@@ -45,9 +45,9 @@ template<class T> void test(const std::string& message, const T& expected, const
     if (equal(expected, actual)) {
         g_passes++;
     } else {
-        std::cerr << "FAIL: " << message;
-        std::cerr << ", expected: " << expected;
-        std::cerr << ", actual: " << actual << std::endl;
+        std::cerr << "\x1b[31;1mFAIL:\x1b[0m " << message;
+        std::cerr << ", expected: " << "\x1b[32;1m" << expected << "\x1b[0m";
+        std::cerr << ", actual: " << "\x1b[31;1m" << actual << "\x1b[0m" << std::endl;
     }
 }
 
