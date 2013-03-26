@@ -97,6 +97,7 @@ ${PACKAGE}-${VERSION}
     Install Prefix: ${prefix}
     C++ Compiler:   ${CXX}
     OS:             ${os}
+    wxWidgets:      ${WX_VERSION}
     Use Valgrind:   ${use_valgrind}
 
 EOF
