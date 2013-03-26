@@ -34,8 +34,7 @@ int main()
         std::cerr << " tests failed" << "\x1b[0m" << std::endl;
         return -1;
     } else {
-        std::cerr << "\x1b[32;1m" << g_passes << "/" << g_total;
-        std::cerr << " tests passed" << "\x1b[0m" << std::endl;
+        std::cerr << "\x1b[32;1m" << g_total << " tests passed" << "\x1b[0m" << std::endl;
         return 0;
     }
 }

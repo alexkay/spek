@@ -63,6 +63,7 @@ void test_audio_info()
         {"2ch-44100Hz-320cbr.mp3", {"MP3", 320000, 44100, 0, 2, MP3_T}},
         {"2ch-44100Hz-V0.mp3", {"MP3", 201329, 44100, 0, 2, MP3_T}},
         {"2ch-44100Hz-V2.mp3", {"MP3", 150124, 44100, 0, 2, MP3_T}},
+        {"2ch-44100Hz-q5.ogg", {"Vorbis", 160000, 44100, 0, 2, 0.1}},
     };
     for (const auto& item : files) {
         run(
