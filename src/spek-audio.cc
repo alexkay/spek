@@ -103,9 +103,9 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name)
                 break;
             }
         }
-    }
-    if (audio_stream == -1) {
-        error = AudioError::NO_AUDIO;
+        if (audio_stream == -1) {
+            error = AudioError::NO_AUDIO;
+        }
     }
 
     AVStream *stream = nullptr;
