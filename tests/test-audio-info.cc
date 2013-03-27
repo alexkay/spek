@@ -50,6 +50,7 @@ static void test_file(const std::string& name, const FileInfo& info)
 void test_audio_info()
 {
     const double MP3_T = 5.0 * 1152 / 44100; // 5 frames * duration per mp3 frame
+    const double M4A_T = (10240 + 628) / 2.0 / 44100;
 
     std::map<std::string, FileInfo> files = {
         {"1ch-96000Hz-24bps.flac", {"FLAC", 0, 96000, 24, 1, 0.1}},
@@ -63,6 +64,7 @@ void test_audio_info()
         {"2ch-44100Hz-320cbr.mp3", {"MP3", 320000, 44100, 0, 2, MP3_T}},
         {"2ch-44100Hz-V0.mp3", {"MP3", 201329, 44100, 0, 2, MP3_T}},
         {"2ch-44100Hz-V2.mp3", {"MP3", 150124, 44100, 0, 2, MP3_T}},
+        {"2ch-44100Hz-q100.m4a", {"AAC", 159649, 44100, 0, 2, M4A_T}},
         {"2ch-44100Hz-q5.ogg", {"Vorbis", 160000, 44100, 0, 2, 0.1}},
     };
     for (const auto& item : files) {
