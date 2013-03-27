@@ -51,7 +51,8 @@ static void test_file(const std::string& name, const FileInfo& info)
 void test_audio_info()
 {
     const double MP3_T = 5.0 * 1152 / 44100; // 5 frames * duration per mp3 frame
-    const double M4A_T = (10240 + 628) / 2.0 / 44100;
+    const double AAC_T = (10240 + 628) / 2.0 / 44100;
+    const double DCA_T = 8.0 * 21180 / 1411216; // file size / bit rate
 
     std::map<std::string, FileInfo> files = {
         {"no.file", {AudioError::CANNOT_OPEN_FILE, "", 0, 0, 0, 0, 0.0}},
@@ -66,8 +67,9 @@ void test_audio_info()
         {"2ch-44100Hz-320cbr.mp3", {AudioError::OK, "MP3", 320000, 44100, 0, 2, MP3_T}},
         {"2ch-44100Hz-V0.mp3", {AudioError::OK, "MP3", 201329, 44100, 0, 2, MP3_T}},
         {"2ch-44100Hz-V2.mp3", {AudioError::OK, "MP3", 150124, 44100, 0, 2, MP3_T}},
-        {"2ch-44100Hz-q100.m4a", {AudioError::OK, "AAC", 159649, 44100, 0, 2, M4A_T}},
+        {"2ch-44100Hz-q100.m4a", {AudioError::OK, "AAC", 159649, 44100, 0, 2, AAC_T}},
         {"2ch-44100Hz-q5.ogg", {AudioError::OK, "Vorbis", 160000, 44100, 0, 2, 0.1}},
+        {"2ch-44100Hz.dts", {AudioError::OK, "DCA", 1411200, 44100, 0, 2, DCA_T}},
     };
     for (const auto& item : files) {
         run(
