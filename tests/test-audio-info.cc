@@ -61,6 +61,7 @@ void test_audio_info()
         {"2ch-48000Hz-16bps.flac", {AudioError::OK, "FLAC", 0, 48000, 16, 2, 0.1}},
         {"1ch-96000Hz-24bps.ape", {AudioError::OK, "Monkey", 0, 96000, 24, 1, 0.1}},
         {"2ch-48000Hz-16bps.ape", {AudioError::OK, "Monkey", 0, 48000, 16, 2, 0.1}},
+        {"2ch-44100Hz-16bps.m4a", {AudioError::OK, "ALAC", 0, 44100, 16, 2, 0.1}},
         {"1ch-96000Hz-24bps.wv", {AudioError::OK, "WavPack", 0, 96000, 24, 1, 0.1}},
         {"2ch-48000Hz-16bps.wv", {AudioError::OK, "WavPack", 0, 48000, 16, 2, 0.1}},
         {"2ch-44100Hz-16bps.wav", {AudioError::OK, "PCM", 0, 44100, 16, 2, 0.1}},
