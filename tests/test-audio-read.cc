@@ -61,6 +61,7 @@ void test_audio_read()
         {"2ch-44100Hz-q100.m4a", 10240},
         {"2ch-44100Hz-q5.ogg", 2 * 1024 * 4 + 1152},
         {"2ch-44100Hz.dts", 10240},
+        {"2ch-44100Hz.ac3", 9 * 1024},
     };
     for (const auto& item : files) {
         run(
