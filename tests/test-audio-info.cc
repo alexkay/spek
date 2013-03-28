@@ -73,6 +73,7 @@ void test_audio_info()
         {"2ch-44100Hz-q5.ogg", {AudioError::OK, "Vorbis", 160000, 44100, 0, 2, 0.1}},
         {"2ch-44100Hz.dts", {AudioError::OK, "DCA", 1411200, 44100, 0, 2, DCA_T}},
         {"2ch-44100Hz.ac3", {AudioError::OK, "ATSC A/52", 192000, 44100, 0, 2, AC3_T}},
+        {"2ch-44100Hz-std.mpc", {AudioError::OK, "Musepack", 0, 44100, 0, 2, 0.0}},
     };
     for (const auto& item : files) {
         run(
