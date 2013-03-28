@@ -25,8 +25,7 @@ int main()
 {
     std::cerr << "-------------" << std::endl;
 
-    test_audio_info();
-    test_audio_read();
+    test_audio();
     test_utils();
 
     if (g_passes < g_total) {
