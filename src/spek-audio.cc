@@ -137,7 +137,9 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name)
             bits_per_sample = codec_context->bits_per_coded_sample;
         }
         if (codec_context->codec_id == AV_CODEC_ID_AAC ||
-            codec_context->codec_id == AV_CODEC_ID_MUSEPACK8) {
+            codec_context->codec_id == AV_CODEC_ID_MUSEPACK8 ||
+            codec_context->codec_id == AV_CODEC_ID_WMAV1 ||
+            codec_context->codec_id == AV_CODEC_ID_WMAV2) {
             // These decoders set both bps and bitrate.
             bits_per_sample = 0;
         }

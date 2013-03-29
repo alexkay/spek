@@ -115,6 +115,10 @@ void test_audio()
             {AudioError::OK, "ATSC A/52", 192000, 44100, 0, 2, AC3_T, 9 * 1024}},
         {"2ch-44100Hz-std.mpc",
             {AudioError::OK, "Musepack", 0, 44100, 0, 2, 0.0, 11 * 1024 + 256}},
+        {"2ch-44100Hz-v1.wma",
+            {AudioError::OK, "Windows Media Audio 1", 128000, 44100, 0, 2, 0.138, 12 * 1024}},
+        {"2ch-44100Hz-v2.wma",
+            {AudioError::OK, "Windows Media Audio 2", 128000, 44100, 0, 2, 0.138, 12 * 1024}},
     };
 
     Audio audio;
