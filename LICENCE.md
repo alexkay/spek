@@ -21,6 +21,7 @@ Contributors:
 
 Translators:
 
+* Adolfo Jayme Barrientos
 * Aleksandar Todorovic
 * Florent Thoumie
 * Giuseppe D. Barbagallo
