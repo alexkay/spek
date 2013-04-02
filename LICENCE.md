@@ -23,6 +23,7 @@ Translators:
 
 * Adolfo Jayme Barrientos
 * Aleksandar Todorovic
+* Antón Méixome
 * Florent Thoumie
 * Giuseppe D. Barbagallo
 * Huang Shibing
