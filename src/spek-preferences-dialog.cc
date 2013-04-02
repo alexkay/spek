@@ -26,6 +26,7 @@
 static const char *available_languages[] =
 {
     "", "",
+    "ca", "Català",
     "cs", "Čeština",
     "da", "Dansk",
     "de", "Deutsch",
@@ -33,6 +34,7 @@ static const char *available_languages[] =
     "eo", "Esperanto",
     "es", "Español",
     "fr", "Français",
+    "gl", "Galego",
     "it", "Italiano",
     "ja", "日本語",
     "nb", "Norsk (bokmål)",
