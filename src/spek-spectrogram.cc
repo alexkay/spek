@@ -22,6 +22,7 @@
 
 #include "spek-audio.h"
 #include "spek-events.h"
+#include "spek-fft.h"
 #include "spek-palette.h"
 #include "spek-pipeline.h"
 #include "spek-platform.h"
@@ -43,8 +44,8 @@ enum
     MIN_RANGE = -140,
     URANGE = -20,
     LRANGE = -120,
-    NFFT = 2048,
-    BANDS = NFFT / 2 + 1,
+    FFT_BITS = 11,
+    BANDS = (1 << (FFT_BITS - 1)) + 1,
     LPAD = 60,
     TPAD = 60,
     RPAD = 90,
@@ -62,6 +63,7 @@ SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
         wxFULL_REPAINT_ON_RESIZE | wxWANTS_CHARS
     ),
     audio(new Audio()), // TODO: refactor
+    fft(new FFT()),
     pipeline(NULL),
     duration(0.0),
     sample_rate(0),
@@ -365,7 +367,7 @@ void SpekSpectrogram::start()
         this->image.Create(samples, BANDS);
         this->pipeline = spek_pipeline_open(
             this->audio->open(std::string(this->path.utf8_str())),
-            BANDS,
+            this->fft->create(FFT_BITS),
             samples,
             pipeline_cb,
             this

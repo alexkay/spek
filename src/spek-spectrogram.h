@@ -24,6 +24,7 @@
 #include <wx/wx.h>
 
 class Audio;
+class FFT;
 class SpekHaveSampleEvent;
 struct spek_pipeline;
 
@@ -46,6 +47,7 @@ private:
     void stop();
 
     std::unique_ptr<Audio> audio;
+    std::unique_ptr<FFT> fft;
     spek_pipeline *pipeline;
     wxString path;
     wxString desc;

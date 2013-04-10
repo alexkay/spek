@@ -49,12 +49,11 @@ enum
 struct spek_pipeline
 {
     std::unique_ptr<AudioFile> file;
-    int bands;
+    std::unique_ptr<FFTPlan> fft;
     int samples;
     spek_pipeline_cb cb;
     void *cb_data;
 
-    struct spek_fft_plan *fft;
     float *coss; // Pre-computed cos table.
     int nfft; // Size of the FFT transform.
     int input_size;
@@ -84,17 +83,21 @@ static void * worker_func(void *);
 static void reader_sync(struct spek_pipeline *p, int pos);
 
 struct spek_pipeline * spek_pipeline_open(
-    std::unique_ptr<AudioFile> file, int bands, int samples, spek_pipeline_cb cb, void *cb_data)
+    std::unique_ptr<AudioFile> file,
+    std::unique_ptr<FFTPlan> fft,
+    int samples,
+    spek_pipeline_cb cb,
+    void *cb_data
+)
 {
     spek_pipeline *p = new spek_pipeline();
     p->file = std::move(file);
-    p->bands = bands;
+    p->fft = std::move(fft);
     p->samples = samples;
     p->cb = cb;
     p->cb_data = cb_data;
 
     p->coss = NULL;
-    p->fft = NULL;
     p->input = NULL;
     p->output = NULL;
     p->has_reader_thread = false;
@@ -105,16 +108,15 @@ struct spek_pipeline * spek_pipeline_open(
     p->has_worker_cond = false;
 
     if (!p->file->get_error()) {
-        p->nfft = 2 * bands - 2;
+        p->nfft = p->fft->get_input_size();
         p->coss = (float*)malloc(p->nfft * sizeof(float));
         float cf = 2.0f * (float)M_PI / p->nfft;
         for (int i = 0; i < p->nfft; ++i) {
             p->coss[i] = cosf(cf * i);
         }
-        p->fft = spek_fft_plan_new(p->nfft);
         p->input_size = p->nfft * (NFFT * 2 + 1);
         p->input = (float*)malloc(p->input_size * sizeof(float));
-        p->output = (float*)malloc(bands * sizeof(float));
+        p->output = (float*)malloc(p->fft->get_output_size() * sizeof(float));
         p->file->start(samples);
     }
 
@@ -172,10 +174,6 @@ void spek_pipeline_close(struct spek_pipeline *p)
     if (p->input) {
         free(p->input);
         p->input = NULL;
-    }
-    if (p->fft) {
-        spek_fft_delete(p->fft);
-        p->fft = NULL;
     }
     if (p->coss) {
         free(p->coss);
@@ -357,7 +355,7 @@ static void * worker_func(void *pp)
     int head = 0, tail = 0;
     int prev_head = 0;
 
-    memset(p->output, 0, sizeof(float) * p->bands);
+    memset(p->output, 0, sizeof(float) * p->fft->get_output_size());
 
     while (true) {
         pthread_mutex_lock(&p->reader_mutex);
@@ -402,12 +400,12 @@ static void * worker_func(void *pp)
                     // val *= 0.53836f - 0.46164f * coss[i];
                     // Hann window.
                     val *= 0.5f * (1.0f - p->coss[i]);
-                    p->fft->input[i] = val;
+                    p->fft->set_input(i, val);
                 }
-                spek_fft_execute(p->fft);
+                p->fft->execute();
                 num_fft++;
-                for (int i = 0; i < p->bands; i++) {
-                    p->output[i] += p->fft->output[i];
+                for (int i = 0; i < p->fft->get_output_size(); i++) {
+                    p->output[i] += p->fft->get_output(i);
                 }
             }
 
@@ -419,14 +417,14 @@ static void * worker_func(void *pp)
                     acc_error += p->file->get_error_per_interval();
                 }
 
-                for (int i = 0; i < p->bands; i++) {
+                for (int i = 0; i < p->fft->get_output_size(); i++) {
                     p->output[i] /= num_fft;
                 }
 
                 if (sample == p->samples) break;
                 p->cb(sample++, p->output, p->cb_data);
 
-                memset(p->output, 0, sizeof(float) * p->bands);
+                memset(p->output, 0, sizeof(float) * p->fft->get_output_size());
                 frames = 0;
                 num_fft = 0;
             }
