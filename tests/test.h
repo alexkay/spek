@@ -52,6 +52,7 @@ template<class T> void test(const std::string& message, const T& expected, const
 }
 
 void test_audio();
+void test_fft();
 void test_utils();
 
 #endif
