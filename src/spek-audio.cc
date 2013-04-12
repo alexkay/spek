@@ -26,6 +26,17 @@ extern "C" {
 
 #include "spek-audio.h"
 
+// TODO: Remove these macros after Debian switches to libav 9.
+#if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(54, 28, 0)
+#define avcodec_free_frame av_freep
+#endif
+#if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(54, 25, 0)
+#define AV_CODEC_ID_AAC CODEC_ID_AAC
+#define AV_CODEC_ID_MUSEPACK8 CODEC_ID_MUSEPACK8
+#define AV_CODEC_ID_WMAV1 CODEC_ID_WMAV1
+#define AV_CODEC_ID_WMAV2 CODEC_ID_WMAV2
+#endif
+
 class AudioFileImpl : public AudioFile
 {
 public:
@@ -210,12 +221,7 @@ AudioFileImpl::~AudioFileImpl()
         av_freep(&this->buffer);
     }
     if (this->frame) {
-        // TODO: Remove this check after Debian switches to libav 9.
-#if LIBAVCODEC_VERSION_INT >= AV_VERSION_INT(54, 28, 0)
         avcodec_free_frame(&this->frame);
-#else
-        av_freep(&this->frame);
-#endif
     }
     if (this->packet.data) {
         this->packet.data -= this->offset;
