@@ -20,6 +20,7 @@
 #define TEST_H_
 
 #include <cmath>
+#include <cstdio>
 #include <functional>
 #include <iostream>
 #include <string>
