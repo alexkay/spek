@@ -34,6 +34,7 @@ Translators:
 * Piotr Drąg
 * Ryan Smith
 * Tiago Rinaldi
+* Wasilis Mandratzis
 * Wouter Bolsterlee
 * Many more (let me know if you translated Spek and want your full name
   listed here)
