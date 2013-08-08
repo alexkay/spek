@@ -82,7 +82,6 @@ AC_CONFIG_FILES([
 	dist/osx/Info.plist
 	dist/win/spek.wxs
 	man/Makefile
-	man/spek.1
 	po/Makefile.in
 	src/Makefile
 	tests/Makefile

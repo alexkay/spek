@@ -8,6 +8,7 @@ SUBDIRS = \
 EXTRA_DIST = \
 	INSTALL.md \
 	LICENCE.md \
+	MANUAL.md \
 	README.md \
 	intltool-extract.in \
 	intltool-merge.in \
@@ -31,14 +32,15 @@ DISTCLEANFILES = \
 .PHONY: man upload
 
 man:
-	man man/spek.1 | man2html -title "Spek @VERSION@ manual" > web/man-@VERSION@.html
+	pandoc --standalone --to=man --output=man/spek.1 MANUAL.md
+	pandoc --standalone --to=html --output=web/man-@VERSION@.html MANUAL.md
 	sed -e 's#<I>\(http://[^<]*\)</I>#<I><a href="\1">\1</a></I>#g' -i '' web/man-@VERSION@.html
-	sed -e 's#<HEAD>#<HEAD>\
+	sed -e 's#<head>#<head>\
 		<style type="text/css">\
 			body {font-size: 11pt;}\
-			h1, h2 {font-weight: bold;}\
-			h1 {font-size: 16pt;}\
-			h2 {font-size: 12pt;}\
+			h1, h2, h3 {font-weight: bold;}\
+			h1 {font-size: 13pt;}\
+			h2, h3 {font-size: 12pt;}\
 		</style>#' -i '' web/man-@VERSION@.html
 
 upload:
