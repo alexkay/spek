@@ -1,7 +1,7 @@
 AC_INIT([spek],[0.8.2])
 AC_CONFIG_SRCDIR([src/spek.cc])
 AC_CONFIG_HEADERS([config.h])
-AM_INIT_AUTOMAKE([1.11.1 foreign no-dist-gzip dist-xz])
+AM_INIT_AUTOMAKE([1.11.1 foreign no-dist-gzip dist-xz serial-tests])
 AM_SILENT_RULES([yes])
 
 AC_LANG([C++])

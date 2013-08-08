@@ -41,10 +41,6 @@ po/stamp-it
 src/*.stamp
 src/spek
 stamp-h1
-test-driver
 tests/test
-tests/test-suite.log
-tests/test.log
-tests/test.trs
 web/version
 xmldocs.make
