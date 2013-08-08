@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-07 10:14-0800\n"
+"POT-Creation-Date: 2013-08-08 09:55-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,121 +19,121 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: ../data/spek.desktop.in.in.h:1
-msgid "Spectrum Analyser"
-msgstr ""
-
-#: ../data/spek.desktop.in.in.h:2
 msgid "Spek"
 msgstr ""
 
-#: ../data/spek.desktop.in.in.h:3
-msgid "Spek Spectrum Analyser"
+#: ../data/spek.desktop.in.in.h:2
+msgid "Spectrum Analyser"
 msgstr ""
 
-#: ../data/spek.desktop.in.in.h:4
+#: ../data/spek.desktop.in.in.h:3
 msgid "View spectrograms of your audio files"
 msgstr ""
 
-#: ../src/spek-pipeline.cc:199
+#: ../data/spek.desktop.in.in.h:4
+msgid "Spek Spectrum Analyser"
+msgstr ""
+
+#: ../src/spek-pipeline.cc:197
 #, c-format
 msgid "%d kbps"
 msgstr ""
 
-#: ../src/spek-pipeline.cc:204
+#: ../src/spek-pipeline.cc:202
 #, c-format
 msgid "%d Hz"
 msgstr ""
 
-#: ../src/spek-pipeline.cc:211
+#: ../src/spek-pipeline.cc:209
 #, c-format
 msgid "%d bit"
 msgid_plural "%d bits"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/spek-pipeline.cc:219
+#: ../src/spek-pipeline.cc:217
 #, c-format
 msgid "%d channel"
 msgid_plural "%d channels"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/spek-pipeline.cc:236
+#: ../src/spek-pipeline.cc:234
 msgid "Cannot open input file"
 msgstr ""
 
-#: ../src/spek-pipeline.cc:239
+#: ../src/spek-pipeline.cc:237
 msgid "Cannot find stream info"
 msgstr ""
 
-#: ../src/spek-pipeline.cc:242
+#: ../src/spek-pipeline.cc:240
 msgid "The file contains no audio streams"
 msgstr ""
 
-#: ../src/spek-pipeline.cc:245
+#: ../src/spek-pipeline.cc:243
 msgid "Cannot find decoder"
 msgstr ""
 
-#: ../src/spek-pipeline.cc:248
+#: ../src/spek-pipeline.cc:246
 msgid "Unknown duration"
 msgstr ""
 
-#: ../src/spek-pipeline.cc:251
+#: ../src/spek-pipeline.cc:249
 msgid "No audio channels"
 msgstr ""
 
-#: ../src/spek-pipeline.cc:254
+#: ../src/spek-pipeline.cc:252
 msgid "Cannot open decoder"
 msgstr ""
 
-#: ../src/spek-pipeline.cc:257
+#: ../src/spek-pipeline.cc:255
 msgid "Unsupported sample format"
 msgstr ""
 
 #. TRANSLATORS: first %s is the error message, second %s is stream description.
-#: ../src/spek-pipeline.cc:269
+#: ../src/spek-pipeline.cc:267
 #, c-format
 msgid "%s: %s"
 msgstr ""
 
-#: ../src/spek-preferences-dialog.cc:62
+#: ../src/spek-preferences-dialog.cc:65
 msgid "Preferences"
 msgstr ""
 
-#: ../src/spek-preferences-dialog.cc:67
+#: ../src/spek-preferences-dialog.cc:70
 msgid "(system default)"
 msgstr ""
 
 #. TRANSLATORS: The name of a section in the Preferences dialog.
-#: ../src/spek-preferences-dialog.cc:74
+#: ../src/spek-preferences-dialog.cc:77
 msgid "General"
 msgstr ""
 
-#: ../src/spek-preferences-dialog.cc:83
+#: ../src/spek-preferences-dialog.cc:86
 msgid "Language:"
 msgstr ""
 
-#: ../src/spek-preferences-dialog.cc:99
+#: ../src/spek-preferences-dialog.cc:102
 msgid "Check for &updates"
 msgstr ""
 
-#: ../src/spek-spectrogram.cc:189
+#: ../src/spek-spectrogram.cc:191
 #, c-format
 msgid "%d kHz"
 msgstr ""
 
-#: ../src/spek-spectrogram.cc:194
+#: ../src/spek-spectrogram.cc:196
 #, c-format
 msgid "%d dB"
 msgstr ""
 
 #. TRANSLATORS: keep "00" unchanged, it's used to calc the text width
-#: ../src/spek-spectrogram.cc:300
+#: ../src/spek-spectrogram.cc:302
 msgid "00 kHz"
 msgstr ""
 
 #. TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
-#: ../src/spek-spectrogram.cc:331
+#: ../src/spek-spectrogram.cc:333
 msgid "-00 dB"
 msgstr ""
 
