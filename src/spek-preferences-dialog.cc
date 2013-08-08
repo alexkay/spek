@@ -30,6 +30,7 @@ static const char *available_languages[] =
     "cs", "Čeština",
     "da", "Dansk",
     "de", "Deutsch",
+    "el", "Ελληνικά",
     "en", "English",
     "eo", "Esperanto",
     "es", "Español",
