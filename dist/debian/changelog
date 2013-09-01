@@ -1,3 +1,9 @@
+spek (0.8.2-2) unstable; urgency=low
+
+  * Fix compilation with Libav 9 (Closes: #721025)
+
+ -- Alexander Kojevnikov <alexander@kojevnikov.com>  Sun, 01 Sep 2013 12:37:37 -0700
+
 spek (0.8.2-1) unstable; urgency=low
 
   * New upstream release.
