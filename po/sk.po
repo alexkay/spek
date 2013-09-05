@@ -1,0 +1,216 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Alexander Kojevnikov <alexander@kojevnikov.com>, 2013
+# patrik.skulavik <patrik.skulavik@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: Spek\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
+"POT-Creation-Date: 2013-08-08 09:55-0700\n"
+"PO-Revision-Date: 2013-09-05 17:19+0000\n"
+"Last-Translator: Alexander Kojevnikov <alexander@kojevnikov.com>\n"
+"Language-Team: Slovak (http://www.transifex.com/projects/p/spek/language/sk/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sk\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: ../data/spek.desktop.in.in.h:1
+msgid "Spek"
+msgstr "Spek"
+
+#: ../data/spek.desktop.in.in.h:2
+msgid "Spectrum Analyser"
+msgstr "Spektrálny analyzátor"
+
+#: ../data/spek.desktop.in.in.h:3
+msgid "View spectrograms of your audio files"
+msgstr "Zobraziť spektrogramy audio súborov"
+
+#: ../data/spek.desktop.in.in.h:4
+msgid "Spek Spectrum Analyser"
+msgstr "Spek Spektrálny Analyzátor"
+
+#: ../src/spek-pipeline.cc:197
+#, c-format
+msgid "%d kbps"
+msgstr "%d kbps"
+
+#: ../src/spek-pipeline.cc:202
+#, c-format
+msgid "%d Hz"
+msgstr "%d Hz"
+
+#: ../src/spek-pipeline.cc:209
+#, c-format
+msgid "%d bit"
+msgid_plural "%d bits"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: ../src/spek-pipeline.cc:217
+#, c-format
+msgid "%d channel"
+msgid_plural "%d channels"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: ../src/spek-pipeline.cc:234
+msgid "Cannot open input file"
+msgstr "Súbor nie je možné otvoriť"
+
+#: ../src/spek-pipeline.cc:237
+msgid "Cannot find stream info"
+msgstr "Nie je možné výhľadať stream informácie"
+
+#: ../src/spek-pipeline.cc:240
+msgid "The file contains no audio streams"
+msgstr "Súbor neobsahuje zvukovú stopu"
+
+#: ../src/spek-pipeline.cc:243
+msgid "Cannot find decoder"
+msgstr "Nemožno vyhľadať dekóder"
+
+#: ../src/spek-pipeline.cc:246
+msgid "Unknown duration"
+msgstr "Neznáma dĺžka"
+
+#: ../src/spek-pipeline.cc:249
+msgid "No audio channels"
+msgstr "Žiadne audio kanály"
+
+#: ../src/spek-pipeline.cc:252
+msgid "Cannot open decoder"
+msgstr "Nemožno otvoriť dekóder"
+
+#: ../src/spek-pipeline.cc:255
+msgid "Unsupported sample format"
+msgstr "Nepodporovaný zvukový formát"
+
+#. TRANSLATORS: first %s is the error message, second %s is stream
+#. description.
+#: ../src/spek-pipeline.cc:267
+#, c-format
+msgid "%s: %s"
+msgstr "%s: %s"
+
+#: ../src/spek-preferences-dialog.cc:65
+msgid "Preferences"
+msgstr "Možnosti"
+
+#: ../src/spek-preferences-dialog.cc:70
+msgid "(system default)"
+msgstr "(predvolené nastavenia)"
+
+#. TRANSLATORS: The name of a section in the Preferences dialog.
+#: ../src/spek-preferences-dialog.cc:77
+msgid "General"
+msgstr "Všeobecné"
+
+#: ../src/spek-preferences-dialog.cc:86
+msgid "Language:"
+msgstr "Jazyk:"
+
+#: ../src/spek-preferences-dialog.cc:102
+msgid "Check for &updates"
+msgstr "Skontrolovať &aktualizácie"
+
+#: ../src/spek-spectrogram.cc:191
+#, c-format
+msgid "%d kHz"
+msgstr "%d kHz"
+
+#: ../src/spek-spectrogram.cc:196
+#, c-format
+msgid "%d dB"
+msgstr "%d dB"
+
+#. TRANSLATORS: keep "00" unchanged, it's used to calc the text width
+#: ../src/spek-spectrogram.cc:302
+msgid "00 kHz"
+msgstr "00 kHz"
+
+#. TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
+#: ../src/spek-spectrogram.cc:333
+msgid "-00 dB"
+msgstr "-00 dB"
+
+#: ../src/spek-window.cc:75
+msgid "Spek - Acoustic Spectrum Analyser"
+msgstr "Spek - Akustický Spektrálny Analyzátor"
+
+#: ../src/spek-window.cc:95
+msgid "&File"
+msgstr "&Súbor"
+
+#: ../src/spek-window.cc:101
+msgid "&Edit"
+msgstr "&Upraviť"
+
+#: ../src/spek-window.cc:105 ../src/spek-window.cc:110
+msgid "&Help"
+msgstr "&Nápoveda"
+
+#: ../src/spek-window.cc:133
+msgid "Help"
+msgstr "Nápoveda"
+
+#: ../src/spek-window.cc:147
+msgid "A new version of Spek is available, click to download."
+msgstr "Nová verzia programu Spek je dostupná, kliknite pre stiahnutie."
+
+#. TRANSLATORS: window title, %s is replaced with the file name
+#: ../src/spek-window.cc:185
+#, c-format
+msgid "Spek - %s"
+msgstr "Spek - %s"
+
+#: ../src/spek-window.cc:232
+msgid "All files"
+msgstr "Všetky súbory"
+
+#: ../src/spek-window.cc:234
+msgid "Audio files"
+msgstr "Audio súbory"
+
+#: ../src/spek-window.cc:248
+msgid "Open File"
+msgstr "Otvoriť súbor"
+
+#: ../src/spek-window.cc:270
+msgid "PNG images"
+msgstr "PNG obrázky"
+
+#: ../src/spek-window.cc:276
+msgid "Save Spectrogram"
+msgstr "Uložiť Spektrogram"
+
+#. Suggested name is <file_name>.png
+#: ../src/spek-window.cc:284
+msgid "Untitled"
+msgstr "Bez názvu"
+
+#. TRANSLATORS: Add your name here
+#: ../src/spek-window.cc:331
+msgid "translator-credits"
+msgstr "Patrik Škulavík"
+
+#: ../src/spek-window.cc:337
+msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
+msgstr "Copyright (c) 2010-2013 Alexander Kojevnikov a prispievatelia"
+
+#: ../src/spek-window.cc:340
+msgid "Spek Website"
+msgstr "Spek Webová stránka"
+
+#. TRANSLATORS: the %s is the package version.
+#: ../src/spek.cc:96
+#, c-format
+msgid "Spek version %s"
+msgstr "Spek verzia %s"

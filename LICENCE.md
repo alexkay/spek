@@ -29,6 +29,7 @@ Translators:
 * Huang Shibing
 * Jonathan Gonzalez V
 * Olga Vasylevska
+* Patrik Škulavík
 * Pavel Fric
 * Philipp Defner
 * Piotr Drąg
