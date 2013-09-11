@@ -34,6 +34,7 @@ Translators:
 * Philipp Defner
 * Piotr Drąg
 * Ryan Smith
+* Tero Talvio
 * Tiago Rinaldi
 * Wasilis Mandratzis
 * Wouter Bolsterlee
