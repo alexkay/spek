@@ -11,7 +11,7 @@ UPX=upx
 ZIP=zip
 
 HOST=i686-pc-mingw32
-LANGUAGES="ca cs da de el eo es fr gl it ja nb nl pl pt_BR ru sk sr@latin sv tr uk vi zh_CN zh_TW"
+LANGUAGES="ca cs da de el eo es fi fr gl it ja nb nl pl pt_BR ru sk sr@latin sv tr uk vi zh_CN zh_TW"
 PATH="$MXE"/bin:$PATH
 STRIP=i686-pc-mingw32-strip
 WINDRES=i686-pc-mingw32-windres
