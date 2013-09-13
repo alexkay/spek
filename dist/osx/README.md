@@ -2,7 +2,7 @@
 
 Using [MacPorts](http://www.macports.org/) install build dependencies:
 
-    port install autoconf automake gcc47 git-core intltool upx yasm.
+    port install autoconf automake gcc48 git-core intltool upx yasm
 
 Download and build wxWidgets 2.9+, example configure flags:
 
@@ -24,7 +24,8 @@ Download and build libopus, example configure flags:
 
 Download and build FFmpeg, example configure flags:
 
-    ./configure --prefix=$HOME/usr --enable-gpl --enable-version3 \
+    PKG_CONFIG_PATH=$HOME/usr/lib/pkgconfig ./configure \
+        --prefix=$HOME/usr --enable-gpl --enable-version3 \
         --enable-runtime-cpudetect --enable-pthreads \
         --disable-shared --disable-debug --disable-doc \
         --disable-nonfree --disable-programs --disable-avdevice \

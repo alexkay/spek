@@ -7,9 +7,9 @@ cd $(dirname $0)/../..
 
 rm -f src/spek
 
-PKG_CONFIG_PATH=$INSTALL_PATH/lib/pkgconfig CXX=/opt/local/bin/g++-mp-4.7 \
+PKG_CONFIG_PATH=$INSTALL_PATH/lib/pkgconfig CXX=/opt/local/bin/g++-mp-4.8 \
     ./autogen.sh --with-wx-config=$INSTALL_PATH/bin/wx-config \
-    && make || exit 1
+    && make && make check || exit 1
 strip src/spek
 upx src/spek
 
