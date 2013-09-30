@@ -4,6 +4,7 @@ Priority: optional
 Maintainer: Alexander Kojevnikov <alexander@kojevnikov.com>
 Build-Depends: debhelper (>= 9),
                autotools-dev,
+               g++-4.8,
                pkg-config,
                intltool (>= 0.35),
                libavcodec-dev (>= 6:0.8),

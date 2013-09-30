@@ -1,6 +1,7 @@
 #!/usr/bin/make -f
 
 export V=1
+export CXX=g++-4.8
 
 %:
 	dh  $@
