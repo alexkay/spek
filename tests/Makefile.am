@@ -17,17 +17,18 @@ AM_CPPFLAGS = \
 	-include config.h \
 	-I$(top_srcdir)/src \
 	-DSAMPLES_DIR=\"$(srcdir)/samples\" \
-	-pthread \
-	$(WX_CPPFLAGS)
+	-pthread
 
 AM_CXXFLAGS = \
-	$(FFMPEG_CFLAGS) \
-	$(WX_CXXFLAGS_ONLY)
+	$(AVFORMAT_CFLAGS) \
+	$(AVCODEC_CFLAGS) \
+	$(AVUTIL_CFLAGS)
 
 LDADD = \
 	../src/libspek.a \
-	$(FFMPEG_LIBS) \
-	$(WX_LIBS)
+	$(AVFORMAT_LIBS) \
+	$(AVCODEC_LIBS) \
+	$(AVUTIL_LIBS)
 
 AM_LDFLAGS = \
 	-pthread

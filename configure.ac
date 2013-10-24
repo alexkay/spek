@@ -8,6 +8,7 @@ AC_LANG([C++])
 AC_PROG_CXX
 CXXFLAGS="$CXXFLAGS -std=gnu++11 -Wall -Wextra"
 AC_PROG_CXXCPP
+AC_PROG_LIBTOOL
 AC_PROG_RANLIB
 AC_PROG_INSTALL
 IT_PROG_INTLTOOL([0.40.0])
@@ -45,7 +46,9 @@ AM_COND_IF([USE_VALGRIND], [use_valgrind=yes], [use_valgrind=no])
 
 AC_CHECK_LIB(m, log10)
 
-PKG_CHECK_MODULES(FFMPEG, [libavcodec >= 53.25 libavformat >= 53.17 libavutil >= 51.17])
+PKG_CHECK_MODULES(AVFORMAT, [libavformat >= 53.17])
+PKG_CHECK_MODULES(AVCODEC, [libavcodec >= 53.25])
+PKG_CHECK_MODULES(AVUTIL, [libavutil >= 51.17])
 
 AM_OPTIONS_WXCONFIG
 reqwx=2.8.0
