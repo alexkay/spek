@@ -8,9 +8,9 @@ This is done in two steps:
 For the first step you can use any Unix-y environment. Set up
 [MXE](http://mxe.cc/#tutorial).
 
-Build Spek dependencies:
+Apply `mxe.diff` and build Spek dependencies:
 
-    make pthreads ffmpeg wxwidgets
+    make pthreads ffmpeg wxwidgets -j4 JOBS=4
 
 Build Spek, adjusting `bundle.sh` variables as necessary:
 

@@ -3,9 +3,13 @@ rem Check README.md in this directory for instructions.
 
 set WIX_PATH=c:\Program Files\Windows Installer XML v3.5\bin
 
-del spek.msi
+cd tests
+test.exe
+if %errorlevel% neq 0 exit /b %errorlevel%
+cd ..
 
 rem Generate a wxs for files in Spek
+del spek.msi
 move Spek\spek.exe .\
 "%WIX_PATH%"\heat dir Spek -gg -ke -srd -cg Files -dr INSTALLLOCATION -template fragment -o files.wxs
 move spek.exe Spek\

@@ -24,16 +24,26 @@ rm -fr dist/win/build && mkdir dist/win/build
 rm -f dist/win/spek.res
 "$WINDRES" dist/win/spek.rc -O coff -o dist/win/spek.res
 mkdir -p src/dist/win && cp dist/win/spek.res src/dist/win/
+mkdir -p tests/dist/win && cp dist/win/spek.res tests/dist/win/
 
 # Compile and strip spek.exe
-LDFLAGS="dist/win/spek.res" ./autogen.sh \
+LDFLAGS="-mwindows dist/win/spek.res" ./autogen.sh \
     --host="$HOST" \
+    --disable-valgrind \
     --with-wx-config="$WX_CONFIG" \
     --prefix=${PWD}/dist/win/build && \
-    "$MAKE" && \
+    "$MAKE" -j8 && \
     "$MAKE" install || exit 1
 "$STRIP" dist/win/build/bin/spek.exe
 "$UPX" dist/win/build/bin/spek.exe
+
+# Compile test.exe
+LDFLAGS="-mconsole" ./autogen.sh \
+    --host="$HOST" \
+    --disable-valgrind \
+    --with-wx-config="$WX_CONFIG" \
+    --prefix=${PWD}/dist/win/build && \
+    "$MAKE" check -j8
 
 # Copy files to the bundle
 cd dist/win
@@ -50,6 +60,11 @@ for lang in $LANGUAGES; do
 done
 rm -fr build
 
+# Copy tests
+rm -fr tests && mkdir tests
+cp ../../tests/.libs/test.exe tests/
+cp -a ../../tests/samples tests/
+
 # Create a zip archive
 rm -f spek.zip
 "$ZIP" -r spek.zip Spek
@@ -57,5 +72,5 @@ rm -f spek.zip
 cd ../..
 
 # Clean up
-rm -fr src/dist
+rm -fr src/dist tests/dist
 rm dist/win/spek.res

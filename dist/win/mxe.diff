@@ -1,0 +1,80 @@
+diff --git a/src/ffmpeg.mk b/src/ffmpeg.mk
+index 8b90d69..fab1a73 100644
+--- a/src/ffmpeg.mk
++++ b/src/ffmpeg.mk
+@@ -3,13 +3,13 @@
+ 
+ PKG             := ffmpeg
+ $(PKG)_IGNORE   := 2%
+-$(PKG)_VERSION  := 1.2.3
+-$(PKG)_CHECKSUM := f083c92075fe010f17416bc880dfca101535276d
++$(PKG)_VERSION  := 2.0.2
++$(PKG)_CHECKSUM := 47d3b3d172ae81f0571549e4dfaadfe5b4fe06cc
+ $(PKG)_SUBDIR   := $(PKG)-$($(PKG)_VERSION)
+ $(PKG)_FILE     := $(PKG)-$($(PKG)_VERSION).tar.bz2
+ $(PKG)_URL      := http://www.ffmpeg.org/releases/$($(PKG)_FILE)
+ $(PKG)_URL_2    := http://launchpad.net/ffmpeg/main/$($(PKG)_VERSION)/+download/$($(PKG)_FILE)
+-$(PKG)_DEPS     := gcc bzip2 lame libass libnut libvpx opencore-amr opus sdl speex theora vo-aacenc vo-amrwbenc vorbis x264 xvidcore zlib
++$(PKG)_DEPS     := gcc bzip2 opus zlib
+ 
+ define $(PKG)_UPDATE
+     $(WGET) -q -O- 'http://www.ffmpeg.org/download.html' | \
+@@ -31,26 +31,20 @@ define $(PKG)_BUILD
+         --disable-pthreads \
+         --enable-w32threads \
+         --disable-doc \
++        --disable-programs \
+         --enable-gpl \
+         --enable-version3 \
+         --disable-nonfree \
+-        --enable-avisynth \
+-        --enable-libass \
+-        --disable-libfaac \
+-        --enable-libmp3lame \
+-        --enable-libnut \
+-        --enable-libopencore-amrnb \
+-        --enable-libopencore-amrwb \
+-        --enable-libopus \
+-        --enable-libspeex \
+-        --enable-libtheora \
+-        --enable-libvo-aacenc \
+-        --enable-libvo-amrwbenc \
+-        --enable-libvorbis \
+-        --enable-libvpx \
+-        --enable-libx264 \
+-        --enable-libxvid \
+-        --enable-postproc
++        --disable-avdevice \
++        --disable-swresample \
++        --disable-swscale \
++        --disable-postproc \
++        --disable-avfilter \
++        --disable-encoders \
++        --disable-muxers \
++        --disable-devices \
++        --disable-filters \
++        --enable-libopus
+     $(MAKE) -C '$(1)' -j '$(JOBS)'
+     $(MAKE) -C '$(1)' -j 1 install
+ endef
+diff --git a/src/wxwidgets.mk b/src/wxwidgets.mk
+index db37a9a..8f37ffd 100644
+--- a/src/wxwidgets.mk
++++ b/src/wxwidgets.mk
+@@ -8,7 +8,7 @@ $(PKG)_CHECKSUM := 0bab57ecd6d065a3672ec5fbb09d287456727ea4
+ $(PKG)_SUBDIR   := wxWidgets-$($(PKG)_VERSION)
+ $(PKG)_FILE     := wxWidgets-$($(PKG)_VERSION).tar.bz2
+ $(PKG)_URL      := http://$(SOURCEFORGE_MIRROR)/project/wxwindows/$($(PKG)_VERSION)/$($(PKG)_FILE)
+-$(PKG)_DEPS     := gcc libiconv libpng jpeg tiff sdl zlib expat
++$(PKG)_DEPS     := gcc libiconv libpng jpeg tiff zlib expat
+ 
+ define $(PKG)_UPDATE
+     $(WGET) -q -O- 'http://sourceforge.net/projects/wxwindows/files/' | \
+@@ -39,7 +39,6 @@ define $(PKG)_CONFIGURE_OPTS
+         --with-regex=yes \
+         --with-zlib=sys \
+         --with-expat=sys \
+-        --with-sdl \
+         --without-gtk \
+         --without-motif \
+         --without-mac \
