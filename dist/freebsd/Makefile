@@ -3,6 +3,7 @@
 
 PORTNAME=	spek
 PORTVERSION=	0.8.2
+PORTREVISION=	2
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_GOOGLE_CODE}
 
@@ -11,23 +12,20 @@ COMMENT=	Acoustic spectrum analyser
 
 LICENSE=	GPLv3
 
-LIB_DEPENDS=	avcodec1:${PORTSDIR}/multimedia/ffmpeg1
+LIB_DEPENDS=	libavcodec.so:${PORTSDIR}/multimedia/ffmpeg
 
 MAN1=		spek.1
 
 USE_XZ=		yes
+NO_STAGE=	yes
 USE_GCC=	4.7+
-USE_GMAKE=	yes
-USE_GETTEXT=	yes
+USES=		gettext gmake
 USE_GNOME=	desktopfileutils intltool
 USE_WX=	2.8+
 WX_UNICODE=	yes
 WX_CONF_ARGS=	absolute
 GNU_CONFIGURE=	yes
-CONFIGURE_ENV=	FFMPEG_CFLAGS="-I${LOCALBASE}/include/ffmpeg1" \
-		FFMPEG_LIBS="-lavcodec1 -lavformat1 -lavutil1 -L${LOCALBASE}/lib/ffmpeg1"
 INSTALLS_ICONS=	yes
-MAKE_JOBS_SAFE=	yes
 
 post-install:
 	-@update-desktop-database

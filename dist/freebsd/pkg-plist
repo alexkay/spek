@@ -25,7 +25,6 @@ share/locale/uk/LC_MESSAGES/spek.mo
 share/locale/vi/LC_MESSAGES/spek.mo
 share/locale/zh_CN/LC_MESSAGES/spek.mo
 share/locale/zh_TW/LC_MESSAGES/spek.mo
-@dirrmtry share/applications
 @dirrmtry share/icons/hicolor/16x16/apps
 @dirrmtry share/icons/hicolor/16x16
 @dirrmtry share/icons/hicolor/22x22/apps
