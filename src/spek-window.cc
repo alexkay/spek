@@ -277,7 +277,7 @@ void SpekWindow::on_save(wxCommandEvent&)
         this->cur_dir,
         wxEmptyString,
         filters,
-        wxFD_SAVE
+        wxFD_SAVE | wxFD_OVERWRITE_PROMPT
     );
 
     // Suggested name is <file_name>.png
