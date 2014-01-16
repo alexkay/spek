@@ -1,10 +1,15 @@
-TESTS = test
+TESTS = \
+	test \
+	perf
 
 if USE_VALGRIND
 TESTS_ENVIRONMENT = valgrind --leak-check=full --quiet --error-exitcode=1
 endif
 
 check_PROGRAMS = $(TESTS)
+
+perf_SOURCES = \
+	perf.cc
 
 test_SOURCES = \
 	test-audio.cc \

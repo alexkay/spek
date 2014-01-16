@@ -41,6 +41,8 @@ po/stamp-it
 src/*.stamp
 src/spek
 stamp-h1
+tests/perf
+tests/samples/perf.wav
 tests/test
 web/version
 xmldocs.make
