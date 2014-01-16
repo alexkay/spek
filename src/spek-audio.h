@@ -30,6 +30,7 @@ class Audio
 {
 public:
     Audio();
+    ~Audio();
 
     std::unique_ptr<AudioFile> open(const std::string& file_name);
 };
