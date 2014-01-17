@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Alexander Kojevnikov <alexander@kojevnikov.com>, 2012.
-# Piotr Drąg <piotrdrag@gmail.com>, 2011-2012.
+# Alexander Kojevnikov <alexander@kojevnikov.com>, 2012
+# Piotr Drąg <piotrdrag@gmail.com>, 2011-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
-"POT-Creation-Date: 2013-02-23 20:00-0800\n"
-"PO-Revision-Date: 2013-02-24 04:17+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-09-11 10:26-0700\n"
+"PO-Revision-Date: 2013-11-20 10:50+0000\n"
 "Last-Translator: Alexander Kojevnikov <alexander@kojevnikov.com>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/spek/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -20,32 +20,32 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../data/spek.desktop.in.in.h:1
-msgid "Spectrum Analyser"
-msgstr "Analizator widma"
-
-#: ../data/spek.desktop.in.in.h:2
 msgid "Spek"
 msgstr "Spek"
 
-#: ../data/spek.desktop.in.in.h:3
-msgid "Spek Spectrum Analyser"
-msgstr "Analizator widma Spek"
+#: ../data/spek.desktop.in.in.h:2
+msgid "Spectrum Analyser"
+msgstr "Analizator widma"
 
-#: ../data/spek.desktop.in.in.h:4
+#: ../data/spek.desktop.in.in.h:3
 msgid "View spectrograms of your audio files"
 msgstr "Wyświetlanie spektrogramów plików dźwiękowych"
 
-#: ../src/spek-pipeline.cc:201
+#: ../data/spek.desktop.in.in.h:4
+msgid "Spek Spectrum Analyser"
+msgstr "Analizator widma Spek"
+
+#: ../src/spek-pipeline.cc:197
 #, c-format
 msgid "%d kbps"
 msgstr "%d kb/s"
 
-#: ../src/spek-pipeline.cc:206
+#: ../src/spek-pipeline.cc:202
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../src/spek-pipeline.cc:213
+#: ../src/spek-pipeline.cc:209
 #, c-format
 msgid "%d bit"
 msgid_plural "%d bits"
@@ -53,7 +53,7 @@ msgstr[0] "%d bit"
 msgstr[1] "%d bity"
 msgstr[2] "%d bitów"
 
-#: ../src/spek-pipeline.cc:221
+#: ../src/spek-pipeline.cc:217
 #, c-format
 msgid "%d channel"
 msgid_plural "%d channels"
@@ -61,83 +61,83 @@ msgstr[0] "%d kanał"
 msgstr[1] "%d kanały"
 msgstr[2] "%d kanałów"
 
-#: ../src/spek-pipeline.cc:238
+#: ../src/spek-pipeline.cc:234
 msgid "Cannot open input file"
 msgstr "Nie można otworzyć pliku wejściowego"
 
-#: ../src/spek-pipeline.cc:241
+#: ../src/spek-pipeline.cc:237
 msgid "Cannot find stream info"
 msgstr "Nie można odnaleźć informacji o strumieniu"
 
-#: ../src/spek-pipeline.cc:244
+#: ../src/spek-pipeline.cc:240
 msgid "The file contains no audio streams"
 msgstr "Plik nie zawiera strumieni dźwięku"
 
-#: ../src/spek-pipeline.cc:247
+#: ../src/spek-pipeline.cc:243
 msgid "Cannot find decoder"
 msgstr "Nie można odnaleźć dekodera"
 
-#: ../src/spek-pipeline.cc:250
+#: ../src/spek-pipeline.cc:246
 msgid "Unknown duration"
 msgstr "Nieznany czas trwania"
 
-#: ../src/spek-pipeline.cc:253
+#: ../src/spek-pipeline.cc:249
 msgid "No audio channels"
 msgstr "Brak kanałów dźwięku"
 
-#: ../src/spek-pipeline.cc:256
+#: ../src/spek-pipeline.cc:252
 msgid "Cannot open decoder"
 msgstr "Nie można otworzyć dekodera"
 
-#: ../src/spek-pipeline.cc:259
+#: ../src/spek-pipeline.cc:255
 msgid "Unsupported sample format"
 msgstr "Nieobsługiwany format próbki"
 
 #. TRANSLATORS: first %s is the error message, second %s is stream
 #. description.
-#: ../src/spek-pipeline.cc:271
+#: ../src/spek-pipeline.cc:267
 #, c-format
 msgid "%s: %s"
 msgstr "%s: %s"
 
-#: ../src/spek-preferences-dialog.cc:61
+#: ../src/spek-preferences-dialog.cc:67
 msgid "Preferences"
 msgstr "Preferencje"
 
-#: ../src/spek-preferences-dialog.cc:66
+#: ../src/spek-preferences-dialog.cc:72
 msgid "(system default)"
 msgstr "(domyślne systemowe)"
 
 #. TRANSLATORS: The name of a section in the Preferences dialog.
-#: ../src/spek-preferences-dialog.cc:73
+#: ../src/spek-preferences-dialog.cc:79
 msgid "General"
 msgstr "Ogólne"
 
-#: ../src/spek-preferences-dialog.cc:82
+#: ../src/spek-preferences-dialog.cc:88
 msgid "Language:"
 msgstr "Język:"
 
-#: ../src/spek-preferences-dialog.cc:98
+#: ../src/spek-preferences-dialog.cc:104
 msgid "Check for &updates"
 msgstr "Sprawdź akt&ualizacje"
 
-#: ../src/spek-spectrogram.cc:189
+#: ../src/spek-spectrogram.cc:191
 #, c-format
 msgid "%d kHz"
 msgstr "%d kHz"
 
-#: ../src/spek-spectrogram.cc:194
+#: ../src/spek-spectrogram.cc:196
 #, c-format
 msgid "%d dB"
 msgstr "%d dB"
 
 #. TRANSLATORS: keep "00" unchanged, it's used to calc the text width
-#: ../src/spek-spectrogram.cc:300
+#: ../src/spek-spectrogram.cc:302
 msgid "00 kHz"
 msgstr "00 kHz"
 
 #. TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
-#: ../src/spek-spectrogram.cc:331
+#: ../src/spek-spectrogram.cc:333
 msgid "-00 dB"
 msgstr "-00 dB"
 

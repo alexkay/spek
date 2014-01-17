@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
-"POT-Creation-Date: 2013-08-08 09:55-0700\n"
-"PO-Revision-Date: 2013-09-10 22:20+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-09-11 10:26-0700\n"
+"PO-Revision-Date: 2013-11-20 10:50+0000\n"
 "Last-Translator: Fintero\n"
 "Language-Team: Finnish (http://www.transifex.com/projects/p/spek/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -97,24 +97,24 @@ msgstr "Näytteen tiedostomuotoa ei tueta"
 msgid "%s: %s"
 msgstr "%s: %s"
 
-#: ../src/spek-preferences-dialog.cc:65
+#: ../src/spek-preferences-dialog.cc:67
 msgid "Preferences"
 msgstr "Asetukset"
 
-#: ../src/spek-preferences-dialog.cc:70
+#: ../src/spek-preferences-dialog.cc:72
 msgid "(system default)"
 msgstr "(oletusasetus)"
 
 #. TRANSLATORS: The name of a section in the Preferences dialog.
-#: ../src/spek-preferences-dialog.cc:77
+#: ../src/spek-preferences-dialog.cc:79
 msgid "General"
 msgstr "Yleiset"
 
-#: ../src/spek-preferences-dialog.cc:86
+#: ../src/spek-preferences-dialog.cc:88
 msgid "Language:"
 msgstr "Kieli:"
 
-#: ../src/spek-preferences-dialog.cc:102
+#: ../src/spek-preferences-dialog.cc:104
 msgid "Check for &updates"
 msgstr "Etsi &päivityksiä"
 

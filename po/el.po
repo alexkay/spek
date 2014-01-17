@@ -8,9 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/spek/issues/list\n"
-"POT-Creation-Date: 2013-03-07 10:14-0800\n"
-"PO-Revision-Date: 2013-08-08 16:42+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-09-11 10:26-0700\n"
+"PO-Revision-Date: 2013-11-20 10:50+0000\n"
 "Last-Translator: Alexander Kojevnikov <alexander@kojevnikov.com>\n"
 "Language-Team: Greek (http://www.transifex.com/projects/p/spek/language/el/)\n"
 "MIME-Version: 1.0\n"
@@ -20,122 +20,122 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/spek.desktop.in.in.h:1
-msgid "Spectrum Analyser"
-msgstr "Spectrum Analyser"
-
-#: ../data/spek.desktop.in.in.h:2
 msgid "Spek"
 msgstr "Spek"
 
-#: ../data/spek.desktop.in.in.h:3
-msgid "Spek Spectrum Analyser"
-msgstr "Spek Spectrum Analyser"
+#: ../data/spek.desktop.in.in.h:2
+msgid "Spectrum Analyser"
+msgstr "Spectrum Analyser"
 
-#: ../data/spek.desktop.in.in.h:4
+#: ../data/spek.desktop.in.in.h:3
 msgid "View spectrograms of your audio files"
 msgstr "Εμφανιση φασματογραφήματων των αρχείων ήχου σας "
 
-#: ../src/spek-pipeline.cc:199
+#: ../data/spek.desktop.in.in.h:4
+msgid "Spek Spectrum Analyser"
+msgstr "Spek Spectrum Analyser"
+
+#: ../src/spek-pipeline.cc:197
 #, c-format
 msgid "%d kbps"
 msgstr "%d kbps"
 
-#: ../src/spek-pipeline.cc:204
+#: ../src/spek-pipeline.cc:202
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../src/spek-pipeline.cc:211
+#: ../src/spek-pipeline.cc:209
 #, c-format
 msgid "%d bit"
 msgid_plural "%d bits"
 msgstr[0] "%d bit"
 msgstr[1] "%d bits"
 
-#: ../src/spek-pipeline.cc:219
+#: ../src/spek-pipeline.cc:217
 #, c-format
 msgid "%d channel"
 msgid_plural "%d channels"
 msgstr[0] "%d καναλι"
 msgstr[1] "%d καναλια"
 
-#: ../src/spek-pipeline.cc:236
+#: ../src/spek-pipeline.cc:234
 msgid "Cannot open input file"
 msgstr "Δεν μπορεί να ανοίχθει το αρχείο εισόδου "
 
-#: ../src/spek-pipeline.cc:239
+#: ../src/spek-pipeline.cc:237
 msgid "Cannot find stream info"
 msgstr "Δεν μπορεί να βρεθει πληροφορία για το stream"
 
-#: ../src/spek-pipeline.cc:242
+#: ../src/spek-pipeline.cc:240
 msgid "The file contains no audio streams"
 msgstr "Το αρχείο δεν περιέχει ροές ήχου "
 
-#: ../src/spek-pipeline.cc:245
+#: ../src/spek-pipeline.cc:243
 msgid "Cannot find decoder"
 msgstr "Δεν μπορει να βρεθει αποκωδικοποιητής"
 
-#: ../src/spek-pipeline.cc:248
+#: ../src/spek-pipeline.cc:246
 msgid "Unknown duration"
 msgstr "Άγνωστη διάρκεια "
 
-#: ../src/spek-pipeline.cc:251
+#: ../src/spek-pipeline.cc:249
 msgid "No audio channels"
 msgstr "Δεν υπαρχουν κανάλια ήχου "
 
-#: ../src/spek-pipeline.cc:254
+#: ../src/spek-pipeline.cc:252
 msgid "Cannot open decoder"
 msgstr "Δεν μπορεί να ανοίχθει ο αποκωδικοποιητής "
 
-#: ../src/spek-pipeline.cc:257
+#: ../src/spek-pipeline.cc:255
 msgid "Unsupported sample format"
 msgstr "Μη υποστηριζόμενη μορφή του δείγματος "
 
 #. TRANSLATORS: first %s is the error message, second %s is stream
 #. description.
-#: ../src/spek-pipeline.cc:269
+#: ../src/spek-pipeline.cc:267
 #, c-format
 msgid "%s: %s"
 msgstr "%s: %s"
 
-#: ../src/spek-preferences-dialog.cc:62
+#: ../src/spek-preferences-dialog.cc:67
 msgid "Preferences"
 msgstr "Ρυθμισεις"
 
-#: ../src/spek-preferences-dialog.cc:67
+#: ../src/spek-preferences-dialog.cc:72
 msgid "(system default)"
 msgstr "(Προκαθορισμος συστηματος)"
 
 #. TRANSLATORS: The name of a section in the Preferences dialog.
-#: ../src/spek-preferences-dialog.cc:74
+#: ../src/spek-preferences-dialog.cc:79
 msgid "General"
 msgstr "Γενικα"
 
-#: ../src/spek-preferences-dialog.cc:83
+#: ../src/spek-preferences-dialog.cc:88
 msgid "Language:"
 msgstr "Γλωσσα:"
 
-#: ../src/spek-preferences-dialog.cc:99
+#: ../src/spek-preferences-dialog.cc:104
 msgid "Check for &updates"
 msgstr "Ελεγχος για καινουργιες εκδοσεις"
 
-#: ../src/spek-spectrogram.cc:189
+#: ../src/spek-spectrogram.cc:191
 #, c-format
 msgid "%d kHz"
 msgstr "%d kHz"
 
-#: ../src/spek-spectrogram.cc:194
+#: ../src/spek-spectrogram.cc:196
 #, c-format
 msgid "%d dB"
 msgstr "%d dB"
 
 #. TRANSLATORS: keep "00" unchanged, it's used to calc the text width
-#: ../src/spek-spectrogram.cc:300
+#: ../src/spek-spectrogram.cc:302
 msgid "00 kHz"
 msgstr "00 kHz"
 
 #. TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
-#: ../src/spek-spectrogram.cc:331
+#: ../src/spek-spectrogram.cc:333
 msgid "-00 dB"
 msgstr "-00 dB"
 
