@@ -44,12 +44,12 @@ void SpekPreferences::init()
         }
     }
     this->locale->Init(lang);
-    this->locale->AddCatalog(wxT(GETTEXT_PACKAGE));
+    this->locale->AddCatalog(GETTEXT_PACKAGE);
 }
 
 SpekPreferences::SpekPreferences() : locale(NULL)
 {
-    wxString path = spek_platform_config_path(wxT("spek"));
+    wxString path = spek_platform_config_path("spek");
     this->config = new wxFileConfig(
         wxEmptyString,
         wxEmptyString,
@@ -63,38 +63,38 @@ SpekPreferences::SpekPreferences() : locale(NULL)
 bool SpekPreferences::get_check_update()
 {
     bool result = true;
-    this->config->Read(wxT("/update/check"), &result);
+    this->config->Read("/update/check", &result);
     return result;
 }
 
 void SpekPreferences::set_check_update(bool value)
 {
-    this->config->Write(wxT("/update/check"), value);
+    this->config->Write("/update/check", value);
     this->config->Flush();
 }
 
 long SpekPreferences::get_last_update()
 {
     long result = 0;
-    this->config->Read(wxT("/update/last"), &result);
+    this->config->Read("/update/last", &result);
     return result;
 }
 
 void SpekPreferences::set_last_update(long value)
 {
-    this->config->Write(wxT("/update/last"), value);
+    this->config->Write("/update/last", value);
     this->config->Flush();
 }
 
 wxString SpekPreferences::get_language()
 {
-    wxString result(wxT(""));
-    this->config->Read(wxT("/general/language"), &result);
+    wxString result("");
+    this->config->Read("/general/language", &result);
     return result;
 }
 
 void SpekPreferences::set_language(const wxString& value)
 {
-    this->config->Write(wxT("/general/language"), value);
+    this->config->Write("/general/language", value);
     this->config->Flush();
 }

@@ -183,7 +183,7 @@ void SpekSpectrogram::on_have_sample(SpekHaveSampleEvent& event)
 static wxString time_formatter(int unit)
 {
     // TODO: i18n
-    return wxString::Format(wxT("%d:%02d"), unit / 60, unit % 60);
+    return wxString::Format("%d:%02d", unit / 60, unit % 60);
 }
 
 static wxString freq_formatter(int unit)
@@ -220,27 +220,27 @@ void SpekSpectrogram::render(wxDC& dc)
     wxFont small_font = wxFont(normal_font);
     small_font.SetPointSize((int)round(8 * spek_platform_font_scale()));
     dc.SetFont(normal_font);
-    int normal_height = dc.GetTextExtent(wxT("dummy")).GetHeight();
+    int normal_height = dc.GetTextExtent("dummy").GetHeight();
     dc.SetFont(large_font);
-    int large_height = dc.GetTextExtent(wxT("dummy")).GetHeight();
+    int large_height = dc.GetTextExtent("dummy").GetHeight();
     dc.SetFont(small_font);
-    int small_height = dc.GetTextExtent(wxT("dummy")).GetHeight();
+    int small_height = dc.GetTextExtent("dummy").GetHeight();
 
     // Clean the background.
     dc.Clear();
 
     // Spek version
     dc.SetFont(large_font);
-    wxString package_name(wxT(PACKAGE_NAME));
+    wxString package_name(PACKAGE_NAME);
     dc.DrawText(
         package_name,
         w - RPAD + GAP,
         TPAD - 2 * GAP - normal_height - large_height
     );
-    int package_name_width = dc.GetTextExtent(package_name + wxT(" ")).GetWidth();
+    int package_name_width = dc.GetTextExtent(package_name + " ").GetWidth();
     dc.SetFont(small_font);
     dc.DrawText(
-        wxT(PACKAGE_VERSION),
+        PACKAGE_VERSION,
         w - RPAD + GAP + package_name_width,
         TPAD - 2 * GAP - normal_height - small_height
     );
@@ -278,7 +278,7 @@ void SpekSpectrogram::render(wxDC& dc)
                 h - BPAD,
                 SpekRuler::BOTTOM,
                 // TODO: i18n
-                wxT("00:00"),
+                "00:00",
                 time_factors,
                 0,
                 (int)this->duration,
@@ -407,7 +407,7 @@ static wxString trim(wxDC& dc, const wxString& s, int length, bool trim_end)
     }
 
     // Binary search FTW!
-    wxString fix(wxT("..."));
+    wxString fix("...");
     int i = 0;
     int k = s.length();
     while (k - i > 1) {

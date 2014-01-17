@@ -57,29 +57,27 @@ bool Spek::OnInit()
 
     static const wxCmdLineEntryDesc desc[] = {{
             wxCMD_LINE_SWITCH,
-            wxT_2("h"),
-            wxT_2("help"),
-            wxT_2("Show this help message"),
+            "h",
+            "help",
+            "Show this help message",
             wxCMD_LINE_VAL_NONE,
-            wxCMD_LINE_OPTION_HELP
+            wxCMD_LINE_OPTION_HELP,
         }, {
             wxCMD_LINE_SWITCH,
-            wxT_2("V"),
-            wxT_2("version"),
-            wxT_2("Display the version and exit"),
+            "V",
+            "version",
+            "Display the version and exit",
             wxCMD_LINE_VAL_NONE,
-            wxCMD_LINE_PARAM_OPTIONAL
+            wxCMD_LINE_PARAM_OPTIONAL,
         }, {
             wxCMD_LINE_PARAM,
             NULL,
             NULL,
-            wxT_2("FILE"),
+            "FILE",
             wxCMD_LINE_VAL_STRING,
-            wxCMD_LINE_PARAM_OPTIONAL
-        }, {
-            // TODO: use wxCMD_LINE_DESC_END after settling on wx29.
-            wxCMD_LINE_NONE, NULL, NULL, NULL, wxCMD_LINE_VAL_NONE, 0
-        }
+            wxCMD_LINE_PARAM_OPTIONAL,
+        },
+        wxCMD_LINE_DESC_END,
     };
 
     wxCmdLineParser parser(desc, argc, argv);
@@ -91,10 +89,10 @@ bool Spek::OnInit()
         this->quit = true;
         return true;
     }
-    if (parser.Found(wxT("version"))) {
+    if (parser.Found("version")) {
         // TRANSLATORS: the %s is the package version.
-        wxPrintf(_("Spek version %s"), wxT(PACKAGE_VERSION));
-        wxPrintf(wxT("\n"));
+        wxPrintf(_("Spek version %s"), PACKAGE_VERSION);
+        wxPrintf("\n");
         this->quit = true;
         return true;
     }

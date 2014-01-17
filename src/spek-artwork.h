@@ -19,13 +19,11 @@
 #ifndef SPEK_ARTWORK_H_
 #define SPEK_ARTWORK_H_
 
-#include <wx/string.h>
-
-#define ART_SPEK wxT("art-spek")
-#define ART_OPEN wxT("art-open")
-#define ART_SAVE wxT("art-save")
-#define ART_HELP wxT("art-help")
-#define ART_CLOSE wxT("art-close")
+#define ART_SPEK "art-spek"
+#define ART_OPEN "art-open"
+#define ART_SAVE "art-save"
+#define ART_HELP "art-help"
+#define ART_CLOSE "art-close"
 
 void spek_artwork_init();
 

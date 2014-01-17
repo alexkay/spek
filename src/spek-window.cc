@@ -75,12 +75,8 @@ SpekWindow::SpekWindow(const wxString& path) :
     this->description = _("Spek - Acoustic Spectrum Analyser");
     SetTitle(this->description);
 
-#if wxCHECK_VERSION(2, 9, 0)
 #ifndef OS_OSX
     SetIcons(wxArtProvider::GetIconBundle(ART_SPEK, wxART_FRAME_ICON));
-#endif
-#else
-    SetIcon(wxArtProvider::GetIcon(ART_SPEK, wxART_FRAME_ICON, wxSize(48, 48)));
 #endif
 
     wxMenuBar *menu = new wxMenuBar();
@@ -96,16 +92,16 @@ SpekWindow::SpekWindow(const wxString& path) :
 
     wxMenu *menu_edit = new wxMenu();
     wxMenuItem *menu_edit_prefs = new wxMenuItem(menu_edit, wxID_PREFERENCES);
-    menu_edit_prefs->SetItemLabel(menu_edit_prefs->GetItemLabelText() + wxT("\tCtrl-E"));
+    menu_edit_prefs->SetItemLabel(menu_edit_prefs->GetItemLabelText() + "\tCtrl-E");
     menu_edit->Append(menu_edit_prefs);
     menu->Append(menu_edit, _("&Edit"));
 
     wxMenu *menu_help = new wxMenu();
     wxMenuItem *menu_help_contents = new wxMenuItem(
-        menu_help, wxID_HELP, wxString(_("&Help")) + wxT("\tF1"));
+        menu_help, wxID_HELP, wxString(_("&Help")) + "\tF1");
     menu_help->Append(menu_help_contents);
     wxMenuItem *menu_help_about = new wxMenuItem(menu_help, wxID_ABOUT);
-    menu_help_about->SetItemLabel(menu_help_about->GetItemLabelText() + wxT("\tShift-F1"));
+    menu_help_about->SetItemLabel(menu_help_about->GetItemLabelText() + "\tShift-F1");
     menu_help->Append(menu_help_about);
     menu->Append(menu_help, _("&Help"));
 
@@ -124,7 +120,6 @@ SpekWindow::SpekWindow(const wxString& path) :
         wxArtProvider::GetBitmap(ART_SAVE, wxART_TOOLBAR),
         menu_file_save->GetItemLabelText()
     );
-#if wxCHECK_VERSION(2, 9, 1)
     toolbar->AddStretchableSpace();
     toolbar->AddTool(
         wxID_HELP,
@@ -132,7 +127,6 @@ SpekWindow::SpekWindow(const wxString& path) :
         wxArtProvider::GetBitmap(ART_HELP, wxART_TOOLBAR),
         _("Help")
     );
-#endif
     toolbar->Realize();
 
     wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
@@ -230,14 +224,14 @@ void SpekWindow::on_open(wxCommandEvent&)
     if (filters.IsEmpty()) {
         filters.Alloc(1024);
         filters += _("All files");
-        filters += wxT("|*.*|");
+        filters += "|*.*|";
         filters += _("Audio files");
-        filters += wxT("|");
+        filters += "|";
         for (int i = 0; audio_extensions[i]; ++i) {
             if (i) {
-                filters += wxT(";");
+                filters += ";";
             }
-            filters += wxT("*.");
+            filters += "*.";
             filters += wxString::FromAscii(audio_extensions[i]);
         }
         filters.Shrink();
@@ -268,7 +262,7 @@ void SpekWindow::on_save(wxCommandEvent&)
 
     if (filters.IsEmpty()) {
         filters = _("PNG images");
-        filters += wxT("|*.png");
+        filters += "|*.png";
     }
 
     wxFileDialog *dlg = new wxFileDialog(
@@ -286,7 +280,7 @@ void SpekWindow::on_save(wxCommandEvent&)
         wxFileName file_name(this->path);
         name = file_name.GetFullName();
     }
-    name += wxT(".png");
+    name += ".png";
     dlg->SetFilename(name);
 
     if (dlg->ShowModal() == wxID_OK) {
@@ -311,34 +305,34 @@ void SpekWindow::on_preferences(wxCommandEvent&)
 void SpekWindow::on_help(wxCommandEvent&)
 {
     wxLaunchDefaultBrowser(
-        wxString::Format(wxT("http://spek.cc/man-%s.html"), wxT(PACKAGE_VERSION))
+        wxString::Format("http://spek.cc/man-%s.html", PACKAGE_VERSION)
     );
 }
 
 void SpekWindow::on_about(wxCommandEvent&)
 {
     wxAboutDialogInfo info;
-    info.AddDeveloper(wxT("Alexander Kojevnikov"));
-    info.AddDeveloper(wxT("Colin Watson"));
-    info.AddDeveloper(wxT("Daniel Hams"));
-    info.AddDeveloper(wxT("Fabian Deutsch"));
-    info.AddDeveloper(wxT("Jonathan Gonzalez V"));
-    info.AddDeveloper(wxT("Simon Ruderich"));
-    info.AddDeveloper(wxT("Stefan Kost"));
-    info.AddDeveloper(wxT("Thibault North"));
-    info.AddArtist(wxT("Olga Vasylevska"));
+    info.AddDeveloper("Alexander Kojevnikov");
+    info.AddDeveloper("Colin Watson");
+    info.AddDeveloper("Daniel Hams");
+    info.AddDeveloper("Fabian Deutsch");
+    info.AddDeveloper("Jonathan Gonzalez V");
+    info.AddDeveloper("Simon Ruderich");
+    info.AddDeveloper("Stefan Kost");
+    info.AddDeveloper("Thibault North");
+    info.AddArtist("Olga Vasylevska");
     // TRANSLATORS: Add your name here
     wxString translator = _("translator-credits");
-    if (translator != wxT("translator-credits")) {
+    if (translator != "translator-credits") {
         info.AddTranslator(translator);
     }
-    info.SetName(wxT("Spek"));
-    info.SetVersion(wxT(PACKAGE_VERSION));
+    info.SetName("Spek");
+    info.SetVersion(PACKAGE_VERSION);
     info.SetCopyright(_("Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"));
     info.SetDescription(this->description);
 #ifdef OS_UNIX
-    info.SetWebSite(wxT("http://spek.cc/"), _("Spek Website"));
-    info.SetIcon(wxArtProvider::GetIcon(wxT("spek"), wxART_OTHER, wxSize(128, 128)));
+    info.SetWebSite("http://spek.cc/", _("Spek Website"));
+    info.SetIcon(wxArtProvider::GetIcon("spek", wxART_OTHER, wxSize(128, 128)));
 #endif
     wxAboutBox(info);
 }
@@ -351,7 +345,7 @@ void SpekWindow::on_notify(wxCommandEvent&)
 
 void SpekWindow::on_visit(wxCommandEvent&)
 {
-    wxLaunchDefaultBrowser(wxT("http://spek.cc"));
+    wxLaunchDefaultBrowser("http://spek.cc");
 }
 
 void SpekWindow::on_close(wxCommandEvent& event)
@@ -387,8 +381,8 @@ static void * check_version(void *p)
     // Get the version number.
     wxString version;
     wxHTTP http;
-    if (http.Connect(wxT("spek.cc"))) {
-        wxInputStream *stream = http.GetInputStream(wxT("/version"));
+    if (http.Connect("spek.cc")) {
+        wxInputStream *stream = http.GetInputStream("/version");
         if (stream) {
             wxStringOutputStream out(&version);
             stream->Read(out);

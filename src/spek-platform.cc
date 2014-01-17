@@ -43,11 +43,11 @@ wxString spek_platform_config_path(const wxString& app_name)
     wxFileName file_name(wxStandardPaths::Get().GetUserConfigDir(), wxEmptyString);
 #else
     wxFileName file_name(wxGetHomeDir(), wxEmptyString);
-    file_name.AppendDir(wxT(".config"));
+    file_name.AppendDir(".config");
 #endif
     file_name.AppendDir(app_name);
     file_name.Mkdir(0755, wxPATH_MKDIR_FULL);
-    file_name.SetFullName(wxT("preferences"));
+    file_name.SetFullName("preferences");
     return file_name.GetFullPath();
 }
 
