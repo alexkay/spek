@@ -51,7 +51,7 @@ PKG_CHECK_MODULES(AVCODEC, [libavcodec >= 53.25])
 PKG_CHECK_MODULES(AVUTIL, [libavutil >= 51.17])
 
 AM_OPTIONS_WXCONFIG
-reqwx=2.9.4
+reqwx=3.0.0
 AM_PATH_WXCONFIG($reqwx, wx=1)
 if test "$wx" != 1; then
 	AC_MSG_ERROR([

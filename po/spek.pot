@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-11 10:26-0700\n"
+"POT-Creation-Date: 2014-03-29 13:05-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -141,72 +141,72 @@ msgstr ""
 msgid "Spek - Acoustic Spectrum Analyser"
 msgstr ""
 
-#: ../src/spek-window.cc:95
+#: ../src/spek-window.cc:91
 msgid "&File"
 msgstr ""
 
-#: ../src/spek-window.cc:101
+#: ../src/spek-window.cc:97
 msgid "&Edit"
 msgstr ""
 
-#: ../src/spek-window.cc:105 ../src/spek-window.cc:110
+#: ../src/spek-window.cc:101 ../src/spek-window.cc:106
 msgid "&Help"
 msgstr ""
 
-#: ../src/spek-window.cc:133
+#: ../src/spek-window.cc:128
 msgid "Help"
 msgstr ""
 
-#: ../src/spek-window.cc:147
+#: ../src/spek-window.cc:141
 msgid "A new version of Spek is available, click to download."
 msgstr ""
 
 #. TRANSLATORS: window title, %s is replaced with the file name
-#: ../src/spek-window.cc:185
+#: ../src/spek-window.cc:179
 #, c-format
 msgid "Spek - %s"
 msgstr ""
 
-#: ../src/spek-window.cc:232
+#: ../src/spek-window.cc:226
 msgid "All files"
 msgstr ""
 
-#: ../src/spek-window.cc:234
+#: ../src/spek-window.cc:228
 msgid "Audio files"
 msgstr ""
 
-#: ../src/spek-window.cc:248
+#: ../src/spek-window.cc:242
 msgid "Open File"
 msgstr ""
 
-#: ../src/spek-window.cc:270
+#: ../src/spek-window.cc:264
 msgid "PNG images"
 msgstr ""
 
-#: ../src/spek-window.cc:276
+#: ../src/spek-window.cc:270
 msgid "Save Spectrogram"
 msgstr ""
 
 #. Suggested name is <file_name>.png
-#: ../src/spek-window.cc:284
+#: ../src/spek-window.cc:278
 msgid "Untitled"
 msgstr ""
 
 #. TRANSLATORS: Add your name here
-#: ../src/spek-window.cc:331
+#: ../src/spek-window.cc:325
 msgid "translator-credits"
 msgstr ""
 
-#: ../src/spek-window.cc:337
+#: ../src/spek-window.cc:331
 msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
 msgstr ""
 
-#: ../src/spek-window.cc:340
+#: ../src/spek-window.cc:334
 msgid "Spek Website"
 msgstr ""
 
 #. TRANSLATORS: the %s is the package version.
-#: ../src/spek.cc:96
+#: ../src/spek.cc:94
 #, c-format
 msgid "Spek version %s"
 msgstr ""
