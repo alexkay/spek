@@ -39,6 +39,7 @@ static const char *available_languages[] =
     "gl", "Galego",
     "it", "Italiano",
     "ja", "日本語",
+    "lv", "Latviešu",
     "nb", "Norsk (bokmål)",
     "nl", "Nederlands",
     "pl", "Polski",
