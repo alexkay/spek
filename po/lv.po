@@ -1,0 +1,215 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Toms Zvīnis <tomy91@inbox.lv>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Spek\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-03-29 13:05-0700\n"
+"PO-Revision-Date: 2014-03-02 11:25+0000\n"
+"Last-Translator: Toms Zvīnis <tomy91@inbox.lv>\n"
+"Language-Team: Latvian (http://www.transifex.com/projects/p/spek/language/lv/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: lv\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);\n"
+
+#: ../data/spek.desktop.in.in.h:1
+msgid "Spek"
+msgstr "Spek"
+
+#: ../data/spek.desktop.in.in.h:2
+msgid "Spectrum Analyser"
+msgstr "Spektra Analīze"
+
+#: ../data/spek.desktop.in.in.h:3
+msgid "View spectrograms of your audio files"
+msgstr "Skatīt audiofailu spektrogrammas"
+
+#: ../data/spek.desktop.in.in.h:4
+msgid "Spek Spectrum Analyser"
+msgstr "Spek Spektra Analīze"
+
+#: ../src/spek-pipeline.cc:197
+#, c-format
+msgid "%d kbps"
+msgstr "%d kb/s"
+
+#: ../src/spek-pipeline.cc:202
+#, c-format
+msgid "%d Hz"
+msgstr "%d Hz"
+
+#: ../src/spek-pipeline.cc:209
+#, c-format
+msgid "%d bit"
+msgid_plural "%d bits"
+msgstr[0] "%d biti"
+msgstr[1] "%d bits"
+msgstr[2] "%d biti"
+
+#: ../src/spek-pipeline.cc:217
+#, c-format
+msgid "%d channel"
+msgid_plural "%d channels"
+msgstr[0] "%d kanāli"
+msgstr[1] "%d kanāls"
+msgstr[2] "%d kanāli"
+
+#: ../src/spek-pipeline.cc:234
+msgid "Cannot open input file"
+msgstr "Nevar atvērt ievades failu"
+
+#: ../src/spek-pipeline.cc:237
+msgid "Cannot find stream info"
+msgstr "Nevar atrast plūsmas informāciju"
+
+#: ../src/spek-pipeline.cc:240
+msgid "The file contains no audio streams"
+msgstr "Fails nesatur audio plūsmu"
+
+#: ../src/spek-pipeline.cc:243
+msgid "Cannot find decoder"
+msgstr "Nevar atrast dekoderi"
+
+#: ../src/spek-pipeline.cc:246
+msgid "Unknown duration"
+msgstr "Nezināms ilgums"
+
+#: ../src/spek-pipeline.cc:249
+msgid "No audio channels"
+msgstr "Nav audio kanālu"
+
+#: ../src/spek-pipeline.cc:252
+msgid "Cannot open decoder"
+msgstr "Nevar atvērt dekoderi"
+
+#: ../src/spek-pipeline.cc:255
+msgid "Unsupported sample format"
+msgstr "Neatbalstīts formāts"
+
+#. TRANSLATORS: first %s is the error message, second %s is stream
+#. description.
+#: ../src/spek-pipeline.cc:267
+#, c-format
+msgid "%s: %s"
+msgstr "%s: %s"
+
+#: ../src/spek-preferences-dialog.cc:67
+msgid "Preferences"
+msgstr "Uzstādījumi"
+
+#: ../src/spek-preferences-dialog.cc:72
+msgid "(system default)"
+msgstr "(sistēmas noklusējums)"
+
+#. TRANSLATORS: The name of a section in the Preferences dialog.
+#: ../src/spek-preferences-dialog.cc:79
+msgid "General"
+msgstr "Pamata"
+
+#: ../src/spek-preferences-dialog.cc:88
+msgid "Language:"
+msgstr "Valoda:"
+
+#: ../src/spek-preferences-dialog.cc:104
+msgid "Check for &updates"
+msgstr "Pārbaudīt &atjauninājumus"
+
+#: ../src/spek-spectrogram.cc:191
+#, c-format
+msgid "%d kHz"
+msgstr "%d kHz"
+
+#: ../src/spek-spectrogram.cc:196
+#, c-format
+msgid "%d dB"
+msgstr "%d dB"
+
+#. TRANSLATORS: keep "00" unchanged, it's used to calc the text width
+#: ../src/spek-spectrogram.cc:302
+msgid "00 kHz"
+msgstr "00 kHz"
+
+#. TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
+#: ../src/spek-spectrogram.cc:333
+msgid "-00 dB"
+msgstr "-00 dB"
+
+#: ../src/spek-window.cc:75
+msgid "Spek - Acoustic Spectrum Analyser"
+msgstr "Spek - Akustiskā Spektra Analīze"
+
+#: ../src/spek-window.cc:91
+msgid "&File"
+msgstr "&Fails"
+
+#: ../src/spek-window.cc:97
+msgid "&Edit"
+msgstr "&Labot"
+
+#: ../src/spek-window.cc:101 ../src/spek-window.cc:106
+msgid "&Help"
+msgstr "&Palīdzība"
+
+#: ../src/spek-window.cc:128
+msgid "Help"
+msgstr "Palīdzība"
+
+#: ../src/spek-window.cc:141
+msgid "A new version of Spek is available, click to download."
+msgstr "Ir pieejama jauna Spek versija, klikšķini lai lejupielādētu."
+
+#. TRANSLATORS: window title, %s is replaced with the file name
+#: ../src/spek-window.cc:179
+#, c-format
+msgid "Spek - %s"
+msgstr "Spek - %s"
+
+#: ../src/spek-window.cc:226
+msgid "All files"
+msgstr "Visi faili"
+
+#: ../src/spek-window.cc:228
+msgid "Audio files"
+msgstr "Audio faili"
+
+#: ../src/spek-window.cc:242
+msgid "Open File"
+msgstr "Atvērt Failu"
+
+#: ../src/spek-window.cc:264
+msgid "PNG images"
+msgstr "PNG attēli"
+
+#: ../src/spek-window.cc:270
+msgid "Save Spectrogram"
+msgstr "Saglablabāt Spektrogrammu"
+
+#. Suggested name is <file_name>.png
+#: ../src/spek-window.cc:278
+msgid "Untitled"
+msgstr "Nenosaukts"
+
+#. TRANSLATORS: Add your name here
+#: ../src/spek-window.cc:325
+msgid "translator-credits"
+msgstr "Toms Zvīnis - @beigtapel3"
+
+#: ../src/spek-window.cc:331
+msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
+msgstr "Visas tiesības aizsargātas (c) 2010-2013 Aleksandrs Kojevņikovs un atbalstītāji"
+
+#: ../src/spek-window.cc:334
+msgid "Spek Website"
+msgstr "Spek interneta vietne"
+
+#. TRANSLATORS: the %s is the package version.
+#: ../src/spek.cc:94
+#, c-format
+msgid "Spek version %s"
+msgstr "Spek versija %s"
