@@ -1,3 +1,16 @@
+spek (0.8.2-3.2) unstable; urgency=medium
+
+  * Build using the default GCC. Closes: #751331.
+
+ -- Matthias Klose <doko@debian.org>  Sat, 09 Aug 2014 15:04:29 +0200
+
+spek (0.8.2-3.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Update to use wxWidgets 3.0.
+
+ -- Olly Betts <olly@survex.com>  Wed, 19 Mar 2014 11:30:09 +1300
+
 spek (0.8.2-3) unstable; urgency=low
 
   * Explicitly require g++-4.8 (Closes: #722486)
