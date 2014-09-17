@@ -16,6 +16,8 @@
  * along with Spek.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using namespace std;//needed for debugging with cout, FIXME remove all lines with cout after implementing scaling frequency range
+
 #include <cmath>
 
 #include <wx/dcbuffer.h>
@@ -42,6 +44,8 @@ enum
 {
     MAX_RANGE = 0,
     MIN_RANGE = -140,
+    MAX_FREQ = 48000,
+    MIN_FREQ = 0,
     URANGE = -20,
     LRANGE = -120,
     FFT_BITS = 11,
@@ -71,7 +75,9 @@ SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
     image(1, 1),
     prev_width(-1),
     urange(URANGE),
-    lrange(LRANGE)
+    lrange(LRANGE),
+    ufreq(MAX_FREQ),
+    lfreq(MIN_FREQ)
 {
     SetBackgroundStyle(wxBG_STYLE_CUSTOM);
     SetFocus();
@@ -115,15 +121,55 @@ void SpekSpectrogram::on_char(wxKeyEvent& evt)
     bool CS = evt.GetModifiers() == (wxMOD_CONTROL | wxMOD_SHIFT);
     bool dn = evt.GetKeyCode() == WXK_DOWN;
     bool up = evt.GetKeyCode() == WXK_UP;
+    bool lf = evt.GetKeyCode() == WXK_LEFT;
+    bool rg = evt.GetKeyCode() == WXK_RIGHT;
 
     if (C && up) {
+        // increasing lower limit of dynamic range
         this->lrange = spek_min(this->lrange + 1, this->urange - 1);
     } else if (C && dn) {
+        // decreasing lower limit of dynamic range
         this->lrange = spek_max(this->lrange - 1, MIN_RANGE);
     } else if (CS && up) {
+        // increasing upper limit of dynamic range
         this->urange = spek_min(this->urange + 1, MAX_RANGE);
     } else if (CS && dn) {
+        // decreasing upper limit of dynamic range
         this->urange = spek_max(this->urange - 1, this->lrange + 1);
+    } else if (C && rg) {
+        // increasing lower limit frequency range
+        cout << "Crg" << this->lfreq << " " << this->ufreq << "\n";//FIXME
+        if (this->lfreq == MIN_FREQ) {
+            this->lfreq = 1; // because two times zero is still zero
+        } else {
+            this->lfreq = spek_min(this->lfreq * 2, this->ufreq / 2);
+        }
+        cout << this->lfreq << "\n";//FIXME
+    } else if (C && lf) {
+        // decreasing lower limit frequency range
+        cout << "Clf" << this->lfreq << " " << this->ufreq << "\n";//FIXME
+        if (this->lfreq == MIN_FREQ) {
+            // do nothing
+        } else if (this->lfreq == 1) {
+            this->lfreq = MIN_FREQ; // to avoid going into rounding
+        } else {
+            this->lfreq = this->lfreq / 2;
+        }
+        cout << this->lfreq << "\n";//FIXME
+    } else if (CS && rg) {
+        // increasing upper limit frequency range
+        cout << "CSrg" << this->lfreq << " " << this->ufreq << "\n";//FIXME
+        if (this->ufreq == MAX_FREQ) {
+            // do nothing
+        } else {
+            this->ufreq = spek_min(this->ufreq * 2, MAX_FREQ);
+        }
+        cout << this->ufreq << "\n";//FIXME
+    } else if (CS && lf) {
+        // decreasing upper limit frequency range
+        cout << "CSlf" << this->lfreq << " " << this->ufreq << "\n";//FIXME
+        this->ufreq = spek_max(this->ufreq / 2, this->lfreq * 2);
+        cout << this->ufreq << "\n";//FIXME
     } else {
         evt.Skip();
         return;
@@ -301,11 +347,11 @@ void SpekSpectrogram::render(wxDC& dc)
                 // TRANSLATORS: keep "00" unchanged, it's used to calc the text width
                 _("00 kHz"),
                 freq_factors,
-                0,
-                freq,
+                0,//FIXME replace with this->lfreq?
+                freq,//FIXME replace with this->ufreq?
                 3.0,
-                (h - TPAD - BPAD) / (double)freq,
-                0.0,
+                (h - TPAD - BPAD) / (double)freq,//FIXME replace with (double)this->ufreq
+                0.0,//FIXME replace with (double)this->lfreq ?
                 freq_formatter
                 );
             freq_ruler.draw(dc);
@@ -377,6 +423,7 @@ void SpekSpectrogram::start()
         this->desc = wxString::FromUTF8(spek_pipeline_desc(this->pipeline).c_str());
         this->duration = spek_pipeline_duration(this->pipeline);
         this->sample_rate = spek_pipeline_sample_rate(this->pipeline);
+        this->ufreq = this->sample_rate / 2;
     } else {
         this->image.Create(1, 1);
     }

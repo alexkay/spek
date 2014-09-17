@@ -58,6 +58,8 @@ private:
     int prev_width;
     int urange;
     int lrange;
+    int ufreq;
+    int lfreq;
 
     DECLARE_EVENT_TABLE()
 };
