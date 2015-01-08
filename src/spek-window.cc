@@ -196,6 +196,7 @@ static const char *audio_extensions[] = {
     "au",
     "dts",
     "flac",
+    "flv",
     "gsm",
     "m4a",
     "m4p",
