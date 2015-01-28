@@ -17,7 +17,7 @@
  */
 
 #include <cmath>
-
+#include <stdlib.h>
 #define __STDC_CONSTANT_MACROS
 extern "C" {
 #include <libavcodec/avfft.h>
