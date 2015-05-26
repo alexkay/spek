@@ -37,6 +37,7 @@ Translators:
 * Tero Talvio
 * Tiago Rinaldi
 * Toms Zvīnis
+* Vincent A
 * Wasilis Mandratzis
 * Wouter Bolsterlee
 * Many more (let me know if you translated Spek and want your full name
