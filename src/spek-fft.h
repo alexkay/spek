@@ -35,7 +35,7 @@ class FFTPlan
 {
 public:
     FFTPlan(int nbits) :
-        nbits(nbits), input_size(1 << nbits), output_size((1 << (nbits - 1)) + 1),
+        input_size(1 << nbits), output_size((1 << (nbits - 1)) + 1),
         input(input_size), output(output_size) {}
     virtual ~FFTPlan() {}
 
@@ -52,7 +52,6 @@ protected:
     float *get_input() { return this->input.data(); }
 
 private:
-    int nbits;
     int input_size;
     int output_size;
     std::vector<float> input;
