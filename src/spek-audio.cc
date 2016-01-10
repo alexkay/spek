@@ -213,7 +213,7 @@ AudioFileImpl::AudioFileImpl(
     this->packet.data = nullptr;
     this->packet.size = 0;
     this->offset = 0;
-    this->frame = avcodec_alloc_frame();
+    this->frame = av_frame_alloc();
     this->buffer_len = 0;
     this->buffer = nullptr;
     this->frames_per_interval = 0;
@@ -227,7 +227,7 @@ AudioFileImpl::~AudioFileImpl()
         av_freep(&this->buffer);
     }
     if (this->frame) {
-        avcodec_free_frame(&this->frame);
+        av_frame_free(&this->frame);
     }
     if (this->packet.data) {
         this->packet.data -= this->offset;
@@ -264,7 +264,7 @@ int AudioFileImpl::read()
 
     for (;;) {
         while (this->packet.size > 0) {
-            avcodec_get_frame_defaults(this->frame);
+            av_frame_unref(this->frame);
             auto codec_context = this->format_context->streams[this->audio_stream]->codec;
             int got_frame = 0;
             int len = avcodec_decode_audio4(codec_context, this->frame, &got_frame, &this->packet);
