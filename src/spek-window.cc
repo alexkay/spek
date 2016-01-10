@@ -314,6 +314,7 @@ void SpekWindow::on_about(wxCommandEvent&)
 {
     wxAboutDialogInfo info;
     info.AddDeveloper("Alexander Kojevnikov");
+    info.AddDeveloper("Andreas Cadhalpun");
     info.AddDeveloper("Colin Watson");
     info.AddDeveloper("Daniel Hams");
     info.AddDeveloper("Fabian Deutsch");

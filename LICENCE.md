@@ -11,6 +11,7 @@ Maintainer:
 
 Contributors:
 
+* Andreas Cadhalpun
 * Colin Watson
 * Daniel Hams
 * Fabian Deutsch
