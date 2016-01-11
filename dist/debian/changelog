@@ -1,3 +1,9 @@
+spek (0.8.2-4) unstable; urgency=low
+
+  * Fix build with FFmpeg 2.9 (Closes: #803861)
+
+ -- Alexander Kojevnikov <alexander@kojevnikov.com>  Sun, 10 Jan 2016 17:52:24 -0800
+
 spek (0.8.2-3.2) unstable; urgency=medium
 
   * Build using the default GCC. Closes: #751331.

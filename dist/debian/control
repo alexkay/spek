@@ -11,7 +11,7 @@ Build-Depends: debhelper (>= 9),
                libavutil-dev (>= 6:0.8),
                libwxgtk3.0-dev,
                wx-common
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://spek.cc/
 Vcs-Git: git://github.com/alexkay/spek.git
 Vcs-Browser: https://github.com/alexkay/spek
