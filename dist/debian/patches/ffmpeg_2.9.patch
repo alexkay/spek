@@ -1,0 +1,34 @@
+Description: Replace deprecated FFmpeg API
+Author: Andreas Cadhalpun <Andreas.Cadhalpun@googlemail.com>
+Last-Update: <2015-11-02>
+
+--- spek-0.8.2.orig/src/spek-audio.cc
++++ spek-0.8.2/src/spek-audio.cc
+@@ -199,7 +199,7 @@ AudioFileImpl::AudioFileImpl(
+     this->packet.data = nullptr;
+     this->packet.size = 0;
+     this->offset = 0;
+-    this->frame = avcodec_alloc_frame();
++    this->frame = av_frame_alloc();
+     this->buffer_size = 0;
+     this->buffer = nullptr;
+     this->frames_per_interval = 0;
+@@ -215,7 +215,7 @@ AudioFileImpl::~AudioFileImpl()
+     if (this->frame) {
+         // TODO: Remove this check after Debian switches to libav 9.
+ #if LIBAVCODEC_VERSION_INT >= AV_VERSION_INT(54, 28, 0)
+-        avcodec_free_frame(&this->frame);
++        av_frame_free(&this->frame);
+ #else
+         av_freep(&this->frame);
+ #endif
+@@ -255,7 +255,7 @@ int AudioFileImpl::read()
+ 
+     for (;;) {
+         while (this->packet.size > 0) {
+-            avcodec_get_frame_defaults(this->frame);
++            av_frame_unref(this->frame);
+             auto codec_context = this->format_context->streams[this->audio_stream]->codec;
+             int got_frame = 0;
+             int len = avcodec_decode_audio4(codec_context, this->frame, &got_frame, &this->packet);
+
