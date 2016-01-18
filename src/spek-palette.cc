@@ -24,23 +24,23 @@ uint32_t spek_palette_spectrum(double level)
 {
     level *= 0.6625;
     double r = 0.0, g = 0.0, b = 0.0;
-    if (level >= 0 && level < 0.15) {
+    if (level < 0.15) {
         r = (0.15 - level) / (0.15 + 0.075);
         g = 0.0;
         b = 1.0;
-    } else if (level >= 0.15 && level < 0.275) {
+    } else if (level < 0.275) {
         r = 0.0;
         g = (level - 0.15) / (0.275 - 0.15);
         b = 1.0;
-    } else if (level >= 0.275 && level < 0.325) {
+    } else if (level < 0.325) {
         r = 0.0;
         g = 1.0;
         b = (0.325 - level) / (0.325 - 0.275);
-    } else if (level >= 0.325 && level < 0.5) {
+    } else if (level < 0.5) {
         r = (level - 0.325) / (0.5 - 0.325);
         g = 1.0;
         b = 0.0;
-    } else if (level >= 0.5 && level < 0.6625) {
+    } else if (level < 0.6625) {
         r = 1.0;
         g = (0.6625 - level) / (0.6625 - 0.5f);
         b = 0.0;
