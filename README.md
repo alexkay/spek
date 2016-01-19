@@ -52,13 +52,13 @@ Bugfixes:
 
 Spek 0.8.2 tarball:
 
- * <https://spek.googlecode.com/files/spek-0.8.2.tar.xz>
+ * <https://github.com/alexkay/spek/releases/download/v0.8.2/spek-0.8.2.tar.xz>
 
 Windows and Mac OS X binaries:
 
- * <https://spek.googlecode.com/files/spek-0.8.2.msi>
- * <https://spek.googlecode.com/files/spek-0.8.2.zip>
- * <https://spek.googlecode.com/files/spek-0.8.2.dmg>
+ * <https://github.com/alexkay/spek/releases/download/v0.8.2/spek-0.8.2.msi>
+ * <https://github.com/alexkay/spek/releases/download/v0.8.2/spek-0.8.2.zip>
+ * <https://github.com/alexkay/spek/releases/download/v0.8.2/spek-0.8.2.dmg>
 
 Unix packages:
 
