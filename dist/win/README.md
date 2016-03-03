@@ -17,5 +17,5 @@ Build Spek, adjusting `bundle.sh` variables as necessary:
     ./dist/win/bundle.sh
 
 For the second step, you will need a Windows box with
-[WiX](http://wix.sourceforge.net/) installed. Copy over the entire `dist/win`
+[WiX](http://wixtoolset.org/) installed. Copy over the entire `dist/win`
 directory and run `bundle.bat`.

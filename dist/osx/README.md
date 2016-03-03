@@ -1,6 +1,6 @@
 # Building the OS X bundle
 
-Using [MacPorts](http://www.macports.org/) install build dependencies:
+Using [MacPorts](https://www.macports.org/) install build dependencies:
 
     port install autoconf automake gcc48 git-core intltool upx yasm
 
