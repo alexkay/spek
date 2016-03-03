@@ -13,7 +13,7 @@ Find out more about Spek on its website: <http://spek.cc/>
 
 Spek 0.8.2 is part of beta 0.x releases, leading up to a stable 1.0 release
 (hopefully) later this year. The roadmap is available on
-[GitHub](https://github.com/alexkay/spek/issues/milestones).
+[GitHub](https://github.com/alexkay/spek/milestones).
 
 New features since 0.7:
 

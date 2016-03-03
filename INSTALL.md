@@ -20,12 +20,12 @@ Spek requires OS X 10.5+ and an Intel-based Mac.
 
 ### Binary packages
 
- * Arch: [spek](http://aur.archlinux.org/packages.php?ID=38001) and
-   [spek-git](http://aur.archlinux.org/packages.php?ID=37252)
- * Debian: [spek](http://packages.debian.org/search?keywords=spek)
+ * Arch: [spek](https://aur.archlinux.org/packages/spek/) and
+   [spek-git](https://aur.archlinux.org/packages/spek-git/)
+ * Debian: [spek](https://packages.debian.org/search?keywords=spek)
  * Fedora: [RPMFusion package](https://bugzilla.rpmfusion.org/show_bug.cgi?id=1718)
- * FreeBSD: [audio/spek](http://www.freshports.org/audio/spek/)
- * Gentoo: [media-sound/spek](http://packages.gentoo.org/package/media-sound/spek)
+ * FreeBSD: [audio/spek](https://www.freshports.org/audio/spek/)
+ * Gentoo: [media-sound/spek](https://packages.gentoo.org/packages/media-sound/spek)
  * Ubuntu: [spek](http://packages.ubuntu.com/search?keywords=spek)
 
 ### Building from the tarball
@@ -54,5 +54,5 @@ Or install it with:
 
     git clone git://github.com/alexkay/spek.git
     cd spek
-    /autogen.sh
+    ./autogen.sh
     make
