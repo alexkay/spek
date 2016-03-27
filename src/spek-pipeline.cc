@@ -110,7 +110,7 @@ struct spek_pipeline * spek_pipeline_open(
     if (!p->file->get_error()) {
         p->nfft = p->fft->get_input_size();
         p->coss = (float*)malloc(p->nfft * sizeof(float));
-        float cf = 2.0f * (float)M_PI / p->nfft;
+        float cf = 2.0f * (float)M_PI / (p->nfft - 1.0f);
         for (int i = 0; i < p->nfft; ++i) {
             p->coss[i] = cosf(cf * i);
         }
