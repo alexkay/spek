@@ -222,7 +222,7 @@ AudioFileImpl::~AudioFileImpl()
         this->packet.data -= this->offset;
         this->packet.size += this->offset;
         this->offset = 0;
-        av_free_packet(&this->packet);
+        av_packet_unref(&this->packet);
     }
     if (this->format_context) {
         if (this->audio_stream >= 0) {
@@ -326,7 +326,7 @@ int AudioFileImpl::read()
             this->packet.data -= this->offset;
             this->packet.size += this->offset;
             this->offset = 0;
-            av_free_packet(&this->packet);
+            av_packet_unref(&this->packet);
         }
 
         int res = 0;
@@ -334,7 +334,7 @@ int AudioFileImpl::read()
             if (this->packet.stream_index == this->audio_stream) {
                 break;
             }
-            av_free_packet(&this->packet);
+            av_packet_unref(&this->packet);
         }
         if (res < 0) {
             // End of file or error.
