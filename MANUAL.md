@@ -53,6 +53,12 @@ On OS X use the Command key instead of Ctrl.
 `Ctrl-Shift-up`, `Ctrl-Shift-down`
 :   Change the upper limit of the dynamic range in dBFS.
 
+`Ctrl-left`, `Ctrl-right`
+:   Change the lower limit of the frequency range in Hz.
+
+`Ctrl-Shift-left`, `Ctrl-Shift-right`
+:   Change the upper limit of the frequency range in Hz.
+
 # FILES
 
 *~/.config/spek/preferences*
