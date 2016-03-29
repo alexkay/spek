@@ -46,6 +46,8 @@ private:
     void start();
     void stop();
 
+    void create_palette();
+
     std::unique_ptr<Audio> audio;
     std::unique_ptr<FFT> fft;
     spek_pipeline *pipeline;
@@ -56,6 +58,7 @@ private:
     wxImage palette;
     wxImage image;
     int prev_width;
+    int fft_bits;
     int urange;
     int lrange;
 

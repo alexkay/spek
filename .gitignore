@@ -1,4 +1,5 @@
 *.a
+*.core
 *.exe
 *.msi
 *.o

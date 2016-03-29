@@ -40,12 +40,13 @@ END_EVENT_TABLE()
 
 enum
 {
-    MAX_RANGE = 0,
     MIN_RANGE = -140,
+    MAX_RANGE = 0,
     URANGE = -20,
     LRANGE = -120,
     FFT_BITS = 11,
-    BANDS = (1 << (FFT_BITS - 1)) + 1,
+    MIN_FFT_BITS = 8,
+    MAX_FFT_BITS = 14,
     LPAD = 60,
     TPAD = 60,
     RPAD = 90,
@@ -56,6 +57,7 @@ enum
 
 // Forward declarations.
 static wxString trim(wxDC& dc, const wxString& s, int length, bool trim_end);
+static int bits_to_bands(int bits);
 
 SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
     wxWindow(
@@ -67,25 +69,17 @@ SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
     pipeline(NULL),
     duration(0.0),
     sample_rate(0),
-    palette(RULER, BANDS),
+    palette(),
     image(1, 1),
     prev_width(-1),
+    fft_bits(FFT_BITS),
     urange(URANGE),
     lrange(LRANGE)
 {
+    this->create_palette();
+
     SetBackgroundStyle(wxBG_STYLE_CUSTOM);
     SetFocus();
-
-    // Pre-draw the palette.
-    for (int y = 0; y < BANDS; y++) {
-        uint32_t color = spek_palette_spectrum(y / (double) BANDS);
-        this->palette.SetRGB(
-            wxRect(0, BANDS - y - 1, RULER, 1),
-            color >> 16,
-            (color >> 8) & 0xFF,
-            color & 0xFF
-        );
-    }
 }
 
 SpekSpectrogram::~SpekSpectrogram()
@@ -111,19 +105,27 @@ void SpekSpectrogram::save(const wxString& path)
 
 void SpekSpectrogram::on_char(wxKeyEvent& evt)
 {
+    bool N = evt.GetModifiers() == wxMOD_NONE;
     bool C = evt.GetModifiers() == wxMOD_CONTROL;
+    bool S = evt.GetModifiers() == wxMOD_SHIFT;
     bool CS = evt.GetModifiers() == (wxMOD_CONTROL | wxMOD_SHIFT);
-    bool dn = evt.GetKeyCode() == WXK_DOWN;
-    bool up = evt.GetKeyCode() == WXK_UP;
+    bool U = evt.GetKeyCode() == WXK_UP;
+    bool D = evt.GetKeyCode() == WXK_DOWN;
 
-    if (C && up) {
+    if (C && U) {
         this->lrange = spek_min(this->lrange + 1, this->urange - 1);
-    } else if (C && dn) {
+    } else if (C && D) {
         this->lrange = spek_max(this->lrange - 1, MIN_RANGE);
-    } else if (CS && up) {
+    } else if (CS && U) {
         this->urange = spek_min(this->urange + 1, MAX_RANGE);
-    } else if (CS && dn) {
+    } else if (CS && D) {
         this->urange = spek_max(this->urange - 1, this->lrange + 1);
+    } else if (S && evt.GetKeyCode() == 'S') {
+        this->fft_bits = spek_min(this->fft_bits + 1, MAX_FFT_BITS);
+        this->create_palette();
+    } else if (N && evt.GetKeyCode() == 's') {
+        this->fft_bits = spek_max(this->fft_bits - 1, MIN_FFT_BITS);
+        this->create_palette();
     } else {
         evt.Skip();
         return;
@@ -343,9 +345,9 @@ void SpekSpectrogram::render(wxDC& dc)
     }
 }
 
-static void pipeline_cb(int sample, float *values, void *cb_data)
+static void pipeline_cb(int bands, int sample, float *values, void *cb_data)
 {
-    SpekHaveSampleEvent event(BANDS, sample, values, false);
+    SpekHaveSampleEvent event(bands, sample, values, false);
     SpekSpectrogram *s = (SpekSpectrogram *)cb_data;
     wxPostEvent(s, event);
 }
@@ -364,10 +366,10 @@ void SpekSpectrogram::start()
     wxSize size = GetClientSize();
     int samples = size.GetWidth() - LPAD - RPAD;
     if (samples > 0) {
-        this->image.Create(samples, BANDS);
+        this->image.Create(samples, bits_to_bands(this->fft_bits));
         this->pipeline = spek_pipeline_open(
             this->audio->open(std::string(this->path.utf8_str())),
-            this->fft->create(FFT_BITS),
+            this->fft->create(this->fft_bits),
             samples,
             pipeline_cb,
             this
@@ -390,6 +392,20 @@ void SpekSpectrogram::stop()
 
         // Make sure all have_sample events are processed before returning.
         wxApp::GetInstance()->ProcessPendingEvents();
+    }
+}
+
+void SpekSpectrogram::create_palette()
+{
+    this->palette.Create(RULER, bits_to_bands(this->fft_bits));
+    for (int y = 0; y < bits_to_bands(this->fft_bits); y++) {
+        uint32_t color = spek_palette_spectrum(y / (double)bits_to_bands(this->fft_bits));
+        this->palette.SetRGB(
+            wxRect(0, bits_to_bands(this->fft_bits) - y - 1, RULER, 1),
+            color >> 16,
+            (color >> 8) & 0xFF,
+            color & 0xFF
+        );
     }
 }
 
@@ -421,4 +437,9 @@ static wxString trim(wxDC& dc, const wxString& s, int length, bool trim_end)
     }
 
     return trim_end ? s.substr(0, i) + fix : fix + s.substr(k);
+}
+
+// TODO: test
+static int bits_to_bands(int bits) {
+    return (1 << (bits - 1)) + 1;
 }

@@ -26,7 +26,7 @@ class AudioFile;
 class FFTPlan;
 struct spek_pipeline;
 
-typedef void (*spek_pipeline_cb)(int sample, float *values, void *cb_data);
+typedef void (*spek_pipeline_cb)(int bands, int sample, float *values, void *cb_data);
 
 struct spek_pipeline * spek_pipeline_open(
     std::unique_ptr<AudioFile> file,

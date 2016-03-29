@@ -325,7 +325,7 @@ static void * reader_func(void *pp)
     pthread_join(p->worker_thread, NULL);
 
     // Notify the client.
-    p->cb(-1, NULL, p->cb_data);
+    p->cb(p->fft->get_output_size(), -1, NULL, p->cb_data);
     return NULL;
 }
 
@@ -422,7 +422,7 @@ static void * worker_func(void *pp)
                 }
 
                 if (sample == p->samples) break;
-                p->cb(sample++, p->output, p->cb_data);
+                p->cb(p->fft->get_output_size(), sample++, p->output, p->cb_data);
 
                 memset(p->output, 0, sizeof(float) * p->fft->get_output_size());
                 frames = 0;
