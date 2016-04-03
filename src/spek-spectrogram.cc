@@ -87,39 +87,43 @@ void SpekSpectrogram::save(const wxString& path)
 
 void SpekSpectrogram::on_char(wxKeyEvent& evt)
 {
-    bool N = evt.GetModifiers() == wxMOD_NONE;
-    bool C = evt.GetModifiers() == wxMOD_CONTROL;
-    bool S = evt.GetModifiers() == wxMOD_SHIFT;
-    bool CS = evt.GetModifiers() == (wxMOD_CONTROL | wxMOD_SHIFT);
-    bool U = evt.GetKeyCode() == WXK_UP;
-    bool D = evt.GetKeyCode() == WXK_DOWN;
-
-    if (C && U) {
-        this->lrange = spek_min(this->lrange + 1, this->urange - 1);
-    } else if (C && D) {
-        this->lrange = spek_max(this->lrange - 1, MIN_RANGE);
-    } else if (CS && U) {
-        this->urange = spek_min(this->urange + 1, MAX_RANGE);
-    } else if (CS && D) {
-        this->urange = spek_max(this->urange - 1, this->lrange + 1);
-    } else if (S && evt.GetKeyCode() == 'F') {
+    switch (evt.GetKeyCode()) {
+    case 'F':
         this->window_function = (enum window_function) ((this->window_function + 1) % WINDOW_COUNT);
-    } else if (N && evt.GetKeyCode() == 'f') {
+        break;
+    case 'f':
         this->window_function =
             (enum window_function) ((this->window_function - 1 + WINDOW_COUNT) % WINDOW_COUNT);
-    } else if (S && evt.GetKeyCode() == 'S') {
-        this->fft_bits = spek_min(this->fft_bits + 1, MAX_FFT_BITS);
-        this->create_palette();
-    } else if (N && evt.GetKeyCode() == 's') {
-        this->fft_bits = spek_max(this->fft_bits - 1, MIN_FFT_BITS);
-        this->create_palette();
-    } else if (S && evt.GetKeyCode() == 'P') {
+        break;
+    case 'L':
+        this->lrange = spek_min(this->lrange + 1, this->urange - 1);
+        break;
+    case 'l':
+        this->lrange = spek_max(this->lrange - 1, MIN_RANGE);
+        break;
+    case 'P':
         this->palette = (enum palette) ((this->palette + 1) % PALETTE_COUNT);
         this->create_palette();
-    } else if (N && evt.GetKeyCode() == 'p') {
+        break;
+    case 'p':
         this->palette = (enum palette) ((this->palette - 1 + PALETTE_COUNT) % PALETTE_COUNT);
         this->create_palette();
-    } else {
+        break;
+    case 'U':
+        this->urange = spek_min(this->urange + 1, MAX_RANGE);
+        break;
+    case 'u':
+        this->urange = spek_max(this->urange - 1, this->lrange + 1);
+        break;
+    case 'W':
+        this->fft_bits = spek_min(this->fft_bits + 1, MAX_FFT_BITS);
+        this->create_palette();
+        break;
+    case 'w':
+        this->fft_bits = spek_max(this->fft_bits - 1, MIN_FFT_BITS);
+        this->create_palette();
+        break;
+    default:
         evt.Skip();
         return;
     }

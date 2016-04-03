@@ -47,20 +47,20 @@ On OS X use the Command key instead of Ctrl.
 
 ## Spectrogram
 
-`Ctrl-up`, `Ctrl-down`
-:   Change the lower limit of the dynamic range in dBFS.
-
-`Ctrl-Shift-up`, `Ctrl-Shift-down`
-:   Change the upper limit of the dynamic range in dBFS.
-
 `f`, `F`
 :   Change the DFT window function.
 
-`s`, `S`
-:   Change the DFT window size.
+`l`, `L`
+:   Change the lower limit of the dynamic range in dBFS.
 
 `p`, `P`
 :   Change the palette.
+
+`u`, `U`
+:   Change the upper limit of the dynamic range in dBFS.
+
+`w`, `W`
+:   Change the DFT window size.
 
 # FILES
 
