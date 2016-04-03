@@ -1,8 +1,10 @@
+#include <assert.h>
+
 #include "spek-palette.h"
 
 // Modified version of Dan Bruton's algorithm:
 // http://www.physics.sfasu.edu/astro/color/spectra.html
-uint32_t spek_palette_spectrum(double level)
+static uint32_t spectrum(double level)
 {
     level *= 0.6625;
     double r = 0.0, g = 0.0, b = 0.0;
@@ -40,4 +42,22 @@ uint32_t spek_palette_spectrum(double level)
     uint32_t gg = (uint32_t) (g * cf + 0.5);
     uint32_t bb = (uint32_t) (b * cf + 0.5);
     return (rr << 16) + (gg << 8) + bb;
+}
+
+static uint32_t mono(double level)
+{
+    uint32_t v = (uint32_t) (level * 255.0 + 0.5);
+    return (v << 16) + (v << 8) + v;
+}
+
+uint32_t spek_palette(enum palette palette, double level) {
+    switch (palette) {
+    case PALETTE_SPECTRUM:
+        return spectrum(level);
+    case PALETTE_MONO:
+        return mono(level);
+    default:
+        assert(false);
+        return 0;
+    }
 }

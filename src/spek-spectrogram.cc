@@ -5,7 +5,6 @@
 #include "spek-audio.h"
 #include "spek-events.h"
 #include "spek-fft.h"
-#include "spek-palette.h"
 #include "spek-pipeline.h"
 #include "spek-platform.h"
 #include "spek-ruler.h"
@@ -51,7 +50,8 @@ SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
     pipeline(NULL),
     duration(0.0),
     sample_rate(0),
-    palette(),
+    palette(PALETTE_DEFAULT),
+    palette_image(),
     image(1, 1),
     prev_width(-1),
     fft_bits(FFT_BITS),
@@ -108,6 +108,12 @@ void SpekSpectrogram::on_char(wxKeyEvent& evt)
     } else if (N && evt.GetKeyCode() == 's') {
         this->fft_bits = spek_max(this->fft_bits - 1, MIN_FFT_BITS);
         this->create_palette();
+    } else if (S && evt.GetKeyCode() == 'P') {
+        this->palette = (enum palette) ((this->palette + 1) % PALETTE_COUNT);
+        this->create_palette();
+    } else if (N && evt.GetKeyCode() == 'p') {
+        this->palette = (enum palette) ((this->palette - 1 + PALETTE_COUNT) % PALETTE_COUNT);
+        this->create_palette();
     } else {
         evt.Skip();
         return;
@@ -150,7 +156,7 @@ void SpekSpectrogram::on_have_sample(SpekHaveSampleEvent& event)
     for (int y = 0; y < bands; y++) {
         double value = fmin(this->urange, fmax(this->lrange, values[y]));
         double level = (value - this->lrange) / range;
-        uint32_t color = spek_palette_spectrum(level);
+        uint32_t color = spek_palette(this->palette, level);
         this->image.SetRGB(
             sample,
             bands - y - 1,
@@ -301,7 +307,7 @@ void SpekSpectrogram::render(wxDC& dc)
 
     // The palette.
     if (h - TPAD - BPAD > 0) {
-        wxBitmap bmp(this->palette.Scale(RULER, h - TPAD - BPAD + 1));
+        wxBitmap bmp(this->palette_image.Scale(RULER, h - TPAD - BPAD + 1));
         dc.DrawBitmap(bmp, w - RPAD + GAP, TPAD);
 
         // Prepare to draw the ruler.
@@ -379,10 +385,10 @@ void SpekSpectrogram::stop()
 
 void SpekSpectrogram::create_palette()
 {
-    this->palette.Create(RULER, bits_to_bands(this->fft_bits));
+    this->palette_image.Create(RULER, bits_to_bands(this->fft_bits));
     for (int y = 0; y < bits_to_bands(this->fft_bits); y++) {
-        uint32_t color = spek_palette_spectrum(y / (double)bits_to_bands(this->fft_bits));
-        this->palette.SetRGB(
+        uint32_t color = spek_palette(this->palette, y / (double)bits_to_bands(this->fft_bits));
+        this->palette_image.SetRGB(
             wxRect(0, bits_to_bands(this->fft_bits) - y - 1, RULER, 1),
             color >> 16,
             (color >> 8) & 0xFF,

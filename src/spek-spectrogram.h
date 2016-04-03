@@ -4,6 +4,8 @@
 
 #include <wx/wx.h>
 
+#include "spek-palette.h"
+
 class Audio;
 class FFT;
 class SpekHaveSampleEvent;
@@ -36,7 +38,8 @@ private:
     wxString desc;
     double duration;
     int sample_rate;
-    wxImage palette;
+    enum palette palette;
+    wxImage palette_image;
     wxImage image;
     int prev_width;
     int fft_bits;

@@ -56,6 +56,9 @@ On OS X use the Command key instead of Ctrl.
 `s`, `S`
 :   Change the DFT window size.
 
+`p`, `P`
+:   Change the palette.
+
 # FILES
 
 *~/.config/spek/preferences*
