@@ -5,7 +5,6 @@
 #include "spek-audio.h"
 #include "spek-events.h"
 #include "spek-fft.h"
-#include "spek-pipeline.h"
 #include "spek-platform.h"
 #include "spek-ruler.h"
 #include "spek-utils.h"
@@ -48,6 +47,7 @@ SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
     audio(new Audio()), // TODO: refactor
     fft(new FFT()),
     pipeline(NULL),
+    window_function(WINDOW_DEFAULT),
     duration(0.0),
     sample_rate(0),
     palette(PALETTE_DEFAULT),
@@ -102,6 +102,11 @@ void SpekSpectrogram::on_char(wxKeyEvent& evt)
         this->urange = spek_min(this->urange + 1, MAX_RANGE);
     } else if (CS && D) {
         this->urange = spek_max(this->urange - 1, this->lrange + 1);
+    } else if (S && evt.GetKeyCode() == 'F') {
+        this->window_function = (enum window_function) ((this->window_function + 1) % WINDOW_COUNT);
+    } else if (N && evt.GetKeyCode() == 'f') {
+        this->window_function =
+            (enum window_function) ((this->window_function - 1 + WINDOW_COUNT) % WINDOW_COUNT);
     } else if (S && evt.GetKeyCode() == 'S') {
         this->fft_bits = spek_min(this->fft_bits + 1, MAX_FFT_BITS);
         this->create_palette();
@@ -358,6 +363,7 @@ void SpekSpectrogram::start()
         this->pipeline = spek_pipeline_open(
             this->audio->open(std::string(this->path.utf8_str())),
             this->fft->create(this->fft_bits),
+            this->window_function,
             samples,
             pipeline_cb,
             this

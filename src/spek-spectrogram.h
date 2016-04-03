@@ -5,6 +5,7 @@
 #include <wx/wx.h>
 
 #include "spek-palette.h"
+#include "spek-pipeline.h"
 
 class Audio;
 class FFT;
@@ -34,6 +35,7 @@ private:
     std::unique_ptr<Audio> audio;
     std::unique_ptr<FFT> fft;
     spek_pipeline *pipeline;
+    enum window_function window_function;
     wxString path;
     wxString desc;
     double duration;

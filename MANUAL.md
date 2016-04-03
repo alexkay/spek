@@ -53,6 +53,9 @@ On OS X use the Command key instead of Ctrl.
 `Ctrl-Shift-up`, `Ctrl-Shift-down`
 :   Change the upper limit of the dynamic range in dBFS.
 
+`f`, `F`
+:   Change the DFT window function.
+
 `s`, `S`
 :   Change the DFT window size.
 

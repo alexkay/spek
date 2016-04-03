@@ -25,6 +25,7 @@ struct spek_pipeline
 {
     std::unique_ptr<AudioFile> file;
     std::unique_ptr<FFTPlan> fft;
+    enum window_function window_function;
     int samples;
     spek_pipeline_cb cb;
     void *cb_data;
@@ -60,6 +61,7 @@ static void reader_sync(struct spek_pipeline *p, int pos);
 struct spek_pipeline * spek_pipeline_open(
     std::unique_ptr<AudioFile> file,
     std::unique_ptr<FFTPlan> fft,
+    enum window_function window_function,
     int samples,
     spek_pipeline_cb cb,
     void *cb_data
@@ -68,6 +70,7 @@ struct spek_pipeline * spek_pipeline_open(
     spek_pipeline *p = new spek_pipeline();
     p->file = std::move(file);
     p->fft = std::move(fft);
+    p->window_function = window_function;
     p->samples = samples;
     p->cb = cb;
     p->cb_data = cb_data;
@@ -319,6 +322,19 @@ static void reader_sync(struct spek_pipeline *p, int pos)
     pthread_mutex_unlock(&p->worker_mutex);
 }
 
+static float get_window(enum window_function f, int i, float *coss, int n) {
+    switch (f) {
+    case WINDOW_HANN:
+        return 0.5f * (1.0f - coss[i]);
+    case WINDOW_HAMMING:
+        return 0.53836f - 0.46164f * coss[i];
+    case WINDOW_BLACKMAN_HARRIS:
+        return 0.35875f - 0.48829f * coss[i] + 0.14128f * coss[2*i % n] - 0.01168f * coss[3*i % n];
+    default:
+        assert(false);
+    }
+}
+
 static void * worker_func(void *pp)
 {
     struct spek_pipeline *p = (spek_pipeline*)pp;
@@ -370,11 +386,7 @@ static void * worker_func(void *pp)
                 prev_head = head;
                 for (int i = 0; i < p->nfft; i++) {
                     float val = p->input[(p->input_size + head - p->nfft + i) % p->input_size];
-                    // TODO: allow the user to chose the window function
-                    // Hamming window.
-                    // val *= 0.53836f - 0.46164f * coss[i];
-                    // Hann window.
-                    val *= 0.5f * (1.0f - p->coss[i]);
+                    val *= get_window(p->window_function, i, p->coss, p->nfft);
                     p->fft->set_input(i, val);
                 }
                 p->fft->execute();
