@@ -23,7 +23,7 @@ enum
 {
     MIN_RANGE = -140,
     MAX_RANGE = 0,
-    URANGE = -20,
+    URANGE = 0,
     LRANGE = -120,
     FFT_BITS = 11,
     MIN_FFT_BITS = 8,
