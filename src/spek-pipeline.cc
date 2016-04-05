@@ -170,16 +170,19 @@ std::string spek_pipeline_desc(const struct spek_pipeline *pipeline)
     if (!pipeline->file->get_codec_name().empty()) {
         items.push_back(pipeline->file->get_codec_name());
     }
+
     if (pipeline->file->get_bit_rate()) {
         items.push_back(std::string(
             wxString::Format(_("%d kbps"), (pipeline->file->get_bit_rate() + 500) / 1000).utf8_str()
         ));
     }
+
     if (pipeline->file->get_sample_rate()) {
         items.push_back(std::string(
             wxString::Format(_("%d Hz"), pipeline->file->get_sample_rate()).utf8_str()
         ));
     }
+
     // Include bits per sample only if there is no bitrate.
     if (pipeline->file->get_bits_per_sample() && !pipeline->file->get_bit_rate()) {
         items.push_back(std::string(
@@ -189,6 +192,7 @@ std::string spek_pipeline_desc(const struct spek_pipeline *pipeline)
             ).utf8_str()
         ));
     }
+
     if (pipeline->file->get_channels()) {
         items.push_back(std::string(
             wxString::Format(
@@ -196,6 +200,26 @@ std::string spek_pipeline_desc(const struct spek_pipeline *pipeline)
                 pipeline->file->get_channels()
             ).utf8_str()
         ));
+    }
+
+    items.push_back(std::string(wxString::Format(wxT("W:%i"), pipeline->nfft).utf8_str()));
+
+    std::string window_function_name;
+    switch (pipeline->window_function) {
+    case WINDOW_HANN:
+        window_function_name = std::string("Hann");
+        break;
+    case WINDOW_HAMMING:
+        window_function_name = std::string("Hamming");
+        break;
+    case WINDOW_BLACKMAN_HARRIS:
+        window_function_name = std::string("Blackman–Harris");
+        break;
+    default:
+        assert(false);
+    }
+    if (window_function_name.size()) {
+        items.push_back("F:" + window_function_name);
     }
 
     std::string desc;
@@ -332,6 +356,7 @@ static float get_window(enum window_function f, int i, float *coss, int n) {
         return 0.35875f - 0.48829f * coss[i] + 0.14128f * coss[2*i % n] - 0.01168f * coss[3*i % n];
     default:
         assert(false);
+        return 0.0f;
     }
 }
 
