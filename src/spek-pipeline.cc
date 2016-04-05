@@ -95,7 +95,7 @@ struct spek_pipeline * spek_pipeline_open(
         p->input_size = p->nfft * (NFFT * 2 + 1);
         p->input = (float*)malloc(p->input_size * sizeof(float));
         p->output = (float*)malloc(p->fft->get_output_size() * sizeof(float));
-        p->file->start(samples);
+        p->file->start(0, samples);
     }
 
     return p;
@@ -293,20 +293,13 @@ static void * reader_func(void *pp)
     }
 
     int pos = 0, prev_pos = 0;
-    int channels = p->file->get_channels();
     int len;
     while ((len = p->file->read()) > 0) {
         if (p->quit) break;
 
         const float *buffer = p->file->get_buffer();
-        while (len >= channels) {
-            float val = 0.0f;
-            for (int i = 0; i < channels; i++) {
-                val += buffer[i];
-            }
-            p->input[pos] = val / channels;
-            buffer += channels;
-            len -= channels;
+        while (len-- > 0) {
+            p->input[pos] = *buffer++;
             pos = (pos + 1) % p->input_size;
 
             // Wake up the worker if we have enough data.
@@ -314,7 +307,7 @@ static void * reader_func(void *pp)
                 reader_sync(p, prev_pos = pos);
             }
         }
-        assert(len == 0);
+        assert(len == -1);
     }
 
     if (pos != prev_pos) {

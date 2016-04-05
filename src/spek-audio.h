@@ -21,7 +21,7 @@ class AudioFile
 public:
     virtual ~AudioFile() {}
 
-    virtual void start(int samples) = 0;
+    virtual void start(int channel, int samples) = 0;
     virtual int read() = 0;
 
     virtual AudioError get_error() const = 0;
