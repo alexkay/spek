@@ -91,44 +91,44 @@ void SpekSpectrogram::save(const wxString& path)
 void SpekSpectrogram::on_char(wxKeyEvent& evt)
 {
     switch (evt.GetKeyCode()) {
-    case 'C':
+    case 'c':
         this->channel = (this->channel + 1) % this->channels;
         break;
-    case 'c':
+    case 'C':
         this->channel = (this->channel - 1 + this->channels) % this->channels;
         break;
-    case 'F':
+    case 'f':
         this->window_function = (enum window_function) ((this->window_function + 1) % WINDOW_COUNT);
         break;
-    case 'f':
+    case 'F':
         this->window_function =
             (enum window_function) ((this->window_function - 1 + WINDOW_COUNT) % WINDOW_COUNT);
         break;
-    case 'L':
+    case 'l':
         this->lrange = spek_min(this->lrange + 1, this->urange - 1);
         break;
-    case 'l':
+    case 'L':
         this->lrange = spek_max(this->lrange - 1, MIN_RANGE);
         break;
-    case 'P':
+    case 'p':
         this->palette = (enum palette) ((this->palette + 1) % PALETTE_COUNT);
         this->create_palette();
         break;
-    case 'p':
+    case 'P':
         this->palette = (enum palette) ((this->palette - 1 + PALETTE_COUNT) % PALETTE_COUNT);
         this->create_palette();
         break;
-    case 'U':
+    case 'u':
         this->urange = spek_min(this->urange + 1, MAX_RANGE);
         break;
-    case 'u':
+    case 'U':
         this->urange = spek_max(this->urange - 1, this->lrange + 1);
         break;
-    case 'W':
+    case 'w':
         this->fft_bits = spek_min(this->fft_bits + 1, MAX_FFT_BITS);
         this->create_palette();
         break;
-    case 'w':
+    case 'W':
         this->fft_bits = spek_max(this->fft_bits - 1, MIN_FFT_BITS);
         this->create_palette();
         break;
