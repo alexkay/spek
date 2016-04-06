@@ -205,24 +205,26 @@ std::string spek_pipeline_desc(const struct spek_pipeline *pipeline)
         ));
     }
 
-    items.push_back(std::string(wxString::Format(wxT("W:%i"), pipeline->nfft).utf8_str()));
+    if (pipeline->file->get_error() == AudioError::OK) {
+        items.push_back(std::string(wxString::Format(wxT("W:%i"), pipeline->nfft).utf8_str()));
 
-    std::string window_function_name;
-    switch (pipeline->window_function) {
-    case WINDOW_HANN:
-        window_function_name = std::string("Hann");
-        break;
-    case WINDOW_HAMMING:
-        window_function_name = std::string("Hamming");
-        break;
-    case WINDOW_BLACKMAN_HARRIS:
-        window_function_name = std::string("Blackman–Harris");
-        break;
-    default:
-        assert(false);
-    }
-    if (window_function_name.size()) {
-        items.push_back("F:" + window_function_name);
+        std::string window_function_name;
+        switch (pipeline->window_function) {
+        case WINDOW_HANN:
+            window_function_name = std::string("Hann");
+            break;
+        case WINDOW_HAMMING:
+            window_function_name = std::string("Hamming");
+            break;
+        case WINDOW_BLACKMAN_HARRIS:
+            window_function_name = std::string("Blackman–Harris");
+            break;
+        default:
+            assert(false);
+        }
+        if (window_function_name.size()) {
+            items.push_back("F:" + window_function_name);
+        }
     }
 
     std::string desc;
