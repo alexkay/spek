@@ -25,6 +25,7 @@ struct spek_pipeline
 {
     std::unique_ptr<AudioFile> file;
     std::unique_ptr<FFTPlan> fft;
+    int channel;
     enum window_function window_function;
     int samples;
     spek_pipeline_cb cb;
@@ -61,6 +62,7 @@ static void reader_sync(struct spek_pipeline *p, int pos);
 struct spek_pipeline * spek_pipeline_open(
     std::unique_ptr<AudioFile> file,
     std::unique_ptr<FFTPlan> fft,
+    int channel,
     enum window_function window_function,
     int samples,
     spek_pipeline_cb cb,
@@ -70,6 +72,7 @@ struct spek_pipeline * spek_pipeline_open(
     spek_pipeline *p = new spek_pipeline();
     p->file = std::move(file);
     p->fft = std::move(fft);
+    p->channel = channel;
     p->window_function = window_function;
     p->samples = samples;
     p->cb = cb;
@@ -95,7 +98,7 @@ struct spek_pipeline * spek_pipeline_open(
         p->input_size = p->nfft * (NFFT * 2 + 1);
         p->input = (float*)malloc(p->input_size * sizeof(float));
         p->output = (float*)malloc(p->fft->get_output_size() * sizeof(float));
-        p->file->start(0, samples);
+        p->file->start(channel, samples);
     }
 
     return p;
@@ -196,8 +199,8 @@ std::string spek_pipeline_desc(const struct spek_pipeline *pipeline)
     if (pipeline->file->get_channels()) {
         items.push_back(std::string(
             wxString::Format(
-                ngettext("%d channel", "%d channels", pipeline->file->get_channels()),
-                pipeline->file->get_channels()
+                // TRANSLATORS: first %d is the current channel, second %d is the total number.
+                "channel %d / %d", pipeline->channel + 1, pipeline->file->get_channels()
             ).utf8_str()
         ));
     }
@@ -271,6 +274,11 @@ std::string spek_pipeline_desc(const struct spek_pipeline *pipeline)
     }
 
     return desc;
+}
+
+int spek_pipeline_channels(const struct spek_pipeline *pipeline)
+{
+    return pipeline->file->get_channels();
 }
 
 double spek_pipeline_duration(const struct spek_pipeline *pipeline)
