@@ -13,7 +13,7 @@ public:
     Audio();
     ~Audio();
 
-    std::unique_ptr<AudioFile> open(const std::string& file_name);
+    std::unique_ptr<AudioFile> open(const std::string& file_name, int stream);
 };
 
 class AudioFile
@@ -29,6 +29,7 @@ public:
     virtual int get_bit_rate() const = 0;
     virtual int get_sample_rate() const = 0;
     virtual int get_bits_per_sample() const = 0;
+    virtual int get_streams() const = 0;
     virtual int get_channels() const = 0;
     virtual double get_duration() const = 0;
     virtual const float *get_buffer() const = 0;

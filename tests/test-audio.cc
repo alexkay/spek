@@ -107,7 +107,7 @@ void test_audio()
     for (const auto& item : files) {
         auto name = item.first;
         auto info = item.second;
-        auto file = audio.open(SAMPLES_DIR "/" + name);
+        auto file = audio.open(SAMPLES_DIR "/" + name, 0);
         run(
             "audio info: " + name,
             [&] () { test_info(file.get(), info); }

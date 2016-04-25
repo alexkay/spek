@@ -374,7 +374,7 @@ void SpekSpectrogram::start()
     if (samples > 0) {
         this->image.Create(samples, bits_to_bands(this->fft_bits));
         this->pipeline = spek_pipeline_open(
-            this->audio->open(std::string(this->path.utf8_str())),
+            this->audio->open(std::string(this->path.utf8_str()), 0),
             this->fft->create(this->fft_bits),
             this->channel,
             this->window_function,

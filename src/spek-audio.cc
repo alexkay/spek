@@ -16,7 +16,7 @@ public:
     AudioFileImpl(
         AudioError error, AVFormatContext *format_context, int audio_stream,
         const std::string& codec_name, int bit_rate, int sample_rate, int bits_per_sample,
-        int channels, double duration
+        int streams, int channels, double duration
     );
     ~AudioFileImpl() override;
     void start(int channel, int samples) override;
@@ -27,6 +27,7 @@ public:
     int get_bit_rate() const override { return this->bit_rate; }
     int get_sample_rate() const override { return this->sample_rate; }
     int get_bits_per_sample() const override { return this->bits_per_sample; }
+    int get_streams() const override { return this->streams; }
     int get_channels() const override { return this->channels; }
     double get_duration() const override { return this->duration; }
     const float *get_buffer() const override { return this->buffer; }
@@ -42,6 +43,7 @@ private:
     int bit_rate;
     int sample_rate;
     int bits_per_sample;
+    int streams;
     int channels;
     double duration;
 
@@ -70,7 +72,7 @@ Audio::~Audio()
     av_lockmgr_register(nullptr);
 }
 
-std::unique_ptr<AudioFile> Audio::open(const std::string& file_name)
+std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, int stream)
 {
     AudioError error = AudioError::OK;
 
@@ -88,11 +90,14 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name)
     }
 
     int audio_stream = -1;
+    int streams = 0;
     if (!error) {
         for (unsigned int i = 0; i < format_context->nb_streams; i++) {
             if (format_context->streams[i]->codec->codec_type == AVMEDIA_TYPE_AUDIO) {
-                audio_stream = i;
-                break;
+                if (stream == streams) {
+                    audio_stream = i;
+                }
+                streams++;
             }
         }
         if (audio_stream == -1) {
@@ -100,12 +105,12 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name)
         }
     }
 
-    AVStream *stream = nullptr;
+    AVStream *avstream = nullptr;
     AVCodecContext *codec_context = nullptr;
     AVCodec *codec = nullptr;
     if (!error) {
-        stream = format_context->streams[audio_stream];
-        codec_context = stream->codec;
+        avstream = format_context->streams[audio_stream];
+        codec_context = avstream->codec;
         codec = avcodec_find_decoder(codec_context->codec_id);
         if (!codec) {
             error = AudioError::NO_DECODER;
@@ -140,8 +145,8 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name)
         }
         channels = codec_context->channels;
 
-        if (stream->duration != AV_NOPTS_VALUE) {
-            duration = stream->duration * av_q2d(stream->time_base);
+        if (avstream->duration != AV_NOPTS_VALUE) {
+            duration = avstream->duration * av_q2d(avstream->time_base);
         } else if (format_context->duration != AV_NOPTS_VALUE) {
             duration = format_context->duration / (double) AV_TIME_BASE;
         } else {
@@ -170,19 +175,19 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name)
     return std::unique_ptr<AudioFile>(new AudioFileImpl(
         error, format_context, audio_stream,
         codec_name, bit_rate, sample_rate, bits_per_sample,
-        channels, duration
+        streams, channels, duration
     ));
 }
 
 AudioFileImpl::AudioFileImpl(
     AudioError error, AVFormatContext *format_context, int audio_stream,
     const std::string& codec_name, int bit_rate, int sample_rate, int bits_per_sample,
-    int channels, double duration
+    int streams, int channels, double duration
 ) :
     error(error), format_context(format_context), audio_stream(audio_stream),
     codec_name(codec_name), bit_rate(bit_rate),
     sample_rate(sample_rate), bits_per_sample(bits_per_sample),
-    channels(channels), duration(duration)
+    streams(streams), channels(channels), duration(duration)
 {
     av_init_packet(&this->packet);
     this->packet.data = nullptr;
