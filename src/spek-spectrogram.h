@@ -35,6 +35,8 @@ private:
     std::unique_ptr<Audio> audio;
     std::unique_ptr<FFT> fft;
     spek_pipeline *pipeline;
+    int streams;
+    int stream;
     int channels;
     int channel;
     enum window_function window_function;

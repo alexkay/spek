@@ -59,6 +59,9 @@ On OS X use the Command key instead of Ctrl.
 `p`, `P`
 :   Change the palette.
 
+`s`, `S`
+:   Change the audio stream.
+
 `u`, `U`
 :   Change the upper limit of the dynamic range in dBFS.
 

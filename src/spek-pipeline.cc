@@ -278,6 +278,11 @@ std::string spek_pipeline_desc(const struct spek_pipeline *pipeline)
     return desc;
 }
 
+int spek_pipeline_streams(const struct spek_pipeline *pipeline)
+{
+    return pipeline->file->get_streams();
+}
+
 int spek_pipeline_channels(const struct spek_pipeline *pipeline)
 {
     return pipeline->file->get_channels();
