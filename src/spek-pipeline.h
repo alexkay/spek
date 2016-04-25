@@ -20,6 +20,7 @@ typedef void (*spek_pipeline_cb)(int bands, int sample, float *values, void *cb_
 struct spek_pipeline * spek_pipeline_open(
     std::unique_ptr<AudioFile> file,
     std::unique_ptr<FFTPlan> fft,
+    int stream,
     int channel,
     enum window_function window_function,
     int samples,

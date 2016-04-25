@@ -25,6 +25,7 @@ struct spek_pipeline
 {
     std::unique_ptr<AudioFile> file;
     std::unique_ptr<FFTPlan> fft;
+    int stream;
     int channel;
     enum window_function window_function;
     int samples;
@@ -62,6 +63,7 @@ static void reader_sync(struct spek_pipeline *p, int pos);
 struct spek_pipeline * spek_pipeline_open(
     std::unique_ptr<AudioFile> file,
     std::unique_ptr<FFTPlan> fft,
+    int stream,
     int channel,
     enum window_function window_function,
     int samples,
@@ -72,6 +74,7 @@ struct spek_pipeline * spek_pipeline_open(
     spek_pipeline *p = new spek_pipeline();
     p->file = std::move(file);
     p->fft = std::move(fft);
+    p->stream = stream;
     p->channel = channel;
     p->window_function = window_function;
     p->samples = samples;
@@ -268,6 +271,15 @@ std::string spek_pipeline_desc(const struct spek_pipeline *pipeline)
     auto error_string = std::string(error.utf8_str());
     if (desc.empty()) {
         desc = error_string;
+    } else if (pipeline->stream < pipeline->file->get_streams()) {
+        desc = std::string(
+            wxString::Format(
+                // TRANSLATORS: first %d is the stream number, second %d is the
+                // total number of streams, %s is the stream description.
+                _("Stream %d / %d: %s"),
+                pipeline->stream + 1, pipeline->file->get_streams(), desc.c_str()
+            ).utf8_str()
+        );
     } else if (!error_string.empty()) {
         desc = std::string(
             // TRANSLATORS: first %s is the error message, second %s is stream description.

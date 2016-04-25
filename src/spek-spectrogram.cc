@@ -393,6 +393,7 @@ void SpekSpectrogram::start()
         this->pipeline = spek_pipeline_open(
             this->audio->open(std::string(this->path.utf8_str()), this->stream),
             this->fft->create(this->fft_bits),
+            this->stream,
             this->channel,
             this->window_function,
             samples,
