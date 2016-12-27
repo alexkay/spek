@@ -1,21 +1,17 @@
 #!/bin/sh
 
-INSTALL_PATH=$HOME/usr
 LANGUAGES="ca cs da de el eo es fi fr gl it ja lv nb nl pl pt_BR ru sk sr@latin sv tr uk vi zh_CN zh_TW"
 
 cd $(dirname $0)/../..
 
 rm -f src/spek
 
-PKG_CONFIG_PATH=$INSTALL_PATH/lib/pkgconfig CXX=/opt/local/bin/g++-mp-4.8 \
-    ./autogen.sh --with-wx-config=$INSTALL_PATH/bin/wx-config \
-    && make && make check || exit 1
-strip src/spek
-upx src/spek
+./autogen.sh && make -j8 || exit 1
 
 cd dist/osx
 rm -fr Spek.app
 mkdir -p Spek.app/Contents/MacOS
+mkdir -p Spek.app/Contents/Frameworks
 mkdir -p Spek.app/Contents/Resources
 mv ../../src/spek Spek.app/Contents/MacOS/Spek
 cp Info.plist Spek.app/Contents/
@@ -29,9 +25,31 @@ cp ../../lic/* Spek.app/Contents/Resources/lic/
 for lang in $LANGUAGES; do
     mkdir -p Spek.app/Contents/Resources/"$lang".lproj
     cp -v ../../po/"$lang".gmo Spek.app/Contents/Resources/"$lang".lproj/spek.mo
-    cp -v "$INSTALL_PATH"/share/locale/"$lang"/LC_MESSAGES/wxstd.mo Spek.app/Contents/Resources/"$lang".lproj/
+    cp -v /usr/local/share/locale/"$lang"/LC_MESSAGES/wxstd.mo Spek.app/Contents/Resources/"$lang".lproj/
 done
 mkdir -p Spek.app/Contents/Resources/en.lproj
+
+BINS="Spek.app/Contents/MacOS/Spek"
+while [ ! -z "$BINS" ]; do
+    NEWBINS=""
+    for bin in $BINS; do
+        echo "Updating dependendies for $bin."
+        LIBS=$(otool -L $bin | grep /usr/local | tr -d '\t' | awk '{print $1}')
+        for lib in $LIBS; do
+            reallib=$(realpath $lib)
+            libname=$(basename $reallib)
+            install_name_tool -change $lib @executable_path/../Frameworks/$libname $bin
+            if [ ! -f Spek.app/Contents/Frameworks/$libname ]; then
+                echo "\tBundling $reallib."
+                cp $reallib Spek.app/Contents/Frameworks/
+                chmod +w Spek.app/Contents/Frameworks/$libname
+                install_name_tool -id @executable_path/../Frameworks/$libname Spek.app/Contents/Frameworks/$libname
+                NEWBINS="$NEWBINS Spek.app/Contents/Frameworks/$libname"
+            fi
+        done
+    done
+    BINS="$NEWBINS"
+done
 
 # Make DMG image
 VOLUME_NAME=Spek
