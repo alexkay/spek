@@ -18,7 +18,7 @@ template<class T> bool equal(const T& a, const T& b)
 
 template<> inline bool equal<double>(const double& a, const double& b)
 {
-    return std::abs(a - b) < 1e-8;
+    return std::abs(a - b) < 1e-5;
 }
 
 template<class T> void test(const std::string& message, const T& expected, const T& actual)

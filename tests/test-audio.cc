@@ -31,6 +31,10 @@ static void test_info(AudioFile *file, const FileInfo& info)
 
 static void test_read(AudioFile *file, int samples)
 {
+    if (!file->get_error()) {
+        file->start(0, 1024);
+    }
+
     int samples_read = 0;
     double power = 0.0;
     int len;
@@ -64,43 +68,43 @@ void test_audio()
         {"no.file",
             {AudioError::CANNOT_OPEN_FILE, "", 0, 0, 0, 0, 0.0, 0}},
         {"1ch-96000Hz-24bps.flac",
-            {AudioError::OK, "FLAC", 0, 96000, 24, 1, 0.1, 1 * 96000 / 10}},
+            {AudioError::OK, "FLAC", 0, 96000, 24, 1, 0.1, 96000 / 10}},
         {"2ch-48000Hz-16bps.flac",
-            {AudioError::OK, "FLAC", 0, 48000, 16, 2, 0.1, 2 * 48000 / 10}},
+            {AudioError::OK, "FLAC", 0, 48000, 16, 2, 0.1, 48000 / 10}},
         {"1ch-96000Hz-24bps.ape",
-            {AudioError::OK, "Monkey", 0, 96000, 24, 1, 0.1, 1 * 96000 / 10}},
+            {AudioError::OK, "Monkey", 0, 96000, 24, 1, 0.1, 96000 / 10}},
         {"2ch-48000Hz-16bps.ape",
-            {AudioError::OK, "Monkey", 0, 48000, 16, 2, 0.1, 2 * 48000 / 10}},
+            {AudioError::OK, "Monkey", 0, 48000, 16, 2, 0.1, 48000 / 10}},
         {"2ch-44100Hz-16bps.m4a",
-            {AudioError::OK, "ALAC", 0, 44100, 16, 2, 0.1, 2 * 44100 / 10}},
+            {AudioError::OK, "ALAC", 0, 44100, 16, 2, 0.1, 44100 / 10}},
         {"1ch-96000Hz-24bps.wv",
-            {AudioError::OK, "WavPack", 0, 96000, 24, 1, 0.1, 1 * 96000 / 10}},
+            {AudioError::OK, "WavPack", 0, 96000, 24, 1, 0.1, 96000 / 10}},
         {"2ch-48000Hz-16bps.wv",
-            {AudioError::OK, "WavPack", 0, 48000, 16, 2, 0.1, 2 * 48000 / 10}},
+            {AudioError::OK, "WavPack", 0, 48000, 16, 2, 0.1, 48000 / 10}},
         {"2ch-44100Hz-16bps.wav",
-            {AudioError::OK, "PCM", 0, 44100, 16, 2, 0.1, 2 * 44100 / 10}},
+            {AudioError::OK, "PCM", 0, 44100, 16, 2, 0.1, 44100 / 10}},
         {"2ch-44100Hz-128cbr.mp3",
-            {AudioError::OK, "MP3", 128000, 44100, 0, 2, MP3_T, 2 * 1152 * 4 + 94}},
+            {AudioError::OK, "MP3", 128000, 44100, 0, 2, MP3_T, 44100 / 10}},
         {"2ch-44100Hz-320cbr.mp3",
-            {AudioError::OK, "MP3", 320000, 44100, 0, 2, MP3_T, 2 * 1152 * 4 + 94}},
+            {AudioError::OK, "MP3", 320000, 44100, 0, 2, MP3_T, 44100 / 10}},
         {"2ch-44100Hz-V0.mp3",
-            {AudioError::OK, "MP3", 201329, 44100, 0, 2, MP3_T, 2 * 1152 * 4 + 94}},
+            {AudioError::OK, "MP3", 201329, 44100, 0, 2, MP3_T, 44100 / 10}},
         {"2ch-44100Hz-V2.mp3",
-            {AudioError::OK, "MP3", 150124, 44100, 0, 2, MP3_T, 2 * 1152 * 4 + 94}},
+            {AudioError::OK, "MP3", 150124, 44100, 0, 2, MP3_T, 44100 / 10}},
         {"2ch-44100Hz-q100.m4a",
-            {AudioError::OK, "AAC", 159649, 44100, 0, 2, AAC_T, 10240}},
+            {AudioError::OK, "AAC", 159649, 44100, 0, 2, AAC_T, 5120}},
         {"2ch-44100Hz-q5.ogg",
-            {AudioError::OK, "Vorbis", 160000, 44100, 0, 2, 0.1, 2 * 1024 * 4 + 1152}},
+            {AudioError::OK, "Vorbis", 160000, 44100, 0, 2, 0.1, 4672}},
         {"2ch-44100Hz.dts",
-            {AudioError::OK, "DCA", 1411200, 44100, 0, 2, DCA_T, 10240}},
+            {AudioError::OK, "DCA", 1411200, 44100, 0, 2, DCA_T, 5120}},
         {"2ch-44100Hz.ac3",
-            {AudioError::OK, "ATSC A/52", 192000, 44100, 0, 2, AC3_T, 9 * 1024}},
+            {AudioError::OK, "ATSC A/52", 192000, 44100, 0, 2, AC3_T, 4608}},
         {"2ch-44100Hz-std.mpc",
-            {AudioError::OK, "Musepack", 0, 44100, 0, 2, 0.0, 11 * 1024 + 256}},
+            {AudioError::OK, "Musepack", 0, 44100, 0, 2, 0.0, 6912}},
         {"2ch-44100Hz-v1.wma",
-            {AudioError::OK, "Windows Media Audio 1", 128000, 44100, 0, 2, 0.138, 12 * 1024}},
+            {AudioError::OK, "Windows Media Audio 1", 128000, 44100, 0, 2, 0.138, 6 * 1024}},
         {"2ch-44100Hz-v2.wma",
-            {AudioError::OK, "Windows Media Audio 2", 128000, 44100, 0, 2, 0.138, 12 * 1024}},
+            {AudioError::OK, "Windows Media Audio 2", 128000, 44100, 0, 2, 0.138, 6 * 1024}},
     };
 
     Audio audio;
