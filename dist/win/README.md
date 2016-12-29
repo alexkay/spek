@@ -10,7 +10,7 @@ For the first step you can use any Unix-y environment. Set up
 
 Apply `mxe.diff` and build Spek dependencies:
 
-    make pthreads ffmpeg wxwidgets -j4 JOBS=4
+    make pthreads ffmpeg wxwidgets -j8 JOBS=8
 
 Build Spek, adjusting `bundle.sh` variables as necessary:
 
@@ -18,4 +18,4 @@ Build Spek, adjusting `bundle.sh` variables as necessary:
 
 For the second step, you will need a Windows box with
 [WiX](http://wixtoolset.org/) installed. Copy over the entire `dist/win`
-directory and run `bundle.bat`.
+directory, cd into it, and run `bundle.bat`.

@@ -24,6 +24,7 @@ dist/osx/Spek.app
 dist/osx/Spek.dmg
 dist/win/Spek
 dist/win/spek.wxs
+dist/win/tests
 env
 install-sh
 intltool-extract.in
@@ -40,8 +41,10 @@ po/.intltool-merge-cache
 po/POTFILES
 po/stamp-it
 src/*.stamp
+src/.libs
 src/spek
 stamp-h1
+tests/.libs
 tests/perf
 tests/samples/perf.wav
 tests/test
