@@ -1,6 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
+# French translation for SPEK
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the SPEK package.
 # 
 # Translators:
 # Alexander Kojevnikov <alexander@kojevnikov.com>, 2011-2012
@@ -8,13 +8,14 @@
 # FoeNyx <foenyx@free.fr>, 2011
 # PegHorse <peghorse@crdf.fr>, 2012
 # Vincent A <doezerx@gmail.com>, 2015
+# Olivier Humbert <trebmuh@tuxfamily.org>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-29 13:05-0700\n"
-"PO-Revision-Date: 2015-03-25 22:57+0000\n"
-"Last-Translator: Vincent A <doezerx@gmail.com>\n"
+"PO-Revision-Date: 2017-01-29 00:28+0100\n"
+"Last-Translator: Olivier Humbert <trebmuh@tuxfamily.org>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/spek/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +29,7 @@ msgstr "Spek"
 
 #: ../data/spek.desktop.in.in.h:2
 msgid "Spectrum Analyser"
-msgstr "Analyseur de Spectre"
+msgstr "Analyseur de spectre"
 
 #: ../data/spek.desktop.in.in.h:3
 msgid "View spectrograms of your audio files"
@@ -68,7 +69,7 @@ msgstr "Impossible d'ouvrir le fichier"
 
 #: ../src/spek-pipeline.cc:237
 msgid "Cannot find stream info"
-msgstr "Impossible de trouver les infos sur le flux audio"
+msgstr "Impossible de trouver des infos sur le flux audio"
 
 #: ../src/spek-pipeline.cc:240
 msgid "The file contains no audio streams"
@@ -76,7 +77,7 @@ msgstr "Le fichier ne contient pas de flux audio"
 
 #: ../src/spek-pipeline.cc:243
 msgid "Cannot find decoder"
-msgstr "Impossible de trouver de décodeurs"
+msgstr "Impossible de trouver de décodeur"
 
 #: ../src/spek-pipeline.cc:246
 msgid "Unknown duration"
@@ -92,7 +93,7 @@ msgstr "Impossible d'ouvrir le décodeur"
 
 #: ../src/spek-pipeline.cc:255
 msgid "Unsupported sample format"
-msgstr "Format d'échantillon sonore non pris en charge"
+msgstr "Format d'échantillon non pris en charge"
 
 #. TRANSLATORS: first %s is the error message, second %s is stream
 #. description.
@@ -107,7 +108,7 @@ msgstr "Préférences"
 
 #: ../src/spek-preferences-dialog.cc:72
 msgid "(system default)"
-msgstr "(Valeur par défaut du système)"
+msgstr "(valeur par défaut du système)"
 
 #. TRANSLATORS: The name of a section in the Preferences dialog.
 #: ../src/spek-preferences-dialog.cc:79
@@ -116,11 +117,11 @@ msgstr "Général"
 
 #: ../src/spek-preferences-dialog.cc:88
 msgid "Language:"
-msgstr "Langue:"
+msgstr "Langue :"
 
 #: ../src/spek-preferences-dialog.cc:104
 msgid "Check for &updates"
-msgstr "Vérifier les &mises à jours"
+msgstr "Vérifier les &mises à jour"
 
 #: ../src/spek-spectrogram.cc:191
 #, c-format
@@ -144,7 +145,7 @@ msgstr "-00 dB"
 
 #: ../src/spek-window.cc:75
 msgid "Spek - Acoustic Spectrum Analyser"
-msgstr "Spek - Analyseur de Spectre Acoustique"
+msgstr "Spek - Analyseur de spectre acoustique"
 
 #: ../src/spek-window.cc:91
 msgid "&File"
@@ -200,11 +201,11 @@ msgstr "Sans titre"
 #. TRANSLATORS: Add your name here
 #: ../src/spek-window.cc:325
 msgid "translator-credits"
-msgstr "Florent Thoumie\nAlexander Kojevnikov"
+msgstr "Florent Thoumie\nAlexander Kojevnikov\nOlivier Humbert"
 
 #: ../src/spek-window.cc:331
 msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
-msgstr "Copyright (c) 2010-2015 Alexander Kojevnikov et contributeurs."
+msgstr "Copyright (c) 2010-2013 Alexander Kojevnikov et contributeurs."
 
 #: ../src/spek-window.cc:334
 msgid "Spek Website"
