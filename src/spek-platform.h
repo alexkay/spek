@@ -1,6 +1,7 @@
 #pragma once
 
 #include <wx/string.h>
+#include <cstddef>
 
 // Platform-specific initialisation code.
 void spek_platform_init();
@@ -14,3 +15,7 @@ bool spek_platform_can_change_language();
 
 // Fonts are smaller on OSX.
 double spek_platform_font_scale();
+
+// Allocating aligned memory is very dependent on platform or compiler.
+void *spek_platform_aligned_alloc(size_t alignment, size_t size);
+void spek_platform_aligned_free(void *mem);
