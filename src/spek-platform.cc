@@ -1,4 +1,6 @@
+#include <new>
 #include <cstring>
+#include <cstdlib>
 
 #ifdef OS_OSX
 #include <ApplicationServices/ApplicationServices.h>
@@ -48,5 +50,28 @@ double spek_platform_font_scale()
     return 1.3;
 #else
     return 1.0;
+#endif
+}
+
+void *spek_platform_aligned_alloc(size_t alignment, size_t size)
+{
+    void *ptr;
+#ifdef OS_WIN
+    ptr = _aligned_malloc(size, alignment);
+    if (!ptr)
+        throw std::bad_alloc();
+#else
+    if (posix_memalign(&ptr, alignment, size) != 0)
+        throw std::bad_alloc();
+#endif
+    return ptr;
+}
+
+void spek_platform_aligned_free(void *mem)
+{
+#ifdef OS_WIN
+     _aligned_free(mem);
+#else
+    free(mem);
 #endif
 }
