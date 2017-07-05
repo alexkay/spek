@@ -31,7 +31,7 @@ public:
 
     virtual ~FFTPlan()
     {
-        av_freep(this->input);
+        av_freep(&this->input);
     }
 
     int get_input_size() const { return this->input_size; }
