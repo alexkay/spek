@@ -46,8 +46,8 @@ AM_COND_IF([USE_VALGRIND], [use_valgrind=yes], [use_valgrind=no])
 
 AC_CHECK_LIB(m, log10)
 
-PKG_CHECK_MODULES(AVFORMAT, [libavformat >= 53.17])
-PKG_CHECK_MODULES(AVCODEC, [libavcodec >= 55.46])
+PKG_CHECK_MODULES(AVFORMAT, [libavformat >= 57.33.100])
+PKG_CHECK_MODULES(AVCODEC, [libavcodec >= 57.33.100])
 PKG_CHECK_MODULES(AVUTIL, [libavutil >= 51.17])
 
 AM_OPTIONS_WXCONFIG
