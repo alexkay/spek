@@ -63,15 +63,10 @@ private:
 
 
 Audio::Audio()
-{
-    av_register_all();
-}
+{}
 
 Audio::~Audio()
-{
-    // This prevents a memory leak.
-    av_lockmgr_register(nullptr);
-}
+{}
 
 std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, int stream)
 {
