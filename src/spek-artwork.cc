@@ -13,6 +13,7 @@ protected:
 wxBitmap SpekArtProvider::CreateBitmap(
     const wxArtID& id, const wxArtClient& client, const wxSize& size)
 {
+	(void) id, (void) client, (void) size;
 #ifdef OS_UNIX
     if (id == ART_SPEK) {
         return wxArtProvider::GetBitmap("spek", client, size);
@@ -63,6 +64,7 @@ wxBitmap SpekArtProvider::CreateBitmap(
 
 wxIconBundle SpekArtProvider::CreateIconBundle(const wxArtID& id, const wxArtClient& client)
 {
+	(void) id, (void) client;
 #ifdef OS_UNIX
     if (id == ART_SPEK) {
         return wxArtProvider::GetIconBundle("spek", client);
