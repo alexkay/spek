@@ -243,6 +243,9 @@ std::string spek_pipeline_desc(const struct spek_pipeline *pipeline)
     case AudioError::CANNOT_OPEN_FILE:
         error = _("Cannot open input file");
         break;
+    case AudioError::CANNOT_OPEN_DEVICE:
+        error = _("Cannot open input device");
+        break;
     case AudioError::NO_STREAMS:
         error = _("Cannot find stream info");
         break;
@@ -453,7 +456,6 @@ static void * worker_func(void *pp)
                     p->output[i] /= num_fft;
                 }
 
-                if (sample == p->samples) break;
                 p->cb(p->fft->get_output_size(), sample++, p->output, p->cb_data);
 
                 memset(p->output, 0, sizeof(float) * p->fft->get_output_size());

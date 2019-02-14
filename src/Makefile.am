@@ -21,6 +21,7 @@ libspek_a_CXXFLAGS = \
 	$(AVFORMAT_CFLAGS) \
 	$(AVCODEC_CFLAGS) \
 	$(AVUTIL_CFLAGS) \
+	$(AVDEVICE_CFLAGS) \
 	$(WX_CXXFLAGS_ONLY)
 
 bin_PROGRAMS = spek
@@ -57,6 +58,7 @@ spek_LDADD = \
 	$(AVFORMAT_LIBS) \
 	$(AVCODEC_LIBS) \
 	$(AVUTIL_LIBS) \
+	$(AVDEVICE_LIBS) \
 	$(WX_LIBS)
 
 spek_LDFLAGS = \

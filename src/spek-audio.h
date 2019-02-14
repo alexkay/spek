@@ -13,7 +13,7 @@ public:
     Audio();
     ~Audio();
 
-    std::unique_ptr<AudioFile> open(const std::string& file_name, int stream);
+    std::unique_ptr<AudioFile> open(const std::string& file_name, const std::string& device_name, int stream);
 };
 
 class AudioFile
@@ -42,6 +42,7 @@ enum class AudioError
 {
     OK,
     CANNOT_OPEN_FILE,
+    CANNOT_OPEN_DEVICE,
     NO_STREAMS,
     NO_AUDIO,
     NO_DECODER,

@@ -73,9 +73,10 @@ SpekSpectrogram::~SpekSpectrogram()
     this->stop();
 }
 
-void SpekSpectrogram::open(const wxString& path)
+void SpekSpectrogram::open(const wxString& path, const wxString& device)
 {
     this->path = path;
+    this->device = device;
     this->stream = 0;
     this->channel = 0;
     start();
@@ -192,13 +193,29 @@ void SpekSpectrogram::on_have_sample(SpekHaveSampleEvent& event)
         double value = fmin(this->urange, fmax(this->lrange, values[y]));
         double level = (value - this->lrange) / range;
         uint32_t color = spek_palette(this->palette, level);
-        this->image.SetRGB(
-            sample,
-            bands - y - 1,
-            color >> 16,
-            (color >> 8) & 0xFF,
-            color & 0xFF
-        );
+        int draw_sample = sample;
+        if (!device.IsEmpty()) {
+            draw_sample = sample % (this->image.GetWidth()-1);
+        }
+        if (draw_sample >= 0 && draw_sample < this->image.GetWidth()) {
+            this->image.SetRGB(
+                draw_sample,
+                bands - y - 1,
+                color >> 16,
+                (color >> 8) & 0xFF,
+                color & 0xFF
+            );
+        }
+        if (!device.IsEmpty()) {
+            draw_sample = (sample+1) % (this->image.GetWidth()-1);
+            this->image.SetRGB(
+                draw_sample,
+                bands - y - 1,
+                0xFF,
+                0xFF,
+                0xFF
+            );
+        }
     }
 
     // TODO: refresh only one pixel column
@@ -377,7 +394,8 @@ static void pipeline_cb(int bands, int sample, float *values, void *cb_data)
 
 void SpekSpectrogram::start()
 {
-    if (this->path.IsEmpty()) {
+    wxLogMessage("SpekSpectrogram::start");
+    if (this->path.IsEmpty() && this->device.IsEmpty()) {
         return;
     }
 
@@ -391,7 +409,7 @@ void SpekSpectrogram::start()
     if (samples > 0) {
         this->image.Create(samples, bits_to_bands(this->fft_bits));
         this->pipeline = spek_pipeline_open(
-            this->audio->open(std::string(this->path.utf8_str()), this->stream),
+            this->audio->open(std::string(this->path.utf8_str()), std::string(this->device.utf8_str()), this->stream),
             this->fft->create(this->fft_bits),
             this->stream,
             this->channel,
@@ -414,6 +432,7 @@ void SpekSpectrogram::start()
 
 void SpekSpectrogram::stop()
 {
+    wxLogMessage("SpekSpectrogram::stop");
     if (this->pipeline) {
         spek_pipeline_close(this->pipeline);
         this->pipeline = NULL;

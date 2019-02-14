@@ -7,8 +7,8 @@ class SpekSpectrogram;
 class SpekWindow : public wxFrame
 {
 public:
-    SpekWindow(const wxString& path);
-    void open(const wxString& path);
+    SpekWindow(const wxString& path, const wxString& device);
+    void open(const wxString& path, const wxString& device);
 
 private:
     void on_open(wxCommandEvent& event);
@@ -23,6 +23,7 @@ private:
 
     SpekSpectrogram *spectrogram;
     wxString path;
+    wxString device;
     wxString cur_dir;
     wxString description;
 
