@@ -1,3 +1,8 @@
+#define NDEBUG
+/* disable debug messages included in wxwidgets
+ * see docs.wxwidgets.org/trunk/group__group__funcmacro__debug.html
+ */
+
 #include <wx/cmdline.h>
 #include <wx/log.h>
 #include <wx/socket.h>
