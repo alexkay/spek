@@ -49,7 +49,7 @@ msgstr "%d Hz"
 #, c-format
 msgid "%d bit"
 msgid_plural "%d bits"
-msgstr[0] "%d 字節"
+msgstr[0] "%d 比特"
 
 #: ../src/spek-pipeline.cc:217
 #, c-format
