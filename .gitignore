@@ -13,6 +13,7 @@ Makefile.in
 Makefile.in.in
 aclocal.m4
 autom4te.cache
+ar-lib
 compile
 config.*
 configure
