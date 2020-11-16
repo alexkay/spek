@@ -5,6 +5,7 @@ AM_INIT_AUTOMAKE([1.11.1 foreign no-dist-gzip dist-xz serial-tests])
 AM_SILENT_RULES([yes])
 
 AC_LANG([C++])
+AM_PROG_AR
 AC_PROG_CXX
 CXXFLAGS="$CXXFLAGS -std=gnu++11 -Wall -Wextra"
 AC_PROG_CXXCPP
