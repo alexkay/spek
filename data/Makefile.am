@@ -4,11 +4,10 @@ SUBDIRS = icons
 
 desktopdir = $(datadir)/applications
 desktop_in_files = spek.desktop.in
-desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
-@INTLTOOL_DESKTOP_RULE@
+desktop_DATA = spek.desktop
 
-EXTRA_DIST = \
-	$(desktop_in_files)
+EXTRA_DIST = spek.desktop.in
+CLEANFILES = spek.desktop
 
-CLEANFILES = \
-	$(desktop_DATA)
+spek.desktop: spek.desktop.in $(wildcard $(top_srcdir)/po/*po)
+	$(AM_V_GEN)$(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $@

@@ -1,5 +1,4 @@
-[encoding: UTF-8]
-data/spek.desktop.in.in
+data/spek.desktop.in
 src/spek-pipeline.cc
 src/spek-preferences-dialog.cc
 src/spek-spectrogram.cc
