@@ -19,6 +19,7 @@ Contributors:
 * Simon Ruderich
 * Stefan Kost
 * Thibault North
+* Matteo Bini
 
 Translators:
 
