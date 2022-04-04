@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Alexander Kojevnikov <alexander@kojevnikov.com>, 2012
 # Shibing Huang <mr.shibing@mac.com>, 2012
@@ -9,204 +9,209 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-11 10:26-0700\n"
+"POT-Creation-Date: 2022-04-04 13:17-0700\n"
 "PO-Revision-Date: 2013-11-20 10:50+0000\n"
 "Last-Translator: Alexander Kojevnikov <alexander@kojevnikov.com>\n"
-"Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/spek/language/zh_TW/)\n"
+"Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/spek/"
+"language/zh_TW/)\n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../data/spek.desktop.in.in.h:1
+#: data/spek.desktop.in:4
 msgid "Spek"
 msgstr "Spek"
 
-#: ../data/spek.desktop.in.in.h:2
+#: data/spek.desktop.in:5
 msgid "Spectrum Analyser"
 msgstr "頻譜分析儀"
 
-#: ../data/spek.desktop.in.in.h:3
+#: data/spek.desktop.in:6
 msgid "View spectrograms of your audio files"
 msgstr "顯示你的音頻頻譜"
 
-#: ../data/spek.desktop.in.in.h:4
-msgid "Spek Spectrum Analyser"
-msgstr "Spek頻譜分析儀"
-
-#: ../src/spek-pipeline.cc:197
+#: src/spek-pipeline.cc:182
 #, c-format
 msgid "%d kbps"
 msgstr "%d kbps"
 
-#: ../src/spek-pipeline.cc:202
+#: src/spek-pipeline.cc:188
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../src/spek-pipeline.cc:209
+#: src/spek-pipeline.cc:196
 #, c-format
 msgid "%d bit"
 msgid_plural "%d bits"
 msgstr[0] "%d 字節"
 
-#: ../src/spek-pipeline.cc:217
-#, c-format
-msgid "%d channel"
-msgid_plural "%d channels"
-msgstr[0] "%d 聲道"
-
-#: ../src/spek-pipeline.cc:234
+#: src/spek-pipeline.cc:244
 msgid "Cannot open input file"
 msgstr "無法打開文件"
 
-#: ../src/spek-pipeline.cc:237
+#: src/spek-pipeline.cc:247
 msgid "Cannot find stream info"
 msgstr "無法定位流媒體信息"
 
-#: ../src/spek-pipeline.cc:240
+#: src/spek-pipeline.cc:250
 msgid "The file contains no audio streams"
 msgstr "該文件不包含音頻流"
 
-#: ../src/spek-pipeline.cc:243
+#: src/spek-pipeline.cc:253
 msgid "Cannot find decoder"
 msgstr "無法定位解碼器"
 
-#: ../src/spek-pipeline.cc:246
+#: src/spek-pipeline.cc:256
 msgid "Unknown duration"
 msgstr "未知長度"
 
-#: ../src/spek-pipeline.cc:249
+#: src/spek-pipeline.cc:259
 msgid "No audio channels"
 msgstr "無音頻聲道"
 
-#: ../src/spek-pipeline.cc:252
+#: src/spek-pipeline.cc:262
 msgid "Cannot open decoder"
 msgstr "無法運行解碼器"
 
-#: ../src/spek-pipeline.cc:255
+#: src/spek-pipeline.cc:265
 msgid "Unsupported sample format"
 msgstr "不支持的音頻文件"
 
-#. TRANSLATORS: first %s is the error message, second %s is stream
-#. description.
-#: ../src/spek-pipeline.cc:267
+#. TRANSLATORS: first %d is the stream number, second %d is the
+#. total number of streams, %s is the stream description.
+#: src/spek-pipeline.cc:279
+#, c-format
+msgid "Stream %d / %d: %s"
+msgstr ""
+
+#. TRANSLATORS: first %s is the error message, second %s is stream description.
+#: src/spek-pipeline.cc:286
 #, c-format
 msgid "%s: %s"
 msgstr "%s: %s"
 
-#: ../src/spek-preferences-dialog.cc:67
+#: src/spek-preferences-dialog.cc:50
 msgid "Preferences"
 msgstr "偏好設定"
 
-#: ../src/spek-preferences-dialog.cc:72
+#: src/spek-preferences-dialog.cc:55
 msgid "(system default)"
 msgstr "(作業系統默認)"
 
 #. TRANSLATORS: The name of a section in the Preferences dialog.
-#: ../src/spek-preferences-dialog.cc:79
+#: src/spek-preferences-dialog.cc:62
 msgid "General"
 msgstr "普通設定"
 
-#: ../src/spek-preferences-dialog.cc:88
+#: src/spek-preferences-dialog.cc:71
 msgid "Language:"
 msgstr "語言"
 
-#: ../src/spek-preferences-dialog.cc:104
+#: src/spek-preferences-dialog.cc:87
 msgid "Check for &updates"
 msgstr "檢查更新"
 
-#: ../src/spek-spectrogram.cc:191
+#: src/spek-spectrogram.cc:216
 #, c-format
 msgid "%d kHz"
 msgstr "%d kHz"
 
-#: ../src/spek-spectrogram.cc:196
+#: src/spek-spectrogram.cc:221
 #, c-format
 msgid "%d dB"
 msgstr "%d dB"
 
 #. TRANSLATORS: keep "00" unchanged, it's used to calc the text width
-#: ../src/spek-spectrogram.cc:302
+#: src/spek-spectrogram.cc:327
 msgid "00 kHz"
 msgstr "00 kHz"
 
 #. TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
-#: ../src/spek-spectrogram.cc:333
+#: src/spek-spectrogram.cc:358
 msgid "-00 dB"
 msgstr "-00 dB"
 
-#: ../src/spek-window.cc:75
+#: src/spek-window.cc:57
 msgid "Spek - Acoustic Spectrum Analyser"
 msgstr "Spek - 聲學頻譜分析儀"
 
-#: ../src/spek-window.cc:95
+#: src/spek-window.cc:73
 msgid "&File"
 msgstr "文件"
 
-#: ../src/spek-window.cc:101
+#: src/spek-window.cc:79
 msgid "&Edit"
 msgstr "編輯"
 
-#: ../src/spek-window.cc:105 ../src/spek-window.cc:110
+#: src/spek-window.cc:83 src/spek-window.cc:88
 msgid "&Help"
 msgstr "幫助"
 
-#: ../src/spek-window.cc:133
+#: src/spek-window.cc:110
 msgid "Help"
 msgstr "幫助"
 
-#: ../src/spek-window.cc:147
+#: src/spek-window.cc:123
 msgid "A new version of Spek is available, click to download."
 msgstr "已經有更新版本的Spek發佈，點擊更新"
 
 #. TRANSLATORS: window title, %s is replaced with the file name
-#: ../src/spek-window.cc:185
+#: src/spek-window.cc:161
 #, c-format
 msgid "Spek - %s"
 msgstr "Spek - %s"
 
-#: ../src/spek-window.cc:232
+#: src/spek-window.cc:209
 msgid "All files"
 msgstr "所有文件"
 
-#: ../src/spek-window.cc:234
+#: src/spek-window.cc:211
 msgid "Audio files"
 msgstr "音頻文件"
 
-#: ../src/spek-window.cc:248
+#: src/spek-window.cc:225
 msgid "Open File"
 msgstr "打開文件"
 
-#: ../src/spek-window.cc:270
+#: src/spek-window.cc:247
 msgid "PNG images"
 msgstr "PNG圖像"
 
-#: ../src/spek-window.cc:276
+#: src/spek-window.cc:253
 msgid "Save Spectrogram"
 msgstr "保存頻譜"
 
 #. Suggested name is <file_name>.png
-#: ../src/spek-window.cc:284
+#: src/spek-window.cc:261
 msgid "Untitled"
 msgstr "未命名"
 
 #. TRANSLATORS: Add your name here
-#: ../src/spek-window.cc:331
+#: src/spek-window.cc:309
 msgid "translator-credits"
 msgstr "Shibing Huang <mr.shibing@mac.com> 提供"
 
-#: ../src/spek-window.cc:337
+#: src/spek-window.cc:315
 msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
 msgstr "(c) 2010-2013 Alexander Kojevnikov以及貢獻者 版權所有"
 
-#: ../src/spek-window.cc:340
+#: src/spek-window.cc:318
 msgid "Spek Website"
 msgstr "Spek官網"
 
 #. TRANSLATORS: the %s is the package version.
-#: ../src/spek.cc:96
+#: src/spek.cc:76
 #, c-format
 msgid "Spek version %s"
 msgstr "Spek 版本信息 %s"
+
+#~ msgid "Spek Spectrum Analyser"
+#~ msgstr "Spek頻譜分析儀"
+
+#, c-format
+#~ msgid "%d channel"
+#~ msgid_plural "%d channels"
+#~ msgstr[0] "%d 聲道"

@@ -5,7 +5,6 @@ Maintainer: Alexander Kojevnikov <alexander@kojevnikov.com>
 Build-Depends: debhelper (>= 9),
                autotools-dev,
                pkg-config,
-               intltool (>= 0.35),
                libavcodec-dev (>= 6:0.8),
                libavformat-dev (>= 6:0.8),
                libavutil-dev (>= 6:0.8),

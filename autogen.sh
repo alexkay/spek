@@ -6,6 +6,6 @@ test -n "$srcdir" || srcdir=.
 (
   cd "$srcdir" &&
   touch config.rpath &&
-  AUTOPOINT='intltoolize --automake --copy' autoreconf -fiv
+  autoreconf -fiv
 ) || exit
 test -n "$NOCONFIGURE" || "$srcdir/configure" "$@"
