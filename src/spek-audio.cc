@@ -121,7 +121,11 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, int stream)
     double duration = 0;
     if (!error) {
         // We can already fill in the stream info even if the codec won't be able to open it.
-        codec_name = codec->long_name;
+        if (codec->long_name) {
+            codec_name = codec->long_name;
+        } else if (codec->name) {
+            codec_name = codec->name;
+        }
         bit_rate = codecpar->bit_rate;
         sample_rate = codecpar->sample_rate;
         bits_per_sample = codecpar->bits_per_raw_sample;
