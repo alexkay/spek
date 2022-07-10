@@ -33,8 +33,8 @@ Spek requires OS X 10.5+ and an Intel-based Mac.
 To build Spek, download the source code tarball then run these commands from
 terminal:
 
-    tar -xvf spek-0.8.2.tar.xz
-    cd spek-0.8.2
+    tar -xvf spek-0.8.4.tar.xz
+    cd spek-0.8.4
     ./configure
     make
 

@@ -21,21 +21,22 @@ EXTRA_DIST = \
 	lic/zlib \
 	tests/samples
 
-DISTCLEANFILES =
+DISTCLEANFILES = \
+	tests/samples/perf.wav
 
 .PHONY: man upload
 
 man:
 	pandoc --standalone --to=man --output=man/spek.1 MANUAL.md
 	pandoc --standalone --to=html --output=web/man-@VERSION@.html MANUAL.md
-	sed -e 's#<I>\(http://[^<]*\)</I>#<I><a href="\1">\1</a></I>#g' -i '' web/man-@VERSION@.html
+	sed -e 's#<I>\(http://[^<]*\)</I>#<I><a href="\1">\1</a></I>#g' -i web/man-@VERSION@.html
 	sed -e 's#<head>#<head>\
 		<style type="text/css">\
 			body {font-size: 11pt;}\
 			h1, h2, h3 {font-weight: bold;}\
 			h1 {font-size: 13pt;}\
 			h2, h3 {font-size: 12pt;}\
-		</style>#' -i '' web/man-@VERSION@.html
+		</style>#' -i web/man-@VERSION@.html
 
 upload:
 	rsync -avhz web/nginx.conf server:spek

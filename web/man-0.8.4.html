@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+	<style type="text/css">
+		body {font-size: 11pt;}
+		h1, h2, h3 {font-weight: bold;}
+		h1 {font-size: 13pt;}
+		h2, h3 {font-size: 12pt;}
+	</style>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="" />
+  <meta name="dcterms.date" content="2022-07-10" />
+  <title>SPEK(1) User’s Guide | Version 0.8.4</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">SPEK(1) User’s Guide | Version 0.8.4</h1>
+<p class="author"></p>
+<p class="date">2022-07-10</p>
+</header>
+<h1 id="name">NAME</h1>
+<p>Spek - Acoustic Spectrum Analyser</p>
+<h1 id="synopsis">SYNOPSIS</h1>
+<p><code>spek</code> [<em>OPTION</em> <em>…</em>] [<em>FILE</em>]</p>
+<h1 id="description">DESCRIPTION</h1>
+<p><em>Spek</em> generates a spectrogram for the input audio file.</p>
+<h1 id="options">OPTIONS</h1>
+<dl>
+<dt><code>-h</code>, <code>--help</code></dt>
+<dd>Output the help message then quit.
+</dd>
+<dt><code>-V</code>, <code>--version</code></dt>
+<dd>Output version information then quit.
+</dd>
+</dl>
+<h1 id="keybindings">KEYBINDINGS</h1>
+<h2 id="notes">Notes</h2>
+<p>On OS X use the Command key instead of Ctrl.</p>
+<h2 id="menu">Menu</h2>
+<dl>
+<dt><code>Ctrl-O</code></dt>
+<dd>Open a new file.
+</dd>
+<dt><code>Ctrl-S</code></dt>
+<dd>Save the spectrogram as an image file.
+</dd>
+<dt><code>Ctrl-E</code></dt>
+<dd>Show the preferences dialog.
+</dd>
+<dt><code>F1</code></dt>
+<dd>Open online manual in the browser.
+</dd>
+<dt><code>Shift-F1</code></dt>
+<dd>Show the about dialog.
+</dd>
+</dl>
+<h2 id="spectrogram">Spectrogram</h2>
+<dl>
+<dt><code>c</code>, <code>C</code></dt>
+<dd>Change the audio channel.
+</dd>
+<dt><code>f</code>, <code>F</code></dt>
+<dd>Change the DFT window function.
+</dd>
+<dt><code>l</code>, <code>L</code></dt>
+<dd>Change the lower limit of the dynamic range in dBFS.
+</dd>
+<dt><code>p</code>, <code>P</code></dt>
+<dd>Change the palette.
+</dd>
+<dt><code>s</code>, <code>S</code></dt>
+<dd>Change the audio stream.
+</dd>
+<dt><code>u</code>, <code>U</code></dt>
+<dd>Change the upper limit of the dynamic range in dBFS.
+</dd>
+<dt><code>w</code>, <code>W</code></dt>
+<dd>Change the DFT window size.
+</dd>
+</dl>
+<h1 id="files">FILES</h1>
+<dl>
+<dt><em>~/.config/spek/preferences</em></dt>
+<dd>The configuration file for <em>Spek</em>, stored in a simple INI format.
+</dd>
+</dl>
+<h1 id="authors">AUTHORS</h1>
+<p>Alexander Kojevnikov <a href="mailto:alexander@kojevnikov.com" class="email">alexander@kojevnikov.com</a>. Other contributors are listed in the LICENCE.md file distributed with the source code.</p>
+<h1 id="distribution">DISTRIBUTION</h1>
+<p>The latest version of <em>Spek</em> may be downloaded from <a href="http://spek.cc" class="uri">http://spek.cc</a>.</p>
+</body>
+</html>
