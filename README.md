@@ -1,58 +1,42 @@
 # Spek
 
-Spek is an acoustic spectrum analyser written in C and C++. It uses FFmpeg
+Spek is an acoustic spectrum analyser written in C++. It uses FFmpeg
 libraries for audio decoding and wxWidgets for the GUI.
 
 Spek is available on *BSD, GNU/Linux, Windows and Mac OS X.
 
 Find out more about Spek on its website: <http://spek.cc/>
 
-## Spek 0.8.2 - Released 2013-02-24
+## Spek 0.8.4 - Released 2022-07-10
 
 ### New Features And Enhancements
 
-Spek 0.8.2 is part of beta 0.x releases, leading up to a stable 1.0 release
-(hopefully) later this year. The roadmap is available on
-[GitHub](https://github.com/alexkay/spek/milestones).
+New features since 0.8.2:
 
-New features since 0.7:
-
- * Adjustable spectral density range (#4).
- * Switched from GTK+ to wxWidgets for better Windows and OS X integration.
- * Single .exe version for Windows.
- * Added translations in 11 more languages (totalling 19).
- * Open .opus audio files (#39).
+ * Add 2 more palettes and change the default.
+ * Allow changing the DFT window size and function.
+ * Allow switching between audio streams and channels.
+ * Add translations for 14 additional languages.
 
 Enhancements:
 
- * Switched to .xz tarballs.
- * Split out libspek and added unit tests.
- * 24-bit APE support (upstream fix).
- * Better toolbar icons on Windows and OS X (#21).
- * Installer options for app shortcuts on Windows (#1).
- * Associate with audio/video files on OS X (#2).
- * Online manual (#24).
- * Use non-deprecated FFmpeg decoding API.
- * Moved downloads to Google Code since GitHub no longer offers downloads (#38).
- * Compatibility with retina-based Macs (#32).
+ * Remove dependency on `intltool`.
+ * Fix FFmpeg build warnings.
+ * Detect AR tool.
+ * Use Homebrew for macOS dependencies.
+ * Improve test coverage.
 
 Bugfixes:
 
- * Fixed crash when the preferences file is not writable.
- * Fixed crash when the home directory is not writable.
- * Fixed duration and rendering for some video files.
- * Fixed compilation with newer FFmpeg and libav versions.
- * Proper handling of Unicode file names under Windows (upstream fix).
- * Don't lock the input file on Windows (#26).
- * Fixed mapping of the spectral density into the palette.
- * Fix magnitude calculation for the first and the last frequency band.
- * Support planar sample formats (#44).
+ * Remove association with .mod and MIDI files.
+ * Fix autoconf errors.
+ * Fix an AVX-related crash.
 
 ### Sources / Packages
 
-Spek 0.8.2 tarball:
+Spek 0.8.4 tarball:
 
- * <https://github.com/alexkay/spek/releases/download/v0.8.2/spek-0.8.2.tar.xz>
+ * <https://github.com/alexkay/spek/releases/download/v0.8.4/spek-0.8.4.tar.xz>
 
 Windows and Mac OS X binaries:
 
@@ -66,5 +50,5 @@ Unix packages:
 
 ### Dependencies
 
- * wxWidgets >= 2.8
- * A recent version of FFmpeg or libav
+ * wxWidgets >= 3
+ * A recent version of FFmpeg
