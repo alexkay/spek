@@ -14,12 +14,16 @@ Contributors:
 * Andreas Cadhalpun
 * Colin Watson
 * Daniel Hams
+* Elias Ojala
 * Fabian Deutsch
+* Guillaume Fourrier
+* Jakov Smolic
 * Jonathan Gonzalez V
+* Matteo Bini
 * Simon Ruderich
 * Stefan Kost
 * Thibault North
-* Matteo Bini
+* Wyatt J. Brown
 
 Translators:
 
