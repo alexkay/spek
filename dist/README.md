@@ -1,7 +1,7 @@
 # Spek release checklist
 
  * Bump the version number in configure.ac.
- * `cd po && make update-po && tx push -s`.
+ * `make -C po update-po && tx push -s`.
  * `tx pull -a` and commit with correct `--author`s.
  * Review translations, fix things like missing mnemonics.
  * Translate what I can, Ich spreek un peu по-русски.

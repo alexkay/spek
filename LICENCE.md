@@ -25,23 +25,38 @@ Translators:
 
 * Adolfo Jayme Barrientos
 * Aleksandar Todorovic
+* Alex Chrisakis
+* Anna Vannieuwenhuyse
 * Antón Méixome
+* Erik Solem
+* Even Gabrielsen
 * Florent Thoumie
+* Gabriel Secreve
+* Gergő Seregély
 * Giuseppe D. Barbagallo
+* Harun Arı
 * Huang Shibing
+* Iho Somnam
+* Jimmy Malmqvist
+* Johan van Rietveld
 * Jonathan Gonzalez V
+* Marko Ivanović
 * Olga Vasylevska
 * Patrik Škulavík
 * Pavel Fric
 * Philipp Defner
 * Piotr Drąg
 * Ryan Smith
+* Shibing Huang
+* Tan Rico
 * Tero Talvio
 * Tiago Rinaldi
 * Toms Zvīnis
 * Vincent A
 * Wasilis Mandratzis
 * Wouter Bolsterlee
+* Yakir Rachmany
+* Zames Dean
 * Many more (let me know if you translated Spek and want your full name
   listed here)
 

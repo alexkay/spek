@@ -1,26 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR The Spek authors
 # This file is distributed under the same license as the spek package.
-#
+# 
 # Translators:
-# Alexander Kojevnikov <alexander@kojevnikov.com>, 2011-2012
-# sacrebleu, 2011
-# sacrebleu <olga@vasylevska.com>, 2011
+# Tan Rico <riecotan@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-10 15:29-0700\n"
+"POT-Creation-Date: 2022-04-04 13:17-0700\n"
 "PO-Revision-Date: 2011-02-23 09:25+0000\n"
-"Last-Translator: sacrebleu <olga@vasylevska.com>, 2011\n"
-"Language-Team: Russian (http://www.transifex.com/spek/spek/language/ru/)\n"
-"Language: ru\n"
+"Last-Translator: Tan Rico <riecotan@gmail.com>, 2016\n"
+"Language-Team: Indonesian (http://www.transifex.com/spek/spek/language/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
-"%100>=11 && n%100<=14)? 2 : 3);\n"
+"Language: id\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: data/spek.desktop.in:4
 msgid "Spek"
@@ -28,62 +24,59 @@ msgstr "Spek"
 
 #: data/spek.desktop.in:5
 msgid "Spectrum Analyser"
-msgstr "Анализатор спектра"
+msgstr "Spectrum Analyser"
 
 #: data/spek.desktop.in:6
 msgid "View spectrograms of your audio files"
-msgstr "Просмотр спектрограмм аудио файлов"
+msgstr "Tampilkan spektogram dari file audio-mu"
 
 #: src/spek-pipeline.cc:182
 #, c-format
 msgid "%d kbps"
-msgstr "%d кбит/сек"
+msgstr "%d kbps"
 
 #: src/spek-pipeline.cc:188
 #, c-format
 msgid "%d Hz"
-msgstr "%d Гц"
+msgstr "%d Hz"
 
 #: src/spek-pipeline.cc:196
 #, c-format
 msgid "%d bit"
 msgid_plural "%d bits"
-msgstr[0] "%d бит"
-msgstr[1] "%d бита"
-msgstr[2] "%d битов"
-msgstr[3] "%d битов"
+msgstr[0] "%d bits"
 
 #: src/spek-pipeline.cc:244
 msgid "Cannot open input file"
-msgstr "Не могу открыть входной файл"
+msgstr "Tidak dapat membuka file masukan"
 
 #: src/spek-pipeline.cc:247
 msgid "Cannot find stream info"
-msgstr "Не могу найти информацию о потоке"
+msgstr "Tidak dapat menemukan informasi gelombang audio"
 
 #: src/spek-pipeline.cc:250
 msgid "The file contains no audio streams"
-msgstr "Файл не содержит аудио потоков"
+msgstr "File ini tidak memiliki gelombang audio"
 
 #: src/spek-pipeline.cc:253
 msgid "Cannot find decoder"
-msgstr "Не могу найти декодер"
+msgstr "Tidak dapat menemukan decoder"
 
 #: src/spek-pipeline.cc:256
 msgid "Unknown duration"
-msgstr "Неизвестная продолжительность"
+msgstr "Durasi tidak diketahui"
 
 #: src/spek-pipeline.cc:259
 msgid "No audio channels"
-msgstr "Нет аудио каналов"
+msgstr "Tidak ada kanal audio"
 
 #: src/spek-pipeline.cc:262
 msgid "Cannot open decoder"
-msgstr "Не удается открыть декодер"
+msgstr "Tidak dapat membuka decoder"
 
 #: src/spek-pipeline.cc:265
 msgid "Unsupported sample format"
-msgstr "Неподдерживаемый формат сэмпла"
+msgstr "Sampel format tidak didukung"
 
 #. TRANSLATORS: first %d is the stream number, second %d is the
 #. total number of streams, %s is the stream description.
@@ -92,76 +85,77 @@ msgstr "Неподдерживаемый формат сэмпла"
 msgid "Stream %d / %d: %s"
 msgstr ""
 
-#. TRANSLATORS: first %s is the error message, second %s is stream description.
+#. TRANSLATORS: first %s is the error message, second %s is stream
+#. description.
 #: src/spek-pipeline.cc:286
 #, c-format
 msgid "%s: %s"
 msgstr "%s: %s"
 
-#: src/spek-preferences-dialog.cc:58
+#: src/spek-preferences-dialog.cc:50
 msgid "Preferences"
-msgstr "Параметры"
+msgstr "Preferensi"
 
-#: src/spek-preferences-dialog.cc:63
+#: src/spek-preferences-dialog.cc:55
 msgid "(system default)"
-msgstr "(системный по умолчанию)"
+msgstr "(bawaan sistem)"
 
 #. TRANSLATORS: The name of a section in the Preferences dialog.
-#: src/spek-preferences-dialog.cc:70
+#: src/spek-preferences-dialog.cc:62
 msgid "General"
-msgstr "Общие"
+msgstr "Umum"
 
-#: src/spek-preferences-dialog.cc:79
+#: src/spek-preferences-dialog.cc:71
 msgid "Language:"
-msgstr "Язык"
+msgstr "Bahasa:"
 
-#: src/spek-preferences-dialog.cc:95
+#: src/spek-preferences-dialog.cc:87
 msgid "Check for &updates"
-msgstr "Проверять &обновления"
+msgstr "Cek &pembaharuan"
 
 #: src/spek-spectrogram.cc:216
 #, c-format
 msgid "%d kHz"
-msgstr "%d кГц"
+msgstr "%d kHz"
 
 #: src/spek-spectrogram.cc:221
 #, c-format
 msgid "%d dB"
-msgstr "%d дБ"
+msgstr "%d dB"
 
 #. TRANSLATORS: keep "00" unchanged, it's used to calc the text width
 #: src/spek-spectrogram.cc:327
 msgid "00 kHz"
-msgstr "00 кГц"
+msgstr "00 kHz"
 
 #. TRANSLATORS: keep "-00" unchanged, it's used to calc the text width
 #: src/spek-spectrogram.cc:358
 msgid "-00 dB"
-msgstr "-00 дБ"
+msgstr "-00 dB"
 
 #: src/spek-window.cc:57
 msgid "Spek - Acoustic Spectrum Analyser"
-msgstr "Spek - Акустический анализатор спектра"
+msgstr "Spek - Acoustic Spectrum Analyser"
 
 #: src/spek-window.cc:73
 msgid "&File"
-msgstr "&Файл"
+msgstr "&File"
 
 #: src/spek-window.cc:79
 msgid "&Edit"
-msgstr "&Правка"
+msgstr "&Edit"
 
 #: src/spek-window.cc:83 src/spek-window.cc:88
 msgid "&Help"
-msgstr "&Справка"
+msgstr "&Bantuan"
 
 #: src/spek-window.cc:110
 msgid "Help"
-msgstr "Справка"
+msgstr "Bantuan"
 
 #: src/spek-window.cc:123
 msgid "A new version of Spek is available, click to download."
-msgstr "Вышла новая версия Spek, щёлкните для скачивания"
+msgstr "Versi terbaru Spek ditemukan, klik untuk mengunduh."
 
 #. TRANSLATORS: window title, %s is replaced with the file name
 #: src/spek-window.cc:161
@@ -171,44 +165,44 @@ msgstr "Spek - %s"
 
 #: src/spek-window.cc:209
 msgid "All files"
-msgstr "Все файлы"
+msgstr "Semua file"
 
 #: src/spek-window.cc:211
 msgid "Audio files"
-msgstr "Аудио файлы"
+msgstr "File Audio"
 
 #: src/spek-window.cc:225
 msgid "Open File"
-msgstr "Открыть файл"
+msgstr "Buka File"
 
 #: src/spek-window.cc:247
 msgid "PNG images"
-msgstr "PNG изображения"
+msgstr "Gambar PNG"
 
 #: src/spek-window.cc:253
 msgid "Save Spectrogram"
-msgstr "Сохранить спектрограмму"
+msgstr "Simpan Spektogram"
 
 #. Suggested name is <file_name>.png
 #: src/spek-window.cc:261
 msgid "Untitled"
-msgstr "Без названия"
+msgstr "Tidak ada judul"
 
 #. TRANSLATORS: Add your name here
 #: src/spek-window.cc:309
 msgid "translator-credits"
-msgstr "Александр Кожевников <alexander@kojevnikov.com>"
+msgstr "translator-credits"
 
 #: src/spek-window.cc:315
 msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
-msgstr "Авторские права (c) 2010-2013 Александр Кожевников и соавторы"
+msgstr "Hak Cipta (c) 2010-2013 Alexander Kojevnikov dan para kontributor"
 
 #: src/spek-window.cc:318
 msgid "Spek Website"
-msgstr "Веб-сайт Spek"
+msgstr "Laman Website Spek"
 
 #. TRANSLATORS: the %s is the package version.
 #: src/spek.cc:76
 #, c-format
 msgid "Spek version %s"
-msgstr "Spek версии %s"
+msgstr "Spek versi %s"

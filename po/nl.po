@@ -1,9 +1,12 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR The Spek authors
+# This file is distributed under the same license as the spek package.
 #
 # Translators:
 # Alexander Kojevnikov <alexander@kojevnikov.com>, 2011-2012
+# Anna Vannieuwenhuyse <djsndcx@gmail.com>, 2019
+# Gabriel Secreve <rdsserver@outlook.com>, 2017
+# Johan van Rietveld <johan.van.rietveld@home.nl>, 2016
 # theguyofdoom <thom.venividivici@gmail.com>, 2011
 # theguyofdoom <thom.venividivici@gmail.com>, 2012
 # Wouter Bolsterlee <wbolster@gnome.org>, 2011
@@ -11,11 +14,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-04 13:17-0700\n"
-"PO-Revision-Date: 2013-11-20 10:50+0000\n"
-"Last-Translator: Alexander Kojevnikov <alexander@kojevnikov.com>\n"
-"Language-Team: Dutch (http://www.transifex.com/projects/p/spek/language/"
-"nl/)\n"
+"POT-Creation-Date: 2022-07-10 15:29-0700\n"
+"PO-Revision-Date: 2011-02-23 09:25+0000\n"
+"Last-Translator: Anna Vannieuwenhuyse <djsndcx@gmail.com>, 2019\n"
+"Language-Team: Dutch (http://www.transifex.com/spek/spek/language/nl/)\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +34,7 @@ msgstr "Spectrumanalyse"
 
 #: data/spek.desktop.in:6
 msgid "View spectrograms of your audio files"
-msgstr "Spectrogrammen van uw geluidsbestanden bekijken"
+msgstr "Bekijk spectrogrammen van uw geluidsbestanden"
 
 #: src/spek-pipeline.cc:182
 #, c-format
@@ -69,7 +71,7 @@ msgstr "Kan decoder niet vinden"
 
 #: src/spek-pipeline.cc:256
 msgid "Unknown duration"
-msgstr ""
+msgstr "Tijdsduur onbekend"
 
 #: src/spek-pipeline.cc:259
 msgid "No audio channels"
@@ -81,7 +83,7 @@ msgstr "Kan decoder niet openen"
 
 #: src/spek-pipeline.cc:265
 msgid "Unsupported sample format"
-msgstr "Sample-formaat niet ondersteund"
+msgstr "Sampleformaat niet ondersteund"
 
 #. TRANSLATORS: first %d is the stream number, second %d is the
 #. total number of streams, %s is the stream description.
@@ -96,24 +98,24 @@ msgstr ""
 msgid "%s: %s"
 msgstr "%s: %s"
 
-#: src/spek-preferences-dialog.cc:50
+#: src/spek-preferences-dialog.cc:58
 msgid "Preferences"
-msgstr "Einstellungen"
+msgstr "Voorkeuren"
 
-#: src/spek-preferences-dialog.cc:55
+#: src/spek-preferences-dialog.cc:63
 msgid "(system default)"
 msgstr "(systeem standaard)"
 
 #. TRANSLATORS: The name of a section in the Preferences dialog.
-#: src/spek-preferences-dialog.cc:62
+#: src/spek-preferences-dialog.cc:70
 msgid "General"
-msgstr "Allgemein"
+msgstr "Algemeen"
 
-#: src/spek-preferences-dialog.cc:71
+#: src/spek-preferences-dialog.cc:79
 msgid "Language:"
 msgstr "Taal:"
 
-#: src/spek-preferences-dialog.cc:87
+#: src/spek-preferences-dialog.cc:95
 msgid "Check for &updates"
 msgstr "Controleer op &updates"
 
@@ -143,7 +145,7 @@ msgstr "Spek - Akoestische spectrumanalyse"
 
 #: src/spek-window.cc:73
 msgid "&File"
-msgstr "&File"
+msgstr "&Bestand"
 
 #: src/spek-window.cc:79
 msgid "&Edit"
@@ -159,7 +161,7 @@ msgstr "Hulp"
 
 #: src/spek-window.cc:123
 msgid "A new version of Spek is available, click to download."
-msgstr ""
+msgstr "Er is een nieuwe versie van Spek beschikbaar, klik voor download"
 
 #. TRANSLATORS: window title, %s is replaced with the file name
 #: src/spek-window.cc:161
@@ -198,11 +200,13 @@ msgid "translator-credits"
 msgstr ""
 "DutchDude (TheGuyOfDoom)\n"
 "Wouter Bolsterlee\n"
-"Alexander Kojevnikov"
+"Alexander Kojevnikov\n"
+"Gabriel Secreve\n"
+"HumbleDeer"
 
 #: src/spek-window.cc:315
 msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
-msgstr ""
+msgstr "Copyright (c) 2010-2013 Alexander Kojevnikov en inzenders"
 
 #: src/spek-window.cc:318
 msgid "Spek Website"
@@ -213,12 +217,3 @@ msgstr "Spek-website"
 #, c-format
 msgid "Spek version %s"
 msgstr "Spek versie %s"
-
-#~ msgid "Spek Spectrum Analyser"
-#~ msgstr "Spek Spectrumanalyse"
-
-#, c-format
-#~ msgid "%d channel"
-#~ msgid_plural "%d channels"
-#~ msgstr[0] "%d kanaal"
-#~ msgstr[1] "%d kanalen"

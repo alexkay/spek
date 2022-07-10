@@ -1,6 +1,6 @@
 #!/bin/sh
 
-LANGUAGES="ca cs da de el eo es fi fr gl it ja lv nb nl pl pt_BR ru sk sr@latin sv tr uk vi zh_CN zh_TW"
+LANGUAGES="bs ca cs da de el eo es fi fr gl he hr hu id it ja ko lv nb nl nn pl pt_BR ru sk sr@latin sv th tr uk vi zh_CN zh_TW"
 
 cd $(dirname $0)/../..
 

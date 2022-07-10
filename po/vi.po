@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR The Spek authors
+# This file is distributed under the same license as the spek package.
 #
 # Translators:
 # alienyd <altranine@gmail.com>, 2013
@@ -8,11 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-04 13:17-0700\n"
-"PO-Revision-Date: 2013-11-20 10:50+0000\n"
-"Last-Translator: Alexander Kojevnikov <alexander@kojevnikov.com>\n"
-"Language-Team: Vietnamese (http://www.transifex.com/projects/p/spek/language/"
-"vi/)\n"
+"POT-Creation-Date: 2022-07-10 15:29-0700\n"
+"PO-Revision-Date: 2011-02-23 09:25+0000\n"
+"Last-Translator: alienyd <altranine@gmail.com>, 2013\n"
+"Language-Team: Vietnamese (http://www.transifex.com/spek/spek/language/vi/)\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -92,24 +91,24 @@ msgstr ""
 msgid "%s: %s"
 msgstr "%s: %s"
 
-#: src/spek-preferences-dialog.cc:50
+#: src/spek-preferences-dialog.cc:58
 msgid "Preferences"
 msgstr "Tuỳ chỉnh"
 
-#: src/spek-preferences-dialog.cc:55
+#: src/spek-preferences-dialog.cc:63
 msgid "(system default)"
 msgstr "(mặc định)"
 
 #. TRANSLATORS: The name of a section in the Preferences dialog.
-#: src/spek-preferences-dialog.cc:62
+#: src/spek-preferences-dialog.cc:70
 msgid "General"
 msgstr "Chung"
 
-#: src/spek-preferences-dialog.cc:71
+#: src/spek-preferences-dialog.cc:79
 msgid "Language:"
 msgstr "Ngôn ngữ:"
 
-#: src/spek-preferences-dialog.cc:87
+#: src/spek-preferences-dialog.cc:95
 msgid "Check for &updates"
 msgstr "Kiểm tra &cập nhật"
 
@@ -206,11 +205,3 @@ msgstr "Trang chủ của Spek"
 #, c-format
 msgid "Spek version %s"
 msgstr "Spek phiên bản %s"
-
-#~ msgid "Spek Spectrum Analyser"
-#~ msgstr "Spek phân tích âm phổ"
-
-#, c-format
-#~ msgid "%d channel"
-#~ msgid_plural "%d channels"
-#~ msgstr[0] "%d kênh"

@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR The Spek authors
+# This file is distributed under the same license as the spek package.
 #
 # Translators:
 # Alexander Kojevnikov <alexander@kojevnikov.com>, 2011-2012
@@ -11,17 +11,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-04 13:17-0700\n"
-"PO-Revision-Date: 2013-11-20 10:50+0000\n"
-"Last-Translator: Alexander Kojevnikov <alexander@kojevnikov.com>\n"
-"Language-Team: Ukrainian (http://www.transifex.com/projects/p/spek/language/"
-"uk/)\n"
+"POT-Creation-Date: 2022-07-10 15:29-0700\n"
+"PO-Revision-Date: 2011-02-23 09:25+0000\n"
+"Last-Translator: sacrebleu <olga@vasylevska.com>, 2011\n"
+"Language-Team: Ukrainian (http://www.transifex.com/spek/spek/language/uk/)\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != "
+"11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % "
+"100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
+"(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
 #: data/spek.desktop.in:4
 msgid "Spek"
@@ -52,6 +53,7 @@ msgid_plural "%d bits"
 msgstr[0] "%d біт"
 msgstr[1] "%d біта"
 msgstr[2] "%d бітів"
+msgstr[3] "%d бітів"
 
 #: src/spek-pipeline.cc:244
 msgid "Cannot open input file"
@@ -98,24 +100,24 @@ msgstr ""
 msgid "%s: %s"
 msgstr "%s: %s"
 
-#: src/spek-preferences-dialog.cc:50
+#: src/spek-preferences-dialog.cc:58
 msgid "Preferences"
 msgstr "Параметри"
 
-#: src/spek-preferences-dialog.cc:55
+#: src/spek-preferences-dialog.cc:63
 msgid "(system default)"
 msgstr "(системна)"
 
 #. TRANSLATORS: The name of a section in the Preferences dialog.
-#: src/spek-preferences-dialog.cc:62
+#: src/spek-preferences-dialog.cc:70
 msgid "General"
 msgstr "Загальні"
 
-#: src/spek-preferences-dialog.cc:71
+#: src/spek-preferences-dialog.cc:79
 msgid "Language:"
 msgstr "Мова:"
 
-#: src/spek-preferences-dialog.cc:87
+#: src/spek-preferences-dialog.cc:95
 msgid "Check for &updates"
 msgstr "Перевіряти наявність &оновлень"
 
@@ -212,13 +214,3 @@ msgstr "Веб-сайт Spek"
 #, c-format
 msgid "Spek version %s"
 msgstr "Spek версії %s"
-
-#~ msgid "Spek Spectrum Analyser"
-#~ msgstr "Аналізатор спектру Spek"
-
-#, c-format
-#~ msgid "%d channel"
-#~ msgid_plural "%d channels"
-#~ msgstr[0] "%d канал"
-#~ msgstr[1] "%d каналу"
-#~ msgstr[2] "%d каналів"

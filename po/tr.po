@@ -1,19 +1,19 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR The Spek authors
+# This file is distributed under the same license as the spek package.
 #
 # Translators:
 # Alexander Kojevnikov <alexander@kojevnikov.com>, 2013
-# apranax <apranax@sharklasers.com>, 2012
+# apranax fort <apranax@sharklasers.com>, 2012
+# Harun Arı, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-04 13:17-0700\n"
-"PO-Revision-Date: 2013-11-20 10:50+0000\n"
-"Last-Translator: Alexander Kojevnikov <alexander@kojevnikov.com>\n"
-"Language-Team: Turkish (http://www.transifex.com/projects/p/spek/language/"
-"tr/)\n"
+"POT-Creation-Date: 2022-07-10 15:29-0700\n"
+"PO-Revision-Date: 2011-02-23 09:25+0000\n"
+"Last-Translator: Harun Arı, 2022\n"
+"Language-Team: Turkish (http://www.transifex.com/spek/spek/language/tr/)\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +26,7 @@ msgstr "Spek"
 
 #: data/spek.desktop.in:5
 msgid "Spectrum Analyser"
-msgstr "Spektrum Analizör"
+msgstr "Spektrum Çözümleyicisi"
 
 #: data/spek.desktop.in:6
 msgid "View spectrograms of your audio files"
@@ -51,23 +51,23 @@ msgstr[1] ""
 
 #: src/spek-pipeline.cc:244
 msgid "Cannot open input file"
-msgstr "Girdi dosyası açılamadı"
+msgstr "Girdi dosyası açılamıyor"
 
 #: src/spek-pipeline.cc:247
 msgid "Cannot find stream info"
-msgstr "Akış bilgisi bulunamadı"
+msgstr "Akış bilgisi bulunamıyor"
 
 #: src/spek-pipeline.cc:250
 msgid "The file contains no audio streams"
-msgstr "Dosya ses akışı içermiyor"
+msgstr "Dosya, ses akışı içermiyor"
 
 #: src/spek-pipeline.cc:253
 msgid "Cannot find decoder"
-msgstr "Dekoder bulunamadı"
+msgstr "Kod çözücü bulunamıyor"
 
 #: src/spek-pipeline.cc:256
 msgid "Unknown duration"
-msgstr "Bilinmeyen Süre"
+msgstr "Süre bilinmiyor"
 
 #: src/spek-pipeline.cc:259
 msgid "No audio channels"
@@ -75,18 +75,18 @@ msgstr "Ses kanalı yok"
 
 #: src/spek-pipeline.cc:262
 msgid "Cannot open decoder"
-msgstr "Dekoder açılamadı."
+msgstr "Kod çözücü açılamıyor"
 
 #: src/spek-pipeline.cc:265
 msgid "Unsupported sample format"
-msgstr "Desteklenmeyen örnekleme biçimi"
+msgstr "Desteklenmeyen örnek biçimi"
 
 #. TRANSLATORS: first %d is the stream number, second %d is the
 #. total number of streams, %s is the stream description.
 #: src/spek-pipeline.cc:279
 #, c-format
 msgid "Stream %d / %d: %s"
-msgstr ""
+msgstr "Akış %d / %d: %s"
 
 #. TRANSLATORS: first %s is the error message, second %s is stream description.
 #: src/spek-pipeline.cc:286
@@ -94,26 +94,26 @@ msgstr ""
 msgid "%s: %s"
 msgstr "%s: %s"
 
-#: src/spek-preferences-dialog.cc:50
+#: src/spek-preferences-dialog.cc:58
 msgid "Preferences"
-msgstr "Seçenekler"
+msgstr "Tercihler"
 
-#: src/spek-preferences-dialog.cc:55
+#: src/spek-preferences-dialog.cc:63
 msgid "(system default)"
 msgstr "(sistem varsayılanı)"
 
 #. TRANSLATORS: The name of a section in the Preferences dialog.
-#: src/spek-preferences-dialog.cc:62
+#: src/spek-preferences-dialog.cc:70
 msgid "General"
-msgstr "General"
+msgstr "Genel"
 
-#: src/spek-preferences-dialog.cc:71
+#: src/spek-preferences-dialog.cc:79
 msgid "Language:"
-msgstr "Dil"
+msgstr "Dil:"
 
-#: src/spek-preferences-dialog.cc:87
+#: src/spek-preferences-dialog.cc:95
 msgid "Check for &updates"
-msgstr "&Güncellemeleri kontrol et"
+msgstr "&Güncellemeleri denetle"
 
 #: src/spek-spectrogram.cc:216
 #, c-format
@@ -137,15 +137,15 @@ msgstr "-00 dB"
 
 #: src/spek-window.cc:57
 msgid "Spek - Acoustic Spectrum Analyser"
-msgstr "Spek - Akustik Spektrum Analizör"
+msgstr "Spek - Akustik Spektrum Çözümleyicisi"
 
 #: src/spek-window.cc:73
 msgid "&File"
-msgstr "&File"
+msgstr "&Dosya"
 
 #: src/spek-window.cc:79
 msgid "&Edit"
-msgstr "&Düzenle"
+msgstr "Dü&zen"
 
 #: src/spek-window.cc:83 src/spek-window.cc:88
 msgid "&Help"
@@ -157,7 +157,7 @@ msgstr "Yardım"
 
 #: src/spek-window.cc:123
 msgid "A new version of Spek is available, click to download."
-msgstr "Spek'in yeni bir versiyonu hazır, indirmek için tıklayınız."
+msgstr "Spek'in yeni bir sürümü mevcut, indirmek için tıklayın."
 
 #. TRANSLATORS: window title, %s is replaced with the file name
 #: src/spek-window.cc:161
@@ -175,11 +175,11 @@ msgstr "Ses dosyaları"
 
 #: src/spek-window.cc:225
 msgid "Open File"
-msgstr "Aç"
+msgstr "Dosya Aç"
 
 #: src/spek-window.cc:247
 msgid "PNG images"
-msgstr "PNG imajları"
+msgstr "PNG resimleri"
 
 #: src/spek-window.cc:253
 msgid "Save Spectrogram"
@@ -193,34 +193,18 @@ msgstr "Adsız"
 #. TRANSLATORS: Add your name here
 #: src/spek-window.cc:309
 msgid "translator-credits"
-msgstr "apranax"
+msgstr "apranax, harbee"
 
 #: src/spek-window.cc:315
 msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
-msgstr ""
-"Telif hakları (c) 2010-2013 Alexander Kojevnikov and katkıda bulunanlar"
+msgstr "Telif Hakkı (c) 2010-2013 Alexander Kojevnikov ve katkıda bulunanlar"
 
 #: src/spek-window.cc:318
 msgid "Spek Website"
-msgstr "Spek Websitesi"
+msgstr "Spek Web Sitesi"
 
 #. TRANSLATORS: the %s is the package version.
 #: src/spek.cc:76
 #, c-format
 msgid "Spek version %s"
-msgstr "Spek versiyonu %s"
-
-#~ msgid "Spek Spectrum Analyser"
-#~ msgstr "Spek Spektrum Analizör"
-
-#, c-format
-#~ msgid "%d channel"
-#~ msgid_plural "%d channels"
-#~ msgstr[0] ""
-#~ "%d kanal\n"
-#~ "\n"
-#~ "%d kanal"
-#~ msgstr[1] ""
-#~ "%d kanal\n"
-#~ "\n"
-#~ "%d kanal"
+msgstr "Spek sürümü %s"
