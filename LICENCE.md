@@ -20,6 +20,7 @@ Contributors:
 * Jakov Smolic
 * Jonathan Gonzalez V
 * Matteo Bini
+* Mike Wang
 * Simon Ruderich
 * Stefan Kost
 * Thibault North

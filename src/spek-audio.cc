@@ -50,7 +50,7 @@ private:
 
     int channel;
 
-    AVPacket packet;
+    AVPacket *packet;
     int offset;
     AVFrame *frame;
     int buffer_len;
@@ -103,7 +103,7 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, int stream)
 
     AVStream *avstream = nullptr;
     AVCodecParameters *codecpar = nullptr;
-    AVCodec *codec = nullptr;
+    const AVCodec *codec = nullptr;
     if (!error) {
         avstream = format_context->streams[audio_stream];
         codecpar = avstream->codecpar;
@@ -143,7 +143,7 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, int stream)
         if (bits_per_sample) {
             bit_rate = 0;
         }
-        channels = codecpar->channels;
+        channels = codecpar->ch_layout.nb_channels;
 
         if (avstream->duration != AV_NOPTS_VALUE) {
             duration = avstream->duration * av_q2d(avstream->time_base);
@@ -201,9 +201,9 @@ AudioFileImpl::AudioFileImpl(
     sample_rate(sample_rate),
     bits_per_sample(bits_per_sample), streams(streams), channels(channels), duration(duration)
 {
-    av_init_packet(&this->packet);
-    this->packet.data = nullptr;
-    this->packet.size = 0;
+    this->packet = av_packet_alloc();
+    this->packet->data = nullptr;
+    this->packet->size = 0;
     this->offset = 0;
     this->frame = av_frame_alloc();
     this->buffer_len = 0;
@@ -221,11 +221,11 @@ AudioFileImpl::~AudioFileImpl()
     if (this->frame) {
         av_frame_free(&this->frame);
     }
-    if (this->packet.data) {
-        this->packet.data -= this->offset;
-        this->packet.size += this->offset;
+    if (this->packet->data) {
+        this->packet->data -= this->offset;
+        this->packet->size += this->offset;
         this->offset = 0;
-        av_packet_unref(&this->packet);
+        av_packet_unref(this->packet);
     }
     if (this->codec_context) {
         avcodec_free_context(&codec_context);
@@ -258,23 +258,23 @@ int AudioFileImpl::read()
     }
 
     for (;;) {
-        while (this->packet.size > 0) {
+        while (this->packet->size > 0) {
             av_frame_unref(this->frame);
-            int got_frame = 0;
-            int len = avcodec_decode_audio4(
-                this->codec_context, this->frame, &got_frame, &this->packet
-            );
-            if (len < 0) {
-                // Error, skip the frame.
+            int ret;
+            ret = avcodec_send_packet(this->codec_context, this->packet);
+            if (ret < 0) {
+                // Error sending a packet for decoding, skip the frame.
                 break;
             }
-            this->packet.data += len;
-            this->packet.size -= len;
-            this->offset += len;
-            if (!got_frame) {
-                // No data yet, get more frames.
-                continue;
+            ret = avcodec_receive_frame(this->codec_context, this->frame);
+            if (ret < 0 && ret != AVERROR(EAGAIN) && ret != AVERROR_EOF) {
+                // Error during decoding, skip the frame.
+                break;
             }
+            int len = this->packet->size;
+            this->packet->data += len;
+            this->packet->size -= len;
+            this->offset += len;
             // We have data, return it and come back for more later.
             int samples = this->frame->nb_samples;
             if (samples > this->buffer_len) {
@@ -324,19 +324,19 @@ int AudioFileImpl::read()
             }
             return samples;
         }
-        if (this->packet.data) {
-            this->packet.data -= this->offset;
-            this->packet.size += this->offset;
+        if (this->packet->data) {
+            this->packet->data -= this->offset;
+            this->packet->size += this->offset;
             this->offset = 0;
-            av_packet_unref(&this->packet);
+            av_packet_unref(this->packet);
         }
 
         int res = 0;
-        while ((res = av_read_frame(this->format_context, &this->packet)) >= 0) {
-            if (this->packet.stream_index == this->audio_stream) {
+        while ((res = av_read_frame(this->format_context, this->packet)) >= 0) {
+            if (this->packet->stream_index == this->audio_stream) {
                 break;
             }
-            av_packet_unref(&this->packet);
+            av_packet_unref(this->packet);
         }
         if (res < 0) {
             // End of file or error.
