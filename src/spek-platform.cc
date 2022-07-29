@@ -24,8 +24,14 @@ wxString spek_platform_config_path(const wxString& app_name)
 #ifdef OS_WIN
     wxFileName file_name(wxStandardPaths::Get().GetUserConfigDir(), wxEmptyString);
 #else
-    wxFileName file_name(wxGetHomeDir(), wxEmptyString);
-    file_name.AppendDir(".config");
+    wxFileName file_name;
+    wxString xdg_config_home;
+    if (wxGetEnv("XDG_CONFIG_HOME", &xdg_config_home) && !xdg_config_home.IsEmpty()) {
+        file_name = wxFileName(xdg_config_home, wxEmptyString);
+    } else {
+        file_name = wxFileName(wxGetHomeDir(), wxEmptyString);
+        file_name.AppendDir(".config");
+    }
 #endif
     file_name.AppendDir(app_name);
     file_name.Mkdir(0755, wxPATH_MKDIR_FULL);
