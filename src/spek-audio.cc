@@ -6,6 +6,7 @@ extern "C" {
 #include <libavformat/avformat.h>
 #include <libavcodec/avcodec.h>
 #include <libavutil/mathematics.h>
+#include <libavdevice/avdevice.h>
 }
 
 #include "spek-audio.h"
@@ -68,13 +69,32 @@ Audio::Audio()
 Audio::~Audio()
 {}
 
-std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, int stream)
+std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, const std::string& device_name, int stream)
 {
     AudioError error = AudioError::OK;
 
+    static bool registered;
+    if (!registered) {
+        avdevice_register_all();
+        registered = true;
+    }
+
+    const char* file_or_device = file_name.c_str();
+    AVInputFormat *file_iformat = nullptr;
+    if (!device_name.empty()) {
+        file_or_device = "default";
+        file_iformat = av_find_input_format("alsa");
+        if (!file_iformat) {
+            error = AudioError::CANNOT_OPEN_DEVICE;
+        } else {
+        }
+    }
+
     AVFormatContext *format_context = nullptr;
-    if (avformat_open_input(&format_context, file_name.c_str(), nullptr, nullptr) != 0) {
-        error = AudioError::CANNOT_OPEN_FILE;
+    if (!error) {
+        if (avformat_open_input(&format_context, file_or_device, file_iformat, nullptr) != 0) {
+            error = AudioError::CANNOT_OPEN_FILE;
+        }
     }
 
     if (!error && avformat_find_stream_info(format_context, nullptr) < 0) {
@@ -149,6 +169,8 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, int stream)
             duration = avstream->duration * av_q2d(avstream->time_base);
         } else if (format_context->duration != AV_NOPTS_VALUE) {
             duration = format_context->duration / (double) AV_TIME_BASE;
+        } else if (!device_name.empty()) {
+            duration = 60; /* seconds visible */
         } else {
             error = AudioError::NO_DURATION;
         }
@@ -182,6 +204,10 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, int stream)
             fmt != AV_SAMPLE_FMT_DBL && fmt != AV_SAMPLE_FMT_DBLP ) {
             error = AudioError::BAD_SAMPLE_FORMAT;
         }
+    }
+
+    if (format_context) {
+        av_dump_format(format_context, 0, file_name.c_str(), false);
     }
 
     return std::unique_ptr<AudioFile>(new AudioFileImpl(

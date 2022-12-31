@@ -41,7 +41,7 @@ public:
 protected:
     virtual bool OnDropFiles(wxCoord, wxCoord, const wxArrayString& filenames){
         if (filenames.GetCount() == 1) {
-            window->open(filenames[0]);
+            window->open(filenames[0], "");
             return true;
         }
         return false;
@@ -51,8 +51,8 @@ private:
     SpekWindow *window;
 };
 
-SpekWindow::SpekWindow(const wxString& path) :
-    wxFrame(NULL, -1, wxEmptyString, wxDefaultPosition, wxSize(640, 480)), path(path)
+SpekWindow::SpekWindow(const wxString& path, const wxString& device) :
+    wxFrame(NULL, -1, wxEmptyString, wxDefaultPosition, wxSize(640, 480)), path(path), device(device)
 {
     this->description = _("Spek - Acoustic Spectrum Analyser");
     SetTitle(this->description);
@@ -139,8 +139,8 @@ SpekWindow::SpekWindow(const wxString& path) :
 
     this->cur_dir = wxGetHomeDir();
 
-    if (!path.IsEmpty()) {
-        open(path);
+    if (!path.IsEmpty() || !device.IsEmpty()) {
+        open(path, device);
     }
 
     SetDropTarget(new SpekDropTarget(this));
@@ -151,17 +151,18 @@ SpekWindow::SpekWindow(const wxString& path) :
     pthread_create(&thread, NULL, &check_version, this);
 }
 
-void SpekWindow::open(const wxString& path)
+void SpekWindow::open(const wxString& path, const wxString& device)
 {
     wxFileName file_name(path);
-    if (file_name.FileExists()) {
+    if (file_name.FileExists() || !device.IsEmpty()) {
         this->path = path;
+        this->device = device;
         wxString full_name = file_name.GetFullName();
         // TRANSLATORS: window title, %s is replaced with the file name
         wxString title = wxString::Format(_("Spek - %s"), full_name.c_str());
         SetTitle(title);
 
-        this->spectrogram->open(path);
+        this->spectrogram->open(path, device);
     }
 }
 
@@ -233,7 +234,7 @@ void SpekWindow::on_open(wxCommandEvent&)
     if (dlg->ShowModal() == wxID_OK) {
         this->cur_dir = dlg->GetDirectory();
         filter_index = dlg->GetFilterIndex();
-        open(dlg->GetPath());
+        open(dlg->GetPath(), "");
     }
 
     dlg->Destroy();

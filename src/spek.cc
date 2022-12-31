@@ -23,6 +23,7 @@ protected:
 private:
     SpekWindow *window;
     wxString path;
+    wxString device;
     bool quit;
 };
 
@@ -30,6 +31,7 @@ IMPLEMENT_APP(Spek)
 
 bool Spek::OnInit()
 {
+    delete wxLog::SetActiveTarget(new wxLogStderr()) ;
     wxInitAllImageHandlers();
     wxSocketBase::Initialize();
 
@@ -49,6 +51,13 @@ bool Spek::OnInit()
             "V",
             "version",
             "Display the version and exit",
+            wxCMD_LINE_VAL_NONE,
+            wxCMD_LINE_PARAM_OPTIONAL,
+        }, {
+            wxCMD_LINE_SWITCH,
+            NULL,
+            "microphone",
+            "Show continuous graph recorded from mircophone",
             wxCMD_LINE_VAL_NONE,
             wxCMD_LINE_PARAM_OPTIONAL,
         }, {
@@ -78,11 +87,14 @@ bool Spek::OnInit()
         this->quit = true;
         return true;
     }
+    if (parser.Found("microphone")) {
+        this->device = "default";
+    }
     if (parser.GetParamCount()) {
         this->path = parser.GetParam();
     }
 
-    this->window = new SpekWindow(this->path);
+    this->window = new SpekWindow(this->path, this->device);
     this->window->Show(true);
     SetTopWindow(this->window);
     return true;
