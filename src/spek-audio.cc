@@ -73,7 +73,7 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, int stream)
     AudioError error = AudioError::OK;
 
     AVFormatContext *format_context = nullptr;
-    if (avformat_open_input(&format_context, file_name.c_str(), nullptr, nullptr) != 0) {
+    if (avformat_open_input(&format_context, file_name.c_str(), nullptr, nullptr) < 0) {
         error = AudioError::CANNOT_OPEN_FILE;
     }
 
@@ -275,8 +275,10 @@ int AudioFileImpl::read()
             this->packet->data += len;
             this->packet->size -= len;
             this->offset += len;
-            // We have data, return it and come back for more later.
             int samples = this->frame->nb_samples;
+            // Occasionally the frame has no samples, move on to the next one.
+            if (samples == 0) continue;
+            // We have data, return it and come back for more later.
             if (samples > this->buffer_len) {
                 this->buffer = static_cast<float*>(
                     av_realloc(this->buffer, samples * sizeof(float))
