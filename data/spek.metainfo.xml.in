@@ -31,6 +31,7 @@
     <url type="bugtracker">https://github.com/alexkay/spek/issues</url>
     <developer_name>alexkay</developer_name>
     <content_rating type="oars-1.1" />
+    <launchable type="desktop-id">spek.desktop</launchable>
     <releases>
         <release version="0.8.5" date="2023-01-10"/>
         <release version="0.8.4" date="2022-07-11"/>
