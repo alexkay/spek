@@ -51,6 +51,7 @@ Translators:
 * Pavel Fric
 * Philipp Defner
 * Piotr Drąg
+* Roman Horník
 * Ryan Smith
 * Shibing Huang
 * Tan Rico

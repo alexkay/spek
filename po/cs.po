@@ -1,25 +1,25 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR The Spek authors
 # This file is distributed under the same license as the spek package.
-#
+# 
 # Translators:
 # Alexander Kojevnikov <alexander@kojevnikov.com>, 2012
 # fri, 2011
 # fri, 2012
+# Roman Horník <roman.hornik@debian-linux.cz>, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-10 15:29-0700\n"
+"POT-Creation-Date: 2022-07-10 16:20-0700\n"
 "PO-Revision-Date: 2011-02-23 09:25+0000\n"
-"Last-Translator: fri, 2012\n"
+"Last-Translator: Roman Horník <roman.hornik@debian-linux.cz>, 2022\n"
 "Language-Team: Czech (http://www.transifex.com/spek/spek/language/cs/)\n"
-"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n "
-"<= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
 #: data/spek.desktop.in:4
 msgid "Spek"
@@ -89,9 +89,10 @@ msgstr "Vzorkovací formát není podporován"
 #: src/spek-pipeline.cc:279
 #, c-format
 msgid "Stream %d / %d: %s"
-msgstr ""
+msgstr "Stream %d / %d: %s"
 
-#. TRANSLATORS: first %s is the error message, second %s is stream description.
+#. TRANSLATORS: first %s is the error message, second %s is stream
+#. description.
 #: src/spek-pipeline.cc:286
 #, c-format
 msgid "%s: %s"
