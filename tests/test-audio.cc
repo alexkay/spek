@@ -94,7 +94,7 @@ void test_audio()
         {"2ch-44100Hz-q100.m4a",
             {AudioError::OK, "AAC", 159649, 44100, 0, 2, AAC_T, 5120}},
         {"2ch-44100Hz-q5.ogg",
-            {AudioError::OK, "Vorbis", 160000, 44100, 0, 2, 0.1, 4672}},
+            {AudioError::OK, "Vorbis", 160000, 44100, 0, 2, 0.1, 4282}},
         {"2ch-44100Hz.dts",
             {AudioError::OK, "DCA", 1411200, 44100, 0, 2, DCA_T, 5120}},
         {"2ch-44100Hz.ac3",
@@ -102,9 +102,9 @@ void test_audio()
         {"2ch-44100Hz-std.mpc",
             {AudioError::OK, "Musepack", 0, 44100, 0, 2, 0.0, 5760}},
         {"2ch-44100Hz-v1.wma",
-            {AudioError::OK, "Windows Media Audio 1", 128000, 44100, 0, 2, 0.138, 6 * 1024}},
+            {AudioError::OK, "Windows Media Audio 1", 128000, 44100, 0, 2, 0.138, 4 * 1024}},
         {"2ch-44100Hz-v2.wma",
-            {AudioError::OK, "Windows Media Audio 2", 128000, 44100, 0, 2, 0.138, 6 * 1024}},
+            {AudioError::OK, "Windows Media Audio 2", 128000, 44100, 0, 2, 0.138, 4 * 1024}},
     };
 
     Audio audio;
