@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-10 16:20-0700\n"
+"POT-Creation-Date: 2023-01-09 19:59-0800\n"
 "PO-Revision-Date: 2011-02-23 09:25+0000\n"
 "Last-Translator: Iho Somnam <ihosomnam4741@gmail.com>, 2017\n"
 "Language-Team: Thai (http://www.transifex.com/spek/spek/language/th/)\n"
@@ -188,15 +188,15 @@ msgid "Untitled"
 msgstr "ไฟล์ที่ไม่ได้ตั้งชื่อ"
 
 #. TRANSLATORS: Add your name here
-#: src/spek-window.cc:309
+#: src/spek-window.cc:315
 msgid "translator-credits"
 msgstr "ไอโฮ โสมนาม"
 
-#: src/spek-window.cc:315
+#: src/spek-window.cc:321
 msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
 msgstr "ลิขสิทธิ์ (c) 2010-2013 Alexander Kojevnikov และผู้มีส่วนร่วม"
 
-#: src/spek-window.cc:318
+#: src/spek-window.cc:324
 msgid "Spek Website"
 msgstr "เว็บไซต์ Spek"
 

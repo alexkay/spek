@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-10 16:20-0700\n"
+"POT-Creation-Date: 2023-01-09 19:59-0800\n"
 "PO-Revision-Date: 2011-02-23 09:25+0000\n"
 "Last-Translator: Gergő Seregély <seregely.gergo99@gmail.com>, 2019\n"
 "Language-Team: Hungarian (http://www.transifex.com/spek/spek/language/hu/)\n"
@@ -190,17 +190,17 @@ msgid "Untitled"
 msgstr "Névtelen"
 
 #. TRANSLATORS: Add your name here
-#: src/spek-window.cc:309
+#: src/spek-window.cc:315
 msgid "translator-credits"
 msgstr "Greg Starling"
 
-#: src/spek-window.cc:315
+#: src/spek-window.cc:321
 msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
 msgstr ""
 "Minden jog fenntartva (©) 2010-2013 Alexander Kojevnikov és a közreműködők "
 "részére."
 
-#: src/spek-window.cc:318
+#: src/spek-window.cc:324
 msgid "Spek Website"
 msgstr "Spek weboldala"
 

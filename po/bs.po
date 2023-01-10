@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-10 16:20-0700\n"
+"POT-Creation-Date: 2023-01-09 19:59-0800\n"
 "PO-Revision-Date: 2011-02-23 09:25+0000\n"
 "Last-Translator: Aleksandar Todorović (r3bl) <aleksandar@r3bl.me>, 2015\n"
 "Language-Team: Bosnian (http://www.transifex.com/spek/spek/language/bs/)\n"
@@ -191,15 +191,15 @@ msgid "Untitled"
 msgstr "Bez naslova"
 
 #. TRANSLATORS: Add your name here
-#: src/spek-window.cc:309
+#: src/spek-window.cc:315
 msgid "translator-credits"
 msgstr "zasluge-za-prevod"
 
-#: src/spek-window.cc:315
+#: src/spek-window.cc:321
 msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
 msgstr "Copyright (c) 2010-2013 Alexander Kojevnikov i ostali kontributori"
 
-#: src/spek-window.cc:318
+#: src/spek-window.cc:324
 msgid "Spek Website"
 msgstr "Spek web sajt"
 

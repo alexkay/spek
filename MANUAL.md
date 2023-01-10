@@ -1,6 +1,6 @@
-% SPEK(1) User's Guide | Version 0.8.4
+% SPEK(1) User's Guide | Version 0.8.5
 %
-% 2022-07-10
+% 2023-01-09
 
 # NAME
 

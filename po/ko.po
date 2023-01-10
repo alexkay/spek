@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-10 16:20-0700\n"
+"POT-Creation-Date: 2023-01-09 19:59-0800\n"
 "PO-Revision-Date: 2011-02-23 09:25+0000\n"
 "Last-Translator: Zames Dean <zdci4li@gmail.com>, 2014,2022\n"
 "Language-Team: Korean (http://www.transifex.com/spek/spek/language/ko/)\n"
@@ -189,15 +189,15 @@ msgid "Untitled"
 msgstr "제목 없음"
 
 #. TRANSLATORS: Add your name here
-#: src/spek-window.cc:309
+#: src/spek-window.cc:315
 msgid "translator-credits"
 msgstr "4Li, 큰돌"
 
-#: src/spek-window.cc:315
+#: src/spek-window.cc:321
 msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
 msgstr "저작권 (c) 2010-2013 Alexander Kojevnikov 와 공헌자들"
 
-#: src/spek-window.cc:318
+#: src/spek-window.cc:324
 msgid "Spek Website"
 msgstr "Spek 웹사이트"
 

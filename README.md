@@ -7,12 +7,13 @@ Spek is available on *BSD, GNU/Linux, Windows and Mac OS X.
 
 Find out more about Spek on its website: <http://spek.cc/>
 
-## Spek 0.8.4 - Released 2022-07-10
+## Spek 0.8.5 - Released 2023-01-09
 
 ### New Features And Enhancements
 
 New features since 0.8.2:
 
+ * Upgrade to FFmpeg 5.1
  * Add 2 more palettes and change the default.
  * Allow changing the DFT window size and function.
  * Allow switching between audio streams and channels.
@@ -25,6 +26,7 @@ Enhancements:
  * Detect AR tool.
  * Use Homebrew for macOS dependencies.
  * Improve test coverage.
+ * Use `XDG_CONFIG_HOME` on Unix systems.
 
 Bugfixes:
 
