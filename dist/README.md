@@ -26,6 +26,7 @@
  * Update web/index.html: bump version numbers, binary sizes and news.
  * Write the blog post, link from web/index.html, don't publish yet.
  * Upload the tarball + OSX and WIN binaries.
+ * Update releases section in `data/spek.metainfo.xml.in`
  * `git tag -a vX.Y.Z`.
  * `git push origin vX.Y.Z`.
  * Upload the website using `make upload`.
