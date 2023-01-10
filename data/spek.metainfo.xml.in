@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+    <id>cc.spek.Spek</id>
+    <metadata_license>CC0-1.0</metadata_license>
+    <project_license>GPL-3.0</project_license>
+    <name>Spek</name>
+    <summary>View spectrograms of your audio files</summary>
+    <description>
+        <p>Spek is an acoustic spectrum analyser written in C and C++. It uses FFmpeg libraries for audio decoding and wxWidgets for the GUI.</p>
+        <ul>
+            <li>Supports all popular lossy and lossless audio file formats thanks to the FFmpeg libraries.</li>
+            <li>Ultra-fast signal processing, uses multiple threads to further speed up the analysis.</li>
+            <li>Shows the codec name and the audio signal parameters.</li>
+            <li>Allows to save the spectrogram as an image file.</li>
+            <li>Drag-and-drop support; associates with common audio file formats.</li>
+            <li>Auto-fitting time, frequency and spectral density rulers.</li>
+            <li>Adjustable spectral density range.</li>
+            <li>Translated into 19 languages.</li>
+        </ul>
+    </description>
+    <screenshots>
+      <screenshot type="default">
+        <image>http://spek.cc/flac.png</image>
+      </screenshot>
+    </screenshots>
+	<categories>
+		<category>Audio</category>
+		<category>AudioVideo</category>
+	</categories>
+    <url type="homepage">http://spek.cc/</url>
+    <url type="bugtracker">https://github.com/alexkay/spek/issues</url>
+    <developer_name>alexkay</developer_name>
+    <content_rating type="oars-1.1" />
+    <releases>
+        <release version="0.8.5" date="2023-01-10"/>
+        <release version="0.8.4" date="2022-07-11"/>
+        <release version="0.8.2" date="2016-01-19"/>
+    </releases>
+</component>
