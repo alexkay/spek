@@ -27,8 +27,6 @@
  * Write the blog post, link from web/index.html, don't publish yet.
  * Upload the tarball + OSX and WIN binaries.
  * `git tag -a vX.Y.Z`.
+ * `git push origin vX.Y.Z`.
  * Upload the website using `make upload`.
  * Publish the blog post.
- * Send an announcement to the LAA list.
- * Update the forum thread on what.
- * Update FreeBSD and Debian ports.

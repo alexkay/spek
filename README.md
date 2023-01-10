@@ -36,9 +36,9 @@ Bugfixes:
 
 ### Sources / Packages
 
-Spek 0.8.4 tarball:
+Spek 0.8.5 tarball:
 
- * <https://github.com/alexkay/spek/releases/download/v0.8.4/spek-0.8.4.tar.xz>
+ * <https://github.com/alexkay/spek/releases/download/v0.8.5/spek-0.8.5.tar.xz>
 
 Windows and Mac OS X binaries:
 
