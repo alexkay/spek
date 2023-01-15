@@ -45,7 +45,8 @@ LDFLAGS="-mconsole" ./autogen.sh \
 cd dist/win
 rm -fr Spek && mkdir Spek
 cp build/bin/spek.exe Spek/
-cp ../../LICENCE.md Spek/
+cp ../../CREDITS.md Spek/
+cp ../../LICENSE Spek/
 cp ../../README.md Spek/
 mkdir Spek/lic
 cp ../../lic/* Spek/lic/

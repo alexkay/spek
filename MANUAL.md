@@ -76,7 +76,7 @@ On OS X use the Command key instead of Ctrl.
 # AUTHORS
 
 Alexander Kojevnikov <alexander@kojevnikov.com>. Other contributors are listed
-in the LICENCE.md file distributed with the source code.
+in the CREDITS.md file distributed with the source code.
 
 # DISTRIBUTION
 

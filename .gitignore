@@ -19,6 +19,7 @@ compile
 config.*
 configure
 data/spek.desktop
+data/spek.metainfo.xml
 depcomp
 dist/osx/Info.plist
 dist/osx/Spek.app

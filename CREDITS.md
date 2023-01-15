@@ -21,6 +21,7 @@ Contributors:
 * Jonathan Gonzalez V
 * Matteo Bini
 * Mike Wang
+* Nils Fürniß
 * Simon Ruderich
 * Stefan Kost
 * Thibault North

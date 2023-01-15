@@ -6,8 +6,9 @@ SUBDIRS = \
 	tests
 
 EXTRA_DIST = \
+	CREDITS.md \
 	INSTALL.md \
-	LICENCE.md \
+	LICENSE \
 	MANUAL.md \
 	README.md \
 	lic/Expat \
