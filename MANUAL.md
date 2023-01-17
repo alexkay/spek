@@ -80,4 +80,4 @@ in the CREDITS.md file distributed with the source code.
 
 # DISTRIBUTION
 
-The latest version of *Spek* may be downloaded from <http://spek.cc>.
+The latest version of *Spek* may be downloaded from <https://www.spek.cc>.

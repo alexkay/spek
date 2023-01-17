@@ -9,7 +9,7 @@
     <Package InstallerVersion="301" Compressed="yes" Platform="x86" InstallScope="perMachine"/>
     <Media Id="1" Cabinet="spek.cab" EmbedCab="yes" CompressionLevel="high" />
     <Property Id="ARPPRODUCTICON" Value="ProgramIcon" />
-    <Property Id="ARPHELPLINK" Value="http://spek.cc/" />
+    <Property Id="ARPHELPLINK" Value="https://www.spek.cc/" />
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
     <UIRef Id="SpekInstallDir" />
     <UIRef Id="WixUI_ErrorProgressText" />

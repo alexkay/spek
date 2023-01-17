@@ -20,14 +20,14 @@
     </description>
     <screenshots>
       <screenshot type="default">
-        <image>http://spek.cc/flac.png</image>
+        <image>https://raw.githubusercontent.com/alexkay/spek/b3759bbb7d1108b3193394b941eeee982f15b739/web/flac.png</image>
       </screenshot>
     </screenshots>
 	<categories>
 		<category>Audio</category>
 		<category>AudioVideo</category>
 	</categories>
-    <url type="homepage">http://spek.cc/</url>
+    <url type="homepage">https://www.spek.cc/</url>
     <url type="bugtracker">https://github.com/alexkay/spek/issues</url>
     <developer_name>alexkay</developer_name>
     <content_rating type="oars-1.1" />

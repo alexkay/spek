@@ -288,7 +288,7 @@ void SpekWindow::on_preferences(wxCommandEvent&)
 void SpekWindow::on_help(wxCommandEvent&)
 {
     wxLaunchDefaultBrowser(
-        wxString::Format("http://spek.cc/man-%s.html", PACKAGE_VERSION)
+        wxString::Format("http://help.spek.cc/man-%s.html", PACKAGE_VERSION)
     );
 }
 
@@ -321,7 +321,7 @@ void SpekWindow::on_about(wxCommandEvent&)
     info.SetCopyright(_("Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"));
     info.SetDescription(this->description);
 #ifdef OS_UNIX
-    info.SetWebSite("http://spek.cc/", _("Spek Website"));
+    info.SetWebSite("https://www.spek.cc/", _("Spek Website"));
     info.SetIcon(wxArtProvider::GetIcon("spek", wxART_OTHER, wxSize(128, 128)));
 #endif
     wxAboutBox(info);
@@ -335,7 +335,7 @@ void SpekWindow::on_notify(wxCommandEvent&)
 
 void SpekWindow::on_visit(wxCommandEvent&)
 {
-    wxLaunchDefaultBrowser("http://spek.cc");
+    wxLaunchDefaultBrowser("https://www.spek.cc");
 }
 
 void SpekWindow::on_close(wxCommandEvent& event)
@@ -371,7 +371,7 @@ static void * check_version(void *p)
     // Get the version number.
     wxString version;
     wxHTTP http;
-    if (http.Connect("spek.cc")) {
+    if (http.Connect("help.spek.cc")) {
         wxInputStream *stream = http.GetInputStream("/version");
         if (stream) {
             wxStringOutputStream out(&version);
