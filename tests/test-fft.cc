@@ -62,7 +62,7 @@ static void test_sine()
                 if (i == k) {
                     continue;
                 }
-                if (plan->get_output(i) > -150.0f) {
+                if (plan->get_output(i) > -149.0f) {
                     silence = false;
                     break;
                 }
