@@ -2,9 +2,8 @@
 
 Using [Homebrew](http://brew.sh) install build dependencies:
 
-    brew install autoconf automake coreutils git libtool pkg-config
-    brew install ffmpeg gettext wxmac
-    brew link --force gettext
+    brew install automake coreutils git
+    brew install ffmpeg wxwidgets
 
 Bundle Spek:
 
