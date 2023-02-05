@@ -1,49 +1,55 @@
+diff --git a/src/ffmpeg-1-fixes.patch b/src/ffmpeg-1-fixes.patch
+index 5381ddf6..be47f68b 100644
+--- a/src/ffmpeg-1-fixes.patch
++++ b/src/ffmpeg-1-fixes.patch
+@@ -2,26 +2,6 @@ This file is part of MXE. See LICENSE.md for licensing information.
+ 
+ Contains ad hoc patches for cross building.
+ 
+-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+-From: Tony Theodore <tonyt@logyst.com>
+-Date: Sun, 25 Apr 2021 19:23:19 +1000
+-Subject: [PATCH 1/2] fix windres whitespace handling
+-
+-
+-diff --git a/ffbuild/common.mak b/ffbuild/common.mak
+-index 1111111..2222222 100644
+---- a/ffbuild/common.mak
+-+++ b/ffbuild/common.mak
+-@@ -82,7 +82,7 @@ COMPILE_NVCC = $(call COMPILE,NVCC)
+- 	-$(if $(ASMSTRIPFLAGS), $(STRIP) $(ASMSTRIPFLAGS) $@)
+- 
+- %.o: %.rc
+--	$(WINDRES) $(IFLAGS) --preprocessor "$(DEPWINDRES) -E -xc-header -DRC_INVOKED $(CC_DEPFLAGS)" -o $@ $<
+-+	$(WINDRES) $(IFLAGS) --preprocessor "$(DEPWINDRES)" $(addprefix --preprocessor-arg ,-E -xc-header -DRC_INVOKED $(CC_DEPFLAGS)) -o $@ $<
+- 
+- %.i: %.c
+- 	$(CC) $(CCFLAGS) $(CC_E) $<
+-
+ From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+ From: Mark Brand <mabrand@mabrand.nl>
+ Date: Mon, 4 Apr 2022 00:33:50 +0200
 diff --git a/src/ffmpeg.mk b/src/ffmpeg.mk
-index 8b90d69..fab1a73 100644
+index b486d859..d1d7013d 100644
 --- a/src/ffmpeg.mk
 +++ b/src/ffmpeg.mk
-@@ -3,13 +3,13 @@
- 
+@@ -3,8 +3,8 @@
  PKG             := ffmpeg
- $(PKG)_IGNORE   := 2%
--$(PKG)_VERSION  := 1.2.3
--$(PKG)_CHECKSUM := f083c92075fe010f17416bc880dfca101535276d
-+$(PKG)_VERSION  := 2.0.2
-+$(PKG)_CHECKSUM := 47d3b3d172ae81f0571549e4dfaadfe5b4fe06cc
+ $(PKG)_WEBSITE  := https://ffmpeg.org/
+ $(PKG)_IGNORE   :=
+-$(PKG)_VERSION  := 4.2.3
+-$(PKG)_CHECKSUM := 217eb211c33303b37c5521a5abe1f0140854d6810c6a6ee399456cc96356795e
++$(PKG)_VERSION  := 5.1.2
++$(PKG)_CHECKSUM := 39a0bcc8d98549f16c570624678246a6ac736c066cebdb409f9502e915b22f2b
  $(PKG)_SUBDIR   := $(PKG)-$($(PKG)_VERSION)
  $(PKG)_FILE     := $(PKG)-$($(PKG)_VERSION).tar.bz2
- $(PKG)_URL      := http://www.ffmpeg.org/releases/$($(PKG)_FILE)
- $(PKG)_URL_2    := http://launchpad.net/ffmpeg/main/$($(PKG)_VERSION)/+download/$($(PKG)_FILE)
--$(PKG)_DEPS     := gcc bzip2 lame libass libnut libvpx opencore-amr opus sdl speex theora vo-aacenc vo-amrwbenc vorbis x264 xvidcore zlib
-+$(PKG)_DEPS     := gcc bzip2 opus zlib
- 
- define $(PKG)_UPDATE
-     $(WGET) -q -O- 'http://www.ffmpeg.org/download.html' | \
-@@ -31,26 +31,20 @@ define $(PKG)_BUILD
+ $(PKG)_URL      := https://ffmpeg.org/releases/$($(PKG)_FILE)
+@@ -40,28 +40,26 @@ define $(PKG)_BUILD
          --disable-pthreads \
          --enable-w32threads \
          --disable-doc \
+-        --enable-avresample \
 +        --disable-programs \
-         --enable-gpl \
-         --enable-version3 \
-         --disable-nonfree \
--        --enable-avisynth \
--        --enable-libass \
--        --disable-libfaac \
--        --enable-libmp3lame \
--        --enable-libnut \
--        --enable-libopencore-amrnb \
--        --enable-libopencore-amrwb \
--        --enable-libopus \
--        --enable-libspeex \
--        --enable-libtheora \
--        --enable-libvo-aacenc \
--        --enable-libvo-amrwbenc \
--        --enable-libvorbis \
--        --enable-libvpx \
--        --enable-libx264 \
--        --enable-libxvid \
--        --enable-postproc
 +        --disable-avdevice \
 +        --disable-swresample \
 +        --disable-swscale \
@@ -53,28 +59,27 @@ index 8b90d69..fab1a73 100644
 +        --disable-muxers \
 +        --disable-devices \
 +        --disable-filters \
-+        --enable-libopus
-     $(MAKE) -C '$(1)' -j '$(JOBS)'
-     $(MAKE) -C '$(1)' -j 1 install
- endef
-diff --git a/src/wxwidgets.mk b/src/wxwidgets.mk
-index db37a9a..8f37ffd 100644
---- a/src/wxwidgets.mk
-+++ b/src/wxwidgets.mk
-@@ -8,7 +8,7 @@ $(PKG)_CHECKSUM := 0bab57ecd6d065a3672ec5fbb09d287456727ea4
- $(PKG)_SUBDIR   := wxWidgets-$($(PKG)_VERSION)
- $(PKG)_FILE     := wxWidgets-$($(PKG)_VERSION).tar.bz2
- $(PKG)_URL      := http://$(SOURCEFORGE_MIRROR)/project/wxwindows/$($(PKG)_VERSION)/$($(PKG)_FILE)
--$(PKG)_DEPS     := gcc libiconv libpng jpeg tiff sdl zlib expat
-+$(PKG)_DEPS     := gcc libiconv libpng jpeg tiff zlib expat
- 
- define $(PKG)_UPDATE
-     $(WGET) -q -O- 'http://sourceforge.net/projects/wxwindows/files/' | \
-@@ -39,7 +39,6 @@ define $(PKG)_CONFIGURE_OPTS
-         --with-regex=yes \
-         --with-zlib=sys \
-         --with-expat=sys \
--        --with-sdl \
-         --without-gtk \
-         --without-motif \
-         --without-mac \
+         --enable-gpl \
+         --enable-version3 \
+         --extra-libs='-mconsole' \
+-        --enable-avisynth \
+-        --enable-gnutls \
+-        --enable-libass \
+         --enable-libbluray \
+-        --enable-libbs2b \
+-        --enable-libcaca \
+-        --enable-libmp3lame \
+         --enable-libopencore-amrnb \
+         --enable-libopencore-amrwb \
+         --enable-libopus \
+         --enable-libspeex \
+-        --enable-libtheora \
+-        --enable-libvidstab \
+-        --enable-libvo-amrwbenc \
+         --enable-libvorbis \
+         --enable-libvpx \
+-        --enable-libx264 \
+-        --enable-libxvid \
+         --extra-ldflags="-fstack-protector" \
+         $($(PKG)_CONFIGURE_OPTS)
+     $(MAKE) -C '$(BUILD_DIR)' -j '$(JOBS)'

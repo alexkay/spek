@@ -10,7 +10,7 @@ For the first step you can use any Unix-y environment. Set up
 
 Apply `mxe.diff` and build Spek dependencies:
 
-    make pthreads ffmpeg wxwidgets -j8 JOBS=8
+    make pthreads ffmpeg wxwidgets -j8 JOBS=8 MXE_TARGETS='x86_64-w64-mingw32.static'
 
 Build Spek, adjusting `bundle.sh` variables as necessary:
 

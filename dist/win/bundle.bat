@@ -1,7 +1,7 @@
-rem This script will build an MSI installer for Win32.
+rem This script will build an MSI installer for Win64.
 rem Check README.md in this directory for instructions.
 
-set WIX_PATH=c:\Program Files\Windows Installer XML v3.5\bin
+set WIX_PATH=c:\Program Files (x86)\WiX Toolset v3.11\bin
 
 cd tests
 test.exe
@@ -15,7 +15,7 @@ move Spek\spek.exe .\
 move spek.exe Spek\
 
 rem Make the MSI package
-"%WIX_PATH%"\candle SpekInstallDirDlg.wxs SpekInstallDir.wxs spek.wxs files.wxs
+"%WIX_PATH%"\candle -arch x64 SpekInstallDirDlg.wxs SpekInstallDir.wxs spek.wxs files.wxs
 "%WIX_PATH%"\light -b Spek SpekInstallDirDlg.wixobj SpekInstallDir.wixobj spek.wixobj files.wixobj -ext WixUIExtension.dll -o spek.msi
 start /wait fix-msi.js spek.msi
 

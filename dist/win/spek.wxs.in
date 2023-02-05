@@ -6,7 +6,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="*" Name="$(var.ProductName)" Language="0"
            Version="$(var.ProductVersion)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)">
-    <Package InstallerVersion="301" Compressed="yes" Platform="x86" InstallScope="perMachine"/>
+    <Package InstallerVersion="301" Compressed="yes" Platform="x64" InstallScope="perMachine"/>
     <Media Id="1" Cabinet="spek.cab" EmbedCab="yes" CompressionLevel="high" />
     <Property Id="ARPPRODUCTICON" Value="ProgramIcon" />
     <Property Id="ARPHELPLINK" Value="https://www.spek.cc/" />
@@ -54,7 +54,7 @@
         <Directory Id="ProgramMenuSubfolder" Name="$(var.ProductName)"/>
       </Directory>
       <Directory Id="DesktopFolder" />
-      <Directory Id="ProgramFilesFolder">
+      <Directory Id="ProgramFiles64Folder">
         <Directory Id="INSTALLLOCATION" Name="$(var.ProductName)">
           <Component Id="Main" Guid="CD5121AD-F799-4796-9DB8-0C24CA0A4C8E">
             <File Id="spek.ico" Name="spek.ico" Source="spek.ico" />

@@ -1,21 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR The Spek authors
 # This file is distributed under the same license as the spek package.
-# 
+#
 # Translators:
 # Tan Rico <riecotan@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-04 13:17-0700\n"
+"POT-Creation-Date: 2023-01-09 19:59-0800\n"
 "PO-Revision-Date: 2011-02-23 09:25+0000\n"
 "Last-Translator: Tan Rico <riecotan@gmail.com>, 2016\n"
 "Language-Team: Indonesian (http://www.transifex.com/spek/spek/language/id/)\n"
+"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: id\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: data/spek.desktop.in:4
@@ -85,31 +85,30 @@ msgstr "Sampel format tidak didukung"
 msgid "Stream %d / %d: %s"
 msgstr ""
 
-#. TRANSLATORS: first %s is the error message, second %s is stream
-#. description.
+#. TRANSLATORS: first %s is the error message, second %s is stream description.
 #: src/spek-pipeline.cc:286
 #, c-format
 msgid "%s: %s"
 msgstr "%s: %s"
 
-#: src/spek-preferences-dialog.cc:50
+#: src/spek-preferences-dialog.cc:58
 msgid "Preferences"
 msgstr "Preferensi"
 
-#: src/spek-preferences-dialog.cc:55
+#: src/spek-preferences-dialog.cc:63
 msgid "(system default)"
 msgstr "(bawaan sistem)"
 
 #. TRANSLATORS: The name of a section in the Preferences dialog.
-#: src/spek-preferences-dialog.cc:62
+#: src/spek-preferences-dialog.cc:70
 msgid "General"
 msgstr "Umum"
 
-#: src/spek-preferences-dialog.cc:71
+#: src/spek-preferences-dialog.cc:79
 msgid "Language:"
 msgstr "Bahasa:"
 
-#: src/spek-preferences-dialog.cc:87
+#: src/spek-preferences-dialog.cc:95
 msgid "Check for &updates"
 msgstr "Cek &pembaharuan"
 
@@ -189,15 +188,15 @@ msgid "Untitled"
 msgstr "Tidak ada judul"
 
 #. TRANSLATORS: Add your name here
-#: src/spek-window.cc:309
+#: src/spek-window.cc:315
 msgid "translator-credits"
 msgstr "translator-credits"
 
-#: src/spek-window.cc:315
+#: src/spek-window.cc:321
 msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
 msgstr "Hak Cipta (c) 2010-2013 Alexander Kojevnikov dan para kontributor"
 
-#: src/spek-window.cc:318
+#: src/spek-window.cc:324
 msgid "Spek Website"
 msgstr "Laman Website Spek"
 
