@@ -1,4 +1,16 @@
-name: Build Windows x64
+# Spek - Windows build has to be done in two stages
+# it's based on the procedure documented in dist/win/README.md
+#
+# There are two jobs in this yml, and the Windows job depends on the artifacts of the Linux job
+#
+# MXE building on GitHub runner takes about 2 hours.  It will get rebuilt if mxe.diff changes, or if you manually delete the cache to force a rebuild
+#
+# Every now and then, this job may fail if GitHub's runners are in maintenance mode or under load (it'll usually fail in the Linux job trying to install the dependencies).
+# Re-run the job and it should pass.
+#
+# Lots of testing was done to get this process working, tweak with care!  -sylikc
+
+name: Build Windows x64 ZIP + MSI
 
 on: [push, pull_request]
 
@@ -30,15 +42,14 @@ jobs:
           mkdir mxe
         fi
 
-        # get the size - debug
+        # get the size (to debug if the cache worked)
         du -h --max-depth=1 mxe
 
-        # sets up soft link to the location that spek expects it to be
+        # sets up soft link to the location that spek expects it to be, without editing the build.sh
         ln -s `pwd`/mxe ../mxe
 
-        # check softlink
+        # check softlink (for easier debugging)
         ls -alF ../mxe
-        ls -alF ../mxe/
 
     - name: Install Dependencies to build MXE and Spek
       # need these dependencies to build Spek as well as MXE
@@ -59,6 +70,7 @@ jobs:
         make pthreads ffmpeg wxwidgets -j8 JOBS=8 MXE_TARGETS='x86_64-w64-mingw32.static'
 
         # save space, delete the ccache (or if too big, only save ccache and not anything else)
+        # remove this line if in the future, may need to do rebuilds
         rm -rf .ccache
 
         # get the total size printed out - debug
@@ -74,7 +86,7 @@ jobs:
         ls -alF  ../mxe/usr/x86_64-w64-mingw32.static/share/aclocal
 
         ./dist/win/bundle.sh
-        
+
         #ls -alFR ./dist/win/
 
     - name: Get Git short SHA hash
@@ -88,13 +100,13 @@ jobs:
           dist/win/Spek
           dist/win/tests
           dist/win/spek.wxs
-          # there is a dist/win/spek.zip which has the came contents
+          # there is a dist/win/spek.zip which has the came contents, we don't include as the second stage needs the extracted files
 
 
   windows-wix-build:
     needs: linux-mxe-build
     runs-on: windows-2019
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -108,7 +120,7 @@ jobs:
         # https://github.community/t/set-path-for-wix-toolset-in-windows-runner/154708/3
         $env:Path += ";C:\Program Files (x86)\WiX Toolset v3.11\bin"
         echo "$env:WIX_PATH"
-        # check where they're found, with all information
+        # Make sure they are found, if this throws an error, candle/light not found
         Get-Command candle.exe | Format-List
         Get-Command light.exe | Format-List
 
@@ -129,7 +141,7 @@ jobs:
       shell: cmd
       working-directory: dist/win
       run: call bundle.bat
-        
+
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
@@ -137,4 +149,5 @@ jobs:
         name: spek-GH_${{ github.repository_owner }}-Win64+MSI-${{ env.short_sha }}
         path: |
           dist/win/spek.msi
-          dist/win/Spek  # has the extract only, no tests
+          # has the extract only, no tests
+          dist/win/Spek
