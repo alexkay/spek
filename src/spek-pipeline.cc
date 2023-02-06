@@ -277,7 +277,7 @@ std::string spek_pipeline_desc(const struct spek_pipeline *pipeline)
                 // TRANSLATORS: first %d is the stream number, second %d is the
                 // total number of streams, %s is the stream description.
                 _("Stream %d / %d: %s"),
-                pipeline->stream + 1, pipeline->file->get_streams(), desc.c_str()
+                pipeline->stream + 1, pipeline->file->get_streams(), wxString::FromUTF8(desc.c_str())
             ).utf8_str()
         );
     } else if (!error_string.empty()) {
