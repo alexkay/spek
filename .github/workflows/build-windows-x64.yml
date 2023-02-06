@@ -1,0 +1,89 @@
+name: Build Windows x64
+
+on: [push, pull_request]
+
+# TODO bin cache mxe
+
+jobs:
+  linux-mxe-build:
+    # the first stage of the build to cross compile requires linux
+    # check list of runners here: https://github.com/actions/runner-images
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: MXE Cache - Restore from previous Build
+      # https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows
+      id: cache-bin
+      uses: actions/cache@v3
+      with:
+        # cache key only changes when mxe.diff changes, since that's the only reason to rebuild
+        key: ${{ runner.os }}-mxe-win-x64-${{ hashFiles('./dist/win/mxe.diff') }}
+        path: |
+          mxe
+
+    - name: Create MXE directory if not exist, and set up soft link
+      shell: bash
+      run: |
+        if [ ! -d "mxe" ]; then
+          # create dir if not exist
+          mkdir mxe
+        fi
+
+        # get the size - debug
+        du -h --max-depth=1 mxe
+
+        # sets up soft link to the location that spek expects it to be
+        ln -s `pwd`/mxe ../mxe
+
+        # check softlink
+        ls -alF ../mxe
+        ls -alF ../mxe/
+
+    - name: Install Dependencies to build MXE and Spek
+      # need these dependencies to build Spek as well as MXE
+      # https://docs.github.com/en/actions/using-github-hosted-runners/customizing-github-hosted-runners
+      shell: bash
+      run: |
+        # https://mxe.cc/#requirements
+        sudo apt-get -y install autoconf automake autopoint bash bison bzip2 flex g++ g++-multilib gettext git gperf intltool libc6-dev-i386 libgdk-pixbuf2.0-dev libltdl-dev libgl-dev libssl-dev libtool-bin libxml-parser-perl lzip make openssl p7zip-full patch perl python3 python3-mako python3-pkg-resources ruby sed unzip wget xz-utils
+
+    # this takes a LONG time (~2h) so only do it once
+    - name: Clone, patch, and build MXE - Spek Dependencies
+      if: ${{ steps.cache-bin.outputs.cache-hit != 'true' }}
+      shell: bash
+      run: |
+        git clone https://github.com/mxe/mxe.git
+        cd mxe
+        patch -p1 < ../dist/win/mxe.diff
+        make pthreads ffmpeg wxwidgets -j8 JOBS=8 MXE_TARGETS='x86_64-w64-mingw32.static'
+
+        # save space, delete the ccache (or if too big, only save ccache and not anything else)
+        rm -rf .ccache
+
+        # get the total size printed out - debug
+        du -h --max-depth=1
+
+    - name: Build Spek
+      shell: bash
+      run: |
+        # patch autogen.sh -- similar to https://github.com/alexkay/spek/issues/189
+        # https://superuser.com/questions/422459/substitution-in-text-file-without-regular-expressions/422467#422467
+        sed -i "s|autoreconf -fiv|autoreconf -fiv -I ../mxe/usr/x86_64-w64-mingw32.static/share/aclocal/|g" autogen.sh
+
+        ls -alF  ../mxe/usr/x86_64-w64-mingw32.static/share/aclocal
+
+        ./dist/win/bundle.sh
+
+    - name: Get Git short SHA hash
+      run: echo "short_sha=$(git rev-parse --short "${{ github.sha }}")" >> $GITHUB_ENV
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: spek-GH_${{ github.repository_owner }}_Win64-${{ env.short_sha }}
+        path: |
+          dist/win/Spek
+          # there is a dist/win/spek.zip which has the came contents
