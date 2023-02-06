@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
+set -euo pipefail
 
 LANGUAGES="bs ca cs da de el eo es fi fr gl he hr hu id it ja ko lv nb nl nn pl pt_BR ru sk sr@latin sv th tr uk vi zh_CN zh_TW"
 
@@ -26,7 +28,7 @@ cp ../../lic/* Spek.app/Contents/Resources/lic/
 for lang in $LANGUAGES; do
     mkdir -p Spek.app/Contents/Resources/"$lang".lproj
     cp -v ../../po/"$lang".gmo Spek.app/Contents/Resources/"$lang".lproj/spek.mo
-    cp -v /usr/local/share/locale/"$lang"/LC_MESSAGES/wxstd.mo Spek.app/Contents/Resources/"$lang".lproj/
+    cp -v /usr/local/share/locale/"$lang"/LC_MESSAGES/wxstd-3.2.mo Spek.app/Contents/Resources/"$lang".lproj/ || echo "No WX translation for $lang"
 done
 mkdir -p Spek.app/Contents/Resources/en.lproj
 
@@ -35,7 +37,7 @@ while [ ! -z "$BINS" ]; do
     NEWBINS=""
     for bin in $BINS; do
         echo "Updating dependendies for $bin."
-        LIBS=$(otool -L $bin | grep /usr/local | tr -d '\t' | awk '{print $1}')
+        LIBS=$(otool -L $bin | { grep /usr/local || test $? = 1; } | tr -d '\t' | awk '{print $1}')
         for lib in $LIBS; do
             reallib=$(realpath $lib)
             libname=$(basename $reallib)

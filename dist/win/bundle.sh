@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euxo pipefail
+set -euo pipefail
 
 # This script will cross-compile spek.exe, make a ZIP archive and prepare files
 # for building an MSI installer under Windows.
