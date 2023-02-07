@@ -23,11 +23,11 @@
     <key>CFBundleVersion</key>
     <string>@VERSION@</string>
     <key>NSPrincipalClass</key>
-    <string>NSApplication</string>
+    <string>wxNSApplication</string>
     <key>NSHumanReadableCopyright</key>
     <string>Copyright (c) 2010-2013 Alexander Kojevnikov and contributors</string>
     <key>LSMinimumSystemVersion</key>
-    <string>10.5</string>
+    <string>10.15</string>
     <key>CFBundleDocumentTypes</key>
     <array>
         <dict>

@@ -52,10 +52,11 @@ private:
 };
 
 SpekWindow::SpekWindow(const wxString& path) :
-    wxFrame(NULL, -1, wxEmptyString, wxDefaultPosition, wxSize(640, 480)), path(path)
+    wxFrame(NULL, -1, wxEmptyString, wxDefaultPosition, wxDefaultSize), path(path)
 {
     this->description = _("Spek - Acoustic Spectrum Analyser");
     SetTitle(this->description);
+    SetSize(this->FromDIP(wxSize(640, 480)));
 
 #ifndef OS_OSX
     SetIcons(wxArtProvider::GetIconBundle(ART_SPEK, wxART_FRAME_ICON));

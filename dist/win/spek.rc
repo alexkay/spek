@@ -1,3 +1,4 @@
+#define wxUSE_DPI_AWARE_MANIFEST 2
 #include <wx/msw/wx.rc>
 
 aaaa ICON "spek.ico"

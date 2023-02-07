@@ -77,6 +77,10 @@ wxIconBundle SpekArtProvider::CreateIconBundle(const wxArtID& id, const wxArtCli
         bundle.AddIcon(wxIcon("aaaa", wxBITMAP_TYPE_ICO_RESOURCE, 24, 24));
         bundle.AddIcon(wxIcon("aaaa", wxBITMAP_TYPE_ICO_RESOURCE, 32, 32));
         bundle.AddIcon(wxIcon("aaaa", wxBITMAP_TYPE_ICO_RESOURCE, 48, 48));
+        bundle.AddIcon(wxIcon("aaaa", wxBITMAP_TYPE_ICO_RESOURCE, 64, 64));
+        bundle.AddIcon(wxIcon("aaaa", wxBITMAP_TYPE_ICO_RESOURCE, 96, 96));
+        bundle.AddIcon(wxIcon("aaaa", wxBITMAP_TYPE_ICO_RESOURCE, 128, 128));
+        bundle.AddIcon(wxIcon("aaaa", wxBITMAP_TYPE_ICO_RESOURCE, 256, 256));
         return bundle;
     }
 #endif

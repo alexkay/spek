@@ -51,6 +51,12 @@ private:
     int fft_bits;
     int urange;
     int lrange;
+    const int LPAD;
+    const int TPAD;
+    const int RPAD;
+    const int BPAD;
+    const int GAP;
+    const int RULER;
 
     DECLARE_EVENT_TABLE()
 };

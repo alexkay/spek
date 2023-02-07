@@ -27,12 +27,6 @@ enum
     FFT_BITS = 11,
     MIN_FFT_BITS = 8,
     MAX_FFT_BITS = 14,
-    LPAD = 60,
-    TPAD = 60,
-    RPAD = 90,
-    BPAD = 40,
-    GAP = 10,
-    RULER = 10,
 };
 
 // Forward declarations.
@@ -60,7 +54,13 @@ SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
     prev_width(-1),
     fft_bits(FFT_BITS),
     urange(URANGE),
-    lrange(LRANGE)
+    lrange(LRANGE),
+    LPAD(this->FromDIP(60)),
+    TPAD(this->FromDIP(60)),
+    RPAD(this->FromDIP(90)),
+    BPAD(this->FromDIP(40)),
+    GAP(this->FromDIP(10)),
+    RULER(this->FromDIP(10))
 {
     this->create_palette();
 
