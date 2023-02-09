@@ -31,3 +31,9 @@ jobs:
       run: make distcheck
     - name: bundle
       run: ./dist/osx/bundle.sh
+
+    - name: Upload binary
+      uses: actions/upload-artifact@v3
+      with:
+        name: binary
+        path: dist/osx/Spek.dmg
