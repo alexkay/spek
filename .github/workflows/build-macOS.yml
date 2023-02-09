@@ -18,7 +18,7 @@ jobs:
     - name: install dependencies
       run: brew install automake coreutils ffmpeg wxwidgets
     - name : symlink wxwin.m4
-      run: (cd /usr/local/share/aclocal && ln -s ../../Cellar/wxwidgets/3.2.1/share/wx/3.2/aclocal/wxwin.m4 .)
+      run: find /usr/local/Cellar/wxwidgets/ -name "wxwin.m4" -exec ln -s {} /usr/local/share/aclocal/wxwin.m4 \;
     - name: autogen
       run: ./autogen.sh
     - name: configure
