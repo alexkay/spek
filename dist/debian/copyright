@@ -1,47 +1,57 @@
-This work was packaged for Debian by:
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Spek
+Upstream-Contact: Alexander Kojevnikov <alexander@kojevnikov.com>
+Source: http://spek.cc/
+Files-Excluded: dist lic web
+Comment: Non-source files and files where the license is not clear.
 
-    Alexander Kojevnikov <alexander@kojevnikov.com> on Mon, 14 Mar 2011 21:05:52 +0800
+Files: *
+Copyright: © 2010-2013 Alexander Kojevnikov <alexander@kojevnikov.com> and contributors
+License: GPL-3+
 
-It was downloaded from:
+Files: po/bs.po
+       po/ca.po
+       po/cs.po
+       po/da.po
+       po/de.po
+       po/el.po
+       po/eo.po
+       po/es.po
+       po/fi.po
+       po/fr.po
+       po/gl.po
+       po/he.po
+       po/hr.po
+       po/hu.po
+       po/id.po
+       po/it.po
+       po/ja.po
+       po/ko.po
+       po/lv.po
+       po/nb.po
+       po/nl.po
+       po/nn.po
+       po/pl.po
+       po/pt_BR.po
+       po/ru.po
+       po/sk.po
+       po/spek.pot
+       po/sr@latin.po
+       po/sv.po
+       po/th.po
+       po/tr.po
+       po/uk.po
+       po/vi.po
+       po/zh_CN.po
+       po/zh_TW.po
+Copyright: © YEAR The Spek authors
+License: GPL-3+
 
-    http://spek.cc/
+Files: debian/*
+Copyright: © 2011-2012 Alexander Kojevnikov <alexander@kojevnikov.com>
+           © 2023 Matteo Bini <matteobin@tiepi.it>
+License: GPL-3+
 
-Upstream Author:
-
-    Alexander Kojevnikov <alexander@kojevnikov.com>
-
-Copyright:
-
-    For everything not noted below:
-      Copyright (C) 2010-2013 Alexander Kojevnikov
-
-    For src/spek-pipeline.c:
-      Copyright (C) 2010-2012 Alexander Kojevnikov
-      Copyright (C) 2007-2009 Sebastian Dröge
-      Copyright (C) 2006 Stefan Kost
-      Copyright (C) 1999 Erik Walthinsen
-
-License:
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This package is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program. If not, see <http://www.gnu.org/licenses/>.
-
-On Debian systems, the complete text of the GNU General
-Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
-
-The Debian packaging is:
-
-    Copyright (C) 2011-2012 Alexander Kojevnikov <alexander@kojevnikov.com>
-
-and is licensed under the GPL version 3 or any later version, see above.
-
+License: GPL-3+
+ On Debian systems, the complete text of the GNU General Public License
+ version 3 can be found in "/usr/share/common-licenses/GPL-3".
