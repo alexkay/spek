@@ -1,0 +1,19 @@
+Author: Matteo Bini <matteobin@tiepi.it>
+Description: Remove DFSG excluded files for Autoconf
+Forwarded: not-needed
+--- a/configure.ac
++++ b/configure.ac
+@@ -81,13 +81,10 @@ AC_CONFIG_FILES([
+ 	data/icons/32x32/Makefile
+ 	data/icons/48x48/Makefile
+ 	data/icons/scalable/Makefile
+-	dist/osx/Info.plist
+-	dist/win/spek.wxs
+ 	man/Makefile
+ 	po/Makefile.in
+ 	src/Makefile
+ 	tests/Makefile
+-	web/version
+ ])
+ AC_OUTPUT
+ 

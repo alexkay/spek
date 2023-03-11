@@ -1,3 +1,52 @@
+spek (0.8.5+dfsg-2) unstable; urgency=high
+
+  * debian/patches/:
+    - Add temporary fix to build on arm64 and mips64el
+      architectures (01_arm64-mips64el.patch).
+
+ -- Matteo Bini <matteobin@tiepi.it>  Fri, 27 Jan 2023 12:32:59 +0100
+
+spek (0.8.5+dfsg-1) unstable; urgency=low
+
+  * New upstream release (Closes: #1007814).
+  * debian/compat:
+    - Replace compat file with debhelper-compat virtual package.
+  * debian/control:
+    - Change maintainer.
+    - Remove autotools-dev from Build-Depends.
+    - Update Build-Depends debhelper (>= 9) to debhelper-compat (= 13).
+    - Update Build-Depends libwxgtk3.0-dev to libwxgtk3.2-dev
+      (Closes: #933438).
+    - Update Build-Depends libavcodec-dev, libavformat-dev and libavutil-dev
+      min version to 7:5.0.1.
+    - Bump Standards-Version to 4.6.2.
+    - Add Rules-Requires-Root field (no).
+  * debian/copyright:
+    - Rewrite file to be machine-readable.
+  * debian/docs:
+    - Add LICENCE.md, MANUAL.md and README.md as doc files to be installed.
+  * debian/patches/:
+    - Delete old patches since there is no more need for them, and add new
+      DFSG one.
+  * debian/rules:
+    - Add hardening flags.
+    - Remove verbose variable.
+  * debian/spek.install:
+    - Delete install file due to xpm file removal: the xpm line was the only
+      one of the file.
+  * debian/spek.menu:
+    - Delete menu file due to Technical Committee decision.
+  * debian/spek.xpm:
+    - Delete xpm file due to menu file removal.
+  * debian/upstream/metadata:
+    - Add basic upstream meta-information.
+  * debian/watch:
+    - Bump version to 4.
+    - Change link to the new GitHub repository since Google Code has closed
+      down.
+
+ -- Matteo Bini <matteobin@tiepi.it>  Mon, 16 Jan 2023 21:59:10 +0100
+
 spek (0.8.2-4) unstable; urgency=low
 
   * Fix build with FFmpeg 2.9 (Closes: #803861)

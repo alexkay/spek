@@ -1,19 +1,18 @@
 Source: spek
 Section: sound
 Priority: optional
-Maintainer: Alexander Kojevnikov <alexander@kojevnikov.com>
-Build-Depends: debhelper (>= 9),
-               autotools-dev,
+Maintainer: Matteo Bini <matteobin@tiepi.it>
+Build-Depends: debhelper-compat (= 13),
+               gettext,
                pkg-config,
-               libavcodec-dev (>= 6:0.8),
-               libavformat-dev (>= 6:0.8),
-               libavutil-dev (>= 6:0.8),
-               libwxgtk3.0-dev,
+               libavcodec-dev (>= 7:5.0.1),
+               libavformat-dev (>= 7:5.0.1),
+               libavutil-dev (>= 7:5.0.1),
+               libwxgtk3.2-dev,
                wx-common
-Standards-Version: 3.9.6
+Standards-Version: 4.6.2
 Homepage: http://spek.cc/
-Vcs-Git: git://github.com/alexkay/spek.git
-Vcs-Browser: https://github.com/alexkay/spek
+Rules-Requires-Root: no
 
 Package: spek
 Architecture: any
