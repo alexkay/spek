@@ -17,8 +17,6 @@ SPEK_CPPFLAGS = ${OS_FLAGS} -DGETTEXT_PACKAGE=\"'${NAME}'\" -DPACKAGE_NAME=\"'${
 SPEK_CXXFLAGS = -Os `wx-config --cxxflags` ${SPEK_CPPFLAGS} ${CXXFLAGS}
 SPEK_LDFLAGS  = ${LIBS} ${LDFLAGS}
 
-CXX = g++
-
 GMO = \
 	po/bs.gmo \
 	po/ca.gmo \
