@@ -17,41 +17,7 @@ SPEK_CPPFLAGS = ${OS_FLAGS} -DGETTEXT_PACKAGE=\"'${NAME}'\" -DPACKAGE_NAME=\"'${
 SPEK_CXXFLAGS = -Os `wx-config --cxxflags` ${SPEK_CPPFLAGS} ${CXXFLAGS}
 SPEK_LDFLAGS  = ${LIBS} ${LDFLAGS}
 
-GMO = \
-	po/bs.gmo \
-	po/ca.gmo \
-	po/cs.gmo \
-	po/da.gmo \
-	po/de.gmo \
-	po/el.gmo \
-	po/eo.gmo \
-	po/es.gmo \
-	po/fi.gmo \
-	po/fr.gmo \
-	po/gl.gmo \
-	po/he.gmo \
-	po/hr.gmo \
-	po/hu.gmo \
-	po/id.gmo \
-	po/it.gmo \
-	po/ja.gmo \
-	po/ko.gmo \
-	po/lv.gmo \
-	po/nb.gmo \
-	po/nl.gmo \
-	po/nn.gmo \
-	po/pl.gmo \
-	po/pt_BR.gmo \
-	po/ru.gmo \
-	po/sk.gmo \
-	po/sr@latin.gmo \
-	po/sv.gmo \
-	po/th.gmo \
-	po/tr.gmo \
-	po/uk.gmo \
-	po/vi.gmo \
-	po/zh_CN.gmo \
-	po/zh_TW.gmo \
+GMO = ${PO:.po=.gmo}
 
 OBJ_LIB = \
 	src/spek-audio.o \
@@ -80,6 +46,50 @@ OBJ = \
 	src/spek-spectrogram.o \
 	src/spek-window.o \
 
+PO = \
+	po/bs.po \
+	po/ca.po \
+	po/cs.po \
+	po/da.po \
+	po/de.po \
+	po/el.po \
+	po/eo.po \
+	po/es.po \
+	po/fi.po \
+	po/fr.po \
+	po/gl.po \
+	po/he.po \
+	po/hr.po \
+	po/hu.po \
+	po/id.po \
+	po/it.po \
+	po/ja.po \
+	po/ko.po \
+	po/lv.po \
+	po/nb.po \
+	po/nl.po \
+	po/nn.po \
+	po/pl.po \
+	po/pt_BR.po \
+	po/ru.po \
+	po/sk.po \
+	po/sr@latin.po \
+	po/sv.po \
+	po/th.po \
+	po/tr.po \
+	po/uk.po \
+	po/vi.po \
+	po/zh_CN.po \
+	po/zh_TW.po \
+
+POTFILES = \
+	data/spek.desktop.in \
+	src/spek-pipeline.cc \
+	src/spek-preferences-dialog.cc \
+	src/spek-spectrogram.cc \
+	src/spek-window.cc \
+	src/spek.cc \
+
 all:
 	@echo "To build ${NAME} type make and one the following: osx, unix or win."
 	@echo "E.g. \`make unix\`"
@@ -102,13 +112,22 @@ ${LIB}: ${OBJ_LIB}
 ${BIN}: ${LIB} ${OBJ}
 	${CXX} -o ${BIN} ${OBJ} ${LIB} ${SPEK_LDFLAGS}
 
-data/${NAME}.desktop:
+data/${NAME}.desktop: po/LINGUAS
 	sed '/^#/d' ${@}.in > ${@}.in.tmp
 	msgfmt -d po -o $@ --desktop --template=${@}.in.tmp
 	rm ${@}.in.tmp
 
-data/${NAME}.metainfo.xml:
+data/${NAME}.metainfo.xml: po/LINGUAS
 	msgfmt -d po -o $@ --xml --template=${@}.in
+
+po/LINGUAS: ${PO}
+	printf "%s" '${PO}' | xargs -d ' ' -I {} printf "%s\n" '{}' | sed 's/^po\/\(.*\)\.po$$/\1/' | sort > $@
+
+po/${NAME}.pot: ${POTFILES}
+	xgettext -o $@ --copyright-holder='The Spek authors' --package-name=${NAME} --package-version=${VERSION} --from-code=UTF-8 --add-comments --keyword=_ --keyword=N_ ${POTFILES}
+	for po in po/*.po; do \
+		msgmerge -o "$$po" -q "$$po" $@; \
+	done;
 
 osx:
 	@make options ${BIN} OS_FLAGS=-DOS_OSX
@@ -134,7 +153,7 @@ check: tests/perf${EXT} tests/test${EXT}
 clean:
 	rm -f ${BIN} ${NAME}.exe ${LIB} ${OBJ} ${OBJ_LIB} ${GMO} data/${NAME}.desktop data/${NAME}.desktop.in.tmp data/${NAME}.metainfo.xml ${NAME}-${VERSION}.tar.gz tests/perf tests/perf.exe tests/perf${EXT} tests/test tests/test.exe tests/test${EXT} ${OBJ_PERF} ${OBJ_TEST}
 
-dist: clean
+dist: clean po/${NAME}.pot
 	mkdir ${NAME}-${VERSION}
 	cp -R $$(ls -A | sed '/^\.git$$/d;/^${NAME}-${VERSION}$$/d') ${NAME}-${VERSION}
 	tar -cf ${NAME}-${VERSION}.tar ${NAME}-${VERSION}

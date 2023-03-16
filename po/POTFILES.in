@@ -1,6 +1,0 @@
-data/spek.desktop.in
-src/spek-pipeline.cc
-src/spek-preferences-dialog.cc
-src/spek-spectrogram.cc
-src/spek-window.cc
-src/spek.cc
