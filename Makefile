@@ -5,7 +5,7 @@ VERSION = 0.8.5
 
 PREFIX = /usr/local
 
-LIBS       = -lavcodec -lavformat -lavutil `wx-config --libs`
+LIBS = -lavcodec -lavformat -lavutil `wx-config --libs`
 
 TESTS_LIBS = -lavcodec -lavformat -lavutil
 
