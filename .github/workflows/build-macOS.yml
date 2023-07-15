@@ -1,0 +1,39 @@
+name: build on macOS
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        runner: [macos-11, macos-12]
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: install dependencies
+      run: brew install automake coreutils ffmpeg wxwidgets
+    - name : symlink wxwin.m4
+      run: find /usr/local/Cellar/wxwidgets/ -name "wxwin.m4" -exec ln -s {} /usr/local/share/aclocal/wxwin.m4 \;
+    - name: autogen
+      run: ./autogen.sh
+    - name: configure
+      run: ./configure
+    - name: make
+      run: make
+    - name: make check
+      run: make check
+    - name: make distcheck
+      run: make distcheck
+    - name: bundle
+      run: ./dist/osx/bundle.sh
+
+    - name: Upload binary
+      uses: actions/upload-artifact@v3
+      with:
+        name: binary-${{ matrix.runner }}
+        path: dist/osx/Spek.dmg
