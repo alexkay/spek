@@ -25,7 +25,8 @@ void SpekPreferences::init()
             lang = info->Language;
         }
     }
-    this->locale->Init(lang);
+    if (!this->locale->Init(lang))
+        fprintf(stderr, "failed to set language\n");
     this->locale->AddCatalog(GETTEXT_PACKAGE);
 }
 
