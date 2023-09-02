@@ -1,0 +1,153 @@
+# Spek - Windows build has to be done in two stages
+# it's based on the procedure documented in dist/win/README.md
+#
+# There are two jobs in this yml, and the Windows job depends on the artifacts of the Linux job
+#
+# MXE building on GitHub runner takes about 2 hours.  It will get rebuilt if mxe.diff changes, or if you manually delete the cache to force a rebuild
+#
+# Every now and then, this job may fail if GitHub's runners are in maintenance mode or under load (it'll usually fail in the Linux job trying to install the dependencies).
+# Re-run the job and it should pass.
+#
+# Lots of testing was done to get this process working, tweak with care!  -sylikc
+
+name: Build Windows x64 ZIP + MSI
+
+on: [push, pull_request]
+
+jobs:
+  linux-mxe-build:
+    # the first stage of the build to cross compile requires linux
+    # check list of runners here: https://github.com/actions/runner-images
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: MXE Cache - Restore from previous Build
+      # https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows
+      id: cache-bin
+      uses: actions/cache@v3
+      with:
+        # cache key only changes when mxe.diff changes, since that's the only reason to rebuild
+        key: ${{ runner.os }}-mxe-win-x64-${{ hashFiles('./dist/win/mxe.diff') }}
+        path: |
+          mxe
+
+    - name: Create MXE directory if not exist, and set up soft link
+      shell: bash
+      run: |
+        if [ ! -d "mxe" ]; then
+          # create dir if not exist
+          mkdir mxe
+        fi
+
+        # get the size (to debug if the cache worked)
+        du -h --max-depth=1 mxe
+
+        # sets up soft link to the location that spek expects it to be, without editing the build.sh
+        ln -s `pwd`/mxe ../mxe
+
+        # check softlink (for easier debugging)
+        ls -alF ../mxe
+
+    - name: Install Dependencies to build MXE and Spek
+      # need these dependencies to build Spek as well as MXE
+      # https://docs.github.com/en/actions/using-github-hosted-runners/customizing-github-hosted-runners
+      shell: bash
+      run: |
+        # https://mxe.cc/#requirements
+        sudo apt-get -y install autoconf automake autopoint bash bison bzip2 flex g++ g++-multilib gettext git gperf intltool libc6-dev-i386 libgdk-pixbuf2.0-dev libltdl-dev libgl-dev libssl-dev libtool-bin libxml-parser-perl lzip make openssl p7zip-full patch perl python3 python3-mako python3-pkg-resources ruby sed unzip wget xz-utils
+
+    # this takes a LONG time (~2h) so only do it once
+    - name: Clone, patch, and build MXE - Spek Dependencies
+      if: ${{ steps.cache-bin.outputs.cache-hit != 'true' }}
+      shell: bash
+      run: |
+        git clone https://github.com/mxe/mxe.git
+        cd mxe
+        patch -p1 < ../dist/win/mxe.diff
+        make pthreads ffmpeg wxwidgets -j8 JOBS=8 MXE_TARGETS='x86_64-w64-mingw32.static'
+
+        # save space, delete the ccache (or if too big, only save ccache and not anything else)
+        # remove this line if in the future, may need to do rebuilds
+        rm -rf .ccache
+
+        # get the total size printed out - debug
+        du -h --max-depth=1
+
+    - name: Build Spek
+      shell: bash
+      run: |
+        # patch autogen.sh -- similar to https://github.com/alexkay/spek/issues/189
+        # https://superuser.com/questions/422459/substitution-in-text-file-without-regular-expressions/422467#422467
+        sed -i "s|autoreconf -fiv|autoreconf -fiv -I ../mxe/usr/x86_64-w64-mingw32.static/share/aclocal/|g" autogen.sh
+
+        ls -alF  ../mxe/usr/x86_64-w64-mingw32.static/share/aclocal
+
+        ./dist/win/bundle.sh
+
+        #ls -alFR ./dist/win/
+
+    - name: Get Git short SHA hash
+      run: echo "short_sha=$(git rev-parse --short "${{ github.sha }}")" >> $GITHUB_ENV
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: spek-GH_${{ github.repository_owner }}-Win64+tests-${{ env.short_sha }}
+        path: |
+          dist/win/Spek
+          dist/win/tests
+          dist/win/spek.wxs
+          # there is a dist/win/spek.zip which has the came contents, we don't include as the second stage needs the extracted files
+
+
+  windows-wix-build:
+    needs: linux-mxe-build
+    runs-on: windows-2019
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+
+    - name: Set WiX paths for candle and light
+      shell: powershell
+      env:
+        WIX_PATH: ${{ env.wix }}
+      run: |
+        # https://github.community/t/set-path-for-wix-toolset-in-windows-runner/154708/3
+        $env:Path += ";C:\Program Files (x86)\WiX Toolset v3.11\bin"
+        echo "$env:WIX_PATH"
+        # Make sure they are found, if this throws an error, candle/light not found
+        Get-Command candle.exe | Format-List
+        Get-Command light.exe | Format-List
+
+    - name: Get Git short SHA hash
+      shell: powershell
+      run: echo "short_sha=$(git rev-parse --short "${{ github.sha }}")" >> $env:GITHUB_ENV
+
+
+    - name: Download artifact from first job
+      uses: actions/download-artifact@v3
+      with:
+        name: spek-GH_${{ github.repository_owner }}-Win64+tests-${{ env.short_sha }}
+        # restore it into the expected path
+        path: dist/win
+
+
+    - name: Build WiX project
+      shell: cmd
+      working-directory: dist/win
+      run: call bundle.bat
+
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: spek-GH_${{ github.repository_owner }}-Win64+MSI-${{ env.short_sha }}
+        path: |
+          dist/win/spek.msi
+          # has the extract only, no tests
+          dist/win/Spek
