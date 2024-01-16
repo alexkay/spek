@@ -23,7 +23,6 @@ Spek requires OS X 10.5+ and an Intel-based Mac.
  * Arch: [spek](https://aur.archlinux.org/packages/spek/) and
    [spek-git](https://aur.archlinux.org/packages/spek-git/)
  * Debian: [spek](https://packages.debian.org/search?keywords=spek)
- * Fedora: [RPMFusion package](https://bugzilla.rpmfusion.org/show_bug.cgi?id=1718)
  * FreeBSD: [audio/spek](https://www.freshports.org/audio/spek/)
  * Gentoo: [media-sound/spek](https://packages.gentoo.org/packages/media-sound/spek)
  * Ubuntu: [spek](http://packages.ubuntu.com/search?keywords=spek)
@@ -41,6 +40,9 @@ terminal:
 To build you will need wxWidgets and FFmpeg packages. On Debian/Ubuntu you also
 need development packages: `libwxgtk2.8-dev`, `wx-common`, `libavcodec-dev` and
 `libavformat-dev`.
+
+You may have to `export CPATH="/usr/include/ffmpeg/"` if the `libav*` directories
+are nested. This is the case on Fedora 37.
 
 To start Spek, run:
 
