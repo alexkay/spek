@@ -23,6 +23,52 @@ EXTRA_DIST = \
 	tests/samples
 
 DISTCLEANFILES = \
+	ABOUT-NLS \
+	aclocal.m4 \
+	ar-lib \
+	compile \
+	config.guess \
+	config.h.in \
+	config.rpath \
+	config.sub \
+	configure \
+	data/Makefile.in \
+	data/icons/16x16/Makefile.in \
+	data/icons/22x22/Makefile.in \
+	data/icons/24x24/Makefile.in \
+	data/icons/32x32/Makefile.in \
+	data/icons/48x48/Makefile.in \
+	data/icons/Makefile.in \
+	data/icons/scalable/Makefile.in \
+	depcomp \
+	install-sh \
+	ltmain.sh \
+	m4/gettext.m4 \
+	m4/host-cpu-c-abi.m4 \
+	m4/iconv.m4 \
+	m4/intlmacosx.m4 \
+	m4/lib-ld.m4 \
+	m4/lib-link.m4 \
+	m4/lib-prefix.m4 \
+	m4/nls.m4 \
+	m4/po.m4 \
+	m4/progtest.m4 \
+	Makefile.in \
+	po/*.gmo \
+	man/Makefile.in \
+	missing \
+	po/Makefile.in.in \
+	po/Makevars.template \
+	po/Rules-quot \
+	po/boldquot.sed \
+	po/en@boldquot.header \
+	po/en@quot.header \
+	po/insert-header.sin \
+	po/quot.sed \
+	po/remove-potcdate.sin \
+	po/stamp-po \
+	src/Makefile.in \
+	tests/Makefile.in \
 	tests/samples/perf.wav
 
 .PHONY: man upload
