@@ -26,7 +26,7 @@ public:
     {
         // FFmpeg uses various assembly optimizations which expect
         // input data to be aligned by up to 32 bytes (e.g. AVX)
-        this->input = (float*) av_malloc(sizeof(float) * input_size);
+        this->input = (float*) av_malloc(sizeof(float) * (input_size + 2));
     }
 
     virtual ~FFTPlan()
