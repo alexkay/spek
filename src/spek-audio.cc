@@ -313,7 +313,7 @@ int AudioFileImpl::read()
                     offset = sample;
                 } else {
                     data = this->frame->data[0];
-                    offset = sample * this->channels;
+                    offset = sample * this->channels + this->channel;
                 }
                 float value;
                 switch (format) {
