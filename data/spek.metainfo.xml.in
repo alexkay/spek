@@ -1,40 +1,206 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <component type="desktop-application">
-    <id>cc.spek.Spek</id>
-    <metadata_license>CC0-1.0</metadata_license>
-    <project_license>GPL-3.0</project_license>
-    <name>Spek</name>
-    <summary>View spectrograms of your audio files</summary>
-    <description>
-        <p>Spek is an acoustic spectrum analyser written in C and C++. It uses FFmpeg libraries for audio decoding and wxWidgets for the GUI.</p>
+  <id>cc.spek.Spek</id>
+  <name>Spek</name>
+  <summary>View spectrograms of your audio files</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-only</project_license>
+  <description>
+    <p>Spek is an acoustic spectrum analyser written in C++. It uses FFmpeg libraries for audio decoding and wxWidgets for the GUI.</p>
+  </description>
+  <developer id="cc.spek.www">
+    <name>Alexander Kojevnikov</name>
+  </developer>
+  <launchable type="desktop-id">spek.desktop</launchable>
+  <url type="homepage">https://www.spek.cc/</url>
+  <url type="bugtracker">https://github.com/alexkay/spek/issues</url>
+  <url type="translate">https://explore.transifex.com/spek/spek/</url>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://raw.githubusercontent.com/alexkay/spek/b3759bbb7d1108b3193394b941eeee982f15b739/web/flac.png</image>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Audio</category>
+    <category>AudioVideo</category>
+  </categories>
+  <releases>
+    <release type="stable" version="0.8.5" date="2023-01-09T00:00:00Z">
+      <description>
+        <p>This release adds the following feature:</p>
         <ul>
-            <li>Supports all popular lossy and lossless audio file formats thanks to the FFmpeg libraries.</li>
-            <li>Ultra-fast signal processing, uses multiple threads to further speed up the analysis.</li>
-            <li>Shows the codec name and the audio signal parameters.</li>
-            <li>Allows to save the spectrogram as an image file.</li>
-            <li>Drag-and-drop support; associates with common audio file formats.</li>
-            <li>Auto-fitting time, frequency and spectral density rulers.</li>
-            <li>Adjustable spectral density range.</li>
-            <li>Translated into 19 languages.</li>
+          <li>Upgrade to FFmpeg 5.1</li>
         </ul>
-    </description>
-    <screenshots>
-      <screenshot type="default">
-        <image>https://raw.githubusercontent.com/alexkay/spek/b3759bbb7d1108b3193394b941eeee982f15b739/web/flac.png</image>
-      </screenshot>
-    </screenshots>
-	<categories>
-		<category>Audio</category>
-		<category>AudioVideo</category>
-	</categories>
-    <url type="homepage">https://www.spek.cc/</url>
-    <url type="bugtracker">https://github.com/alexkay/spek/issues</url>
-    <developer_name>alexkay</developer_name>
-    <content_rating type="oars-1.1" />
-    <launchable type="desktop-id">spek.desktop</launchable>
-    <releases>
-        <release version="0.8.5" date="2023-01-10"/>
-        <release version="0.8.4" date="2022-07-11"/>
-        <release version="0.8.2" date="2016-01-19"/>
-    </releases>
+        <p>This release includes the following change:</p>
+        <ul>
+          <li>Use XDG_CONFIG_HOME on Unix systems.</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="0.8.4" date="2022-07-10T00:00:00Z">
+      <description>
+        <p>This release adds the following features:</p>
+        <ul>
+          <li>Add 2 more palettes and change the default.</li>
+          <li>Allow changing the DFT window size and function.</li>
+          <li>Allow switching between audio streams and channels.</li>
+          <li>Add translations for 14 additional languages.</li>
+        </ul>
+        <p>This release includes the following changes:</p>
+        <ul>
+          <li>Remove dependency on intltool.</li>
+          <li>Fix FFmpeg build warnings.</li>
+          <li>Detect AR tool.</li>
+          <li>Use Homebrew for macOS dependencies.</li>
+          <li>Improve test coverage.</li>
+        </ul>
+        <p>This release fixes the following bugs:</p>
+        <ul>
+          <li>Remove association with .mod and MIDI files.</li>
+          <li>Fix autoconf errors.</li>
+          <li>Fix an AVX-related crash.</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="0.8.3" date="2013-02-26T00:00:00Z">
+      <description>
+        <p>This release fixes the following bug:</p>
+        <ul>
+          <li>OS X specific bugfix release</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="0.8.2" date="2013-02-24T00:00:00Z">
+      <description>
+        <p>This release adds the following feature:</p>
+        <ul>
+          <li>Open .opus audio files (#39).</li>
+        </ul>
+        <p>This release includes the following changes:</p>
+        <ul>
+          <li>Use non-deprecated FFmpeg decoding API.</li>
+          <li>Moved downloads to Google Code since GitHub no longer offers downloads (#38).</li>
+          <li>Compatibility with retina-based Macs (#32).</li>
+        </ul>
+        <p>This release fixes the following bugs:</p>
+        <ul>
+          <li>Fix magnitude calculation for the first and the last frequency band.</li>
+          <li>Support planar sample formats (#44).</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="0.8.1" date="2012-09-27T00:00:00Z">
+      <description>
+        <p>This release fixes the following bug:</p>
+        <ul>
+          <li>Fixed mapping of the spectral density into the palette.</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="0.8.0" date="2012-09-23T00:00:00Z">
+      <description>
+        <p>This release adds the following features:</p>
+        <ul>
+          <li>Adjustable spectral density range (#4).</li>
+          <li>Switched from GTK+ to wxWidgets for better Windows and OS X integration.</li>
+          <li>Single .exe version for Windows.</li>
+          <li>Added translations in 8 more languages (totalling 16).</li>
+        </ul>
+        <p>This release includes the following changes:</p>
+        <ul>
+          <li>Switched to .xz tarballs.</li>
+          <li>Split out libspek and added unit tests.</li>
+          <li>24-bit APE support (upstream fix).</li>
+          <li>Better toolbar icons on Windows and OS X (#21).</li>
+          <li>Installer options for app shortcuts on Windows (#1).</li>
+          <li>Associate with audio/video files on OS X (#2).</li>
+          <li>Online manual (#24).</li>
+        </ul>
+        <p>This release fixes the following bugs:</p>
+        <ul>
+          <li>Fixed crash when the preferences file is not writable.</li>
+          <li>Fixed crash when the home directory is not writable.</li>
+          <li>Fixed duration and rendering for some video files.</li>
+          <li>Fixed compilation with newer FFmpeg and libav versions.</li>
+          <li>Proper handling of Unicode file names under Windows (upstream fix).</li>
+          <li>Don't lock the input file on Windows (#26).</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="0.7" date="2011-04-24T00:00:00Z">
+      <description>
+        <p>This release adds the following features:</p>
+        <ul>
+          <li>Added translations in 8 languages</li>
+          <li>Preferences to select a language and to check for a new version</li>
+          <li>Spectral density ruler</li>
+          <li>Added a menu bar, cleaned up the tool bar.</li>
+          <li>Better OS X integration</li>
+        </ul>
+        <p>This release includes the following changes:</p>
+        <ul>
+          <li>Show the version number in the window</li>
+          <li>Pre-compute the cosine table to speed up analysis by ±16%</li>
+          <li>Use jhbuild and ige-mac-bundler to build and package Spek on OS X</li>
+          <li>spek(1) man page</li>
+          <li>Avoid using APIs depreciated in GTK3</li>
+        </ul>
+        <p>This release fixes the following bugs:</p>
+        <ul>
+          <li>Fixed link activation on OS X (issue 31)</li>
+          <li>Fixed new version detection on OS X</li>
+          <li>Fixed duration for unsynchronised ID3v24 mp3 tags (upstream fix)</li>
+          <li>Fixed rigth click → Quit (issue 24) and the ⌘ Q shortcut (issue 44)</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="0.6" date="2010-07-13T00:00:00Z">
+      <description>
+        <p>This release adds the following features:</p>
+        <ul>
+          <li>Switch from GStreamer to FFmpeg libraries for audio decoding. This speeds up the overall analysis by a factor of 1.5 to 2.</li>
+          <li>Decode audio and perform the analysis in separate threads. This makes the analysis 1.3~1.8 times faster on multi-core systems (issue 11).</li>
+          <li>Check for a new version once a week and notify when it becomes available (issue 27)</li>
+        </ul>
+        <p>This release includes the following changes:</p>
+        <ul>
+          <li>Windows installer branding (issue 32)</li>
+          <li>Option to launch Spek when the Windows installer exits</li>
+        </ul>
+        <p>This release fixes the following bugs:</p>
+        <ul>
+          <li>Fix link activation on Windows (issue 31)</li>
+          <li>Fix ALAC issues on OS X (issue 23)</li>
+          <li>Re-run the analysis only if the window width has been changed</li>
+          <li>Fix opening of files containing Unicode symbols in their name on Windows</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="0.5" date="2010-06-25T00:00:00Z">
+      <description>
+        <p>This release adds the following features:</p>
+        <ul>
+          <li>Speed up spectral analysis by using the optimal number of frequency bands.</li>
+          <li>DTS files support.</li>
+          <li>Distribute Windows version as a ZIP archive in addition to the MSI installer.</li>
+          <li>Mac OS X installer.</li>
+          <li>Use Pango to render text.</li>
+          <li>Brand new icon.</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="0.4" date="2010-05-21T00:00:00Z">
+      <description>
+        <p>This release adds the following features:</p>
+        <ul>
+          <li>Associate with audio files ("Open with..." menu in file managers)</li>
+          <li>Show the name of the open file in the window title</li>
+          <li>Support 24-bit FLACs</li>
+          <li>Drag and Drop support</li>
+          <li>Show file name and its properties in the window</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1"/>
 </component>
