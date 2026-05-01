@@ -9,12 +9,12 @@ instructions.
 If you don't want to use the installer, you can download the ZIP archive, unpack
 it somewhere on your disk and run `Spek\spek.exe`.
 
-## Mac OS X
+## macOS
 
-Spek for Mac OS X is available in the download section. Download and open the
+Spek for macOS is available in the download section. Download and open the
 DMG package, then drag the Spek icon to Applications.
 
-Spek requires OS X 10.5+ and an Intel-based Mac.
+Spek requires macOS 10.15+ on Intel, or macOS 11+ on Apple Silicon.
 
 ## *BSD and GNU/Linux
 
