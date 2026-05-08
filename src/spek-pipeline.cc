@@ -373,7 +373,11 @@ static float get_window(enum window_function f, int i, float *coss, int n) {
     case WINDOW_HAMMING:
         return 0.53836f - 0.46164f * coss[i];
     case WINDOW_BLACKMAN_HARRIS:
-        return 0.35875f - 0.48829f * coss[i] + 0.14128f * coss[2*i % n] - 0.01168f * coss[3*i % n];
+        {
+            int period = n - 1;
+            return 0.35875f - 0.48829f * coss[i] + 0.14128f * coss[2*i % period] -
+                0.01168f * coss[3*i % period];
+        }
     default:
         assert(false);
         return 0.0f;
