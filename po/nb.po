@@ -68,7 +68,7 @@ msgstr "Kan ikke finne dekoder"
 
 #: src/spek-pipeline.cc:256
 msgid "Unknown duration"
-msgstr "Ukjent fillengde "
+msgstr "Ukjent fillengde"
 
 #: src/spek-pipeline.cc:259
 msgid "No audio channels"
@@ -97,7 +97,7 @@ msgstr "%s: %s"
 
 #: src/spek-preferences-dialog.cc:58
 msgid "Preferences"
-msgstr "Instillinger"
+msgstr "Innstillinger"
 
 #: src/spek-preferences-dialog.cc:63
 msgid "(system default)"
@@ -138,7 +138,7 @@ msgstr "-00 dB"
 
 #: src/spek-window.cc:57
 msgid "Spek - Acoustic Spectrum Analyser"
-msgstr "Spek - akustisk spektrumsanalysator "
+msgstr "Spek - akustisk spektrumsanalysator"
 
 #: src/spek-window.cc:73
 msgid "&File"
@@ -198,11 +198,11 @@ msgstr "Ulykkesnissen og erikbs"
 
 #: src/spek-window.cc:321
 msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
-msgstr "Opphavs (c) 2010-2013 Alexander Kojevnikov og bidragsytere"
+msgstr "Opphavsrett (c) 2010-2013 Alexander Kojevnikov og bidragsytere"
 
 #: src/spek-window.cc:324
 msgid "Spek Website"
-msgstr "Speks nettside"
+msgstr "Spek sitt nettsted"
 
 #. TRANSLATORS: the %s is the package version.
 #: src/spek.cc:76
