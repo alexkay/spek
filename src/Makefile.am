@@ -50,6 +50,9 @@ spek_CPPFLAGS = \
 	$(WX_CPPFLAGS)
 
 spek_CXXFLAGS = \
+	$(AVFORMAT_CFLAGS) \
+	$(AVCODEC_CFLAGS) \
+	$(AVUTIL_CFLAGS) \
 	$(WX_CXXFLAGS_ONLY)
 
 spek_LDADD = \
