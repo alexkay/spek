@@ -145,7 +145,32 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, int stream)
         channels = codecpar->ch_layout.nb_channels;
 
         if (avstream->duration != AV_NOPTS_VALUE) {
-            duration = avstream->duration * av_q2d(avstream->time_base);
+            int64_t duration_ts = avstream->duration;
+            duration = duration_ts * av_q2d(avstream->time_base);
+            // FFmpeg 8+ commit 5a526fd (avformat > 61.9.107) trims MP3 duration by
+            // start_pad + end_pad for gapless playback.
+            // Recover the original frames * spf duration.
+            if (avformat_version() > AV_VERSION_INT(61, 9, 107)
+                && avstream->start_time > 0 && codecpar->codec_id == AV_CODEC_ID_MP3) {
+                // Add back the start time
+                duration_ts += avstream->start_time;
+                duration = duration_ts * av_q2d(avstream->time_base);
+                if (codecpar->frame_size > 0 && sample_rate > 0) {
+                    int64_t spf = codecpar->frame_size;
+                    // Convert duration_ts to (frames * spf) - end_pad
+                    int64_t total_samples = av_rescale_q(
+                        duration_ts,
+                        avstream->time_base,
+                        (AVRational){1, sample_rate}
+                    );
+                    // end_pad is always less than spf end_pad < spf.
+                    // Round up to the next frame boundary to recover frames * spf.
+                    int64_t full_duration_samples = ((total_samples + spf - 1) / spf) * spf;
+                    // FFmpeg's frames to duration calculation:
+                    // duration = (frames * spf)/(time_base * sample_rate)
+                    duration = full_duration_samples / (double)sample_rate;
+                }
+            }
         } else if (format_context->duration != AV_NOPTS_VALUE) {
             duration = format_context->duration / (double) AV_TIME_BASE;
         } else {
