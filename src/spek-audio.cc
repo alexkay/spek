@@ -302,6 +302,17 @@ int AudioFileImpl::read()
             this->packet = nullptr;
         }
 
+        // Newer FFmpeg trims trailing padding for gapless AAC playback.
+        // Clear the AV_PKT_DATA_SKIP_SAMPLES side data to avoid skipping
+        // when using newer FFmpeg versions.
+        if (this->packet && this->codec_context->codec_id == AV_CODEC_ID_AAC) {
+            // Only clear the side data if it exists.
+            if (av_packet_get_side_data(this->packet, AV_PKT_DATA_SKIP_SAMPLES, NULL)) {
+                // Docs say AV_PKT_DATA_SKIP_SAMPLES is 10 bytes
+                av_packet_new_side_data(this->packet, AV_PKT_DATA_SKIP_SAMPLES, 10);
+            }
+        }
+
         ret = avcodec_send_packet(this->codec_context, this->packet);
         if (this->packet) {
             av_packet_unref(this->packet);
