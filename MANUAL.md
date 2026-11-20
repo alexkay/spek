@@ -47,6 +47,11 @@ On OS X use the Command key instead of Ctrl.
 
 ## Spectrogram
 
+The mouse wheel zooms the time axis around the pointer. Hold Shift while using
+the mouse wheel to pan horizontally, or drag the spectrogram with the left mouse
+button. When zoomed in, drag the overview strip to move through the full track.
+The strip shows the visible range and current zoom factor. Double-click the spectrogram to show the full track again.
+
 `c`, `C`
 :   Change the audio channel.
 
