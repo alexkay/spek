@@ -24,6 +24,8 @@ struct spek_pipeline * spek_pipeline_open(
     int channel,
     enum window_function window_function,
     int samples,
+    double start_time,
+    double duration,
     spek_pipeline_cb cb,
     void *cb_data
 );
