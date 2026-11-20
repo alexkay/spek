@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <assert.h>
 
 extern "C" {
@@ -19,7 +20,7 @@ public:
         int bits_per_sample, int streams, int channels, double duration
     );
     ~AudioFileImpl() override;
-    void start(int channel, int samples) override;
+    void start(int channel, int samples, double start_time, double duration) override;
     int read() override;
 
     AudioError get_error() const override { return this->error; }
@@ -58,6 +59,8 @@ private:
     int64_t frames_per_interval;
     int64_t error_per_interval;
     int64_t error_base;
+    int64_t start_timestamp;
+    int64_t frames_remaining;
 };
 
 
@@ -165,6 +168,7 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, int stream)
         if (codec_context) {
             // Copy codec parameters from input stream to output codec context.
             if (avcodec_parameters_to_context(codec_context, codecpar) == 0) {
+                codec_context->pkt_timebase = avstream->time_base;
                 // Finally, init the decoder.
                 if (avcodec_open2(codec_context, codec, nullptr) == 0) {
                     error = AudioError::OK;
@@ -209,6 +213,8 @@ AudioFileImpl::AudioFileImpl(
     this->frames_per_interval = 0;
     this->error_per_interval = 0;
     this->error_base = 0;
+    this->start_timestamp = 0;
+    this->frames_remaining = 0;
 }
 
 AudioFileImpl::~AudioFileImpl()
@@ -230,7 +236,7 @@ AudioFileImpl::~AudioFileImpl()
     }
 }
 
-void AudioFileImpl::start(int channel, int samples)
+void AudioFileImpl::start(int channel, int samples, double start_time, double duration)
 {
     this->channel = channel;
     if (channel < 0 || channel >= this->channels) {
@@ -240,14 +246,43 @@ void AudioFileImpl::start(int channel, int samples)
 
     AVStream *stream = this->format_context->streams[this->audio_stream];
     int64_t rate = this->sample_rate * (int64_t)stream->time_base.num;
-    int64_t duration = (int64_t)(this->duration * stream->time_base.den / stream->time_base.num);
+    int64_t duration_ticks = (int64_t)(duration * stream->time_base.den / stream->time_base.num);
     this->error_base = samples * (int64_t)stream->time_base.den;
-    this->frames_per_interval = av_rescale_rnd(duration, rate, this->error_base, AV_ROUND_DOWN);
-    this->error_per_interval = (duration * rate) % this->error_base;
+    this->frames_per_interval = av_rescale_rnd(
+        duration_ticks, rate, this->error_base, AV_ROUND_DOWN
+    );
+    this->error_per_interval = (duration_ticks * rate) % this->error_base;
+    this->frames_remaining = (int64_t)(duration * this->sample_rate + 0.5);
+
+    this->start_timestamp =
+        stream->start_time == AV_NOPTS_VALUE ? 0 : stream->start_time;
+    this->start_timestamp += av_rescale_q(
+        (int64_t)(start_time * AV_TIME_BASE), AVRational{1, AV_TIME_BASE}, stream->time_base
+    );
+
+    if (start_time > 0.0) {
+        int ret = av_seek_frame(
+            this->format_context, this->audio_stream,
+            this->start_timestamp, AVSEEK_FLAG_BACKWARD
+        );
+        if (ret < 0) {
+            ret = avformat_seek_file(
+                this->format_context, this->audio_stream,
+                INT64_MIN, this->start_timestamp, this->start_timestamp,
+                AVSEEK_FLAG_BACKWARD
+            );
+        }
+        if (ret >= 0) {
+            avcodec_flush_buffers(this->codec_context);
+        }
+    }
 }
 
 int AudioFileImpl::read()
 {
+    if (this->frames_remaining <= 0) {
+        return 0;
+    }
     if (!!this->error) {
         // Stop on error.
         return -1;
@@ -289,12 +324,42 @@ int AudioFileImpl::read()
         // The packet can contain multiple frames, read all of them.
         int total_samples = 0;
         while ((ret = avcodec_receive_frame(this->codec_context, this->frame)) >= 0) {
-            int samples = this->frame->nb_samples;
-            if (samples == 0) {
+            int frame_samples = this->frame->nb_samples;
+            if (frame_samples == 0) {
                 // Occasionally the frame has no samples, move on to the next one.
                 av_frame_unref(this->frame);
                 continue;
             }
+
+            int skip = 0;
+            AVStream *stream = this->format_context->streams[this->audio_stream];
+            int64_t frame_timestamp = this->frame->best_effort_timestamp;
+            if (frame_timestamp != AV_NOPTS_VALUE) {
+                int64_t frame_duration = av_rescale_q(
+                    frame_samples, AVRational{1, this->sample_rate}, stream->time_base
+                );
+                if (frame_timestamp + frame_duration <= this->start_timestamp) {
+                    av_frame_unref(this->frame);
+                    continue;
+                }
+                if (frame_timestamp < this->start_timestamp) {
+                    skip = (int)av_rescale_q_rnd(
+                        this->start_timestamp - frame_timestamp,
+                        stream->time_base, AVRational{1, this->sample_rate},
+                        (AVRounding)(AV_ROUND_UP | AV_ROUND_PASS_MINMAX)
+                    );
+                    skip = std::min(skip, frame_samples);
+                }
+            }
+
+            int samples = (int)std::min<int64_t>(
+                frame_samples - skip, this->frames_remaining
+            );
+            if (samples <= 0) {
+                av_frame_unref(this->frame);
+                continue;
+            }
+
             // We have the data, normalise and write to the buffer.
             if ((total_samples + samples) > this->buffer_len) {
                 this->buffer = static_cast<float*>(
@@ -308,12 +373,13 @@ int AudioFileImpl::read()
             for (int sample = 0; sample < samples; ++sample) {
                 uint8_t *data;
                 int offset;
+                int source_sample = skip + sample;
                 if (is_planar) {
                     data = this->frame->data[this->channel];
-                    offset = sample;
+                    offset = source_sample;
                 } else {
                     data = this->frame->data[0];
-                    offset = sample * this->channels;
+                    offset = source_sample * this->channels;
                 }
                 float value;
                 switch (format) {
@@ -342,7 +408,11 @@ int AudioFileImpl::read()
                 this->buffer[total_samples + sample] = value;
             }
             total_samples += samples;
+            this->frames_remaining -= samples;
             av_frame_unref(this->frame);
+            if (this->frames_remaining <= 0) {
+                break;
+            }
         }
         if (total_samples > 0) {
             return total_samples;
