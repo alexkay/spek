@@ -1,7 +1,6 @@
 #include "spek-events.h"
 
-//IMPLEMENT_DYNAMIC_CLASS(SpekHaveSampleEvent, wxEvent)
-DEFINE_EVENT_TYPE(SPEK_HAVE_SAMPLE)
+wxDEFINE_EVENT(SPEK_HAVE_SAMPLE, SpekHaveSampleEvent);
 
 SpekHaveSampleEvent::SpekHaveSampleEvent(int bands, int sample, float *values, bool free_values)
     : wxEvent(), bands(bands), sample(sample), values(values), free_values(free_values)
