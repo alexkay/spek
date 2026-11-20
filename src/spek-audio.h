@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <ostream>
+#include <stdint.h>
 #include <string>
 
 class AudioFile;
@@ -21,7 +22,7 @@ class AudioFile
 public:
     virtual ~AudioFile() {}
 
-    virtual void start(int channel, int samples) = 0;
+    virtual void start(int channel, int samples, double start_time, double duration) = 0;
     virtual int read() = 0;
 
     virtual AudioError get_error() const = 0;

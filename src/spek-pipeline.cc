@@ -29,6 +29,8 @@ struct spek_pipeline
     int channel;
     enum window_function window_function;
     int samples;
+    double start_time;
+    double duration;
     spek_pipeline_cb cb;
     void *cb_data;
 
@@ -67,6 +69,8 @@ struct spek_pipeline * spek_pipeline_open(
     int channel,
     enum window_function window_function,
     int samples,
+    double start_time,
+    double duration,
     spek_pipeline_cb cb,
     void *cb_data
 )
@@ -78,6 +82,8 @@ struct spek_pipeline * spek_pipeline_open(
     p->channel = channel;
     p->window_function = window_function;
     p->samples = samples;
+    p->start_time = start_time;
+    p->duration = duration > 0.0 ? duration : p->file->get_duration();
     p->cb = cb;
     p->cb_data = cb_data;
 
@@ -101,7 +107,7 @@ struct spek_pipeline * spek_pipeline_open(
         p->input_size = p->nfft * (NFFT * 2 + 1);
         p->input = (float*)malloc(p->input_size * sizeof(float));
         p->output = (float*)malloc(p->fft->get_output_size() * sizeof(float));
-        p->file->start(channel, samples);
+        p->file->start(channel, samples, p->start_time, p->duration);
     }
 
     return p;
